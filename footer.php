@@ -4,9 +4,10 @@
 
 
     <div id="footer">
-      <div class="container" style="color:#333;" >
-	  <br /><br />
+      <div class="container" style="color:#333;margin-top:35px;padding:0px;" >
+	  	
         <center><p class="credit">Copyright &copy; <?php echo date("Y"); ?> <a href="http://www.iiitdm.ac.in" title="IIITD&amp;M Kancheepuram" >IIITD&amp;M Kancheepuram</a> <a href="/4pi/team/" title="The Team" > <strong>||| WebOps |||</strong></a></p></center>
+      
       </div>
     </div>
 

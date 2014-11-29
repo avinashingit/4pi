@@ -311,9 +311,12 @@ function retrieveLatestPosts(value, call) {
         })
         .success(function(data) {
 
+
+
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
 
             data = data.trim();
+            // console.log(data);
             if (value == "empty") {
                 //alert(value);
                 $('.post').each(function() {
@@ -324,12 +327,13 @@ function retrieveLatestPosts(value, call) {
                     });
                 });
             }
+
+
             if (data != 404) {
                 $('#postEmptyMessage').html("");
-                //console.log(data);
+                console.log(data);
                 var ob = JSON.parse(data);
                 for (i = 0; i < ob.length; i++) {
-
                     postInsert('last', ob[i]);
                     if (ob[i].comments == null) {
                         var cLength = 0;
@@ -771,9 +775,9 @@ function postInsert(position, data1) {
 
     post += '<div class="text-center">';
 
-    if (data1.followPost == -1) {
+    if (data1.followPost == 1) {
         post += '<button type="button" class="btn btn-primary" onclick="followPost(\'' + data1.postId + '\');">FOLLOW</button>';
-    } else if (data1.followPost == 1) {
+    } else if (data1.followPost == -1) {
         post += '<button type="button" class="btn btn-primary" onclick="followPost(\'' + data1.postId + '\');">UNFOLLOW</button>';
     }
 
@@ -882,8 +886,9 @@ function followPost(id) {
         .error(function() {
 
         })
-        .success(function(data) {
 
+        .success(function(data) {
+            console.log(data);
             if (checkData(data) == 1) {
                 html = $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html();
 
@@ -900,7 +905,7 @@ function followPost(id) {
 function reportPost(id) {
     alert("Called");
 
-    var reportContent = $('#' + id).find('inputReport').val();
+    var reportContent = $('#' + id).find('#inputReport').val();
     $.post('./handlers/postHandlers/reportPost.php', {
         _postId: id,
         _reason: reportContent

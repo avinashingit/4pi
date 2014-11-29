@@ -105,7 +105,7 @@ $userIdHash=$_SESSION['vj'];
 							
 							$_SESSION=array();
 							session_destroy();
-							echo 12;
+							echo 13;
 						}
 					}
 				

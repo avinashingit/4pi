@@ -1,5 +1,6 @@
 <script>
 var userIdHash="<?php echo $_SESSION['vj']; ?>";
+var inView="<?php echo $_SESSION['jx'];?>";
 </script>
 <div class="col-md-7" id="posts">
 

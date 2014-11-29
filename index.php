@@ -8,6 +8,7 @@ if($_GET['logout']=="yes")
 		unset($_SESSION['mq']);
 		unset($_SESSION['jq']);
 		unset($_SESSION['qq']);
+		unset($_SESSION['mc']);
 		session_destroy();
 		
 //echo '<script>window.location="index.php";</script>';
@@ -87,14 +88,14 @@ require("header.php");
 					<div class="col-md-4 text-center col-md-offset-4">
 						An informative hub
 					</div>
-					<!--<div class="col-md-4">
+					<div class="col-md-4">
 								<a href=""><div class="socialIcons" id="facebook" ></div></a>
 								<a href=""><div class="socialIcons" id="twitter" ></div></a>
 								<a href=""><div class="socialIcons" id="gplus" ></div></a>
-					</div>-->
+					</div>
 				</div>
 			</div>
-			
+			<br/>
 			
 			<div id="section2">
 				<div class="row text-center" >
@@ -274,5 +275,6 @@ require("header.php");
 								
 								</script>
 								<?php
+									echo '<br/>';
 									require("footer.php");
 								?>

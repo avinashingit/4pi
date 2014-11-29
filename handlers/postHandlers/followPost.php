@@ -3,9 +3,9 @@ session_start();
 	require_once('../../QOB/qob.php');
 	require_once('../fetch.php');
 //testing Inputs start
-$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
-	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
- $_POST['_postId']="16462edf7108a40bc1639284722e6c662964c1d527ce89113d63264cc20841c0f297f6d1044894d581e3196b3d9ca89eb201f469edde1f5e2ae62a8e95b107e1";
+//$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+	//$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+ //$_POST['_postId']="16462edf7108a40bc1639284722e6c662964c1d527ce89113d63264cc20841c0f297f6d1044894d581e3196b3d9ca89eb201f469edde1f5e2ae62a8e95b107e1";
 
 //Testing Inputs End
 /*

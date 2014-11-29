@@ -13,36 +13,36 @@
 		{
 			if(stripos($followers,$userId)===false)
 				{
-					return -1;
+					return 1;
 				}
 			else
 				{
-					return 1;
+					return -1;
 				}
 		}
 		
 	function hasStarred($userId,$hasStarred)
 		{
-			if(stripos($hasStarred,$userId)!==false)
+			if(stripos($hasStarred,$userId)===false)
 				{
-					return 1;
+					return -1;
 				}
 			else
 				{
-					return -1;
+					return 1;
 				}
 		}
 		
 		
 	function hiddenTo($userId,$hiddenTo)
 		{
-			if(stripos($hiddenTo,$userId) !== false)
+			if(stripos($hiddenTo,$userId) === false)
 				{
-					return -1;
+					return 1;
 				}
 			else
 				{
-					return 1;
+					return -1;
 				}
 		}
 

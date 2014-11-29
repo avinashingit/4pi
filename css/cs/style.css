@@ -430,17 +430,17 @@ a, a:hover, a:active, a:visited{
   }
 #facebook
   {
-    background-image: url('../img/socialIcons.jpg');
+    background-image: url('/4pi/img/appImgs/socialIcons.jpg');
 	background-position: -400px 0px;
   }
 #twitter
   {
-    background-image: url('../img/socialIcons.jpg');
+    background-image: url('/4pi/img/appImgs/socialIcons.jpg');
 	background-position: -200px 0px;
   }
 #gplus
   {
-    background-image: url('../img/socialIcons.jpg');
+    background-image: url('/4pi/img/appImgs/socialIcons.jpg');
 	background-position: 0px 0px;
   }
   

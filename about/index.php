@@ -3,8 +3,6 @@
 <?php
 	include('../header.php');
 ?>
-
-
 <body style="padding:0px;" >
     <div id="wrap" >
 

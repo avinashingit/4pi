@@ -4,10 +4,10 @@ session_start();
 	require_once('../fetch.php');
 
 //testing inputs begin
-// 	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
-// 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-// 	$_POST['_postId']="16462edf7108a40bc1639284722e6c662964c1d527ce89113d63264cc20841c0f297f6d1044894d581e3196b3d9ca89eb201f469edde1f5e2ae62a8e95b107e1";
-// 	$_POST['_reason']="Some Hypothetical Reason!!";
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","EDM12B021".SALT);
+	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+	$_POST['_postId']="c502640c7e0796fd7849c9e406da0d3b3457bf670215ad323bd5b18ee72ebde362ffcaefbeade92a236bdd8be14ce78f24366558264b34bf3d270b019b3a4c15";
+	$_POST['_reason']="Some Hypothetical Reason!!";*/
 // //testing inputs end
 /*
 Code 3: SUCCESS!!
@@ -58,6 +58,7 @@ Code 10: MailError!!
 				$hiddenTo=$post['hiddenTo'];
 				$postId=$post['postId'];
 				$reason=$_POST['_reason'];
+				echo $reason;
 				$ObjectType="Post";
 				if(isSharedTo($userId,$post['sharedWith'])==false)
 				{
@@ -110,7 +111,7 @@ Code 10: MailError!!
 					{
 						//$timestamp=time();
 						//$timestamp="".$timestamp;
-						$ReportSpamSQL="INSERT INTO reportspams(userId,reason,objectId,ObjectType) VALUES(?,?,?,?)";
+						$ReportSpamSQL="INSERT INTO reportspams (userId,reason,objectId,ObjectType) VALUES(?,?,?,?)";
 						$values1[0]=array($userId =>'s');
 						$values1[1]=array($reason => 's');
 						$values1[2]=array($postId => 's');
