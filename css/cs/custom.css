@@ -1,0 +1,148 @@
+/* Landing page index.php */
+@font-face {
+    font-family: openSans;
+    src: url(../fonts/OpenSans-Light.ttf);
+}
+
+body{
+    *background: linear-gradient(#3fa6ff,#fff) no-repeat !important;
+    *background-color: #ffffff !important;
+    background-image: url('../pixel imgs/block3.png');
+    font-family: openSans !important;
+    min-width: 540px;
+}
+a{
+    color:black;
+}
+a,a:hover{
+    text-decoration:none;
+}
+
+.center{
+    text-align: center;
+}
+
+
+
+
+
+
+.hidden{
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------------------- */
+
+/* NewsFeed */
+#icons{
+    color:white;
+    padding-top:5px;
+}
+
+#userDetails{
+    background-color:black;
+    color:white;
+    overflow-y:auto !important;
+    *max-height:580px !important;
+    margin-top:-1px;
+    z-index:-1;
+}
+
+#userGroups h5{ 
+    text-align:left;
+    font-family:'Roboto';
+}
+
+#userImage img{
+    margin:auto;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+#posts{
+    *overflow-y:auto !important;
+    *max-height:580px !important;
+}
+
+#rightBlock{
+    *background-color:black;
+    color:white;
+    *overflow-y:auto !important;
+    *max-height:580px !important;
+    padding-left: 0px;
+
+}
+#events,#threads,#polls{
+    *float:center;
+    background-color:white;
+    color:black;
+    *max-height:190px;
+    *padding:0px;
+}
+#events{
+    margin-top:15px;
+}
+
+.cursorPointer{
+    cursor:pointer;
+}
+
+#posts{
+    margin-top:5px;
+    *overflow-y:auto !important;
+    *max-height:580px;
+}
+.borderBottom{
+    border-bottom:1px solid rgba(0,0,0,0.2);
+}
+#posts p{
+    text-align:justify !important;
+}
+i {
+    cursor:pointer;
+}
+      /* #card, #card2,#card3{
+        height: 280px;
+        border:1px solid rgba(0,0,0,0.2);
+      }*/
+
+.fontSize13{
+    font-size:13px;
+}
+.fontSize9{
+    font-size:9px;
+}
+.paddingTopPostIcons{
+    padding-top:25px;
+}
+.paddingLeftPostIcons{
+    padding-left:10px;
+}
+.paddingBottomPostIcons{
+    padding-bottom:0px;
+}
+#post{
+    background-color:white;
+}
+.postLikesAndCommentIcons{
+    padding-bottom: 10px;
+}
+.stick{
+    position:fixed;
+    top:50px;
+    width:23.5%;
+}

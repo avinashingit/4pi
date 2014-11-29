@@ -1,0 +1,281 @@
+.replace {
+display:none;
+}
+
+/*.stickMenu{
+    position:fixed;
+    top:20px;
+}*/
+
+.postMenu{
+    margin-top:-10px;
+}
+.eventMenu{
+    top:51px !important;
+    position:fixed;
+    width:56.1%;
+}
+#rightBlock1 .panel-heading{
+    background:linear-gradient(#005c87,#004f74);
+    color:#fff;
+    
+}
+#rightBlock1 .panel-heading:hover{
+    background-color:#004160;
+    color:#e5e5e5;
+}
+#rightBlock1{
+    *box-shadow: #185978 0px 1px 2px 1px;
+    /*box-shadow:inset #38ccb0 0px 2px 0 0;*/
+    border:1px solid #185978;
+    margin-top:5px;
+}
+#rightBlock2 .panel-heading{
+    background:linear-gradient(#af0021,#98001d);
+    color:#fff;
+}
+#rightBlock2 .panel-heading:hover{
+    background-color:#750016;
+    color:#e5e5e5;
+}
+#rightBlock2{
+    border:1px solid #790017;
+}
+#rightBlock3 .panel-heading{
+    background:linear-gradient(#78009f,#580075);
+    color:#fff;
+}
+#rightBlock3 .panel-heading:hover{
+    background-color:#4c0065;
+    color:#e5e5e5;
+}
+#rightBlock3{
+    border:1px solid #3a004d;
+}
+#miniRightBlock1{
+    background-color:#004f74;
+    color:#fff !important;
+    font-size:16px;
+}
+#miniRightBlock1:hover{
+    background-color:#019be3;
+    color:#fff !important;
+    font-size:16px;
+}
+#miniRightBlock2{
+    background-color:#98001d;
+    color:#fff !important;
+    font-size:16px;
+}
+#miniRightBlock2:hover{
+    background-color:#dc002a;
+    color:#fff !important;
+    font-size:16px;
+}
+#miniRightBlock3{
+    background-color:#580075;
+    color:#fff !important;
+    font-size:16px;
+}
+#miniRightBlock3:hover{
+    background-color:#9700c9;
+    color:#fff !important;
+    font-size:16px;
+}
+.comment{
+    *padding-bottom:5px;
+    *padding-top:5px;
+    border-top:1px solid #cbcbcb;
+}
+.commentText{
+    *padding-right:15px;
+}
+.commentProPic{
+    width:45px;
+    height:auto;
+    *padding-right: 15px;
+}
+.badge{
+    background-color:#ed4534;
+    color:#fff;
+}
+.group{
+    font-size:15px;
+    color:#fff;
+}
+.group:hover{
+    font-size:15px;
+    background-color:#242424;
+}
+.groupIcons{
+    width:5px;
+    padding-right:10px;
+}
+
+p.commentText
+{
+    font-size: 12px;
+}
+.commentTextArea{
+    width:92%;
+    font-size:9px;
+}
+.starAndComment{
+    font-size:20px;
+}
+.comments{
+    *padding-top:15px;
+    *padding-left:0px !important;
+    *padding-right:0px !important;
+    border-top:1px solid #f8f8f8;
+}
+.postUser img{
+    margin-left:-5px;
+}
+.postUser{
+    color:#0059c6;
+}
+.postUser:hover{
+    color:#002e66;
+}
+.stickyBox{
+    position:fixed;
+    *top:50px;
+    width:100%;
+}
+.panel,.panel-heading{
+    border-radius:0px;
+}
+.btn-group{
+    border-radius:0px;
+}
+.btn{
+    border-radius:0px;
+}
+.postBackForms{
+    position:relative;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.changeBackroundColorPostBackIcons{
+    background-color:#363636;
+    color:white;
+}
+
+
+/***********************middleBlock.php css ***********************/
+.fontSize15{
+    font-size:15px;
+}
+.postPPic{
+    width:40px;
+    height:40px;
+    margin-right:5px;
+	margin-top:10px;
+}
+
+
+.paddingTopRowPost{
+    padding-top:20px;
+}
+.fontSize14{
+    font-size:14;
+}
+
+
+.textBold{
+    font-weight: bold;
+}
+
+.postContent{
+    font-size:14px;
+    text-align: justify !important;
+    padding-left:2%;
+    padding-right:2%;
+    padding-bottom:10px;
+    padding-top:10px;
+}
+
+.badge{
+    border-radius:0px !important;
+    background-color:#eb8500 !important;
+}
+
+.postBottomRowPadding{
+    margin-top:5px;
+    margin-bottom: 15px;
+}
+
+#postStarIcon{
+    color:#FFD700;
+}
+
+#postCommentIcon{
+    color:#6AB127;
+}
+
+#postMailIcon{
+    color:#0067b7;
+}
+
+.form-control{
+    background-color:white !important;
+    border:1px solid rgba(0,0,0,0.3) !important;
+    color:#000 !important;
+    border-radius:0px;
+}
+.commentInsertArea{
+    margin-left:-25px !important;
+}
+.commentProfilePicture{
+    width:30px;
+    height:30px;
+    margin-top:10px;
+}
+.commentText{
+    margin-left:-25px;
+    font-size:13px;
+    margin-top:10px;
+}
+.fontSize13{
+    font-size: 13px !important;
+}
+
+.postComments{
+    background-color:#F8F8F8;
+}
+.post{
+    background-color:#fff;
+    border:1px solid rgba(0,0,0,0.3);
+}
+.front:hover,.back:hover{
+    box-shadow:inset #38ccb0 0px 3px 0 0;
+}
+.changeBackroundColorPostBackIcons{
+    background-color:#333;
+}
+a{
+    color:#005a89;
+}
+text-area{
+    line-height: 1;
+}
+
+.postIconsFrontFontSize{
+    font-size:18px !important;
+}
+
+.fontSize18{
+    font-size:18px !important;
+}
+.popOver{
+    color:gray;
+}
+.hidden{
+    visibility: hidden;
+}
+.attrCountPost{
+    font-size:12px;
+}
