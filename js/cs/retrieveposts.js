@@ -17,8 +17,12 @@ function checkData(data) {
         alert("Invalid Input");
         return -1;
     } 
-    else {
+    else if(data==3) {
         return 1;
+    }
+    else
+    {
+        return "error";
     }
 }
 
@@ -197,99 +201,129 @@ function editPost(ele) {
 function editedPostSend() {
 
     //alert("HEll");	
-    var postId = $('#editPostModal').find('#editPostId').html();
+    var postId = $('#editPostModal').find('#editPostId').html().trim();
     // console.log(postId);
-    var postSubject = $('#editPostSubject').val();
+    var postSubject = $('#editPostSubject').val().trim();
     //console.log(postSubject);
-    var postContent = $('#editPostContent').val();
+    var postContent = $('#editPostContent').val().trim();
+    var done=1;
     if (postContent.length == 0) {
         alert("Post content is to be filled");
-    } else {
+        done=0;
+    } 
         //var files[]=$('#editPostFileInput').val();
-        var sharedWith = $('#editPostSharedWith').val();
-        var postValidity = $('#editPostLivingTime').val();
-        //alert("hai"+postSubject+" "+postContent+" "+sharedWith+" "+postValidity)
-        var y = $.post('./handlers/postHandlers/editPost.php', {
-                _subject: postSubject,
-                _postContent: postContent,
-                /*_files:files,*/
-                _share: sharedWith,
-                _validity: postValidity,
-                _postId: postId
-            })
-            .error(function() {
-                alert("Post edit Failed");
-            })
-            .success(
-                function(data) {
-                    $('#editPostModal').modal('hide');
-
-                    if (checkData(data) == 1) {
-                        modifyPost(postId, data);
-                    }
-                }
-            );
+    var sharedWith = $('#editPostSharedWith').val().trim();
+    if(sharedWith.length==0)
+    {
+        alert("Please tell us to whom the post should be shared with. :)");
+        done=0;
     }
+    var postValidity = $('#editPostLivingTime').val().trim();
+    if(postValidity.length==0)
+    {
+        alert("You are trying to mess with 4pi. :(");
+        done=0;
+    }
+    if(done==1)
+    {
+        var y = $.post('./handlers/postHandlers/editPost.php', {
+            _subject: postSubject,
+            _postContent: postContent,
+            /*_files:files,*/
+            _share: sharedWith,
+            _validity: postValidity,
+            _postId: postId
+        })
+        .error(function() {
+            alert("Post edit Failed");
+        })
+        .success(
+            function(data) {
+                
+                $('#editPostModal').modal('hide');
+                if (checkData(data) == 1) {
+
+                    modifyPost(postId, data);
+
+                }
+            }
+        );
+    }
+
 }
 
 function createPost() {
 
 
-    var postSubject = $('#createPostSubject').val();
+    var postSubject = $('#createPostSubject').val().trim();
+    var done=1;
     if (postSubject.length > 40) {
         alert("Please limit the subject length to 40 characters");
-    } else {
-        var postContent = $('#createPostContent').val();
-        if (postContent.length == 0) {
-            alert("Post content is to be filled");
-        } else {
-            var sharedWith = $('#createPostSharedWith').val();
-            var postValidity = $('#createPostLivingTime').val();
-            $('#createPostModal').find('#createPostSubject').val("");
-            $('#createPostModal').find('#createPostContent').val("");
-            $('#createPostModal').find('#createPostSharedWith').val("Everyone");
-            $('#createPostModal').find('#createPostLivingTime').val("1");
-            $('.row .postMenu').find('#createPostButton').attr("data-target", "").find('a span').html("Creating post...");
-            $('.row .postMenu').find('#createPostButton').find('.fa-plus').addClass('fa-spin');
-            $('#createPostModal').modal('hide');
-
-            var y = $.post('http://localhost/4pi/handlers/postHandlers/createPost.php', {
-                _subject: postSubject,
-                _postContent: postContent,
-                //_files:files,
-                _share: sharedWith,
-                _validity: postValidity
-            })
-
-            .error(function() {
-                alert("Post Creation Failed" + y.status);
-            })
-                .success(
-
-                    function(data) {
-                    	// console.log(data);
-                        data = data.trim();
-                        $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
-                        $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
-
-                        if (data == "12") {
-                            alert("Sorry. We encountered an error in creating your post ");
-                        } else if (data == 13) {
-                            alert("Do not fiddle with 4pi");
-                        } else if (data == 16) {
-                            alert("Please check the post details you have entered");
-                        } else {
-                            $('#createPostModal').modal('hide');
-                            //console.log(data);
-                            var x = JSON.parse(data);
-                            //console.log(data);
-                            postInsert("first", x);
-                            callAfterAjax();
-                        }
-                    }
-            );
-        }
+        done=0;
     }
+    var postContent = $('#createPostContent').val().trim();
+    if (postContent.length == 0) {
+        alert("Post content is to be filled");
+        done=0;
+    }
+    var sharedWith = $('#createPostSharedWith').val().trim();
+    if(sharedWith.length==0)
+    {
+        alert("Please tell us to whom the post should be shared with");
+        done=0;
+    }
+    var postValidity = $('#createPostLivingTime').val().trim();
+    if(postValidity.length==0)
+    {
+        alert("You are trying to mess with 4pi. :(");
+            done=0;
+    }
+    if(done==1)
+    {
+        $('#createPostModal').find('#createPostSubject').val("");
+    $('#createPostModal').find('#createPostContent').val("");
+    $('#createPostModal').find('#createPostSharedWith').val("Everyone");
+    $('#createPostModal').find('#createPostLivingTime').val("1");
+    $('.row .postMenu').find('#createPostButton').attr("data-target", "").find('a span').html("Creating post...");
+    $('.row .postMenu').find('#createPostButton').find('.fa-plus').addClass('fa-spin');
+    $('#createPostModal').modal('hide');
+
+    var y = $.post('http://localhost/4pi/handlers/postHandlers/createPost.php', {
+        _subject: postSubject,
+        _postContent: postContent,
+        //_files:files,
+        _share: sharedWith,
+        _validity: postValidity
+    })
+
+    .error(function() {
+        alert("Post Creation Failed" + y.status);
+    })
+        .success(
+            function(data) {
+                // console.log(data);
+                data = data.trim();
+                $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
+                $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
+
+                if (data == "12") {
+                    alert("Sorry. We encountered an error in creating your post ");
+                } else if (data == 13) {
+                    alert("Do not fiddle with 4pi");
+                } else if (data == 16) {
+                    alert("Please check the post details you have entered");
+                } else {
+                    $('#createPostModal').modal('hide');
+                    //console.log(data);
+                    var x = JSON.parse(data);
+                    //console.log(data);
+                    postInsert("first", x);
+                    callAfterAjax();
+                }
+            }
+    );
+    }
+    
 
 }
 
@@ -816,24 +850,34 @@ function postInsert(position, data1) {
 
 function mailPost(id, event) {
     alert("CLICKED");
-    var email = $('#' + id).find('#inputEmailPost').val();
-    $.post('./handlers/postHandlers/mailPost.php', {
+    var email = $('#' + id).find('#inputEmailPost').val().trim();
+    var done=1;
+    if(email.length==0)
+    {
+        alert("Please tell us to whom the post is to be mailed to. :)");
+        done=0;
+    }
+    if(done==1)
+    {
+        $.post('./handlers/postHandlers/mailPost.php', {
         _emailId: email,
         _postId: id
-    })
+        })
         .error(function() {
             alert("Unable to mail post with id " + id);
         })
         .success(function(data) {
             if(checkData(data)==1)
             {
-            	$('#' + id).find('#mailCount').html(data);
-            	alert("Mailed successfully");
-            	$('#'+id).find(".back").hide();
-            	$('#'+id).find(".front").show();
+                $('#' + id).find('#mailCount').html(data);
+                alert("Mailed successfully");
+                $('#'+id).find(".back").hide();
+                $('#'+id).find(".front").show();
             }
             
         });
+    }
+    
 }
 
 function deletePost(id) {
@@ -903,13 +947,19 @@ function followPost(id) {
 }
 
 function reportPost(id) {
-    alert("Called");
-
-    var reportContent = $('#' + id).find('#inputReport').val();
-    $.post('./handlers/postHandlers/reportPost.php', {
+    var reportContent = $('#' + id).find('#inputReport').val().trim();
+    var done = 1;
+    if(reportContent.length==0)
+    {
+        alert("Please tell us the reason for reporting. :(");
+        done=0;
+    }
+    if(done==1)
+    {
+        $.post('./handlers/postHandlers/reportPost.php', {
         _postId: id,
         _reason: reportContent
-    })
+        })
         .error(function() {
 
         })
@@ -917,17 +967,25 @@ function reportPost(id) {
 
             // console.log(data);
             var check=checkData(data);
-			if(check==1)
-			{
-				$('#postArea').find('#'+id).remove();
-			}
+            if(check==1)
+            {
+                $('#postArea').find('#'+id).remove();
+            }
         });
+    }
+    
 }
 
 function insertCommentToPost(id, event) {
     if (event.keyCode == 13 && !event.shiftKey) {
-        var commentContent = $('#postArea').find('#' + id).find('.commentInsertArea').val();
-        console.log(commentContent);
+        var done=1;
+        var commentContent = $('#postArea').find('#' + id).find('.commentInsertArea').val().trim();
+        if(commentContent.length==0)
+        {
+            alert("Empty comments are not allowed. :)");
+            done=0;
+        }
+        // console.log(commentContent);
         $('#postArea').find('#' + id).find('.commentInsertArea').val("");
         var x = $('#postArea').find('#' + id).find('#commentCount').html();
         y = parseInt(x);
@@ -962,13 +1020,21 @@ function insertCommentToPost(id, event) {
 }
 
 function editComment(postId, commentId,calslback) {
-    var commentContent = $('#' + commentId).find('#' + commentId + 'b').val();
+    var commentContent = $('#' + commentId).find('#' + commentId + 'b').val().trim();
+    var done=1;
+    if(commentContent.length==0)
+    {
+        alert("Empty comments are not allowed. :)");
+        done=0;
+    }
     //console.log(commentContent);
-    $.post('./handlers/postHandlers/editComment.php', {
+    if(done==1)
+    {
+        $.post('./handlers/postHandlers/editComment.php', {
         _postId: postId,
         _commentId: commentId,
         _commentContent: commentContent
-    })
+        })
         .error(function() {
 
             alert("Server Overload. Please try again.:(")
@@ -976,12 +1042,14 @@ function editComment(postId, commentId,calslback) {
         })
         .success(function(data) {
             if (checkData(data) == 1) {
-        	    calslback(1);
+                calslback(1);
             } 
             else {
                 calslback(1);
             }
         });
+    }
+    
 }
 
 function starPost(id) {
@@ -1008,6 +1076,9 @@ function starPost(id) {
 }
 
 function deleteComment(cid, pid) {
+
+    
+
     $.post('handlers/postHandlers/deleteComment.php', {
         _commentId: cid,
         _postId: pid
@@ -1028,3 +1099,35 @@ function deleteComment(cid, pid) {
 $(document).ready(function() {
     $('.popOver').popover();
 });
+
+//functino for confirmations
+function reCheckSelect(x,y){
+y='<div class="modal fade" id="confirmActionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+y='<div class="modal-dialog">';
+y='<div class="modal-content">';
+y='<div class="modal-header">';
+y='<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
+y='</div>';
+y='<div class="modal-body">';
+y='<div class="form-group">';
+y='<h4>'+x+'</h4>';
+y='</div>';
+y='<button onclick="confirmAction(\'1\');" class="btn btn-danger">'+y+'</button>';
+y='<button onclick="confirmAction(\'-1\');" class="btn btn-default">Cancel</button>';
+y='</div>';
+y='</div>';
+y='</div>';
+y='</div>';
+$('body').append(y);
+}
+function confirmAction(x)
+{
+    if(x==1)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
