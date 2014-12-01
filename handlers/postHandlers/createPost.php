@@ -4,8 +4,8 @@
 	require_once('./miniClasses/miniPost.php');
 	require_once('../fetch.php');
 	
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
-	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);*/
 	
 	 //Inputs for testing
 	/*$_POST['_postContent']="Some random Stuff";

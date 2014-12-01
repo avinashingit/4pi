@@ -4,10 +4,10 @@ session_start();
 	require_once('../fetch.php');
 
 //testing inputs begin
-/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B021".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_postId']="3ade034661698c76b1e1d166e9cdb24a50e36acebdf072ddf0c8c578cc6ee7a26ed3c6ea68ac1f744f9fa443810a675bd2467ab7f1c8c2922d03a4b5a8795f9a";
-	$_POST['reason']="Some Hypothetical Reason!!";*/
+	$_POST['_postId']="d7e3c3e07e768c84515242733f4bdeb924e3471cc989b7fc395a6ec6ab0b4d726fccc77e93dbed8ba92e9b9574130f243947eb01353cf46b78d1c3525dfea2b3";
+	$_POST['_reason']="Some Hypothetical Reason!!";*/
 //testing inputs end
 /*
 Code 3: SUCCESS!!
@@ -55,7 +55,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				blockUserByHash($userIdHash,"Messing with PostIdHash!! In reportost");
 				$_SESSION=array();
 				session_destroy();
-				echo 13;
+				echo 14;
 			}
 			else
 			{
@@ -64,6 +64,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$userId=$user['userId'];
 				$spamCount=$post['spamCount'];
 				$hiddenTo=$post['hiddenTo'];
+				//echo "Hi".$hiddenTo;
 				$postId=$post['postId'];
 				$reason=$_POST['_reason'];
 				$ObjectType="Post";
@@ -98,24 +99,35 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					{
 						$reportedBy=$reportedBy.",".$userId;
 					}
-					if($hiddenTo=="")
+					if($hiddenTo=='')
 					{
 						$hiddenTo=$userId;
+						//echo $hiddenTo;
 					}
 					else
 					{
 						$hiddenTo=$hiddenTo.",".$userId;
+						//echo $hiddenTo;
 					}
 					$spamCount++;
+
 					$UpdatePostSQL="UPDATE post  SET reportedBy = ?, spamCount= ?, hiddenTo = ? WHERE postIdHash= ?";
-					
+					$UpdatePostSQL2="UPDATE post  SET displayStatus=0, reportedBy = ?, spamCount= ?, hiddenTo = ? WHERE postIdHash= ?";
 					
 					$values[0]=array($reportedBy => 's');
 					$values[1]=array($spamCount => 'i');
 					$values[2]=array($hiddenTo => 's');
 					$values[3]=array($postIdHash => 's');
 					$conn->startTransaction();
-					$result=$conn->update($UpdatePostSQL,$values);
+					if($spamCount>=3)
+					{
+						$result=$conn->update($UpdatePostSQL2,$values);
+					}
+					else
+					{
+						$result=$conn->update($UpdatePostSQL,$values);
+					}
+					
 					if($conn->error==""&&$result==true)
 					{
 						//$timestamp=time();

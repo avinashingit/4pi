@@ -406,15 +406,16 @@
 
 		function isSharedTo($userId,$sharedWith)
 		{
-			$nSharedWith=explode(",",$sharedWith);
-			foreach($nSharedWith as $exp)
+			//$nSharedWith=explode(",",$sharedWith);
+			$finalRegex=getRollNoRegex($userId);
+			if(preg_match('/'.$finalRegex.'/',$sharedWith))
 			{
-				if(preg_match('/'.$exp.'/',$userId))
-				{
-					return true;
-				}
+				return true;
 			}
-			return false;
+			else
+			{
+				return false;
+			}
 		}
 
 		function isThere($haystack,$needle)
@@ -487,7 +488,7 @@
 		$stud['yearDegree']=$stud['year'].$stud['degree'];
 		$stud['branchYearDegree']=$stud['branch'].$stud['yearDegree'];
 		$regexString="(".$stud['year']."|".$stud['branch']."|".$stud['degree']."|".$stud['branchYear']."|".$stud['branchDegree']."|".$stud['yearDegree']."|".$stud['branchYearDegree'].")";
-		$finalRegexString="(,".$regexString.",?)|(^".$regexString.",?)|(^ALL$)";
+		$finalRegexString="(,".$regexString.",?)|(^".$regexString.",?)|(^All$)";
 		return $finalRegexString;
 	}
 

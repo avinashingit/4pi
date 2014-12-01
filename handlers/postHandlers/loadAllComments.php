@@ -60,6 +60,10 @@
 											//echo "This is the user id <br/>";
 											//echo $userId.'<br/>';
 											
+											$tsc = new DateTime();
+											$tsc->setTimestamp($postComments['timestamp']);
+											$timestampc = $tsc->format(DateTime::ISO8601);
+
 											$userIdHash = getHash($userId);
 											
 											$personTags = $postComments['personTags'];
@@ -84,7 +88,7 @@
 											//echo "This is comment content <br/>";
 											//echo $postComments['content']."<br/>";
 											
-											$objc = new miniComment($postIdHash,$userIdHash,$postComments['content'],$postComments['timestamp'],$postComments['commentIdHash'],$userId,$commentUserName,$commentOwner);
+											$objc = new miniComment($postIdHash,$userIdHash,$postComments['content'],$timestampc,$postComments['commentIdHash'],$userId,$commentUserName,$commentOwner);
 											
 											//print_r(json_encode($objc));
 											

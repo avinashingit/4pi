@@ -397,7 +397,7 @@ function retrieveLatestPosts(value, call) {
 
             if (data != 404) {
                 $('#postEmptyMessage').html("");
-                console.log(data);
+                // console.log(data);
                 var ob = JSON.parse(data);
                 for (i = 0; i < ob.length; i++) {
                     postInsert('last', ob[i]);

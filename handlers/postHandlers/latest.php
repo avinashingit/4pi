@@ -22,8 +22,8 @@
 
 	else
 		{
-			//////echo "Session Variable not set error <br/>";
-			echo "404<br/>";
+			////////echo "Session Variable not set error <br/>";
+			echo 11;
 		}
 		
 	function latest($arrayOfPostsShown)
@@ -42,8 +42,8 @@
 						{
 							$currentUserId = $result1['userId'];
 							
-							//////echo "This the current user id <br/>";
-							//////echo $currentUserId.'<br/>';
+							////////echo "This the current user id <br/>";
+							////////echo $currentUserId.'<br/>';
 							
 							$postIdHashArray = fetchPostIdHashes($arrayOfPostsShown,$limit,$currentUserId);
 							////print_r($postIdHashArray);
@@ -58,26 +58,25 @@
 									for($i = 0;$i<$outputArrayLength-1;$i++)
 										{
 											
-											//////////echo '<h3>POSTID</h3><br>' .$outputa[$i]->postId.'<br>';
-											/*//////////echo '<h3>SHARED WITH</h3><br>' .$outputa[$i]->sharedWith.'<br>';
-											//////////echo '<h3>POST VALIDITY</h3><br>' .$outputa[$i]->postValidity.'<br>';
-											//////////echo '<h3>POST USERs ID</h3><br>' .$outputa[$i]->postUserId.'<br>';
-											//////////echo '<h3>PROFILE PIC</h3><br>' .$outputa[$i]->postProfilePic.'<br>';
+											////////////echo '<h3>POSTID</h3><br>' .$outputa[$i]->postId.'<br>';
+											/*////////////echo '<h3>SHARED WITH</h3><br>' .$outputa[$i]->sharedWith.'<br>';
+											////////////echo '<h3>POST VALIDITY</h3><br>' .$outputa[$i]->postValidity.'<br>';
+											////////////echo '<h3>POST USERs ID</h3><br>' .$outputa[$i]->postUserId.'<br>';
+											////////////echo '<h3>PROFILE PIC</h3><br>' .$outputa[$i]->postProfilePic.'<br>';
 											*/
 											
-											////////////echo '<h3>POST USER NAME</h3><br>' .$outputa[$i]->postUserName.'<br>';
-											//////echo '<h3>SUBJECT</h3><br>' .$outputa[$i+1]->postSubject.'<br>';
-											//////////echo '<h3>CONTENT</h3><br>' .$outputa[$i]->postContent.'<br>';
-											/*//////////echo '<h3>NO OF STARS</h3><br>' .$outputa[$i]->noOfStars.'<br>';
-											//////////echo '<h3>NO OF COMMENTS</h3><br>' .$outputa[$i]->noOfComments.'<br>';
+											//////////////echo '<h3>POST USER NAME</h3><br>' .$outputa[$i]->postUserName.'<br>';
+											//echo '<h3>SUBJECT</h3><br>' .$outputa[$i+1]->postSubject.'<br>';
+											////////////echo '<h3>CONTENT</h3><br>' .$outputa[$i]->postContent.'<br>';
+											/*////////////echo '<h3>NO OF STARS</h3><br>' .$outputa[$i]->noOfStars.'<br>';
+											////////////echo '<h3>NO OF COMMENTS</h3><br>' .$outputa[$i]->noOfComments.'<br>';
 											*/
 											
-											/*//////////echo '<h3>NO OF MAIL TOs</h3><br>' .$outputa[$i]->noOfMailTos.'<br>';
-											//////////echo '<h3>NO OF SEEN</h3><br>' .$outputa[$i]->postSeenNumber.'<br>';
-											//////////echo '<h3>TIMESTAMP</h3><br>' .$outputa[$i]->postCreationTime.'<br>';
-											//////////echo '<h3>FOLLOW</h3><br>' .$outputa[$i]->followPost.'<br>';
-											//////////echo '<h3>COMMENTS</h3><br>';
-											*/
+											////////////echo '<h3>NO OF MAIL TOs</h3><br>' .$outputa[$i]->noOfMailTos.'<br>';
+											////////////echo '<h3>NO OF SEEN</h3><br>' .$outputa[$i]->postSeenNumber.'<br>';
+											//echo '<h3>TIMESTAMP</h3><br>' .$outputa[$i+1]->postCreationTime.'<br>';
+											////////////echo '<h3>FOLLOW</h3><br>' .$outputa[$i]->followPost.'<br>';
+											////////////echo '<h3>COMMENTS</h3><br>';
 											$jasonarray[$i] = $outputa[$i+1];
 											
 										}
@@ -86,21 +85,21 @@
 								}
 							else if($outputa[0] == -1)
 								{
-									//////echo "No posts left to fetch <br/>";
+									////////echo "No posts left to fetch <br/>";
 									echo 404;
 								}
 						}
 						
 					else
 						{
-							//////echo "No values found for Query 1 of latest function <br/>";
+							////////echo "No values found for Query 1 of latest function <br/>";
 						}
 				}
 				
 			else
 				{
-					//////echo "Error in Query 1 of latest function <br/>";
-					//////echo $conObj->error.'<br/>';
+					////////echo "Error in Query 1 of latest function <br/>";
+					////////echo $conObj->error.'<br/>';
 				}
 				
 			
@@ -111,9 +110,9 @@
 	function fetchPostIdHashes($arrayOfPostsShown,$limit,$currentUserId)
 		{
 
-			/*echo "This is the posts shown array<br/>";
+			/*//echo "This is the posts shown array<br/>";
 			print_r($arrayOfPostsShown);
-			echo '<br/>';*/
+			//echo '<br/>';*/
 
 			$conObj = new QoB();
 			$arrayOfPostsShownLength = count($arrayOfPostsShown);
@@ -123,18 +122,18 @@
 			
 			$regex = getRollNoRegex($currentUserId);
 			
-			//echo "This the value of regex <br/>";
-			//echo $regex.'<br/>';
+			////echo "This the value of regex <br/>";
+			////echo $regex.'<br/>';
 			
-			$rollNoToCompare = '%'.$currentUserId.'%';
-			//echo "This the value of rollNoToCompare <br/>";
-			//echo $rollNoToCompare.'<br/>';
+			$rollNoToCompare = '(,'.$currentUserId.',?)|(^'.$currentUserId.',?)';
+			////echo "This the value of rollNoToCompare <br/>";
+			////echo $rollNoToCompare.'<br/>';
 			
 			$date = date_create();
 			$currentTimestamp = date_timestamp_get($date);
 			
-			//echo "This the value of currentTimestamp <br/>";
-			//echo $currentTimestamp.'<br/>';
+			////echo "This the value of currentTimestamp <br/>";
+			////echo $currentTimestamp.'<br/>';
 			
 			$returnArray = array();
 			
@@ -143,9 +142,9 @@
 			
 			if($arrayOfPostsShownLength == 0)
 				{
-					$values2 = array(0=> array($currentUserId => 's'),1 => array($regex => 's'), 2=> array($rollNoToCompare => 's'), 3=> array($currentTimestamp => 'i'), 4 => array(0 => 'i'), 5 => array($limit => 'i'));	
+					$values2 = array(0=> array($currentUserId => 's'),1 => array($regex => 's'), 2=> array($rollNoToCompare => 's'), 3=> array($currentTimestamp => 'i'), 4 => array(1 => 'i'),5 => array(0 => 'i'), 6 => array($limit => 'i'));	
 					
-					$result2 = $conObj->select("SELECT postIdHash FROM post WHERE ((userId = ?) or (sharedWith REGEXP ?)) AND (hiddenTo NOT LIKE ?) AND (lifetime > ?) ORDER BY timestamp DESC LIMIT ?,?",$values2);
+					$result2 = $conObj->select("SELECT postIdHash FROM post WHERE ((userId = ?) or (sharedWith REGEXP ?)) AND (hiddenTo NOT REGEXP ?) AND (lifetime > ?) AND ( displayStatus = ? ) ORDER BY timestamp DESC LIMIT ?,?",$values2);
 					
 					if($conObj->error == "")
 						{
@@ -153,9 +152,9 @@
 							
 							while($postIdHashes = $conObj->fetch($result2))
 								{
-									////echo "hi<br/>";
-									////echo "This is the postIdHash<br/>";
-									////echo $postIdHashes['postIdHash'].'<br/>';
+									//////echo "hi<br/>";
+									//////echo "This is the postIdHash<br/>";
+									//////echo $postIdHashes['postIdHash'].'<br/>';
 									
 									$returnArray[$returnArrayIndex] = $postIdHashes['postIdHash'];
 									$returnArrayIndex++;
@@ -164,16 +163,16 @@
 						
 					else
 						{
-							//////echo "Error in Query 2 where arrayOfPostsShown length = 0, Query in fetchPostIdHashes <br/>";
-							//////echo $conObj->error.'<br/>';
+							////////echo "Error in Query 2 where arrayOfPostsShown length = 0, Query in fetchPostIdHashes <br/>";
+							////////echo $conObj->error.'<br/>';
 						}
 				}
 				
 			else if($arrayOfPostsShownLength > 0)
 				{
-					// echo "hi length ! =0 <br/>";
+					// //echo "hi length ! =0 <br/>";
 
-					$sql = "SELECT postIdHash FROM post WHERE ((userId = ?) or (sharedWith REGEXP ?)) AND (hiddenTo NOT LIKE ?) AND (lifetime > ?) AND (postIdHash != ";
+					$sql = "SELECT postIdHash FROM post WHERE ((userId = ?) or (sharedWith REGEXP ?)) AND (hiddenTo NOT REGEXP ?) AND (lifetime > ?) AND (postIdHash != ";
 					
 					$arrayOfPostsShownIndex = 0;
 					$values2 = array();
@@ -198,13 +197,14 @@
 							$arrayOfPostsShownIndex++;
 						}
 						
-					$sql = $sql." ORDER BY timestamp DESC LIMIT ?,?";
-					//echo "This is the value of sql <br/>";
-					//echo $sql.'<br/>';
-					$values2[$arrayOfPostsShownIndex+4] = array(0 => 'i');
-					$values2[$arrayOfPostsShownIndex+5] = array($limit => 'i');
+					$sql = $sql."AND ( displayStatus = ? ) ORDER BY timestamp DESC LIMIT ?,?";
+					////echo "This is the value of sql <br/>";
+					////echo $sql.'<br/>';
+					$values2[$arrayOfPostsShownIndex+4] = array(1 => 'i');
+					$values2[$arrayOfPostsShownIndex+5] = array(0 => 'i');
+					$values2[$arrayOfPostsShownIndex+6] = array($limit => 'i');
 					
-					//echo "This is the values array <br/>";
+					////echo "This is the values array <br/>";
 					//print_r($values2);
 
 					$result2 = $conObj->select($sql,$values2);
@@ -222,8 +222,8 @@
 						
 					else
 						{
-							//echo "Error in Query 2 where arrayOfPostsShown length != 0, Query in fetchPostIdHashes <br/>";
-							//echo $conObj->error.'<br/>';
+							////echo "Error in Query 2 where arrayOfPostsShown length != 0, Query in fetchPostIdHashes <br/>";
+							////echo $conObj->error.'<br/>';
 						}
 				}
 				
@@ -234,10 +234,10 @@
 		{
 			$conObj = new QoB();
 			
-			//////////echo 'Hi fetch posts<br/>';
+			////////////echo 'Hi fetch posts<br/>';
 			$postIdHashArrayLength = count($postIdHashArray);
 			
-			//////////echo 'The post Id Hash Array Length is '.$postIdHashArrayLength.'<br/>';
+			////////////echo 'The post Id Hash Array Length is '.$postIdHashArrayLength.'<br/>';
 			$returnArray = array();
 			
 			//Starts from 1, 0 is left to check whether there are any posts or not.
@@ -273,12 +273,12 @@
 						
 					$sql = $sql." ORDER BY timestamp DESC";
 					
-					//////////echo "The value of sql is ".$sql."<br/>";
-					//////////echo "The value of values array is <br/>";
+					////////////echo "The value of sql is ".$sql."<br/>";
+					////////////echo "The value of values array is <br/>";
 					
 					// //////print_r($values4);
 					
-					//////////echo '<br/>';
+					////////////echo '<br/>';
 					
 					$result4 = $conObj->select($sql,$values4);
 					
@@ -286,7 +286,7 @@
 					{
 						while($latestPosts = $conObj->fetch($result4))
 						{
-							//////////echo "This is lifetime ".$latestPosts['lifetime']."<br/>";
+							////////////echo "This is lifetime ".$latestPosts['lifetime']."<br/>";
 							$days = ($latestPosts['lifetime'] - $latestPosts['timestamp'])/86400;
 							$followPost = isFollowing($latestPosts['userId'],$latestPosts['followers']);
 							$userIdHash = getHash($latestPosts['userId']);
@@ -294,16 +294,21 @@
 							//print $userIdHash;
 							$postUserName = getName($latestPosts['userId']);
 							//print $postUserName;
+							//
+							//echo $latestPosts['timestamp'];
+							//echo '<br/>';
 							$ts = new DateTime();
 							$ts->setTimestamp($latestPosts['timestamp']);
 							$timestamp=$ts->format(DateTime::ISO8601);
+
+
 							// $timestamp="2008-07-17T09:24:17Z";
 							$postOwner=-1;
-							////////////echo $currentUserId." ".$latestPosts['userId'];
+							//////////////echo $currentUserId." ".$latestPosts['userId'];
 							
 							if(strcasecmp($currentUserId,$latestPosts['userId']) == 0)
 								{
-									////////////echo "compared correctly";
+									//////////////echo "compared correctly";
 									$postOwner = 1;
 								}
 							else
@@ -330,8 +335,12 @@
 											$userIdHash = getHash($userId);
 											
 											$personTags = $postComments['personTags'];
-											$timestamp = $postComments['timestamp'];
+											//$timestampc = $postComments['timestamp'];
 											$commentIdHash = $postComments['commentIdHash'];
+
+											$tsc = new DateTime();
+											$tsc->setTimestamp($postComments['timestamp']);
+											$timestampc = $tsc->format(DateTime::ISO8601);
 											
 											//$idAndName = getIdAndName($userIdHash);
 											//$commentUserId = $idAndName[1];
@@ -345,7 +354,7 @@
 
 											
 											
-											$objc = new miniComment($latestPosts['postIdHash'],$userIdHash,$postComments['content'],$postComments['timestamp'],$postComments['commentIdHash'],$userId,$commentUserName,$commentOwner);
+											$objc = new miniComment($latestPosts['postIdHash'],$userIdHash,$postComments['content'],$timestampc,$postComments['commentIdHash'],$userId,$commentUserName,$commentOwner);
 											
 											$outputac[$noofelementsc] = $objc;
 											
@@ -354,14 +363,14 @@
 									
 									if($noofelementsc == 0)
 										{
-											////////////echo 'No values found for Query of Comments<br />';	
+											//////////////echo 'No values found for Query of Comments<br />';	
 										}
 								
 								}
 							else
 								{
-									////////////echo 'Error in Query of comments<br />';
-									////////////echo $conObj->error.'<br />';
+									//////////////echo 'Error in Query of comments<br />';
+									//////////////echo $conObj->error.'<br />';
 									//return -1;
 								}
 							
@@ -369,8 +378,8 @@
 							
 							
 							////////print_r($outputac);
-							////////////echo $outputac[1]->commentUserId;
-							////////////echo '<br /> above obj'.$postOwner;
+							//////////////echo $outputac[1]->commentUserId;
+							//////////////echo '<br /> above obj'.$postOwner;
 							///
 							/*$strx="";
 							for($i=0;$i<strlen($latestPosts['sharedWith']);$i++)
@@ -383,7 +392,7 @@
 							
 							$returnArray[$returnArrayIndex] = new miniPost($latestPosts['postIdHash'],$latestPosts['sharedWith'],$days,$postUserName,$latestPosts['subject'],$latestPosts['content'],$latestPosts['starCount'],$latestPosts['commentCount'],$latestPosts['mailCount'],$latestPosts['seenCount'],$timestamp,$followPost,$userIdHash,$latestPosts['userId'],$hasStarred,$outputac,$postOwner );
 
-							//////echo "Value of jason encode object <br/>";
+							////////echo "Value of jason encode object <br/>";
 							////print_r(json_encode($returnArray[$returnArrayIndex]));
 							$returnArrayIndex++;
 								
@@ -391,8 +400,8 @@
 					}
 				else
 					{
-						//////////echo "Error in query of fetchpost <br/>";
-						//////////echo $conObj->error.'<br/>';
+						////////////echo "Error in query of fetchpost <br/>";
+						////////////echo $conObj->error.'<br/>';
 					}
 				
 				}
