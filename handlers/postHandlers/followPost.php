@@ -3,18 +3,26 @@ session_start();
 	require_once('../../QOB/qob.php');
 	require_once('../fetch.php');
 //testing Inputs start
-//$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
-	//$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
- //$_POST['_postId']="16462edf7108a40bc1639284722e6c662964c1d527ce89113d63264cc20841c0f297f6d1044894d581e3196b3d9ca89eb201f469edde1f5e2ae62a8e95b107e1";
-
+/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B016".SALT);
+	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+ $_POST['_postId']="3ade034661698c76b1e1d166e9cdb24a50e36acebdf072ddf0c8c578cc6ee7a26ed3c6ea68ac1f744f9fa443810a675bd2467ab7f1c8c2922d03a4b5a8795f9a";
+*/
 //Testing Inputs End
 /*
 Code 3: SUCCESS!!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
+Code 11: Session Variables unset!!
 */
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 	$conn= new QoB();
 	$userIdHash=$_SESSION['vj'];
 	//Checking the session varianles. Second Level Protection

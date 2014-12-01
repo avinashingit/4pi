@@ -4,27 +4,34 @@
 	require_once('./miniClasses/miniPost.php');
 	require_once('../fetch.php');
 	
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	
 	 //Inputs for testing
-$_POST['_postContent']="Some random Stuff";
-$_POST['_share']="EDS,COE,EDM,MDM";
-$_POST['_validity']=30;
-$_POST['_subject']="Reply!!"; 
+	/*$_POST['_postContent']="Some random Stuff";
+	$_POST['_share']="EDS,COE,EDM,MDM";
+	$_POST['_validity']=30;
+	$_POST['_subject']="Reply!!"; */
 	//Inputs for testing ends  
 	
 	//echo $_SESSION['vj'].' '.$_SESSION['tn'];
 	//print_r($_SESSION);
 
-/*
-Code 3: SUCCESS!!
+
+/*Code 3: SUCCESS!!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-*/
-	
+Code 11: Session Variables unset!!*/
+
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 //var_dump($_POST);
 //echo $_POST['_share'];*/
 
@@ -37,9 +44,11 @@ Code 16: Erroneous Entry By USER!!
 	$userIdHash=$_SESSION['vj'];
 	//echo $_SESSION['vj'];
 	//Checking the session varianles. Second Level Protection
+	
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		
+		// var_dump($_SESSION);
+		// echo hash("sha512",$userIdHash.SALT2).'<br/>'.$_SESSION['tn'];
 		notifyAdmin("Suspicious session variable in createPost",$userIdHash);
 		//$_SESSION=array();
 		//session_destroy();
@@ -60,25 +69,37 @@ Code 16: Erroneous Entry By USER!!
 		}
 		else
 		{
-			$content=$_POST['_postContent'];//1
+			$content=trim($_POST['_postContent']);//1
+			if($content=="")
+			{
+				echo 16;
+				exit();
+			}
 			$postUserName=$user['name'];
 			$userId=$user['userId'];
 			$rawsharedWith=$_POST['_share'];
 			$rawsharedWith=trim($rawsharedWith);
+			//echo $rawsharedWith;
+			if($rawsharedWith=="")
+			{
+				echo 16;
+				exit();
+			}
 			$splitSharedWith=explode(",",$rawsharedWith);
 			$n=count($splitSharedWith);
 			//echo $n+1;
+			//var_dump($splitSharedWith);
 			$sharedWith="";
-			if(stripos($rawsharedWith,"EVERYONE")===false)
+			if(stripos($rawsharedWith,"All")===false)
 			{
-					if($rawsharedWith!=",")
+				if($rawsharedWith!=",")
 				{
 					for($i=0;$i<$n;$i++)
 					{
 						if($splitSharedWith[$i]!="")
 						{
 							//echo $i.",".$splitSharedWith[$i]."<br/>";
-							$out=validateSharedWith($splitSharedWith[$i]);
+							$out=newValidateSharedWith($splitSharedWith[$i]);
 							if($out=="Invalid")
 							{
 								echo 16;
@@ -107,11 +128,11 @@ Code 16: Erroneous Entry By USER!!
 			}
 			else
 			{
-				$sharedWith="^.{9}$";
+				$sharedWith="All";
 			}
+			//echo $sharedWith;
 			
-			
-			$subject=$_POST['_subject'];//3
+			$subject=trim($_POST['_subject']);//3
 			$lifetime=$_POST['_validity'];
 			$isPermanent=false;//4
 			if($lifetime==9999)

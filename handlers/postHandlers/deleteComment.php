@@ -1,4 +1,5 @@
 <?php
+session_start();
 	require_once('../../QOB/qob.php');
 	require_once('../fetch.php');
 	//Testing Inputs Start
@@ -11,9 +12,17 @@
 Code 3: SUCCESS!!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
+Code 11: Session Variables unset!!
 */
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 	$conn= new QoB();
 	$userIdHash=$_SESSION['vj'];
 	//Checking the session varianles. Second Level Protection

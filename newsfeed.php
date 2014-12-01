@@ -14,7 +14,7 @@ $_SESSION['jq']=0;
 
 <script>
 
-var userId = "<?php  echo $_SESSION['vj']; ?>";
+var userIdHash = "<?php  echo $_SESSION['vj']; ?>";
 var inView= "<?php echo $_SESSION['jx']; ?>";
 
 

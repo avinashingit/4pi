@@ -1734,3 +1734,587 @@
 
 [2014-11-29 23:03:29             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
 
+[2014-12-01 18:33:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:34:30             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:34:53             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:35:20             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:47:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ? )ORDER BY timestamp DESC LIMIT ?,?' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:11             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:11             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:11             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:11             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:11             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND ' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:48             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:50             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:49:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:01             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:01             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:01             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:01             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:01             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:01             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:02             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:07             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:08             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:08             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:09             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:09             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:09             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:09             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:55             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:50:59             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:03             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:03             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:03             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:03             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:03             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:24             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:51:25             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:44             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:52:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:22             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:53:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ?) AND (postIdHash ! = ? )ORDE' at line 1$$$
+
+[2014-12-01 18:55:31             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:31             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:31             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:32             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:33             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:33             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:33             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:33             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:51             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:55:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:04             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:05             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:06             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:06             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:06             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+
+[2014-12-01 18:58:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
+

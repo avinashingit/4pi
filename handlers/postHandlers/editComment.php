@@ -16,10 +16,26 @@ require_once('miniClasses/miniComment.php');
 Code 3: SUCCESS!!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
+Code 11: Session Variables unset!!
 */
-$commentContent=$_POST['_commentContent'];
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
+$commentContent=trim($_POST['_commentContent']);
+if($commentContent=="")
+{
+	blockUserByHash($userIdHash,"Messing with postIdHash!! In EditComment");
+	$_SESSION=array();
+	session_destroy();
+	echo 14;
+	exit();
+}
 $postIdHash=$_POST['_postId'];
 $commentIdHash=$_POST['_commentId'];
 if($commentContent!=""&&$postIdHash!=""&&$commentIdHash!="")
@@ -54,7 +70,7 @@ if($commentContent!=""&&$postIdHash!=""&&$commentIdHash!="")
 				blockUserByHash($userIdHash,"Messing with postIdHash!! In EditComment");
 				$_SESSION=array();
 				session_destroy();
-				echo 13;
+				echo 14;
 			}
 			else
 			{

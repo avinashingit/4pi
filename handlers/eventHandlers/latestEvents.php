@@ -4,11 +4,11 @@ require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
+/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	//$_SESSION['vgr']=0;
-	$_POST['_refresh']=0;*/
-
+	$_POST['_refresh']=0;
+	$_POST['sgk']="";
+*/
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
@@ -16,20 +16,35 @@ Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
 */
-//Upcoming Event Offset
 
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
+//Upcoming Event Offset - vgr
+//Processed Event Hashes - sgk
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
-if($refresh==1)
+$ProcessedHashes=array();
+$inputHashes=$_POST['sgk'];
+if($inputHashes!="")
 {
-	$_SESSION['vgr']=0;
+	$ProcessedHashes=explode(",", $inputHashes);
+	$ProcessedHashesCount=count($ProcessedHashes);
 }
-$offset=$_SESSION['vgr'];
+else
+{
+	$ProcessedHashesCount=0;
+}
+
 $conn=new QoB();
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		if(blockUserByHash($userIdHash,"Suspicious Session Variable in latest events")>0)
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in latestEvent")>0)
 		{
 			$_SESSION=array();
 			session_destroy();
@@ -58,21 +73,28 @@ $conn=new QoB();
 		else
 		{
 			$userId=$user['userId'];
+			$i=0;
+			$finalStudentRegex=getRollNoRegex($userId);
+			$getLatestEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?";
 			
-			
-			$noffset=$offset+3;
-			$getUpcomingEventsSQL="SELECT * FROM event ORDER BY timestamp DESC LIMIT ?,?";
-			$values[0]=array($offset => 'i');
-			$values[1]=array($noffset => 'i');
+			$values[0]=array($finalStudentRegex => 's');
+			for($i=0;$i<$ProcessedHashesCount;$i++)
+			{
+				$getLatestEventsSQL=$getLatestEventsSQL." AND postIdHash!=?";
+				$values[$i+1]=array($ProcessedHashes[$i] => 's');
+			}
+			$SQLEndPart=" ) OR userId=? ORDER BY timestamp";
+			$values[$i+1]=array($userId => 's');
+			//var_dump($values);
+			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
+			//echo $getLatestEventsSQL;
 			$displayCount=0;
-			$result=$conn->select($getUpcomingEventsSQL,$values);
+			$result=$conn->select($getLatestEventsSQL,$values);
 			if($conn->error=="")
 			{
 				//Success
-				$processedEvents=0;
 				while(($event=$conn->fetch($result))&&$displayCount<3)
 				{
-					
 					$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
 					{
@@ -82,7 +104,7 @@ $conn=new QoB();
 					{
 						$eventOwner=-1;
 					}
-					if(isSharedTo($userId,$event['sharedWith'])||$eventOwner==1)
+					if(!(in_array($event['eventIdHash'],$ProcessedHashes)))
 					{
 						if(stripos($event['attenders'], $userId)===false)
 						{
@@ -96,24 +118,18 @@ $conn=new QoB();
 						$rawTime=changeToRawTimeFormat($eventTime);
 						$eventDate=$event['eventDate'];
 						$rawDate=changeToRawDateFormat($eventDate);
+						$ts = new DateTime();
+						$ts->setTimestamp($event['timestamp']);
+						$eventCreationTime=$ts->format(DateTime::ISO8601);
 						$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
 						$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
-							$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender);
-						echo $displayCount;
-						echo "<br/>";
+							$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
+							$event['eventDurationHrs'],$event['eventDurationMin'],$event['eventStatus'],$eventCreationTime);
 						print_r(json_encode($eventObj));
 						$displayCount++;
-					}
-					$processedEvents++;
-					
+					}	
 				}
-
-				/*
-				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
-							$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, $seenCount,$eventOwner,$isAttender);
-				print_r(json_encode($eventObj));*/
-				$_SESSION['vgr']=$_SESSION['vgr']+$processedEvents;
-				if($processedEvents==0||$displayCount==0)
+				if($displayCount==0)
 				{
 					echo 404;
 					exit();
@@ -121,10 +137,9 @@ $conn=new QoB();
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! While inserting in latestEvent",$userId);
+				notifyAdmin("Conn.Error".$conn->error."! While inserting in latestEvents",$userId);
 				echo 12;
 				exit();
 			}
 		}
 	}
-?>

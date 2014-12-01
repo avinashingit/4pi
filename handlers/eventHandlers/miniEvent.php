@@ -18,10 +18,13 @@ class miniEvent
 	public $isAttender;
 	public $eventDurationHrs;
 	public $eventDurationMin;
+
 	public $eventStatus;
+	public $eventTimestamp;
 
 	function __construct($eventIdHash,$eventOrgName,$eventName,$eventType,$eventContent,
-		$eventDate,$eventTime,$eventVenue,$attendCount,$sharedWith, $seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,$eventStatus)
+		$eventDate,$eventTime,$eventVenue,$attendCount,$sharedWith, 
+		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp)
 	{
 		$this->eventIdHash=$eventIdHash;
 		$this->eventOrgName=$eventOrgName;
@@ -38,9 +41,11 @@ class miniEvent
 		$this->seenCount=$seenCount;
 		$this->eventOwner=$eventOwner;
 		$this->isAttender=$isAttender;
-		$this->eventDuration=$eventDurationHrs;
+		$this->eventDurationHrs=$eventDurationHrs;
 		$this->eventDurationMin=$eventDurationMin;
+
 		$this->eventStatus=$eventStatus;
+		$this->eventTimestamp=$eventTimestamp;
 		return $this;
 
 	}

@@ -86,7 +86,7 @@
 
 					    			<label for="shareWith">Share With</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it untouched makes the event visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
 
-					    			<input value="Everyone" name="createEventSharedWith" class="form-control"type="text" id="createEventSharedWith">
+					    			<input value="All" name="createEventSharedWith" class="form-control"type="text" id="createEventSharedWith">
 
 					  		</div>
 
@@ -228,7 +228,7 @@
 
 					    			<label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it untouched makes the event visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
 
-					    			<input name="editEventSharedWith" class="form-control"type="text" id="editEventSharedWith">
+					    			<input name="editEventSharedWith" value="All" class="form-control"type="text" id="editEventSharedWith">
 
 					  		</div>
 
@@ -425,35 +425,40 @@
 function eventInsert(position,data)
 
 {
+
+	alert("called");
 	var event="";
 
-	event+='<div class="row event" id="eventId" style="margin-bottom:10px;">';
+	event+='<div class="row event" id="eventId" style="margin-bottom:10px;margin-top:30px;">';
 
-	event+='<div id="eventSharedWith" class="hidden" >B.Tech</div>';
+	event+='<div id="eventSharedWith" class="hidden" >'+data.sharedWith+'</div>';
 
-	event+='<div id="eventStatus" class="hidden" >As Scheduled</div>';
+	event+='<div id="eventStatus" class="hidden" >'+data.eventStatus+'</div>';
 
-	event+='<div id="eventType" class="hidden">Competition</div>';
+	event+='<div id="eventType" class="hidden">'+data.eventType+'</div>';
 
 	event+='<div class="row" id="eventNameTime">';
 
 	event+='<div class="col-md-6 text-left" id="eventNameAndClub">';
 
-	event+='<div style="font-size:18px;"><a href="#"><span id="eventOrganizer" class="text-bold">Zerone Club</span></a> - <span id="eventName" class="text-bold">Bug D Bug</span></div>';
+	event+='<div style="font-size:18px;"><a href="#"><span id="eventOrganizer" class="text-bold">'+data.eventOrgName+'</span></a> - <span id="eventName" class="text-bold">'+data.eventName+'</span></div>';
 
 	event+='</div>';
 
-	event+='<div class="col-md-2 col-md-offset-1"  id="editEvent">';
+	if(data.eventOwner==1)
+	{
+		event+='<div class="col-md-2 col-md-offset-1"  id="editEvent">';
 
-	event+='<p class="text-right"><i class="fa fa-pencil" title="Edit Event" onclick="editEvent(\'eventId\');"></i>&nbsp;';
+		event+='<p class="text-right"><i class="fa fa-pencil" title="Edit Event" onclick="editEvent(\'eventId\');"></i>&nbsp;';
 
-	event+='<i class="fa fa-trash" title="Delete Event" onclick="deleteEvent(\'eventId\');"></i></p>';
+		event+='<i class="fa fa-trash" title="Delete Event" onclick="deleteEvent(\'eventId\');"></i></p>';
 
-	event+='</div>';
+		event+='</div>';
+	}
 
 	event+='<div class="col-md-3 text-right" id="eventPostedTime">';
 
-	event+='<time class="timeago" id="eventPostedTimeValue" datetime="2014-10-10T09:24:17Z" title="">October 17,2014</time>';
+	event+='<time class="timeago" id="eventPostedTimeValue" datetime="'+data.eventTimestamp+'" title="">'+data.eventTimestamp+'</time>';
 
 	event+='</div>';
 
@@ -465,7 +470,7 @@ function eventInsert(position,data)
 
 	event+='<div class="col-md-12">';
 
-	event+='<p id="eventContent">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>';
+	event+='<p id="eventContent">'+data.eventContent+'</p>';
 
 	event+='</div>';
 
@@ -480,25 +485,25 @@ function eventInsert(position,data)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-danger"><p class="venueDateTimeEvent text-center" ><i class="fa fa-at" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">H05</span></p></button>';
+	event+='<button type="button" class="btn btn-danger"><p class="venueDateTimeEvent text-center" ><i class="fa fa-at" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
 				  
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-primary"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">24-09-2014</span></p></button>';
+	event+='<button type="button" class="btn btn-primary"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
 	
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-warning"><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">6:45</span><</p></button>';
+	event+='<button type="button" class="btn btn-warning"><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span><</p></button>';
 				  
 	event+='</div>';
 
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-info"><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Duration"></i>&nbsp;<span id="eventDurationHours">6</span>:<span id="eventDuratoinMinutes">30</span></p></button>';
+	event+='<button type="button" class="btn btn-info"><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDuratoinMinutes">'+data.eventDurationMin+'</span></p></button>';
 				  
 	event+='</div>';
 				
@@ -514,21 +519,27 @@ function eventInsert(position,data)
 
 	event+='<div class="col-md-3 col-md-offset-1">';
 
-	event+='<span id="eventAttendeeNumber"><i class="fa fa-check" title="No of Attenders"></i>&nbsp;<span id="eventAttendersValue">25</span></span>';
+	event+='<span id="eventAttendeeNumber"><i class="fa fa-check" title="No of Attenders"></i>&nbsp;<span id="eventAttendersValue">'+data.attendCount+'</span></span>';
 
 	event+='</div>';
 
 	event+='<div class="col-md-3 col-md-offset-1">';
 
-	event+='<p><i class="fa fa-eye" title="Seen By"></i>&nbsp;<span id="eventSeenByNumber">25</span></p>';
+	event+='<p><i class="fa fa-eye" title="Seen By"></i>&nbsp;<span id="eventSeenByNumber">'+data.seenCount+'</span></p>';
 
 	event+='</div>';
 
 	event+='<div class="col-md-3 col-md-offset-1 text-left">';
 
-	event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\'eventId\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
-				
-	event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
+	if(data.isAttender!=1)
+	{
+		event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\'eventId\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
+	}
+
+	else
+	{
+		event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
+	}
 
 	event+='</div>';
 
@@ -542,15 +553,19 @@ function eventInsert(position,data)
 
 	event+='</div>';
 
+	console.log("HEEEE");
+
 	if(position=="first")
 	{
-		$("#eventArea").append(event).hide().fadeIn('slow');
+		$("#eventArea").prepend(event).hide().fadeIn('slow');
 	}
 
 	else
 	{
-		$('#eventArea').prepend(event).hide().fadeIn('slow');
+		$('#eventArea').append(event).hide().fadeIn('slow');
 	}
+
+	console.log(event);
 
 }
 
@@ -576,7 +591,7 @@ function editEvent(id)
 	
 	var eventDate=$('#'+id).find('#eventDate').html();
 	
-	var eventTime=$('#'+id).find('#eventTimeHours').html();
+	var eventTime=$('#'+id).find('#eventTime').html();
 
 	var eventDurationHours=$('#'+id).find('#eventDurationHours').html();
 	
@@ -608,7 +623,7 @@ function editEvent(id)
 	
 	$('#editEventModal').find('#editEventType').val(eventType);
 
-	('#editEventModal').find('#editEventStatus').val(eventStatus);
+	$('#editEventModal').find('#editEventStatus').val(eventStatus);
 	
 	$('#editEventModal').find('#editEventId').html(id);
 
@@ -699,29 +714,35 @@ function editedEventSend(){
 
 }
 
-function createEventSP(){
+function createEventSP()
+{
+	
+	var eventClubName=$('#createEventOrganizerName').val().trim();
+	
+	var eventName=$('#createEventName').val().trim();
+	
+	var eventContent=$('#createEventContent').val().trim();
+	
+	var eventSharedWith=$('#createEventSharedWith').val().trim();
+	
+	var eventVenue=$('#createEventVenue').val().trim();
+	
+	var eventDate=$('#createEventDate').val().trim();
+	
+	var eventTime=$('#createEventTime').val().trim();
+
+	var eventDurationHours=$('#createEventDurationHours').val().trim();
+
+	var eventDurationMinutes=$('#createEventDurationMinutes').val().trim();
+
+	if(isNaN(Number(eventDurationHours)) || isNaN(Number(eventDurationMinutes)))
+	{
+		alert("Please enter correct values in duration. :)");
+	} 
 
 	
 	
-	var eventClubName=$('#createEventOrganizerName').val();
-	
-	var eventName=$('#createEventName').val();
-	
-	var eventContent=$('#createEventContent').val();
-	
-	var eventSharedWith=$('#createEventSharedWith').val();
-	
-	var eventVenue=$('#createEventVenue').val();
-	
-	var eventDate=$('#createEventDate').val();
-	
-	var eventTime=$('#createEventTime').val();
-
-	var eventDurationHours=$('#createEventDurationHours').val();
-
-	var eventDurationMinutes=$('#createEventDurationMinutes').val();
-	
-	var eventType=$('#createEventType').val();
+	var eventType=$('#createEventType').val().trim();
 	
 	// var eventFiles=$('#createEventFileInput').val();
 
@@ -767,23 +788,23 @@ function createEventSP(){
 
 		$.post('./handlers/eventHandlers/createEvent.php',{
 
-			_eventClubName:eventClubName,
+			_eventOrgName:eventClubName,
 
 			_eventName:eventName,
 
-			_eventContent:eventContent,
+			_content:eventContent,
 
-			_eventSharedWith:eventSharedWith,
+			_sharedWith:eventSharedWith,
 
-			_eventVenue:eventVenue,
+			_venue:eventVenue,
 
 			_eventDate:eventDate,
 
 			_eventTime:eventTime,
 
-			_eventDurationHours:eventDurationHours,
+			_eventDurationHrs:eventDurationHours,
 
-			_eventDurationMinutes:eventDurationMinutes,
+			_eventDurationMin:eventDurationMinutes,
 
 			_eventType:eventType
 
@@ -799,9 +820,20 @@ function createEventSP(){
 
 		.success(function(data){
 
-			jQuery.parseJSON(data);
+			console.log(data);
 
-			alert("HELLO event");
+			// jQuery.parseJSON(data);
+
+			// alert("HELLO event");
+			// 
+			
+			x=JSON.parse(data);
+
+			console.log(x);
+
+			eventInsert("first",x);
+
+			$('.timeago').timeago();
 
 		});
 
@@ -906,7 +938,74 @@ function deleteEventSend(){
 
 }
 
+function latestEventsFetch(value,call)
+{
+	$.post('/4pi/handlers/eventHandlers/latest.php',{
+		_call:call
+	})
+	.error(function(data){
+		alert("Server overload error. Please try again. :(");
+	})
+	.success(function(data){
+		if(value=="empty")
+		{
+			$('.event').each(function(){
+				$(this).remove();
+			});
+		}
+		data=data.trim();
+		if(checkData(data)==1)
+		{
+			x=JSON.parse(data);
+			for (i=0;i<x.length;i++)
+			{
+				eventInsert('last',x[i]);
+			}
+		}
+	});
+}
 
+function upComingEventsFetch(value,call)
+{
+	$.post('/4pi/handlers/eventHandlers/latest.php',{
+		_call:call
+	})
+	.error(function(data){
+		alert("Server overload error. Please try again. :(");
+	})
+	.success(function(data){
+		data=data.trim();
+		if(checkData(data)==1)
+		{
+			x=JSON.parse(data);
+			for (i=0;i<x.length;i++)
+			{
+				eventInsert('last',x[i]);
+			}
+		}
+	});
+}
+
+function pastCompetitionsFetch(value,call)
+{
+	$.post('/4pi/handlers/eventHandlers/latest.php',{
+		_call:call
+	})
+	.error(function(data){
+		alert("Server overload error. Please try again. :(");
+	})
+	.success(function(data){
+		data=data.trim();
+		if(checkData(data)==1)
+		{
+			x=JSON.parse(data);
+			for (i=0;i<x.length;i++)
+			{
+				eventInsert('last',x[i]);
+			}
+		}
+	});
+}
 
 $(document).ready(function(){
 
@@ -929,7 +1028,7 @@ $(document).ready(function(){
 
 		});
 
-	 var input3=$('#eventCreateModal').find('#editEventTime');
+	 var input3=$('#editEventModal').find('#editEventTime');
 
 	 input3.clockpicker({
 
@@ -946,6 +1045,8 @@ $(document).ready(function(){
 
 
 	$('.popOver').popover();
+
+
 
 });
 

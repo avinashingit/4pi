@@ -4,11 +4,10 @@ require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
-	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);*/
-	//$_SESSION['vgr']=0;
-	//$_POST['_eventId']="0218124b992b38dd672b65c809b95b8ab5eec28808bed6b4339b4fe922f8e942636460a938075e0bd0510ec674413f35fe7c63baf6ed4be62eee2e155f0ce13f";
-
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","EDM12B009".SALT);
+	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+	$_POST['_eventId']="4fd09779dc874a8842cb4d1e06ec5d6b3c939e928dda3e5b9f7de9fb609f02be863492cdfdbc024027335db623f651b15c8b0862295ba9ece62c1eeddfc802f1";
+*/
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
@@ -16,7 +15,15 @@ Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
 */
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 //Upcoming Event Offset
 
 $userIdHash=$_SESSION['vj'];

@@ -12,6 +12,21 @@ require_once('../fetch.php');
 
 //1 if already noted, 2 if updated, -1 in case of failure.
 
+/*
+Code 3: SUCCESS!!
+Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
+Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
+Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
+*/
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 $conn = new QoB();
 $userIdHash=$_SESSION['vj'];
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])

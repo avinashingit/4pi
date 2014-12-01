@@ -2,7 +2,7 @@
 
 	<div class="row panel" id="rightBlock1" >
 
-		<div class="panel-heading text-center cursorPointer " style="font-size:18px;"><i class="fa fa-bank"></i>&nbsp;<a href="newsfeed.php" style="color:white;">Posts</a></div>
+		<a href="newsfeed.php" style="color:white;"><div class="panel-heading text-center cursorPointer " style="font-size:18px;"><i class="fa fa-bank"></i>&nbsp;Posts</div></a>
 
 			<ul class="list-group">
 
@@ -26,7 +26,7 @@
 
 	<div class=" row panel panel-success" id="rightBlock2" >
 
-		<div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-gears"></i>&nbsp;<a href="events.php" style="color:white;">Events</a></div>
+		<a href="events.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-gears"></i>&nbsp;Events</div></a>
 
 			<ul class="list-group">
 
@@ -50,7 +50,7 @@
 
 	<div class="row panel panel-info"  id="rightBlock3">
 
-		<div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-cubes"></i>&nbsp;<a href="polls.php" style="color:white;">Polls</a></div>
+		<a href="polls.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-cubes"></i>&nbsp;Polls</div></a>
 
 			<ul class="list-group">
 

@@ -4,11 +4,11 @@ require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","EDM12B021".SALT);
+/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B006".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 
 	$_POST['_eventId']="0218124b992b38dd672b65c809b95b8ab5eec28808bed6b4339b4fe922f8e942636460a938075e0bd0510ec674413f35fe7c63baf6ed4be62eee2e155f0ce13f";
-
+*/
 //Testing Content Ends
 
 
@@ -18,7 +18,14 @@ Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
 */
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
 
 
 	//Actual DeleteEvent Code Starts
@@ -58,7 +65,7 @@ Code 16: Erroneous Entry By USER!!
 			$userId=$user['userId'];
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
-				if(blockUserByHash($userIdHash,"Tampering EventIdHash in Delete Event",$eventIdHash)>0)
+				if(blockUserByHash($userIdHash,"Tampering EventIdHash in Delete Event",$userId.",sh:".$eventIdHash)>0)
 				{
 					$_SESSION=array();
 					session_destroy();
@@ -67,7 +74,7 @@ Code 16: Erroneous Entry By USER!!
 				}
 				else
 				{
-					notifyAdmin("Suspicious eventIdHash in DeleteEvent",$userIdHash.",sh:".$eventIdHash);
+					notifyAdmin("Suspicious eventIdHash in DeleteEvent",$userId.",sh:".$eventIdHash);
 					$_SESSION=array();
 					session_destroy();
 					echo 13;
@@ -77,7 +84,7 @@ Code 16: Erroneous Entry By USER!!
 			$eventUserId=$event['userId'];
 			if($eventUserId!=$userId)
 			{
-				if(blockUserByHash($userIdHash,"Illegal Attempt to Delete Event",$eventIdHash)>0)
+				if(blockUserByHash($userIdHash,"Illegal Attempt to Delete Event",$userId.",sh:".$eventIdHash)>0)
 				{
 					$_SESSION=array();
 					session_destroy();
@@ -86,7 +93,7 @@ Code 16: Erroneous Entry By USER!!
 				}
 				else
 				{
-					notifyAdmin("Illegal Attempt to Delete Event",$userIdHash.",sh:".$eventIdHash);
+					notifyAdmin("Illegal Attempt to Delete Event",$userId.",sh:".$eventIdHash);
 					$_SESSION=array();
 					session_destroy();
 					echo 13;

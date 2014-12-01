@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+session_start(); 
 require_once('../../QOB/qob.php');
 require_once('../fetch.php');
 require_once('miniClasses/miniPost.php');
@@ -21,10 +21,16 @@ $_POST['_subject']="post subject 4"; */
 Code 3: SUCCESS!!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
+Code 11: Session Variables unset!!
 */
 
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
 
 //Actual Code Starts
 	$conn= new QoB();
@@ -57,7 +63,7 @@ Code 10: MailError!!
 				blockUserByHash($userIdHash,"Messing with PostIdHash!! In editpost");
 				$_SESSION=array();
 				session_destroy();
-				echo 13;
+				echo 14;
 			}
 			else
 			{
@@ -67,8 +73,17 @@ Code 10: MailError!!
 				$followers=$post['followers'];
 				if($userId==$postUserId)
 				{
-					$content=trim($_POST['_postContent']);//1		
+					$content=trim($_POST['_postContent']);//1
 					$rawsharedWith=trim($_POST['_share']);
+					if($content==""||$rawsharedWith=="")
+					{
+						blockUserByHash($userIdHash,"Messing with PostIdHash!! In editpost");
+						$_SESSION=array();
+						session_destroy();
+						echo 14;
+						exit();
+					}
+					
 					$splitSharedWith=explode(",",$rawsharedWith);
 					$n=count($splitSharedWith);
 					$sharedWith="";
@@ -112,7 +127,7 @@ Code 10: MailError!!
 					{
 						$sharedWith="All";
 					}
-					$subject=trim($_POST['_subject']);//3
+					$subject=$_POST['_subject'];//3
 					$lifetime=$_POST['_validity'];
 					$isPermanent=false;
 					$lastUpdated=time();//7+4=11
@@ -141,7 +156,7 @@ Code 10: MailError!!
 							echo 13;
 						}
 					}
-					$time=time();
+					$lifetime=$lifetime*86400+time();
 					$filesAttached="";
 					$updatePostSQL="UPDATE post SET content = ?,
 						sharedWith = ?,
@@ -154,7 +169,7 @@ Code 10: MailError!!
 					$values[1]=array($sharedWith=>'s');
 					$values[2]=array($subject=>'s');//subject
 					$values[3]=array($lifetime=>'s');//lifetime
-					$values[4]=array($time=>'s');//lastUpdated
+					$values[4]=array($lastUpdated=>'s');//lastUpdated
 
 					$values[5]=array($requestPermanence=>'i');//requestPermanence
 					$values[6]=array($filesAttached =>'s');//filesAttached

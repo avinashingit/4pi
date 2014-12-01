@@ -48,7 +48,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 								  </div> -->
 								  <div class="form-group">
 								    <label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it blank makes the post visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
-								    <input name="createPostSharedWith" value="Everyone" class="form-control"type="text" id="createPostSharedWith">
+								    <input name="createPostSharedWith" value="All" class="form-control"type="text" id="createPostSharedWith">
 								  </div>
 								  <div class="form-group">
 								    <label for="porstValidity">Post Validity</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="A post lives only for a fixed time. You can also REQUEST for a lifetime validity. "></i>]

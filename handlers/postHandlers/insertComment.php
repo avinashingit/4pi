@@ -15,10 +15,17 @@ session_start();
 Code 3: SUCCESS!!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
+Code 11: Session Variables unset!!
 */
-// var_dump($_POST);
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 $content=$_POST['_commentContent'];
 $postIdHash=$_POST['_postId'];
 if($content!=""&&$postIdHash!="")
@@ -81,17 +88,11 @@ if($content!=""&&$postIdHash!="")
 						else
 						{
 							$commentId=$cId+1;
-						}
-						
+						}						
 						$commentIdHash=hash("sha512", $commentId.POCHASH);
-
-						
 						$commentUserName=$user['name'];
 						//$commentUserName=$user['alias'];
 						$postCommentCount=$post['commentCount'];
-
-
-						
 						$insertCommentSQL="INSERT INTO ".$tablename." (commentIdHash,content,userId,timestamp,personTags,commentId) VALUES(?,?,?,?,?,?)";
 						$values[0]=array($commentIdHash => 's');
 						$values[1]=array($content => 's');
@@ -110,7 +111,7 @@ if($content!=""&&$postIdHash!="")
 							$commentObj= new miniComment($postIdHash,$userIdHash,$content,$CommentCreationTime,
 													$commentIdHash,$commentUserId,$commentUserName,$commentOwner);
 							
-							if(updatePostIndexesOnComment($post,$conn))
+							if(updatePostIndexesOnComment($post,$userId,$conn))
 							{
 								$conn->completeTransaction();
 								print_r(json_encode($commentObj));

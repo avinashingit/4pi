@@ -16,8 +16,12 @@ function login()
 
 						$userIdHash=hash("sha512",$userId.SALT);
 						$_SESSION['vj'] = $userIdHash;
+						// echo '<script>console.log($userIdHash)</script>';
+
+
 						$secondUserIdHash = hash("sha512",$userIdHash.SALT2);
 						$_SESSION['tn'] = $secondUserIdHash;
+						// echo '<script>console.log($secondUserIdHash)<script>';
 						//echo $secondUserIdHash;
 						$_SESSION['jq'] = 0;
 						$_SESSION['mq'] = 0;

@@ -57,17 +57,25 @@
 
 			  		</div>
 
+			  		<!-- <div class="form-group">
+
+			   			<label for="pollDuration">Poll duration</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Basically, how long the poll should be conduted."></i>]
+
+			    		<input type="text" name="pollDuration" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollDuration" placeholder="Poll on"></input>
+
+			  		</div> -->
+
 			  		<div class="form-group">
 
-			   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+			   			<label for="pollName">Poll type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
 			    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollType" >
 			    			
-			    			<option value="1">Show results after the user votes</option>
+			    			<option value="1">Display results after the user votes</option>
 
-			    			<option value="2">Show results after all the users vote</option>
+			    			<option value="2">Display results along with options</option>
 
-			    			<option value="3">Do not show results</option>
+			    			<option value="3">Display results after the poll has ended</option>
 
 
 			    		</select>
@@ -75,63 +83,75 @@
 			  		</div>
 
 
-					<div class="form-group" id="option1">
-			   			
-			   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
-
-						<!-- <div class="input-group"> -->
-			    			
-		    			<input type="text" name="pollOptions" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" placeholder="Option"></textarea>
-
-			    			<!-- <span class="input-group-addon">
-
-								<i class="fa fa-plus" onclick="createPollAddInput();"></i>
-
-			    			</span>
-
-			    			<span class="input-group-addon hidden">
-
-								<i class="fa fa-minus" onclick="createPollDeleteInput();"></i>
-
-			    			</span> -->
-
-		    			<!-- </div> -->
-
-		    		</div>
+			  		<div class="row">
 
 
-		    		<div class="form-group" id="option2">
-			   			
-			   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+						<div class="form-group col-md-6" id="option1">
+				   			
+				   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
 
-						<div class="input-group">
-			    			
-			    			<input type="text" name="pollOptions" class="form-control input-sm" style="background-color:white !important;border-radius:0px;"placeholder="Option 2"></textarea>
+							<!-- <div class="input-group"> -->
+				    			
+			    			<input type="text" name="pollOptions" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" placeholder="Option"></textarea>
 
-			    			<span class="input-group-addon" id="addOption">
+				    			<!-- <span class="input-group-addon">
 
-								<i class="fa fa-plus" onclick="createPollAddInput();"></i>
+									<i class="fa fa-plus" onclick="createPollAddInput();"></i>
 
-			    			</span>
+				    			</span>
 
-			    			<span class="input-group-addon hidden" id="deleteOption">
+				    			<span class="input-group-addon hidden">
 
-								<i class="fa fa-minus" onclick="createPollDeleteInput(this);"></i>
+									<i class="fa fa-minus" onclick="createPollDeleteInput();"></i>
 
-			    			</span>
+				    			</span> -->
 
-		    			</div>
+			    			<!-- </div> -->
+
+			    		</div>
+
+
+			    		<div class="form-group col-md-6" id="option2">
+				   			
+				   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+
+							<div class="input-group">
+				    			
+				    			<input type="text" name="pollOptions" class="form-control input-sm" style="background-color:white !important;border-radius:0px;"placeholder="Option 2"></textarea>
+
+				    			<span class="input-group-addon" id="addOption">
+
+									<i class="fa fa-plus" onclick="createPollAddInput();"></i>
+
+				    			</span>
+
+				    			<span class="input-group-addon hidden" id="deleteOption">
+
+									<i class="fa fa-minus" onclick="createPollDeleteInput(this);"></i>
+
+				    			</span>
+
+			    			</div>
+
+			    		</div>
+
 
 		    		</div>
 				
 				</form>
 
+				<br/>
+
 				<button onclick="createPollSP();" class="btn btn-primary">Create Poll</button>
 
 			</div>
+			
 		</div>
+
 	</div>
+
 </div>
+
 </div>
 
 
@@ -150,7 +170,7 @@ function createPollAddInput(){
 	current.find('input').val("");
 	current.find('label').html(placeHolder);
 	current.find('#deleteOption').removeClass('hidden');
-	$('#pollCreateModal').find('.modal-body').find('form').append(current);
+	$('#pollCreateModal').find('.modal-body').find('form .row').append(current);
 }
 
 //----------------------------------------------------------------------------//

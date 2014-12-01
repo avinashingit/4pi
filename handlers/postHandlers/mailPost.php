@@ -1,19 +1,35 @@
 <?php
-session_start();
 	require_once('../../QOB/qob.php');
 	require_once('../fetch.php');
 	//Testing Inputs Start
-///$userIdHash=$_SESSION['vj']=hash("sha512","COE12B009".SALT);
-// 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-//  $_POST['_postId']="16462edf7108a40bc1639284722e6c662964c1d527ce89113d63264cc20841c0f297f6d1044894d581e3196b3d9ca89eb201f469edde1f5e2ae62a8e95b107e1";
-// 	//Testing Inputs End
-// $_POST['_emailId']="COE12B009@iiitdm.ac.in";
-// Code 3: SUCCESS!!
-// Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
-// Code 12: Database ERROR!!
-// Code 16: Erroneous Entry By USER!!
-// Code 10: MailError!!
-// Code 1: Mailed Again By an Old user.
+/*$userIdHash=$_SESSION['vj']=hash("sha512","COE11B005".SALT);
+	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+ $_POST['_postId']="3ade034661698c76b1e1d166e9cdb24a50e36acebdf072ddf0c8c578cc6ee7a26ed3c6ea68ac1f744f9fa443810a675bd2467ab7f1c8c2922d03a4b5a8795f9a";*/
+	//Testing Inputs End
+
+/*Code 3: SUCCESS!!
+Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
+Code 12: Database ERROR!!
+Code 16: Erroneous Entry By USER!!
+Code 10: MailError!!
+Code 1: Mailed Again By an Old user.
+
+*/
+/*
+Code 3: SUCCESS!!
+Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
+Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
+Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
+*/
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 
 	$conn= new QoB();
 	$userIdHash=$_SESSION['vj'];
@@ -52,7 +68,7 @@ session_start();
 				$postId=$post['postId'];
 				$userId=$user['userId'];
 				//validation needed
-				$emailId=$_POST['_emailId'];
+				$emailId=$_POST['_email'];
 				//validation
 				$subject="Mail Post Request for '".$post['subject']."' By '".$user['name']."'";
 				$content=$post['content'];
@@ -71,33 +87,37 @@ session_start();
 						{
 							$mailedBy=$mailedBy.",".$userId;
 						}
-						$mailCount=$mailCount+1;
-						$date = date_create();
-							
-						$mailToIndexUpdated = ($post['mailToIndex'] + date_timestamp_get($date))/2;
-						$mailToIndexUpdated="".$mailToIndexUpdated;	
-						$impIndexUpdated = $post['likeIndex'] + 2 * $mailToIndexUpdated;
-						$impIndexUpdated="".$impIndexUpdated;	
-						$values2 = array( 0 => array($mailToIndexUpdated => 's'), 1 => array($impIndexUpdated => 's'), 2 => array($mailedBy =>'s'), 3 =>array($mailCount => 'i'), 4 => array($postId => 's'));
-							
-						$result2 = $conn->update("UPDATE post SET mailToIndex = ? ,impIndex = ?, mailedBy = ?, mailCount = ? WHERE postId = ? ",$values2,false);
-						if($conn->error==""&&$result2==true)
+					}
+					$followers=$post['followers'];
+					if(stripos($followers,$userId)===false)
+					{
+						if($followers=="")
 						{
-							print_r(json_encode($mailCount));
+							$followers=$userId;
 						}
 						else
 						{
-							notifyAdmin("Conn.Error: ".$conn->error."! In Updating Post In mailPost. PostId:".$postId,$userId);
-							echo 12;
+							$followers=$followers.",".$userId;
 						}
+					}
+					$mailCount=$mailCount+1;
+					$date = date_create();
+						
+					$mailToIndexUpdated = ($post['mailToIndex'] + date_timestamp_get($date))/2;
+					$mailToIndexUpdated="".$mailToIndexUpdated;	
+					$impIndexUpdated = $post['likeIndex'] + 2 * $mailToIndexUpdated;
+					$impIndexUpdated="".$impIndexUpdated;	
+					$values2 = array( 0 => array($mailToIndexUpdated => 's'), 1 => array($impIndexUpdated => 's'), 2 => array($mailedBy =>'s'), 3 =>array($mailCount => 'i'), 4 => array($followers => 's'), 5 => array($postId => 's'));	
+					$result2 = $conn->update("UPDATE post SET mailToIndex = ? ,impIndex = ?, mailedBy = ?, mailCount = ?, followers=? WHERE postId = ? ",$values2,false);
+					if($conn->error==""&&$result2==true)
+					{
+						print_r(json_encode($mailCount));
 					}
 					else
 					{
-						echo 1;
+						notifyAdmin("Conn.Error: ".$conn->error."! In Updating Post In mailPost. PostId:".$postId,$userId);
+						echo 12;
 					}
-
-
-					
 				}
 				else
 				{

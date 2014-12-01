@@ -4,19 +4,20 @@ require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDM12B006".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B021".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 
-	$_POST['content']="Telidu";
-	$_POST['eventName']="Peru Chepparu";
-	$_POST['venue']="Cheptaru aagu!!";
-	$_POST['eventType']="Avesapadaddu";
+	$_POST['_content']="Some Other Event";
+	$_POST['_eventName']="SomeOther Peru kuda!";
+	$_POST['_venue']="Some Place";
+	$_POST['_eventType']="Some type";
 
-	$_POST['eventDate']="24-10-21";
-	$_POST['eventTime']="13:10";
-	$_POST['eventDuration']="02:00";
-	$_POST['sharedWith']="MDM,MDS,I";
-	$_POST['eventOrgName']="Rajni Kanth";*/
+	$_POST['_eventDate']="21/10/2015";
+	$_POST['_eventTime']="17:10";
+	$_POST['_eventDurationHrs']=2;
+	$_POST['_eventDurationMin']=45;
+	$_POST['_sharedWith']="EDS,EVD,EDM11";
+	$_POST['_eventOrgName']="Something Raju";*/
 //Testing Content Ends
 
 
@@ -26,206 +27,60 @@ Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
 */
 
-function validateSharedWith($str){
-		$regstr;
-		$conn=new QOB();
-		if(strlen($str)==0)
-		{
-			$storeString="^.{9}$";
-			$regstr=$storeString;
-			return $regstr;
-		}
-		if(strlen($str)==1)
-		{
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$storeString="^.{5}".$str.".{3}$";
-			$values[0]=array('_____'.$str.'___'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					$regstr=$storeString;
-					return $regstr;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}	
-		}
-		else if(strlen($str)==2){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$storeString="^.{3}".$str.".{4}$";
-			$values[0]=array('___'.$str.'____'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					$regstr=$storeString;
-					return $regstr;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}			
-		}
-		else if(strlen($str)==3){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array('___'.$str.'___'=>'s');
-			$storeString1='^.{3}'.$str.'.{3}$';
-			$values1[0]=array($str.'______'=>'s');
-			$storeString2='^'.$str.'.{6}$';
-			$result=$conn->fetchALL($sql,$values,true);
-			//
-			if($conn->error!=''){
-				notifyAdmin("Conn.Error".$conn->error."In validate Shared With1",$userId);
-				//echo $conn->error;
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					$regstr=$storeString1;
-					return $regstr;
-				}
-				else
-				{
-					$result2=$conn->fetchALL($sql,$values1,true);
-					if($conn->error!=""){
-						notifyAdmin("Conn.Error".$conn->error."In validate Shared With2",$userId);
-						//echo $conn->error;
-						return "Invalid";
-					}
-					else{
-						if($result2>=1){
-							//echo "Accepted";
-							$regstr=$storeString2;
-							return $regstr;
-						}
-						else
-						{
-							//echo "here";
-							return "Invalid";
-						}
-					}
-				}
-			}		
-		}
-		else if(strlen($str)==4){
-			$divide=str_split($str);
-			$searchString=$divide[0].$divide[1].$divide[2]."__".$divide[3];
-			$storeString='^'.$divide[0].$divide[1].$divide[2].".{2}".$divide[3].".{3}$";
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array($searchString.'___'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					$regstr=$storeString;
-					return $regstr;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}		
-		}
-		else if(strlen($str)==5){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array($str.'____'=>'s');
-			$storeString="^".$str.".{4}$";
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					$regstr=$storeString;
-					return $regstr;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}		
-		}
-		else if(strlen($str)==6){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array($str.'___'=>'s');
-			$storeString="^".$str.".{3}$";
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					$regstr=$storeString;
-					return $regstr;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}		
-		}
-		else{
-			return "Invalid";
-		}
-	}//END OF validateSharedWith Function!!!!!!
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
 
 	//Actual CreateEvent Code Starts
-	$eventContent=$_POST['content'];
-	$eventName=$_POST['eventName'];
-	$eventVenue=$_POST['venue'];
-	$type=$_POST['eventType'];
+	$eventContent=$_POST['_content'];
+	$eventName=$_POST['_eventName'];
+	$eventVenue=$_POST['_venue'];
+	$type=$_POST['_eventType'];
 
-	$rawDate=$_POST['eventDate'];
-	$rawTime=$_POST['eventTime'];
-	$eventDurationHrs=$_POST['eventDurationHrs'];
-	$eventDurationMin=$_POST['eventDurationMin'];
-	$rawSharedWith=$_POST['sharedWith'];
-	$organisedBy=$_POST['eventOrgName'];
+	$rawDate=$_POST['_eventDate'];
+	$rawTime=$_POST['_eventTime'];
+	$eventDurationHrs=$_POST['_eventDurationHrs'];
+	$eventDurationMin=$_POST['_eventDurationMin'];
+	$rawSharedWith=$_POST['_sharedWith'];
+	$organisedBy=$_POST['_eventOrgName'];
 
 	$rawSharedWith=trim($rawSharedWith);
 
 	$conn= new QoB();
 	if($rawTime==""||$rawDate==""||$type==""||$eventName==""||$eventContent==""||$eventVenue==""||$organisedBy==""||$rawSharedWith==""||$eventDurationHrs==""||$eventDurationMin=="")
 	{
+		//echo "something empty";
 		echo 16;
 		exit();
 	}
-	if(strlen($rawDate)!=8||strlen($rawTime)!=5)
+	if(strlen($rawDate)!=10||strlen($rawTime)!=5)
 	{
+		//echo "Date Time Validate";
 		echo 16;
 		exit();
 	}
-	if(gettype($eventDurationHrs)!="integer"||gettype($eventDurationMin)!="integer")
+	if(preg_match('/^[0-9]{1,}$/', $eventDurationHrs)==0||preg_match('/^[0-9]{1,}$/', $eventDurationMin)==0)
 	{
+		//echo "Hr Validate";
 		echo 16;
 		exit();		
 	}
-	if($eventDurationMin!=15&&$eventDurationMin!=30&&$eventDurationMin!=45&&$eventDurationMin!=00)
+	if($eventDurationMin!=15&&$eventDurationMin!=30&&$eventDurationMin!=45&&$eventDurationMin!=0)
 	{
+		//echo "Min validate";
 		echo 16;
 		exit();
 	}
 	$eventDuration=$eventDurationHrs.":".$eventDurationMin;
 	if(validateDate($rawDate)==false)
 	{
+		//echo "validate";
 		echo 16;
 		exit();
 	}
@@ -268,39 +123,47 @@ function validateSharedWith($str){
 
 			$n=count($splitSharedWith);
 			$sharedWith="";
-			if($rawSharedWith!=",")
+			if(stripos($rawSharedWith,"ALL")===false)
 			{
-				for($i=0;$i<$n;$i++)
+				if($rawSharedWith!=",")
 				{
-					if($splitSharedWith[$i]!="")
+					for($i=0;$i<$n;$i++)
 					{
-						//echo $i.",".$splitSharedWith[$i]."<br/>";
-						$out=validateSharedWith($splitSharedWith[$i]);
-						if($out=="Invalid")
+						if($splitSharedWith[$i]!="")
 						{
-							echo 16;
-							exit();
-						}
-						else
-						{
-							//echo $out;
-							if($sharedWith=="")
+							//echo $i.",".$splitSharedWith[$i]."<br/>";
+							$out=newValidateSharedWith($splitSharedWith[$i]);
+							if($out=="Invalid")
 							{
-								$sharedWith=$out;
+								echo 16;
+								exit();
 							}
 							else
 							{
-								$sharedWith=$sharedWith.",".$out;
+								//echo $out;
+								if($sharedWith=="")
+								{
+									$sharedWith=$out;
+								}
+								else
+								{
+									$sharedWith=$sharedWith.",".$out;
+								}
 							}
 						}
-					}
-				}//2
+					}//2
+				}
+				else
+				{
+					echo 16;
+					exit();
+				}	
 			}
 			else
 			{
-				echo 16;
-				exit();
+				$sharedWith="ALL";
 			}
+
 			$FetchMaxEventIDSQL="SELECT MAX(eventId) as maxEventId FROM event";
 			$maxEventID=$conn->fetchALL($FetchMaxEventIDSQL,false);
 			if($conn->error!=""||$maxEventID=="")
@@ -322,7 +185,8 @@ function validateSharedWith($str){
 			$timestamp=$lastUpdated=time();
 			$eventIdHash=hash("sha512", $eventId.POEVHASH);
 			$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
-				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDuration) VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?)";
+				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin) 
+				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?)";
 			$values[0]=array($eventId => 'i');
 			$values[1]=array($eventIdHash => 's');
 			$values[2]=array($timestamp => 'i');
@@ -338,7 +202,9 @@ function validateSharedWith($str){
 			$values[11]=array($lastUpdated => 'i');
 			
 			$values[12]=array($userId => 's');
-			$values[13]=array($eventDuration => 's');
+			$values[13]=array($eventDurationHrs => 's');
+			$values[14]=array($eventDurationMin => 's');
+			//$values[15]=array($eventStatus => 's');
 			$result=$conn->insert($CreateEventSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
@@ -348,8 +214,13 @@ function validateSharedWith($str){
 				$isAttender=0;
 				$eventOwner=1;
 				$eventStatus="As Scheduled";
+				$ts = new DateTime();
+				$ts->setTimestamp($timestamp);
+				$eventCreationTime=$ts->format(DateTime::ISO8601);
+
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
-		$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, $seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin);
+				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime);
 				print_r(json_encode($eventObj));
 			}
 			else

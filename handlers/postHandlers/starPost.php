@@ -9,6 +9,23 @@ session_start();
 	$_POST['_postId']="8122b703cb14aa7fe4370e91dc2757ebd3dc7ace4be8a20642ef42e9f362d10ed57f29cfba40975fa15457fcf2fbab764bb19fb8e9f92e8cab7fa04a19fa47a5";*/
 
 //testing inputs end
+
+/*
+Code 3: SUCCESS!!
+Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
+Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
+Code 16: Erroneous Entry By USER!!
+Code 11: Session Variables unset!!
+*/
+
+if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+{
+	echo 11;
+	exit();
+}
+
+	
 $conn=new QoB();
 $postIdHash=$_POST['_postId'];
 $userIdHash=$_SESSION['vj'];
@@ -63,8 +80,19 @@ $userIdHash=$_SESSION['vj'];
 							{
 								$starredBy=$starredBy.",".$userId;
 							}
+							$followers=$post['followers'];
+							if(stripos($followers,$userId)===false)
+							{
+								if($followers=="")
+								{
+									$followers=$userId;
+								}
+								else
+								{
+									$followers=$followers.",".$userId;
+								}
+							}
 							$starCount=$starCount+1;
-
 							$date = date_create();
 							
 							//$likeIndexUpdated = ($post['likeIndex'] + date_timestamp_get($date))/2;
@@ -79,9 +107,9 @@ $userIdHash=$_SESSION['vj'];
 							$impIndexUpdated="".$impIndexUpdated;
 							
 							//echo $impIndexUpdated." is uii";
-							$values2 = array(0 => array($likeIndexUpdated => 's'), 1 => array($popularityIndexUpdated => 's'), 2 => array($impIndexUpdated => 's'), 3 => array($starCount => 'i'), 4 => (array($starredBy => 's')), 5 => array($postIdHash => 's'));
+							$values2 = array(0 => array($likeIndexUpdated => 's'), 1 => array($popularityIndexUpdated => 's'), 2 => array($impIndexUpdated => 's'), 3 => array($starCount => 'i'), 4 => (array($starredBy => 's')), 5 => array($followers => 's'), 6 => array($postIdHash => 's'));
 							
-							$result2 = $conn->update("UPDATE post SET likeIndex = ?, popularityIndex = ?, impIndex = ?, starCount= ? ,starredBy= ? WHERE postIdHash = ?",$values2,false);
+							$result2 = $conn->update("UPDATE post SET likeIndex = ?, popularityIndex = ?, impIndex = ?, starCount= ? ,starredBy= ?, followers = ? WHERE postIdHash = ?",$values2,false);
 							
 							//$StarPostSQL="UPDATE post WHERE postIdHash = ? SET starCount= ? ,starredBy= ? ";
 							if($conn->error == ""&&$result2==true)
@@ -105,7 +133,7 @@ $userIdHash=$_SESSION['vj'];
 							
 							$_SESSION=array();
 							session_destroy();
-							echo 13;
+							echo 12;
 						}
 					}
 				

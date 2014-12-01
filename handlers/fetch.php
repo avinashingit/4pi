@@ -225,7 +225,7 @@
 			if($conn->error==""&&$result==true)
 			{
 				$adminNotif="Blocked: ".$crime.",".$privateData;
-				$user=getUserFromHash($userIdHash);
+				//$user=getUserFromHash($userIdHash);
 				//$userId=$user['userId'];
 				$values1[0]=array($userIdHash =>'s');
 				$values1[1]=array($adminNotif => 's');
@@ -261,7 +261,7 @@
 
 		}
 
-		function mailContent($userId,$content,$subject,$attachments="")
+		function mailContent($emailId,$content,$subject,$attachments="")
 		{
 			$mail = new PHPMailer();
 			$mail->IsSMTP();
@@ -272,13 +272,13 @@
 			$mail->Port       = 465;                   // set the SMTP port
 
 			$mail->Username   = "coe12b013@iiitdm.ac.in";  // GMAIL username
-			$mail->Password   = "ly@vexir";            // GMAIL password
+			$mail->Password   = "";            // GMAIL password
 
 			$mail->From       = "4pi-IIIT D&M Kancheepuram";
 			$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
 			$mail->Subject    = $subject;
 			$mail->WordWrap   = 500; // set word wrap
-			$mail->AddAddress($userId);
+			$mail->AddAddress($emailId);
 			$mailBody="<center><strong>--This is an Automated Email.Don't Waste Your TIME Replying to this email address!!--</strong></center><br/>";
 			$mailBody=$mailBody."<strong>Subject:</strong>".$subject."<br/>";
 			$mailBody=$mailBody."<strong>Content:</strong><br/>".$content."<br/><br/>";
@@ -328,10 +328,22 @@
 			}
 		}
 
-		function updatePostIndexesOnComment($postArray,$conn)
+		function updatePostIndexesOnComment($postArray,$userId,$conn)
 		{
 			$postIdHash=$postArray['postIdHash'];
 			$date = date_create();
+			$followers=$postArray['followers'];
+			if(stripos($followers,$userId)===false)
+			{
+				if($followers=="")
+				{
+					$followers=$userId;
+				}
+				else
+				{
+					$followers=$followers.",".$userId;
+				}
+			}
 
 			$commentCount=$postArray['commentCount'];
 			$commentCount=$commentCount+1;
@@ -340,9 +352,9 @@
 							
 			$popularityIndexUpdated = $postArray['likeIndex']+ 1.4 * $commentIndexUpdated;
 							
-			$values = array(0 => array($commentIndexUpdated => 'i'), 1 => array($popularityIndexUpdated => 'i'), 2 => array($commentCount => 'i'), 3 => array($postIdHash => 's'),);
+			$values = array(0 => array($commentIndexUpdated => 'i'), 1 => array($popularityIndexUpdated => 'i'), 2 => array($commentCount => 'i'), 3 => array($followers => 's'),4 => array($postIdHash => 's'));
 							
-			$result = $conn->update("UPDATE post SET commentIndex = ?, popularityIndex = ?,commentCount = ? WHERE postIdHash = ? ",$values);
+			$result = $conn->update("UPDATE post SET commentIndex = ?, popularityIndex = ?,commentCount = ?,followers = ? WHERE postIdHash = ? ",$values);
 			if($conn->error == ""&&$result==true)
 			{
 				//echo 'Updated successfully<br />';
@@ -368,7 +380,7 @@
 		}
 		function changeToEventDateFormat($date)
 		{
-			$dateRegex="([-]+)";
+			$dateRegex="([/]+)";
 			$eventDate=preg_replace($dateRegex, '', $date);
 			return $eventDate;
 		}
@@ -381,13 +393,13 @@
 		function changeToRawDateFormat($eventDate)
 		{
 			$nDate=str_split($eventDate,2);
-			$rawDate=implode("-",$nDate);
+			$rawDate=implode("/",$nDate);
 			return $rawDate;
 		}
 
 		function changeToRawTimeFormat($eventTime)
 		{
-			$nTime=str_split($eventTime,2);
+			$nTime=explode('/',$eventTime,3);
 			$rawTime=implode(":",$nTime);
 			return $rawTime;
 		}
@@ -397,7 +409,6 @@
 			$nSharedWith=explode(",",$sharedWith);
 			foreach($nSharedWith as $exp)
 			{
-
 				if(preg_match('/'.$exp.'/',$userId))
 				{
 					return true;
@@ -420,7 +431,8 @@
 
 		function validateDate($rawDate)
 		{
-			$ndate=explode("-",$rawDate);
+			$ndate=explode('/',$rawDate);
+			//var_dump($ndate);
 			if($ndate[2]<2007||$ndate[2]>2030)
 			{
 				return false;
@@ -465,7 +477,22 @@
 			}
 		}
 
-	function validateSharedWith($str){
+	function getRollNoRegex($rollno)
+	{
+		$stud['year']=substr($rollno, 3,2);
+		$stud['branch']=substr($rollno,0,3);
+		$stud['degree']=substr($rollno, 5,1);
+		$stud['branchYear']=substr($rollno,0,5);
+		$stud['branchDegree']=$stud['branch'].$stud['degree'];
+		$stud['yearDegree']=$stud['year'].$stud['degree'];
+		$stud['branchYearDegree']=$stud['branch'].$stud['yearDegree'];
+		$regexString="(".$stud['year']."|".$stud['branch']."|".$stud['degree']."|".$stud['branchYear']."|".$stud['branchDegree']."|".$stud['yearDegree']."|".$stud['branchYearDegree'].")";
+		$finalRegexString="(,".$regexString.",?)|(^".$regexString.",?)|(^ALL$)";
+		return $finalRegexString;
+	}
+
+	function validateSharedWith($str)
+	{
 		$regstr;
 		$conn=new QOB();
 		
@@ -618,6 +645,164 @@
 			return "Invalid";
 		}
 	}//END OF validateSharedWith Function!!!!!!
+	
+	function newValidateSharedWith($str)
+	{
+		$conn=new QOB();
+		
+		if(strlen($str)==1)
+		{
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array('_____'.$str.'___'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}	
+		}
+		else if(strlen($str)==2){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array('___'.$str.'____'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}			
+		}
+		else if(strlen($str)==3){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array('___'.$str.'___'=>'s');
+			$values1[0]=array($str.'______'=>'s');
+			$storeString2='^'.$str.'......$';
+			$result=$conn->fetchALL($sql,$values,true);
+			//
+			if($conn->error!=''){
+				notifyAdmin("Conn.Error".$conn->error."In validate Shared With1",$userId);
+				//echo $conn->error;
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					$result2=$conn->fetchALL($sql,$values1,true);
+					if($conn->error!=""){
+						notifyAdmin("Conn.Error".$conn->error."In validate Shared With2",$userId);
+						//echo $conn->error;
+						return "Invalid";
+					}
+					else{
+						if($result2>=1){
+							//echo "Accepted";
+							return $str;
+						}
+						else
+						{
+							//echo "here";
+							return "Invalid";
+						}
+					}
+				}
+			}		
+		}
+		else if(strlen($str)==4){
+			$divide=str_split($str);
+			$searchString=$divide[0].$divide[1].$divide[2]."__".$divide[3];
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array($searchString.'___'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}		
+		}
+		else if(strlen($str)==5){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array($str.'____'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}		
+		}
+		else if(strlen($str)==6){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array($str.'___'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}		
+		}
+		else{
+			return "Invalid";
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	/*function notifyPeople($toBeNotified,$message)
+	{
+		$list=explode(',', $toBeNotified);
+		foreach () $userId 
+	}*/
 //---------Examples and Test Code Executed On Online Compiler Starts------------------------------ 
 
 
@@ -662,5 +847,13 @@ echo $eventTime;
 $nTime=str_split($eventTime,2);
 print_r($nTime);
 $rawTime=implode("-",$nTime);
-echo $rawTime;*/
+echo $rawTime;
+
+<?php
+$str="COE12B013";
+//echo $str[2];
+$str=str_split($str);
+$year=array_slice($str,3,2);
+var_dump($year);
+?>*/
 ?>

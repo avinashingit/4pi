@@ -2,3 +2,31 @@
 
 [2014-10-24 11:51:39       127.0.0.1                   Asia/Kolkata] 0      $$$$$$
 
+[2014-11-29 21:42:34       127.0.0.1                   Asia/Kolkata] 0      $$$$$$
+
+[2014-11-30 15:14:58       127.0.0.1                   Asia/Kolkata] 1054   $$$Unknown column 'eventDuration' in 'field list'$$$
+
+[2014-11-30 15:17:49       127.0.0.1                   Asia/Kolkata] 1054   $$$Unknown column 'status' in 'field list'$$$
+
+[2014-12-01 10:22:10       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX ?' at line 1$$$
+
+[2014-12-01 10:22:39       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1$$$
+
+[2014-12-01 10:23:57       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1$$$
+
+[2014-12-01 10:25:42       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX ? AND postIdHash!=? AND hiddenTo NOT LIKE ?) OR userId=? ORDER BY eventDat' at line 1$$$
+
+[2014-12-01 10:29:40       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX ? AND postIdHash!=? AND hiddenTo NOT LIKE ?) OR userId=? ORDER BY eventDat' at line 1$$$
+
+[2014-12-01 11:03:36       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX ? ) OR userId=? ORDER BY eventDate,eventTime' at line 1$$$
+
+[2014-12-01 11:05:37       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX ? ) OR userId=? ORDER BY eventDate,eventTime' at line 1$$$
+
+[2014-12-01 11:07:44       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX ? ) OR userId=? ORDER BY eventDate,eventTime' at line 1$$$
+
+[2014-12-01 11:10:22       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX (,(12|COE|B|COE12|COEB|12B|COE12B),?)|(^(12|COE|B|COE12|COEB|12B|COE12B),?' at line 1$$$
+
+[2014-12-01 11:11:02       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REGEX '(,(12|COE|B|COE12|COEB|12B|COE12B),?)|(^(12|COE|B|COE12|COEB|12B|COE12B),' at line 1$$$
+
+[2014-12-01 12:20:11             ::1                   Asia/Kolkata] 0      $$$$$$
+
