@@ -45,8 +45,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 	$rawDate=$_POST['_eventDate'];
 	$rawTime=$_POST['_eventTime'];
-	$eventDurationHrs=$_POST['_eventDurationHrs'];
-	$eventDurationMin=$_POST['_eventDurationMin'];
+	$eventDurationHrs="".$_POST['_eventDurationHrs'];
+	$eventDurationMin="".$_POST['_eventDurationMin'];
 	$rawSharedWith=$_POST['_sharedWith'];
 	$organisedBy=$_POST['_eventOrgName'];
 

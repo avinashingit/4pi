@@ -392,14 +392,16 @@
 		}
 		function changeToRawDateFormat($eventDate)
 		{
-			$nDate=str_split($eventDate,2);
-			$rawDate=implode("/",$nDate);
+			$nDate=str_split($eventDate,4);
+			$nndate=str_split($nDate[0],2);
+			$nndate[2]=$nDate[1];
+			$rawDate=implode("/",$nndate);
 			return $rawDate;
 		}
 
 		function changeToRawTimeFormat($eventTime)
 		{
-			$nTime=explode('/',$eventTime,3);
+			$nTime=str_split($eventTime,2);
 			$rawTime=implode(":",$nTime);
 			return $rawTime;
 		}
@@ -443,7 +445,7 @@
 				$daysArray=[31,29,31,30,31, 30,31,31,30,31, 30,31];
 				if($ndate[1]>=1&&$ndate[1]<=12)
 				{
-					if($ndate[0]>=0&&$ndate[0]<=$daysArray[$ndate[1]])
+					if($ndate[0]>=0&&$ndate[0]<=$daysArray[$ndate[1]-1])
 					{
 						return true;
 					}
@@ -462,7 +464,7 @@
 				$daysArray=[31,28,31,30,31, 30,31,31,30,31, 30,31];
 				if($ndate[1]>=1&&$ndate[1]<=12)
 				{
-					if($ndate[0]>=0&&$ndate[0]<=$daysArray[$ndate[1]])
+					if($ndate[0]>=0&&$ndate[0]<=$daysArray[$ndate[1]-1])
 					{
 						return true;
 					}

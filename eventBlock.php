@@ -1,6 +1,6 @@
 <div class="col-md-7" id="events">
 	
-	<div class="row eventMenu topMenu" style="z-index:1040;">
+	<div class="row eventMenu topMenu" style="z-index:1040;margin-bottom:20px;">
 	
 		<div class="btn-group btn-group-justified" style="padding:10px;">
 			
@@ -12,25 +12,27 @@
 
 		  	<div class="btn-group">
 			
-			    <button type="button" id="latestEventsButton" class="btn btn-info"><a style="color:white;" ><i class="fa fa-calendar"></i>&nbsp;Latest</a></button>
+			    <button type="button" id="latestEventsButton" onclick="latestEventsFetch('empty',-1);" class="btn btn-info"><a style="color:white;" ><i class="fa fa-calendar"></i>&nbsp;Latest</a></button>
 		  	
 		  	</div>
 
 		  	<div class="btn-group">
 			
-			    <button type="button" id="upcomingEventsButton" class="btn btn-success"><a style="color:white;" ><i class="fa fa-clock-o"></i>&nbsp;Upcoming Events</a></button>
+			    <button type="button" id="upcomingEventsButton" onclick="upcomingEventsFetch('empty',-1);" class="btn btn-success"><a style="color:white;" ><i class="fa fa-clock-o"></i>&nbsp;Upcoming Events</a></button>
 		  	
 		  	</div>
 
 		  	<div class="btn-group">
 			
-			    <button type="button" id="eventWinnersButton" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-check"></i>&nbsp;Past Competitions</a></button>
+			    <button type="button" id="eventWinnersButton" onclick="pastCompetitionsFetch('empty',-1);" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-check"></i>&nbsp;Past Competitions</a></button>
 		  	
 		  	</div>
 			
 		</div>
 
 	</div>
+
+	<br/><br/>
 
 	<div class="modal fade slow" id="eventCreateModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 
@@ -264,13 +266,13 @@
 
 						  				<div class="col-md-6">
 
-						  					<input type="number" name="eventDurationHours" id="createEventDurationHours" class="form-control"/>
+						  					<input type="number" name="eventDurationHours" id="editEventDurationHours" class="form-control"/>
 
 				  						</div>
 
 				  						<div class="col-md-6">
 
-						  					<select type="text" name="eventDurationMinutes" id="createEventDurationMinutes" class="form-control">
+						  					<select type="text" name="eventDurationMinutes" id="editEventDurationMinutes" class="form-control">
 
 						  						<option val="00">00</option>
 
@@ -416,20 +418,12 @@
 
 <script>
 
-// $('.row.event').css({'background-color':'#fff'});
-
-</script>
-
-<script>
-
 function eventInsert(position,data)
 
 {
-
-	alert("called");
 	var event="";
 
-	event+='<div class="row event" id="eventId" style="margin-bottom:10px;margin-top:30px;">';
+	event+='<div class="row event" id="'+data.eventIdHash+'" style="border:1px solid gray;margin-bottom:10px;">';
 
 	event+='<div id="eventSharedWith" class="hidden" >'+data.sharedWith+'</div>';
 
@@ -449,15 +443,20 @@ function eventInsert(position,data)
 	{
 		event+='<div class="col-md-2 col-md-offset-1"  id="editEvent">';
 
-		event+='<p class="text-right"><i class="fa fa-pencil" title="Edit Event" onclick="editEvent(\'eventId\');"></i>&nbsp;';
+		event+='<p class="text-right"><i class="fa fa-pencil" title="Edit Event" onclick="editEvent(\''+data.eventIdHash+'\');"></i>&nbsp;';
 
-		event+='<i class="fa fa-trash" title="Delete Event" onclick="deleteEvent(\'eventId\');"></i></p>';
+		event+='<i class="fa fa-trash" title="Delete Event" onclick="deleteEvent(\''+data.eventIdHash+'\');"></i></p>';
 
 		event+='</div>';
+
+		event+='<div class="col-md-3 text-right" id="eventPostedTime">';
 	}
 
-	event+='<div class="col-md-3 text-right" id="eventPostedTime">';
-
+	else
+	{
+		event+='<div class="col-md-3 col-md-offset-3 text-right" id="eventPostedTime">';
+	}
+	
 	event+='<time class="timeago" id="eventPostedTimeValue" datetime="'+data.eventTimestamp+'" title="">'+data.eventTimestamp+'</time>';
 
 	event+='</div>';
@@ -470,7 +469,7 @@ function eventInsert(position,data)
 
 	event+='<div class="col-md-12">';
 
-	event+='<p id="eventContent">'+data.eventContent+'</p>';
+	event+='<p id="eventContent" style="white-space:pre-wrap">'+data.eventContent+'</p>';
 
 	event+='</div>';
 
@@ -485,25 +484,25 @@ function eventInsert(position,data)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-danger"><p class="venueDateTimeEvent text-center" ><i class="fa fa-at" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
+	event+='<button type="button" class="btn" style="background-color:#FFD1A3;"title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-at" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
 				  
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-primary"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
+	event+='<button type="button" class="btn" style="background-color:#D6FFFF;"title="Event Date"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
 	
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-warning"><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span><</p></button>';
+	event+='<button type="button" class="btn" style="background-color:#ADFF85;"title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
 				  
 	event+='</div>';
 
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-info"><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDuratoinMinutes">'+data.eventDurationMin+'</span></p></button>';
+	event+='<button type="button" class="btn"style="background-color:#ADFF5C;"title="Event Duration"><p class="venueDateTimeEvent text-center"><i class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span></p></button>';
 				  
 	event+='</div>';
 				
@@ -533,14 +532,17 @@ function eventInsert(position,data)
 
 	if(data.isAttender!=1)
 	{
-		event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\'eventId\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
+		event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\''+data.eventIdHash+'\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
+		event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';		
 	}
 
 	else
 	{
-		event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
+		event+='<button class="btn btn-sm btn-success" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
 	}
 
+
+
 	event+='</div>';
 
 	event+='</div>';
@@ -548,12 +550,10 @@ function eventInsert(position,data)
 	event+='<br/>';
 
 	event+='</div>';
-	
-	event+='<br/>';
 
 	event+='</div>';
 
-	console.log("HEEEE");
+	// console.log("HEEEE");
 
 	if(position=="first")
 	{
@@ -565,7 +565,7 @@ function eventInsert(position,data)
 		$('#eventArea').append(event).hide().fadeIn('slow');
 	}
 
-	console.log(event);
+	// console.log(event);
 
 }
 
@@ -594,6 +594,8 @@ function editEvent(id)
 	var eventTime=$('#'+id).find('#eventTime').html();
 
 	var eventDurationHours=$('#'+id).find('#eventDurationHours').html();
+
+	console.log(eventDurationHours);
 	
 	var eventDurationMinutes=$('#'+id).find('#eventDurationMinutes').html();
 	
@@ -629,9 +631,9 @@ function editEvent(id)
 
 }
 
-function editedEventSend(){
-	
-	
+function editedEventSend()
+
+{
 	
 	var eventId=$('#editEventModal').find('#editEventId').html();
 	
@@ -710,12 +712,12 @@ function editedEventSend(){
 		});
 	}
 
-
-
 }
 
 function createEventSP()
+
 {
+	$('.row .eventMenu').find('#createEventButton').find('i').addClass('fa-spin');
 	
 	var eventClubName=$('#createEventOrganizerName').val().trim();
 	
@@ -835,18 +837,17 @@ function createEventSP()
 
 			$('.timeago').timeago();
 
+			$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
+
 		});
 
 	}
 
 }
 
-
 $('.popOver').popover();
 
 $('time.timeago').timeago();
-
-
 
 function attendEvent(id)
 
@@ -860,11 +861,11 @@ function attendEvent(id)
 
 	$('#'+id).find('#eventIcons').find('#eventAttendeeNumber').find('#eventAttendersValue').html(y)
 
-	$('#'+id).find('#attend').toggleClass('visibleHidden');
+	/*$('#'+id).find('#attend').toggleClass('visibleHidden');
 
-	$('#'+id).find('#attend').next().toggleClass('visibleHidden');
+	$('#'+id).find('#attend').next().toggleClass('visibleHidden');*/
 
-	/*$.post('./handlers/eventHandlers/attendEvent.php',{
+	$.post('./handlers/eventHandlers/attendEvent.php',{
 
 		_eventId:id
 
@@ -878,21 +879,24 @@ function attendEvent(id)
 
 	.success(function (data){
 
-		jQuery.parseJSON(data);
+		// x=JSON.parse(data);
+		// 
+		console.log(data);
+		// 
+		data=data.trim();
 
-		$('#'+id).find('#evenAttendersValue').html(data.eventAttendeeCount);
+		if(checkData(data)==1)
+		{
+			$('#'+id).find("#evenAttendeeNumber").html(data.eventAttendeeCount);
 
-		/*$('#'+id).toggleClass('visibleHidden');
+			$('#'+id).find("#attend").toggleClass('visibleHidden');
 
-		$('#'+id).next().toggleClass('visibleHidden');
+			$('#'+id).find("#attending").toggleClass('visibleHidden');
+		}
 
-	});*/
-
-
+	});
 
 }
-
-
 
 function deleteEvent(id)
 
@@ -904,7 +908,9 @@ function deleteEvent(id)
 
 }
 
-function deleteEventSend(){
+function deleteEventSend()
+
+{
 
 	var eventId=$('#deleteEventModal').find('#deleteEventId').html();
 
@@ -926,11 +932,13 @@ function deleteEventSend(){
 
 	.success(function(data){
 
+		console.log(data);
+
 		if(data==1)
 
 		{
 
-			$('#'+eventId).hide();
+			$('#'+eventId).remove();
 
 		}
 
@@ -939,9 +947,18 @@ function deleteEventSend(){
 }
 
 function latestEventsFetch(value,call)
+
 {
-	$.post('/4pi/handlers/eventHandlers/latest.php',{
-		_call:call
+	$('.row .eventMenu').find('#latestEventsButton').find('i').addClass('fa-spin');
+	var eventsCurrent=[];
+	var i=0;
+	$('.event').each(function(){
+		eventsCurrent[i]=$(this).attr("id");
+		i++;
+	});
+	$.post('/4pi/handlers/eventHandlers/latestEvents.php',{
+		_sgk:eventsCurrent,
+		_refresh:call
 	})
 	.error(function(data){
 		alert("Server overload error. Please try again. :(");
@@ -956,38 +973,69 @@ function latestEventsFetch(value,call)
 		data=data.trim();
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
+			var x=JSON.parse(data);
+			// console.log(x.length);
 			for (i=0;i<x.length;i++)
 			{
 				eventInsert('last',x[i]);
 			}
+			$('.timeago').timeago();
 		}
+		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
 	});
+
 }
 
-function upComingEventsFetch(value,call)
+function upcomingEventsFetch(value,call)
+
 {
-	$.post('/4pi/handlers/eventHandlers/latest.php',{
-		_call:call
+
+	$('.row .eventMenu').find('#upcomingEventsButton').find('i').addClass('fa-spin');
+	var eventsCurrent=[];
+	var i=0;
+	$('.event').each(function(){
+		eventsCurrent[i]=$(this).attr("id");
+		i++;
+	});
+
+	$.post('/4pi/handlers/eventHandlers/upcomingEvents.php',{
+		_refresh:call,
+		_sgk:eventsCurrent
 	})
 	.error(function(data){
 		alert("Server overload error. Please try again. :(");
 	})
 	.success(function(data){
 		data=data.trim();
+		if(value=="empty")
+		{
+			$('.event').each(function(){
+				$(this).remove();
+			});
+		}
+		// console.log(data);
+		// console.log(checkData(data));
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
+			var x=JSON.parse(data);
+			// console.log(x.length);
 			for (i=0;i<x.length;i++)
 			{
 				eventInsert('last',x[i]);
 			}
 		}
+		$('.timeago').timeago();
+		$('.row .eventMenu').find('#upcomingEventsButton').find('i').removeClass('fa-spin');
 	});
+
 }
 
 function pastCompetitionsFetch(value,call)
+
 {
+	
+	$('.row .eventMenu').find('#eventWinnersButton').find('i').addClass('fa-spin');
+
 	$.post('/4pi/handlers/eventHandlers/latest.php',{
 		_call:call
 	})
@@ -1005,6 +1053,8 @@ function pastCompetitionsFetch(value,call)
 			}
 		}
 	});
+	$('.row .eventMenu').find('#eventWinnersButton').find('i').removeClass('fa-spin');
+
 }
 
 $(document).ready(function(){

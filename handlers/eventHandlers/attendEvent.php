@@ -28,6 +28,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 $userIdHash=$_SESSION['vj'];
 $eventIdHash=$_POST['_eventId'];
+// echo $eventIdHash;
 $conn=new QoB();
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
@@ -117,7 +118,7 @@ $conn=new QoB();
 			$result=$conn->update($UpdateEventSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
-				echo json_encode($attendCount);
+				echo $attendCount;
 			}
 			else
 			{

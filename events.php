@@ -51,3 +51,13 @@ var inView= "<?php echo $_SESSION['jx']; ?>";
 <?php
 	include_once("footer.php");
 ?>
+
+<script>
+
+// $('.row.event').css({'background-color':'#fff'});
+// 
+var inView="<?php echo $_SESSION['jx'];?>";
+
+latestEventsFetch("empty",-1);
+
+</script>

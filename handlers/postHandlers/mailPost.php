@@ -1,4 +1,5 @@
 <?php
+session_start();
 	require_once('../../QOB/qob.php');
 	require_once('../fetch.php');
 	//Testing Inputs Start

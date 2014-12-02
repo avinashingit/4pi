@@ -1,8 +1,10 @@
 <?php
 session_start();	
+error_reporting(E_ALL ^ E_NOTICE);
 require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
+$_SESSION['jx']="1002"; //1001 for latest events 1002 for upcoming events 1003 for winners
 //Testing Content Starts
 /*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
@@ -31,7 +33,7 @@ $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
 $inputHashes=$_POST['sgk'];
-if($inputHashes!="")
+if(count($inputHashes)!=0)
 {
 	$ProcessedHashes=explode(",", $inputHashes);
 	$ProcessedHashesCount=count($ProcessedHashes);
@@ -93,7 +95,8 @@ $conn=new QoB();
 			if($conn->error=="")
 			{
 				//Success
-				while(($event=$conn->fetch($result))&&$displayCount<3)
+				$eventObjArray=array();
+				while(($event=$conn->fetch($result))&&$displayCount<10)
 				{
 					$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
@@ -125,7 +128,8 @@ $conn=new QoB();
 						$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 							$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
 							$event['eventDurationHrs'],$event['eventDurationMin'],$event['eventStatus'],$eventCreationTime);
-						print_r(json_encode($eventObj));
+						//print_r(json_encode($eventObj));
+						$eventObjArray[]=$eventObj;
 						$displayCount++;
 					}	
 				}
@@ -133,6 +137,10 @@ $conn=new QoB();
 				{
 					echo 404;
 					exit();
+				}
+				else
+				{
+					print_r(json_encode($eventObjArray));
 				}
 			}
 			else

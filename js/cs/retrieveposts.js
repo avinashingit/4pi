@@ -1,5 +1,5 @@
 var genUrl = "http:localhost/4pi/";
-
+var contentLoadedPosts=0;
 function checkData(data) {
     data = data.trim();
     if (data == 12) {
@@ -28,10 +28,11 @@ function checkData(data) {
     {
         alert("Please login to continue");
         window.location.href = "/4pi/index.php";
+        return -1;
     }
     else
     {
-        return "error";
+        return 1;
     }
 }
 
@@ -41,8 +42,8 @@ function callAfterAjax() {
         //console.log($(this).parent().parent().parent().parent().next().find('.postComments'));
         $(this).parent().parent().parent().parent().next().find('.postComments').toggleClass('hidden');
         $(this).parent().parent().parent().parent().next().find('.postComments').show(500);
-        /*		$(this).parent().parent().parent().parent().next().find('.loadmoreComments').toggleClass('hidden');
-			$(this).parent().parent().parent().parent().next().find('.loadmoreComments').show(500);*/
+        /*      $(this).parent().parent().parent().parent().next().find('.loadmoreComments').toggleClass('hidden');
+            $(this).parent().parent().parent().parent().next().find('.loadmoreComments').show(500);*/
     });
     $(".post").each(function() {
         $(this).find('#postContent').shorten({
@@ -65,7 +66,7 @@ $(function() {
 
 function exchange(el, el2) {
 
-	// console.log(el);
+    // console.log(el);
 
     $(el2).removeClass('fa-pencil').addClass('fa-close').attr("title", "Press Esc to cancel");
     commentDiv = $('#' + el);
@@ -146,10 +147,10 @@ function replaceIt(y, z, x, event, val) {
         event.preventDefault();
 
         m=function(result){
-        	if(result==1)
-        	{
-        		exchange2(z, x, 'enter');
-        	}
+            if(result==1)
+            {
+                exchange2(z, x, 'enter');
+            }
         };
 
         editComment(y,z,m);
@@ -212,7 +213,7 @@ function editPost(ele) {
 
 function editedPostSend() {
 
-    //alert("HEll");	
+    //alert("HEll");    
     var postId = $('#editPostModal').find('#editPostId').html().trim();
     // console.log(postId);
     var postSubject = $('#editPostSubject').val().trim();
@@ -424,6 +425,7 @@ function retrieveLatestPosts(value, call) {
                 // alert("HE::L");
                 $('#postEmptyMessage').html("<p class='text-center'>Sorry! No more posts to display.</p>");
             }
+            contentLoadedPosts=0;
 
         });
 
@@ -632,8 +634,8 @@ function postInsert(position, data1) {
     post += '<div class="text-center paddingTopRowPost"><i class="fa fa-bars" title="More Options"></i>&nbsp;&nbsp;';
 
     if (data1.postOwner == 1) {
-        /*			post+=data.postOwner;
-			post+=data.postUserId;*/
+        /*          post+=data.postOwner;
+            post+=data.postUserId;*/
         post += '<i class="fa fa-pencil"  data-toggle="modal"  onclick="editPost(this);" title="Edit Post"></i>';
     }
 
@@ -756,7 +758,7 @@ function postInsert(position, data1) {
 
     post += '<div>';
 
-    post += '<p class="text-center">Please enter the emailId of the recipient.</p>';
+    post += '<br/><p class="text-center">Please enter the emailId of the recipient.</p><br/>';
 
     post += '<form class="form-horizontal text-center" role="form">';
 
@@ -770,13 +772,13 @@ function postInsert(position, data1) {
 
     post += '</div>';
 
-    post += '<div class="col-md-1 col-md-offset-6">';
+    post += '<div class="col-md-1 col-md-offset-5 text-center">';
 
     post += '<div class="form-group">';
 
-    post += '<button type="button" id="mailPostButton" class="btn btn-success" onclick="mailPost(\'' + data1.postId + '\');"><i class="fa fa-envelope"></i>&nbsp;Mail</button>';
+    post += '<br/><button type="button" id="mailPostButton" class="btn btn-success" onclick="mailPost(\'' + data1.postId + '\');"><i class="fa fa-envelope"></i>&nbsp;Mail</button>';
 
-    post += '</div>';
+    post += '<br/><br/></div>';
 
     post += '</div>';
 
@@ -792,7 +794,7 @@ function postInsert(position, data1) {
 
         post += '<div class="tab-pane" id="deletePost' + data1.postId + '">';
 
-        post += '<p class="text-center">This action cannot be reverted.</p>';
+        post += '<br/><p class="text-center">This action cannot be reverted.</p><br/>';
 
         post += '<div class="text-center">';
 
@@ -807,9 +809,9 @@ function postInsert(position, data1) {
 
     post += '<div class="tab-pane" id="hidePost' + data1.postId + '">';
 
-    post += '<p class="text-center">Once you hide the post you will not see the post again. This action is not revertable.</p>';
+    post += '<br/><p class="text-center">Once you hide the post you will not see the post again. This action is not revertable.</p>';
 
-    post += '<div class="text-center">';
+    post += '<br/><div class="text-center">';
 
     post += '<button type="button" class="btn btn-danger" onclick="hidePost(\'' + data1.postId + '\');"><i class="fa fa-lock"></i>&nbsp;Hide</button>';
 
@@ -821,11 +823,11 @@ function postInsert(position, data1) {
 
     post += '<div class="tab-pane" id="reportPost' + data1.postId + '">';
 
-    post += '<p class="text-center">On reporting the post will be hidden from you and the post will be sent for admin review.</p>';
+    post += '<br/><p class="text-center">On reporting the post will be hidden from you and the post will be sent for admin review.</p>';
 
     // post+='<form class="form-horizontal text-center">';
 
-    post += '<div class="coml-md-10 col-md-offset-1">';
+    post += '<br/><div class="coml-md-10 col-md-offset-1">';
 
     // post+=' <div class="form-group">';
 
@@ -839,7 +841,7 @@ function postInsert(position, data1) {
 
     // post+='<div class="form-group">';
 
-    post += '<button class="btn btn-success" onclick="reportPost(\'' + data1.postId + '\');"><i class="fa fa-warning"></i>Report</button>';
+    post += '<br/><button class="btn btn-success" onclick="reportPost(\'' + data1.postId + '\');"><i class="fa fa-warning"></i>Report</button>';
 
     // post+='</div>';
 
@@ -853,14 +855,20 @@ function postInsert(position, data1) {
 
     post += '<div class="tab-pane" id="followUnfollow' + data1.postId + '">';
 
-    post += '<br/>On following you will be receiving notifications for all the actions related to the posts.';
+    
 
     post += '<div class="text-center">';
 
     if (data1.followPost == 1) {
-        post += '<button type="button" class="btn btn-primary" onclick="followPost(\'' + data1.postId + '\');">FOLLOW</button>';
+
+        post += '<br/><p class="futext text-center">Follow to receive notifications for all the actions related to the post.</p>';
+
+        post += '<br/><button type="button" class="btn btn-primary" onclick="followPost(\'' + data1.postId + '\');">FOLLOW</button>';
     } else if (data1.followPost == -1) {
-        post += '<button type="button" class="btn btn-primary" onclick="followPost(\'' + data1.postId + '\');">UNFOLLOW</button>';
+
+        post += '<br/><p class="futext text-center">Unfollow to stop receiving notifications for any action related to the post.</p>';
+
+        post += '<br/><button type="button" class="btn btn-primary" onclick="followPost(\'' + data1.postId + '\');">UNFOLLOW</button>';
     }
 
     post += '</div>';
@@ -877,7 +885,7 @@ function postInsert(position, data1) {
 
     post += '<div class="fontSize13"><i class="fa fa-mail-reply"></i></div>';
 
-    post += '</div>				';
+    post += '</div>             ';
 
     post += '</div><!-- end class row -->';
 
@@ -937,7 +945,7 @@ function mailPost(id, event) {
     if(done==1)
     {
         $.post('./handlers/postHandlers/mailPost.php', {
-        _emailId: email,
+        _email: email,
         _postId: id
         })
         .error(function() {
@@ -1003,6 +1011,17 @@ function hidePost(id) {
 }
 
 function followPost(id) {
+    html = $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html();
+    at   = $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').attr("onclick");
+    if(html=="FOLLOW")
+    {
+        $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html("Following").attr("onclick","");
+    }
+    else
+    {
+        $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html("Unfollowing").attr("onclick","");
+    }
+    
     $.post('./handlers/postHandlers/followPost.php', {
         _postId: id
     })
@@ -1015,10 +1034,15 @@ function followPost(id) {
             if (checkData(data) == 1) {
                 html = $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html();
 
-                if (html == "FOLLOW") {
-                    $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html("UNFOLLOW");
-                } else {
-                    $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html("FOLLOW");
+                if (html == "Following") {
+                     $('#'+id).find('.tab-pane#followUnfollow'+id+' .futext').html("Unfollow to stop receiving notifications for any action related to the post.")
+
+                    $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html("UNFOLLOW").attr("onclick",at);
+                } 
+                else {
+                    $('#'+id).find('.tab-pane#followUnfollow'+id+' .futext').html("Follow to receive notifications for all the actions related to the post.")
+
+                    $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html("FOLLOW").attr("onclick",at);
                 }
             }
 

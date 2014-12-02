@@ -1,8 +1,10 @@
 <?php
 session_start();	
+error_reporting(E_ALL ^ E_NOTICE);
 require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
+$_SESSION['jx']="1001"; //1001 for latest events 1002 for upcoming events 1003 for winners
 //Testing Content Starts
 /*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
@@ -27,11 +29,13 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Upcoming Event Offset - vgr
 //Processed Event Hashes - sgk
+$_POST['_refresh']=-1;
+$_POST['_sgk']=array();
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['sgk'];
-if($inputHashes!="")
+$inputHashes=$_POST['_sgk'];
+if(count($inputHashes)!=0)
 {
 	$ProcessedHashes=explode(",", $inputHashes);
 	$ProcessedHashesCount=count($ProcessedHashes);
@@ -83,7 +87,7 @@ $conn=new QoB();
 				$getLatestEventsSQL=$getLatestEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=" ) OR userId=? ORDER BY timestamp";
+			$SQLEndPart=" ) OR userId=? ORDER BY timestamp DESC";
 			$values[$i+1]=array($userId => 's');
 			//var_dump($values);
 			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
@@ -93,7 +97,8 @@ $conn=new QoB();
 			if($conn->error=="")
 			{
 				//Success
-				while(($event=$conn->fetch($result))&&$displayCount<3)
+				$eventObjArray=array();
+				while(($event=$conn->fetch($result))&&$displayCount<10)
 				{
 					$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
@@ -125,14 +130,20 @@ $conn=new QoB();
 						$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 							$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
 							$event['eventDurationHrs'],$event['eventDurationMin'],$event['eventStatus'],$eventCreationTime);
-						print_r(json_encode($eventObj));
+						//print_r(json_encode($eventObj));
+						$eventObjArray[]=$eventObj;
 						$displayCount++;
 					}	
 				}
+
 				if($displayCount==0)
 				{
 					echo 404;
 					exit();
+				}
+				else
+				{
+					print_r(json_encode($eventObjArray));
 				}
 			}
 			else

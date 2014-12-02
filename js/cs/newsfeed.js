@@ -96,54 +96,47 @@ $(document).ready(function(){
 
         }
 
-        var no=1;
-       if($(document).height()-200<=$(window).scrollTop()+$(window).height())
+       /* if($(document).height()-200<=$(window).scrollTop()+$(window).height())
         {
-            
 
-            if(no==1){
-                $('.loader').css({'display':'block'});
+            /*$('.loader').css({'display':'block'});
 
-                //alert(inView);
-                if(inView=="events")
-                {
-                    // var pageRetrieveUrl="./handlers/eventHandlers/";
+				//alert(inView);
+            if(inView=="events")
+            {
+                // var pageRetrieveUrl="./handlers/eventHandlers/";
 
-                    retrieveLatestEvents('add',1);
-                }
-
-                else if(inView=="999")
-                {
-                    // var pageRetrieveUrl="./handlers/postHandlers/";
-                    console.log("Called");
-                    retrieveLatestPosts('add',1);
-                }
-
-                else if(inView=="997")
-                {
-                    retrieveImportantPosts('add',1);
-                }
-
-                else if(inView=="998")
-                {
-                    retrievePopularPosts('add',1);
-                }
-
-                /*else if(inView=="polls")
-                {
-                    retrieveLatestPolls('add',1);
-                }
-
-                else if(inView=="polls")
-                {
-                    var pageRetrieveUrl="./handlers/pollHandlers/";
-                }*/
-                no=2;
+                retrieveLatestEvents('add',1);
             }
 
-            
+            else if(inView=="999")
+            {
+                // var pageRetrieveUrl="./handlers/postHandlers/";
 
-        }
+                retrieveLatestPosts('add',1);
+            }
+
+            else if(inView=="997")
+            {
+                retrieveImportantPosts('add',1);
+            }
+
+            else if(inView=="998")
+            {
+                retrievePopularPosts('add',1);
+            }
+
+            /*else if(inView=="polls")
+            {
+                retrieveLatestPolls('add',1);
+            }
+
+            else if(inView=="polls")
+            {
+                var pageRetrieveUrl="./handlers/pollHandlers/";
+            }*/
+
+        // }*/
 
     });
 
