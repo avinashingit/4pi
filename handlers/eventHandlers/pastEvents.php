@@ -80,8 +80,10 @@ $conn=new QoB();
 			date_default_timezone_set("Asia/Kolkata");
 			$currentDate=date("Ymd",time());
 			$currentTime=date("Hi",time());
+			$currentDate=(int)$currentDate;
+			$currentTime=(int)$currentTime;
 			$finalStudentRegex=getRollNoRegex($userId);
-			$getUpcomingEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?";
+			$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?";
 			
 			$values[0]=array($finalStudentRegex => 's');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
@@ -89,10 +91,11 @@ $conn=new QoB();
 				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=" ) OR userId=? AND eventDate<= ? AND eventTime< ? ORDER BY eventDate,eventTime";
-			$values[$i+1]=array($currentDate => 'i');
-			$values[$i+2]=array($currentTime => 'i')
-			$values[$i+3]=array($userId => 's');
+			$SQLEndPart=") OR userId=?)  AND (eventDate<= ? AND eventTime< ?) ORDER BY eventDate,eventTime";
+			$values[$i+1]=array($userId => 's');
+			$values[$i+2]=array($currentDate => 'i');
+			$values[$i+3]=array($currentTime => 'i');
+			
 			//var_dump($values);
 			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
 			//echo $getUpcomingEventsSQL;
@@ -113,31 +116,28 @@ $conn=new QoB();
 					{
 						$eventOwner=-1;
 					}
-					if(!(in_array($event['eventIdHash'],$ProcessedHashes)))
+					if(stripos($event['attenders'], $userId)===false)
 					{
-						if(stripos($event['attenders'], $userId)===false)
-						{
-							$isAttender=-1;
-						}
-						else
-						{
-							$isAttender=1;
-						}
-						$eventTime=$event['eventTime'];
-						$rawTime=changeToRawTimeFormat($eventTime);
-						$eventDate=$event['eventDate'];
-						$rawDate=changeToRawDateFormat($eventDate);
-						$ts = new DateTime();
-						$ts->setTimestamp($event['timestamp']);
-						$eventCreationTime=$ts->format(DateTime::ISO8601);
-						$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
-						$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
-							$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-							$event['eventDurationHrs'],$event['eventDurationMin'],$event['eventStatus'],$eventCreationTime);
-						//print_r(json_encode($eventObj));
-						$eventObjArray[]=$eventObj;
-						$displayCount++;
-					}	
+						$isAttender=-1;
+					}
+					else
+					{
+						$isAttender=1;
+					}
+					$eventTime=$event['eventTime'];
+					$rawTime=changeToRawTimeFormat($eventTime);
+					$eventDate=$event['eventDate'];
+					$rawDate=changeToRawDateFormat($eventDate);
+					$ts = new DateTime();
+					$ts->setTimestamp($event['timestamp']);
+					$eventCreationTime=$ts->format(DateTime::ISO8601);
+					$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
+					$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
+						$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
+						$event['eventDurationHrs'],$event['eventDurationMin'],$event['eventStatus'],$eventCreationTime);
+					//print_r(json_encode($eventObj));
+					$eventObjArray[]=$eventObj;
+					$displayCount++;
 				}
 				if($displayCount==0)
 				{

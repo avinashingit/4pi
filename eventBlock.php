@@ -484,7 +484,7 @@ function eventInsert(position,data)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn" style="background-color:#FFD1A3;"title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-at" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
+	event+='<button type="button" class="btn" style="background-color:#FFD1A3;"title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
 				  
 	event+='</div>';
 				  
@@ -1044,7 +1044,7 @@ function upcomingEventsFetch(value,call)
 	})
 	.success(function(data){
 		data=data.trim();
-		
+
 		if(value=="empty")
 		{
 			$('.event').each(function(){
@@ -1074,7 +1074,7 @@ function pastCompetitionsFetch(value,call)
 	
 	$('.row .eventMenu').find('#eventWinnersButton').find('i').addClass('fa-spin');
 
-	$.post('/4pi/handlers/eventHandlers/latest.php',{
+	$.post('/4pi/handlers/eventHandlers/pastEvents.php',{
 		_call:call
 	})
 	.error(function(data){
@@ -1082,6 +1082,13 @@ function pastCompetitionsFetch(value,call)
 	})
 	.success(function(data){
 		data=data.trim();
+		console.log(data);
+		if(value=="empty")
+		{
+			$('.event').each(function(){
+				$(this).remove();
+			});
+		}
 		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
