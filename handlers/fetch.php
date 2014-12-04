@@ -332,11 +332,11 @@
 		}
 		function changeToRawDateFormat($eventDate)
 		{
-			echo $eventDate;
+			//echo $eventDate;
 			$nndate[0]=substr($eventDate, 6,2);//day
 			$nndate[1]=substr($eventDate, 4,2);//month
 			$nndate[2]=substr($eventDate, 0,4);//year
-			var_dump($nndate);
+			//var_dump($nndate);
 			/*$nDate=str_split($eventDate,4);
 			$nndate=str_split($nDate[0],2);
 			$nndate[2]=$nDate[1];*/

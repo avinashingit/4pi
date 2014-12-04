@@ -1006,6 +1006,7 @@ function latestEventsFetch(value,call)
 				$(this).remove();
 			});
 		}
+		console.log(data);
 		data=data.trim();
 		if(checkData(data)==1)
 		{
@@ -1043,13 +1044,14 @@ function upcomingEventsFetch(value,call)
 	})
 	.success(function(data){
 		data=data.trim();
+		
 		if(value=="empty")
 		{
 			$('.event').each(function(){
 				$(this).remove();
 			});
 		}
-		// console.log(data);
+		console.log(data);
 		// console.log(checkData(data));
 		if(checkData(data)==1)
 		{
