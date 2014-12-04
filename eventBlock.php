@@ -631,6 +631,33 @@ function editEvent(id)
 
 }
 
+function modifyEvent(data,id)
+{
+	$('#'+id).find('#eventOrganizer').html(data.eventOrgName);
+	
+	$('#'+id).find('#eventName').html(data.eventName);
+	
+	$('#'+id).find('#eventContent').html(data.eventContent);
+	
+	// var eventFiles=$('#'+id).find('#eventFiles').html();
+	
+	$('#'+id).find('#eventSharedWith').html(data.sharedWith);
+	
+	$('#'+id).find('#eventVenue').html(data.eventVenue);
+	
+	$('#'+id).find('#eventDate').html(data.eventDate);
+	
+	$('#'+id).find('#eventTime').html(data.eventTime);
+
+	$('#'+id).find('#eventDurationHours').html(data.eventDurationHrs);
+	
+	$('#'+id).find('#eventDurationMinutes').html(data.eventDurationMin);
+	
+	$('#'+id).find('#eventType').html(data.eventType);
+
+	$('#'+id).find('#eventStatus').html(data.eventStatus);
+}
+
 function editedEventSend()
 
 {
@@ -659,6 +686,8 @@ function editedEventSend()
 
 	var eventStatus=$('#editEventModal').find('#editEventStatus').val();
 
+	var eventType=$('#editEventModal').find('#editEventType').val();
+
 	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>1000 || eventVenue.length==0 || eventDate.length==0 )
 
 	{
@@ -677,25 +706,27 @@ function editedEventSend()
 		
 			_eventId:eventId,
 		
-			_eventClubName:eventClubName,
+			_eventOrgName:eventClubName,
 		
 			_eventName:eventName,
 
-			_eventContent:eventContent,
+			_content:eventContent,
 		
-			_eventSharedWith:eventSharedWith,
+			_sharedWith:eventSharedWith,
 		
-			_eventVenue:eventVenue,
+			_venue:eventVenue,
 		
 			_eventDate:eventDate,
 		
 			_eventTime:eventTimeHours,
 
-			_eventDurationHours:eventDurationHours,
+			_eventDurationHrs:eventDurationHours,
 
-			_eventDurationMinutes:eventDurationMinutes,
+			_eventDurationMin:eventDurationMinutes,
 
-			_eventStatus:eventStatus
+			_status:eventStatus,
+
+			_eventType:eventType
 		
 		})
 		
@@ -707,7 +738,12 @@ function editedEventSend()
 
 		.success(function (data){
 
-			//do something
+			console.log(data);
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				modifyEvent(data,eventId);
+			}
 
 		});
 	}
