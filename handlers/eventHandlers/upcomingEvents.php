@@ -6,11 +6,11 @@ require_once('./miniEvent.php');
 require_once('../fetch.php');
 $_SESSION['jx']="1002"; //1001 for latest events 1002 for upcoming events 1003 for winners
 //Testing Content Starts
-/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_refresh']=0;
-	$_POST['sgk']="";
-*/
+	$_POST['sgk']=array();
+
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
@@ -89,7 +89,7 @@ $conn=new QoB();
 			$values[$i+1]=array($userId => 's');
 			//var_dump($values);
 			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
-			//echo $getUpcomingEventsSQL;
+			echo $getUpcomingEventsSQL;
 			$displayCount=0;
 			$result=$conn->select($getUpcomingEventsSQL,$values);
 			if($conn->error=="")
@@ -119,8 +119,10 @@ $conn=new QoB();
 						}
 						$eventTime=$event['eventTime'];
 						$rawTime=changeToRawTimeFormat($eventTime);
+						echo $rawTime."<br/>";
 						$eventDate=$event['eventDate'];
 						$rawDate=changeToRawDateFormat($eventDate);
+						echo $rawDate."<br/>";
 						$ts = new DateTime();
 						$ts->setTimestamp($event['timestamp']);
 						$eventCreationTime=$ts->format(DateTime::ISO8601);
@@ -140,7 +142,7 @@ $conn=new QoB();
 				}
 				else
 				{
-					print_r(json_encode($eventObjArray));
+					//print_r(json_encode($eventObjArray));
 				}
 			}
 			else

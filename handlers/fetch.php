@@ -1,68 +1,6 @@
 <?php
 
 	require("../../PHPMailer_v5.1/class.phpmailer.php");
-	function postFetch($postid)
-		{
-			$conObj = new QoB();
-			$values1 = array(0 => array($postid => 's'));
-			$result1 = $conObj->fetchall("SELECT * FROM post WHERE postId = ?",$values1,false);
-			if($conObj->error == "")
-				{
-					if($result1 != "")
-						{
-							$userId = $row2['userId'];
-							$content = $row2['content'];
-							$timestamp = $row2['timestamp'];
-							$reportedBy = $row2['reportedBy'];
-							$spamCount = $row2['spamCount'];
-													
-							$postId = $row2['postId'];
-							$subject = $row2['subject'];
-							$starCount = $row2['starCount'];
-							$mailCount = $row2['mailCount'];
-							$mailedBy = $row2['mailedBy'];
-							
-							$isPermanent = $row2['isPermanent'];
-							$starredBy = $row2['starredBy'];
-							$displayStatus = $row2['displayStatus'];
-							$lastUpdated = $row2['lastUpdated'];
-							$likeIndex = $row2['likeIndex'];
-							
-							$commentIndex = $row2['commentIndex'];
-							$lifetime = $row2['lifetime'];
-							$impIndex = $row2['impIndex'];
-							$requestPermanence = $row2['$requestPermanence'];
-							$popularityIndex = $row2['popularityIndex'];
-							
-							$followers = $row2['followers'];
-							$hiddenTo = $row2['hiddenTo'];
-							$filesAttached = $row2['filesAttached'];
-							$commentCount = $row2['commentCount'];
-							$mailToIndex = $row2['mailToIndex'];
-							
-							$taggedUsers = $row2['taggedUsers'];
-							$seenBy = $row2['seenBy'];
-							$seenCount = $row2['seenCount'];
-							$sharedWith = $row2['sharedWith'];
-							
-							$postObj = new Post($userId,$subject,$content,$seenCount,$postId,$starCount,$mailCount,$commentCount,$timestamp,$reportedBy,$spamCount,$mailedby,$isPermanent,$starredBy,$displayStatus,$lastUpdated,$likeIndex,$commentIndex,$lifetime,$impIndex,
-                                $requestPermanence,$popularityIndex,$followers,$hiddenTo,$filesAttached,$mailToIndex,$sharedWith,$seenBy,$taggedUsers);
-							
-							return $postObj;
-						
-						}
-					
-					else
-						{
-							return false;
-						}
-
-				}
-			else
-				{
-					return false;
-				}
-		}
 		
 		function getUserFromHash($userHash)
 		{
@@ -380,8 +318,10 @@
 		}
 		function changeToEventDateFormat($date)
 		{
-			$dateRegex="([/]+)";
-			$eventDate=preg_replace($dateRegex, '', $date);
+			$nDate=explode("/", $date);
+			$eventDate=$nDate[2].$nDate[1].$nDate[0];
+			/*$dateRegex="([/]+)";
+			$eventDate=preg_replace($dateRegex, '', $date);*/
 			return $eventDate;
 		}
 		function changeToEventTimeFormat($time)
@@ -392,9 +332,14 @@
 		}
 		function changeToRawDateFormat($eventDate)
 		{
-			$nDate=str_split($eventDate,4);
+			echo $eventDate;
+			$nndate[0]=substr($eventDate, 6,2);//day
+			$nndate[1]=substr($eventDate, 4,2);//month
+			$nndate[2]=substr($eventDate, 0,4);//year
+			var_dump($nndate);
+			/*$nDate=str_split($eventDate,4);
 			$nndate=str_split($nDate[0],2);
-			$nndate[2]=$nDate[1];
+			$nndate[2]=$nDate[1];*/
 			$rawDate=implode("/",$nndate);
 			return $rawDate;
 		}

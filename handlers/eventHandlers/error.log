@@ -30,3 +30,7 @@
 
 [2014-12-01 12:20:11             ::1                   Asia/Kolkata] 0      $$$$$$
 
+[2014-12-04 12:59:03       127.0.0.1                   Asia/Kolkata] 1054   $$$Unknown column 'postIdHash' in 'where clause'$$$
+
+[2014-12-04 13:01:29       127.0.0.1                   Asia/Kolkata] 1054   $$$Unknown column 'postIdHash' in 'where clause'$$$
+

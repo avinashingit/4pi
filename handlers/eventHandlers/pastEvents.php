@@ -4,7 +4,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
-$_SESSION['jx']="1001"; //1001 for latest events 1002 for upcoming events 1003 for winners
+$_SESSION['jx']="1002"; //1001 for latest events 1002 for upcoming events 1003 for winners
 //Testing Content Starts
 /*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
@@ -29,12 +29,10 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Upcoming Event Offset - vgr
 //Processed Event Hashes - sgk
-$_POST['_refresh']=-1;
-$_POST['_sgk']=array();
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['_sgk'];
+$inputHashes=$_POST['sgk'];
 if(count($inputHashes)!=0)
 {
 	$ProcessedHashes=explode(",", $inputHashes);
@@ -48,7 +46,7 @@ else
 $conn=new QoB();
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		if(blockUserByHash($userIdHash,"Suspicious Session Variable in latestEvent")>0)
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in upcomingEvent")>0)
 		{
 			$_SESSION=array();
 			session_destroy();
@@ -57,7 +55,7 @@ $conn=new QoB();
 		}
 		else
 		{
-			notifyAdmin("Suspicious Session Variable in latest Event",$userIdHash.",sh:".$_SESSION['tn']);
+			notifyAdmin("Suspicious Session Variable in upcoming Event",$userIdHash.",sh:".$_SESSION['tn']);
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
@@ -68,7 +66,7 @@ $conn=new QoB();
 	{
 		if(($user=getUserFromHash($userIdHash))==false)
 		{
-			notifyAdmin("Critical Error In latestEvent",$userIdHash);
+			notifyAdmin("Critical Error In upcomingEvent",$userIdHash);
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
@@ -78,22 +76,28 @@ $conn=new QoB();
 		{
 			$userId=$user['userId'];
 			$i=0;
+
+			date_default_timezone_set("Asia/Kolkata");
+			$currentDate=date("Ymd",time());
+			$currentTime=date("Hi",time());
 			$finalStudentRegex=getRollNoRegex($userId);
-			$getLatestEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?";
+			$getUpcomingEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?";
 			
 			$values[0]=array($finalStudentRegex => 's');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getLatestEventsSQL=$getLatestEventsSQL." AND postIdHash!=?";
+				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=" ) OR userId=? ORDER BY timestamp DESC";
-			$values[$i+1]=array($userId => 's');
+			$SQLEndPart=" ) OR userId=? AND eventDate<= ? AND eventTime< ? ORDER BY eventDate,eventTime";
+			$values[$i+1]=array($currentDate => 'i');
+			$values[$i+2]=array($currentTime => 'i')
+			$values[$i+3]=array($userId => 's');
 			//var_dump($values);
-			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
-			//echo $getLatestEventsSQL;
+			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
+			//echo $getUpcomingEventsSQL;
 			$displayCount=0;
-			$result=$conn->select($getLatestEventsSQL,$values);
+			$result=$conn->select($getUpcomingEventsSQL,$values);
 			if($conn->error=="")
 			{
 				//Success
@@ -135,7 +139,6 @@ $conn=new QoB();
 						$displayCount++;
 					}	
 				}
-
 				if($displayCount==0)
 				{
 					echo 404;
@@ -148,9 +151,10 @@ $conn=new QoB();
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! While inserting in latestEvents",$userId);
+				notifyAdmin("Conn.Error".$conn->error."! While inserting in upcomingEvent",$userId);
 				echo 12;
 				exit();
 			}
 		}
 	}
+?>

@@ -49,10 +49,10 @@
 
 
 //QOB configuration file
-require("qobConfig.php");
+require("/qobConfig.php");
 
 //QOB helper functions support
-require("helper.php");
+require("/helper.php");
 
 
 
