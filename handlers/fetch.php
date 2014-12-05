@@ -379,7 +379,7 @@
 		$currentDate=(int)$currentDate;
 		//$currentTime=(int)$currentTime;
 
-		if(event['eventDate']==$currentDate)
+		if($event['eventDate']==$currentDate)
 		{
 			$eventTimeHr=(int)(substr($event['eventTime'],0,2));
 			$eventTimeMin=(int)(substr($event['eventTime'], 2,2));

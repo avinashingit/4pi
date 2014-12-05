@@ -91,11 +91,10 @@ $conn=new QoB();
 				$getLatestEventsSQL=$getlatestEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=") OR userId=?)  AND ( eventDate> ? OR (eventDate= ? AND eventTime> ?)) ORDER BY timestamp DESC";
+			$SQLEndPart=") OR userId=?)  AND ( eventDate>= ?) ORDER BY timestamp DESC";
 			$values[$i+1]=array($userId => 's');
 			$values[$i+2]=array($currentDate => 'i');
-			$values[$i+3]=array($currentDate => 'i');
-			$values[$i+4]=array($currentTime => 'i');
+			
 			//var_dump($values);
 			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
 			//echo $getLatestEventsSQL;
@@ -107,6 +106,20 @@ $conn=new QoB();
 				$eventObjArray=array();
 				while(($event=$conn->fetch($result))&&$displayCount<10)
 				{
+					if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
+					{
+						$eventStatus=getEventStatus($event);
+					}
+					else
+					{
+						$eventStatus=$event['eventStatus'];
+					}
+
+					if($eventStatus=="Completed")
+					{
+						continue;
+					}
+
 					$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
 					{

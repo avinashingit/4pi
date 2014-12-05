@@ -91,11 +91,10 @@ $conn=new QoB();
 				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=") OR userId=?)  AND ((eventDate> ?) OR (eventDate= ? AND eventTime> ?))ORDER BY eventDate,eventTime";
+			$SQLEndPart=") OR userId=?)  AND (eventDate>= ?) ORDER BY eventDate,eventTime";
 			$values[$i+1]=array($userId => 's');
 			$values[$i+2]=array($currentDate => 'i');
-			$values[$i+3]=array($currentDate => 'i');
-			$values[$i+4]=array($currentTime => 'i');
+
 			//var_dump($values);
 			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
 			// echo $getUpcomingEventsSQL;
@@ -107,6 +106,19 @@ $conn=new QoB();
 				$eventObjArray=array();
 				while(($event=$conn->fetch($result))&&$displayCount<10)
 				{
+					if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
+					{
+						$eventStatus=getEventStatus($event);
+					}
+					else
+					{
+						$eventStatus=$event['eventStatus'];
+					}
+					if($eventStatus=="Completed")
+					{
+						continue;
+					}
+
 					$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
 					{
@@ -130,14 +142,7 @@ $conn=new QoB();
 					// echo $rawTime."<br/>";
 					$eventDate=$event['eventDate'];
 					$rawDate=changeToRawDateFormat($eventDate);
-					if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
-					{
-						$eventStatus=getEventStatus($event);
-					}
-					else
-					{
-						$eventStatus=$event['eventStatus'];
-					}
+					
 
 					
 					// echo $rawDate."<br/>";

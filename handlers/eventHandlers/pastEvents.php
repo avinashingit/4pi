@@ -1,6 +1,6 @@
 <?php
 session_start();	
-//error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL ^ E_NOTICE);
 require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
