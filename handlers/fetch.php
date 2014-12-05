@@ -50,83 +50,6 @@
 			}
 		}
 
-
-		/*function isfollowing($hash,$follwers)
-		{
-			$followersarray = explode(',',$followers);
-			$nooffollowers = count($followersarray);
-			
-			$output = 0;
-			for($i = 0;$i<$nooffollowers;$i++)
-				{
-					if(strcmp($hash,$followersarray[$i]) == 0)
-						{
-							$output++;
-							break;
-						}
-				}
-				
-			if($output == 0)
-				{
-					return -1;
-				}
-			else
-				{
-					return 1;
-				}
-		}*/
-
-		/*function hiddenTo($userId,$hiddenTo)
-		{
-			$hiddenToarray = explode(',',$hiddenTo);
-			$noofhidden = count($hiddenToarray);
-			
-			$output = 0;
-			for($i = 0;$i<$noofhidden;$i++)
-				{
-					if(strcmp($userId,$hiddenToarray[$i]) == 0)
-						{
-							$output++;
-							break;
-						}
-				}
-				
-			if($output == 0)
-				{
-					return -1;
-				}
-			else
-				{
-					return 1;
-				}
-		}*/
-		/*function hasStarred($userId,$starredBy)
-		{
-			$hiddenToarray = explode(',',$hiddenTo);
-			$noofhidden = count($hiddenToarray);
-			
-			$output = 0;
-			for($i = 0;$i<$noofhidden;$i++)
-				{
-					if(strcmp($userId,$hiddenToarray[$i]) == 0)
-						{
-							$output++;
-							break;
-						}
-				}
-				
-			if($output == 0)
-				{
-					return -1;
-				}
-			else
-				{
-					return 1;
-				}
-		}*/
-
-
-
 		function hasReported($userId,$hiddenTo)
 		{
 			$hiddenToarray = explode(',',$hiddenTo);
@@ -206,18 +129,18 @@
 			$mail->IsHTML();
 			$mail->SMTPAuth   = true;                  // enable SMTP authentication
 			$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-			$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-			$mail->Port       = 465;                   // set the SMTP port
+			$mail->Host       = "smtp.mail.com";      // sets GMAIL as the SMTP server
+			$mail->Port       = 587;                   // set the SMTP port
 
-			$mail->Username   = "coe12b013@iiitdm.ac.in";  // GMAIL username
-			$mail->Password   = "";            // GMAIL password
+			$mail->Username   = "4pi@programmer.net";  // GMAIL username
+			$mail->Password   = "110720@iiitdmK";            // GMAIL password
 
 			$mail->From       = "4pi-IIIT D&M Kancheepuram";
 			$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
 			$mail->Subject    = $subject;
 			$mail->WordWrap   = 500; // set word wrap
 			$mail->AddAddress($emailId);
-			$mailBody="<center><strong>--This is an Automated Email.Don't Waste Your TIME Replying to this email address!!--</strong></center><br/>";
+			$mailBody="<center><strong>--This is an Automated Email. Don't Waste Your TIME Replying to this email address!!--</strong></center><br/>";
 			$mailBody=$mailBody."<strong>Subject:</strong>".$subject."<br/>";
 			$mailBody=$mailBody."<strong>Content:</strong><br/>".$content."<br/><br/>";
 			$mailBody=$mailBody."Have A Nice Time<br/>Regards,<br/><strong>4pi-Admin</strong><br/>";
@@ -438,8 +361,164 @@
 		$finalRegexString="(,".$regexString.",?)|(^".$regexString.",?)|(^All$)";
 		return $finalRegexString;
 	}
+	
+	function newValidateSharedWith($str)
+	{
+		$conn=new QOB();
+		
+		if(strlen($str)==1)
+		{
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array('_____'.$str.'___'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}	
+		}
+		else if(strlen($str)==2){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array('___'.$str.'____'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}			
+		}
+		else if(strlen($str)==3){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array('___'.$str.'___'=>'s');
+			$values1[0]=array($str.'______'=>'s');
+			$storeString2='^'.$str.'......$';
+			$result=$conn->fetchALL($sql,$values,true);
+			//
+			if($conn->error!=''){
+				notifyAdmin("Conn.Error".$conn->error."In validate Shared With1",$userId);
+				//echo $conn->error;
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					$result2=$conn->fetchALL($sql,$values1,true);
+					if($conn->error!=""){
+						notifyAdmin("Conn.Error".$conn->error."In validate Shared With2",$userId);
+						//echo $conn->error;
+						return "Invalid";
+					}
+					else{
+						if($result2>=1){
+							//echo "Accepted";
+							return $str;
+						}
+						else
+						{
+							//echo "here";
+							return "Invalid";
+						}
+					}
+				}
+			}		
+		}
+		else if(strlen($str)==4){
+			$divide=str_split($str);
+			$searchString=$divide[0].$divide[1].$divide[2]."__".$divide[3];
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array($searchString.'___'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}		
+		}
+		else if(strlen($str)==5){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array($str.'____'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}		
+		}
+		else if(strlen($str)==6){
+			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			$values[0]=array($str.'___'=>'s');
+			$result=$conn->fetchALL($sql,$values,true);
+			if($conn->error!=''){
+				return "Invalid";
+			}
+			else{
+				if($result>=1){
+					//echo "Accepted";
+					return $str;
+				}
+				else
+				{
+					return "Invalid";
+				}
+			}		
+		}
+		else{
+			return "Invalid";
+		}
+	}
 
-	function validateSharedWith($str)
+	function notifyPeople($toBeNotified,$objectId,$from,$type)
+	{
+		if($toBeNotified!="")
+		{
+			
+			$list=explode(',', $toBeNotified);
+			foreach ($list as $userId)
+			{
+				$InsertNotificationSQL="IF EXISTS(SELECT * FROM notifications WHERE objectId= ? and type=?) 
+											UPDATE notifications SET message=?, "
+			}
+		}
+	}
+//---------Examples, old functions and Test Code Executed On Online Compiler Starts------------------------------ 
+
+/*function validateSharedWith($str)
 	{
 		$regstr;
 		$conn=new QOB();
@@ -592,167 +671,7 @@
 		else{
 			return "Invalid";
 		}
-	}//END OF validateSharedWith Function!!!!!!
-	
-	function newValidateSharedWith($str)
-	{
-		$conn=new QOB();
-		
-		if(strlen($str)==1)
-		{
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array('_____'.$str.'___'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					return $str;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}	
-		}
-		else if(strlen($str)==2){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array('___'.$str.'____'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					return $str;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}			
-		}
-		else if(strlen($str)==3){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array('___'.$str.'___'=>'s');
-			$values1[0]=array($str.'______'=>'s');
-			$storeString2='^'.$str.'......$';
-			$result=$conn->fetchALL($sql,$values,true);
-			//
-			if($conn->error!=''){
-				notifyAdmin("Conn.Error".$conn->error."In validate Shared With1",$userId);
-				//echo $conn->error;
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					return $str;
-				}
-				else
-				{
-					$result2=$conn->fetchALL($sql,$values1,true);
-					if($conn->error!=""){
-						notifyAdmin("Conn.Error".$conn->error."In validate Shared With2",$userId);
-						//echo $conn->error;
-						return "Invalid";
-					}
-					else{
-						if($result2>=1){
-							//echo "Accepted";
-							return $str;
-						}
-						else
-						{
-							//echo "here";
-							return "Invalid";
-						}
-					}
-				}
-			}		
-		}
-		else if(strlen($str)==4){
-			$divide=str_split($str);
-			$searchString=$divide[0].$divide[1].$divide[2]."__".$divide[3];
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array($searchString.'___'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					return $str;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}		
-		}
-		else if(strlen($str)==5){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array($str.'____'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					return $str;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}		
-		}
-		else if(strlen($str)==6){
-			$sql="SELECT * FROM users WHERE userId LIKE ?";
-			$values[0]=array($str.'___'=>'s');
-			$result=$conn->fetchALL($sql,$values,true);
-			if($conn->error!=''){
-				return "Invalid";
-			}
-			else{
-				if($result>=1){
-					//echo "Accepted";
-					return $str;
-				}
-				else
-				{
-					return "Invalid";
-				}
-			}		
-		}
-		else{
-			return "Invalid";
-		}
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	/*function notifyPeople($toBeNotified,$message)
-	{
-		$list=explode(',', $toBeNotified);
-		foreach () $userId 
-	}*/
-//---------Examples and Test Code Executed On Online Compiler Starts------------------------------ 
-
+	}//END OF validateSharedWith Function!!!!!!*/
 
 /*$regex="^.{3}$";
 $word="boys";

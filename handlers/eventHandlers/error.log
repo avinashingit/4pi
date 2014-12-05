@@ -50,3 +50,15 @@
 
 [2014-12-04 19:47:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate<= ? AND eventTime< ?) ORDER BY eventDate,eventTim' at line 1$$$
 
+[2014-12-05 10:40:31       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY timestamp' at line 1$$$
+
+[2014-12-05 10:42:35       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY eventDate,eventTim' at line 1$$$
+
+[2014-12-05 10:44:50       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY timestamp' at line 1$$$
+
+[2014-12-05 10:45:53       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY timestamp' at line 1$$$
+
+[2014-12-05 10:48:41       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY timestamp' at line 1$$$
+
+[2014-12-05 10:51:36       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY eventDate,eventTim' at line 1$$$
+

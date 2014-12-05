@@ -1,16 +1,16 @@
 <?php
 session_start();	
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
-$_SESSION['jx']="1002"; //1001 for latest events 1002 for upcoming events 1003 for winners
+$_SESSION['jx']="1003"; //1001 for latest events 1002 for upcoming events 1003 for winners
 //Testing Content Starts
-/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_refresh']=0;
-	$_POST['sgk']="";
-*/
+	$_POST['sgk']=array();*/
+
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
@@ -91,10 +91,11 @@ $conn=new QoB();
 				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=") OR userId=?)  AND (eventDate<= ? AND eventTime< ?) ORDER BY eventDate,eventTime";
+			$SQLEndPart=") OR userId=?)  AND (eventDate< ? OR (eventDate= ? AND eventTime< ?)) ORDER BY eventDate,eventTime";
 			$values[$i+1]=array($userId => 's');
 			$values[$i+2]=array($currentDate => 'i');
-			$values[$i+3]=array($currentTime => 'i');
+			$values[$i+3]=array($currentDate => 'i');
+			$values[$i+4]=array($currentTime => 'i');
 			
 			//var_dump($values);
 			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;

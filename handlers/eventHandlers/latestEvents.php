@@ -6,11 +6,11 @@ require_once('./miniEvent.php');
 require_once('../fetch.php');
 $_SESSION['jx']="1001"; //1001 for latest events 1002 for upcoming events 1003 for winners
 //Testing Content Starts
-/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_refresh']=0;
-	$_POST['sgk']="";
-*/
+	$_POST['sgk']=array();*/
+
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
@@ -29,12 +29,10 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Upcoming Event Offset - vgr
 //Processed Event Hashes - sgk
-
-
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['_sgk'];
+$inputHashes=$_POST['sgk'];
 if(count($inputHashes)!=0)
 {
 	$ProcessedHashes=explode(",", $inputHashes);
@@ -85,18 +83,19 @@ $conn=new QoB();
 			$currentTime=(int)$currentTime;
 
 			$finalStudentRegex=getRollNoRegex($userId);
-			$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?";
+			$getLatestEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?";
 			
 			$values[0]=array($finalStudentRegex => 's');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND postIdHash!=?";
+				$getLatestEventsSQL=$getlatestEventsSQL." AND postIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=") OR userId=?)  AND (eventDate<= ? AND eventTime< ?) ORDER BY eventDate,eventTime";
+			$SQLEndPart=") OR userId=?)  AND ( eventDate> ? OR (eventDate= ? AND eventTime> ?)) ORDER BY timestamp DESC";
 			$values[$i+1]=array($userId => 's');
 			$values[$i+2]=array($currentDate => 'i');
-			$values[$i+3]=array($currentTime => 'i');
+			$values[$i+3]=array($currentDate => 'i');
+			$values[$i+4]=array($currentTime => 'i');
 			//var_dump($values);
 			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
 			//echo $getLatestEventsSQL;
