@@ -128,13 +128,22 @@ $conn=new QoB();
 					$rawTime=changeToRawTimeFormat($eventTime);
 					$eventDate=$event['eventDate'];
 					$rawDate=changeToRawDateFormat($eventDate);
+					if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
+					{
+						$eventStatus=getEventStatus($event);
+					}
+					else
+					{
+						$eventStatus=$event['eventStatus'];
+					}
+
 					$ts = new DateTime();
 					$ts->setTimestamp($event['timestamp']);
 					$eventCreationTime=$ts->format(DateTime::ISO8601);
 					$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
 					$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 						$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-						$event['eventDurationHrs'],$event['eventDurationMin'],$event['eventStatus'],$eventCreationTime);
+						$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);
 					//print_r(json_encode($eventObj));
 					$eventObjArray[]=$eventObj;
 					$displayCount++;

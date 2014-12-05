@@ -78,7 +78,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		exit();
 	}
 	$eventDuration=$eventDurationHrs.":".$eventDurationMin;
-	if(validateDate($rawDate)==false)
+	if(validateDate($rawDate)==false||validateTime($rawTime)==false)
 	{
 		//echo "validate";
 		echo 16;
@@ -87,6 +87,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 	$eventDate=changeToEventDateFormat($rawDate);
 	$eventTime=changeToEventTimeFormat($rawTime);
+
+	if(validateEventDateAndTime($eventDate,$eventTime)==false)
+	{
+		echo 16;
+		exit();
+	}
 	$userIdHash=$_SESSION['vj'];
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
@@ -211,9 +217,16 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				//Success
 				$attendCount=0;
 				$seenCount=0;
-				$isAttender=0;
+				$isAttender=1;
 				$eventOwner=1;
-				$eventStatus="As Scheduled";
+				if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
+				{
+					$eventStatus=getEventStatus($event);
+				}
+				else
+				{
+					$eventStatus=$event['eventStatus'];
+				}
 				$ts = new DateTime();
 				$ts->setTimestamp($timestamp);
 				$eventCreationTime=$ts->format(DateTime::ISO8601);

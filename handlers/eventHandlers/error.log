@@ -62,3 +62,5 @@
 
 [2014-12-05 10:51:36       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') OR userId=?)  AND (eventDate>= ? AND eventTime> ?) ORDER BY eventDate,eventTim' at line 1$$$
 
+[2014-12-05 15:51:49       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'eventStatus = ? WHERE eventIdHash=?' at line 1$$$
+
