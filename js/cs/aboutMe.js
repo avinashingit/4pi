@@ -1,3 +1,7 @@
+//data attributes not written for any
+//set mode bit also	
+
+//---------------------------------------------------------------//
 function topPartInsert(data)
 {
 
@@ -34,7 +38,7 @@ function topPartInsert(data)
 	top+='<p style="font-size:15px;"><em>28-06-1994</em></p>';
 	top+='<p style="font-size:17px;">B.Tech, Computer Engineering</p>';
 	top+='<p style="font-size:18px;">CEO at apple.inc</p>';
-	top+='<a href="index.php"  class="btn btn-primary" >Find My Resume <i class="fa fa-external-link"></i></a>';
+	top+='<a href="'+data/resumeLink+'"  class="btn btn-primary" >Find My Resume <i class="fa fa-external-link"></i></a>';
 
 	top+='</div>';
 
@@ -74,3 +78,212 @@ function topPartFetch()
 	});
 }
 
+//----------------------------------------------------------------//
+
+function bottomPartInsert(data)
+{
+
+}
+
+function bottomPartFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again. :(");
+	})
+	.success(function(data){
+
+	});
+}
+//----------------------------------------------------------------//
+function interestsInsert(data)
+{
+
+}
+
+function interestsFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again. :(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			interestsInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function achInsert(data)
+{
+
+}
+
+function achFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again. :(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			achInsert(data);
+		}
+	})
+}
+//----------------------------------------------------------------//
+function certiInsert(data)
+{
+
+}
+
+function certiFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			certiInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function wsaInsert(data)
+{
+
+}
+
+function wsaFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			wsaInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function acadInsert(data)
+{
+
+}
+
+function acadFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			acadInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function expInsert(data)
+{
+
+}
+
+function expFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			expInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function projInsert(data)
+{
+
+}
+
+function projFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			projInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function toolInsert(data)
+{
+	
+}
+
+function toolFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			toolInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
+function skillInsert(data)
+{
+
+}
+
+function skillFetch()
+{
+	$.post('./handlers/aboutHandlers/aboutMe.php',{
+		_mode:1
+	})
+	.error(function(){
+		alert("Server overload error. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			skillInsert(data);
+		}
+	});
+}
+//----------------------------------------------------------------//
