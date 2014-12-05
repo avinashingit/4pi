@@ -93,6 +93,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();
 	}
+
 	$userIdHash=$_SESSION['vj'];
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
@@ -142,6 +143,14 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					echo 13;
 					exit();
 				}
+			}
+			if(getEventStatus($event,1)=="Completed")
+			{
+				notifyAdmin("attempt to edit a completed event".",sh:".$event['eventId']],$userIdHash);
+				$_SESSION=array();
+				session_destroy();
+				echo 16;
+				exit();
 			}
 			$eventUserId=$event['userId'];
 			$eventTimestamp=$event['timestamp'];

@@ -371,14 +371,12 @@
 
 	}
 
-	function getEventStatus($event)
+	function getEventStatus($event,$isAttending)
 	{
 		date_default_timezone_set("Asia/Kolkata");
 		$currentDate=date("Ymd",time());
-		//$currentTime=date("Hi",time());
 		$currentDate=(int)$currentDate;
-		//$currentTime=(int)$currentTime;
-
+		$actualStatus="";
 		if($event['eventDate']==$currentDate)
 		{
 			$eventTimeHr=(int)(substr($event['eventTime'],0,2));
@@ -395,36 +393,59 @@
 			$currentMin=(int)date("i",time());
 			if($currentHr<$eventEndHr&&$currentHr>=$eventTimeHr)
 			{
-				return "Ongoing";
+				$actualStatus="Ongoing";
 			}
 			else if($currentHr>=$eventTimeHr&&$currentHr==$eventEndHr&&$currentMin<$eventEndMin)
 			{
-				return "Ongoing";
+				$actualStatus="Ongoing";
 			}
 			else if($currentHr<$eventTimeHr)
 			{
-				return "As Scheduled";
+				$actualStatus="As Scheduled";
 			}
 			else if($currentHr==$eventTimeHr&&$currentMin<$eventTimeMin)
 			{
-				return "As Scheduled";
+				$actualStatus="As Scheduled";
 			}
 			else if($currentHr>$eventEndHr)
 			{
-				return "Completed";
+				$actualStatus="Completed";
 			}
 			else if($currentHr==$eventEndHr&&$currentMin>=$eventEndMin)
 			{
-				return "Completed";
+				$actualStatus="Completed";
 			}
 		}
 		else if($event['eventDate']<$currentDate)
 		{
-			return "Completed";
+			$actualStatus="Completed";
 		}
 		else
 		{
-			return "As Scheduled";
+			$actualStatus="As Scheduled";
+		}
+
+		if($isAttending==1)
+		{
+			if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled"&&$event['eventStatus']!="Preponed"&&$event['eventStatus']!="Postponed")
+			{
+				return $actualStatus;
+			}
+			else
+			{
+				return $event['eventStatus'];
+			}
+		}
+		else
+		{
+			if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
+			{
+				return $actualStatus;
+			}
+			else
+			{
+				return $event['eventStatus'];
+			}
 		}
 	}
 

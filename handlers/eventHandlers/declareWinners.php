@@ -4,12 +4,12 @@ require_once('../../QOB/qob.php');
 require_once('./miniEvent.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B021".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B021".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 
 	$_POST['_eventId']="0f5e5132d3ab48f0e3c1f33900a764227e441a53cce32b8ac20808325afd61eb59176fa04f830bf34dec8061fddb7e8f45a60fe7f0e313616a6956ba9e46bfba";
 
-	$_POST['_description']="Telisina Cheppanu";
+	$_POST['_description']="Telisina Cheppanu";*/
 	
 //Testing Content Ends
 
