@@ -50,6 +50,21 @@
 		}
 	}
 
+	function getPollFromHash($pollIdHash)
+	{
+		$conn=new QoB();
+		$values = array(0 => array($pollIdHash => 's'));
+		$result = $conn->fetchAll("SELECT * FROM poll WHERE pollIdHash = ?",$values,false);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function hasReported($userId,$hiddenTo)
 	{
 		$hiddenToarray = explode(',',$hiddenTo);

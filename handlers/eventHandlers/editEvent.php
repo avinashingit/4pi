@@ -214,7 +214,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			else
 			{
-				$sharedWith="ALL";
+				$sharedWith="All";
 			}
 			
 			$lastUpdated=time();

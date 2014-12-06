@@ -88,7 +88,7 @@ $conn=new QoB();
 			$values[0]=array($finalStudentRegex => 's');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getLatestEventsSQL=$getlatestEventsSQL." AND postIdHash!=?";
+				$getLatestEventsSQL=$getlatestEventsSQL." AND eventIdHash!=?";
 				$values[$i+1]=array($ProcessedHashes[$i] => 's');
 			}
 			$SQLEndPart=") OR userId=?)  AND ( eventDate>= ?) ORDER BY timestamp DESC";

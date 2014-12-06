@@ -57,11 +57,8 @@ define("POCHASH", "tlastsop21");
 //Salt for Comments
 define("COMHASH", "21HCAOSMHents");
 
-//salt for EVENTS
+//salt for POLLS&EVENTS
 define("POEVHASH", "sloppnstneve21");
-
-//salt for polls
-define("POLLHASH", "hsah12tlassllop");
 
 /***************************COMMON PARAMETERS**************************/
 

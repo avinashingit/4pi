@@ -167,7 +167,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			else
 			{
-				$sharedWith="ALL";
+				$sharedWith="All";
 			}
 
 			$FetchMaxEventIDSQL="SELECT MAX(eventId) as maxEventId FROM event";

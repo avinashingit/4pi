@@ -1,0 +1,20 @@
+[2014-12-06 23:12:39       127.0.0.1                   Asia/Kolkata] 0      $$$$$$
+
+[2014-12-06 23:15:22       127.0.0.1                   Asia/Kolkata] 0      $$$$$$
+
+[2014-12-06 23:23:15       127.0.0.1                   Asia/Kolkata] 0      $$$$$$
+
+[2014-12-07 00:00:24       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR userId=?) ORDER BY t' at line 1$$$
+
+[2014-12-07 00:01:52       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ON poll.userId=users.userId WHERE (sharedWith REGEXP ?) OR userId=?) ORDER BY ti' at line 1$$$
+
+[2014-12-07 00:03:16       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ORDER BY timestamp DESC' at line 1$$$
+
+[2014-12-07 00:03:53       127.0.0.1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2014-12-07 00:04:39       127.0.0.1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2014-12-07 00:05:07       127.0.0.1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 00:17:58       127.0.0.1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
