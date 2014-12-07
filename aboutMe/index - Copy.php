@@ -175,7 +175,7 @@ include('../header.php');
 								
 								
 								
-										<li class="aboutTab active"  ><a href="#tcontents" data-target="skills" class="contentTabs"  ><i class="fa fa-bar-chart"></i> Skills</a></li>
+										<li class="aboutTab active"  ><a href="#tcontents" data-target="skills" class="contentTabs"  ><i class="fa fa-bar-chart"></i> Skills&nbsp;&nbsp;</a></li>
 										<li class="aboutTab"><a  data-target="tools" href="#tcontents" class="contentTabs"  ><i class="fa fa-wrench"></i> Tools</a></li>
 										<li class="aboutTab" ><a data-target="projects" class="contentTabs" href="#tcontents"  ><i class="fa fa-database"></i> Projects</a></li>
 										<li class="aboutTab" ><a class="contentTabs" data-target="experience" href="#tcontents"  ><i class="fa fa-fighter-jet"></i> Experience</a></li>
@@ -184,7 +184,7 @@ include('../header.php');
 										<li class="aboutTab"><a  data-target="certifications"  class="contentTabs" href="#tcontents"  ><i class="fa fa-certificate"></i> Certifications</a></li>
 										<li class="aboutTab"  ><a data-target="achievements" class="contentTabs" href="#tcontents"  ><i class="fa fa-trophy"></i> Achievements</a></li>
 										<li class="aboutTab" ><a data-target="ints" class="contentTabs" href="#tcontents"  ><i class="fa fa-star"></i> Interests</a></li>
-										<li class="aboutTab" ><a href="#contact" ><i class="fa fa-envelope"></i> Contact</a></li>
+										<li class="aboutTab" ><a href="#contact" ><i class="fa fa-envelope"></i> Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 										
 								
 									</ul>

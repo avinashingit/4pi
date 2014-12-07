@@ -380,6 +380,20 @@
 
 	</div><!-- end id eventArea -->
 
+	<div id="eventEmptyMessage">
+
+			<div class="row">
+
+				<div class="col-md-12 text-center">
+
+					<p class="text-center" id="messageEmpty"></p>
+
+				</div>
+
+			</div>
+
+		</div>
+
 </div>
 
 <style>
@@ -1008,15 +1022,25 @@ function latestEventsFetch(value,call)
 		}
 		console.log(data);
 		data=data.trim();
+
 		if(checkData(data)==1)
 		{
-			var x=JSON.parse(data);
-			// console.log(x.length);
-			for (i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				eventInsert('last',x[i]);
+				var x=JSON.parse(data);
+				// console.log(x.length);
+				for (i=0;i<x.length;i++)
+				{
+					eventInsert('last',x[i]);
+				}
+				$('.timeago').timeago();
 			}
-			$('.timeago').timeago();
+
+			else
+			{
+				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
+			}
+			
 		}
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
 	});
@@ -1055,11 +1079,20 @@ function upcomingEventsFetch(value,call)
 		// console.log(checkData(data));
 		if(checkData(data)==1)
 		{
-			var x=JSON.parse(data);
-			// console.log(x.length);
-			for (i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				eventInsert('last',x[i]);
+				var x=JSON.parse(data);
+				// console.log(x.length);
+				for (i=0;i<x.length;i++)
+				{
+					eventInsert('last',x[i]);
+				}
+				$('.timeago').timeago();
+			}
+
+			else
+			{
+				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
 			}
 		}
 		$('.timeago').timeago();
@@ -1091,10 +1124,20 @@ function pastCompetitionsFetch(value,call)
 		}
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
-			for (i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				eventInsert('last',x[i]);
+				var x=JSON.parse(data);
+				// console.log(x.length);
+				for (i=0;i<x.length;i++)
+				{
+					eventInsert('last',x[i]);
+				}
+				$('.timeago').timeago();
+			}
+
+			else
+			{
+				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
 			}
 		}
 	});

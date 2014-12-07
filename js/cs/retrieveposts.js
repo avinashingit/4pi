@@ -1,4 +1,4 @@
-var genUrl = "http:localhost/4pi/";
+var genUrl = "";
 var contentLoadedPosts=0;
 function checkData(data) {
     data = data.trim();
@@ -383,7 +383,7 @@ function retrieveLatestPosts(value, call) {
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
 
             data = data.trim();
-            // console.log(data);
+            console.log(data);
             if (value == "empty") {
                 //alert(value);
                 $('.post').each(function() {
@@ -422,10 +422,10 @@ function retrieveLatestPosts(value, call) {
                 window.location.href = "/4pi/index.php";
             }
             else if (data == 404) {
-                // alert("HE::L");
-                $('#postEmptyMessage').html("<p class='text-center'>Sorry! No more posts to display.</p>");
+                $('#postEmptyMessage').find('#messageEmpty').html("No posts to display.");
             }
             contentLoadedPosts=0;
+            done=1;
 
         });
 

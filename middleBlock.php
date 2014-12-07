@@ -136,7 +136,17 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		</div>	
 
-		<div id="#postEmptyMessage">
+		<div id="postEmptyMessage">
+
+			<div class="row">
+
+				<div class="col-md-12 text-center">
+
+					<p class="text-center" id="messageEmpty"></p>
+
+				</div>
+
+			</div>
 
 		</div>
 		<!-- end post area -->

@@ -17,6 +17,29 @@ if(!isset($_SESSION['vj']))
 {
 require("header.php");
 ?>
+<script>
+//to detect enter key press in login form
+function checkKeyEnter(e){
+	var code = (e.keyCode ? e.keyCode : e.which);
+	 if(code == 13) { //Enter keycode
+	   userLogin();
+	 }
+
+}
+function homeSearch(el)
+{
+	var v=$(el).val();
+	$.post('./handlers/homeSearch.php',{
+		_inputVal:v
+	})
+	.error(function(){
+
+	})
+	.success(function(data){
+		console.log(data);
+	});
+}
+</script>
 <body>
 	<div id="wrap-body" >
 		<div class="container-fluid text-center" >
@@ -58,14 +81,14 @@ require("header.php");
 							
 							<div class="aClose" >
 								<i class="fa fa-user aClose"></i>&nbsp;&nbsp;
-								<input type="text" class="form-control input-md aClose" name="loginUsername" id="loginUsername" placeholder="Username..." style="" autocomplete="off" required/>
+								<input type="text" class="form-control input-md aClose" onkeypress="checkKeyEnter(event);" name="loginUsername" id="loginUsername" placeholder="Username..." style="" autocomplete="off" required/>
 							</div>
 							
 							<br />
 							
 							<div class="aClose" >
 								<i class="fa fa-unlock aClose"></i>&nbsp;
-								<input type="password" class="form-control aClose input-md" name="loginPassword" id="loginPassword" placeholder="Password..." autocomplete="off"  required/>
+								<input type="password" class="form-control aClose input-md" onkeypress="checkKeyEnter(event);" name="loginPassword" id="loginPassword" placeholder="Password..." autocomplete="off"  required/>
 							</div>
 							
 							<br />
@@ -219,7 +242,7 @@ require("header.php");
 												<br />
 												<div class="row">
 													<div class="col-md-8 col-md-offset-2">
-														<input type="text" class="form-control input-md" placeholder="Only 100 characters allowed..." />
+														<input type="text" class="form-control input-md" onkeypress="homeSearch(this);" placeholder="Only 100 characters allowed..." />
 													</div>
 												</div>
 												

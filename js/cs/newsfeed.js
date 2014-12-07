@@ -1,3 +1,4 @@
+var done=1;
 $(document).ready(function(){
     
     var s = $("#rightBox");
@@ -96,47 +97,54 @@ $(document).ready(function(){
 
         }
 
-       /* if($(document).height()-200<=$(window).scrollTop()+$(window).height())
+        if($(document).height()-200<=$(window).scrollTop()+$(window).height())
         {
-
-            /*$('.loader').css({'display':'block'});
-
-				//alert(inView);
-            if(inView=="events")
+            if(done!=0)
             {
-                // var pageRetrieveUrl="./handlers/eventHandlers/";
+                $('.loader').css({'display':'block'});
 
-                retrieveLatestEvents('add',1);
+                //alert(inView);
+                if(inView=="events")
+                {
+                    // var pageRetrieveUrl="./handlers/eventHandlers/";
+
+                    retrieveLatestEvents('add',1);
+                    done=0;
+                }
+
+                else if(inView=="999")
+                {
+                    // var pageRetrieveUrl="./handlers/postHandlers/";
+
+                    retrieveLatestPosts('add',1);
+                    done=0;
+                }
+
+                else if(inView=="997")
+                {
+                    retrieveImportantPosts('add',1);
+                    done=0;
+                }
+
+                else if(inView=="998")
+                {
+                    retrievePopularPosts('add',1);
+                    done=0;
+                }
+
+                /*else if(inView=="polls")
+                {
+                    retrieveLatestPolls('add',1);
+                }
+
+                else if(inView=="polls")
+                {
+                    var pageRetrieveUrl="./handlers/pollHandlers/";
+                }*/
             }
+            
 
-            else if(inView=="999")
-            {
-                // var pageRetrieveUrl="./handlers/postHandlers/";
-
-                retrieveLatestPosts('add',1);
-            }
-
-            else if(inView=="997")
-            {
-                retrieveImportantPosts('add',1);
-            }
-
-            else if(inView=="998")
-            {
-                retrievePopularPosts('add',1);
-            }
-
-            /*else if(inView=="polls")
-            {
-                retrieveLatestPolls('add',1);
-            }
-
-            else if(inView=="polls")
-            {
-                var pageRetrieveUrl="./handlers/pollHandlers/";
-            }*/
-
-        // }*/
+        }
 
     });
 
