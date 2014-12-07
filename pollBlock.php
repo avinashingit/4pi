@@ -194,9 +194,6 @@
 
 
 <script>
-$('button').click(function(e){
-	e.preventDefault();
-});
 //--------------------------------------------------------------------------//
 //add option input
 function createPollAddInput(){
@@ -360,7 +357,8 @@ function sendVoteMultipleOptions(id)
 {
 	alert("Hello");
 	var options=[];
-	$('#'+id+'#vote:checked').each(function(){
+	console.log($('#'+id));
+	$('#'+id).find('#vote:checked').each(function(){
 
 		options.push($(this).val());
 
@@ -474,7 +472,7 @@ function insertPoll(data,position)
 			{
 				poll+='<div class="col-md-6">';
 
-				poll+='<input type="radio" name="vote" value="'+i+'" onclick="voteSend('+i+',\"'+data.pollIdHash+'\");"> &nbsp;'+data.pollOptions[i]+'<br>';
+				poll+='<input type="radio" name="vote" value="'+i+'" onclick="voteSend('+i+',\''+data.pollIdHash+'\');"> &nbsp;'+data.pollOptions[i]+'<br/>';
 
 				poll+='</div>'
 			}
@@ -505,7 +503,7 @@ function insertPoll(data,position)
 
 			poll+='</div>';
 
-			poll+='<button class="text-center btn btn-success" onclick="sendVoteMultipleOptions('+data.pollIdHash+');">Vote</button>';
+			poll+='<button class="text-center btn btn-success" onclick="sendVoteMultipleOptions(\''+data.pollIdHash+'\');">Vote</button>';
 
 			// poll+='</form>';
 
