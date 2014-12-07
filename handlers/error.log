@@ -66,3 +66,41 @@
 
 [2014-12-06 15:16:27             ::1                   Asia/Kolkata] 1191   $$$Can't find FULLTEXT index matching the column list$$$
 
+[2014-12-07 16:58:02             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:03             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:04             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:04             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:04             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:07             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:08             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:08             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:12             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:12             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:13             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:16             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:17             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:17             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:44             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:58:46             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2014-12-07 16:59:33             ::1                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2014-12-07 16:59:38             ::1                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2014-12-07 16:59:40             ::1                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+

@@ -102,8 +102,8 @@
 
 	.percentage
 	{
-		color:rgba(222, 123, 26, 1);
-		/*color:white;*/
+		background-color:rgba(222, 123, 26, 1);
+		color:white;
 	}
 
 	.middleNavbarA

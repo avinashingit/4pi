@@ -242,7 +242,7 @@ function homeSearch(el)
 												<br />
 												<div class="row">
 													<div class="col-md-8 col-md-offset-2">
-														<input type="text" class="form-control input-md" onkeypress="homeSearch(this);" placeholder="Only 100 characters allowed..." />
+														<input type="text" class="form-control input-md" onkeyup="homeSearch(this);" placeholder="Only 100 characters allowed..." />
 													</div>
 												</div>
 												

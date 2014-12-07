@@ -38,7 +38,7 @@ $pollOptionsArray=$_POST['_pollOptions'];
 $pollOptionsType=$_POST['_pollOptionType'];
 $rawSharedWith=$_POST['_sharedWith'];
 
-if($pollQuestion==""||gettype($pollType)!="integer"||count($pollOptionsArray)<=1)
+if($pollQuestion==""||count($pollOptionsArray)<=1)
 {
 	echo 16;
 	exit();
