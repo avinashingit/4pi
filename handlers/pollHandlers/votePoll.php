@@ -170,7 +170,7 @@ else
 			$result=$conn->insert($editPollSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
-				echo 3;
+				print_r(json_encode($pollExistingVotesArray));
 			}
 			else
 			{
