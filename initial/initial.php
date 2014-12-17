@@ -25,6 +25,7 @@
 	.formLink
 	{
 		font-size:16px;
+		cursor:pointer;
 	}
 
 	.fontSize16
@@ -185,19 +186,19 @@ function submitTopPart()
 					<button class="menu__handle"><span>Menu</span></button>
 					<div class="menu__inner">
 						<ul>
-							<li><a href="#" class="formLink" data-target="#home"><i class="fa fa-fw fa-home"></i><span>Home<span></a></li>
-							<li><a href="#" class="formLink" data-target="#authentication"><i class="fa fa-fw fa-unlock"></i><span>Authentication<span></a></li>
-							<li><a href="#" class="formLink" data-target="#topPart"><i class="fa fa-fw fa-user"></i><span>Personal information<span></a></li>
-							<li><a href="#" class="formLink" data-target="#bottomPart"><i class="fa fa-fw fa-envelope"></i><span>Contact<span></a></li>
-							<li><a href="#" class="formLink" data-target="#projects"><i class="fa fa-fw fa-database"></i><span>Projects<span></a></li>
-							<li><a href="#" class="formLink" data-target="#skills"><i class="fa fa-fw fa-bar-chart"></i><span>Skills<span></a></li>
-							<li><a href="#" class="formLink" data-target="#tools"><i class="fa fa-fw fa-wrench"></i><span>Tools<span></a></li>
-							<li><a href="#" class="formLink" data-target="#academics"><i class="fa fa-fw fa-motor-board"></i><span>Academics<span></a></li>
-							<li><a href="#" class="formLink" data-target="#certifications"><i class="fa fa-fw fa-certificate"></i><span>Certifications<span></a></li>
-							<li><a href="#" class="formLink" data-target="#workshops"><i class="fa fa-fw fa-gears"></i><span>Workshops<span></a></li>
-							<li><a href="#" class="formLink" data-target="#interests"><i class="fa fa-fw fa-star"></i><span>Interests<span></a></li>
-							<li><a href="#" class="formLink" data-target="#achievements"><i class="fa fa-fw fa-trophy"></i><span>Achievements<span></a></li>
-							<li><a href="#" class="formLink" data-target="#experience"><i class="fa fa-fw fa-fighter-jet"></i><span>Experience<span></a></li>
+							<li><a class="formLink" data-target="#home"><i class="fa fa-fw fa-home"></i><span>Home<span></a></li>
+							<li><a class="formLink" data-target="#authentication"><i class="fa fa-fw fa-unlock"></i><span>Authentication<span></a></li>
+							<li><a class="formLink" data-target="#topPart"><i class="fa fa-fw fa-user"></i><span>Personal information<span></a></li>
+							<li><a class="formLink" data-target="#bottomPart"><i class="fa fa-fw fa-envelope"></i><span>Contact<span></a></li>
+							<li><a class="formLink" data-target="#projects"><i class="fa fa-fw fa-database"></i><span>Projects<span></a></li>
+							<li><a class="formLink" data-target="#skills"><i class="fa fa-fw fa-bar-chart"></i><span>Skills<span></a></li>
+							<li><a class="formLink" data-target="#tools"><i class="fa fa-fw fa-wrench"></i><span>Tools<span></a></li>
+							<li><a class="formLink" data-target="#academics"><i class="fa fa-fw fa-mortar-board"></i><span>Academics<span></a></li>
+							<li><a class="formLink" data-target="#certifications"><i class="fa fa-fw fa-certificate"></i><span>Certifications<span></a></li>
+							<li><a class="formLink" data-target="#workshops"><i class="fa fa-fw fa-gears"></i><span>Workshops<span></a></li>
+							<li><a class="formLink" data-target="#interests"><i class="fa fa-fw fa-star"></i><span>Interests<span></a></li>
+							<li><a class="formLink" data-target="#achievements"><i class="fa fa-fw fa-trophy"></i><span>Achievements<span></a></li>
+							<li><a class="formLink" data-target="#experience"><i class="fa fa-fw fa-fighter-jet"></i><span>Experience<span></a></li>
 						</ul>
 					</div>
 					<div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
@@ -360,11 +361,560 @@ function submitTopPart()
 
 					</form>
 
-				</div>
+				</div><!-- end id topPart -->
 
-				<div class="row" id="contact">
-					<!-- Start from here  17-12-2014 -->
-				</div>
+				<div class="row" id="bottomPart">
+
+					<form id="bottomPartForm">
+					
+						<label class="input-label fontSize16" for="input-1">Alternate email</label>
+						<div class="input-wrap">
+							<input type="text" id="alternateEmail"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Address line 1</label>
+						<div class="input-wrap">
+							<input type="text" id="addressLine1"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Address line 2</label>
+						<div class="input-wrap">
+							<input type="text" id="addressLine2"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Phone number 1</label>
+						<div class="input-wrap">
+							<input type="text" id="contactNumber1"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Phone number 2</label>
+						<div class="input-wrap">
+							<input type="text" id="contactNumber2"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Facebook url</label>
+						<div class="input-wrap">
+							<input type="text" id="facebookURL"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Twitter url</label>
+						<div class="input-wrap">
+							<input type="text" id="twitterURL"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Google+ url</label>
+						<div class="input-wrap">
+							<input type="text" id="googlePlusURL"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Linkedin url</label>
+						<div class="input-wrap">
+							<input type="text" id="linkedinURL"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<label class="input-label fontSize16" for="input-1">Pinterest url</label>
+						<div class="input-wrap">
+							<input type="text" id="pintrestURL"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+					
+						<div class="col-md-3 col-md-offset-5">
+							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+					</form>
+
+				</div><!-- end id bottom part -->
+
+				<div class="row" id="projects">
+
+					<form id="projectsForm">
+
+						<label class="input-label fontSize16" for="input-1">Title</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTitle"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Company</label>
+						<div class="input-wrap">
+							<input type="text" id="projectCompany"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Position</label>
+						<div class="input-wrap">
+							<input type="text" id="projectPosition"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Team</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTeam"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Description line 1</label>
+						<div class="input-wrap">
+							<input type="text" id="projectDescriptionLine1"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Description line 2</label>
+						<div class="input-wrap">
+							<input type="text" id="projectDescriptionLine2"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Description line 1</label>
+						<div class="input-wrap">
+							<input type="text" id="projectDescriptionLine1"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">From</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="projectDurationFrom"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">To</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="projectDurationTo"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-md-offset-4">
+							<button id="projectPartButton" class="button button--effect-1" onclick="submitProject();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
+
+				</div><!-- end id projects -->
+
+				<div class="row" id="skills">
+
+					<form id="skillsForm">
+
+						<label class="input-label fontSize16" for="input-1">Skill</label>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillName1" placeholder="Enter the skill. Eg. Photoshop"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillValue1" placeholder="Enter the percentage. Eg. 93"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Skill</label>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillName2" placeholder="Enter the skill. Eg. After effects"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillValue2" placeholder="Enter the percentage. Eg. 63"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Skill</label>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillName3" placeholder="Enter the skill. Eg. PHP"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillValue3" placeholder="Enter the percentage. Eg. 98"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<label class="input-label fontSize16" for="input-1">Skill</label>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillName4" placeholder="Enter the skill. Eg. Web development"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<div class="input-wrap">
+							<input type="text" id="projectSkillValue4" placeholder="Enter the percentage. Eg. 100"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br />
+
+						<div class="col-md-3 col-md-offset-4">
+							<button id="skillButton" class="button button--effect-1" onclick="submitSkills();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
+
+				</div><!-- end id skills -->
+
+				<div class="row" id="tools">
+
+					<form id="toolsForm">
+
+						<label class="input-label fontSize16" for="input-1">Tool name</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTool1" placeholder="Enter the tool name. Eg. Photoshop"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Tool name</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTool2" placeholder="Enter the tool name. Eg. Photoshop"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Tool name</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTool3" placeholder="Enter the tool name. Eg. Photoshop"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Tool name</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTool4" placeholder="Enter the tool name. Eg. Photoshop"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Tool name</label>
+						<div class="input-wrap">
+							<input type="text" id="projectTool5" placeholder="Enter the tool name. Eg. Photoshop"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="col-md-3 col-md-offset-5">
+							<button id="skillButton" class="button button--effect-1" onclick="submitTools();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
+
+				</div><!-- end id tools -->
+
+				<div class="row" id="academics">
+
+					<form id="academicsForm">
+
+						<label class="input-label fontSize16" for="input-1">Degree</label>
+						<div class="input-wrap">
+							<input type="text" id="academicDegree" placeholder="Enter the degree. Eg. B.Tech"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Institution</label>
+						<div class="input-wrap">
+							<input type="text" id="academicInstitution" placeholder="Enter the degree. Eg. IIITD&M Kancheepuram"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Location</label>
+						<div class="input-wrap">
+							<input type="text" id="academicDegree" placeholder="Enter the location. Eg. Chennai"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="row">
+
+							<div class="col-md-4">
+
+								<label class="input-label fontSize16" for="input-1">Percentage/GPA</label>
+								<div class="input-wrap">
+									<input type="text" id="academicPercentage" placeholder=" Eg. 98% or 9.5"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-4">
+
+								<label class="input-label fontSize16" for="input-1">From</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="academicDurationFrom" placeholder="Eg. 29/12/2014"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+
+							</div>
+
+							<div class="col-md-4">
+
+								<label class="input-label fontSize16" for="input-1">To</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="academicDurationTo" placeholder="Eg. 29/12/2015"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-md-offset-5">
+							<button id="academicsButton" class="button button--effect-1" onclick="submitAcademics();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
+
+				</div><!-- end id academics -->
+
+				<div class="row" id="certifications">
+
+				</div><!-- end id certifications -->
+
+				<div class="row" id="workshops">
+
+				</div><!-- end id workshops -->
+
+				<div class="row" id="interests">
+
+				</div><!-- end id interests -->
+
+				<div class="row" id="achievements">
+
+				</div><!-- end id achievements -->
+
+				<div class="row" id="experience">
+
+				</div><!-- end id experience -->
+
+				<div class="row" id="uploads">
+
+				</div><!-- end id uploads -->
 
 			</div>
 			
