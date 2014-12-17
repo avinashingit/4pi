@@ -9,6 +9,7 @@
 	.container
 	{
 		background-color:white;
+		padding:0px !important;
 	}
 
 	#topContent
@@ -120,6 +121,64 @@
 </style>
 
 <script>
+
+	$(function () {
+    	$('#skills').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Skillset'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+			max:100,
+            title: {
+                text: 'Percentage'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y:.1f} %</b>'
+        },
+        series: [{
+            name: 'Skill',
+            data: [
+                ['Skill1', 100],
+                ['Skill2', 90],
+                ['Skill3', 80],
+                ['Karachi', 70],
+                ['Mumbai', 60],
+                ['Moscow', 50],
+                ['Karachi', 70],
+                ['Mumbai', 60],
+                ['Moscow', 50]
+            ],
+            dataLabels: {
+                enabled: true,
+                color: '#000000',
+                x: 0,
+                y: 0,
+                style: {
+                    fontSize: '8px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        }]
+	    });
+	});
 	
 	// $('textarea').autosize({'append':'false'});
 
@@ -128,7 +187,7 @@
 			$(this).hide();
 		});
 		// $('#skills').hide();
-		$('#tools').show();
+		$('#skills').show();
 
 		$('.middleNavbarA').click(function(){
 			$('.middleNavbarA').each(function(){
@@ -183,8 +242,12 @@
 
 		var x=$('#editProjectModal');
 		var y=$('#project'+n);
+		x.find('#editProjectModalProjectId').val(n);
 		x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
-		x.find('#editProjectModalProjectDuration').val(y.find('#projectDuration').html());
+		z=y.find('#projectDuration').html();
+		xz=z.split("-");
+		x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
+		x.find('#editProjectModalProjectDurationTo').val(xz[1]);
 		x.find('#editProjectModalProjectRole').val(y.find('#projectRole').html());
 		x.find('#editProjectModalProjectCompany').val(y.find('#projectCompany').html());
 		x.find('#editProjectModalProjectDescription').val(y.find('#projectDescription').html());
@@ -203,7 +266,10 @@
 		var y=$('#experience'+n);
 		x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
 		x.find('#editExperienceModalRole').val(y.find('#role').html());
-		x.find('#editExperienceModalDuration').val(y.find('#duration').html());
+		z=y.find('#duration').html();
+		xz=z.split("-");
+		x.find('#editExperienceModalDurationHours').val(xz[0]);
+		x.find('#editExperienceModalDurationMin').val(xz[1]);
 	}
 
 	function addCertification()
@@ -383,79 +449,177 @@
 
 				<div class="navObject" id="skills">
 
+					<div class="row">
+
+						
+
+					</div>
+
 				</div><!-- end id skills -->
+
+				<!-- <div class="navObject" id="tools">
+				
+					<div class="row" id="toolsetHeading">
+				
+						<div class="col-md-2">
+				
+							<h3 class="text-center" style="color:blue;"><i class="fa fa-wrench"></i>&nbsp; Tool set</h3>
+				
+						</div>
+				
+						<div class="col-md-1 col-md-offset-9">
+				
+							<a class="cursorPointer" onclick="addTool();"><h5 class="text-center"><i class="fa fa-plus" ></i>&nbsp; Add </h5></a>
+				
+						</div>
+				
+						<br/>
+				
+					</div>end id toolsetHeading
+				
+					<div class="row" id="toolContent">
+				
+						<div class="col-md-4 text-center" id="toolsColumn1">
+				
+							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(1,1);"></i>&nbsp;<span id="toolsColumn1Tool1">Tool 1</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,2);"></i>&nbsp;<span id="toolsColumn1Tool2">Tool 2</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,3);"></i>&nbsp;<span id="toolsColumn1Tool3">Tool 3</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,4);"></i>&nbsp;<span id="toolsColumn1Tool4">Tool 4</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,5);"></i>&nbsp;<span id="toolsColumn1Tool5">Tool 5</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,6);"></i>&nbsp;<span id="toolsColumn1Tool6">Tool 6</span></p><br/>
+				
+						</div>end id toolsColumn1
+				
+						<div class="col-md-4 text-center" id="toolsColumn2">
+				
+							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(2,1);"></i>&nbsp;<span id="toolsColumn2Tool1">Tool 1</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,2);"></i>&nbsp;<span id="toolsColumn2Tool2">Tool 2</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,3);"></i>&nbsp;<span id="toolsColumn2Tool3">Tool 3</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,4);"></i>&nbsp;<span id="toolsColumn2Tool4">Tool 4</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,5);"></i>&nbsp;<span id="toolsColumn2Tool5">Tool 5</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,6);"></i>&nbsp;<span id="toolsColumn2Tool6">Tool 6</span></p><br/>
+				
+						</div>end id toolsColumn1
+				
+						<div class="col-md-4 text-center" id="toolsColumn3">
+				
+							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(3,1);"></i>&nbsp;<span id="toolsColumn3Tool1">Tool 1</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,2);"></i>&nbsp;<span id="toolsColumn3Tool2">Tool 2</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,3);"></i>&nbsp;<span id="toolsColumn3Tool3">Tool 3</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,4);"></i>&nbsp;<span id="toolsColumn3Tool4">Tool 4</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,5);"></i>&nbsp;<span id="toolsColumn3Tool5">Tool 5</span></p><br/>
+				
+							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,6);"></i>&nbsp;<span id="toolsColumn3Tool6">Tool 6</span></p><br/>
+				
+						</div>end id toolsColumn1
+				
+					</div>end id toolContent
+				
+				</div>end id tools -->
 
 				<div class="navObject" id="tools">
 
-					<div class="row" id="toolsetHeading">
+					<div class="row" id="toolContainer">
 
-						<div class="col-md-2">
+						<div class="col-md-1" id="tool1">
 
-							<h3 class="text-center" style="color:blue;"><i class="fa fa-wrench"></i>&nbsp; Tool set</h3>
-
-						</div>
-
-						<div class="col-md-1 col-md-offset-9">
-
-							<a class="cursorPointer" onclick="addTool();"><h5 class="text-center"><i class="fa fa-plus" ></i>&nbsp; Add </h5></a>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
 						</div>
 
-						<br/>
+						<div class="col-md-1" id="tool1">
 
-					</div><!-- end id toolsetHeading -->
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-					<div class="row" id="toolContent">
+						</div>
 
-						<div class="col-md-4 text-center" id="toolsColumn1">
+						<div class="col-md-1" id="tool1">
 
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(1,1);"></i>&nbsp;<span id="toolsColumn1Tool1">Tool 1</span></p><br/>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,2);"></i>&nbsp;<span id="toolsColumn1Tool2">Tool 2</span></p><br/>
+						</div>
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,3);"></i>&nbsp;<span id="toolsColumn1Tool3">Tool 3</span></p><br/>
+						<div class="col-md-1" id="tool1">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,4);"></i>&nbsp;<span id="toolsColumn1Tool4">Tool 4</span></p><br/>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,5);"></i>&nbsp;<span id="toolsColumn1Tool5">Tool 5</span></p><br/>
+						</div>
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,6);"></i>&nbsp;<span id="toolsColumn1Tool6">Tool 6</span></p><br/>
+						<div class="col-md-1" id="tool1">
 
-						</div><!-- end id toolsColumn1 -->
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-						<div class="col-md-4 text-center" id="toolsColumn2">
+						</div>
 
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(2,1);"></i>&nbsp;<span id="toolsColumn2Tool1">Tool 1</span></p><br/>
+						<div class="col-md-1" id="tool1">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,2);"></i>&nbsp;<span id="toolsColumn2Tool2">Tool 2</span></p><br/>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,3);"></i>&nbsp;<span id="toolsColumn2Tool3">Tool 3</span></p><br/>
+						</div>
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,4);"></i>&nbsp;<span id="toolsColumn2Tool4">Tool 4</span></p><br/>
+						<div class="col-md-1" id="tool1">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,5);"></i>&nbsp;<span id="toolsColumn2Tool5">Tool 5</span></p><br/>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,6);"></i>&nbsp;<span id="toolsColumn2Tool6">Tool 6</span></p><br/>
+						</div>
 
-						</div><!-- end id toolsColumn1 -->
+						<div class="col-md-1" id="tool1">
 
-						<div class="col-md-4 text-center" id="toolsColumn3">
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(3,1);"></i>&nbsp;<span id="toolsColumn3Tool1">Tool 1</span></p><br/>
+						</div>
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,2);"></i>&nbsp;<span id="toolsColumn3Tool2">Tool 2</span></p><br/>
+						<div class="col-md-1" id="tool1">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,3);"></i>&nbsp;<span id="toolsColumn3Tool3">Tool 3</span></p><br/>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,4);"></i>&nbsp;<span id="toolsColumn3Tool4">Tool 4</span></p><br/>
+						</div>
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,5);"></i>&nbsp;<span id="toolsColumn3Tool5">Tool 5</span></p><br/>
+						<div class="col-md-1" id="tool1">
 
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,6);"></i>&nbsp;<span id="toolsColumn3Tool6">Tool 6</span></p><br/>
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
 
-						</div><!-- end id toolsColumn1 -->
+						</div>
 
-					</div><!-- end id toolContent -->
+						<div class="col-md-1" id="tool1">
+
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+
+						</div>
+
+						<div class="col-md-1" id="tool1">
+
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+
+						</div>
+
+						<div class="col-md-1 col-md-offset-1" id="tool1">
+
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+
+						</div>
+
+						<div class="col-md-1" id="tool1">
+
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+
+						</div>
+	
+					</div><!-- end class row -->
 
 				</div><!-- end id tools -->
 
@@ -481,7 +645,7 @@
 
 					<div class="row">
 
-						<div class="col-md-12">
+						<div class="col-md-12" id="projectContainer">
 
 							<div class="row project" id="project1">
 
@@ -659,7 +823,7 @@
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="experienceContainer1">
 
 							<div class="row experience" id="experience1">
 
@@ -823,7 +987,7 @@
 
 						</div><!-- end class col-md- 6 -->
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="experienceContainer2">
 
 							<div class="row experience" id="experience5">
 
@@ -1013,7 +1177,7 @@
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="academicsContainer1">
 
 							<div class="row academics" id="academics1">
 
@@ -1237,7 +1401,7 @@
 
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="academicsContainer2">
 
 							<div class="row academics" id="academics5">
 
@@ -1488,7 +1652,7 @@
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="workshopContainer1">
 
 							<div class="row workshop" id="workshop1">
 
@@ -1668,7 +1832,7 @@
 
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="workshopContainer2">
 
 							<div class="row workshop" id="workshop5">
 
@@ -1874,7 +2038,7 @@
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="certificationContainer1">
 
 							<div class="row certification" id="certification1">
 
@@ -1992,7 +2156,7 @@
 
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="certificationContainer2">
 
 							<div class="row certification" id="certification4">
 
@@ -2136,7 +2300,7 @@
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="achievementContainer1">
 
 							<div class="row achievement" id="achievement1">
 
@@ -2278,7 +2442,7 @@
 
 						</div><!-- end class col-md-6 -->
 
-						<div class="col-md-6">
+						<div class="col-md-6" id="achievementContainer2">
 
 							<div class="row achievement" id="achievement4">
 
@@ -2739,9 +2903,25 @@
 
 					<br/>
 
-					<label for="projectDuration">Project Duration</label>
+					<div class="row">
 
-					<input type="text" id="addProjectModalProjectDuration" class="form-control">
+						<div class="col-md-6">
+
+							<label for="projectDuration">Project Duration From</label>
+
+							<input type="text" id="addProjectModalProjectDurationFrom" class="datepicker form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="projectDuration">Project Duration To</label>
+
+							<input type="text" id="addProjectModalProjectDurationTo" class="datepicker form-control">
+
+						</div>
+
+					</div>
 
 					<br/>
 
@@ -2771,7 +2951,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" onclick="addProjectSendData();" class="btn btn-primary">Add</button>
 
 			</div>
 
@@ -2800,15 +2980,33 @@
 
 				<form>
 
+					<input type="text" id="#editProjectModalProjectId" class="hidden">
+
 					<label for="projectTitle">Project title</label>
 
 					<input type="text" id="editProjectModalProjectTitle" class="form-control">
 
 					<br/>
 
-					<label for="projectDuration">Project Duration</label>
+					<div class="row">
 
-					<input type="text" id="editProjectModalProjectDuration" class="form-control">
+						<div class="col-md-6">
+
+							<label for="projectDuration">From</label>
+
+							<input type="text" id="editProjectModalProjectDurationFrom" class="datepicker form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="projectDuration">To</label>
+
+							<input type="text" id="editProjectModalProjectDurationTo" class="datepicker form-control">
+
+						</div>
+
+					</div>
 
 					<br/>
 
@@ -2838,7 +3036,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" onclick="editProjectSendData();" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -2879,9 +3077,21 @@
 
 					<br/>
 
-					<label for="experienceDuration">Duration</label>
+					<div class="col-md-6">
 
-					<input type="text" id="addExperienceModalDuration" class="form-control">
+						<label for="experienceDuration">From</label>
+
+						<input type="text" id="addExperienceModalDurationFrom" class="datepicker form-control">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label for="experienceDuration">To</label>
+
+						<input type="text" id="addExperienceModalDurationTo" class="datepicker form-control">
+
+					</div>
 
 					<br/>
 
@@ -2895,7 +3105,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" onclick="addExperienceSendData();" class="btn btn-primary">Add</button>
 
 			</div>
 
@@ -2905,7 +3115,7 @@
 
 </div>
 
-<div class="modal fade" id="editExperienceModal">
+<div class="modal fade" id="editExperience Modal">
 
 	<div class="modal-dialog">
 
@@ -2936,9 +3146,25 @@
 
 					<br/>
 
-					<label for="experienceDuration">Duration</label>
+					<div class="row">
 
-					<input type="text" id="editExperienceModalDuration" class="form-control">
+						<div class="col-md-6">
+
+							<label for="experienceDurationHours">From</label>
+
+							<input type="text" id="editExperienceModalDurationHours" class="form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="experienceDurationMin">To</label>
+
+							<input type="text" id="editExperienceModalDurationMin" class="form-control">
+
+						</div>
+
+					</div>
 
 					<br/>
 
@@ -2999,17 +3225,32 @@
 
 					<br/>
 
-					<label for="duration">Duration</label>
-
-					<input type="text" id="addAcademicsModalDuration" class="form-control">
-
-					<br/>
-
 					<label for="location">Location</label>
 
 					<input type="text" id="addAcademicsModalSchoolLocation" class="form-control">
 
 					<br/>
+
+					<div class="col-md-6">
+
+						<label for="duration">From</label>
+
+						<input type="text" id="addAcademicsModalDurationFrom" class="datepicker form-control">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label for="duration">To</label>
+
+						<input type="text" id="addAcademicsModalDurationTo" class="datepicker form-control">
+
+					</div>
+
+					<br/>
+					<br/>
+
+					
 
 				</form>
 
@@ -3019,7 +3260,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" onclick="addAcademicsSendData();" class="btn btn-primary">Add</button>
 
 			</div>
 
@@ -3127,9 +3368,21 @@
 
 					<br/>
 
-					<label for="duration">Duration</label>
+					<div class="col-md-6">
 
-					<input type="text" id="addWorkshopModalWorkshopDuration" class="form-control">
+						<label for="duration">From</label>
+
+						<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control">
+
+					</div>
+					
+					<div class="col-md-6">
+
+						<label for="duration">To</label>
+
+						<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control">
+
+					</div>
 
 					<br/>
 
@@ -3147,7 +3400,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" onclick="addWorkshopSendData();" class="btn btn-primary">Add</button>
 
 			</div>
 
@@ -3249,9 +3502,21 @@
 
 					<br/>
 
-					<label for="experienceDuration">Duration</label>
+					<div class="col-md-6">
 
-					<input type="text" id="addCertificationModalDuration" class="form-control">
+						<label for="experienceDuration">From</label>
+
+						<input type="text" id="addCertificationModalDurationFrom" class="form-control">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label for="experienceDuration">To</label>
+
+						<input type="text" id="addCertificationModalDurationTo" class="form-control">
+
+					</div>
 
 					<br/>
 
@@ -3265,7 +3530,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" onclick="addCertificationSendData();" class="btn btn-primary">Add</button>
 
 			</div>
 
@@ -3383,7 +3648,7 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" onclick="addAchievementSendData();" class="btn btn-primary">Add</button>
 
 			</div>
 
@@ -3454,3 +3719,13 @@
 
 </div>
 
+
+
+
+<script>
+
+$('.datepicker').datepicker();
+
+$('.datepicker').css({'z-index':'1052'});
+
+</script>

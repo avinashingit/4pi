@@ -35,11 +35,13 @@ function homeSearch($inputString)
                 if($flag)
                     $outputString = "*".$inputString."*";
 
+                echo $outputString;
+
                 $values[0] = array($outputString=>"s");
                 $values[1] = array($outputString=>"s");
                 $values[2] = array($outputString=>"s");
                 $values[3] = array($outputString=>"s");
-                $query = "select name, userId from users where (match(name) against (?)) or (match(userId) against (?)) order by (match(name) against (?))+(match(userId) against (?)) desc limit 9 offset 0";
+                $query = "select name, userId from users where (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode)) desc limit 9 offset 0";
                 
                 $result = $qob->select($query, $values);
                 
@@ -71,5 +73,7 @@ function homeSearch($inputString)
         else
             echo 134;//invalid inputs
     }
+//$str = "sa";
+//homeSearch($str);
 homeSearch($_POST['_inputVal']);
 ?>

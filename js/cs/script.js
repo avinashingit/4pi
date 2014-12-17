@@ -7,36 +7,48 @@ $('.ew').hide();//to hide the executive wing tab
 function userLogin(){
 	var username=$('#loginUsername').val();
 	var password=$('#loginPassword').val();
+
+	var error=0;
+
+	if(username.length==0 || password.length==0)
+	{
+		error=1;
+
+		$('#loginError').html("Username or password cannot be empty");
+	}
+
+	if(error==0)
+	{
+		//alert("called");
+		var x=$.post('loginBackend.php',{
+			_username:username,
+			_password:password
+		})
+		
+		.error(function(){
+			alert("Server Overload. Please try after a few seconds");
+			//return false;
+		})
+		
+		.success(function (data){
+		//alert("HAI");
+		//alert(data);
+		data = data.trim();
+		//alert(data);
+		////alert(data);
+		//alert(data.length);
+			if(data=="-1")
+			{
+				$('#loginError').html("Username or password wrong!!!");
+			}
+			else if(data=="1")
+			{
+				//alert("asdf");
+				window.location.href="newsfeed.php";
+			}
+		});
+	}
 	
-	
-	//alert("called");
-	var x=$.post('loginBackend.php',{
-		_username:username,
-		_password:password
-	})
-	
-	.error(function(){
-		alert("Server Overload. Please try after a few seconds");
-		//return false;
-	})
-	
-	.success(function (data){
-	//alert("HAI");
-	//alert(data);
-	data = data.trim();
-	//alert(data);
-	////alert(data);
-	//alert(data.length);
-		if(data=="-1")
-		{
-			$('#loginError').html("Username or password wrong!!!");
-		}
-		else if(data=="1")
-		{
-			//alert("asdf");
-			window.location.href="newsfeed.php";
-		}
-	});
 }
    
    
