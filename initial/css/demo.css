@@ -22,6 +22,11 @@ a:focus {
 	outline: none;
 }
 
+input
+{
+	color:black !important;
+}
+
 .theme-2 { background: #434d55; }
 .theme-2 a { color: #4991C2; }
 .theme-2 a:hover, .theme-2 a:focus { color: #74777b; }

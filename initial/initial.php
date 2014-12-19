@@ -11,6 +11,7 @@
 
 <style>
 
+
 	@font-face 
 	{    
 	    font-family: openSans;
@@ -42,122 +43,266 @@
 
 <script>
 
-$(document).ready(function(){
-	$('#secondContent').hide();
-	setInterval(function(){
-		$('#firstContent').fadeOut(function(){
-			$('#secondContent').fadeIn();
-		});
-	},00);
-	$('.formLink').each(function(){
-		var els=$(this).attr("data-target");
-		$(els).hide();
-		
-	});
-	$('#home').show();
-	$('.formLink').click(function(){
-		var els=$(this).attr("data-target");
+	$(document).ready(function(){
+		$('#secondContent').hide();
+		setInterval(function(){
+			$('#firstContent').fadeOut(function(){
+				$('#secondContent').fadeIn();
+			});
+		},00);
 		$('.formLink').each(function(){
-			var ls=$(this).attr("data-target");
-			$(ls).hide();
+			var els=$(this).attr("data-target");
+			$(els).hide();
+			
 		});
-		$(els).show();
+		$('#home').show();
+		$('.formLink').click(function(){
+			var els=$(this).attr("data-target");
+			$('.formLink').each(function(){
+				var ls=$(this).attr("data-target");
+				$(ls).hide();
+			});
+			$(els).show();
+		});
 	});
-});
 
-var userId="COE12B009";
-function submitAuthentication()
-{
-	var p1=$('#authenicationForm').find('#password').val();
-	var p2=$('#authenicationForm').find('#passwordAgain').val();
-	if(p1.length<8)
+	var userId="COE12B009";
+	function submitAuthentication(e)
 	{
-		alert("Password should consist of atleast 8 characters");
+		alert("Authentication");
+		e.preventDefault();
+		var p1=$('#authenicationForm').find('#password').val();
+		var p2=$('#authenicationForm').find('#passwordAgain').val();
+		if(p1.length<8)
+		{
+			alert("Password should consist of atleast 8 characters");
+		}
+		else if(p1!=p2)
+		{
+			alert("Passwords do not match");
+		}
+		else
+		{
+			$('#authenicationButton').find('.button__text').html("Submitting").attr("onclick","");
+			$.post('/4pi/handlers/initial/insertPassword.php',{
+				_passwordOne:p1,
+				_passwordTwo:p2,
+				_userId:userId
+			})
+			.error(function(){
+				alert("Server overload. Please try again. :(");
+					$('#authenicationButton').find('.button__text').html("Submit").attr("onclick","submitAuthentication();");
+			})
+			.success(function(data){
+				if(checkData(data)==1)
+				{
+					$('#authentication').remove();
+					$('.formLink').each(function(){
+						if($(this).attr("data-target")=="#authentication")
+						{
+							$(this).remove();
+							$('#topPart').show();
+						}
+					});
+				}
+				else
+				{
+					$('#authenicationButton').find('.button__text').html("Submitting").attr("onclick","submitAuthentication();");
+				}
+			});
+		}
 	}
-	else if(p1!=p2)
+
+	function submitTopPart(e)
 	{
-		alert("Passwords do not match");
+		alert("Vafjldas");
+		e.preventDefault();
+		var alias=$('#topPartForm').find('#topPartAlias').val().trim();
+		var degree=$('#topPartForm').find('#topPartCurrentDegree').val().trim();
+		var profession=$('#topPartForm').find('#topPartCurrentProfesssion').val().trim();
+		var dob=$('#topPartForm').find('#topPartDOB').val().trim();
+		var aboutme=$('#topPartForm').find('#topPartAboutme').val().trim();
+		if(alias.length==0 || degree.length==0 || profession.length==0 || dob.length==0 || aboutme.length==0)
+		{
+			alert("Please fill all the fields.");
+		}
+		else if(dob.length!=10)
+		{
+			alert("Please enter the exact date of birth in dd/mm/yyyy format");
+		}
+		else
+		{
+			$('#topPartButton').find('.button__text').html("Submitting").attr("onclick","");
+			$.post('/4pi/handlers/initial/insertTopPart.php',{
+				_alias:alias,
+				_degree:degree,
+				_profession:profession,
+				_dob:dob,
+				_aboutme:aboutme,
+				_userId:userId
+			})
+			.error(function(){
+				alert("Server overload. Please try again. :(");
+					$('#topPartButton').find('.button__text').html("Submit").attr("onclick","submitTopPart();");
+			})
+			.success(function(data){
+				if(checkData(data)==1)
+				{
+					$('#topPart').remove();
+					$('.formLink').each(function(){
+						if($(this).attr("data-target")=="#topPart")
+						{
+							$(this).remove();
+							$('#bottomPart').show();
+						}
+					});
+				}
+				else
+				{
+					$('#topPartButton').find('.button__text').html("Submit").attr("onclick","submitTopPart();");
+				}
+			});
+		}
 	}
-	else
-	{
-		$('#authenicationButton').find('.button__text').html("Submitting").attr("onclick","");
-		$.post('/4pi/handlers/initial/insertPassword.php',{
-			_passwordOne:p1,
-			_passwordTwo:p2,
+
+	function submitBottomPart(e)
+	{ 
+		alert("Bottompart");
+		e.preventDefault();
+		var link=$("#bottomPartForm");
+		var aEmail=link.find('#alternateEmail').val().trim();
+		var addressLine1=link.find('#addressLine1').val().trim();
+		var addressLine2=link.find('#addressLine2').val().trim();
+		var cNumber1=link.find('#contactNumber1').val().trim();
+		var cNumber2=link.find('#contactNumber2').val().trim();
+		var facebook=link.find('#facebookURL').val().trim();
+		var twitter=link.find('#twitterURL').val().trim();
+		var gplus=link.find('#googlePlusURL').val().trim();
+		var linkedin=link.find('#linkedinURL').val().trim();
+		var pintrest=link.find('#pintrestURL').val().trim();
+		$('#bottomPartButton').find('.button__text').html("Submitting").attr("onclick","");
+		alert("done");
+		$.post('/4pi/handlers/initial/insertBottomPart.php',{
+			_alternateEmail:aEmail,
+			_aLine1:addressLine1,
+			_aLine2:addressLine2,
+			_cNumber1:cNumber1,
+			_cNumber2:cNumber2,
+			_facebook:facebook,
+			_twitter:twitter,
+			_gplus:gplus,
+			_linkedin:linkedin,
+			_pintrest:pintrest,
 			_userId:userId
 		})
 		.error(function(){
-			alert("Server overload. Please try again. :(");
-				$('#authenicationButton').find('.button__text').html("Submit").attr("onclick","submitAuthentication();");
+			alert("Server overload. Please try again.:(");
+			$('#bottomPartButton').find('.button__text').html("Submit").attr("onclick","submitBottomPart(event);");
 		})
 		.success(function(data){
+			alert(data);
 			if(checkData(data)==1)
 			{
-				$('#authentication').hide();
+				alert("success");
+				$('#bottomPart').remove();
 				$('.formLink').each(function(){
-					if($(this).attr("data-target")=="#authentication")
+					if($(this).attr("data-target")=="#bottomPart")
 					{
 						$(this).remove();
+						$("#projects").show();
 					}
 				});
-				$('#topPart').show();
 			}
 			else
 			{
-				$('#authenicationButton').find('.button__text').html("Submitting").attr("onclick","submitAuthentication();");
+				$('#bottomPartButton').find('.button__text').html("Submit").attr("onclick","submitBottomPart(event);");
 			}
 		});
 	}
-}
 
-function submitTopPart()
-{
-	alert("Vafjldas");
-	var alias=$('#topPartForm').find('#topPartAlias').val().trim();
-	var degree=$('#topPartForm').find('#topPartCurrentDegree').val().trim();
-	var profession=$('#topPartForm').find('#topPartCurrentProfesssion').val().trim();
-	var dob=$('#topPartForm').find('#topPartDOB').val().trim();
-	var aboutme=$('#topPartForm').find('#topPartAboutme').val().trim();
-	if(alias.length==0 || degree.length==0 || profession.length==0 || dob.length==0 || aboutme.length==0)
+	function submitProject(e)
 	{
-		alert("Please fill all the fields.");
+		var link=$('#projectsForm');
+		e.preventDefault();
+		var title=link.find('#projectTitle').val().trim();
+		var company=link.find('#projectCompany').val().trim();
+		var position=link.find('#projectPosition').val().trim();
+		var team=link.find('#projectTeam').val().trim();
+		var desc1=link.find('#projectDescriptionLine1').val().trim();
+		var desc2=link.find('#projectDescriptionLine2').val().trim();
+		var duration=link.find('#projectDurationFrom').val().trim()+"-"+link.find('#projectDurationTo').val().trim();
+		if(title.length==0)
+		{
+			alert("Please enter the title");
+		}
+		else
+		{
+			$('#projectButton').find('.button__text').html("Submitting").attr("onclick","");
+			$.post('/4pi/handlers/initial/insertProject.php',{
+				_title:title,
+				_company:company,
+				_position:position,
+				_team:team,
+				_desc1:desc1,
+				_desc2:desc2,
+				_duration:duration,
+				_userId:userId
+			})
+			.error(function(){
+				alert("Server overload. Please try again. :(");
+				$('#projectButton').find('.button__text').html("Submit").attr("onclick","submitProject(event);");
+			})
+			.success(function(data){
+				// alert(data);
+				if(checkData(data)==1)
+				{
+					$('#projects').hide();
+					$('#projectButton').find('.button__text').html("Submit").attr("onclick","submitProject(event);");
+					$('#skills').show();
+				}
+				else
+				{
+					$('#projectButton').find('.button__text').html("Submit").attr("onclick","submitProject(event);");
+				}
+			});
+		}
 	}
-	else if(dob.length!=10)
+
+	function submitSkills(e)
 	{
-		alert("Please enter the exact date of birth in dd/mm/yyyy format");
+		e.preventDefault();
+		var link=$('#skillsForm');
+		var skill=link.find('#skillName1').val().trim();
+		var value=link.find('#skillValue1').val().trim();
+		if(skill.length==0 || value.length==0)
+		{
+			alert("Please fill all the fields");
+		}
+		else
+		{
+			$('#skillButton').find('.button__text').html("Submitting").attr("onclick","");
+			$.post('/4pi/handlers/initial/insertSkill.php',{
+				_skill:skill,
+				_value:value,
+				_userId:userId
+			})
+			.error(function(){
+				alert("Server overload. Please try again.")
+				$('#skillButton').find('.button__text').html("Submit").attr("onclick","submitSkills(event);");
+			})
+			.success(function(data){
+				if(checkData(data)==1)
+				{
+					$('#tools').show();
+					$('#skillButton').find('.button__text').html("Submit").attr("onclick","submitSkills(event);");
+				}
+				else
+				{
+					$('#skillButton').find('.button__text').html("Submit").attr("onclick","submitSkills(event);");
+				}
+			});
+		}
 	}
-	else
-	{
-		$('#topPartButton').find('.button__text').html("Submitting").attr("onclick","");
-		$.post('/4pi/handlers/initial/insertTopPart.php',{
-			_alias:alias,
-			_degree:degree,
-			_profession:profession,
-			_dob:dob,
-			_aboutme:aboutme
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-				$('#topPartButton').find('.button__text').html("Submit").attr("onclick","submitTopPart();");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				$('#topPart').hide();
-				$('.formLink').each(function(){
-					if($(this).atrr("data-target")=="#topPart")
-					{
-						$(this).remove();
-					}
-				});
-			}
-			else
-			{
-				$('#topPartButton').find('.button__text').html("Submit").attr("onclick","submitTopPart();");
-			}
-		});
-	}
-}
 
 
 </script>
@@ -199,6 +344,7 @@ function submitTopPart()
 							<li><a class="formLink" data-target="#interests"><i class="fa fa-fw fa-star"></i><span>Interests<span></a></li>
 							<li><a class="formLink" data-target="#achievements"><i class="fa fa-fw fa-trophy"></i><span>Achievements<span></a></li>
 							<li><a class="formLink" data-target="#experience"><i class="fa fa-fw fa-fighter-jet"></i><span>Experience<span></a></li>
+							<li><a class="formLink" data-target="#uploads"><i class="fa fa-fw fa-upload"></i><span>Upload<span></a></li>
 						</ul>
 					</div>
 					<div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
@@ -258,7 +404,7 @@ function submitTopPart()
 						<div class="input-container">
 							<label class="input-label fontSize16" for="input-1">Password</label>
 							<div class="input-wrap">
-								<input type="text" class="pw" id="password"/>
+								<input type="password" id="password"/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 									<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 										<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -268,7 +414,7 @@ function submitTopPart()
 							<br />
 							<label class="input-label fontSize16" for="input-1">Password again</label>
 							<div class="input-wrap">
-								<input type="text" class="pw" id="passwordAgain"/>
+								<input type="password" id="passwordAgain"/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 									<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 										<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -277,7 +423,7 @@ function submitTopPart()
 							</div>
 							<br />
 							<div class="col-md-3 col-md-offset-4">
-								<button id="authenticationButton" class="button button--effect-1" onclick="submitAuthentication();">
+								<button id="authenticationButton" class="button button--effect-1" onclick="submitAuthentication(event);">
 									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 										<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 											<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -347,7 +493,7 @@ function submitTopPart()
 							</div>
 							<br />
 							<div class="col-md-3 col-md-offset-4">
-								<button id="topPartButton" class="button button--effect-1" onclick="submitTopPart();">
+								<button id="topPartButton" class="button button--effect-1" onclick="submitTopPart(event);">
 									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 										<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 											<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -478,7 +624,7 @@ function submitTopPart()
 						<br />
 					
 						<div class="col-md-3 col-md-offset-5">
-							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart();">
+							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart(event);">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -561,17 +707,6 @@ function submitTopPart()
 						</div>
 						<br />
 
-						<label class="input-label fontSize16" for="input-1">Description line 1</label>
-						<div class="input-wrap">
-							<input type="text" id="projectDescriptionLine1"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
 						<div class="row">
 
 							<div class="col-md-6">
@@ -607,7 +742,7 @@ function submitTopPart()
 						</div>
 
 						<div class="col-md-3 col-md-offset-4">
-							<button id="projectPartButton" class="button button--effect-1" onclick="submitProject();">
+							<button id="projectButton" class="button button--effect-1" onclick="submitProject(event);">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -627,7 +762,7 @@ function submitTopPart()
 
 						<label class="input-label fontSize16" for="input-1">Skill</label>
 						<div class="input-wrap">
-							<input type="text" id="projectSkillName1" placeholder="Enter the skill. Eg. Photoshop"/>
+							<input type="text" id="skillName1" placeholder="Enter the skill. Eg. Photoshop"/>
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -635,64 +770,7 @@ function submitTopPart()
 							</span>
 						</div>
 						<div class="input-wrap">
-							<input type="text" id="projectSkillValue1" placeholder="Enter the percentage. Eg. 93"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Skill</label>
-						<div class="input-wrap">
-							<input type="text" id="projectSkillName2" placeholder="Enter the skill. Eg. After effects"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<div class="input-wrap">
-							<input type="text" id="projectSkillValue2" placeholder="Enter the percentage. Eg. 63"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Skill</label>
-						<div class="input-wrap">
-							<input type="text" id="projectSkillName3" placeholder="Enter the skill. Eg. PHP"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<div class="input-wrap">
-							<input type="text" id="projectSkillValue3" placeholder="Enter the percentage. Eg. 98"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Skill</label>
-						<div class="input-wrap">
-							<input type="text" id="projectSkillName4" placeholder="Enter the skill. Eg. Web development"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<div class="input-wrap">
-							<input type="text" id="projectSkillValue4" placeholder="Enter the percentage. Eg. 100"/>
+							<input type="number" id="skillValue1" placeholder="Enter the percentage. Eg. 93"/>
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -702,7 +780,7 @@ function submitTopPart()
 						<br />
 
 						<div class="col-md-3 col-md-offset-4">
-							<button id="skillButton" class="button button--effect-1" onclick="submitSkills();">
+							<button id="skillButton" class="button button--effect-1" onclick="submitSkills(event);">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -894,21 +972,390 @@ function submitTopPart()
 
 				<div class="row" id="certifications">
 
+					<form id="certificationsForm">
+
+						<label class="input-label fontSize16" for="input-1">Course name</label>
+						<div class="input-wrap">
+							<input type="text" id="certificationsCourseName" placeholder="Eg. Artificial Intelligence"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Institute</label>
+						<div class="input-wrap">
+							<input type="text" id="certificationsInstitute" placeholder="Eg. MIT"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">From</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="certificationsDurationFrom" placeholder="Eg. 17/1/2014"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">To</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="certificationsDurationTo" placeholder="Eg. 17/10/2014"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-md-offset-4">
+							<button id="academicsButton" class="button button--effect-1" onclick="submitAcademics();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
+
 				</div><!-- end id certifications -->
 
 				<div class="row" id="workshops">
+
+					<form id="workshopsForm">
+
+						<label class="input-label fontSize16" for="input-1">Workshop</label>
+						<div class="input-wrap">
+							<input type="text" id="workshopName" placeholder="Eg. Android development"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Location</label>
+						<div class="input-wrap">
+							<input type="text" id="workshopLocation" placeholder="Eg. IIT Madras"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="row">
+
+							<div class="col-md-4">
+
+								<label class="input-label fontSize16" for="input-1">Attendee no.</label>
+								<div class="input-wrap">
+									<input type="text" id="workhopPeopleNumber" placeholder="No. of attendees. Eg. 223"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-4">
+
+								<label class="input-label fontSize16" for="input-1">From</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="workshopDurationFrom" placeholder="Eg. 22/03/1999"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-4">
+
+								<label class="input-label fontSize16" for="input-1">To</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="workshopDurationTo" placeholder="Eg. 22/05/1999"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-md-offset-5">
+							<button id="workshopsBUtton" class="button button--effect-1" onclick="submitWorkshop();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+	
+					</form>
 
 				</div><!-- end id workshops -->
 
 				<div class="row" id="interests">
 
+					<form id="interestsForm">
+
+						<label class="input-label fontSize16" for="input-1">Interest</label>
+						<div class="input-wrap">
+							<input type="text" id="interest1" placeholder="Eg. Playing cricket"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Interest</label>
+						<div class="input-wrap">
+							<input type="text" id="interest2" placeholder="Eg. Chatting"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Interest</label>
+						<div class="input-wrap">
+							<input type="text" id="interest3" placeholder="Eg. Writing"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Interest</label>
+						<div class="input-wrap">
+							<input type="text" id="interest4" placeholder="Eg. Reading"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="col-md-3 col-md-offset-5">
+							<button id="interestsButton" class="button button--effect-1" onclick="submitInterests();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
+
 				</div><!-- end id interests -->
 
 				<div class="row" id="achievements">
 
+					<form id="achievementsForm">
+
+						<label class="input-label fontSize16" for="input-1">Event name</label>
+						<div class="input-wrap">
+							<input type="text" id="achievementsName" placeholder="Eg. Android app development"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Location</label>
+						<div class="input-wrap">
+							<input type="text" id="achievementsLocation" placeholder="Eg. IIT Madras"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Description</label>
+						<div class="input-wrap">
+							<input type="text" id="achievementsDescription" placeholder="A little description about the event."/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">From</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="achievementsDurationFrom" placeholder="Eg. 22/03/2008"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">To</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="achievementsDurationTo" placeholder="Eg. 22/05/2009"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-md-offset-5">
+							<button id="achievementsButton" class="button button--effect-1" onclick="submitAchievements();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+	
+					</form>
+
 				</div><!-- end id achievements -->
 
 				<div class="row" id="experience">
+
+					<form id="experienceForm">
+
+						<label class="input-label fontSize16" for="input-1">Company</label>
+						<div class="input-wrap">
+							<input type="text" id="experienceCompanyName" placeholder="Eg. Microsoft"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Role/position</label>
+						<div class="input-wrap">
+							<input type="text" id="certificationsInstitute" placeholder="Eg. Software system architect"/>
+							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+								</svg>
+							</span>
+						</div>
+						<br/>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">From</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="experienceDurationFrom" placeholder="Eg. 17/1/2014"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">To</label>
+								<div class="input-wrap">
+									<input type="text" class="datepicker" id="experienceDurationTo" placeholder="Eg. 17/10/2014"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-3 col-md-offset-4">
+							<button id="experienceButton" class="button button--effect-1" onclick="submitExperience();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
+										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
+									</svg>
+								</span>
+								<span style="color:black;" class="button__text">Submit</span>
+							</button>
+						</div>
+
+					</form>
 
 				</div><!-- end id experience -->
 
@@ -1103,7 +1550,11 @@ function submitTopPart()
 
 	})();	
 
-	$('#topPartDOB').datepicker();
+	 $( ".datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		dateFormat:"dd/mm/yy"
+	});
 </script>
 
 </body>

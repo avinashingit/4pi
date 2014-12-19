@@ -3724,8 +3724,12 @@
 
 <script>
 
-$('.datepicker').datepicker();
+$( ".datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		dateFormat:"dd/mm/yy"
+	});
 
-$('.datepicker').css({'z-index':'1052'});
+// $('.datepicker').css({'z-index':'1052'});
 
 </script>
