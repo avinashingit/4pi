@@ -12,19 +12,30 @@ body {
 }
 
 a {
-	color: #B24E51;
+	color: #e4e4e4;
 	text-decoration: none;
+}
+
+.fa
+{
+	color:#a6ffbd !important;
 }
 
 a:hover,
 a:focus {
 	color: #afb3b8;
 	outline: none;
+	text-decoration: none;
 }
 
 input
 {
 	color:black !important;
+}
+
+.input-label
+{
+	color:white !important;
 }
 
 .theme-2 { background: #434d55; }

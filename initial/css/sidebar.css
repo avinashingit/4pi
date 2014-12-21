@@ -53,6 +53,7 @@
 .menu.menu--anim ul li {
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
+	text-decoration: none;
 }
 
 .menu ul li:first-child {
@@ -73,6 +74,13 @@
 .menu ul li a {
 	display: block;
 	outline: none;
+	text-decoration: none !important;
+}
+
+.menu ul li a:hover {
+	display: block;
+	outline: none;
+	text-decoration: none !important;
 }
 
 .menu ul li .fa {

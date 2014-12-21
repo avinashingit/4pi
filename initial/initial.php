@@ -1,7 +1,12 @@
 <?php 
 	include_once("../header_initial.php");
 ?>
+<script>
 
+var userId=<?php echo $_GET['ref'];?>;
+console.log(userId);
+
+</script>
 <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
 <link rel="stylesheet" type="text/css" href="css/demo.css" />
 <link rel="stylesheet" type="text/css" href="css/inputs.css" />
