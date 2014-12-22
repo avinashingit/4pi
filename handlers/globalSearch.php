@@ -59,7 +59,7 @@ if(!isset($_SESSION['vj']))
                         $values[2] = array($outputString=>"s");
                         $values[3] = array($outputString=>"s");
 
-                        $query1 = "select name, userId, userIdHash from users where (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode)) desc limit 2 offset 0";
+                        $query1 = "select name, userId, userIdHash, gender from users where (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode)) desc limit 2 offset 0";
 
                         $query2 = "select P.postIdHash, P.subject, U.name as userName, U.userIdHash as userIdHash from post as P, users as U where ((match(P.subject) against (? in boolean mode)) or (match(P.content) against (? in boolean mode))) and (P.userId=U.userId) order by (match(P.subject) against (? in boolean mode))+(match(P.content) against (? in boolean mode)) desc limit 2 offset 0";
 
@@ -82,7 +82,7 @@ if(!isset($_SESSION['vj']))
                                         $count=0;
                                         while($record = $qob->fetch($result))
                                             {
-                                                $resultObj = new studentSearchResult($record['userId'], $record['name'], $record['userIdHash']);
+                                                $resultObj = new studentSearchResult($record['userId'], $record['name'], $record['userIdHash'],$record['gender']);
                                                 $studentSearchResults[] = $resultObj;
                                                 $count++;
                                             }

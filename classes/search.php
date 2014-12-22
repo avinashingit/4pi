@@ -5,12 +5,14 @@
                 public $userId;
                 public $name;
                 public $userIdHash;
+                public $gender;
             
-                public function __construct($userId, $name, $userIdHash)
+                public function __construct($userId, $name, $userIdHash, $gender)
                     {
                         $this->userId = $userId;
                         $this->name = $name;
                         $this->userIdHash = $userIdHash;
+                        $this->gender=$gender;
                     }
 
             } // end of class
