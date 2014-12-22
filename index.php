@@ -26,18 +26,164 @@ function checkKeyEnter(e){
 	 }
 
 }
+
+function showSearchModal()
+{
+	$('#searchModal').modal('show');
+	$('#searchResults').find('.searchResult').each(function(){
+		$(this).remove();
+	});
+	$('#searchModal').find('#searchModalInput').val("");
+}
+
+var result="";
+
+function imageInsertSearch(data,val)
+{
+	if(val==0)
+	{
+		if(data.gender=="M")
+			{
+				var result="";
+				result+='<div class="row searchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+
+				result+='<div class="col-md-1" id="userImage">';
+
+
+				console.log("WENT");
+				result+='<img src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>';
+
+				result+='</div>';
+
+				result+='<div class="col-md-11" id="userName">';
+
+				result+='<a href="http://localhost/4pi/'+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+
+				result+='</div>';
+
+				result+='</div>';
+
+				$('#searchResults').append(result);
+			}
+			else
+			{
+
+				var result="";
+				result+='<div class="row searchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+
+				result+='<div class="col-md-1" id="userImage">';
+
+
+				// console.log("WENT");
+				result+='<img src="/4pi/img/defaultWoman1.jpg" alt="'+data.name+'" width="30" height="30"/>';
+
+				result+='</div>';
+
+				result+='<div class="col-md-11" id="userName">';
+
+				result+='<a href="http://localhost/4pi/'+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+
+				result+='</div>';
+
+				result+='</div>';
+
+				$('#searchResults').append(result);
+				
+			}
+	}
+	else
+	{
+		var result="";
+		result+='<div class="row searchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+
+		result+='<div class="col-md-1" id="userImage">';
+
+
+		// console.log("WENT");
+		result+='<img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.name+'" width="30" height="30"/>';
+
+		result+='</div>';
+
+		result+='<div class="col-md-11" id="userName">';
+
+		result+='<a href="http://localhost/4pi/'+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+
+		result+='</div>';
+
+		result+='</div>';
+
+		$('#searchResults').append(result);
+	}
+
+	// $('#searchResults').append(result);
+}
+
+function checkIfImageExists(url,data,res)
+{
+	$.ajax(url,{
+			x:url
+		})
+		.error(function(){
+			// console.log(data.gender);
+			imageInsertSearch(data,0);
+		})
+		.success(function(){
+			imageInsertSearch(data,1);
+		});
+}
+
+
+
+
+
+function insertSearchResult(data)
+{
+	
+		// alert(url);
+		// 
+		// $('#searchResults').append(result);
+		var url="http://localhost/4pi/img/proPics/"+data.userIdHash+".jpg";
+		checkIfImageExists(url,data);
+			
+		// result="";
+}
+
+var change=0;
 function homeSearch(el)
 {
 	var v=$(el).val();
-	$.post('./handlers/homeSearch.php',{
-		_inputVal:v
-	})
-	.error(function(){
+	if(change==0)
+	{
+		change=1;
+		$.post('./handlers/homeSearch.php',{
+			_inputVal:v
+		})
+		.error(function(){
 
-	})
-	.success(function(data){
-		console.log(data);
-	});
+		})
+		.success(function(data){
+			console.log(data);
+			data=JSON.parse(data);
+			$('.searchResult').each(function(){
+				$(this).remove();
+			});
+			if(data==131)
+			{
+				$('#noResultForSearch').html("<h4>No results found.</h4>");
+				change=0;
+			}
+			else
+			{
+				$('#noResultForSearch').html("");
+				for(i=0;i<data.length;i++)
+				{
+					insertSearchResult(data[i]);
+				}
+				change=0;
+			}
+		});
+	}
+	
 }
 </script>
 <body>
@@ -212,7 +358,7 @@ function homeSearch(el)
 						</a>
 						</div><!-- end of class col-md-3 -->
 						<div class="col-md-3  blocks " >
-							<a href="#search" role="button" title="Search students" class=" blcs" data-toggle="modal">
+							<a onclick="showSearchModal();" role="button" title="Search students" class=" blcs" data-toggle="modal">
 								<div id="fb">
 									<i class="fa fa-search "></i>
 									<p>Search</p>
@@ -230,7 +376,7 @@ function homeSearch(el)
 								</div><!-- end of class row in section 3 -->
 								
 								<!-- search -->
-								<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -240,15 +386,18 @@ function homeSearch(el)
 											<div class="modal-body">
 												<h4><b>Enter student name</b></h4>
 												<br />
-												<div class="row">
+												<div class="row" style="border-bottom:1px solid #e6e6e6;padding-bottom:20px;">
 													<div class="col-md-8 col-md-offset-2">
-														<input type="text" class="form-control input-md" onkeyup="homeSearch(this);" placeholder="Only 100 characters allowed..." />
+														<input type="text" id="searchModalInput" class="form-control input-md" onkeyup="homeSearch(this,event);" placeholder="Only 100 characters allowed..." />
 													</div>
 												</div>
-												
+
 												<div id="searchResults" style="min-height:100px;"  >
-													results here...
+													
+
 												</div>
+
+												<div  id="noResultForSearch"></div>
 												
 											</div>
 										</div>

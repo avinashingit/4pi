@@ -104,3 +104,5 @@
 
 [2014-12-07 16:59:40             ::1                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
 
+[2014-12-22 17:37:31             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+

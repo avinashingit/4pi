@@ -1,10 +1,26 @@
 <?php 
+
 	include_once("../header_initial.php");
+	error_reporting(E_ALL ^ E_DEPRECATED);
 ?>
 <script>
 
-var userId=<?php echo $_GET['ref'];?>;
-console.log(userId);
+
+	var userId="<?php echo $_GET['ref'];?>";
+	console.log(userId);
+
+	var userName="<?php
+	$con=mysql_connect("localhost","root","root");
+	mysql_select_db("iiitdmstudentsportal");
+	$sql="SELECT name FROM users WHERE userIdHash='".$_GET['ref']."'";
+	$res=mysql_query($sql);
+	while($row=mysql_fetch_array($res))
+	{
+		echo $row[0];
+	}
+	?>";
+
+
 
 </script>
 <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
@@ -48,7 +64,9 @@ console.log(userId);
 
 <script>
 
+
 	$(document).ready(function(){
+		$('#authenticationForm').find('#currentUserName').html(userName);
 		$('#secondContent').hide();
 		setInterval(function(){
 			$('#firstContent').fadeOut(function(){
@@ -76,8 +94,8 @@ console.log(userId);
 	{
 		alert("Authentication");
 		e.preventDefault();
-		var p1=$('#authenicationForm').find('#password').val();
-		var p2=$('#authenicationForm').find('#passwordAgain').val();
+		var p1=$('#authenticationForm').find('#password').val();
+		var p2=$('#authenticationForm').find('#passwordAgain').val();
 		if(p1.length<8)
 		{
 			alert("Password should consist of atleast 8 characters");
@@ -88,7 +106,7 @@ console.log(userId);
 		}
 		else
 		{
-			$('#authenicationButton').find('.button__text').html("Submitting").attr("onclick","");
+			$('#authenticationButton').find('.button__text').html("Submitting").attr("onclick","");
 			$.post('/4pi/handlers/initial/insertPassword.php',{
 				_passwordOne:p1,
 				_passwordTwo:p2,
@@ -96,7 +114,7 @@ console.log(userId);
 			})
 			.error(function(){
 				alert("Server overload. Please try again. :(");
-					$('#authenicationButton').find('.button__text').html("Submit").attr("onclick","submitAuthentication();");
+					$('#authenticationButton').find('.button__text').html("Submit").attr("onclick","submitAuthentication();");
 			})
 			.success(function(data){
 				if(checkData(data)==1)
@@ -112,7 +130,7 @@ console.log(userId);
 				}
 				else
 				{
-					$('#authenicationButton').find('.button__text').html("Submitting").attr("onclick","submitAuthentication();");
+					$('#authenticationButton').find('.button__text').html("Submitting").attr("onclick","submitAuthentication();");
 				}
 			});
 		}
@@ -682,9 +700,9 @@ console.log(userId);
 
 				<div class="row" id="authentication">
 
-					<form id="authenicationForm">
+					<form id="authenticationForm">
 
-						<h1>Hello , <span id="currentUserName">Avinash</span></h1>
+						<h1>Hello , <span id="currentUserName"></span></h1>
 						<h3>Your roll number is your username</h3>
 						<br/>
 

@@ -1,17 +1,20 @@
 <?php
 require_once("../QOB/qob.php");
-
-
+// $_POST['_inputVal']="Avinash";
 
 class studentSearchResult
     {
         public $userId;
         public $name;
+        public $userIdHash;
+        public $gender;
     
-        public function __construct($userId, $name)
+        public function __construct($userId, $name ,$userIdHash,$gender)
             {
                 $this->userId = $userId;
                 $this->name = $name;
+                $this->userIdHash= $userIdHash;
+                $this->gender=$gender;
             }
 
     } // end of class
@@ -35,13 +38,13 @@ function homeSearch($inputString)
                 if($flag)
                     $outputString = "*".$inputString."*";
 
-                echo $outputString;
+                // echo $outputString;
 
                 $values[0] = array($outputString=>"s");
                 $values[1] = array($outputString=>"s");
                 $values[2] = array($outputString=>"s");
                 $values[3] = array($outputString=>"s");
-                $query = "select name, userId from users where (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode)) desc limit 9 offset 0";
+                $query = "select name, userId, userIdHash, gender from users where (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode)) desc limit 9 offset 0";
                 
                 $result = $qob->select($query, $values);
                 
@@ -53,13 +56,14 @@ function homeSearch($inputString)
                                 $count=0;
                                 while($record = $qob->fetch($result))
                                     {
-                                        $resultObj = new studentSearchResult($record['userId'], $record['name']);
+                                        $resultObj = new studentSearchResult($record['userId'], $record['name'],$record['userIdHash'],$record['gender']);
                                         $searchResults[] = $resultObj;
                                         $count++;
                                     }
                                 if($count)
                                     print_r(json_encode($searchResults));
-                                else 131;//no results found
+                                else 
+                                    echo json_encode(131);//no results found
                             }
                         else
                             echo 132;//logical error

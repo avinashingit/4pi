@@ -1140,6 +1140,7 @@ function editComment(postId, commentId,calslback) {
         alert("Empty comments are not allowed. :)");
         done=0;
     }
+    
     //console.log(commentContent);
     if(done==1)
     {
