@@ -1,3 +1,23 @@
+<?php
+
+	mysql_connect("localhost","root","root");
+
+	mysql_select_db("iiitdmstudentsportal");
+
+	$sql="SELECT * FROM users WHERE userIdHash=".$_SESSION['vj'];
+
+	$res=mysql_query($sql);
+
+	$rows=mysql_num_rows($res);
+
+	if($rows==1)
+	{
+		while($row=mysql_fetch_array($rows))
+		{
+
+		}
+	}
+
 <div class="col-md-2" id="userDetails" style="padding:0px !important;" >
 
 	<br/>
@@ -10,7 +30,7 @@
 
 	</div>
 
-<!-- 	<div id="userBadges">
+	<!--<div id="userBadges">
 
 		<h4 class="text-center"><i class="fa fa-bomb colorWhite cursorPointer"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-briefcase colorWhite cursorPointer"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bullhorn colorWhite cursorPointer"></i></h4>
 

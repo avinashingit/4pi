@@ -327,6 +327,16 @@ function displayChart(json,idC,id,hUh)
             pie: {
                 innerSize: 100,
                 depth: 65
+            },
+            series: {
+                dataLabels: {
+                	enabled:true,
+                    formatter: function() {
+                        return Math.round(this.percentage*100)/100 + ' %';
+                    },
+                    distance: -20,
+                    color:'white'
+                }
             }
         },
         series: [{
