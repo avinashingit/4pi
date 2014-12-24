@@ -1,22 +1,3 @@
-<?php
-
-	mysql_connect("localhost","root","root");
-
-	mysql_select_db("iiitdmstudentsportal");
-
-	$sql="SELECT * FROM users WHERE userIdHash=".$_SESSION['vj'];
-
-	$res=mysql_query($sql);
-
-	$rows=mysql_num_rows($res);
-
-	if($rows==1)
-	{
-		while($row=mysql_fetch_array($rows))
-		{
-
-		}
-	}
 
 <div class="col-md-2" id="userDetails" style="padding:0px !important;" >
 
