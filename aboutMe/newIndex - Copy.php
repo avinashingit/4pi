@@ -1,6 +1,5 @@
 <?php 
 	include('../header_adv.php');
-	
 ?>
 
 
@@ -273,8 +272,6 @@
 		x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
 	}
-
-
 
 </script>
 

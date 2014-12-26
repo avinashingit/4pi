@@ -1,7 +1,12 @@
 <?php 
 
 	include_once("../header_initial.php");
-	error_reporting(E_ALL ^ E_DEPRECATED);
+	error_reporting(E_ALL ^E_NOTICE^E_WARNING^E_DEPRECATED);
+	/*if($_GET['ref']=="")
+	{
+		echo '<script>alert("The url does not exist.");</script>';
+		echo "<script>window.open('','_parent','');window.close();</script>";
+	}*/
 ?>
 <script>
 
@@ -72,11 +77,10 @@
 			$('#firstContent').fadeOut(function(){
 				$('#secondContent').fadeIn();
 			});
-		},00);
+		},1500);
 		$('.formLink').each(function(){
 			var els=$(this).attr("data-target");
 			$(els).hide();
-			
 		});
 		$('#home').show();
 		$('.formLink').click(function(){
@@ -620,7 +624,7 @@
 
 			<div class="col-md-12 text-center">
 
-				<br/><br/><br/><br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 				<h1 class="text-center">Hi</h1>
 
@@ -637,19 +641,19 @@
 					<div class="menu__inner">
 						<ul>
 							<li><a class="formLink" data-target="#home"><i class="fa fa-fw fa-home"></i><span>Home<span></a></li>
-							<li><a class="formLink" data-target="#authentication"><i class="fa fa-fw fa-unlock"></i><span>Authentication<span></a></li>
-							<li><a class="formLink" data-target="#topPart"><i class="fa fa-fw fa-user"></i><span>Personal information<span></a></li>
-							<li><a class="formLink" data-target="#bottomPart"><i class="fa fa-fw fa-envelope"></i><span>Contact<span></a></li>
-							<li><a class="formLink" data-target="#projects"><i class="fa fa-fw fa-database"></i><span>Projects<span></a></li>
-							<li><a class="formLink" data-target="#skills"><i class="fa fa-fw fa-bar-chart"></i><span>Skills<span></a></li>
-							<li><a class="formLink" data-target="#tools"><i class="fa fa-fw fa-wrench"></i><span>Tools<span></a></li>
-							<li><a class="formLink" data-target="#academics"><i class="fa fa-fw fa-mortar-board"></i><span>Academics<span></a></li>
-							<li><a class="formLink" data-target="#certifications"><i class="fa fa-fw fa-certificate"></i><span>Certifications<span></a></li>
-							<li><a class="formLink" data-target="#workshops"><i class="fa fa-fw fa-gears"></i><span>Workshops<span></a></li>
-							<li><a class="formLink" data-target="#interests"><i class="fa fa-fw fa-star"></i><span>Interests<span></a></li>
-							<li><a class="formLink" data-target="#achievements"><i class="fa fa-fw fa-trophy"></i><span>Achievements<span></a></li>
-							<li><a class="formLink" data-target="#experience"><i class="fa fa-fw fa-fighter-jet"></i><span>Experience<span></a></li>
-							<li><a class="formLink" data-target="#uploads"><i class="fa fa-fw fa-upload"></i><span>Upload<span></a></li>
+							<li><a class="formLink hidden" data-target="#authentication"><i class="fa fa-fw fa-unlock"></i><span>Authentication<span></a></li>
+							<li><a class="formLink hidden" data-target="#topPart"><i class="fa fa-fw fa-user"></i><span>Personal information<span></a></li>
+							<li><a class="formLink hidden" data-target="#bottomPart"><i class="fa fa-fw fa-envelope"></i><span>Contact<span></a></li>
+							<li><a class="formLink hidden" data-target="#projects"><i class="fa fa-fw fa-database"></i><span>Projects<span></a></li>
+							<li><a class="formLink hidden" data-target="#skills"><i class="fa fa-fw fa-bar-chart"></i><span>Skills<span></a></li>
+							<li><a class="formLink hidden" data-target="#tools"><i class="fa fa-fw fa-wrench"></i><span>Tools<span></a></li>
+							<li><a class="formLink hidden" data-target="#academics"><i class="fa fa-fw fa-mortar-board"></i><span>Academics<span></a></li>
+							<li><a class="formLink hidden" data-target="#certifications"><i class="fa fa-fw fa-certificate"></i><span>Certifications<span></a></li>
+							<li><a class="formLink hidden" data-target="#workshops"><i class="fa fa-fw fa-gears"></i><span>Workshops<span></a></li>
+							<li><a class="formLink hidden" data-target="#interests"><i class="fa fa-fw fa-star"></i><span>Interests<span></a></li>
+							<li><a class="formLink hidden" data-target="#achievements"><i class="fa fa-fw fa-trophy"></i><span>Achievements<span></a></li>
+							<li><a class="formLink hidden" data-target="#experience"><i class="fa fa-fw fa-fighter-jet"></i><span>Experience<span></a></li>
+							<li><a class="formLink hidden" data-target="#uploads"><i class="fa fa-fw fa-upload"></i><span>Upload<span></a></li>
 						</ul>
 					</div>
 					<div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
@@ -696,6 +700,14 @@
 
 					</div>
 
+					<div class="row">
+
+						<button class="text-center btn btn-primary" onclick="$('#home').hide();$('#authentication').show();$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#authentication'){
+						$(this).toggleClass('hidden');}});";>Next</button>
+
+					</div>
+
 				</div><!-- end id home -->
 
 				<div class="row" id="authentication">
@@ -728,16 +740,17 @@
 							</div>
 							<br />
 							<div class="col-md-3 col-md-offset-4">
-								<button id="authenticationButton" class="button button--effect-1" onclick="submitAuthentication(event);">
+								<button id="authenticationButton" class="button button--effect-1" onclick="submitAuthentication(event);$('.formLink').each(function(){if($(this).attr('data-target')=='#topPart'){$(this).toggleClass('hidden');}});">
 									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 										<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 											<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 										</svg>
 									</span>
-									<span style="color:black;" class="button__text">Submit</span>
+									<span style="color:black;" class="button__text">Set password</span>
 								</button>
 							</div>
 						</div>
+					
 					</form>
 
 				</div><!-- end id authentication -->
@@ -798,7 +811,7 @@
 							</div>
 							<br />
 							<div class="col-md-3 col-md-offset-4">
-								<button id="topPartButton" class="button button--effect-1" onclick="submitTopPart(event);">
+								<button id="topPartButton" class="button button--effect-1" onclick="submitTopPart(event);$('.formLink').each(function(){if($(this).attr('data-target')=='#bottomPart'){$(this).toggleClass('hidden');}});">
 									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 										<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 											<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -815,6 +828,12 @@
 				</div><!-- end id topPart -->
 
 				<div class="row" id="bottomPart">
+
+					<div class="text-center">
+
+						<h3>Contact</h3>
+
+					</div>
 
 					<form id="bottomPartForm">
 					
@@ -929,7 +948,9 @@
 						<br />
 					
 						<div class="col-md-3 col-md-offset-5">
-							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart(event);">
+							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#projects'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1047,7 +1068,9 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-4">
-							<button id="projectButton" class="button button--effect-1" onclick="submitProject(event);">
+							<button id="projectButton" class="button button--effect-1" onclick="submitProject(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#skills'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1115,7 +1138,9 @@
 						<br/>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="toolButton" class="button button--effect-1" onclick="submitTools(event);">
+							<button id="toolButton" class="button button--effect-1" onclick="submitTools(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#academics'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1217,7 +1242,9 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="academicsButton" class="button button--effect-1" onclick="submitAcademics(event);">
+							<button id="academicsButton" class="button button--effect-1" onclick="submitAcademics(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#certifications'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1292,7 +1319,9 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-4">
-							<button id="certificationsButton" class="button button--effect-1" onclick="submitCertifications(event);">
+							<button id="certificationsButton" class="button button--effect-1" onclick="submitCertifications(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#workshops'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1382,7 +1411,9 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="workshopsButton" class="button button--effect-1" onclick="submitWorkshops(event);">
+							<button id="workshopsButton" class="button button--effect-1" onclick="submitWorkshops(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#interests'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1412,7 +1443,9 @@
 						<br/>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="interestsButton" class="button button--effect-1" onclick="submitInterests(event);">
+							<button id="interestsButton" class="button button--effect-1" onclick="submitInterests(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#achievements'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
@@ -1498,7 +1531,9 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="achievementsButton" class="button button--effect-1" onclick="submitAchievements(event);">
+							<button id="achievementsButton" class="button button--effect-1" onclick="submitAchievements(event);$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#experience'){
+						$(this).toggleClass('hidden');}});">
 								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
