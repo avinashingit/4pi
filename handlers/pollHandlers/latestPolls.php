@@ -103,9 +103,14 @@ else
 			{
 				$options=$poll['options'];
 				$optionsArray=explode(',', $options);
+				$optionCount=count($optionsArray);
 				$hasVoted=isThere($poll['votedBy'],$userId);
 				$optionVotes=$poll['optionVotes'];
 				$optionVotesArray=explode(',', $optionVotes);
+				for($i=0;$i<$optionCount;$i++)
+				{
+					$optionsAndVotes[$i]=array($optionsArray[$i] => $optionsVotesArray[$i])
+				}
 				if($poll['userId']==$userId)
 				{
 					$isOwner=1;
@@ -119,7 +124,7 @@ else
 				$pollCreationTime=$ts->format(DateTime::ISO8601);
 				$pollStatus=$poll['pollStatus'];
 				$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-									$poll['optionsType'],$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus,$isOwner);
+									$poll['optionsType'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
 				//print_r(json_encode($pollObj));
 				$pollObjArray[]=$pollObj;
 				$displayCount++;

@@ -156,7 +156,7 @@ else
 		{
 			$pollId=$eId+1;
 		}
-		for($i=0;$i<count($pollOptionsArray);$i++)
+		for($i=0;$i<$pollOptionsCount;$i++)
 			$optionVotesArray[]=0;
 		$optionVotes=implode(',',$optionVotesArray);
 		$timestamp=time();
@@ -185,9 +185,12 @@ else
 			$pollCreationTime=$ts->format(DateTime::ISO8601);
 			$hasVoted=1;
 			$pollStatus=0;
-			
+			for($i=0;$i<$pollOptionsCount;$i++)
+			{
+				$optionsAndVotes[$i]=array($pollOptionsArray[$i] => $optionVotesArray[$i]);
+			}
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus,1);
+					$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,1);
 			print_r(json_encode($pollObj));
 		}
 		else
