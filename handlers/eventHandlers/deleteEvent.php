@@ -14,6 +14,7 @@ require_once('../fetch.php');
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
@@ -65,21 +66,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$userId=$user['userId'];
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
-				if(blockUserByHash($userIdHash,"Tampering EventIdHash in Delete Event",$userId.",sh:".$eventIdHash)>0)
-				{
-					$_SESSION=array();
-					session_destroy();
-					echo 14;
-					exit();
-				}
-				else
-				{
-					notifyAdmin("Suspicious eventIdHash in DeleteEvent",$userId.",sh:".$eventIdHash);
-					$_SESSION=array();
-					session_destroy();
-					echo 13;
-					exit();
-				}
+				//Assuming the user tried to delete an already deleted event
+				echo 5;
+				exit();
 			}
 			$eventUserId=$event['userId'];
 			if($eventUserId!=$userId)

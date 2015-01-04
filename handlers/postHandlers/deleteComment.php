@@ -10,6 +10,7 @@ session_start();
 	//Testing Inputs End*/
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
@@ -59,15 +60,16 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			{
 				$commentIdHash=$_POST['_commentId'];
 				$userId=$user['userId'];
-				//$postUserId=$post['userId'];
+				$postUserId=$post['userId'];
 				$postId=$post['postId'];
+
 				$commentCount=$post['commentCount'];
 				$commentTableName="p".$postId."c";
 				if(($comment=getCommentByPostIdAndHash($postId,$commentIdHash))==true)
 				{
 					$commentUserId=$comment['userId'];
 					$commentId=$comment['commentId'];
-					if($commentUserId==$userId)
+					if($commentUserId==$userId||$postUserId==$userId)
 					{
 						$DeleteCommentSQL="DELETE FROM ".$commentTableName." WHERE commentIdHash=?";
 						//$values[]=array($commentTableName => 's');
@@ -114,10 +116,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				else
 				{
 					//Detected tampered commentIdHash
-					blockUserByHash($userIdHash,"Tampering commentId Suspected!! In DeleteComment(2),".$commentIdHash);
-					$_SESSION=array();
-					session_destroy();
-					echo 13;
+					//Assuming the user tried to delete an already deleted comment.
+					echo 5;
+					exit();
 				}				
 			}
 		}

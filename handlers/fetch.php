@@ -479,6 +479,19 @@
 		return $finalRegexString;
 	}
 	
+	function isCoCAS($userId)
+	{
+		if($userId=="COE12B013"||$userId=="COE12B009")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+
 	function newValidateSharedWith($str)
 	{
 		$conn=new QOB();

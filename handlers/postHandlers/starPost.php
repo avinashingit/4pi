@@ -12,6 +12,7 @@ session_start();
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
@@ -129,11 +130,11 @@ $userIdHash=$_SESSION['vj'];
 						else
 						{
 							//Detected an attempt to Increase StarCount;
-							blockUserbyHash($_SESSION['vj'],"Tampering the StarCount!",$postId);
+							/*blockUserbyHash($_SESSION['vj'],"Tampering the StarCount!",$postId);
 							
 							$_SESSION=array();
-							session_destroy();
-							echo 12;
+							session_destroy();*/
+							echo 5;
 						}
 					}
 				

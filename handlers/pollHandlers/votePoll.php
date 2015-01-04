@@ -4,22 +4,24 @@ require_once('../../QOB/qob.php');
 require_once('./miniPoll.php');
 require_once('../fetch.php');
 //Testing Content Starts
-/*	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B006".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B009".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_pollId']="df5812ac54f9591e41f1b6befd20932f578698d70b496573c4a18215907bcbf760f493249deb4a82ad35273a231266b008798fa1562f846450c338f1f0ac7031";
-	$_POST['_votes']=[1];*/
+	$_POST['_votes']=[3];*/
 //Testing Content Ends
 
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
-var_dump($_POST);
+//var_dump($_POST);
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 {
 	echo 11;
@@ -101,7 +103,7 @@ else
 				exit();
 			}
 		}
-		//$pollOptions=$poll['options'];
+		$pollOptions=$poll['options'];
 		if($poll['approvalStatus']!=1||$poll['pollStatus']==0)
 		{
 			if(blockUserByHash($userIdHash,"Illegal Attempt to vote an unapproved or closed poll",$userId.",sh:".$pollIdHash)>0)
@@ -140,11 +142,12 @@ else
 			}
 		}
 		$votedBy=$poll['votedBy'];
+
 		if(isThere($votedBy,$userId)==-1)
 		{
 			$pollExistingVotes=$poll['optionVotes'];
 			$pollExistingVotesArray=explode(',', $pollExistingVotes);
-			
+			$pollOptionsArray=explode(',', $pollOptions);
 			if($votedBy=="")
 			{
 				$votedBy=$votedBy.$userId;
@@ -159,6 +162,11 @@ else
 				$temp=((int)$pollExistingVotesArray[$option])+1;
 				$pollExistingVotesArray[$option]=(string)$temp;
 			}
+			$optionCount=count($pollOptionsArray);
+			for($i=0;$i<$optionCount;$i++)
+			{
+				$optionsAndVotes[$i]=array($pollOptionsArray[$i] => $pollExistingVotesArray[$i]);
+			}
 			$pollUpdatedVotes=implode(",",$pollExistingVotesArray);
 			$editPollSQL="UPDATE poll SET optionVotes = ?, votedBy=? WHERE pollIdHash= ?";
 
@@ -170,7 +178,7 @@ else
 			$result=$conn->insert($editPollSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
-				print_r(json_encode($pollExistingVotesArray));
+				print_r(json_encode($optionsAndVotes));
 			}
 			else
 			{
@@ -181,21 +189,7 @@ else
 		}
 		else
 		{
-			if(blockUserByHash($userIdHash,"Attempt To Re Vote",$userId.",sh:".$pollIdHash)>0)
-			{
-				$_SESSION=array();
-				session_destroy();
-				echo 14;
-				exit();
-			}
-			else
-			{
-				notifyAdmin("Attempt To Re Vote",$userId.",sh:".$pollIdHash);
-				$_SESSION=array();
-				session_destroy();
-				echo 13;
-				exit();
-			}
+			echo 5;
 		}
 		
 	}

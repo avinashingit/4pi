@@ -14,6 +14,7 @@ require_once('../fetch.php');
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
@@ -65,21 +66,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$userId=$user['userId'];
 			if(($poll=getPollFromHash($pollIdHash))==false)
 			{
-				if(blockUserByHash($userIdHash,"Tampering pollIdHash in Delete poll",$userId.",sh:".$pollIdHash)>0)
-				{
-					$_SESSION=array();
-					session_destroy();
-					echo 14;
-					exit();
-				}
-				else
-				{
-					notifyAdmin("Suspicious pollIdHash in Deletepoll",$userId.",sh:".$pollIdHash);
-					$_SESSION=array();
-					session_destroy();
-					echo 13;
-					exit();
-				}
+				//Assuming the user tried to delete an already deleted poll
+				echo 5;
+				exit();
 			}
 			$pollUserId=$poll['userId'];
 			if($pollUserId!=$userId)

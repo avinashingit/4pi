@@ -4,13 +4,13 @@ require_once('../../QOB/qob.php');
 require_once('./miniPoll.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B021".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","EDM12B012".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_pollId']="";
-	$_POST['_pollQuestion']="Some Other Event";
-	$_POST['_pollType']="SomeOther Peru kuda!";
-	$_POST['_pollOptions']="Some Place";
-	$_POST['_pollOptionType']="Some type";
+	$_POST['_pollId']="6c3b5a62fa26c9e18e026fdc3feae29b824103141efe1da6d93e2427511c72003b6cb3cd9a735d3719da8a3b4460e1b7e86778633efe878136467ce91d22c427";
+	$_POST['_pollQuestion']="Some Other Poll number";
+	$_POST['_pollType']=2;
+	$_POST['_pollOptions']=['nopt1','nopt2','nopt3'];
+	$_POST['_pollOptionType']=2;
 	$_POST['_sharedWith']="EDS,EVD,EDM11";*/
 //Testing Content Ends
 
@@ -37,32 +37,33 @@ $pollQuestion=$_POST['_pollQuestion'];
 $pollType=$_POST['_pollType'];
 $pollOptionsArray=$_POST['_pollOptions'];
 $pollOptionsType=$_POST['_pollOptionType'];
-$sharedWith=$_POST['_sharedWith'];
+$rawSharedWith=$_POST['_sharedWith'];
 
-if($pollQuestion==""||gettype($pollType)!="integer"||count($pollOptionsArray)<=1)
+if($pollQuestion==""||count($pollOptionsArray)<=1)
 {
-	echo 16;
+	echo 15;
 	exit();
 }
 if($pollType!=1&&$pollType!=2&&$pollType!=3)
 {
-	echo 16;
+	echo 17;
 	exit();
 }
 if($pollOptionsType!=1&&$pollOptionsType!=2)
 {
-	echo 16;
+	echo 18;
 	exit();
 }
-if($sharedWith=="")
+if($rawSharedWith=="")
 {
-	echo 16;
+	echo 19;
 	exit();
 }
+$conn= new QoB();
 $userIdHash=$_SESSION['vj'];
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in editPoll")>0)//Happy Birthday to Myself!! Its October 21st!! 00:00 hrs
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in editPoll")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -96,7 +97,7 @@ else
 		$userName=$user['name'];
 		if(($poll=getPollFromHash($pollIdHash))==false)
 		{
-			if(blockUserByHash($userIdHash,"Tampering pollIdHash in editPoll",$userId.",sh:".$eventIdHash)>0)
+			if(blockUserByHash($userIdHash,"Tampering pollIdHash in editPoll",$userId.",sh:".$pollIdHash)>0)
 			{
 				$_SESSION=array();
 				session_destroy();
@@ -105,7 +106,7 @@ else
 			}
 			else
 			{
-				notifyAdmin("Suspicious pollIdHash in editpoll",$userId.",sh:".$eventIdHash);
+				notifyAdmin("Suspicious pollIdHash in editpoll",$userId.",sh:".$pollIdHash);
 				$_SESSION=array();
 				session_destroy();
 				echo 13;
@@ -114,7 +115,7 @@ else
 		}
 		if($poll['approvalStatus']==1)
 		{
-			if(blockUserByHash($userIdHash,"Attempt To Edit anapproved poll",$userId.",sh:".$eventIdHash)>0)
+			if(blockUserByHash($userIdHash,"Attempt To Edit anapproved poll",$userId.",sh:".$pollIdHash)>0)
 			{
 				$_SESSION=array();
 				session_destroy();
@@ -123,7 +124,7 @@ else
 			}
 			else
 			{
-				notifyAdmin("Attempt to edit an approved poll",$userId.",sh:".$eventIdHash);
+				notifyAdmin("Attempt to edit an approved poll",$userId.",sh:".$pollIdHash);
 				$_SESSION=array();
 				session_destroy();
 				echo 13;
@@ -134,7 +135,7 @@ else
 		$pollUserId=$poll['userId'];
 		if($pollUserId!=$userId)
 		{
-			if(blockUserByHash($userIdHash,"Illegal Attempt to Edit Poll",$userId.",sh:".$eventIdHash)>0)
+			if(blockUserByHash($userIdHash,"Illegal Attempt to Edit Poll",$userId.",sh:".$pollIdHash)>0)
 			{
 				$_SESSION=array();
 				session_destroy();
@@ -143,7 +144,7 @@ else
 			}
 			else
 			{
-				notifyAdmin("Illegal Attempt to Edit Poll",$userId.",sh:".$eventIdHash);
+				notifyAdmin("Illegal Attempt to Edit Poll",$userId.",sh:".$pollIdHash);
 				$_SESSION=array();
 				session_destroy();
 				echo 13;
@@ -196,11 +197,11 @@ else
 			$sharedWith="All";
 		}
 		$pollOptions=implode(',',$pollOptionsArray);
-		$pollOptionsCount=count(pollOptionsArray);
+		$pollOptionsCount=count($pollOptionsArray);
 		for($i=0;$i<count($pollOptionsArray);$i++)
 			$optionVotesArray[]=0;
 		$optionVotes=implode(',',$optionVotesArray);
-		$editPollSQL="UPDATE poll SET pollType = ?,question = ? ,options = ?,optionsType =? ,optionCount =?,sharedWith = ?,optionVotes=? 
+		$editPollSQL="UPDATE poll SET pollType = ?,question = ? ,options = ?,optionsType =? ,optionCount = ?, sharedWith = ?,optionVotes= ? 
 						WHERE pollIdHash= ?";
 
 		$values[0]=array($pollType => 's');
@@ -209,15 +210,15 @@ else
 		$values[3]=array($pollOptionsType => 's');
 		$values[4]=array($pollOptionsCount => 's');
 		$values[5]=array($sharedWith => 's');
-		$values[6]=array($userId => 's');
-		$values[7]=array($optionVotes => 's');
-		$values[8]=array($pollIdHash => 's');
+		$values[6]=array($optionVotes => 's');
+		$values[7]=array($pollIdHash => 's');
 
 
 		$result=$conn->insert($editPollSQL,$values);
 		if($conn->error==""&&$result==true)
 		{
-			//Success			
+			//Success
+			$timestamp=$poll['timestamp'];			
 			$ts = new DateTime();
 			$ts->setTimestamp($timestamp);
 			$pollCreationTime=$ts->format(DateTime::ISO8601);
@@ -225,7 +226,7 @@ else
 			$hasVoted=1;
 			
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus);
+					$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus,1);
 			print_r(json_encode($pollObj));
 		}
 		else

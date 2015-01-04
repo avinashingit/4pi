@@ -11,6 +11,7 @@ session_start();
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
@@ -52,12 +53,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$postIdHash=$_POST['_postId'];
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
-				// echo "Messing with postIdHash!! In DeletePost";
-				// Detected tampered postIdHash
-				blockUserByHash($userIdHash,"Messing with postIdHash!! In DeletePost");
-				$_SESSION=array();
-				session_destroy();
-				echo 13;
+				echo 5;
+				exit();
 			}
 			else
 			{

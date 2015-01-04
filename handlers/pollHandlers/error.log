@@ -18,3 +18,7 @@
 
 [2014-12-07 00:17:58       127.0.0.1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
 
+[2015-01-04 19:00:04       127.0.0.1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-01-04 19:20:50       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE pollIdHash= ?' at line 1$$$
+
