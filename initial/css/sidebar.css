@@ -172,10 +172,10 @@
 	right: 0;
 }
 
-.morph-shape svg path {
-	stroke: #5f656f;
+/* .morph-shape svg path {
+	stroke: #fff;
 	stroke-width: 5px;
-}
+} */
 
 @media screen and (max-width: 63em) {
 	.main {
