@@ -103,6 +103,13 @@
 		});
 	});
 
+	function clearInputs(el)
+	{
+		$(el).find('input').each(function(){
+			$(this).val("");
+		});
+	}
+
 	var userId="COE12B009";
 	function submitAuthentication(e)
 	{
@@ -193,6 +200,7 @@
 							$('#bottomPart').show();
 						}
 					});
+					clearInputs('#topPartForm');
 				}
 				else
 				{
@@ -258,6 +266,7 @@
 					}
 				});
 				$("#projects").show();
+				clearInputs('#bottomPartForm');
 			}
 			else
 			{
@@ -323,6 +332,7 @@
 						}
 					});
 					$('#skills').show();
+					clearInputs('#projectsForm');
 				}
 				else
 				{
@@ -342,7 +352,7 @@
 		{
 			alert("Please fill all the fields");
 		}
-		else if(value<0 && value>100)
+		else if(value<0 || value>100)
 		{
 			alert("Please dont underrate or overrate yourself.")
 		}
@@ -373,6 +383,7 @@
 							}
 						}
 					});
+					clearInputs('#skillsForm');
 				}
 				else
 				{
@@ -401,7 +412,7 @@
 				alert("Server overload. Please try again. :(");
 				$('#toolButton').find('.button__text').html("Submit").attr("onclick","submitTools(event);");
 			})
-			.success(function(){
+			.success(function(data){
 				if(checkData(data)==1)
 				{
 					$('#tools').hide();
@@ -417,6 +428,7 @@
 					});
 					$('#academics').show();
 					$('#toolButton').find('.button__text').html("Submit").attr("onclick","submitTools();");
+					clearInputs('#toolsForm');
 				}
 				else
 				{
@@ -471,6 +483,7 @@
 					});
 					$('#certifications').show();
 					$('#academicsButton').find('.button__text').html("Submit").attr("onclick","submitAcademics(event);");
+					clearInputs('#academicsForm');
 
 				}
 				else
@@ -484,7 +497,7 @@
 	function submitCertifications(e)
 	{
 		e.preventDefault();
-		var link=$('#certificaitonsForm');
+		var link=$('#certificationsForm');
 		var course=link.find('#certificationsCourseName').val().trim();
 		var institute=link.find('#certificationsInstitute').val().trim();
 		var from=link.find('#certificationsDurationFrom').val().trim();
@@ -523,6 +536,7 @@
 					});
 					$('#workshops').show();
 					$('#certificationsButton').find('.button__text').html("Submit").attr("onclick","submitCertifications(event);");
+					clearInputs('#certificationsForm');
 				}
 				else
 				{
@@ -565,7 +579,17 @@
 				{
 					$("#workshopsButton").find(".button__text").html("Submit").attr("onclick","submitWorkshops(event);");
 					$('#workshops').hide();
+					$('.formLink').each(function(){
+						if($(this).attr("data-target")=="#interests")
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+						}
+					});
 					$('#interests').show();
+					clearInputs('#workshopsForm');
 				}
 				else
 				{
@@ -577,7 +601,7 @@
 
 	function submitInterests(e)
 	{
-		e.preventDefault;
+		e.preventDefault();
 		var interestName=$('#interestsForm').find('#interestName').val().trim();
 		if(toolName.length==0)
 		{
@@ -594,12 +618,22 @@
 				alert("Server overload. Please try again. :(");
 				$('#interestsButton').find('.button__text').html("Submit").attr("onclick","submitInterests(event);");
 			})
-			.success(function(){
+			.success(function(data){
 				if(checkData(data)==1)
 				{
 					$('#interests').hide();
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#achievements')
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+						}
+					});
 					$('#achievements').show();
 					$('#interestsButton').find('.button__text').html("Submit").attr("onclick","submitInterests(event);");
+					clearInputs('#interestsForm');
 				}
 				else
 				{
@@ -641,9 +675,19 @@
 				if(checkData(data)==1)
 				{
 					$('#achievements').hide();
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#experience')
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+						}
+					});
 					$('#experience').show();
 					$('#achievementsButton').find('.button__text').html("Submit").attr("onclick","submitAchievements(event);");
-					$('#achievementsForm').find('input').val("");
+					
+					clearInputs('#achievementsForm');
 				}
 				else
 				{
@@ -682,9 +726,10 @@
 			.success(function(data){
 				if(checkData(data)==1)
 				{
-					$('#experience').hide();
-					$('#uploads').show();
+					// $('#experience').hide();
+					// $('#uploads').show();
 					$("#experienceButton").find('.button__text').html("Submit").attr("onclick","submitExperience(event);");
+					clearInputs('#experienceForm');
 				}
 				else
 				{
@@ -692,6 +737,11 @@
 				}
 			});
 		}
+	}
+
+	function showUpload()
+	{
+		window.location.href="http://localhost/4pi/initial/upload.php";
 	}
 
 </script>
@@ -845,7 +895,7 @@
 
 					<div class="row">
 
-						<div class="text-center" style="font-size:26px;"><b>Personal information <span div style="font-size:16px;"> (*)</span></b></div>
+						<div class="text-left" style="font-size:26px;"><b>Personal information <span div style="font-size:16px;"> (*)</span></b></div>
 
 					</div>
 
@@ -925,9 +975,9 @@
 
 					<div class="row">
 
-						<div class="text-center col-md-10" style="font-size:26px;">Contact information</div> 
+						<div class="text-left col-md-8" style="font-size:26px;">Contact information</div> 
 
-						<div class="col-md-2 text-center">
+						<div class="col-md-4 text-center">
 
 							<button class="btn btn-sm btn-default" onclick="$('#bottomPart').hide();$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#projects')
@@ -938,6 +988,8 @@
 									}
 								}
 							});$('#projects').show();">Skip</button>
+
+							<a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a>
 
 
 
@@ -1135,11 +1187,11 @@
 
 				<div class="row" id="projects">
 
-					<div class="row text-center">
+					<div class="row text-left">
 
-						<div class="col-md-10 text-center" style="font-size:26px;">Projects</div>
+						<div class="col-md-8 text-left" style="font-size:26px;">Projects</div>
 
-						<div class="col-md-2 text-center"><button class="btn btn-sm btn-default" onclick="$('#projects').hide();$('#skills').show();
+						<div class="col-md-4 text-center"><button class="btn btn-sm btn-default" onclick="$('#projects').hide();$('#skills').show();
 						$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#skills')
 								{
@@ -1148,7 +1200,9 @@
 										$(this).removeClass('hidden');
 									}
 								}
-							});">Skip</button></div>
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+
+						
 
 					</div>
 
@@ -1311,9 +1365,9 @@
 
 					<div class="row">
 	
-						<div class="col-md-10 text-center" style="font-size:26px;">Skill</div>
+						<div class="col-md-8 text-left" style="font-size:26px;">Skill</div>
 
-						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#skills').hide();$('#tools').show();
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#skills').hide();$('#tools').show();
 						$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#tools')
 								{
@@ -1322,7 +1376,9 @@
 										$(this).removeClass('hidden');
 									}
 								}
-							});">Skip</button></div>
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+
+						
 				
 					</div>
 
@@ -1372,9 +1428,9 @@
 
 					<div class="row">
 	
-						<div class="col-md-10 text-center" style="font-size:26px;">Tool</div>
+						<div class="col-md-8 text-left" style="font-size:26px;">Tool</div>
 
-						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#tools').hide();$('#academics').show();
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#tools').hide();$('#academics').show();
 						$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#academics')
 								{
@@ -1383,7 +1439,9 @@
 										$(this).removeClass('hidden');
 									}
 								}
-							});">Skip</button></div>
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+
+						
 				
 					</div>
 
@@ -1421,9 +1479,9 @@
 
 					<div class="row">
 	
-						<div class="col-md-10 text-center" style="font-size:26px;">Academics</div>
+						<div class="col-md-8 text-left" style="font-size:26px;">Academics</div>
 
-						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#academics').hide();$('#certifications').show();
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#academics').hide();$('#certifications').show();
 						$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#certifications')
 								{
@@ -1432,7 +1490,9 @@
 										$(this).removeClass('hidden');
 									}
 								}
-							});">Skip</button></div>
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+
+						
 				
 					</div>
 
@@ -1562,9 +1622,9 @@
 
 					<div class="row">
 	
-						<div class="col-md-10 text-center" style="font-size:26px;">Certifications</div>
+						<div class="col-md-8 text-left" style="font-size:26px;">Certifications</div>
 
-						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#certifications').hide();$('#workshops').show();
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#certifications').hide();$('#workshops').show();
 						$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#workshops')
 								{
@@ -1573,7 +1633,9 @@
 										$(this).removeClass('hidden');
 									}
 								}
-							});">Skip</button></div>
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+
+						
 				
 					</div>
 
@@ -1668,9 +1730,9 @@
 
 					<div class="row">
 	
-						<div class="col-md-10 text-center" style="font-size:26px;">Workshops</div>
+						<div class="col-md-8 text-left" style="font-size:26px;">Workshops</div>
 
-						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#workshops').hide();$('#interests').show();
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#workshops').hide();$('#interests').show();
 						$('.formLink').each(function(){
 								if($(this).attr('data-target')=='#interests')
 								{
@@ -1679,7 +1741,9 @@
 										$(this).removeClass('hidden');
 									}
 								}
-							});">Skip</button></div>
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+
+						
 				
 					</div>
 
@@ -1689,7 +1753,7 @@
 
 						<label class="input-label fontSize16" for="input-1">Workshop</label>
 						<div class="input-wrap">
-							<input type="text" id="workshopName" placeholder="Eg. Android development"/>
+							<input type="text" id="workshopName" placeholder="Eg. Android development.Required."/>
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -1711,7 +1775,7 @@
 
 						<div class="row">
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 
 								<label class="input-label fontSize16" for="input-1">Attendee no.</label>
 								<div class="input-wrap">
@@ -1726,7 +1790,7 @@
 
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 
 								<label class="input-label fontSize16" for="input-1">From</label>
 								<div class="input-wrap">
@@ -1741,7 +1805,7 @@
 
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-3">
 
 								<label class="input-label fontSize16" for="input-1">To</label>
 								<div class="input-wrap">
@@ -1759,10 +1823,8 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="workshopsButton" class="button button--effect-1" onclick="submitWorkshops(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#interests'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+							<button id="workshopsButton" class="button button--effect-1" onclick="submitWorkshops(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1777,11 +1839,30 @@
 
 				<div class="row" id="interests">
 
+					<div class="row">
+	
+						<div class="col-md-8 text-left" style="font-size:26px;">Interest</div>
+
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#interests').hide();$('#achievements').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#achievements')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+				
+					</div>
+
+					<br/>
+
 					<form id="interestsForm">
 
 						<label class="input-label fontSize16" for="input-1">Interest</label>
 						<div class="input-wrap">
-							<input type="text" id="interestName" placeholder="Eg. Playing cricket"/>
+							<input type="text" id="interestName" placeholder="Eg. Playing cricket. Required ."/>
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -1791,10 +1872,8 @@
 						<br/>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="interestsButton" class="button button--effect-1" onclick="submitInterests(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#achievements'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+							<button id="interestsButton" class="button button--effect-1" onclick="submitInterests(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1809,11 +1888,30 @@
 
 				<div class="row" id="achievements">
 
+					<div class="row">
+	
+						<div class="col-md-8 text-left" style="font-size:26px;">Achievements</div>
+
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="$('#achievements').hide();$('#experience').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#experience')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button><a href="/4pi/initial/upload.php"><button class="btn btn-danger btn-sm">Skip remaining</button></a></div>
+				
+					</div>
+
+					<br/>
+
 					<form id="achievementsForm">
 
 						<label class="input-label fontSize16" for="input-1">Event name</label>
 						<div class="input-wrap">
-							<input type="text" id="achievementsName" placeholder="Eg. Android app development"/>
+							<input type="text" id="achievementsName" placeholder="Eg. Android app development. Required ."/>
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -1879,10 +1977,8 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="achievementsButton" class="button button--effect-1" onclick="submitAchievements(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#experience'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+							<button id="achievementsButton" class="button button--effect-1" onclick="submitAchievements(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1897,11 +1993,21 @@
 
 				<div class="row" id="experience">
 
+					<div class="row">
+	
+						<div class="col-md-8 text-left" style="font-size:26px;">Experience</div>
+
+						<div class="col-md-4 text-center"><button class="btn btn-default btn-sm" onclick="showUpload();">Skip</button></div>
+				
+					</div>
+
+					<br/>
+
 					<form id="experienceForm">
 
 						<label class="input-label fontSize16" for="input-1">Company</label>
 						<div class="input-wrap">
-							<input type="text" id="experienceCompanyName" placeholder="Eg. Microsoft"/>
+							<input type="text" id="experienceCompanyName" placeholder="Eg. Microsoft. Required ."/>
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -1956,8 +2062,8 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-4">
-							<button id="experienceButton" class="button button--effect-1" onclick="submitExperience(event);">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+							<button id="experienceButton" class="button button--effect-1" onclick="submitExperience(event);showUpload();">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>

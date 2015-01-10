@@ -8,8 +8,122 @@
 
 </style>
 
+<style>
+
+	.poll
+	{
+		border:1px solid #CCCCCC;
+		margin-bottom:10px;
+		padding:5px;
+		padding-bottom:10px;
+	}
+
+	.poll:hover
+	{
+		box-shadow:0px 5px 0px #33FF4B inset;
+	}
+
+	.fa-trash
+	{
+		color:maroon;
+	}
+	.fa-pencil
+	{
+		color:#0041CF;
+	}
+	#pollQuestion
+	{
+		font-weight:bold;
+	}
+
+</style>
+
 <script>
 
+
+
+	function submitVote(pollId,type,result)
+	{
+		if(type=='single')
+		{
+			var option=$('#'+pollId).find('input');
+			for (i =0;i<option.length;i++)
+			{
+				if(option[i].checked)
+				{
+					alert(option[i].value);
+				}
+			}
+		}
+
+		else if(type=="multiple")
+		{
+			var option=$('#'+pollId).find('input');
+			for (i =0;i<option.length;i++)
+			{
+				if(option[i].checked)
+				{
+					alert(option[i].value);
+				}
+			}
+		}
+	}
+
+	function deletePoll(pollId)
+	{
+		if(confirm("Do you want to delete the poll")==true)
+		{
+			$('#'+pollId).remove();
+		}
+	}
+
+	function editPollAddInput(){
+		var numberOfOptionsCurrent=$('#pollEditModal').find('.inputOption').length;
+		var current=$('#pollEditModal').find('#option2').clone();
+		var optionVal=numberOfOptionsCurrent+1;
+		current.attr('id',optionVal);
+		current.find('.inputOption').attr("id",optionVal);
+		placeHolder="Option ";
+		current.find('.inputOption').attr("placeholder",placeHolder);
+		current.find('.inputOption').val("");
+		current.find('label').html(placeHolder);
+		current.find('#deleteOption').removeClass('hidden');
+		$('#pollEditModal').find('.modal-body').find('form .row').append(current);
+	}
+
+	//----------------------------------------------------------------------------//
+	//delete option input
+	function editPollDeleteInput(el){
+		$(el).parent().parent().parent().remove();
+	}
+
+	function editPoll(pollId)
+	{
+		$('#pollEditModal').modal('show');
+		var olink=$('#'+pollId);
+		var link=$('#pollEditModal');
+		link.find('#editPollQuestion').val(olink.find('#pollQuestion').find('div').html());
+		link.find('#editPollOptionType').val(olink.find('#pollOptionType').html());
+		link.find('#editPollSharedWith').val(olink.find('#pollShareWith').html());
+		link.find('#editPollType').val(olink.find('#pollResultType').html());
+		var options=olink.find('input').length;
+		if(link.find('#pollOptionsDiv').find('input').length!=options)
+		{
+			link.find('#option1').find('input').val(olink.find('#pollOption0').next().html());
+			link.find('#option2').find('input').val(olink.find('#pollOption1').next().html());
+
+			if(options>=3)
+			{
+				for(i=3;i<=options;i++)
+				{
+					editPollAddInput();
+					link.find('#'+i).find('input').val(olink.find('#pollOption'+i).next().html());
+				}
+			}
+			
+			
+		}
+	}
 	
 
 </script>
@@ -444,281 +558,189 @@
 
 	function insertPoll(data,position)
 	{
-
-		// alert("called");
-
+		var optionLength=data.pollOptions.length;
 		var poll="";
-
-		if(data.pollType==1)
+		if(data.pollOptionsType==1)
 		{
-			
-			poll+='<div id="'+data.pollIdHash+'b" class="col-md-6 col-md-offset-3 poll"></div>';
+			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-			poll+='<div class="row" id="'+data.pollIdHash+'">';
+				poll+='<br/>';
 
-			poll+='<div class="row poll">';
+				poll+='<div class="row" id="'+data.pollIdHash+'b">';
 
-			poll+='<div class="row" id="pollContent">';
+				poll+='</div>';
 
-			poll+='<div class="col-md-8">';
+				poll+='<div id="pollOptionType" class="hidden">'+data.pollOptionsType+'</div>';
 
-			poll+='<h4 id="pollQuestion">'+data.pollQuestion+'</h4>';
+				poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
+
+				poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
+
+
+				poll+='<div class="row '+data.pollIdHash+'Content">';
+
+					poll+='<div class="row">';
+
+						poll+='<div class="col-md-7" id="pollQuestion">';
+
+							poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-3" id="pollCreatorOptions">';
+
+							poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-2" id="pollCreatedTime">';
+
+							poll+='<time class="time timeago" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+
+						poll+='</div>';
+
+					poll+='</div>';
+
+					poll+='<br/>';
+
+					poll+='<div class="row">';
+
+							poll+='<div class="col-md-6">';
+
+								for(var i=0;i<optionLength;i+=2)
+								{
+									console.log(i);
+									poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+								}
+
+
+							poll+='</div>';
+
+							poll+='<div class="col-md-6">';
+
+								for(var i=1;i<optionLength;i=i+2)
+								{
+									console.log(i);
+									poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+								}
+
+
+							poll+='</div>';
+
+
+							
+
+					poll+='</div>';
+
+					poll+='<br/>';
+
+					poll+='<div class="row">';
+
+						poll+='<div class="text-center">';
+
+							poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\''+data.pollType+'\');" class="btn btn-md btn-success">Vote</button>';
+
+						poll+='</div>';
+
+					poll+='</div>';
+
+				poll+='</div>';
 
 			poll+='</div>';
-
-			poll+='<div class="col-md-4">';
-
-			poll+='<p><time class="timeago" id="pollCreatedTime" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time></p>';
-
-			poll+='</div>';
-
-			poll+='</div>';
-
-			poll+='<div class="row" id="pollOptions">';
-
-			poll+='<div class="col-md-12">';
-
-			// poll+='<form>';
-
-			poll+='<div class="row">';
-
-			if(data.pollOptionsType==1)
-			{
-				for ( i = 0; i<data.pollOptions.length;i++)
-				{
-					poll+='<div class="col-md-6">';
-
-					poll+='<input type="radio" name="vote" value="'+i+'" onclick="voteSend('+i+',\''+data.pollIdHash+'\');"> &nbsp;'+data.pollOptions[i]+'<br/>';
-
-					poll+='</div>'
-				}
-
-				poll+='</div>';
-
-				poll+='</form>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-			}
-
-			else if(data.pollOptionsType==2)
-			{
-				for ( i = 0; i<data.pollOptions.length;i++)
-				{
-					poll+='<div class="col-md-6">';
-
-					poll+='<input type="checkbox" name="vote" id="vote" value="'+i+'"> &nbsp;'+data.pollOptions[i]+'<br>';
-
-					poll+='</div>'
-				}
-
-				poll+='</div>';
-
-				poll+='<button class="text-center btn btn-success" onclick="sendVoteMultipleOptions(\''+data.pollIdHash+'\');">Vote</button>';
-
-				// poll+='</form>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-			}
 		}
 
-		else if(data.pollType==2)
+		else if(data.pollOptionsType==2)
 		{
+			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-			poll+='<div class="row">';
+				poll+='<br/>';
 
-			poll+='<div class="col-md-6">';
-			
-			poll+='<div id="'+data.pollIdHash+'b" class="col-md-6 col-md-offset-3 poll"></div>';
+				poll+='<div class="row" id="'+data.pollIdHash+'b">';
+
+				poll+='</div>';
+
+				poll+='<div id="pollOptionType" class="hidden">'+data.pollOptionsType+'</div>';
+
+				poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
+
+				poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
+
+
+				poll+='<div class="row '+data.pollIdHash+'Content">';
+
+					poll+='<div class="row">';
+
+						poll+='<div class="col-md-7" id="pollQuestion">';
+
+							poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-3" id="pollCreatorOptions">';
+
+							poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-2" id="pollCreatedTime">';
+
+							poll+='<time class="time timeago" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+
+						poll+='</div>';
+
+					poll+='</div>';
+
+					poll+='<br/>';
+
+					poll+='<div class="row">';
+
+							poll+='<div class="col-md-6">';
+
+								for(var i=0;i<data.pollOptions.length;i=i+2)
+								{
+									poll+='<p><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+								}
+
+
+							poll+='</div>';
+
+							poll+='<div class="col-md-6">';
+
+								for(var i=1;i<data.pollOptions.length;i=i+2)
+								{
+									poll+='<p><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+								}
+
+
+							poll+='</div>';
+
+
+							
+
+					poll+='</div>';
+
+					poll+='<br/>';
+
+					poll+='<div class="row">';
+
+						poll+='<div class="text-center">';
+
+							poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\''+data.pollType+'\');" class="btn btn-md btn-success">Vote</button>';
+
+						poll+='</div>';
+
+					poll+='</div>';
+
+				poll+='</div>';
 
 			poll+='</div>';
-
-			poll+='<div class="col-md-6">';
-
-			poll+='<div class="row" id="'+data.pollIdHash+'">';
-
-			poll+='<div class="col-md-6 col-md-offset-3 poll">';
-
-			poll+='<div class="row" id="pollContent">';
-
-			poll+='<div class="col-md-10">';
-
-			poll+='<h4 id="pollQuestion">'+data.pollQuestion+'</h4>';
-
-			poll+='</div>';
-
-			poll+='<div class="col-md-2">';
-
-			poll+='<time class="timeago" id="pollCreatedTime" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
-
-			poll+='</div>';
-
-			poll+='</div>';
-
-			poll+='<div class="row" id="pollOptions">';
-
-			poll+='<div class="col-md-12">';
-
-			poll+='<form>';
-
-			poll+='div class="row">';
-
-			if(data.pollOptionsType==1)
-			{
-				for ( i = 0; i<data.pollOptions.length;i++)
-				{
-					poll+='<div class="col-md-6">';
-
-					poll+='<input type="radio" name="vote" value="'+i+'" onclick="voteSend(this.value,'+data.pollIdHash+');"> &nbsp;'+data.pollOptions[i]+'<br>';
-
-					poll+='</div>'
-				}
-
-				poll+='</div>';
-
-				poll+='</form>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-			}
-
-			else if(data.pollOptionsType==2)
-			{
-				for ( i = 0; i<data.pollOptions.length;i++)
-				{
-					poll+='<div class="col-md-6">';
-
-					poll+='<input type="checkbox" name="vote" value="'+i+'"> &nbsp;'+data.pollOptions[i]+'<br>';
-
-					poll+='</div>'
-				}
-
-				poll+='</div>';
-
-				poll+='<button class="text-center btn btn-success" onclick="getVoteMultipleOptions('+data.pollIdHash+');"></button>';
-
-				poll+='</form>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-			}
-
-			poll+='</div>';
-
-			poll+='</div>';
-
-			displayChart(data.optionVotes,data.pollIdHash+'b',data.pollIdHash,0);
 		}
 
-		else if(data.pollType==3)
-		{
-			
-			poll+='<div id="'+data.pollIdHash+'b" class="col-md-6 col-md-offset-3 poll"></div>';
-
-			poll+='<div class="row" id="'+data.pollIdHash+'">';
-
-			poll+='<div class="col-md-6 col-md-offset-3 poll">';
-
-			poll+='<div class="row" id="pollContent">';
-
-			poll+='<div class="col-md-10">';
-
-			poll+='<h4 id="pollQuestion">'+data.pollQuestion+'</h4>';
-
-			poll+='</div>';
-
-			poll+='<div class="col-md-2">';
-
-			poll+='<time class="timeago" id="pollCreatedTime" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
-
-			poll+='</div>';
-
-			poll+='</div>';
-
-			poll+='<div class="row" id="pollOptions">';
-
-			poll+='<div class="col-md-12">';
-
-			poll+='<form>';
-
-			poll+='div class="row">';
-
-			if(data.pollOptionsType==1)
-			{
-				for ( i = 0; i<data.pollOptions.length;i++)
-				{
-					poll+='<div class="col-md-6">';
-
-					poll+='<input type="radio" name="vote" value="'+i+'" onclick=\"voteSend(this.value,'+data.pollIdHash+');\"> &nbsp;'+data.pollOptions[i]+'<br>';
-
-					poll+='</div>'
-				}
-
-				poll+='</div>';
-
-				poll+='</form>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-			}
-
-			else if(data.pollOptionsType==2)
-			{
-				for ( i = 0; i<data.pollOptions.length;i++)
-				{
-					poll+='<div class="col-md-6">';
-
-					poll+='<input type="checkbox" name="vote" value="'+i+'"> &nbsp;'+data.pollOptions[i]+'<br>';
-
-					poll+='</div>'
-				}
-
-				poll+='</div>';
-
-				poll+='<button class="text-center btn btn-success" onclick="getVoteMultipleOptions('+data.pollIdHash+');"></button>';
-
-				poll+='</form>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-
-				poll+='</div>';
-			}
-		}
 		if(position=="first")
 		{
 			$('#pollArea').prepend(poll).hide().fadeIn(500);
 		}
-		else 
+		else if(position=="last")
 		{
 			$('#pollArea').append(poll).hide().fadeIn(500);
 		}
@@ -740,14 +762,14 @@
 			if(checkData(data)==1)
 			{
 				datas=JSON.parse(data);
-				/*for(i=0;i<datas.length;i++)
+				for(i=0;i<datas.length;i++)
 				{
 					insertPoll(datas[i],"last");
-				}*/
+				}
 
 				console.log(datas.length);
 				insertPoll(datas[0],"last");
-				$('.time').timeago();
+				$('time.timeago').timeago();
 			}
 		});
 	}
@@ -756,3 +778,146 @@
 		fetchLatestPolls(1);
 	});
 </script>
+
+<div class="modal fade slow" id="pollEditModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+
+	  	<div class="modal-dialog">
+
+	    	<div class="modal-content">
+
+		      	<div class="modal-header">
+
+	        		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+	        		<h4 class="modal-title" id="editModalLabel"><i class="fa fa-plus"></i> &nbsp;Edit Poll&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="The poll will be shown to the users of 4pi only after SAC speaker's approval. You will not allowed to edit the poll once approved."></i>]</h4>
+
+	      		</div>
+
+		      	<div class="modal-body">
+
+	      		    <form role="form">
+
+				  		<div class="form-group">
+
+				   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+
+				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="editPollQuestion" placeholder="Poll on"></input>
+
+				  		</div>
+
+				  		<!-- <div class="form-group">
+
+				   			<label for="pollDuration">Poll duration</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Basically, how long the poll should be conduted."></i>]
+
+				    		<input type="text" name="pollDuration" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollDuration" placeholder="Poll on"></input>
+
+				  		</div> -->
+
+				  		<div class="form-group">
+
+				   			<label for="pollName">Poll option type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Single option selection or multiple option types."></i>]
+
+				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollOptionType" >
+				    			
+				    			<option value="1">Single option selection</option>
+
+				    			<option value="2">Multiple options selection</option>
+
+				    		</select>
+
+				  		</div>
+
+				  		<div class="form-group">
+
+				   			<label for="pollName">Poll type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+
+				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollType" >
+				    			
+				    			<option value="1">Display results after the user votes</option>
+
+				    			<option value="2">Display results along with options</option>
+
+				    			<option value="3">Display results after the poll has ended</option>
+
+
+				    		</select>
+
+				  		</div>
+
+				  		<div class="form-group">
+
+				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+
+				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollSharedWith" >
+
+				  		</div>
+
+
+				  		<div class="row" id="pollOptionsDiv">
+
+
+							<div class="form-group col-md-6" id="option1">
+					   			
+					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
+
+								<!-- <div class="input-group"> -->
+					    			
+				    			<input  type="text" name="pollOptions" class="inputOption form-control input-sm" style="background-color:white !important;border-radius:0px;" placeholder="Option"></input>
+
+					    			<!-- <span class="input-group-addon">
+
+										<i class="fa fa-plus" onclick="createPollAddInput();"></i>
+
+					    			</span>
+
+					    			<span class="input-group-addon hidden">
+
+										<i class="fa fa-minus" onclick="createPollDeleteInput();"></i>
+
+					    			</span> -->
+
+				    			<!-- </div> -->
+
+				    		</div>
+
+
+				    		<div class="form-group col-md-6" id="option2">
+					   			
+					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+
+								<div class="input-group">
+					    			
+					    			<input type="text" name="pollOptions" class="inputOption form-control input-sm" style="background-color:white !important;border-radius:0px;"placeholder="Option 2"></input>
+
+					    			<span class="input-group-addon" id="addOption">
+
+										<i class="fa fa-plus" onclick="editPollAddInput();"></i>
+
+					    			</span>
+
+					    			<span class="input-group-addon hidden" id="deleteOption">
+
+										<i class="fa fa-minus" onclick="editPollDeleteInput(this);"></i>
+
+					    			</span>
+
+				    			</div>
+
+				    		</div>
+
+
+			    		</div>
+					
+					</form>
+
+					<br/>
+
+					<button onclick="editedPollSend();" class="btn btn-primary">Create Poll</button>
+
+				</div>
+				
+			</div>
+
+		</div>
+
+</div> <!-- end modals -->
