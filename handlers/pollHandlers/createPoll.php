@@ -187,7 +187,7 @@ else
 			$pollStatus=0;
 			for($i=0;$i<$pollOptionsCount;$i++)
 			{
-				$optionsAndVotes[$i]=array($pollOptionsArray[$i] => $optionVotesArray[$i]);
+				$optionsAndVotes[$i]=array($pollOptionsArray[$i] , (int)$optionVotesArray[$i]);
 			}
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
 					$sharedWith,$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,1);

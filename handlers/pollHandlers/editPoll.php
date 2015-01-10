@@ -224,9 +224,12 @@ else
 			$pollCreationTime=$ts->format(DateTime::ISO8601);
 			$pollStatus=0;
 			$hasVoted=1;
-			
+			for($i=0;$i<$pollOptionsCount;$i++)
+			{
+				$optionsAndVotes[$i]=array($pollOptionsArray[$i] , (int)$optionVotesArray[$i]);
+			}
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$sharedWith,$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus,1);
+					$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1);
 			print_r(json_encode($pollObj));
 		}
 		else

@@ -166,7 +166,7 @@ else
 			$optionCount=count($pollOptionsArray);
 			for($i=0;$i<$optionCount;$i++)
 			{
-				$optionsAndVotes[$i]=array($pollOptionsArray[$i] => $pollExistingVotesArray[$i]);
+				$optionsAndVotes[$i]=array($pollOptionsArray[$i] , (int)$pollExistingVotesArray[$i]);
 			}
 			$pollUpdatedVotes=implode(",",$pollExistingVotesArray);
 			$editPollSQL="UPDATE poll SET optionVotes = ?, votedBy=? WHERE pollIdHash= ?";
