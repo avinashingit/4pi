@@ -157,11 +157,12 @@ else
 				$votedBy=$votedBy.",".$userId;
 			}
 
-			foreach ($pollAnswerVotesArray as $option ) 
+			for($i=0;$i<count($pollAnswerVotesArray);$i++)
 			{
-				$temp=((int)$pollExistingVotesArray[$option])+1;
-				$pollExistingVotesArray[$option]=(string)$temp;
+				$temp=((int)$pollExistingVotesArray[$i])+1;
+				$pollExistingVotesArray[$i]=(string)$temp;
 			}
+			
 			$optionCount=count($pollOptionsArray);
 			for($i=0;$i<$optionCount;$i++)
 			{

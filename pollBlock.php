@@ -38,95 +38,7 @@
 
 </style>
 
-<script>
 
-
-
-	function submitVote(pollId,type,result)
-	{
-		if(type=='single')
-		{
-			var option=$('#'+pollId).find('input');
-			for (i =0;i<option.length;i++)
-			{
-				if(option[i].checked)
-				{
-					alert(option[i].value);
-				}
-			}
-		}
-
-		else if(type=="multiple")
-		{
-			var option=$('#'+pollId).find('input');
-			for (i =0;i<option.length;i++)
-			{
-				if(option[i].checked)
-				{
-					alert(option[i].value);
-				}
-			}
-		}
-	}
-
-	function deletePoll(pollId)
-	{
-		if(confirm("Do you want to delete the poll")==true)
-		{
-			$('#'+pollId).remove();
-		}
-	}
-
-	function editPollAddInput(){
-		var numberOfOptionsCurrent=$('#pollEditModal').find('.inputOption').length;
-		var current=$('#pollEditModal').find('#option2').clone();
-		var optionVal=numberOfOptionsCurrent+1;
-		current.attr('id',optionVal);
-		current.find('.inputOption').attr("id",optionVal);
-		placeHolder="Option ";
-		current.find('.inputOption').attr("placeholder",placeHolder);
-		current.find('.inputOption').val("");
-		current.find('label').html(placeHolder);
-		current.find('#deleteOption').removeClass('hidden');
-		$('#pollEditModal').find('.modal-body').find('form .row').append(current);
-	}
-
-	//----------------------------------------------------------------------------//
-	//delete option input
-	function editPollDeleteInput(el){
-		$(el).parent().parent().parent().remove();
-	}
-
-	function editPoll(pollId)
-	{
-		$('#pollEditModal').modal('show');
-		var olink=$('#'+pollId);
-		var link=$('#pollEditModal');
-		link.find('#editPollQuestion').val(olink.find('#pollQuestion').find('div').html());
-		link.find('#editPollOptionType').val(olink.find('#pollOptionType').html());
-		link.find('#editPollSharedWith').val(olink.find('#pollShareWith').html());
-		link.find('#editPollType').val(olink.find('#pollResultType').html());
-		var options=olink.find('input').length;
-		if(link.find('#pollOptionsDiv').find('input').length!=options)
-		{
-			link.find('#option1').find('input').val(olink.find('#pollOption0').next().html());
-			link.find('#option2').find('input').val(olink.find('#pollOption1').next().html());
-
-			if(options>=3)
-			{
-				for(i=3;i<=options;i++)
-				{
-					editPollAddInput();
-					link.find('#'+i).find('input').val(olink.find('#pollOption'+i).next().html());
-				}
-			}
-			
-			
-		}
-	}
-	
-
-</script>
 
 <div class="col-md-7" id="polls">
 	
@@ -430,43 +342,43 @@
 		var pollQuestion =$('#'+id).find('#pollQuestion').html();
 		if(hUh==1)
 		{
-			$('#'+id).hide();
+			$('#'+id+'Content').hide();
 		}
-		$('#'+idC).highcharts({
-	        chart: {
-	            type: 'pie',
-	            options3d: {
-	                enabled: true,
-	                alpha: 20
-	            }
-	        },
-	        title: {
-	            text: pollQuestion
-	        },
-	        plotOptions: {
-	            pie: {
-	                innerSize: 100,
-	                depth: 65
-	            },
-	            series: {
-	                dataLabels: {
-	                	enabled:true,
-	                    formatter: function() {
-	                        return Math.round(this.percentage*100)/100 + ' %';
-	                    },
-	                    distance: -20,
-	                    color:'white'
-	                }
-	            }
-	        },
-	        series: [{
-	            name: 'No. of Votes',
-	            data: json
-	        }]
-	    });
+		$('#'+id).highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 20
+            }
+        },
+        title: {
+            text: pollQuestion
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 100,
+                depth: 65
+            },
+            series: {
+                dataLabels: {
+                	enabled:true,
+                    formatter: function() {
+                        return Math.round(this.percentage*100)/100 + ' %';
+                    },
+                    distance: -20,
+                    color:'white'
+                }
+            }
+        },
+        series: [{
+            name: 'No. of Votes',
+            data: json
+        }]
+    });
 	}
 	//---------------------------------------------------------------------------------------------//
-	function voteSend(value,id)
+	/*function voteSend(value,id)
 	{
 		// alert("Hello");
 		$.post('./handlers/pollHandlers/votePoll.php',{
@@ -477,17 +389,17 @@
 			alert("Server overload. Please try again.:(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			// displayChart(data,id+'b',id,1);
 		});
-	}
+	}*/
 
 	//--------------------------------------------------------------------------------//
 	function sendVoteMultipleOptions(id)
 	{
 		// alert("Hello");
 		var options=[];
-		console.log($('#'+id));
+		//console.log($('#'+id));
 		$('#'+id).find('#vote:checked').each(function(){
 
 			options.push($(this).val());
@@ -502,7 +414,7 @@
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			displayChart(data,id+'b',id,1);
 		});
 	}
@@ -609,7 +521,7 @@
 
 								for(var i=0;i<optionLength;i+=2)
 								{
-									console.log(i);
+									//console.log(i);
 									poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
 								}
 
@@ -620,7 +532,7 @@
 
 								for(var i=1;i<optionLength;i=i+2)
 								{
-									console.log(i);
+									//console.log(i);
 									poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
 								}
 
@@ -758,7 +670,7 @@
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				datas=JSON.parse(data);
@@ -767,7 +679,7 @@
 					insertPoll(datas[i],"last");
 				}
 
-				console.log(datas.length);
+				//console.log(datas.length);
 				insertPoll(datas[0],"last");
 				$('time.timeago').timeago();
 			}
@@ -777,6 +689,120 @@
 	$(document).ready(function(){
 		fetchLatestPolls(1);
 	});
+</script>
+<script>
+
+
+
+	function submitVote(pollId,type,result)
+	{
+		if(type=='single')
+		{
+			var checkedOption=new Array();
+			var option=$('#'+pollId).find('input');
+			for (i =0;i<option.length;i++)
+			{
+				if(option[i].checked)
+				{
+					checkedOption[0]=i;
+				}
+			}
+			$.post('./handlers/pollHandlers/votePoll.php',{
+				_pollId:pollId,
+				_votes:checkedOption[0]
+			})
+			.error(function(){
+				alert("Server overload. Please try again. :(");
+			})
+			.success(function(data){
+				console.log(data);
+				if(checkData(data)==1)
+				{
+					displayChart(data,pollId+'b',pollId,1);
+				}
+			});
+		}
+
+		else if(type=="multiple")
+		{
+			var option=$('#'+pollId).find('input');
+			for (i =0;i<option.length;i++)
+			{
+				if(option[i].checked)
+				{
+					alert(option[i].value);
+				}
+			}
+		}
+	}
+
+	function deletePoll(pollId)
+	{
+		if(confirm("Do you want to delete the poll")==true)
+		{
+			$('#'+pollId).remove();
+		}
+	}
+
+	function editPollAddInput(){
+		var numberOfOptionsCurrent=$('#pollEditModal').find('.inputOption').length;
+		var current=$('#pollEditModal').find('#option2').clone();
+		var optionVal=numberOfOptionsCurrent+1;
+		current.attr('id',optionVal);
+		current.find('.inputOption').attr("id",optionVal);
+		placeHolder="Option ";
+		current.find('.inputOption').attr("placeholder",placeHolder);
+		current.find('.inputOption').val("");
+		current.find('label').html(placeHolder);
+		current.find('#deleteOption').removeClass('hidden');
+		$('#pollEditModal').find('.modal-body').find('form .row').append(current);
+	}
+
+	//----------------------------------------------------------------------------//
+	//delete option input
+	function editPollDeleteInput(el){
+		$(el).parent().parent().parent().remove();
+	}
+
+	function editPoll(pollId)
+	{
+		$('#pollEditModal').find('#pollOptionsDiv').find('div').each(function(){
+			if($(this).attr('id')=='#option1' || $(this).attr('id')=='#option2')
+			{
+				$(this).find('input').val("");
+			}
+			else
+			{
+				$(this).remove();
+			}
+		});
+		$('#pollEditModal').modal('show');
+		var olink=$('#'+pollId);
+		var link=$('#pollEditModal');
+		link.find('#editPollQuestion').val(olink.find('#pollQuestion').find('div').html());
+		link.find('#editPollOptionType').val(olink.find('#pollOptionType').html());
+		link.find('#editPollSharedWith').val(olink.find('#pollShareWith').html());
+		link.find('#editPollType').val(olink.find('#pollResultType').html());
+		var options=olink.find('input').length;
+		if(link.find('#pollOptionsDiv').find('input').length!=options)
+		{
+			link.find('#option1').find('input').val(olink.find('#pollOption0').next().html());
+			link.find('#option2').find('input').val(olink.find('#pollOption1').next().html());
+
+			if(options>=3)
+			{
+				for(i=3;i<=options;i++)
+				{
+					editPollAddInput();
+					link.find('#'+i+1).find('input').val(olink.find('#pollOption'+i-1).next().html());
+				}
+			}
+			
+			
+		}
+	}
+	
+
 </script>
 
 <div class="modal fade slow" id="pollEditModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
