@@ -499,62 +499,83 @@
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3" id="pollCreatorOptions">';
+						if(data.isOwner==1)
+						{
+							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-							poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
-						poll+='</div>';
+							poll+='</div>';
 
-						poll+='<div class="col-md-2" id="pollCreatedTime">';
+							poll+='<div class="col-md-3" id="pollCreatedTime">';
 
-							poll+='<time class="time timeago" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
-						poll+='</div>';
+							poll+='</div>';
+						}
+
+						else
+						{
+							poll+='<div class="col-md-3 col-md-offset-2" id="pollCreatedTime">';
+
+								poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+
+							poll+='</div>';
+						}
+
+						
 
 					poll+='</div>';
 
 					poll+='<br/>';
 
-					poll+='<div class="row">';
+					if(data.hasVoted!=1)
+					{
+						poll+='<div class="row">';
 
-							poll+='<div class="col-md-6">';
+								poll+='<div class="col-md-6">';
 
-								for(var i=0;i<optionLength;i+=2)
-								{
-									//console.log(i);
-									poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
-								}
-
-
-							poll+='</div>';
-
-							poll+='<div class="col-md-6">';
-
-								for(var i=1;i<optionLength;i=i+2)
-								{
-									//console.log(i);
-									poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
-								}
+									for(var i=0;i<optionLength;i+=2)
+									{
+										//console.log(i);
+										poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+									}
 
 
-							poll+='</div>';
+								poll+='</div>';
+
+								poll+='<div class="col-md-6">';
+
+									for(var i=1;i<optionLength;i=i+2)
+									{
+										//console.log(i);
+										poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+									}
 
 
-							
+								poll+='</div>';
 
-					poll+='</div>';
 
-					poll+='<br/>';
-
-					poll+='<div class="row">';
-
-						poll+='<div class="text-center">';
-
-							poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\''+data.pollType+'\');" class="btn btn-md btn-success">Vote</button>';
+								
 
 						poll+='</div>';
 
-					poll+='</div>';
+						poll+='<br/>';
+
+						poll+='<div class="row">';
+
+							poll+='<div class="text-center">';
+
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\''+data.pollType+'\');" class="btn btn-md btn-success">Vote</button>';
+
+							poll+='</div>';
+
+						poll+='</div>';
+					}
+
+					
+
+					
 
 				poll+='</div>';
 
@@ -740,7 +761,19 @@
 	{
 		if(confirm("Do you want to delete the poll")==true)
 		{
-			$('#'+pollId).remove();
+			$.post('./handlers/pollHandlers/deletePoll.php',{
+				_pollId:pollId
+			})
+			.error(function(){
+				alert("Server overload. Please try again.:(");
+			})
+			.success(function(data){
+				if(checkData(data)==1)
+				{
+					console.log(data);
+					$('#'+pollId).remove();
+				}
+			});
 		}
 	}
 
