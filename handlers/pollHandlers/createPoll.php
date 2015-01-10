@@ -190,7 +190,7 @@ else
 				$optionsAndVotes[$i]=array($pollOptionsArray[$i] => $optionVotesArray[$i]);
 			}
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,1);
+					$sharedWith,$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,1);
 			print_r(json_encode($pollObj));
 		}
 		else

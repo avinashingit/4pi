@@ -226,7 +226,7 @@ else
 			$hasVoted=1;
 			
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus,1);
+					$sharedWith,$hasVoted,$optionVotesArray,$pollCreationTime,$pollStatus,1);
 			print_r(json_encode($pollObj));
 		}
 		else

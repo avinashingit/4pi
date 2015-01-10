@@ -18,6 +18,21 @@
 		}
 	}
 	
+	function getUserFromId($userId)
+	{
+		$conn=new QoB();
+		$fetchUserSQL="SELECT * FROM users WHERE userId= ?";
+		$values[0]=array($userId=>'s');
+		$result=$conn->fetchAll($fetchUserSQL,$values);
+		if($conn->error==""&&$result!="")
+		{	
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	
 	function getPostFromHash($postIdHash)
 	{
@@ -491,7 +506,18 @@
 		}
 
 	}
-
+	function getDuration($start,$end)
+	{
+		$startYearMonthDate=date('Y/m/d',$start);
+		$endYearMonthDate=date('Y/m/d',$end);
+		$duration=$startYearMonthDate."-".$endYearMonthDate;
+	}
+	function getMinDuration($start,$end)
+	{
+		$startYearMonthDate=date('Y/m',$start);
+		$endYearMonthDate=date('Y/m',$end);
+		$duration=$startYearMonthDate."-".$endYearMonthDate;
+	}
 	function newValidateSharedWith($str)
 	{
 		$conn=new QOB();

@@ -8,7 +8,7 @@ class miniPoll
 	public $pollType;
 	public $pollOptions;//array of options
 	public $pollOptionsType;
-	//public $sharedWith;//not using because no editing of polls once displayed
+	public $sharedWith;
 
 	public $hasVoted;
 	public $optionVotes;//array of votes to each option
@@ -17,7 +17,7 @@ class miniPoll
 	public $isOwner;
 
 	function __construct($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptions,$pollOptionsType,
-		$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner)
+		$sharedWith,$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner)
 	{
 		$this->pollIdHash=$pollIdHash;
 		$this->userName=$userName;
@@ -26,7 +26,7 @@ class miniPoll
 		$this->pollType=$pollType;
 		$this->pollOptions=$pollOptions;
 		$this->pollOptionsType=$pollOptionsType;
-		//$this->sharedWith=$sharedWith;
+		$this->sharedWith=$sharedWith;
 
 		$this->hasVoted=$hasVoted;
 		$this->optionVotes=$optionVotes;

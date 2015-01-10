@@ -124,7 +124,7 @@ else
 				$pollCreationTime=$ts->format(DateTime::ISO8601);
 				$pollStatus=$poll['pollStatus'];
 				$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-									$poll['optionsType'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
+									$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
 				//print_r(json_encode($pollObj));
 				$pollObjArray[]=$pollObj;
 				$displayCount++;
