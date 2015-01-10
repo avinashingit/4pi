@@ -173,7 +173,7 @@ function homeSearch(el)
 				change=0;
 			}
 			else
-			{
+			{  
 				$('#noResultForSearch').html("");
 				for(i=0;i<data.length;i++)
 				{

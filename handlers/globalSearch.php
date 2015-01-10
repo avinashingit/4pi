@@ -71,7 +71,7 @@ if(!isset($_SESSION['vj']))
                         require_once("../QOB/qob.php");
                         $qob = new QOB();
                         
-                        /*     TO FETCH STUDENT SEARCH RESULTS   */
+                        /*     TO FETCH STUDENT SEARCH RESULTS   
                         $result = $qob->select($query1, $values);
                         
                         if($qob->error=="")
@@ -98,7 +98,7 @@ if(!isset($_SESSION['vj']))
                             {
                                 echo 133;//database error
                             }
-                        /*     TO FETCH STUDENT SEARCH RESULTS   */
+                            TO FETCH STUDENT SEARCH RESULTS   */
 
 
 
@@ -108,7 +108,7 @@ if(!isset($_SESSION['vj']))
 
 
                         
-                        /*     TO FETCH POST SEARCH RESULTS   */
+                            // TO FETCH POST SEARCH RESULTS   
                         $result = $qob->select($query2, $values);
                         
                         if($qob->error=="")
@@ -142,7 +142,7 @@ if(!isset($_SESSION['vj']))
 
 
                         
-                        /*     TO FETCH EVENT SEARCH RESULTS   */
+                        /*     TO FETCH EVENT SEARCH RESULTS   
                         $result = $qob->select($query3, $values);
                         
                         if($qob->error=="")
@@ -181,7 +181,7 @@ if(!isset($_SESSION['vj']))
 
 
                         
-                        /*     TO FETCH POLL SEARCH RESULTS   */
+                        /*     TO FETCH POLL SEARCH RESULTS   
                         $result = $qob->select($query4, $values);
                         
                         if($qob->error=="")
@@ -209,7 +209,7 @@ if(!isset($_SESSION['vj']))
                                // echo $qob->error;
                                 echo 133;//database error
                             }
-                        /*     TO FETCH POLL SEARCH RESULTS   */
+                             TO FETCH POLL SEARCH RESULTS   */
 
 
 

@@ -25,9 +25,18 @@
 	}
 	?>";
 
-
-
+	var userRollNumber="<?php
+	$con=mysql_connect("localhost","root","root");
+	mysql_select_db("iiitdmstudentsportal");
+	$sql="SELECT userId FROM users WHERE userIdHash='".$_GET['ref']."'";
+	$res=mysql_query($sql);
+	while($row=mysql_fetch_array($res))
+	{
+		echo $row[0];
+	}
+	?>";
 </script>
+
 <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
 <link rel="stylesheet" type="text/css" href="css/demo.css" />
 <link rel="stylesheet" type="text/css" href="css/inputs.css" />
@@ -72,12 +81,13 @@
 
 	$(document).ready(function(){
 		$('#authenticationForm').find('#currentUserName').html(userName);
+		$('#authenticationForm').find('#currentUserRollNumber').html(userRollNumber);
 		$('#secondContent').hide();
 		setInterval(function(){
 			$('#firstContent').fadeOut(function(){
 				$('#secondContent').fadeIn();
 			});
-		},1500);
+		},100);
 		$('.formLink').each(function(){
 			var els=$(this).attr("data-target");
 			$(els).hide();
@@ -124,6 +134,7 @@
 				if(checkData(data)==1)
 				{
 					$('#authentication').remove();
+					$('.formLink').each(function(){if($(this).attr('data-target')=='#topPart'){$(this).toggleClass('hidden');}});
 					$('.formLink').each(function(){
 						if($(this).attr("data-target")=="#authentication")
 						{
@@ -145,11 +156,11 @@
 		alert("Vafjldas");
 		e.preventDefault();
 		var alias=$('#topPartForm').find('#topPartAlias').val().trim();
-		var degree=$('#topPartForm').find('#topPartCurrentDegree').val().trim();
-		var profession=$('#topPartForm').find('#topPartCurrentProfesssion').val().trim();
+		/*var degree=$('#topPartForm').find('#topPartCurrentDegree').val().trim();
+		var profession=$('#topPartForm').find('#topPartCurrentProfesssion').val().trim();*/
 		var dob=$('#topPartForm').find('#topPartDOB').val().trim();
 		var aboutme=$('#topPartForm').find('#topPartAboutme').val().trim();
-		if(alias.length==0 || degree.length==0 || profession.length==0 || dob.length==0 || aboutme.length==0)
+		if(alias.length==0 || dob.length==0 || aboutme.length==0)
 		{
 			alert("Please fill all the fields.");
 		}
@@ -162,8 +173,6 @@
 			$('#topPartButton').find('.button__text').html("Submitting").attr("onclick","");
 			$.post('/4pi/handlers/initial/insertTopPart.php',{
 				_alias:alias,
-				_degree:degree,
-				_profession:profession,
 				_dob:dob,
 				_aboutme:aboutme,
 				_userId:userId
@@ -176,6 +185,7 @@
 				if(checkData(data)==1)
 				{
 					$('#topPart').remove();
+					$('#topPart').hide();$('.formLink').each(function(){if($(this).attr('data-target')=='#bottomPart'){$(this).toggleClass('hidden');}});
 					$('.formLink').each(function(){
 						if($(this).attr("data-target")=="#topPart")
 						{
@@ -233,12 +243,21 @@
 				alert("success");
 				$('#bottomPart').remove();
 				$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#projects')
+						{
+							if($(this).hasClass('hidden')){
+								$(this).removeClass('hidden');
+							}
+						}
+					});
+				$('.formLink').each(function(){
 					if($(this).attr("data-target")=="#bottomPart")
 					{
 						$(this).remove();
-						$("#projects").show();
+						
 					}
 				});
+				$("#projects").show();
 			}
 			else
 			{
@@ -284,7 +303,25 @@
 				if(checkData(data)==1)
 				{
 					$('#projects').hide();
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#skills')
+							{
+								if($(this).hasClass('hidden'))
+								{
+									$(this).removeClass('hidden');
+								}
+							}
+						});
 					$('#projectButton').find('.button__text').html("Submit").attr("onclick","submitProject(event);");
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=="#skills")
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+						}
+					});
 					$('#skills').show();
 				}
 				else
@@ -305,6 +342,10 @@
 		{
 			alert("Please fill all the fields");
 		}
+		else if(value<0 && value>100)
+		{
+			alert("Please dont underrate or overrate yourself.")
+		}
 		else
 		{
 			$('#skillButton').find('.button__text').html("Submitting").attr("onclick","");
@@ -320,8 +361,18 @@
 			.success(function(data){
 				if(checkData(data)==1)
 				{
+					$('#skills').hide();
 					$('#tools').show();
 					$('#skillButton').find('.button__text').html("Submit").attr("onclick","submitSkills(event);");
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=="#tools")
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+						}
+					});
 				}
 				else
 				{
@@ -354,6 +405,16 @@
 				if(checkData(data)==1)
 				{
 					$('#tools').hide();
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#academics')
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+							
+						}
+					});
 					$('#academics').show();
 					$('#toolButton').find('.button__text').html("Submit").attr("onclick","submitTools();");
 				}
@@ -399,8 +460,18 @@
 				if(checkData(data)==1)
 				{
 					$('#academics').hide();
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#certifications')
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).toggleClass('hidden');
+							}
+						}
+					});
 					$('#certifications').show();
 					$('#academicsButton').find('.button__text').html("Submit").attr("onclick","submitAcademics(event);");
+
 				}
 				else
 				{
@@ -440,6 +511,16 @@
 				if(checkData(data)==1)
 				{
 					$('#certifications').hide();
+					$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#workshops')
+						{
+							if($(this).hasClass('hidden'))
+							{
+								$(this).removeClass('hidden');
+							}
+							
+						}
+					});
 					$('#workshops').show();
 					$('#certificationsButton').find('.button__text').html("Submit").attr("onclick","submitCertifications(event);");
 				}
@@ -613,7 +694,6 @@
 		}
 	}
 
-
 </script>
 
 <body>
@@ -665,7 +745,7 @@
 
 			</div>
 
-			<div class="col-md-10 text-center">
+			<div class="col-md-7 text-center">
 
 				<div class="row" id="home">
 
@@ -686,13 +766,13 @@
 							<h2>4pi is </h2>
 
 							<ol>
-								<li><h3>The complete, holistic, all-encompassing information portal for you. All that you need to know, ought to know and want to know about our institute will be found here.</h3></li>
+								<li><h4>The complete, holistic, all-encompassing information portal for you. All that you need to know, ought to know and want to know about our institute will be found here.</h4></li>
 
-								<li><h3>A platform where ideas are shared, sparks are ignited and wonders are created, all through interaction on a platform which breaks down any barriers of accessibility and communication that existed hitherto.</h3></li>
+								<li><h4>A platform where ideas are shared, sparks are ignited and wonders are created, all through interaction on a platform which breaks down any barriers of accessibility and communication that existed hitherto.</h4></li>
 
-								<li><h3>The one stop destination for institute news and happenings. Workshops, seminars and so forth.</h3></li>
+								<li><h4>The one stop destination for institute news and happenings. Workshops, seminars and so forth.</h4></li>
 
-								<li><h3>A platform that enables you to filter out what’s relevant to you, find people whose interests match yours and collaborate to make great things happen.</h3></li>
+								<li><h4>A platform that enables you to filter out what’s relevant to you, find people whose interests match yours and collaborate to make great things happen.</h4></li>
 
 							</ol>
 
@@ -704,7 +784,9 @@
 
 						<button class="text-center btn btn-primary" onclick="$('#home').hide();$('#authentication').show();$('.formLink').each(function(){
 						if($(this).attr('data-target')=='#authentication'){
-						$(this).toggleClass('hidden');}});";>Next</button>
+						$(this).toggleClass('hidden');}});$('.formLink').each(function(){
+						if($(this).attr('data-target')=='#home'){
+						$(this).remove();}});";>Next</button>
 
 					</div>
 
@@ -712,10 +794,12 @@
 
 				<div class="row" id="authentication">
 
+					<br/><br/><br/><br/>
+
 					<form id="authenticationForm">
 
 						<h1>Hello , <span id="currentUserName"></span></h1>
-						<h3>Your roll number is your username</h3>
+						<h3>Your roll number <span id="currentUserRollNumber"></span> is your username</h3>
 						<br/>
 
 						<div class="input-container">
@@ -740,8 +824,8 @@
 							</div>
 							<br />
 							<div class="col-md-3 col-md-offset-4">
-								<button id="authenticationButton" class="button button--effect-1" onclick="submitAuthentication(event);$('.formLink').each(function(){if($(this).attr('data-target')=='#topPart'){$(this).toggleClass('hidden');}});">
-									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+								<button id="authenticationButton" class="button button--effect-1" onclick="submitAuthentication(event);">
+									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 										<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 											<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 										</svg>
@@ -757,12 +841,22 @@
 
 				<div class="row" id="topPart">
 
+					<br/><br/><br/>
+
+					<div class="row">
+
+						<div class="text-center" style="font-size:26px;"><b>Personal information <span div style="font-size:16px;"> (*)</span></b></div>
+
+					</div>
+
+					<br/>
+
 					<form id="topPartForm">
 
 						<div class="input-container">
-							<label class="input-label fontSize16" for="input-1">Alias</label>
+							<label class="input-label fontSize16" for="input-1">Display name (*)</label>
 							<div class="input-wrap">
-								<input type="text" id="topPartAlias"/>
+								<input type="text" id="topPartAlias" placeholder="Your alternate name. Required" required/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 									<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 										<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -770,7 +864,7 @@
 								</span>
 							</div>
 							<br />
-							<label class="input-label fontSize16" for="input-1">Current degree</label>
+							<!-- <label class="input-label fontSize16" for="input-1">Current degree</label>
 							<div class="input-wrap">
 								<input type="text" id="topPartCurrentDegree"/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -779,8 +873,8 @@
 									</svg>
 								</span>
 							</div>
-							<br />
-							<label class="input-label fontSize16" for="input-1">Current job</label>
+							<br /> -->
+							<!-- <label class="input-label fontSize16" for="input-1">Current job</label>
 							<div class="input-wrap">
 								<input type="text" id="topPartCurrentProfesssion"/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -789,10 +883,10 @@
 									</svg>
 								</span>
 							</div>
-							<br />
+							<br /> -->
 							<label class="input-label fontSize16" for="input-1">Date of Birth</label>
 							<div class="input-wrap">
-								<input type="text" class="datepicker" id="topPartDOB"/>
+								<input type="text" class="datepicker" id="topPartDOB" placeholder="You can set permissions later.Required." required/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 									<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 										<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -802,7 +896,7 @@
 							<br />
 							<label class="input-label fontSize16" for="input-1">About you</label>
 							<div class="input-wrap">
-								<input type="text" id="topPartAboutme"/>
+								<input type="text" id="topPartAboutme" placeholder="Required" required/>
 								<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 									<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 										<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -811,8 +905,8 @@
 							</div>
 							<br />
 							<div class="col-md-3 col-md-offset-4">
-								<button id="topPartButton" class="button button--effect-1" onclick="submitTopPart(event);$('.formLink').each(function(){if($(this).attr('data-target')=='#bottomPart'){$(this).toggleClass('hidden');}});">
-									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+								<button id="topPartButton" class="button button--effect-1" onclick="submitTopPart(event);">
+									<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 										<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 											<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 										</svg>
@@ -829,129 +923,205 @@
 
 				<div class="row" id="bottomPart">
 
-					<div class="text-center">
+					<div class="row">
 
-						<h3>Contact</h3>
+						<div class="text-center col-md-10" style="font-size:26px;">Contact information</div> 
+
+						<div class="col-md-2 text-center">
+
+							<button class="btn btn-sm btn-default" onclick="$('#bottomPart').hide();$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#projects')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});$('#projects').show();">Skip</button>
+
+
+
+						</div>
 
 					</div>
 
 					<form id="bottomPartForm">
-					
-						<label class="input-label fontSize16" for="input-1">Alternate email</label>
-						<div class="input-wrap">
-							<input type="text" id="alternateEmail"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Address line 1</label>
+								<div class="input-wrap">
+									<input type="text" id="addressLine1"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Address line 2</label>
+								<div class="input-wrap">
+									<input type="text" id="addressLine2"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
 						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Address line 1</label>
-						<div class="input-wrap">
-							<input type="text" id="addressLine1"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Phone number 1</label>
+								<div class="input-wrap">
+									<input type="text" id="contactNumber1"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Phone number 2</label>
+								<div class="input-wrap">
+									<input type="text" id="contactNumber2"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
 						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Address line 2</label>
-						<div class="input-wrap">
-							<input type="text" id="addressLine2"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Facebook url</label>
+								<div class="input-wrap">
+									<input type="text" id="facebookURL"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Twitter url</label>
+								<div class="input-wrap">
+									<input type="text" id="twitterURL"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
 						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Phone number 1</label>
-						<div class="input-wrap">
-							<input type="text" id="contactNumber1"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Google+ url</label>
+								<div class="input-wrap">
+									<input type="text" id="googlePlusURL"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Linkedin url</label>
+								<div class="input-wrap">
+									<input type="text" id="linkedinURL"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
 						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Phone number 2</label>
-						<div class="input-wrap">
-							<input type="text" id="contactNumber2"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Pinterest url</label>
+								<div class="input-wrap">
+									<input type="text" id="pintrestURL"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Alternate email</label>
+								<div class="input-wrap">
+									<input type="text" id="alternateEmail"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
 						</div>
-						<br />
+
+						
 					
-						<label class="input-label fontSize16" for="input-1">Facebook url</label>
-						<div class="input-wrap">
-							<input type="text" id="facebookURL"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Twitter url</label>
-						<div class="input-wrap">
-							<input type="text" id="twitterURL"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Google+ url</label>
-						<div class="input-wrap">
-							<input type="text" id="googlePlusURL"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Linkedin url</label>
-						<div class="input-wrap">
-							<input type="text" id="linkedinURL"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-					
-						<label class="input-label fontSize16" for="input-1">Pinterest url</label>
-						<div class="input-wrap">
-							<input type="text" id="pintrestURL"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-					
-						<div class="col-md-3 col-md-offset-5">
-							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#projects'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+						<div class="col-md-12 text-center">
+							<button id="bottomPartButton" class="button button--effect-1" onclick="submitBottomPart(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -965,79 +1135,134 @@
 
 				<div class="row" id="projects">
 
+					<div class="row text-center">
+
+						<div class="col-md-10 text-center" style="font-size:26px;">Projects</div>
+
+						<div class="col-md-2 text-center"><button class="btn btn-sm btn-default" onclick="$('#projects').hide();$('#skills').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#skills')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button></div>
+
+					</div>
+
+					<br/>
+
 					<form id="projectsForm">
-
-						<label class="input-label fontSize16" for="input-1">Title</label>
-						<div class="input-wrap">
-							<input type="text" id="projectTitle"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Company</label>
-						<div class="input-wrap">
-							<input type="text" id="projectCompany"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Position</label>
-						<div class="input-wrap">
-							<input type="text" id="projectPosition"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Team</label>
-						<div class="input-wrap">
-							<input type="text" id="projectTeam"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Description line 1</label>
-						<div class="input-wrap">
-							<input type="text" id="projectDescriptionLine1"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
-
-						<label class="input-label fontSize16" for="input-1">Description line 2</label>
-						<div class="input-wrap">
-							<input type="text" id="projectDescriptionLine2"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br />
 
 						<div class="row">
 
 							<div class="col-md-6">
 
-								<label class="input-label fontSize16" for="input-1">From</label>
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Title (*)</label>
+								<div class="input-wrap">
+									<input type="text" id="projectTitle" placeholder="Google search engine" required>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+	
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Company</label>
+								<div class="input-wrap">
+									<input type="text" id="projectCompany" placeholder="Google Inc."/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Position</label>
+								<div class="input-wrap">
+									<input type="text" id="projectPosition" placeholder="Software systems architect"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Team</label>
+								<div class="input-wrap">
+									<input type="text" id="projectTeam" placeholder="Individual or Avinash,Hari,Sai kumar"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+					
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Description line 1</label>
+								<div class="input-wrap">
+									<input type="text" id="projectDescriptionLine1" placeholder="Short description"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Description line 2</label>
+								<div class="input-wrap">
+									<input type="text" id="projectDescriptionLine2" placeholder="Short description"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br />
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">From</label>
 								<div class="input-wrap">
 									<input type="text" class="datepicker" id="projectDurationFrom"/>
 									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -1052,7 +1277,7 @@
 
 							<div class="col-md-6">
 
-								<label class="input-label fontSize16" for="input-1">To</label>
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">To</label>
 								<div class="input-wrap">
 									<input type="text" class="datepicker" id="projectDurationTo"/>
 									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -1067,11 +1292,9 @@
 
 						</div>
 
-						<div class="col-md-3 col-md-offset-4">
-							<button id="projectButton" class="button button--effect-1" onclick="submitProject(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#skills'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+						<div class="col-md-12 text-center">
+							<button id="projectButton" class="button button--effect-1" onclick="submitProject(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1086,6 +1309,25 @@
 
 				<div class="row" id="skills">
 
+					<div class="row">
+	
+						<div class="col-md-10 text-center" style="font-size:26px;">Skill</div>
+
+						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#skills').hide();$('#tools').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#tools')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button></div>
+				
+					</div>
+
+					<br/>
+
 					<form id="skillsForm">
 
 						<label class="input-label fontSize16" for="input-1">Skill</label>
@@ -1097,8 +1339,12 @@
 								</svg>
 							</span>
 						</div>
+
+						<br/>
+
+						<label class="input-label fontSize16" for="input-1">Rating</label>
 						<div class="input-wrap">
-							<input type="number" id="skillValue1" placeholder="Enter the percentage. Eg. 93"/>
+							<input type="number" id="skillValue1" placeholder="Rate yourself out of 100" min="0" max="100" />
 							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
 								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
 									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
@@ -1107,9 +1353,9 @@
 						</div>
 						<br />
 
-						<div class="col-md-3 col-md-offset-4">
+						<div class="col-md-12 text-center">
 							<button id="skillButton" class="button button--effect-1" onclick="submitSkills(event);">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1123,6 +1369,25 @@
 				</div><!-- end id skills -->
 
 				<div class="row" id="tools">
+
+					<div class="row">
+	
+						<div class="col-md-10 text-center" style="font-size:26px;">Tool</div>
+
+						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#tools').hide();$('#academics').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#academics')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button></div>
+				
+					</div>
+
+					<br/>
 
 					<form id="toolsForm">
 
@@ -1138,10 +1403,8 @@
 						<br/>
 
 						<div class="col-md-3 col-md-offset-5">
-							<button id="toolButton" class="button button--effect-1" onclick="submitTools(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#academics'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+							<button id="toolButton" class="button button--effect-1" onclick="submitTools(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1156,46 +1419,81 @@
 
 				<div class="row" id="academics">
 
+					<div class="row">
+	
+						<div class="col-md-10 text-center" style="font-size:26px;">Academics</div>
+
+						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#academics').hide();$('#certifications').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#certifications')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button></div>
+				
+					</div>
+
+					<br/>
+
 					<form id="academicsForm">
-
-						<label class="input-label fontSize16" for="input-1">Degree</label>
-						<div class="input-wrap">
-							<input type="text" id="academicDegree" placeholder="Enter the degree. Eg. B.Tech"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br/>
-
-						<label class="input-label fontSize16" for="input-1">Institution</label>
-						<div class="input-wrap">
-							<input type="text" id="academicInstitution" placeholder="Enter the degree. Eg. IIITD&M Kancheepuram"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br/>
-
-						<label class="input-label fontSize16" for="input-1">Location</label>
-						<div class="input-wrap">
-							<input type="text" id="academicLocation" placeholder="Enter the location. Eg. Chennai"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br/>
 
 						<div class="row">
 
-							<div class="col-md-4">
+							<div class="col-md-6">
 
-								<label class="input-label fontSize16" for="input-1">Percentage/GPA</label>
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Degree</label>
+								<div class="input-wrap">
+									<input type="text" id="academicDegree" placeholder="Enter the degree. Eg. B.Tech"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Institution</label>
+								<div class="input-wrap">
+									<input type="text" id="academicInstitution" placeholder="Enter the degree. Eg. IIITD&M Kancheepuram"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Location</label>
+								<div class="input-wrap">
+									<input type="text" id="academicLocation" placeholder="Enter the location. Eg. Chennai"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">Percentage/GPA</label>
 								<div class="input-wrap">
 									<input type="text" id="academicPercentage" placeholder=" Eg. 98% or 9.5"/>
 									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -1208,9 +1506,13 @@
 
 							</div>
 
-							<div class="col-md-4">
+						</div>
 
-								<label class="input-label fontSize16" for="input-1">From</label>
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">From</label>
 								<div class="input-wrap">
 									<input type="text" class="datepicker" id="academicDurationFrom" placeholder="Eg. 29/12/2014"/>
 									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -1224,9 +1526,9 @@
 
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-6">
 
-								<label class="input-label fontSize16" for="input-1">To</label>
+								<label class="col-md-12 text-center input-label fontSize16" for="input-1">To</label>
 								<div class="input-wrap">
 									<input type="text" class="datepicker" id="academicDurationTo" placeholder="Eg. 29/12/2015"/>
 									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
@@ -1241,11 +1543,9 @@
 
 						</div>
 
-						<div class="col-md-3 col-md-offset-5">
-							<button id="academicsButton" class="button button--effect-1" onclick="submitAcademics(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#certifications'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+						<div class="col-md-12 text-center">
+							<button id="academicsButton" class="button button--effect-1" onclick="submitAcademics(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1260,29 +1560,60 @@
 
 				<div class="row" id="certifications">
 
+					<div class="row">
+	
+						<div class="col-md-10 text-center" style="font-size:26px;">Certifications</div>
+
+						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#certifications').hide();$('#workshops').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#workshops')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button></div>
+				
+					</div>
+
+					<br/>
+
 					<form id="certificationsForm">
 
-						<label class="input-label fontSize16" for="input-1">Course name</label>
-						<div class="input-wrap">
-							<input type="text" id="certificationsCourseName" placeholder="Eg. Artificial Intelligence"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
-						</div>
-						<br/>
+						<div class="row">
 
-						<label class="input-label fontSize16" for="input-1">Institute</label>
-						<div class="input-wrap">
-							<input type="text" id="certificationsInstitute" placeholder="Eg. MIT"/>
-							<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
-								<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
-									<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
-								</svg>
-							</span>
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Course name</label>
+								<div class="input-wrap">
+									<input type="text" id="certificationsCourseName" placeholder="Eg. Artificial Intelligence . Required ."/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<label class="input-label fontSize16" for="input-1">Institute</label>
+								<div class="input-wrap">
+									<input type="text" id="certificationsInstitute" placeholder="Eg. MIT"/>
+									<span class="morph-shape" data-morph-active="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s5-10,5-30c0-16-5-30-5-30s75,0,176,0c115,0,174,0,174,0s-5,14-5,30C354,60,359,70,359,70z">
+										<svg width="100%" height="100%" viewBox="0 0 370 80" preserveAspectRatio="none">
+											<path d="M359,70c0,0-59,0-174,0C84,70,9,70,9,70s0-10,0-30c0-16,0-30,0-30s75,0,176,0c115,0,174,0,174,0s0,14,0,30C359,60,359,70,359,70z"/>
+										</svg>
+									</span>
+								</div>
+								<br/>
+
+							</div>
+
 						</div>
-						<br/>
 
 						<div class="row">
 
@@ -1319,10 +1650,8 @@
 						</div>
 
 						<div class="col-md-3 col-md-offset-4">
-							<button id="certificationsButton" class="button button--effect-1" onclick="submitCertifications(event);$('.formLink').each(function(){
-						if($(this).attr('data-target')=='#workshops'){
-						$(this).toggleClass('hidden');}});">
-								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8,9-136,9c-78.2,0-137-9-137-9S3,97.198,3,62.5C3,33.999,13,12,13,12S72,2,150,2c85,0,136,10,136,10s11,17.598,11,52C297,96.398,286,113,286,113z">
+							<button id="certificationsButton" class="button button--effect-1" onclick="submitCertifications(event);">
+								<span class="morph-shape" data-morph-active="M286,113c0,0-68.8-5-136-5c-78.2,0-137,5-137,5s5-15.802,5-50.5C18,33.999,13,12,13,12s59,5,137,5c85,0,136-5,136-5s-5,17.598-5,52C281,96.398,286,113,286,113z">
 									<svg width="100%" height="100%" viewBox="0 0 300 125" preserveAspectRatio="none">
 										<path d="M286,113c0,0-68.8,0-136,0c-78.2,0-137,0-137,0s0-15.802,0-50.5C13,33.999,13,12,13,12s59,0,137,0c85,0,136,0,136,0s0,17.598,0,52C286,96.398,286,113,286,113z"/>
 									</svg>
@@ -1336,6 +1665,25 @@
 				</div><!-- end id certifications -->
 
 				<div class="row" id="workshops">
+
+					<div class="row">
+	
+						<div class="col-md-10 text-center" style="font-size:26px;">Workshops</div>
+
+						<div class="col-md-2 text-center"><button class="btn btn-default btn-sm" onclick="$('#workshops').hide();$('#interests').show();
+						$('.formLink').each(function(){
+								if($(this).attr('data-target')=='#interests')
+								{
+									if($(this).hasClass('hidden'))
+									{
+										$(this).removeClass('hidden');
+									}
+								}
+							});">Skip</button></div>
+				
+					</div>
+
+					<br/>
 
 					<form id="workshopsForm">
 
@@ -1627,12 +1975,21 @@
 				</div><!-- end id uploads -->
 
 			</div>
+
+			<div class="col-md-3 text-center">
+
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+				<img id="pilogo" title="The 4&#960; Team - WebOps" class="img-responsive" src="/4pi/img/appImgs/fourpi.svg" />
+
+			</div>
 			
 		</div>
 
 	</div>
 
 <script src="js/classie.js"></script>
+
 <script>
 	//for the sidebar menu
 	(function() {
