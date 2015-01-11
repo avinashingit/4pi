@@ -179,7 +179,7 @@ else
 			$result=$conn->insert($editPollSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
-				print_r(json_encode($optionsAndVotes));
+				echo json_encode($optionsAndVotes);
 			}
 			else
 			{
