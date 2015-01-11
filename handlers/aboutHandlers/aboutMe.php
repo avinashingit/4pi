@@ -1,13 +1,26 @@
 <?php
 
 session_start();
+require_once('../../QOB/qob.php');
+require_once('./miniPoll.php');
+require_once('../fetch.php');
+//Testing Content Starts
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
+	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+	$_POST['_refresh']=0;
+	$_POST['sgk']=array();*/
+
+//Testing Content Ends
+	
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 {
@@ -22,7 +35,7 @@ $mode=$_POST['_mode'];
 
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in createEvent")>0)
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -31,7 +44,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in createEvent",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in aboutMe",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -40,7 +53,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 }
 if(($user=getUserFromHash($currentUserIdHash))==false)
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in createEvent")>0)
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -49,7 +62,7 @@ if(($user=getUserFromHash($currentUserIdHash))==false)
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in createEvent",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in aboutMe",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -57,6 +70,7 @@ if(($user=getUserFromHash($currentUserIdHash))==false)
 	}
 }
 $isOwner=0;
+$currentUserId=$user['userId'];
 if($user['userId']==$userId)
 {
 	$isOwner=1;
@@ -85,29 +99,26 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchall("SELECT about.*, FROM about WHERE uid = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT about.*,users.name,experience.organisation,experience.designation FROM about INNER JOIN users ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
 		
-		if($conObj->error == "")
+		if($conObj->error == ""&&$result1 != "")
 		{
-			if($result1 != "")
-			{
-				
 					
-				$date1 = date("d-m-y" , $result1['dob']);
+			$date1 = date("d-m-y" , $result1['dob']);
+			/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
+			$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
+			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
+			$highestDegree=getDegree($userId);
+			$work=$result1['designation']." at ".$result1['organisation'];
+			$obj = new about($result1['propic'],$name,$result1['dob'],$result1['description'],$result1['resume'], 
+				$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],$result1['phone'],$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
+			print_r(json_encode($obj));
 				
-				$obj = new about($result1['propic'],$name,$result1['dob'],$result1['description'],$result1['resume'],$result1['hobbies'],$result1['mailid'],$result1['address'],$result1['phone'],$result1['city'],$isOwner);
-				print_r($obj);
-				
-			}
-			else
-			{
-				echo 'No values found for Query 1 in mode 1<br />';
-			}
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 1<br />';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching Top Part of aboutMe:".$userId,$currentUserId);
+			echo 12;			
 		}
 		
 		
@@ -118,28 +129,28 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of achievements
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM achievements WHERE uid = ? ORDER BY achieveddate DESC",$values1);
+		$result1 = $conObj->select("SELECT * FROM achievements WHERE userId = ? ORDER BY achieveddate DESC",$values1);
 		if($conObj->error == "")
 		{	
 			$noOfElementsA = 0;
 			while($achievements = $conObj->fetch($result1))
 			{	
 				$date1 = date("d-m-y" , $$achievements['achieveddate']);
-				$obj = new achievements($achievements['competition'],$achievements['description'],$achievements['position'],$date1,$isOwner);
+				$obj = new achievements($achievements['achievementId'],$achievements['competition'],$achievements['location'],$achievements['description'],$achievements['position'],$date1,$isOwner);
 				$outputa[$noOfElementsA] = $obj;
 				$noOfElementsA++;
 			}
 			print_r($outputa);	
 			if($noOfElementsA == 0)
 			{
-				echo 'No values found for Query 1 in mode 2<br />';
+				echo 404;
 			}
 			
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode2<br />';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching achievements of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}
 		
@@ -172,15 +183,15 @@ function aboutMe($userId,$mode,$isOwner)
 		*/
 		
 		$values1 = array(0 => array($userId=> 's'));
-		$result1 = $conObj->select("SELECT * FROM academics WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM academics WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsAc = 0;
 			while($academics = $conObj->fetch($result1))
 			{
-				$degree = '';
 				
-			    if($academics['degree'] == '18118')
+				
+			    /*if($academics['degree'] == '18118')
 				{
 					$degree = "PHD";
 				}
@@ -205,56 +216,64 @@ function aboutMe($userId,$mode,$isOwner)
 			    else if($academics['degree'] == '211722241110' )
 				{
 					$degree = "Senior Secondary School";
-				}										
-				$obj = new academics($degree,$academics['name'],$academics['start'],$academics['end'],$academics['cgpa'],$isOwner);
+				}*/
+				$startDateTimestamp=$academics['start'];
+				$endDateTimestamp=$academics['end'];
+				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);								
+				$obj = new academics($academics['degreeId'],$academics['degree'],$academics['name'],$duration,$minDuration,$academics['cgpa'],$isOwner);
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}
 			print_r($outputa);
 			if($noOfElementsAc == 0)
 			{
-				echo 'No values found for Query 1 in mode 3<br />';		
+				echo 404;		
 			}
 		}
 		else
-			{
-				echo 'Error in Query 1 in mode 3<br/>';
-				echo $conObj->error;
-			}
+		{
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching academics of aboutMe:".$userId,$currentUserId);
+			echo 12;
+		}
 	}
 		
 	elseif($mode == 4)
 	{
 		//To fetch Details of certifiedCourses
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM certifiedcoursesdummy WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM certifiedCourses WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsC = 0;
 			while($courses = $conObj->fetch($result1))
 			{	
-				$obj = new certifiedCourses($courses['title'],$courses['duration'],$courses['institutename'],$isOwner);
+				$startDateTimestamp=$courses['start'];
+				$endDateTimestamp=$course['end'];
+				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+				$obj = new certifiedCourses($course['courseId']$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
 			print_r($outputa);
 			if($noOfElementsC == 0)
 			{
-				echo 'No values found for Query 1 in mode 4<br />';
+				echo 404;
 			}
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 4<br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching certifiedCourses of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}
 
 	elseif($mode == 5)
 	{
-		//To fetch Details of competitions
+		/*//To fetch Details of competitions
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM competitions WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM competitions WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsCo = 0;
@@ -274,33 +293,37 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			echo 'Error in Query 1 in mode <br/>';
 			echo $conObj->error;
-		}
+		}*/
 	}
 	
 	elseif($mode == 6)
 	{
 		//To fetch Details of experience
 		$values1 = array(0 => array($userId=> 's'));
-		$result1 = $conObj->select("SELECT * FROM experience WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM experience WHERE userId = ?",$values1);
 		$noOfElementsE = 0;
 		if($conObj->error == "")
 		{
 			while($experience = $conObj->fetch($result1))
 			{
-				$obj = new experience($experience['organisation'],$experience['start'],$experience['end'],$experience['title'],$experience['description'],$isOwner);
+				$startDateTimestamp=$experience['start'];
+				$endDateTimestamp=$experience['end'];
+				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+				$obj = new experience($experience['experienceId'],$experience['organisation'],$duration,$minDuration,$experience['designation'],$experience['jobDescription'],$isOwner);
 				$outputa[$noOfElementsE] = $obj;
 				$noOfElementsE++;
 			}
 			print_r($outputa);
 			if($noOfElementsE == 0)
 			{
-				echo 'No values found for Query 1 in mode 6<br />';
+				echo 404;
 			}
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 6<br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching experience of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}
 	
@@ -308,34 +331,34 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of leaveMessage
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM leavemessage WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM leavemessage WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsM = 0;
 			while($leaveMessage = $conObj->fetch($result1))
 			{
-				$obj = new leaveMessage($leaveMessage['name'],$leaveMessage['mailid'],$leaveMessage['message'],$isOwner);
+				$obj = new leaveMessage($leaveMessage['leaveMessageId']$leaveMessage['name'],$leaveMessage['mailid'],$leaveMessage['message'],$isOwner);
 				$outputa[$noOfElementsM] = $obj;
 				$noOfElementsM++;
 			}
 			print_r($outputa);
-			if($noOfElementsM = 0)
+			if($noOfElementsM == 0)
 			{
-				echo 'No values found for Query 1 in mode 7<br />';
+				echo 404;
 			}
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 7<br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching leave Message of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}
 		
 	elseif($mode == 8)
 	{
-		//To fetch Details of objective
+		/*//To fetch Details of objective
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchall("SELECT * FROM objective WHERE uid = ?",$values1);
+		$result1 = $conObj->fetchall("SELECT * FROM objective WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			if($result1!="")
@@ -353,33 +376,37 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			echo 'Error in Query 1 in mode 8<br/>';
 			echo $conObj->error;
-		}
+		}*/
 	}
 	
 	elseif($mode == 9)
 	{
 		//To fetch Details of projects
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM projects WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM projects WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsP = 0;
 			while($projects = $conObj->fetch($result1))
 			{
-				$obj = new projects($projects['title'],$projects['role'],$projects['start'],$projects['end'],$projects['description'],$isOwner);
+				$startDateTimestamp=$projects['start'];
+				$endDateTimestamp=$projects['end'];
+				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+				$obj = new projects($projects['projectId'],$projects['title'],$projects['role'],$duration,$minDuration,$projects['description'],$projects['teamMembers'],$isOwner);
 				$outputa[$noOfElementsP] = $obj;
 				$noOfElementsP++;
 			}
 			print_r($outputa);	
 			if($noOfElementsP == 0)
 			{
-				echo 'No values found for Query 1 in mode 9<br />';
+				echo 404;
 			}
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 9<br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching projects of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}	
 	
@@ -387,40 +414,31 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of skillset
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM skillset WHERE uid = ?",$values1);
-		if($conObj->error == "")
+		$result1 = $conObj->fetchAll("SELECT * FROM skillset WHERE userId = ?",$values1);
+		if($conObj->error == ""&&$result1!="")
 		{
-			$noOfElementsS = 0;
-			while($skillSets = $conObj->fetch($result1))
-			{
-				$obj = new skillSet($skillSets['skills'],$skillSets['rating'],$isOwner);
-				$outputa[$noOfElementsS] = $obj;
-				$noOfElementsS++;
-			}
-			print_r($outputa);
-			if($noOfElementsS == 0)
-			{
-				echo 'No values found for Query 1 in mode 10<br />';
-			}
+			$obj = new skillSet($skillSets['skills'],$skillSets['rating'],$isOwner);
+			
+			print_r(json_encode($obj));
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 10 <br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching skillSet of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 
 	}
 	
 	elseif($mode == 11)
 	{
-		//To fetch Details of socialmedia
+		/*//To fetch Details of socialmedia
 		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->fetchall("SELECT * FROM socialmedia WHERE uid = ?",$values1);
 		if($conObj->error == "")
 		{
 			if($result1!="")
 			{
-				$obj = new socialmedia($result1['facebookid'],$result1['googleid'],$result1['twitterid'],$result1['linkedinid'],$isOwner);
+				$obj = new socialmedia($result1['facebookId'],$result1['googleId'],$result1['twitterId'],$result1['linkedinId'],$isOwner);
 				print_r($obj);
 			}
 			else
@@ -432,33 +450,23 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			echo 'Error in Query 1 in mode 11 <br/>';
 			echo $conObj->error;
-		}
+		}*/
 	}
 		
 	elseif($mode == 12)
 	{
 		//To fetch Details of toolkit
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM toolkit WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM toolkit WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
-			$noOfElementT = 0;
-			while($toolkit = $conObj->fetch($result1))
-			{
-				$obj = new toolkit($toolkit['tools'],$isOwner);
-				$outputa[$noOfElementT] = $obj;
-				$noOfElementT++;
-			}
-			print_r($outputa);
-			if($noOfElementT == 0)
-			{
-				echo 'No values found for Query 1 in mode 12<br />';
-			}
+			$obj = new toolkit($toolkit['tools'],$isOwner);
+			print_r(json_encode($obj));
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 12 <br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching toolkit of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}
 		
@@ -472,20 +480,24 @@ function aboutMe($userId,$mode,$isOwner)
 			$noOfElementsW = 0;
 			while($workshops = $conObj->fetch($result1))
 			{
-				$obj = new workshops($workshops['title'],$workshops['start'],$workshops['end'],$workshops['place'],$workshops['attendees'],$isOwner);
+				$startDateTimestamp=$workshops['start'];
+				$endDateTimestamp=$workshops['end'];
+				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+				$obj = new workshops($workshops['workshopId'],$workshops['title'],$duration,$minDuration,$workshops['place'],$workshops['attendersCount'],$isOwner);
 				$outputa[$noOfElementsW] = $obj;
 				$noOfElementsW++;
 			}
 			print_r($outputa);
 			if($noOfElementsW == 0)
 			{
-				echo 'No values found for Query 1 in mode 13<br />';
+				echo 404;
 			}
 		}
 		else
 		{
-			echo 'Error in Query 1 in mode 13 <br/>';
-			echo $conObj->error;
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching workshops of aboutMe:".$userId,$currentUserId);
+			echo 12;
 		}
 	}	
 	

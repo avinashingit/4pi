@@ -3,7 +3,7 @@
 	{
 		public $profilePicture;
 		public $name;
-		public $dob;	
+		public $dob;
 		public $description;
 		public $resume;
 		public $highestDegree;
@@ -54,7 +54,8 @@
 	
 	
 	class academics
-		{	
+		{
+			public $degreeId;
 			public $degree;
 			public $name;
 			public $duration;
@@ -62,8 +63,9 @@
 			public $cgpa;
 			public $isOwner;
 			
-			public function __construct($degree,$name,$duration,$minDuration,$cgpa,$isOwner)
+			public function __construct($degreeId,$degree,$name,$duration,$minDuration,$cgpa,$isOwner)
 				{
+					$this->degreeId=$degreeId;
 					$this->degree = $degree ;
 					$this->name = $name ;
 					$this->duration = $duration ;
@@ -76,14 +78,18 @@
 		
 	class achievements
 		{
+			public $achievementId;
 			public $competition;
+			public $location;
 			public $description;
 			public $position;
 			public $achieveddate;
 			public $isOwner;
-			public function __construct($competition,$description,$position,$achieveddate,$isOwner)
+			public function __construct($achievementId,$competition,$location,$description,$position,$achieveddate,$isOwner)
 				{
+					$this->achievementId = $achievementId;
 					$this->competition = $competition;
+					$this->location = $location;
 					$this->description = $description;
 					$this->position = $position;
 					$this->achieveddate = $achieveddate;
@@ -94,14 +100,18 @@
 		
 	class certifiedCourses
 		{
+			public $courseId;
 			public $title;
 			public $duration;
+			public $minDuration;
 			public $institutename;
 			public $isOwner;
-			public function __construct($title,$duration,$institutename,$isOwner)
+			public function __construct($courseId,$title,$duration,$minDuration,$institutename,$isOwner)
 				{
+					$this->courseId = $courseId;
 					$this->title = $title;
 					$this->duration = $duration;
+					$this->minDuration = $minDuration;
 					$this->institutename = $institutename;
 					$this->isOwner=$isOwner;
 					return $this;
@@ -110,13 +120,15 @@
 
 	class competitions
 		{
+			public $competitionId;
 			public $title;
 			public $competitionDate;
 			public $place;
 			public $description;
 			public $isOwner;
-			public function __construct($title,$competitionDate,$place,$description,$isOwner)
+			public function __construct($competitionId,$title,$competitionDate,$place,$description,$isOwner)
 				{
+					$this->competitionId=$competitionId;
 					$this->title = $title;
 					$this->competitionDate = $competitionDate;
 					$this->place = $place;
@@ -128,18 +140,20 @@
 		
 	class experience
 		{
+			public $experienceId;
 			public $organisation;
 			public $duration;
 			public $minDuration;
-			public $title;
+			public $designation;
 			public $description;
 			public $isOwner;
-			public function __construct($organisation,$duration,$minDuration,$title,$description,$isOwner)
+			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$description,$isOwner)
 				{
+					$this->experienceId=$experienceId;
 					$this->organisation = $organisation;
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
-					$this->title = $title;
+					$this->designation = $designation;
 					$this->description = $description;
 					$this->isOwner=$isOwner;
 					return $this;
@@ -149,12 +163,14 @@
 
 	class leaveMessage
 		{
+			public $leaveMessageId;
 			public 	$name;
 			public 	$mailId;
 			public 	$message;
 			public $isOwner;
-			public function __construct($name,$mailId,$message,$isOwner)
+			public function __construct($leaveMessageId,$name,$mailId,$message,$isOwner)
 				{
+					$this->leaveMessageId=$leaveMessageId;
 					$this->name = $name;
 					$this->mailId = $mailId;
 					$this->message = $message;
@@ -163,7 +179,7 @@
 				}
 		}
 
-	class objective
+	/*class objective
 		{
 			public $description;
 			public $isOwner;
@@ -173,23 +189,27 @@
 					$this->isOwner=$isOwner;
 					return $this;
 				}
-		}
+		}*/
 
 	class projects
 		{
+			public $projectId;
 			public $title;
 			public $role;
 			public $duration;
 			public $minDuration;
 			public $description;
+			public $teamMembers;
 			public $isOwner;
-			public function __construct($title,$role,$duration,$minDuration,$description,$isOwner)
-				{	
+			public function __construct($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,$isOwner)
+				{
+					$this->projectId=$projectId;
 					$this->title = $title;
 					$this->duration = $duration;
 					$this->role = $role;
 					$this->minDuration = $minDuration;
 					$this->description = $description;
+					$this->teamMembers = $teamMembers;
 					$this->isOwner=$isOwner;
 					return $this;
 				}
@@ -242,14 +262,16 @@
 
 	class workshops
 		{
+			public $workshopId;
 			public $duration;
 			public $minDuration;
 			public $title;
 			public $place;
 			public $attendees;
 			public $isOwner;
-			public function __construct($duration,$minDuration,$title,$place,$attendees,$isOwner)
+			public function __construct($workshopId,$duration,$minDuration,$title,$place,$attendees,$isOwner)
 				{	
+					$this->workshopId=$workshopId;
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
 					$this->title = $title;

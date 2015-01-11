@@ -506,6 +506,56 @@
 		}
 
 	}
+	function getDegree($userId)
+	{
+		$currentYear=date('Y',time());
+		$currentMonth=date('m',time());
+		$startYear=(int)(substr($userId,3,2));
+		$currentYearSliced=(int)(substr($currentYear, 2);
+		$isAlumni=0;
+		
+		$degree="B.Tech";
+		$rollNoArray=explode('',$userId);
+		if($rollNoArray[5]=='D')
+		{
+			$degree="Ph.D";
+		}
+		else if($rollNoArray[5]=='M')
+		{
+			$degree="M.Des";
+			if($startYear+2==$currentYearSliced)
+			{
+				if((int)currentMonth>6)
+				{
+					$degree=$degree." Alumnus";
+				}
+			}
+		}
+		else if($rollNoArray[5]=='I')
+		{
+			$degree="B.Tech Dual Degree";
+			if($startYear+5==$currentYearSliced)
+			{
+				if((int)currentMonth>6)
+				{
+					$degree=$degree." Alumnus";
+				}
+			}
+		}
+		else if($rollNoArray[5]=='B')
+		{
+			$degree="B.Tech";
+			if($startYear+4==$currentYearSliced)
+			{
+				if((int)currentMonth>6)
+				{
+					$degree=$degree." Alumnus";
+				}
+			}
+		}
+		
+		return $degree;
+	}
 	function getDuration($start,$end)
 	{
 		$startYearMonthDate=date('Y/m/d',$start);
