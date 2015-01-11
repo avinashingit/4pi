@@ -183,7 +183,7 @@ else
 			$ts = new DateTime();
 			$ts->setTimestamp($timestamp);
 			$pollCreationTime=$ts->format(DateTime::ISO8601);
-			$hasVoted=1;
+			$hasVoted=0;
 			$pollStatus=0;
 			for($i=0;$i<$pollOptionsCount;$i++)
 			{

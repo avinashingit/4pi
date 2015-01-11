@@ -109,7 +109,7 @@ else
 				$optionVotesArray=explode(',', $optionVotes);
 				for($i=0;$i<$optionCount;$i++)
 				{
-					$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionsVotesArray[$i]);
+					$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionVotesArray[$i]);
 				}
 				if($poll['userId']==$userId)
 				{
@@ -124,7 +124,7 @@ else
 				$pollCreationTime=$ts->format(DateTime::ISO8601);
 				$pollStatus=$poll['pollStatus'];
 				$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-									$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
+									$poll['optionsType'],$poll['sharedWith'],$hasVoted,json_encode($optionsAndVotes),$pollCreationTime,$pollStatus,$isOwner);
 				//print_r(json_encode($pollObj));
 				$pollObjArray[]=$pollObj;
 				$displayCount++;
