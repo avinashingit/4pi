@@ -89,7 +89,7 @@
 
 				   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
-				    		<textarea type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollQuestion" placeholder="Poll on"></textarea>
+				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollQuestion" placeholder="Poll on"></input>
 
 				  		</div>
 
@@ -134,9 +134,9 @@
 
 				  		<div class="form-group">
 
-				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for making it visible to everyone. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number."></i>]
 
-				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollSharedWith" >
+				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollSharedWith" value="All" >
 
 				  		</div>
 
@@ -212,6 +212,12 @@
 
 	<div id="pollArea">
 
+		
+		<div id="pollEmptyMessage" class="text-center">
+
+			<p class="text-center"></p>
+
+		</div>
 
 	</div>
 
@@ -221,7 +227,8 @@
 <script>
 	//--------------------------------------------------------------------------//
 	//add option input
-	function createPollAddInput(){
+	function createPollAddInput()
+	{
 		var numberOfOptionsCurrent=$('#pollCreateModal').find('.inputOption').length;
 		var current=$('#pollCreateModal').find('#option2').clone();
 		var optionVal=numberOfOptionsCurrent+1;
@@ -237,13 +244,15 @@
 
 	//----------------------------------------------------------------------------//
 	//delete option input
-	function createPollDeleteInput(el){
+	function createPollDeleteInput(el)
+	{
 		$(el).parent().parent().parent().remove();
 	}
 
 	//----------------------------------------------------------------------------//
 	// Create Poll Function
-	function createPollSP(){
+	function createPollSP()
+	{
 
 		// alert("called");
 		var pollQuestion=$('#pollCreateModal').find('#createPollQuestion').val();
@@ -261,6 +270,14 @@
 			if(pollQuestion.length==0)
 			{
 				alert("Please enter the poll question");
+			}
+			else if(pollOptionType!=1 && pollOptionType!=2)
+			{
+				alert("Please enter the poll option type.");
+			}
+			else if(pollType!=1 && pollType!=2 && pollType!=3)
+			{
+				alert("Please enter the poll type.");
 			}
 			else
 			{
@@ -296,14 +313,28 @@
 					})
 					.success(function(data){
 
+						console.log(data);
 						if(checkData(data)==1)
 						{
 							data=JSON.parse(data);
 							$('#pollCreateModal').modal('hide');
 							insertPoll(data,"first");
+							$('#pollCreateModal').find('input').each(function(){
+								$(this).val("");
+							});
+
+							$('#pollCreateModal').find('textarea').each(function(){
+								$(this).val("");
+							});
+
+							$('#pollCreateModal').find('select').each(function(){
+								$(this).val("");
+							});
+
+							$('#pollCreateModal').find('#createPollSharedWith').val("All");
 						}
 
-						$('.timeago').timeago();
+						$('time.timeago').timeago();
 
 					});
 
@@ -327,148 +358,94 @@
 		});
 	});
 
+var json1=<?php 
 
+$row1=array("AvinashAvinashAvinashAvinashAvinashavina",1250);
+$row2=array("Alfdasekhya",1300);
+$row3=array("Hafadsri",1000);
+$row4=array("Hafdasri",1150);
+$row5=array("da",1100);
+$row6=array("Hafdasfri",1080);
+$row7=array();
+array_push($row7,$row1);
+array_push($row7,$row2);
+array_push($row7,$row3);
+array_push($row7,$row4);
+array_push($row7,$row5);
+array_push($row7,$row6);
+echo json_encode($row7);?>;
 	//--------------------------------------------------------------------------------------------//
 	function displayChart(json,idC,id,hUh)
 	{
-		console.log("called "+json);
+		// console.log("called "+json+" "+idC+" "+id);
+		console.log(json);
 		var pollQuestion =$('#'+id).find('#pollQuestion').html();
+		// var pollQuestion="Avinash";
 		if(hUh==1)
 		{
 			$('#'+id+'Content').hide();
 		}
-		$('#'+id).highcharts({
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 20
-            }
-        },
-        title: {
-            text: pollQuestion
-        },
-        plotOptions: {
-            pie: {
-                innerSize: 100,
-                depth: 65
-            },
-            series: {
-                dataLabels: {
-                	enabled:true,
-                    formatter: function() {
-                        return Math.round(this.percentage*100)/100 + ' %';
-                    },
-                    distance: -20,
-                    color:'white'
-                }
-            }
-        },
-        series: [{
-            name: 'No. of Votes',
-            data: json
-        }]
-    });
+		// json=JSON.parse(json);
+		$('#'+idC).highcharts({
+	        chart: {
+	            type: 'pie',
+	            options3d: {
+	                enabled: true,
+	                alpha: 20
+	            }
+	        },
+	        title: {
+	            text: pollQuestion
+	        },
+	        plotOptions: {
+	            pie: {
+	                innerSize: 100,
+	                depth: 65
+	            },
+	            series: {
+	                dataLabels: {
+	                	enabled:true,
+	                    formatter: function() {
+	                        return Math.round(this.percentage*100)/100 + ' %';
+	                    },
+	                    distance: -20,
+	                    color:'white'
+	                }
+	            }
+	        },
+	        series: [{
+	            name: 'No. of Votes',
+	            data: json
+	        }]
+	    });
 	}
-	//---------------------------------------------------------------------------------------------//
-	/*function voteSend(value,id)
-	{
-		// alert("Hello");
-		$.post('./handlers/pollHandlers/votePoll.php',{
-			_pollId:id,
-			_votes:value
-		})
-		.error(function(){
-			alert("Server overload. Please try again.:(");
-		})
-		.success(function(data){
-			//console.log(data);
-			// displayChart(data,id+'b',id,1);
-		});
-	}*/
-
-	//--------------------------------------------------------------------------------//
-	function sendVoteMultipleOptions(id)
-	{
-		// alert("Hello");
-		var options=[];
-		//console.log($('#'+id));
-		$('#'+id).find('#vote:checked').each(function(){
-
-			options.push($(this).val());
-
-		});
-
-		$.post('./handlers/pollHandlers/vote.php',{
-			_pollId:id,
-			_votes:options
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			//console.log(data);
-			displayChart(data,id+'b',id,1);
-		});
-	}
-
-	//----------------------------------------------------------------------------------//
-	function sendVoteDontReceive(value,id)
-	{
-		$.post('./handlers/pollHandlers/vote.php',{
-			_type:"single",
-			_pollId:id,
-			_value:value
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				$('#'+id).html("<p class='text-center'>Thanks for voting.</p>");
-			}
-		});
-	}
-
-	//------------------------------------------------------------------------------------//
-	function sendVoteDontReceiveMultiple(id)
-	{
-		var options=[];
-		$('#'+id+'#vote:checked').each(function(){
-
-			options.push($(this).val());
-
-		});
-
-		$.post('./handlers/pollHandlers/vote.php',{
-			_type:"multiple",
-			_pollId:id,
-			_value:options
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				$('#'+id).html("<p class='text-center'>Thanks for voting.</p>");
-			}
-		});
-	}
-
 
 	//---------------------------------------------------------------------------//
 	//insertPollIntopollarea
 
-	function insertPoll(data,position)
+	/*function insertsPoll(data,position)
 	{
+		console.log("Calle insert");
+
 		var optionLength=data.pollOptions.length;
 		var poll="";
 		if(data.pollOptionsType==1)
 		{
 			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
+			j=data.optionVotes
+
+			/*if(data.hasVoted==1)
+			{
+				// console.log("heeeee    "+j);
+				poll+='<a id="pollsDisplay" onclick="displayChart(j,\''+data.pollIdHash+'\',\''+data.pollIdHash+'\',1);">Hello</a>';
+				$('#pollsDisplay').trigger('click');
+
+				<
+			}
+
+			else
+			{
 				poll+='<br/>';
 
 				poll+='<div class="row" id="'+data.pollIdHash+'b">';
@@ -492,7 +469,7 @@
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.hasVoted!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
@@ -548,9 +525,6 @@
 
 								poll+='</div>';
 
-
-								
-
 						poll+='</div>';
 
 						poll+='<br/>';
@@ -567,30 +541,19 @@
 
 						if(data.pollType==2)
 						{
-							var datas=JSON.parse(data.optionVotes);
-							displayChart(datas,data.pollIdHash+'b', data.pollIdHash,0);
-						}
-					}
-
-					else if(data.hasVoted==1)
-					{
-						if(data.pollType==3)
-						{
-							poll+='<h3 class="text-center">Thanks for voting. Results soon. </h3>';
-						}
-						else if(data.pollType==2 || data.pollType==1)
-						{
-							var datas=JSON.parse(data.optionVotes);
-							displayChart(datas, data.pollIdHash+'b', data.pollIdhash, 1);
+							// var datas=JSON.parse(data.optionVotes);
+							poll+='<a id="pollsDisplayTwo" onclick="displayChart(j,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);">Hai</a>';
+							$('#pollsDisplayTwo').trigger('click');
 						}
 					}
 
 				poll+='</div>';
+			}
 
 			poll+='</div>';
 		}
 
-		else if(data.pollOptionsType==2)
+		/*else if(data.pollOptionsType==2)
 		{
 			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
@@ -617,7 +580,7 @@
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.hasVoted!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
@@ -689,7 +652,7 @@
 						{
 							var datas=JSON.parse(data.optionVotes);
 
-							displayChart(datas,data.pollIdHash+'b', data.pollId,0);
+							displayChart(datas,data.pollIdHash+'b', data.pollIdHash,0);
 						}
 					}
 
@@ -704,13 +667,303 @@
 						{
 							var datas=JSON.parse(data.optionVotes);
 
-							displayChart(datas,data.pollIdHash+'b', data.pollId,1);
+							displayChart(datas,data.pollIdHash+'b', data.pollIdHash,1);
 						}
 					}
 
 				poll+='</div>';
 
 			poll+='</div>';
+		}
+		if(position=="first")
+		{
+			$('#pollArea').prepend(poll).hide().fadeIn(500);
+		}
+		else if(position=="last")
+		{
+			$('#pollArea').append(poll).hide().fadeIn(500);
+		}
+	}*/
+
+	function insertPoll(data,position)
+	{
+		// alert("Went");
+		var poll="";
+
+		if(data.pollOptionsType==1)
+		{
+			// alert("Called");
+			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+			poll+='<br/>';
+
+			poll+='<div class="row">';
+
+				poll+='<div class="col-md-6 col-md-offset-3" id="'+data.pollIdHash+'b">';
+
+				poll+='</div>';
+
+			poll+='</div>';
+
+			
+
+			poll+='<div id="pollOptionType" class="hidden">'+data.pollOptionsType+'</div>';
+
+			poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
+
+			poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
+
+
+			poll+='<div class="row pollIdContent">';
+
+				poll+='<div class="row">';
+
+				if(data.hasVoted==1)
+				{
+					poll+='<div class="hidden col-md-7" id="pollQuestion">';
+
+						poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
+
+					poll+='</div>';
+				}
+
+				else
+				{
+					poll+='<div class="col-md-7" id="pollQuestion">';
+
+						poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
+
+					poll+='</div>';
+				}
+
+				if(data.isOwner==1 && data.hasVoted!=1)
+				{
+					poll+='<div class="col-md-2" id="pollCreatorOptions">';
+
+						poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+
+					poll+='</div>';
+
+					poll+='<div class="col-md-3" id="pollCreatedTime">';
+
+						poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreation+'</time>';
+
+					poll+='</div>';
+				}
+
+				else
+				{
+					poll+='<div class="col-md-3 ol-md-offset-2" id="pollCreatedTime">';
+
+						poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreation+'</time>';
+
+					poll+='</div>';
+				}
+
+					
+
+				poll+='</div>';
+
+				poll+='<br/>';
+
+				if(data.hasVoted!=1)
+				{
+					poll+='<div class="row pollOptions">';
+
+						poll+='<div class="col-md-6">';
+
+							for(i=0;i<data.pollOptions.length;i+=2)
+							{
+								poll+='<p><input type="radio" id="pollOption'+i+'" name="pollId" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+							}
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6">';
+
+							for(i=1;i<data.pollOptions.length;i+=2)
+							{
+								poll+='<p><input type="radio" id="pollOption'+i+'" name="pollId" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+							}
+
+						poll+='</div>';
+
+					poll+='</div>';
+
+					poll+='<br/>';
+
+					poll+='<div class="row">';
+
+						poll+='<div class="text-center">';
+
+							if(data.pollType==1 || data.pollType==2)
+							{
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
+							}
+
+							/*else if(data.pollType==3)
+							{
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'no\',1);" class="btn btn-md btn-success">Vote</button>';
+							}*/
+
+						poll+='</div>';
+
+					poll+='</div>';
+				}
+
+				else
+				{
+					// alert("Went");
+					votesStorage=data.optionVotes;
+					poll+='<button class="btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);$(this).remove();">View results</button>';
+					
+				}
+
+			poll+='</div>';
+
+			poll+='</div>';
+		}
+
+		/*else if(data.pollOptionsType==2)
+		{
+
+			// alert("Called");
+			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+			poll+='<br/>';
+
+			poll+='<div class="row">';
+
+				poll+='<div class="col-md-6" id="'+data.pollIdHash+'b">';
+
+				poll+='</div>';
+
+			poll+='</div>';
+
+			
+
+			poll+='<div id="pollOptionType" class="hidden">'+data.pollOptionsType+'</div>';
+
+			poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
+
+			poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
+
+
+			poll+='<div class="row pollIdContent">';
+
+				poll+='<div class="row">';
+
+				if(data.hasVoted==1)
+				{
+					poll+='<div class="hidden col-md-7" id="pollQuestion">';
+
+						poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
+
+					poll+='</div>';
+				}
+
+				else
+				{
+					poll+='<div class="col-md-7" id="pollQuestion">';
+
+						poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
+
+					poll+='</div>';
+				}
+
+				if(data.isOwner==1 && data.hasVoted!=1)
+				{
+					poll+='<div class="col-md-2" id="pollCreatorOptions">';
+
+						poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+
+					poll+='</div>';
+
+					poll+='<div class="col-md-3" id="pollCreatedTime">';
+
+						poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreation+'</time>';
+
+					poll+='</div>';
+				}
+
+				else
+				{
+					poll+='<div class="col-md-3 ol-md-offset-2" id="pollCreatedTime">';
+
+						poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreation+'</time>';
+
+					poll+='</div>';
+				}
+
+					
+
+				poll+='</div>';
+
+				poll+='<br/>';
+
+				if(data.hasVoted!=1)
+				{
+					poll+='<div class="row pollOptions">';
+
+						poll+='<div class="col-md-6">';
+
+							for(i=0;i<data.pollOptions.length;i+=2)
+							{
+								poll+='<p><input type="checkbox" id="pollOption'+i+'" name="pollId" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+							}
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6">';
+
+							for(i=1;i<data.pollOptions.length;i+=2)
+							{
+								poll+='<p><input type="checkbox" id="pollOption'+i+'" name="pollId" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
+							}
+
+						poll+='</div>';
+
+					poll+='</div>';
+
+					poll+='<br/>';
+
+					poll+='<div class="row">';
+
+						poll+='<div class="text-center">';
+
+							if(data.pollType==1 || data.pollType==2)
+							{
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
+							}
+
+							else if(data.pollType==3)
+							{
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'no\',1);" class="btn btn-md btn-success">Vote</button>';
+							}
+
+						poll+='</div>';
+
+					poll+='</div>';
+				}
+
+				else
+				{
+					// alert("Went");
+					votesStorage=data.optionVotes;
+					poll+='<button class="btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);$(this).remove();">View results</button>';
+					$('#pollsDisplay').trigger('click');
+				}
+
+			poll+='</div>';
+
+			poll+='</div>';
+		}*/
+
+		if(data.pollType==2)
+		{
+			votesStorage=data.optionVotes;
+			poll+='<button class="hidden btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',0);$(this).remove();">View results</button>';
+			
 		}
 
 		if(position=="first")
@@ -736,95 +989,129 @@
 		})
 		.success(function(data){
 			console.log(data);
-			if(checkData(data)==1)
+			data=data.trim();
+			if(data==404)
 			{
-				datas=JSON.parse(data);
-				for(i=0;i<datas.length;i++)
+				$('#pollArea').find('#pollEmptyMessage').find('p').html("No more polls to display");
+			}
+
+			else
+			{
+				if(checkData(data)==1)
 				{
-					insertPoll(datas[i],"last");
+					datas=JSON.parse(data);
+					for(i=0;i<datas.length;i++)
+					{
+						// alert(i);
+						insertPoll(datas[i],"last");
+						// alert('i)');
+					}
+
+					$('#pollsDisplay').trigger('click');
+
+					$('time.timeago').timeago();
 				}
 
-				//console.log(datas.length);
-				insertPoll(datas[0],"last");
-				$('time.timeago').timeago();
+				$('#pollArea').find('#pollEmptyMessage').find('p').html("");
 			}
+
+			
 		});
 	}
 
 	$(document).ready(function(){
 		fetchLatestPolls(1);
 	});
-</script>
-<script>
 
 	function submitVote(pollId,type,result, pollType)
 	{
-		if(type=='single')
+		var option=$('#'+pollId).find('input');
+		var good=0; //turns 1 if option is checked
+		for(i=0;i<option.length;i++)
 		{
-			var checkedOption=new Array();
-			var option=$('#'+pollId).find('input');
-			for (i =0;i<option.length;i++)
+			if(option[i].checked)
 			{
-				if(option[i].checked)
-				{
-					checkedOption[0]=i;
-				}
+				good=1;
 			}
-			$.post('./handlers/pollHandlers/votePoll.php',{
-				_pollId:pollId,
-				_votes:checkedOption[0]
-			})
-			.error(function(){
-				alert("Server overload. Please try again. :(");
-			})
-			.success(function(data){
-				console.log(data);
-				datas=JSON.parse(data);
-				console.log(datas);
-				if(checkData(data)==1)
+		}
+
+		if(good==0)
+		{
+			alert("Hey comeon. You have to select atleast one option.");
+		}
+		else if(good==1)
+		{
+			$('.pollIdContent').hide();
+			if(type=='single')
+			{
+				var checkedOption=new Array();
+				var option=$('#'+pollId).find('input');
+				for (i =0;i<option.length;i++)
 				{
-					if(pollType!=3)
+					if(option[i].checked)
 					{
+						checkedOption[0]=i;
+					}
+				}
+				console.log("Option sent"+checkedOption[0]);
+				$.post('./handlers/pollHandlers/votePoll.php',{
+					_pollId:pollId,
+					_votes:checkedOption[0]
+				})
+				.error(function(){
+					alert("Server overload. Please try again. :(");
+				})
+				.success(function(data){
+					console.log(data);
+					datas=JSON.parse(data);
+					console.log(datas);
+					if(checkData(data)==1)
+					{
+						if(pollType!=3)
+						{
+							displayChart(datas,pollId+'b',pollId,1);
+						}
+
+						else
+						{
+							$('#'+pollId).html("<h3 class='text-center'>Thanks for voting. Results soon. </h3>")
+						}
+						
+					}
+				});
+			}
+
+			else if(type=="multiple")
+			{
+				var checkedOptions=new Array();
+				var option=$('#'+pollId).find('input');
+				var count=0;
+				for (i =0;i<option.length;i++)
+				{
+					if(option[i].checked)
+					{
+						checkedOptions[count]=1;
+						count=count+1;
+					}
+				}
+				$.post('/4pi/handlers/pollHandlers/votePoll.php',{
+					_pollId:pollId,
+					_votes:checkedOptions
+				})
+				.error(function(){
+					alert("Server overload. Please try again. :(");
+				})
+				.success(function(data){
+					if(checkData(data)==1)
+					{
+						datas=JSON.parse(data);
 						displayChart(datas,pollId+'b',pollId,1);
 					}
-
-					else
-					{
-						$('#'+pollId).html("<h3 class='text-center'>Thanks for voting. Results soon. </h3>")
-					}
-					
-				}
-			});
-		}
-
-		else if(type=="multiple")
-		{
-			var checkedOptions=new Array();
-			var option=$('#'+pollId).find('input');
-			var count=0;
-			for (i =0;i<option.length;i++)
-			{
-				if(option[i].checked)
-				{
-					checkedOptions[count]=1;
-					count=count+1;
-				}
+				});
 			}
-			$.post('/4pi/handlers/pollHandlers/votePoll.php',{
-				_pollId:pollId,
-				_votes:checkedOptions
-			})
-			.error(function(){
-				alert("Server overload. Please try again. :(");
-			})
-			.success(function(data){
-				if(checkData(data)==1)
-				{
-					datas=JSON.parse(data);
-					displayChart(datas,pollId+'b',pollId,1);
-				}
-			});
 		}
+
+		
 	}
 
 	function deletePoll(pollId)
@@ -847,7 +1134,8 @@
 		}
 	}
 
-	function editPollAddInput(){
+	function editPollAddInput()
+	{
 		var numberOfOptionsCurrent=$('#pollEditModal').find('.inputOption').length;
 		var current=$('#pollEditModal').find('#option2').clone();
 		var optionVal=numberOfOptionsCurrent+1;
@@ -869,7 +1157,7 @@
 
 	function editPoll(pollId)
 	{
-		$('#pollEditModal').find('#pollOptionsDiv').find('div').each(function(){
+		$('#pollEditModal').find('.pollOptions').find('div').each(function(){
 			if($(this).attr('id')=='#option1' || $(this).attr('id')=='#option2')
 			{
 				$(this).find('input').val("");
@@ -887,7 +1175,7 @@
 		link.find('#editPollSharedWith').val(olink.find('#pollShareWith').html());
 		link.find('#editPollType').val(olink.find('#pollResultType').html());
 		var options=olink.find('input').length;
-		if(link.find('#pollOptionsDiv').find('input').length!=options)
+		if(link.find('.pollOptions').find('input').length!=options)
 		{
 			link.find('#option1').find('input').val(olink.find('#pollOption0').next().html());
 			link.find('#option2').find('input').val(olink.find('#pollOption1').next().html());
@@ -897,7 +1185,7 @@
 				for(i=3;i<=options;i++)
 				{
 					editPollAddInput();
-					link.find('#'+i+1).find('input').val(olink.find('#pollOption'+i-1).next().html());
+					link.find('#'+i).find('input').val(olink.find('#pollOption'+i-2).next().html());
 				}
 			}
 			
@@ -905,7 +1193,6 @@
 		}
 	}
 	
-
 </script>
 
 <div class="modal fade slow" id="pollEditModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
