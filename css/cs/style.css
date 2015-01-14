@@ -2316,6 +2316,14 @@ display:none;
 .postMenu,.eventMenu,.pollMenu{
     margin-top:-10px;
 }
+
+.pollMenu
+{
+	width:56.1%;
+	position:fixed;
+	top:51px;
+	margin-bottom:15px;
+}
 #rightBlock1 .panel-heading{
     background:linear-gradient(#005c87,#004f74);
     color:#fff;

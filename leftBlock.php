@@ -1,3 +1,32 @@
+<?php
+
+	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
+
+	require_once '/QOB/qobConfig.php';
+
+	mysql_connect(HOST,USER,PASSWORD) or die("Unable to connect to the server.");
+
+	mysql_select_db(DB);
+
+	$sql=sprintf("SELECT * FROM users WHERE userIdHash='%s'",mysql_real_escape_string($_SESSION['vj']));
+
+	$results=mysql_query($sql);
+
+	$row=mysql_fetch_object($results);
+
+	// var_dump($row);
+
+	$icons=array();
+	$icons[0]="fa-gear";$icons[1]="fa-sort";$icons[2]="fa-space-shuttle";$icons[3]="fa-square";$icons[4]="fa-tags";
+
+	$groups=array();
+	$groups=explode(",",$row->clubsInvolved);
+
+
+
+echo '
+
+
 
 <div class="col-md-2" id="userDetails" style="padding:0px !important;" >
 
@@ -5,9 +34,9 @@
 
 	<div id="userImage">
 
-		<a href="#" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/hpics/3.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>
+		<a href="http://localhost/4pi/'.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/proPics/'.$row->userIdHash.'.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>
 		
-		<h4 class="text-center" ><a href="#" style="color:white;" >Preetham</a></h4>
+		<h4 class="text-center" ><a title="'.$row->name.'"href="http://localhost/4pi/'.$row->userId.'" style="color:white;" >'.substr($row->name,0,18).'...</a></h4>
 
 	</div>
 
@@ -17,67 +46,32 @@
 
 	</div> -->
 
-	<br/>
+	<br/>';
+
+	echo '
 
 	<div id="userGroups">
 
 		<div class="table-responsive" id="userGroups">
 
-		  	<table class="table" style="width:100%;" >
+		  	<table class="table" style="width:100%;" >';
 
-		    	<tr class="group cursorPointer">
+		  	for($i=0;$i<count($groups);$i++)
+		  	{
+		  		echo '<tr class="group cursorPointer">
 
-		    		<td><i class="fa fa-gear colorWhite groupIcons"></i></td>
+		    		<td><i class="fa '.$icons[$i].' colorWhite groupIcons"></i></td>
 
-		    		<td title="Mechanical Community">Mechanical Comm...</td>
+		    		<td title="'.$groups[$i].'">'.$groups[$i].'</td>
 
-	    		</tr>
+	    		</tr>';
+		  	}
 
-	    		<tr class="group cursorPointer">
-
-		    		<td><i class="fa fa-sort colorWhite groupIcons"></i></td>
-
-		    		<td>Zerone</td>
-
-	    		</tr>
-
-	    		<tr class="group cursorPointer">
-
-		    		<td><i class="fa fa-space-shuttle groupIcons colorWhite"></i></td>
-
-		    		<td>Product Design Club</td>
-
-	    		</tr>
-
-	    		<tr class="group cursorPointer">
-
-		    		<td><i class="fa fa-square colorWhite groupIcons "></i></td>
-
-		    		<td>Graphic Design Club</td>
-
-	    		</tr>
-
-	    		<tr class="group cursorPointer">
-
-		    		<td><i class="fa fa-tags colorWhite groupIcons"></i></td>
-
-		    		<td> Industrial Design Club</td>
-
-	    		</tr>
+		  	echo '
 
 		  	</table>
 
 		</div>
-
-		<!--<div class="text-center cursorPointer group"><i class="fa fa-gear colorWhite groupIcons"></i> Mechanical Community</div>
-
-		<div class="text-center cursorPointer group"><i class="fa fa-sort colorWhite groupIcons"></i> Zerone</div>
-
-		<div class="text-center cursorPointer group"><i class="fa fa-space-shuttle groupIcons colorWhite"></i>  Product Design Club</div>
-
-		<div class="text-center cursorPointer group"><i class="fa fa-square colorWhite groupIcons "></i>  Graphic Design Club</div>
-
-		<div class="text-center cursorPointer group"><i class="fa fa-tags colorWhite groupIcons"></i> Industrial Design Club</div>-->
 
 	</div>	
 	<br/><br/>
@@ -86,16 +80,16 @@
 	
 	<table align="center" >
 		<tr>
-			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip('show');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip('show');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip('show');" class=" blcs"title="Feedback"  href="#feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
+			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip(\'show\');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
+			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Feedback"  href="#feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
 			
 		</tr>
 		
 		<tr>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="About"  onmouseover="$(this).tooltip('show');" class="blcs" title="About"  href="/4pi/about/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-info-circle fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="WebOps"  onmouseover="$(this).tooltip('show');" class=" blcs"  href="/4pi/team/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-users fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Idea Bank"  onmouseover="$(this).tooltip('show');" class=" blcs" title="Idea Bank" href="/4pi/ideaBank/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-exclamation fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="About"  onmouseover="$(this).tooltip(\'show\');" class="blcs" title="About"  href="/4pi/about/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-info-circle fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="WebOps"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"  href="/4pi/team/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-users fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Idea Bank"  onmouseover="$(this).tooltip(\'show\');" class=" blcs" title="Idea Bank" href="/4pi/ideaBank/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-exclamation fa-2x"></i></td>
 			
 		</tr>
 		
@@ -112,4 +106,4 @@
 
 </div>
 
-<!-- left column code ends here -->
+<!-- left column code ends here -->';

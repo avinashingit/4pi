@@ -159,8 +159,8 @@ else
 
 			for($i=0;$i<count($pollAnswerVotesArray);$i++)
 			{
-				$temp=((int)$pollExistingVotesArray[$i])+1;
-				$pollExistingVotesArray[$i]=(string)$temp;
+				$temp=((int)$pollExistingVotesArray[(int)$pollAnswerVotesArray[$i]])+1;
+				$pollExistingVotesArray[(int)$pollAnswerVotesArray[$i]]=(string)$temp;
 			}
 			
 			$optionCount=count($pollOptionsArray);

@@ -97,7 +97,7 @@ $(document).ready(function(){
 
         }
 
-        if($(document).height()-200<=$(window).scrollTop()+$(window).height())
+        /*if($(document).height()-200<=$(window).scrollTop()+$(window).height())
         {
             if(done!=0)
             {
@@ -141,10 +141,10 @@ $(document).ready(function(){
                 {
                     var pageRetrieveUrl="./handlers/pollHandlers/";
                 }*/
-            }
+           /* }
             
 
-        }
+        }*/
 
     });
 

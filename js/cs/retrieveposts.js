@@ -30,6 +30,10 @@ function checkData(data) {
         window.location.href = "/4pi/index.php";
         return -1;
     }
+    else if(data==5)
+    {
+        alert("Committed action is being redone. ");
+    }
     else
     {
         return 1;
@@ -1190,8 +1194,6 @@ function starPost(id) {
 }
 
 function deleteComment(cid, pid) {
-
-
 
     $.post('handlers/postHandlers/deleteComment.php', {
         _commentId: cid,
