@@ -1,6 +1,16 @@
 <?php
+//---Documentation---//
+//
+//
+//---Definitions of all Helper Functions for the whole Backend management.
+//---Author : Hari Krishna Majety ,COE12B013.
+//---Email: majetyhk@gmail.com
+//
+//
+//---Documentation Ends ---//
 
 	require("../../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("../miniNotification.php");
 		
 	function getUserFromHash($userHash)
 	{
@@ -511,7 +521,7 @@
 		$currentYear=date('Y',time());
 		$currentMonth=date('m',time());
 		$startYear=(int)(substr($userId,3,2));
-		$currentYearSliced=(int)(substr($currentYear, 2);
+		$currentYearSliced=(int)(substr($currentYear, 2));
 		$isAlumni=0;
 		
 		$degree="B.Tech";
@@ -568,9 +578,78 @@
 		$endYearMonthDate=date('Y/m',$end);
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
 	}
+	function sendNotification($FromUserId,$toUserId,$notifType,$objectId,$objectType)
+	{
+		$conn=new QoB();
+		$timestamp=time();
+		$sendNotificationSQL="IF EXISTS(SELECT * FROM notifications WHERE objectId= ? AND type=? AND objectType=? AND userId=?) 
+							UPDATE notifications SET actionCount=actionCount+1, timestamp=? WHERE objectId= ? AND type=? AND objectType=? AND userId=?
+						ELSE
+    						INSERT INTO notifications(objectId,type,objectType,userId,timestamp) VALUES (?,?,?,?,?) ";
+    	$values[0]=array($objectId => 's');
+    	$values[1]=array($type => 'i');
+    	$values[2]=array($objectType => 's');
+    	$values[3]=array($userId => 's');
+    	
+    	$values[4]=array($objectId => 's');
+    	$values[5]=array($type => 'i');
+    	$values[6]=array($objectType => 's');
+    	$values[7]=array($userId => 's');
+    	
+    	$values[8]=array($objectId => 's');
+    	$values[9]=array($type => 'i');
+    	$values[10]=array($objectType => 's');
+    	$values[11]=array($userId => 's');
+    	$values[12]=array($timestamp => 's');
+    	$result=$conn->update($sendNotificationSQL,$values);
+    	if($conn->error==""&&$result==true)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$postId." , notif type: ".$type.", to userId:".$toUserId.", FromUserId:".$FromUserId,$userId);
+			return false;
+    	}
+	}
+
+	function getNotifications($userId)
+	{
+		/*
+		1-starredYourPost
+		2-commentedOnYourPost
+		3-alsoCommentedOnPost
+		4-mailedYourPost
+		5-commentedOnPostYouMailed
+		6-reportSpamReply
+		7-attendingYourEvent
+		8-alsoAttendingEvent
+		9-answeredYourPoll
+		10-alsoAnsweredPoll
+
+		answeredYourThread
+		alsoAnsweredOnThread
+		upvotedYourThreadAnswer
+		commentedOnYourThread
+		alsoCommentedOnThread
+		commentedOnYourThreadAnswer
+		alsoCommentedOnThreadAnswer*/
+
+		notificationModels[0]=array(0,0);
+		notificationModels[1]=array(" star for your Post"," members starred your Post");
+		notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
+		notificationModels[3]=array(" new comment on the post "," new comments on the post");
+
+		notificationModels[4]=array(" new comment on the post you mailed"," new comments on the post you mailed");
+		notificationModels[5]=array(" The post has been removed as you requested","The post was not removed due to lack of substantial reason.");
+		notificationModels[6]=array(" member is attending your event"," members are attending your event");
+		notificationModels[7]=array(" more person is also attending the event"," more persons are also attending the event ");
+		notificationModels[8]=array(" member voted your poll"," members voted");
+	}
+
 	function newValidateSharedWith($str)
 	{
-		$conn=new QOB();
+		$conn=new QoB();
 		
 		if(strlen($str)==1)
 		{
@@ -709,7 +788,8 @@
 		}
 	}
 
-	function notifyPeople($toBeNotified,$objectId,$from,$type)
+
+	/*function notifyPeople($toBeNotified,$objectId,$from,$type)
 	{
 		if($toBeNotified!="")
 		{
@@ -721,13 +801,13 @@
 											UPDATE notifications SET message=?, ";
 			}
 		}
-	}
+	}*/
 //---------Examples, old functions and Test Code Executed On Online Compiler Starts------------------------------ 
 
 /*function validateSharedWith($str)
 	{
 		$regstr;
-		$conn=new QOB();
+		$conn=new QoB();
 		
 		if(strlen($str)==1)
 		{

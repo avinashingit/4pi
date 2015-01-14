@@ -3,6 +3,8 @@
 	session_start();
 	//$_SESSION['vj'] = '4dbb5a2f9314875d41855940f194da51e2bf06b8bfbbd53257fcfbb3115e468e6c6862485992163e22a7ba03b41bac72e128532b70032bbb5cdf6bf7d20de668';
 	
+	
+
 	if(isset($_SESSION['vj']))
 		{
 			error_reporting(E_ALL ^ E_NOTICE);
@@ -12,7 +14,13 @@
 			require_once '../../QOB/qob.php';
 			require_once '../fetch.php';
 			require_once 'functions.php';
-			
+			//Testing Content Starts
+			$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+			$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+			$_POST['_refresh']=0;
+			$_POST['sgk']=array();
+
+			//Testing Content Ends
 			$_SESSION['jx']="999"; //999 for latest posts 998 for popular posts 997 for important posts
 			//$arrayOfPostsShown = array();
 			//print_r($_POST['_posts']);
