@@ -42,7 +42,7 @@
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				console.log(data);
+				//console.log(data);
 				$('#rightBlock1').find('ul').find('.littlePost').each(function(){
 					$(this).remove();
 				});
@@ -66,7 +66,7 @@
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				console.log(data);
+				//console.log(data);
 				$('#rightBlock2').find('ul').find('.littleEvent').each(function(){
 					$(this).remove();
 				});
@@ -90,7 +90,7 @@
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				console.log(data);
+				//console.log(data);
 				$('#rightBlock3').find('ul').find('.littlePoll').each(function(){
 					$(this).remove();
 				});
