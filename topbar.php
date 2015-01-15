@@ -3,6 +3,12 @@
 
 <script>
 
+	function showNotifications()
+	{
+		$('#notifications').toggleClass('hidden').fadeIn(500);
+		$('#notifications').css({'z-index':'1052'});
+	}
+
 	function insertPeopleSearch(data,val)
 	{
 		if(val==0)
@@ -208,7 +214,211 @@
 
 		<div id="icons" style="position:absolute;top:0;left:0;right:0;bottom:0;">
 
-			<div  class="text-center" style="padding-top:5px;font-size:20px;" ><a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a><!-- &nbsp;&nbsp;&nbsp;&nbsp; --><!-- <i class="fa fa-comment  colorWhite"></i> -->
+			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
+
+				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>
+
+				<div id="notifications" class="hidden">
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					<div class="row notification">
+
+						<div class="col-md-12 text-left">
+
+							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
+							dfjlsafjdklsfjladsjfldkas</p>
+
+							</a>
+
+						</div>
+
+					</div><!-- end class notification -->
+
+					
+
+
+				</div>
 			
 			    <div class="btn-group">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -361,6 +571,26 @@
 
 <script>
 
+	$(document).ready(function()
+	{
+	    $(document).mouseup(function(e)
+	    {
+	        var subject = $("#notifications"); 
+
+	        if(e.target.id != subject.attr('id') && !subject.has(e.target).length)
+	        {
+	            if(subject.hasClass('hidden'))
+            	{
+
+            	}
+            	else
+            	{
+            		subject.addClass('hidden').fadeOut(500);
+            	}
+	        }
+	    });
+	});
+
 	//$('#searchBefore','#searchAfter').css({'background-color':'#484848','color':'white','border':'1px solid #484848'});
 
 	$('#icons div i').css({'cursor':'pointer'});
@@ -469,6 +699,50 @@
 </script>
 
 <style>
+
+	#notifications
+	{
+		position:absolute;
+		z-index:154897;
+		background-color:#FFFFFF;
+		border:1px solid gray;
+		width:150%;
+		height:400px;
+		overflow-y:auto;
+		overflow-x:hidden;
+	}
+
+	.notification
+	{
+		color:black !important;
+		padding:5px !important;
+		font-size:13px;
+		border-bottom:1px solid #eeeeee;
+		background-color:#f1f1f1;
+		white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+		white-space: -pre-wrap;      /* Opera 4-6 */
+		white-space: -o-pre-wrap;    /* Opera 7 */
+		white-space: pre-wrap;       /* css-3 */
+		word-wrap: break-word;       /* Internet Explorer 5.5+ */
+		word-break: break-all;
+		white-space: normal;
+		cursor:pointer;
+	}
+
+	.notification p
+	{
+		margin:0px 0px 0px !important;
+	}
+
+	.notification a
+	{
+		color:black !important;
+	}
+
+	.notification:hover
+	{
+		background-color:#fefefe;
+	}
 
 	#searchResults1{
 		position:absolute;

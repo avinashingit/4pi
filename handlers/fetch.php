@@ -633,7 +633,7 @@
 		commentedOnYourThread
 		alsoCommentedOnThread
 		commentedOnYourThreadAnswer
-		alsoCommentedOnThreadAnswer*/
+		alsoCommentedOnThreadAnswer
 
 		notificationModels[0]=array(0,0);
 		notificationModels[1]=array(" star for your Post"," members starred your Post");
@@ -644,7 +644,7 @@
 		notificationModels[5]=array(" The post has been removed as you requested","The post was not removed due to lack of substantial reason.");
 		notificationModels[6]=array(" member is attending your event"," members are attending your event");
 		notificationModels[7]=array(" more person is also attending the event"," more persons are also attending the event ");
-		notificationModels[8]=array(" member voted your poll"," members voted");
+		notificationModels[8]=array(" member voted your poll"," members voted");*/
 	}
 
 	function newValidateSharedWith($str)
