@@ -2320,3 +2320,5 @@
 
 [2015-01-15 17:07:35       127.0.0.1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
 
+[2015-01-15 17:38:25       127.0.0.1                   Asia/Kolkata] 1139   $$$Got error 'empty (sub)expression' from regexp$$$
+

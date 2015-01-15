@@ -79,24 +79,27 @@ else
 		
 		$currentTimestamp=time();
 		$finalStudentRegex=getRollNoRegex($userId);
+		$hiddenToRegex=isThereInCSVRegex($userId);
 		$getLatestPostsSQL="SELECT post.*, users.name,users.userIdHash FROM post INNER JOIN users ON post.userId=users.userId WHERE ((sharedWith REGEXP ?";
 		
 		$values[0]=array($finalStudentRegex => 's');
+		$i=0;
 		for($i=0;$i<$ProcessedHashesCount;$i++)
 		{
 			$getLatestPostsSQL=$getlatestPostsSQL." AND postIdHash!=?";
 			$values[$i+1]=array($ProcessedHashes[$i] => 's');
 		}
-		$SQLEndPart=" AND hiddenTo NOT REGEXP ? AND lifetime > ? ) OR post.userId=?) AND displayStatus = 1 ORDER BY timestamp DESC";
-		$values[$i+1]=array($finalStudentRegex => 's');
+		$SQLEndPart=" AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.userId=?) AND displayStatus = 1 ORDER BY timestamp DESC";
+		$values[$i+1]=array($hiddenToRegex => 's');
 		$values[$i+2]=array($currentTimestamp => 's');
 		$values[$i+3]=array($userId => 's');
 		
 		//var_dump($values);
 		$getLatestPostsSQL=$getLatestPostsSQL.$SQLEndPart;
-		//echo $getLatestPostsSQL;
+		echo $getLatestPostsSQL;
 		$displayCount=0;
 		$result=$conn->select($getLatestPostsSQL,$values);
+		var_dump($result);
 		if($conn->error=="")
 		{
 			//Success

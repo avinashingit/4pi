@@ -572,7 +572,7 @@
 	}
 
 
-
+	//used to get the regular expression to match against sharedwith. Can't be used for other purposes
 	function getRollNoRegex($rollno)
 	{
 		$stud['year']=substr($rollno, 3,2);
@@ -584,6 +584,12 @@
 		$stud['branchYearDegree']=$stud['branch'].$stud['yearDegree'];
 		$regexString="(".$stud['year']."|".$stud['branch']."|".$stud['degree']."|".$stud['branchYear']."|".$stud['branchDegree']."|".$stud['yearDegree']."|".$stud['branchYearDegree'].")";
 		$finalRegexString="(,".$regexString.",?)|(^".$regexString.",?)|(^All$)";
+		return $finalRegexString;
+	}
+
+	function isThereInCSVRegex($needle)
+	{
+		$finalRegexString="(,".$needle.",?)|(^".$needle.",?)";
 		return $finalRegexString;
 	}
 	
