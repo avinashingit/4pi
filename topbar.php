@@ -139,6 +139,8 @@
 			console.log(data);
 			data=JSON.parse(data);
 
+			
+
 			$('.peopleSearchResult').each(function(){
 				$(this).remove();
 			});
@@ -155,7 +157,7 @@
 				$(this).remove();
 			});
 
-			if(data[0].length==0)
+			/*if(data[0].length==0)
 			{
 				$('#peopleSearchEmptyMessage').html("<h4>No people found</h4>");
 			}
@@ -199,7 +201,7 @@
 				{
 					globalSearchInsertPeople(data[3][i]);
 				}
-			}
+			}*/
 			
 		});
 	}
@@ -448,13 +450,13 @@
 
 		  <div class="form-group">
 
-		    <input id="searchBefore" type="text" onkeyup="fetchGlobalSearchResults();" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
+		    <input id="searchBefore" type="text" onkeyup="fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
 
 		  </div>
 
 		</form>
 
-		<div id="searchResults1" style="background-color:white;">
+		<div id="searchResults1" class="hidden" style="background-color:white;">
 
 			<div id="peopleSearch">
 
@@ -596,9 +598,24 @@
             	}
 	        }
 	    });
-	});
 
-	//$('#searchBefore','#searchAfter').css({'background-color':'#484848','color':'white','border':'1px solid #484848'});
+	    $(document).mouseup(function(e)
+	    {
+	        var subject = $("#searchResults1"); 
+
+	        if(e.target.id != subject.attr('id') && !subject.has(e.target).length)
+	        {
+	            if(subject.hasClass('hidden'))
+            	{
+            		subject.addClass('hidden').fadeOut(500);
+            	}
+            	else
+            	{
+            		subject.addClass('hidden').fadeOut(500);
+            	}
+	        }
+	    });
+	});
 
 	$('#icons div i').css({'cursor':'pointer'});
 
@@ -620,57 +637,13 @@
 
 	    $('#topBar').addClass("sticky");
 
-	    // $('#topBarNew').addClass("sticky");
-
 	  }
 
 	  else{
 
 	    $('#topBar').removeClass("sticky");
 
-	    // $('#topBarNew').removeClass("sticky");
-
 	  }
-	  
-    var srchResults = $("#searchResults1");
-    
-    var pos = srchResults.position(); 
-    
-    
-    
-        var windowposSearch = $(window).scrollTop();
-    
-        //s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
-    
-        //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
-    
-		$("#searchResults1").css("position", "fixed");
-		$("#searchResults1").css("width", "96%");
-		
-        if (windowposSearch >= pos.top-50) {
-		
-				$("#searchResults1").css("margin-top", "50px");
-				
-				
-				
-				
-            //s.addClass("stick");
-    
-            //$('#topBarNew').show();
-    
-            //$('#rightBox').hide();
-    
-            //$('#topBar').hide();
-
-        }
-
-        else {
-
-			$("#searchResults1").css("margin-top", "0px");
-
-        }
-		
-	
 
 	});
 
@@ -690,16 +663,6 @@
 
 	$(this).animate({'width':'100%'},500);
 
-	});
-
-	$('#searchResults1').hide();
-
-	$('#search').focusin(function(){
-		$('#searchResults1').slideDown(500);
-	});
-
-	$('#search').focusout(function(){
-		$('#searchResults1').slideUp(500);
 	});
 
 
@@ -760,9 +723,12 @@
 	#searchResults1{
 		position:absolute;
 		z-index:154897;
+		background-color:#FFFFFF;
 		border:1px solid gray;
-		padding:10px;
 		width:96%;
+		height:400px;
+		overflow-y:auto;
+		overflow-x:hidden;
 	}
 
 	#search{
