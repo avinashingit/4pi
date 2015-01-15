@@ -110,11 +110,11 @@
 		fetchLittlePolls();
 	});
 
-	/*setInterval(function(){
+	setInterval(function(){
 		fetchLittlePosts();
 		fetchLittleEvents();
 		fetchLittlePolls();
-	},30000);*/
+	},5000);
 
 
 

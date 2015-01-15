@@ -258,14 +258,19 @@ function editedPostSend() {
             function(data) {
 
                 console.log(data);
+                data.trim();
+
+                
                 
                 $('#editPostModal').modal('hide');
-                alert(checkData(data));
-                // if (checkData(data) == 1) {
 
+                if(checkData(data)==1)
+                {
+                    // data=JSON.parse(data);
                     modifyPost(postId, data);
+                }
 
-                // }
+                    
             }
         );
     }
@@ -463,7 +468,7 @@ function retrieveImportantPosts(value, call) {
         .success(function(data) {
 
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
-
+            console.log(data);
             var ob = JSON.parse(data);
             if (value == "empty") {
                 //alert(value);

@@ -11,6 +11,11 @@
 
 	require("../../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("../miniNotification.php");
+	require_once("../postHandlers/miniClasses/miniPost.php");
+	require_once("../postHandlers/miniClasses/miniComment.php");
+	require_once("../eventHandlers/miniEvent.php");
+	require_once("../pollHandlers/miniPoll.php");
+
 		
 
 	function getUserFromHash($userHash)

@@ -1,8 +1,11 @@
 <?php
 
+	include_once('../header_adv.php'); 
+	include_once('../topbar.php');
+
 	require_once '../QOB/qobConfig.php';
 
-	if(!isset($_GET['ref']) || !isset($_SESSION['vj']))
+	if(!isset($_GET['ref']))
 	{	
 		echo '<script>alert("Invalid url. Redirecting to home page..");window.location.href="http://localhost/4pi";</script>';
 	}
@@ -17,16 +20,17 @@
 
 function fetchSinglePost()
 {
-	$.post('/4pi/handlers/postHandlers/fetchSinglePost.php',{
+	$.post('/4pi/handlers/fetchSinglePost.php',{
 		_postIdHash:postIdHash
 	})
 	.error(function(){
 		alert("Server overload. Please try again.:(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
-			console.log(data);
+			
 			if(data==404)
 			{
 				alert("The post does not exist.");
@@ -37,9 +41,10 @@ function fetchSinglePost()
 			}
 			else
 			{
+				console.log(data);
 				data=JSON.parse(data);
 				postInsert("first",data);
-				for(i=0;i<data.comments.length);i++)
+				for(i=0;i<data.comments.length;i++)
 					{
 						commentInsert('first', data.comments[i], data.postId);
 					}
@@ -61,7 +66,7 @@ function fetchSinglePost()
 		
 		//echo $_SESSION['vj'];
 		
-		include_once('leftBlock.php'); ?>
+		include_once('../leftBlock.php'); ?>
 		<!-- left column code ends here  -->
 		
 		<div id="postArea">
@@ -70,7 +75,7 @@ function fetchSinglePost()
 		</div>
 		
 		<!-- BLOCK in the right code starts here  -->
-		<?php include_once('rightBlock.php');?>
+		<?php include_once('../rightBlock.php');?>
 		<!-- right block code ends here  -->
 
 	</div>
