@@ -2318,3 +2318,5 @@
 
 [2014-12-01 18:58:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ? ) AND (postIdHash ! =  ' at line 1$$$
 
+[2015-01-15 17:07:35       127.0.0.1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+

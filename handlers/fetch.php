@@ -12,6 +12,7 @@
 	require("../../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("../miniNotification.php");
 		
+
 	function getUserFromHash($userHash)
 	{
 		$conn=new QoB();
@@ -28,6 +29,7 @@
 		}
 	}
 	
+
 	function getUserFromId($userId)
 	{
 		$conn=new QoB();
@@ -44,6 +46,7 @@
 		}
 	}
 	
+
 	function getPostFromHash($postIdHash)
 	{
 		$conn=new QoB();
@@ -75,6 +78,7 @@
 		}
 	}
 
+
 	function getPollFromHash($pollIdHash)
 	{
 		$conn=new QoB();
@@ -89,6 +93,7 @@
 			return false;
 		}
 	}
+
 
 	function hasReported($userId,$hiddenTo)
 	{
@@ -114,6 +119,8 @@
 				return 1;
 			}
 	}
+
+
 	function blockUserByHash($userIdHash,$crime,$privateData="")
 	{
 		$conn=new QoB();
@@ -143,6 +150,8 @@
 			return -1;
 		}
 	}
+
+
 	function notifyAdmin($notification,$userIdentity)
 	{
 		$conn=new QoB();
@@ -161,6 +170,8 @@
 		}
 
 	}
+
+
 
 	function mailContent($emailId,$content,$subject,$attachments="")
 	{
@@ -210,6 +221,8 @@
 
 	}
 
+
+
 	function getCommentByPostIdAndHash($postId,$commentIdHash)
 	{
 		$conn = new QoB();
@@ -228,6 +241,50 @@
 			return false;
 		}
 	}
+
+
+
+	function getAllCommentsByPostId($postId)
+	{
+		$conn = new QoB();
+		$commentTable="p".$postId."c";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId";
+		// $values[]=array("commentTable" => 's');
+		// $values[]=array($commentTable => 's');
+		//$values[0]=array($commentIdHash => 's');
+		$result=$conn->fetchAll($GetCommentSQL);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+
+	function getFewCommentsByPostId($postId)
+	{
+		$conn = new QoB();
+		$commentTable="p".$postId."c";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp LIMIT 0,3";
+		// $values[]=array("commentTable" => 's');
+		// $values[]=array($commentTable => 's');
+		//$values[0]=array($commentIdHash => 's');
+		$result=$conn->fetchAll($GetCommentSQL);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
 
 	function updatePostIndexesOnComment($postArray,$userId,$conn)
 	{
@@ -269,6 +326,8 @@
 		}
 	}
 
+
+
 	function changeToRawSharedWith($sharedWith)
 	{
 		$sharedWithRegex="([\.]+)";
@@ -279,6 +338,9 @@
 		}
 		return $rawSharedWith;
 	}
+
+
+
 	function changeToEventDateFormat($date)
 	{
 		$nDate=explode("/", $date);
@@ -287,12 +349,18 @@
 		$eventDate=preg_replace($dateRegex, '', $date);*/
 		return $eventDate;
 	}
+
+
+
 	function changeToEventTimeFormat($time)
 	{
 		$timeRegex="([:]+)";
 		$eventTime=preg_replace($timeRegex, '', $time);
 		return $eventTime;
 	}
+
+
+
 	function changeToRawDateFormat($eventDate)
 	{
 		//echo $eventDate;
@@ -307,12 +375,16 @@
 		return $rawDate;
 	}
 
+
+
 	function changeToRawTimeFormat($eventTime)
 	{
 		$nTime=str_split($eventTime,2);
 		$rawTime=implode(":",$nTime);
 		return $rawTime;
 	}
+
+
 
 	function isSharedTo($userId,$sharedWith)
 	{
@@ -328,6 +400,8 @@
 		}
 	}
 
+
+
 	function isThere($haystack,$needle)
 	{
 		if(stripos($haystack, $needle)===false)
@@ -339,6 +413,8 @@
 			return 1;
 		}
 	}
+
+
 
 	function validateDate($rawDate)
 	{
@@ -388,6 +464,8 @@
 		}
 	}
 
+
+
 	function validateTime($rawTime)
 	{
 		$nTime=explode(":",$rawTime);
@@ -397,6 +475,8 @@
 		}
 		return true;
 	}
+
+
 
 	function validateEventDateAndTime($eventDate,$eventTime)
 	{
@@ -410,6 +490,8 @@
 		return true;
 
 	}
+
+
 
 	function getEventStatus($event,$isAttending)
 	{
@@ -490,6 +572,7 @@
 	}
 
 
+
 	function getRollNoRegex($rollno)
 	{
 		$stud['year']=substr($rollno, 3,2);
@@ -504,6 +587,8 @@
 		return $finalRegexString;
 	}
 	
+
+
 	function isCoCAS($userId)
 	{
 		if($userId=="COE12B013"||$userId=="COE12B009")
@@ -514,8 +599,10 @@
 		{
 			return false;
 		}
-
 	}
+
+
+
 	function getDegree($userId)
 	{
 		$currentYear=date('Y',time());
@@ -566,26 +653,215 @@
 		
 		return $degree;
 	}
+
+
+
 	function getDuration($start,$end)
 	{
 		$startYearMonthDate=date('Y/m/d',$start);
 		$endYearMonthDate=date('Y/m/d',$end);
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
+		return $duration;
 	}
+
+
+
 	function getMinDuration($start,$end)
 	{
 		$startYearMonthDate=date('Y/m',$start);
 		$endYearMonthDate=date('Y/m',$end);
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
+		return $duration;
 	}
+
+
+
+	function toTimeAgoFormat($timestamp)
+	{
+		$ts= new DateTime();
+		$ts->setTimestamp($timestamp);
+		$timeAgoFormat=$ts->format(DateTime::ISO8601);
+		return $timeAgoFormat;
+	}
+
+
+
+	function getPollObject($poll,$userId)
+	{
+		$options=$poll['options'];
+		$optionsArray=explode(',', $options);
+		$optionCount=count($optionsArray);
+		$hasVoted=isThere($poll['votedBy'],$userId);
+		$optionVotes=$poll['optionVotes'];
+		$optionVotesArray=explode(',', $optionVotes);
+		for($i=0;$i<$optionCount;$i++)
+		{
+			$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionVotesArray[$i]);
+		}
+		if($poll['userId']==$userId)
+		{
+			$isOwner=1;
+		}
+		else
+		{
+			$isOwner=-1;
+		}
+		
+		$pollCreationTime=toTimeAgoFormat($poll['timestamp']);
+		$pollStatus=$poll['pollStatus'];
+		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
+							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
+		return $pollObj;
+	}
+
+
+
+	function getEventObject($event,$userId)
+	{
+		if(stripos($event['attenders'], $userId)===false)
+		{
+			$isAttender=-1;
+		}
+		else
+		{
+			$isAttender=1;
+		}
+		$eventStatus=getEventStatus($event,$isAttender);
+		$eventUserId=$event['userId'];
+		if($eventUserId==$userId)
+		{
+			$eventOwner=1;
+		}
+		else
+		{
+			$eventOwner=-1;
+		}
+		$eventTime=$event['eventTime'];
+		$rawTime=changeToRawTimeFormat($eventTime);
+		$eventDate=$event['eventDate'];
+		$rawDate=changeToRawDateFormat($eventDate);
+		$eventCreationTime=$toTimeAgoFormat($event['timestamp']);
+		$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
+		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
+			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
+			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);
+		return $eventObj;
+	}
+
+
+
+	function getPostObjectWithFewComments($post,$userId)
+	{
+		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
+		$postCreationTime=toTimeAgoFormat($post['timestamp']);
+		if(stripos($post['followers'],$userId)===false)
+		{
+			$followPost=1;
+		}
+		else
+		{
+			$followPost=2;
+		}
+		if($post['userId']==$userId)
+		{
+			$postOwner=1;
+		}
+		else
+		{
+			$postOwner=-1;
+		}
+		$hasStarred=isThere($post['starredBy'],$userId);
+		$postComments=getFewCommentsByPostId($post['postId']);
+		$comments=array();
+		foreach ($postComments as $record)
+		{
+			$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
+		}
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
+		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner);
+		return $postObj;
+	}
+
+
+	function getPostObjectWithAllComments($post,$userId)
+	{
+		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
+		$postCreationTime=toTimeAgoFormat($post['timestamp']);
+		if(stripos($post['followers'],$userId)===false)
+		{
+			$followPost=1;
+		}
+		else
+		{
+			$followPost=2;
+		}
+		if($post['userId']==$userId)
+		{
+			$postOwner=1;
+		}
+		else
+		{
+			$postOwner=-1;
+		}
+		$hasStarred=isThere($post['starredBy'],$userId);
+		$postComments=getAllCommentsByPostId($post['postId']);
+		$comments=array();
+		foreach ($postComments as $record)
+		{
+			$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
+		}
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
+		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner);
+		return $postObj;
+	}
+
+
+	//Requires comment object with details of the user as well( i.e. result of a join on users and comment tables)
+	function getCommentObject($comment,$receiverUserId,$commentPostIdHash)
+	{
+		$commentTime=toTimeAgoFormat($comment['timestamp']);
+		if($receiverUserId==$comment['userId'])
+		{
+			$commentOwner=1;
+		}
+		else
+		{
+			$commentOwner=-1;
+		}
+		$commentObj=new miniComment($commentPostIdHash,$comment['userIdHash'],$comment['content'],$commentTime,
+								$comment['commentIdHash'],$comment['userId'],$comment['name'],$commentOwner);
+		return $commentObj;
+	}
+
+
+
 	function sendNotification($FromUserId,$toUserId,$notifType,$objectId,$objectType)
 	{
 		$conn=new QoB();
+		$FetchMaxNotifIDSQL="SELECT MAX(notificationId) as maxNotificationId FROM notifications";
+		$maxNotificationID=$conn->fetchALL($FetchMaxNotifIDSQL,false);
+		if($conn->error!=""||$maxPollID=="")
+		{
+			notifyAdmin("Conn.Error.:".$conn->error."!In create notification!!",$userId);
+			echo 12;
+			exit();
+		}
+		$eId=$maxPollID['maxNotificationId'];
+		
+		if($eId==NULL)
+		{
+			$notificationId=1;
+		}
+		else
+		{
+			$notificationId=$eId+1;
+		}
+
 		$timestamp=time();
 		$sendNotificationSQL="IF EXISTS(SELECT * FROM notifications WHERE objectId= ? AND type=? AND objectType=? AND userId=?) 
-							UPDATE notifications SET actionCount=actionCount+1, timestamp=? WHERE objectId= ? AND type=? AND objectType=? AND userId=?
+							UPDATE notifications SET actionCount=actionCount+1, timestamp=? ,seen=0,WHERE objectId= ? AND type=? AND objectType=? AND userId=?
 						ELSE
-    						INSERT INTO notifications(objectId,type,objectType,userId,timestamp) VALUES (?,?,?,?,?) ";
+    						INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notifcationId) VALUES (?,?,?,?,?,?) ";
     	$values[0]=array($objectId => 's');
     	$values[1]=array($type => 'i');
     	$values[2]=array($objectType => 's');
@@ -601,6 +877,7 @@
     	$values[10]=array($objectType => 's');
     	$values[11]=array($userId => 's');
     	$values[12]=array($timestamp => 's');
+    	$values[13]=array($notificationId => 's');
     	$result=$conn->update($sendNotificationSQL,$values);
     	if($conn->error==""&&$result==true)
     	{
@@ -613,9 +890,13 @@
     	}
 	}
 
-	function getNotifications($userId)
+	
+
+
+	function getNotifications($userId,$displayedNotifArray)
 	{
-		/*
+		/* Types of Notifications:
+
 		1-starredYourPost
 		2-commentedOnYourPost
 		3-alsoCommentedOnPost
@@ -635,16 +916,57 @@
 		commentedOnYourThreadAnswer
 		alsoCommentedOnThreadAnswer*/
 
-		notificationModels[0]=array(0,0);
-		notificationModels[1]=array(" star for your Post"," members starred your Post");
-		notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
-		notificationModels[3]=array(" new comment on the post "," new comments on the post");
+		$displayedNotifCount=count($displayedNotifArray);
+		$notificationModels[0]=array("You have no notifications yet!",0);
+		$notificationModels[1]=array(" star for your Post"," members starred your Post");
+		$notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
+		$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
+		$notificationModels[4]=array(" member mailed your post"," members mailed your post");
+		$notificationModels[5]=array(" new comment on the post you mailed"," new comments on the post you mailed");
+		$notificationModels[6]=array(" The post has been removed as you requested.","The post was not removed due to lack of substantial reason.");
+		$notificationModels[7]=array(" member is attending your event"," members are attending your event");
+		$notificationModels[8]=array(" more person is also attending the event you are attending"," more members are also attending the event you are attending ");
+		$notificationModels[9]=array(" member voted your poll"," members voted your poll");
+		$notificationModels[10]=array(" member also answered the poll you answered"," members also answered the poll you answered");
+		$notifcationFetchSQL="SELECT notifications FROM notifications WHERE userId=? ";
+		$values[0]=array($userId => 's');
+		for($i=0;$i<$displayedNotifCount;$i++)
+		{
+			$notifcationFetchSQL .= "AND notifcationIdHash!= ? ";
+			$values[$i+1]=array($displayedNotifArray[$i] => 's');
+		}
+		$notifcationFetchSQL .= "ORDER BY timestamp DESC LIMIT 0,7";
+		$result=$conn->select($notifcationFetchSQL);
+		if($conn->error=="")
+		{
+			$displayCount=0;
+			$notifcationObjArray=array();
+			while($notif=$conn->fetch($result)&&$displayCount<7)
+			{
+				if($notif['actionCount']==0)
+				{
+					$notification=$notif['actionCount'].$notificationModels[$notif['type']][0];
+				}
+				else
+				{
+					$notification=$notif['actionCount'].$notificationModels[$notif['type']][1];
+				}
+				
+				$notifObject=new miniNotification($notif['notifcationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
+				$notifcationObjArray[]=$notifObject;
+				$displayCount++;
+			}
+			if($displayCount==0)
+			{
+				echo 404;
+				exit();
+			}
+			else
+			{
+				print_r(json_encode($notificationObjArray));
+			}
+		}
 
-		notificationModels[4]=array(" new comment on the post you mailed"," new comments on the post you mailed");
-		notificationModels[5]=array(" The post has been removed as you requested","The post was not removed due to lack of substantial reason.");
-		notificationModels[6]=array(" member is attending your event"," members are attending your event");
-		notificationModels[7]=array(" more person is also attending the event"," more persons are also attending the event ");
-		notificationModels[8]=array(" member voted your poll"," members voted");
 	}
 
 	function newValidateSharedWith($str)
