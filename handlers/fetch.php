@@ -779,9 +779,12 @@
 		$hasStarred=isThere($post['starredBy'],$userId);
 		$postComments=getFewCommentsByPostId($post['postId']);
 		$comments=array();
-		foreach ($postComments as $record)
+		if($postComments!=false)
 		{
-			$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
+			foreach ($postComments as $record)
+			{
+				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
+			}
 		}
 		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
 		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner);
@@ -812,10 +815,14 @@
 		$hasStarred=isThere($post['starredBy'],$userId);
 		$postComments=getAllCommentsByPostId($post['postId']);
 		$comments=array();
-		foreach ($postComments as $record)
+		if($postComments!=false)
 		{
-			$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
+			foreach ($postComments as $record)
+			{
+				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
+			}
 		}
+		
 		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
 		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner);
 		return $postObj;

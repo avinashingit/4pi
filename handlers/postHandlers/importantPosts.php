@@ -89,7 +89,7 @@ else
 			$getLatestPostsSQL=$getlatestPostsSQL." AND postIdHash!=?";
 			$values[$i+1]=array($ProcessedHashes[$i] => 's');
 		}
-		$SQLEndPart=" AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.userId=?) AND displayStatus = 1 ORDER BY timestamp DESC";
+		$SQLEndPart=" AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.userId=?) AND displayStatus = 1 ORDER BY impIndex DESC";
 		$values[$i+1]=array($hiddenToRegex => 's');
 		$values[$i+2]=array($currentTimestamp => 's');
 		$values[$i+3]=array($userId => 's');
