@@ -104,8 +104,13 @@ error_reporting(E_ALL ^ E_NOTICE);
 			
 			<!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
 		<!--CDN-->
+
+		<!-- For custom scroll bars -->
+		<link rel="stylesheet" href="/4pi/css/TP/jquery.mCustomScrollbar.css" />
 		
 	<!--CSS-->
+
+
 		
 	
 		<script src="/4pi/js/Jquery/jquery.min.js"></script>
@@ -129,6 +134,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 		<script src="/4pi/js/TP/highcharts.js"></script>
 		
 		<script src="/4pi/js/TP/highcharts-3d.js"></script>
+	
+
+		<!-- For custom scroll bar -->
+		<script src="/4pi/js/TP/jquery.mCustomScrollbar.concat.min.js"></script>
 		
 		<!--<script type='text/javascript' src="https://github.com/petersendidit/jquery-timeago/raw/master/jquery.timeago.js"></script>-->
 		
