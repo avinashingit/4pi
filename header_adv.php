@@ -84,6 +84,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 			
 			<link rel="stylesheet" type="text/css" href="/4pi/css/BS/bsClCa/bootstrap-clockpicker.min.css">
 			
+				<!-- For custom scroll bars -->
+		<link rel="stylesheet" href="/4pi/css/TP/jquery.mCustomScrollbar.css" />
 			
 		<!--CUSTOM-->
 		
@@ -120,6 +122,9 @@ error_reporting(E_ALL ^ E_NOTICE);
 		<script src="/4pi/js/TP/highcharts.js"></script>
 		
 		<script src="/4pi/js/TP/highcharts-3d.js"></script>
+
+		<!-- For custom scroll bar -->
+		<script src="/4pi/js/TP/jquery.mCustomScrollbar.concat.min.js"></script>
 		
 		<!--<script type='text/javascript' src="https://github.com/petersendidit/jquery-timeago/raw/master/jquery.timeago.js"></script>-->
 		

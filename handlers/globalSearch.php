@@ -30,7 +30,7 @@ Array[3] = null (emtpy)
 // $_POST['_inputVal']="A";
 
 
-if(!isset($_SESSION['vj']))
+if(isset($_SESSION['vj']))
     {
         require_once("../classes/search.php");
 
@@ -97,7 +97,7 @@ if(!isset($_SESSION['vj']))
                             }
                         else
                             {
-                                echo 133+'u';//database error
+                                echo '133'.'u';//database error
                             }
                             // TO FETCH STUDENT SEARCH RESULTS   
 
@@ -133,7 +133,7 @@ if(!isset($_SESSION['vj']))
                         else
                             {
                                 echo $qob->error;
-                                echo 133+'pos';//database error
+                                echo '133'.'pos';//database error
                             }
                         /*     TO FETCH POST SEARCH RESULTS   */
 
@@ -169,7 +169,7 @@ if(!isset($_SESSION['vj']))
                         else
                             {
                                 echo $qob->error;
-                                echo 133+'e';//database error
+                                echo '133'.'e';//database error
                             }
                         /*     TO FETCH EVENT SEARCH RESULTS   */
 
@@ -208,7 +208,7 @@ if(!isset($_SESSION['vj']))
                         else
                             {
                                // echo $qob->error;
-                                echo 133+'po';//database error
+                                echo '133'.'po';//database error
                             }
                              // TO FETCH POLL SEARCH RESULTS   */
 
