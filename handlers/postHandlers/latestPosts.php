@@ -96,10 +96,10 @@ else
 		
 		//var_dump($values);
 		$getLatestPostsSQL=$getLatestPostsSQL.$SQLEndPart;
-		echo $getLatestPostsSQL;
+		//echo $getLatestPostsSQL;
 		$displayCount=0;
 		$result=$conn->select($getLatestPostsSQL,$values);
-		var_dump($result);
+		//var_dump($result);
 		if($conn->error=="")
 		{
 			//Success
