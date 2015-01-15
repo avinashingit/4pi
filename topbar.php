@@ -8,6 +8,11 @@
 		$('#notifications').css({'z-index':'1052'});
 	}
 
+	function fetchNotifications()
+	{
+		
+	}
+
 	function insertPeopleSearch(data,val)
 	{
 		if(val==0)
