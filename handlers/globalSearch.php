@@ -27,7 +27,7 @@ Array[3] = null (emtpy)
 
 
 
-
+// $_POST['_inputVal']="A";
 
 
 if(!isset($_SESSION['vj']))
@@ -70,8 +70,9 @@ if(!isset($_SESSION['vj']))
 
                         require_once("../QOB/qob.php");
                         $qob = new QOB();
+                        $returnResults=array();
                         
-                        /*     TO FETCH STUDENT SEARCH RESULTS   
+                          // TO FETCH STUDENT SEARCH RESULTS   
                         $result = $qob->select($query1, $values);
                         
                         if($qob->error=="")
@@ -96,9 +97,9 @@ if(!isset($_SESSION['vj']))
                             }
                         else
                             {
-                                echo 133;//database error
+                                echo 133+'u';//database error
                             }
-                            TO FETCH STUDENT SEARCH RESULTS   */
+                            // TO FETCH STUDENT SEARCH RESULTS   
 
 
 
@@ -132,7 +133,7 @@ if(!isset($_SESSION['vj']))
                         else
                             {
                                 echo $qob->error;
-                                echo 133;//database error
+                                echo 133+'pos';//database error
                             }
                         /*     TO FETCH POST SEARCH RESULTS   */
 
@@ -142,7 +143,7 @@ if(!isset($_SESSION['vj']))
 
 
                         
-                        /*     TO FETCH EVENT SEARCH RESULTS   
+                        //  TO FETCH EVENT SEARCH RESULTS   
                         $result = $qob->select($query3, $values);
                         
                         if($qob->error=="")
@@ -168,7 +169,7 @@ if(!isset($_SESSION['vj']))
                         else
                             {
                                 echo $qob->error;
-                                echo 133;//database error
+                                echo 133+'e';//database error
                             }
                         /*     TO FETCH EVENT SEARCH RESULTS   */
 
@@ -181,7 +182,7 @@ if(!isset($_SESSION['vj']))
 
 
                         
-                        /*     TO FETCH POLL SEARCH RESULTS   
+                        //   TO FETCH POLL SEARCH RESULTS   
                         $result = $qob->select($query4, $values);
                         
                         if($qob->error=="")
@@ -207,9 +208,9 @@ if(!isset($_SESSION['vj']))
                         else
                             {
                                // echo $qob->error;
-                                echo 133;//database error
+                                echo 133+'po';//database error
                             }
-                             TO FETCH POLL SEARCH RESULTS   */
+                             // TO FETCH POLL SEARCH RESULTS   */
 
 
 
