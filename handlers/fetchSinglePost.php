@@ -2,7 +2,7 @@
 session_start();	
 error_reporting(E_ALL ^ E_NOTICE);
 require_once('../QOB/qob.php');
-require_once('postHandlers/miniPost.php');
+require_once('postHandlers/miniClasses/miniPost.php');
 require_once('fetch.php');
 $_SESSION['jx']="1004"; //1001 for latest Polls 1002 for upcoming events 1003 for winners 1004 for latestPolls
 //Testing Content Starts
