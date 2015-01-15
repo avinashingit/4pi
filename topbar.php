@@ -1,6 +1,5 @@
 <!-- basically the top bar i.e. the header part of the newsfeed, is common to all the users -->
 
-
 <script>
 
 	function showNotifications()
@@ -571,6 +570,14 @@
 
 <script>
 
+		 (function($){
+	        $(window).load(function(){
+	            $("#notifications").mCustomScrollbar({
+	            	theme:"rounded-dots-dark"
+	            });
+	        });
+	    })(jQuery);
+
 	$(document).ready(function()
 	{
 	    $(document).mouseup(function(e)
@@ -581,7 +588,7 @@
 	        {
 	            if(subject.hasClass('hidden'))
             	{
-
+            		subject.addClass('hidden').fadeOut(500);
             	}
             	else
             	{
@@ -699,6 +706,12 @@
 </script>
 
 <style>
+	
+	.mCS-rounded-dots-dark
+	{
+		background-color:#f1f1f1;
+		color:#000;
+	}
 
 	#notifications
 	{
