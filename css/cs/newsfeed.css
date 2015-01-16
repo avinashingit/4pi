@@ -95,10 +95,6 @@ display:none;
     height:auto;
     *padding-right: 15px;
 }
-.badge{
-    background-color:#ed4534;
-    color:#fff;
-}
 .group{
     font-size:15px;
     color:#fff;
@@ -198,9 +194,13 @@ p.commentText
     padding-top:10px;
 }
 
-.badge{
-    border-radius:0px !important;
-    background-color:#eb8500 !important;
+.badge#notificationNumber{
+    background-color:#A800C2  !important;
+    margin-top:-2px;
+    margin-left:-9px;
+    padding:2px;
+    position:absolute;
+    z-index:5;
 }
 
 .postBottomRowPadding{

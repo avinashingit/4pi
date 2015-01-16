@@ -8,9 +8,80 @@
 		$('#notifications').css({'z-index':'1052'});
 	}
 
+
+	function insertNotifications(data,position)
+	{
+		var notification="";
+
+		if(data.isRead==1)
+		{
+			notification+='<div class="row notification showed" id="'+data.notificationIdHash+'">';
+		}
+
+		else
+		{
+			notification+='<div class="row notification pleaseShow" id="'+data.notificationIdHash+'">';
+		}
+
+			notification+='<div class="col-md-12 text-left">';
+
+			if(data.objectType==700)
+			{
+				notification+='<a href="http://localhost/4pi/posts/fetchSinglePost?ref='+data.objectId+'"><p><img width="25px" height="25px" src="/4pi/img/appImgs/postImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+
+				notification+='</a>';
+			}
+			else if(data.objectType==800)
+			{
+				notification+='<a href="http://localhost/4pi/events/fetchSingleEvent?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/postImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+
+				notification+='</a>';
+			}
+			else if(data.objectType==900)
+			{
+				notification+='<a href="http://localhost/4pi/polls/fetchSinglePoll.php?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/postImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+
+				notification+='</a>';
+			}
+
+			notificatoin+='</div>';
+
+		notification+='</div><!-- end class notification -->';
+
+		$('#notfications').prepend(notification).hide().fadeIn(500);
+	}
+
 	function fetchNotifications()
 	{
-		
+		var presentNotifications=new Array();
+		var i=0;
+		$('#notifications').find('.notificaion').each(function(){
+			presentNotifications[i]=$(this).attr("id");
+			i++;
+		});
+		$.post('/4pi/handlers/notifications/fetchNotifications.php',{
+			_presentNotifications:presentNotifications
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			console.log(data);
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				var unreadNotificationNumber=0;
+				for(i=0;i<data.length;i++)
+				{
+					if(data[i].isRead==-1)
+					{
+						unreadNotificationNumber++;
+					}
+					insertNotification(data[i],"first");
+				}
+				$('#notificationNumber').html(unreadNotificationNumber);
+			}
+		});
 	}
 
 	function insertPeopleSearch(data,val)
@@ -222,11 +293,11 @@
 
 			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
 
-				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>
+				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber">2</span>
 
 				<div id="notifications" class="hidden">
 
-					<div class="row notification">
+					<div class="row notification" id="notificationid">
 
 						<div class="col-md-12 text-left">
 
@@ -699,7 +770,7 @@
 		padding:5px !important;
 		font-size:13px;
 		border-bottom:1px solid #eeeeee;
-		background-color:#f1f1f1;
+		
 		white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
 		white-space: -pre-wrap;      /* Opera 4-6 */
 		white-space: -o-pre-wrap;    /* Opera 7 */
@@ -708,6 +779,16 @@
 		word-break: break-all;
 		white-space: normal;
 		cursor:pointer;
+	}
+
+	.notification.showed
+	{
+		background-color:#f1f1f1;
+	}
+
+	.notification.pleaseShow
+	{
+		background-color:#efefef;
 	}
 
 	.notification p

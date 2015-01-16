@@ -26,8 +26,7 @@ Array[3] = null (emtpy)
  */
 
 
-
-// $_POST['_inputVal']="A";
+$_POST['_inputVal']="the";
 
 
 if(isset($_SESSION['vj']))
