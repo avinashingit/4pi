@@ -368,9 +368,6 @@ function retrieveLatestPosts(value, call) {
             posts[i]=$(this).attr("id");
             i++;
         });
-
-        console.log("                  posts sent");
-        console.log(posts);
     }
 
     $.post('./handlers/postHandlers/latest.php', {
@@ -468,8 +465,8 @@ function retrieveImportantPosts(value, call) {
         .success(function(data) {
 
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
+            data = data.trim();
             console.log(data);
-            var ob = JSON.parse(data);
             if (value == "empty") {
                 //alert(value);
                 $('.post').each(function() {
@@ -480,23 +477,38 @@ function retrieveImportantPosts(value, call) {
                     });
                 });
             }
-            //alert(data);
-            //datad=jQuery.parseJSON(data[0]);
-            for (i = 0; i < ob.length; i++) {
-                postInsert('last', ob[i]);
-                if (ob[i].comments == null) {
-                    var cLength = 0;
-                } else {
-                    var cLength = ob[i].comments.length;
-                }
-                // var cLength = ob[i].comments.length;
 
-                for (j = 0; j < cLength; j++) {
-                    commentInsert('first', ob[i].comments[j], ob[i].postId);
+
+            if (data != 404) {
+                $('#postEmptyMessage').html("");
+                // console.log(data);
+                var ob = JSON.parse(data);
+                for (i = 0; i < ob.length; i++) {
+                    postInsert('last', ob[i]);
+                    if (ob[i].comments == null) {
+                        var cLength = 0;
+                    } else {
+                        var cLength = ob[i].comments.length;
+                    }
+                    // var cLength = ob[i].comments.length;
+
+                    for (j = 0; j < cLength; j++) {
+                        commentInsert('first', ob[i].comments[j], ob[i].postId);
+                    }
                 }
 
+                callAfterAjax();
+            } 
+            else if(data==11)
+            {
+                alert("Please login to continue");
+                window.location.href = "/4pi/index.php";
             }
-            callAfterAjax();
+            else if (data == 404) {
+                $('#postEmptyMessage').find('#messageEmpty').html("No posts to display.");
+            }
+            contentLoadedPosts=0;
+            done=1;
         });
 }
 
@@ -522,6 +534,8 @@ function retrievePopularPosts(value, call) {
         })
         .success(function(data) {
             $('.row .postMenu').find('#popularPostsButton').find('i').removeClass('fa-spin');
+            data = data.trim();
+            console.log(data);
             if (value == "empty") {
                 //alert(value);
                 $('.post').each(function() {
@@ -532,24 +546,38 @@ function retrievePopularPosts(value, call) {
                     });
                 });
             }
-            var ob = JSON.parse(data);
-            //alert(data);
-            //datad=jQuery.parseJSON(data[0]);
-            for (i = 0; i < ob.length; i++) {
-                postInsert('last', ob[i]);
-                if (ob[i].comments == null) {
-                    var cLength = 0;
-                } else {
-                    var cLength = ob[i].comments.length;
-                }
-                // var cLength = ob[i].comments.length;
 
-                for (j = 0; j < cLength; j++) {
-                    commentInsert('first', ob[i].comments[j], ob[i].postId);
+
+            if (data != 404) {
+                $('#postEmptyMessage').html("");
+                // console.log(data);
+                var ob = JSON.parse(data);
+                for (i = 0; i < ob.length; i++) {
+                    postInsert('last', ob[i]);
+                    if (ob[i].comments == null) {
+                        var cLength = 0;
+                    } else {
+                        var cLength = ob[i].comments.length;
+                    }
+                    // var cLength = ob[i].comments.length;
+
+                    for (j = 0; j < cLength; j++) {
+                        commentInsert('first', ob[i].comments[j], ob[i].postId);
+                    }
                 }
 
+                callAfterAjax();
+            } 
+            else if(data==11)
+            {
+                alert("Please login to continue");
+                window.location.href = "/4pi/index.php";
             }
-            callAfterAjax();
+            else if (data == 404) {
+                $('#postEmptyMessage').find('#messageEmpty').html("No posts to display.");
+            }
+            contentLoadedPosts=0;
+            done=1;
         });
 }
 
@@ -1220,4 +1248,6 @@ function deleteComment(cid, pid) {
 $(document).ready(function() {
     $('.popOver').popover();
 });
+
+
 

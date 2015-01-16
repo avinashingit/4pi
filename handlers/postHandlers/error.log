@@ -2322,3 +2322,33 @@
 
 [2015-01-15 17:38:25       127.0.0.1                   Asia/Kolkata] 1139   $$$Got error 'empty (sub)expression' from regexp$$$
 
+[2015-01-16 12:47:44             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-01-16 12:50:36             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-01-16 12:51:39             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 12:51:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 12:52:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 12:52:26             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 13:03:29       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 13:04:18             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 13:04:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')) AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 13:05:09             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')) AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 13:05:21             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')) AND displayStatus = 1 ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-16 19:30:54             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND postIdHash!=? AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.user' at line 1$$$
+
+[2015-01-16 19:31:39             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND postIdHash!=? AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.user' at line 1$$$
+
+[2015-01-16 19:37:33             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND post.postIdHash != ? AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR po' at line 1$$$
+
+[2015-01-16 19:40:51             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND post.postIdHash != ? AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR po' at line 1$$$
+

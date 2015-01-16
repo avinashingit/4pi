@@ -4,7 +4,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 require_once('../../QOB/qob.php');
 require_once('./miniClasses/miniPost.php');
 require_once('../fetch.php');
-$_SESSION['jx']="1004"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
+$_SESSION['jx']="998"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
 //Testing Content Starts
 	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);

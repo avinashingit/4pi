@@ -8,6 +8,8 @@
 //
 //
 //---Documentation Ends ---//
+//
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	require("../../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("../miniNotification.php");
