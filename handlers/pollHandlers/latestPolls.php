@@ -79,16 +79,17 @@ else
 		
 
 		$finalStudentRegex=getRollNoRegex($userId);
-		$getLatestPollsSQL="SELECT poll.*, users.name FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?";
+		$getLatestPollsSQL="SELECT poll.*, users.name FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR poll.userId=?) ";
 		
 		$values[0]=array($finalStudentRegex => 's');
+		$values[1]=array($userId => 's');
 		for($i=0;$i<$ProcessedHashesCount;$i++)
 		{
 			$getLatestPollsSQL=$getlatestPollsSQL." AND pollIdHash!=?";
-			$values[$i+1]=array($ProcessedHashes[$i] => 's');
+			$values[$i+2]=array($ProcessedHashes[$i] => 's');
 		}
-		$SQLEndPart=") OR poll.userId=?) ORDER BY timestamp DESC";
-		$values[$i+1]=array($userId => 's');
+		$SQLEndPart=" ORDER BY timestamp DESC";
+		
 		
 		//var_dump($values);
 		$getLatestPollsSQL=$getLatestPollsSQL.$SQLEndPart;

@@ -80,19 +80,19 @@ else
 		$currentTimestamp=time();
 		$finalStudentRegex=getRollNoRegex($userId);
 		$hiddenToRegex=isThereInCSVRegex($userId);
-		$getLatestPostsSQL="SELECT post.*, users.name,users.userIdHash FROM post INNER JOIN users ON post.userId=users.userId WHERE ((sharedWith REGEXP ?";
+		$getLatestPostsSQL="SELECT post.*, users.name,users.userIdHash FROM post INNER JOIN users ON post.userId=users.userId WHERE ((sharedWith REGEXP ? AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.userId = ?) AND displayStatus = 1";
 		
 		$values[0]=array($finalStudentRegex => 's');
+		$values[1]=array($hiddenToRegex => 's');
+		$values[2]=array($currentTimestamp => 's');
+		$values[3]=array($userId => 's');
 		$i=0;
 		for($i=0;$i<$ProcessedHashesCount;$i++)
 		{
-			$getLatestPostsSQL=$getlatestPostsSQL." AND postIdHash!=?";
-			$values[$i+1]=array($ProcessedHashes[$i] => 's');
+			$getLatestPostsSQL=$getLatestPostsSQL." AND post.postIdHash != ?";
+			$values[$i+4]=array($ProcessedHashes[$i] => 's');
 		}
-		$SQLEndPart=" AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.userId=?) AND displayStatus = 1 ORDER BY impIndex DESC";
-		$values[$i+1]=array($hiddenToRegex => 's');
-		$values[$i+2]=array($currentTimestamp => 's');
-		$values[$i+3]=array($userId => 's');
+		$SQLEndPart="  ORDER BY impIndex DESC LIMIT 0,5";
 		
 		//var_dump($values);
 		$getLatestPostsSQL=$getLatestPostsSQL.$SQLEndPart;

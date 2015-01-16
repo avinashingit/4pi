@@ -83,17 +83,18 @@ $conn=new QoB();
 			$currentDate=(int)$currentDate;
 			$currentTime=(int)$currentTime;
 			$finalStudentRegex=getRollNoRegex($userId);
-			$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?";
+			$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate<=?)";
 			
 			$values[0]=array($finalStudentRegex => 's');
+			$values[1]=array($userId => 's');
+			$values[2]=array($currentDate => 'i');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
 				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND eventIdHash!=?";
-				$values[$i+1]=array($ProcessedHashes[$i] => 's');
+				$values[$i+3]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart=") OR userId=?)  AND (eventDate<=?) ORDER BY eventDate,eventTime";
-			$values[$i+1]=array($userId => 's');
-			$values[$i+2]=array($currentDate => 'i');
+			$SQLEndPart=" ORDER BY eventDate,eventTime";
+			
 			
 			//var_dump($values);
 			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
