@@ -809,7 +809,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		}
 		else
 		{
-			$followPost=2;
+			$followPost=-1;
 		}
 		if($post['userId']==$userId)
 		{
