@@ -389,9 +389,9 @@ function retrieveLatestPosts(value, call) {
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
 
             data = data.trim();
-            console.log(data);
-            if (value == "empty") {
-                //alert(value);
+            // console.log(data);
+            /*if (value == "empty") {
+                alert(value);
                 $('.post').each(function() {
                     $(this).remove();
 
@@ -399,8 +399,7 @@ function retrieveLatestPosts(value, call) {
                         'border': 'none'
                     });
                 });
-            }
-
+            }*/
 
             if (data != 404) {
                 $('#postEmptyMessage').html("");
@@ -932,9 +931,15 @@ function postInsert(position, data1) {
 
 
     if (position == "last") {
-        $('#postArea').append(post).hide().fadeIn('slow');
-    } else if (position == "first") {
-        $('#postArea').prepend(post).hide().fadeIn('slow');
+
+        $('#postArea').append(post);
+
+    } 
+    else if (position == "first") 
+    {
+
+        $('#postArea').prepend(post);
+
     }
 }
 
