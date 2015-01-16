@@ -166,20 +166,24 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 function fetchMorePosts(e)
 {
+	$('#loadMorePostsButton').find('button').html("Loading").attr("onclick","");
 	e.preventDefault();
     if(inView=="999")
     {
         retrieveLatestPosts("noempty",1);
+        $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
     }
 
     else if(inView=="998")
     {
         retrievePopularPosts("noempty",1);
+        $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
     }
 
     else if(inView=="997")
     {
         retrieveImportantPosts("noempty",1);
+        $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
     }
 }
 
