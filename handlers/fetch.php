@@ -11,9 +11,9 @@
 //
 //error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
+
 	require_once("../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
-
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
 	require_once("eventHandlers/miniEvent.php");
@@ -754,7 +754,7 @@
 		$rawTime=changeToRawTimeFormat($eventTime);
 		$eventDate=$event['eventDate'];
 		$rawDate=changeToRawDateFormat($eventDate);
-		$eventCreationTime=$toTimeAgoFormat($event['timestamp']);
+		$eventCreationTime=toTimeAgoFormat($event['timestamp']);
 		$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
 		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,

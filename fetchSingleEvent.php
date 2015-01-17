@@ -1,6 +1,10 @@
 <?php
+session_start();
+	require_once 'QOB/qobConfig.php';
 
-	require_once '../QOB/qobConfig.php';
+	require_once('header.php');
+
+	require_once('topbar.php');
 
 	if(!isset($_GET['ref']) || !isset($_SESSION['vj']))
 	{	
@@ -14,14 +18,14 @@
 ?>
 
 
-<script src="/4pi/js/cs/retrieveEvents.php"></script>
+<script src="/4pi/js/cs/retrieveEvents.js"></script>
 
 <script>
 
 function fetchSingleEvent()
 {
-	$.post('/4pi/handlers/eventHandlers/fetchSingleEvent.php',{
-		_eventIdHash:eventIdHash
+	$.post('/4pi/handlers/fetchSingleEvent.php',{
+		_eventId:eventIdHash
 	})
 	.error(function(){
 		alert("Server overload. Please try again.:(");
@@ -34,7 +38,7 @@ function fetchSingleEvent()
 			{
 				alert("The event does not exist.");
 			}
-			else if(data=505)
+			else if(data==505)
 			{
 				alert("The event is not shared with you.");
 			}
@@ -47,6 +51,8 @@ function fetchSingleEvent()
 		}
 	});
 }
+
+fetchSingleEvent();
 
 </script>
 
@@ -65,10 +71,7 @@ function fetchSingleEvent()
 		include_once('leftBlock.php'); ?>
 		<!-- left column code ends here  -->
 		
-		<div id="eventArea">
-
-
-		</div>
+		<?php include_once('singleEventBlock.php'); ?>
 		
 		<!-- BLOCK in the right code starts here  -->
 		<?php include_once('rightBlock.php');?>

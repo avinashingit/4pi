@@ -390,7 +390,7 @@ function retrieveLatestPosts(value, call) {
 
             data = data.trim();
             // console.log(data);
-            /*if (value == "empty") {
+            if (value == "empty") {
                 alert(value);
                 $('.post').each(function() {
                     $(this).remove();
@@ -399,7 +399,7 @@ function retrieveLatestPosts(value, call) {
                         'border': 'none'
                     });
                 });
-            }*/
+            }
 
             if (data != 404) {
                 $('#postEmptyMessage').html("");
