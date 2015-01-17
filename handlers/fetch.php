@@ -9,14 +9,15 @@
 //
 //---Documentation Ends ---//
 //
-error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
+//error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
-	require("../../PHPMailer_v5.1/class.phpmailer.php");
-	require_once("../miniNotification.php");
-	require_once("../postHandlers/miniClasses/miniPost.php");
-	require_once("../postHandlers/miniClasses/miniComment.php");
-	require_once("../eventHandlers/miniEvent.php");
-	require_once("../pollHandlers/miniPoll.php");
+	require_once("../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("miniNotification.php");
+
+	require_once("postHandlers/miniClasses/miniPost.php");
+	require_once("postHandlers/miniClasses/miniComment.php");
+	require_once("eventHandlers/miniEvent.php");
+	require_once("pollHandlers/miniPoll.php");
 
 		
 
@@ -773,7 +774,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		}
 		else
 		{
-			$followPost=2;
+			$followPost=-1;
 		}
 		if($post['userId']==$userId)
 		{
@@ -854,19 +855,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	}
 
 
-
-	function sendNotification($FromUserId,$toUserId,$notifType,$objectId,$objectType)
+	//Object Type 500-Post,600-Event, 700-Poll,0-Miscellaneous
+	function sendNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectType)
 	{
 		$conn=new QoB();
 		$FetchMaxNotifIDSQL="SELECT MAX(notificationId) as maxNotificationId FROM notifications";
 		$maxNotificationID=$conn->fetchALL($FetchMaxNotifIDSQL,false);
-		if($conn->error!=""||$maxPollID=="")
+		if($conn->error!=""||$maxNotificationID=="")
 		{
 			notifyAdmin("Conn.Error.:".$conn->error."!In create notification!!",$userId);
 			echo 12;
 			exit();
 		}
-		$eId=$maxPollID['maxNotificationId'];
+		$eId=$maxNotificationID['maxNotificationId'];
 		
 		if($eId==NULL)
 		{
@@ -876,38 +877,44 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		{
 			$notificationId=$eId+1;
 		}
-
 		$timestamp=time();
-		$sendNotificationSQL="IF EXISTS(SELECT * FROM notifications WHERE objectId= ? AND type=? AND objectType=? AND userId=?) 
-							UPDATE notifications SET actionCount=actionCount+1, timestamp=? ,seen=0,WHERE objectId= ? AND type=? AND objectType=? AND userId=?
-						ELSE
-    						INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notifcationId) VALUES (?,?,?,?,?,?) ";
-    	$values[0]=array($objectId => 's');
-    	$values[1]=array($type => 'i');
-    	$values[2]=array($objectType => 's');
-    	$values[3]=array($userId => 's');
-    	
-    	$values[4]=array($objectId => 's');
-    	$values[5]=array($type => 'i');
-    	$values[6]=array($objectType => 's');
-    	$values[7]=array($userId => 's');
-    	
-    	$values[8]=array($objectId => 's');
-    	$values[9]=array($type => 'i');
-    	$values[10]=array($objectType => 's');
-    	$values[11]=array($userId => 's');
-    	$values[12]=array($timestamp => 's');
-    	$values[13]=array($notificationId => 's');
-    	$result=$conn->update($sendNotificationSQL,$values);
-    	if($conn->error==""&&$result==true)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$postId." , notif type: ".$type.", to userId:".$toUserId.", FromUserId:".$FromUserId,$userId);
-			return false;
-    	}
+		$toUserIds=explode(',',$toUserIds);
+		foreach ($toUserIds as $userId) 
+		{
+			if($fromUserId!=$userId)
+			{
+				
+				$notificationIdHash=hash("sha512",$notificationId.HASHNOTIF);
+				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) 
+				ON DUPLICATE KEY UPDATE actionCount= CASE WHEN seen=0 THEN actionCount+1 WHEN seen=1 THEN 1 END, seen=0";
+		    	$values[0]=array($objectId => 's');
+		    	$values[1]=array($notifType => 'i');
+		    	$values[2]=array($objectType => 's');
+		    	$values[3]=array($userId => 's');
+		    	$values[4]=array($timestamp => 's');
+		    	$values[5]=array($notificationId => 's');
+		    	$values[6]=array($notificationIdHash => 's');
+		    	
+		    	/*$values[7]=array($objectId => 's');
+		    	$values[8]=array($notifType => 'i');
+		    	$values[9]=array($objectType => 's');
+		    	$values[10]=array($userId => 's');*/
+		    	
+		    	
+		    	$result=$conn->update($sendNotificationSQL,$values);
+		    	if($conn->error!=""&&$result!=true)
+		    	{
+		    		//return true;
+		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
+					return false;
+
+		    	}
+		    	$notificationId++;
+		    	echo "notifid:".$notificationId;
+			}
+			
+		}
+		
 	}
 
 	
@@ -935,35 +942,40 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		alsoCommentedOnThread
 		commentedOnYourThreadAnswer
 		alsoCommentedOnThreadAnswer*/
-
+		$conn = new QoB();
 		$displayedNotifCount=count($displayedNotifArray);
 		$notificationModels[0]=array("You have no notifications yet!",0);
 		$notificationModels[1]=array(" star for your Post"," members starred your Post");
 		$notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
-		$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
+		//$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
+		$notificationModels[3]=array(" new comment on the post "," new comments on the post ");
 		$notificationModels[4]=array(" member mailed your post"," members mailed your post");
-		$notificationModels[5]=array(" new comment on the post you mailed"," new comments on the post you mailed");
+		//$notificationModels[5]=array(" new comment on the post you mailed"," new comments on the post you mailed");
 		$notificationModels[6]=array(" The post has been removed as you requested.","The post was not removed due to lack of substantial reason.");
 		$notificationModels[7]=array(" member is attending your event"," members are attending your event");
 		$notificationModels[8]=array(" more person is also attending the event you are attending"," more members are also attending the event you are attending ");
 		$notificationModels[9]=array(" member voted your poll"," members voted your poll");
 		$notificationModels[10]=array(" member also answered the poll you answered"," members also answered the poll you answered");
-		$notifcationFetchSQL="SELECT notifications FROM notifications WHERE userId=? ";
+		$notificationFetchSQL="SELECT * FROM notifications WHERE userId=? ";
 		$values[0]=array($userId => 's');
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
-			$notifcationFetchSQL .= "AND notifcationIdHash!= ? ";
+			$notificationFetchSQL .= "AND notificationIdHash!= ? ";
 			$values[$i+1]=array($displayedNotifArray[$i] => 's');
 		}
-		$notifcationFetchSQL .= "ORDER BY timestamp DESC LIMIT 0,7";
-		$result=$conn->select($notifcationFetchSQL);
+		$notificationFetchSQL .= "ORDER BY timestamp DESC LIMIT 0,7";
+		echo $notificationFetchSQL;
+		//var_dump($values);
+		$result=$conn->select($notificationFetchSQL,$values);
+		var_dump($result);
 		if($conn->error=="")
 		{
 			$displayCount=0;
-			$notifcationObjArray=array();
+			$notificationObjArray=array();
 			while($notif=$conn->fetch($result)&&$displayCount<7)
 			{
-				if($notif['actionCount']==0)
+				echo "inside while";
+				if($notif['actionCount']==1)
 				{
 					$notification=$notif['actionCount'].$notificationModels[$notif['type']][0];
 				}
@@ -972,8 +984,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 					$notification=$notif['actionCount'].$notificationModels[$notif['type']][1];
 				}
 				
-				$notifObject=new miniNotification($notif['notifcationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
-				$notifcationObjArray[]=$notifObject;
+				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
+				$notificationObjArray[]=$notifObject;
+				var_dump($notifObject);
 				$displayCount++;
 			}
 			if($displayCount==0)
@@ -985,6 +998,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 			{
 				print_r(json_encode($notificationObjArray));
 			}
+		}
+		else
+		{
+			notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
+			return false;
 		}
 
 	}

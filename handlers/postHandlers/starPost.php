@@ -4,9 +4,9 @@ session_start();
 	require_once('../fetch.php');
 
 //testing inputs begin
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B017".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B010".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_postId']="8122b703cb14aa7fe4370e91dc2757ebd3dc7ace4be8a20642ef42e9f362d10ed57f29cfba40975fa15457fcf2fbab764bb19fb8e9f92e8cab7fa04a19fa47a5";*/
+	$_POST['_postId']="002c5f4230c72e4696a68f63591abc7c0678fc73e4ded86e5fba21d7204b416a4e6c139fd1a0635af9b005afefd6effc7b6bab5f01a2bbad72ce32fde69eedf0";
 
 //testing inputs end
 
@@ -82,7 +82,7 @@ $userIdHash=$_SESSION['vj'];
 								$starredBy=$starredBy.",".$userId;
 							}
 							$followers=$post['followers'];
-							if(stripos($followers,$userId)===false)
+							/*if(stripos($followers,$userId)===false)
 							{
 								if($followers=="")
 								{
@@ -92,30 +92,33 @@ $userIdHash=$_SESSION['vj'];
 								{
 									$followers=$followers.",".$userId;
 								}
-							}
+							}*/
 							$starCount=$starCount+1;
 							$date = date_create();
 							
 							//$likeIndexUpdated = ($post['likeIndex'] + date_timestamp_get($date))/2;
 							$likeIndexUpdated=($post['likeIndex']+time())/2;
-							$likeIndexUpdated="".$likeIndexUpdated;
+							
 							//secho $likeIndexUpdated." is uli";
 
 							$popularityIndexUpdated = $likeIndexUpdated + 1.4 * ($post['commentIndex']);
-							$popularityIndexUpdated="".$popularityIndexUpdated;
+							
 							//echo $popularityIndexUpdated." is upi";
 							$impIndexUpdated = $likeIndexUpdated + 2 * ($post['mailToIndex']);
 							$impIndexUpdated="".$impIndexUpdated;
+							$likeIndexUpdated="".$likeIndexUpdated;
+							$popularityIndexUpdated="".$popularityIndexUpdated;
 							
 							//echo $impIndexUpdated." is uii";
-							$values2 = array(0 => array($likeIndexUpdated => 's'), 1 => array($popularityIndexUpdated => 's'), 2 => array($impIndexUpdated => 's'), 3 => array($starCount => 'i'), 4 => (array($starredBy => 's')), 5 => array($followers => 's'), 6 => array($postIdHash => 's'));
+							$values2 = array(0 => array($likeIndexUpdated => 's'), 1 => array($popularityIndexUpdated => 's'), 2 => array($impIndexUpdated => 's'), 3 => array($starCount => 'i'), 4 => (array($starredBy => 's')),  5 => array($postIdHash => 's'));
 							
-							$result2 = $conn->update("UPDATE post SET likeIndex = ?, popularityIndex = ?, impIndex = ?, starCount= ? ,starredBy= ?, followers = ? WHERE postIdHash = ?",$values2,false);
+							$result2 = $conn->update("UPDATE post SET likeIndex = ?, popularityIndex = ?, impIndex = ?, starCount= ? ,starredBy= ? WHERE postIdHash = ?",$values2);
 							
 							//$StarPostSQL="UPDATE post WHERE postIdHash = ? SET starCount= ? ,starredBy= ? ";
 							if($conn->error == ""&&$result2==true)
 								{
 									//echo 'Updated successfully Mode 1<br />';
+									sendNotification($userId,$post['userId'],1,$post['postId'],500);									
 									echo json_encode($starCount);
 								}
 							

@@ -110,7 +110,7 @@ else
 				$optionVotesArray=explode(',', $optionVotes);
 				for($i=0;$i<$optionCount;$i++)
 				{
-					$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionVotesArray[$i]);
+					$optionsAndVotes[$i]=array("label" => $optionsArray[$i] ,"value"=>(int) $optionVotesArray[$i]);
 				}
 				if($poll['userId']==$userId)
 				{

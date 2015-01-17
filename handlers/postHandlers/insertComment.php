@@ -114,6 +114,12 @@ if($content!=""&&$postIdHash!="")
 							if(updatePostIndexesOnComment($post,$userId,$conn))
 							{
 								$conn->completeTransaction();
+								$followers=$post['followers'];
+								if($followers!="")
+								{
+									sendNotification($userId,$followers,3,$postId,500);
+								}
+								sendNotification($userId,$post['userId'],2,$postId,500);
 								print_r(json_encode($commentObj));
 							}
 							else

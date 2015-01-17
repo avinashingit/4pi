@@ -112,6 +112,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					$result2 = $conn->update("UPDATE post SET mailToIndex = ? ,impIndex = ?, mailedBy = ?, mailCount = ?, followers=? WHERE postId = ? ",$values2,false);
 					if($conn->error==""&&$result2==true)
 					{
+						sendNotification($userId,$followers,3,$postId,500);
+						sendNotification($userId,$post['userId'],4,$postId,500);
 						print_r(json_encode($mailCount));
 					}
 					else
