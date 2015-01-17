@@ -12,7 +12,9 @@
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
-	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
+
+
+	require_once("./../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -964,29 +966,29 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 			$values[$i+1]=array($displayedNotifArray[$i] => 's');
 		}
 		$notificationFetchSQL .= "ORDER BY timestamp DESC LIMIT 0,7";
-		echo $notificationFetchSQL;
+		//echo $notificationFetchSQL;
 		//var_dump($values);
 		$result=$conn->select($notificationFetchSQL,$values);
-		var_dump($result);
+		//var_dump($result);
 		if($conn->error=="")
 		{
 			$displayCount=0;
 			$notificationObjArray=array();
-			while($notif=$conn->fetch($result)&&$displayCount<7)
+			while(($notif=$conn->fetch($result))&&$displayCount<7)
 			{
-				echo "inside while";
 				if($notif['actionCount']==1)
 				{
-					$notification=$notif['actionCount'].$notificationModels[$notif['type']][0];
+					$notification=$notif['actionCount'].$notificationModels[(int)$notif['type']][0];
 				}
 				else
 				{
-					$notification=$notif['actionCount'].$notificationModels[$notif['type']][1];
+					$notification=$notif['actionCount'].$notificationModels[(int)$notif['type']][1];
 				}
 				
 				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
+				//print_r($notifObject);
 				$notificationObjArray[]=$notifObject;
-				var_dump($notifObject);
+				//var_dump($notifObject);
 				$displayCount++;
 			}
 			if($displayCount==0)
