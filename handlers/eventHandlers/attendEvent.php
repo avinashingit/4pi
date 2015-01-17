@@ -79,6 +79,8 @@ $conn=new QoB();
 					exit();
 				}
 			}
+			$eventOwner=$event['userId'];
+			$eventId=$event['eventId'];
 			$attenders=$event['attenders'];
 			$attendCount=$event['attendCount'];
 			if(stripos($attenders,$userId)===false)
@@ -119,6 +121,8 @@ $conn=new QoB();
 			if($conn->error==""&&$result==true)
 			{
 				echo $attendCount;
+				sendNotification($userId,$eventOwner,7,$eventId,600);
+				sendNotification($userId,$attenders,8,$eventId,600);
 			}
 			else
 			{

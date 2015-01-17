@@ -14,7 +14,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
-	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -936,7 +936,10 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		8-alsoAttendingEvent
 		9-answeredYourPoll
 		10-alsoAnsweredPoll
-
+		11-approvedEvent
+		12-notApprovedEvent
+		13-approvedPoll
+		14-notApprovedPoll
 		answeredYourThread
 		alsoAnsweredOnThread
 		upvotedYourThreadAnswer
@@ -949,15 +952,20 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$notificationModels[0]=array("You have no notifications yet!",0);
 		$notificationModels[1]=array(" star for your Post"," members starred your Post");
 		$notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
-		//$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
+		$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
 		$notificationModels[3]=array(" new comment on the post "," new comments on the post ");
 		$notificationModels[4]=array(" member mailed your post"," members mailed your post");
-		//$notificationModels[5]=array(" new comment on the post you mailed"," new comments on the post you mailed");
+		$notificationModels[5]=array(" new comment on the post you mailed"," new comments on the post you mailed");
 		$notificationModels[6]=array(" The post has been removed as you requested.","The post was not removed due to lack of substantial reason.");
 		$notificationModels[7]=array(" member is attending your event"," members are attending your event");
 		$notificationModels[8]=array(" more person is also attending the event you are attending"," more members are also attending the event you are attending ");
 		$notificationModels[9]=array(" member voted your poll"," members voted your poll");
 		$notificationModels[10]=array(" member also answered the poll you answered"," members also answered the poll you answered");
+		$notificationModels[11]=array(" of your event has been approved .");
+		$notificationModels[12]=array(" of your event has been rejected.");
+		$notificationModels[13]=array(" of your poll has been approved.");
+		$notificationModels[14]=array(" of your poll has been rejected.");
+
 		$notificationFetchSQL="SELECT * FROM notifications WHERE userId=? ";
 		$values[0]=array($userId => 's');
 		for($i=0;$i<$displayedNotifCount;$i++)
@@ -993,18 +1001,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 			}
 			if($displayCount==0)
 			{
-				echo 404;
-				exit();
+				return false;
 			}
 			else
 			{
-				print_r(json_encode($notificationObjArray));
+				return $notificationObjArray;
 			}
 		}
 		else
 		{
 			notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
-			return false;
+			return 12;
 		}
 
 	}

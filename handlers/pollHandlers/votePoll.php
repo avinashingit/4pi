@@ -142,7 +142,8 @@ else
 			}
 		}
 		$votedBy=$poll['votedBy'];
-
+		$pollId=$poll['pollId'];
+		$pollOwner=$poll['userId'];
 		if(isThere($votedBy,$userId)==-1)
 		{
 			$pollExistingVotes=$poll['optionVotes'];
@@ -179,6 +180,8 @@ else
 			$result=$conn->insert($editPollSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
+				sendNotification($userId,$pollOwner,9,$pollId,700);
+				sendNotification($userId,$votedBy,10,$pollId,700);
 				echo json_encode($optionsAndVotes);
 			}
 			else

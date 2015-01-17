@@ -76,6 +76,21 @@ else
 	else
 	{
 		$userId=$user['userId'];
-		getNotifications($userId,$ProcessedHashes);
+		$notifications=getNotifications($userId,$ProcessedHashes);
+		if($notifications!=false)
+		{
+			if($notifications!=12)
+			{
+				print_r(json_encode($notifications));
+			}
+			else
+			{
+				echo 12;
+			}
+		}
+		else
+		{
+			echo 404;
+		}
 	}
 }
