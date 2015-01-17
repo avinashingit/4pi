@@ -66,7 +66,7 @@
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			console.log("fjal"+data);
 			if(checkData(data)==1)
 			{
 				if(data==404)
