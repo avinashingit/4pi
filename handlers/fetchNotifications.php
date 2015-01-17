@@ -1,13 +1,13 @@
 <?php
 session_start();	
-error_reporting(E_ALL ^ E_NOTICE);
-require_once('../QOB/qob.php');
+//error_reporting(E_ALL ^ E_NOTICE);
+require_once('./../QOB/qob.php');
 require_once('fetch.php');
 //$_SESSION['jx']="999"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B014".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B014".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_presentNotifications']=array();
+	$_POST['_presentNotifications']=array();*/
 
 //Testing Content Ends
 /*
@@ -28,7 +28,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 //Upcoming Event Offset - vgr
 //Processed Event Hashes - sgk
 $userIdHash=$_SESSION['vj'];
-$refresh=$_POST['_refresh'];
+//$refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
 $ProcessedHashes=$_POST['_presentNotifications'];
 //var_dump($inputHashes);
