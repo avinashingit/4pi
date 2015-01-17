@@ -1,9 +1,10 @@
 <?php
+session_start();
 
-	include_once('../header_adv.php'); 
-	include_once('../topbar.php');
+	include_once('header.php'); 
+	include_once('topbar.php');
 
-	require_once '../QOB/qobConfig.php';
+	require_once 'QOB/qobConfig.php';
 
 	if(!isset($_GET['ref']))
 	{	
@@ -21,7 +22,7 @@
 function fetchSinglePost()
 {
 	$.post('/4pi/handlers/fetchSinglePost.php',{
-		_postIdHash:postIdHash
+		_postId:postIdHash
 	})
 	.error(function(){
 		alert("Server overload. Please try again.:(");
@@ -35,7 +36,7 @@ function fetchSinglePost()
 			{
 				alert("The post does not exist.");
 			}
-			else if(data=505)
+			else if(data==505)
 			{
 				alert("The post is not shared with you.");
 			}
@@ -48,11 +49,19 @@ function fetchSinglePost()
 					{
 						commentInsert('first', data.comments[i], data.postId);
 					}
+					callAfterAjax();
 
 			}
 		}
 	});
 }
+
+
+$(document).ready(function(){
+	fetchSinglePost();
+});
+
+var userIdHash="<?php echo $_SESSION['vj'];?>";
 
 </script>
 
@@ -66,16 +75,13 @@ function fetchSinglePost()
 		
 		//echo $_SESSION['vj'];
 		
-		include_once('../leftBlock.php'); ?>
+		include_once('leftBlock.php'); ?>
 		<!-- left column code ends here  -->
 		
-		<div id="postArea">
-
-
-		</div>
+		<?php include_once('singlePostBlock.php'); ?>
 		
 		<!-- BLOCK in the right code starts here  -->
-		<?php include_once('../rightBlock.php');?>
+		 <?php include_once('rightBlock.php');?>
 		<!-- right block code ends here  -->
 
 	</div>

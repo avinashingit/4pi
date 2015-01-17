@@ -23,7 +23,6 @@ class miniPost{
 	public $comments;
 	
 	public $postOwner;
-	
 
 	public function __construct($postId,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
 		$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$postUserId,$hasStarred, $comments,$postOwner)

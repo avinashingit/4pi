@@ -6,7 +6,7 @@ require_once('postHandlers/miniClasses/miniPost.php');
 require_once('fetch.php');
 $_SESSION['jx']="1004"; //1001 for latest Polls 1002 for upcoming events 1003 for winners 1004 for latestPolls
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
+/*	$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_refresh']=0;
 	$_POST['sgk']=array();*/
@@ -27,13 +27,15 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	exit();
 }
 
+// $_POST['_postId']="fd17466e476e69771948219d6dc8893147197b87a90f8350aa6df2cd6860511765f6b87006fcbd6f77512852d465b1555652d29dbd08e3221d4681821a897eb1";
+
 //Upcoming Event Offset - vgr
 //Processed Event Hashes - sgk
 $userIdHash=$_SESSION['vj'];
 //$refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
 $requestedPost=$_POST['_postId'];
-
+// echo $requestedPost;
 
 $conn=new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])

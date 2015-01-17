@@ -2,6 +2,8 @@
 
 	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
+	session_start();
+
 	require_once '/QOB/qobConfig.php';
 
 	mysql_connect(HOST,USER,PASSWORD) or die("Unable to connect to the server.");
@@ -15,6 +17,8 @@
 	$row=mysql_fetch_object($results);
 
 	// var_dump($row);
+	// echo $sql;
+	// echo $_SESSION['vj'].'<br/>';
 
 	$icons=array();
 	$icons[0]="fa-gear";$icons[1]="fa-sort";$icons[2]="fa-space-shuttle";$icons[3]="fa-square";$icons[4]="fa-tags";
@@ -25,9 +29,6 @@
 
 
 echo '
-
-
-
 <div class="col-md-2" id="userDetails" style="padding:0px !important;" >
 
 	<br/>

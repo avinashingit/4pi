@@ -61,6 +61,8 @@
 
 	</div><!-- end class pollMenu.topMenu -->
 
+	<br/><br/>
+
 
 	<!-- Modals for create poll -->
 
@@ -420,279 +422,18 @@ echo json_encode($row7);?>;
 	    });
 	}
 
-	//---------------------------------------------------------------------------//
-	//insertPollIntopollarea
+	var pollCount=0;
 
-	/*function insertsPoll(data,position)
+	var votesStorage=new Array();
+
+	var pollNumber=0;
+
+	function insertPoll(data,position,pollNo)
 	{
-		console.log("Calle insert");
-
-		var optionLength=data.pollOptions.length;
-		var poll="";
-		if(data.pollOptionsType==1)
-		{
-			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
-
-			j=data.optionVotes
-
-			/*if(data.hasVoted==1)
-			{
-				// console.log("heeeee    "+j);
-				poll+='<a id="pollsDisplay" onclick="displayChart(j,\''+data.pollIdHash+'\',\''+data.pollIdHash+'\',1);">Hello</a>';
-				$('#pollsDisplay').trigger('click');
-
-				<
-			}
-
-			else
-			{
-				poll+='<br/>';
-
-				poll+='<div class="row" id="'+data.pollIdHash+'b">';
-
-				poll+='</div>';
-
-				poll+='<div id="pollOptionType" class="hidden">'+data.pollOptionsType+'</div>';
-
-				poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
-
-				poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
-
-
-				poll+='<div class="row '+data.pollIdHash+'Content">';
-
-					poll+='<div class="row">';
-
-						poll+='<div class="col-md-7" id="pollQuestion">';
-
-							poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
-
-						poll+='</div>';
-
-						if(data.isOwner==1 && data.hasVoted!=1)
-						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
-
-								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
-
-							poll+='</div>';
-
-							poll+='<div class="col-md-3" id="pollCreatedTime">';
-
-								poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
-
-							poll+='</div>';
-						}
-
-						else
-						{
-							poll+='<div class="col-md-3 col-md-offset-2" id="pollCreatedTime">';
-
-								poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
-
-							poll+='</div>';
-						}
-
-						
-
-					poll+='</div>';
-
-					poll+='<br/>';
-
-					if(data.hasVoted!=1)
-					{
-						poll+='<div class="row">';
-
-								poll+='<div class="col-md-6">';
-
-									for(var i=0;i<optionLength;i+=2)
-									{
-										//console.log(i);
-										poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
-									}
-
-
-								poll+='</div>';
-
-								poll+='<div class="col-md-6">';
-
-									for(var i=1;i<optionLength;i=i+2)
-									{
-										//console.log(i);
-										poll+='<p><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
-									}
-
-
-								poll+='</div>';
-
-						poll+='</div>';
-
-						poll+='<br/>';
-
-						poll+='<div class="row">';
-
-							poll+='<div class="text-center">';
-
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\''+data.pollType+'\','+data.pollType+');" class="btn btn-md btn-success">Vote</button>';
-
-							poll+='</div>';
-
-						poll+='</div>';
-
-						if(data.pollType==2)
-						{
-							// var datas=JSON.parse(data.optionVotes);
-							poll+='<a id="pollsDisplayTwo" onclick="displayChart(j,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);">Hai</a>';
-							$('#pollsDisplayTwo').trigger('click');
-						}
-					}
-
-				poll+='</div>';
-			}
-
-			poll+='</div>';
-		}
-
-		/*else if(data.pollOptionsType==2)
-		{
-			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
-
-				poll+='<br/>';
-
-				poll+='<div class="row" id="'+data.pollIdHash+'b">';
-
-				poll+='</div>';
-
-				poll+='<div id="pollOptionType" class="hidden">'+data.pollOptionsType+'</div>';
-
-				poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
-
-				poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
-
-
-				poll+='<div class="row '+data.pollIdHash+'Content">';
-
-					poll+='<div class="row">';
-
-						poll+='<div class="col-md-7" id="pollQuestion">';
-
-							poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
-
-						poll+='</div>';
-
-						if(data.isOwner==1 && data.hasVoted!=1)
-						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
-
-								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp;<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
-
-							poll+='</div>';
-
-							poll+='<div class="col-md-3" id="pollCreatedTime">';
-
-								poll+='<time class="time timeago" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
-
-							poll+='</div>';
-
-							
-						}
-
-						else
-						{
-							poll+='<div class="col-md-3 col-md-offset-2" id="pollCreatedTime">';
-
-								poll+='<time class="time timeago" datetime="'+data.pollCreationTime+'" title="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
-
-							poll+='</div>';
-						}
-
-					poll+='</div>';
-
-					poll+='<br/>';
-
-					if(data.hasVoted!=1)
-					{
-						poll+='<div class="row">';
-
-							poll+='<div class="col-md-6">';
-
-								for(var i=0;i<data.pollOptions.length;i=i+2)
-								{
-									poll+='<p><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
-								}
-
-
-							poll+='</div>';
-
-							poll+='<div class="col-md-6">';
-
-								for(var i=1;i<data.pollOptions.length;i=i+2)
-								{
-									poll+='<p><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></p><br/>';
-								}
-
-
-							poll+='</div>';
-
-						poll+='</div>';
-
-						poll+='<br/>';
-
-						poll+='<div class="row">';
-
-							poll+='<div class="text-center">';
-
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\''+data.pollType+'\','+data.pollType+');" class="btn btn-md btn-success">Vote</button>';
-
-							poll+='</div>';
-
-						poll+='</div>';
-
-						if(data.pollType==2)
-						{
-							var datas=JSON.parse(data.optionVotes);
-
-							displayChart(datas,data.pollIdHash+'b', data.pollIdHash,0);
-						}
-					}
-
-					else if(data.hasVoted==1)
-					{
-						if(data.pollType==3)
-						{
-							poll+='<h3 class="text-center"> Thanks for voting </h3>';
-						}
-
-						else if(data.pollType==2 || data.pollType==1)
-						{
-							var datas=JSON.parse(data.optionVotes);
-
-							displayChart(datas,data.pollIdHash+'b', data.pollIdHash,1);
-						}
-					}
-
-				poll+='</div>';
-
-			poll+='</div>';
-		}
-		if(position=="first")
-		{
-			$('#pollArea').prepend(poll).hide().fadeIn(500);
-		}
-		else if(position=="last")
-		{
-			$('#pollArea').append(poll).hide().fadeIn(500);
-		}
-	}*/
-
-	function insertPoll(data,position)
-	{
-		// alert("Went");
 		var poll="";
 
 		if(data.pollOptionsType==1)
 		{
-			// alert("Called");
 			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 			poll+='<br/>';
@@ -801,10 +542,10 @@ echo json_encode($row7);?>;
 								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 							}
 
-							/*else if(data.pollType==3)
+							else if(data.pollType==3)
 							{
 								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'no\',1);" class="btn btn-md btn-success">Vote</button>';
-							}*/
+							}
 
 						poll+='</div>';
 
@@ -814,8 +555,9 @@ echo json_encode($row7);?>;
 				else
 				{
 					// alert("Went");
-					votesStorage=data.optionVotes;
-					poll+='<button class="btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);$(this).remove();">View results</button>';
+					votesStorage[pollNo]=data.optionVotes;
+					
+					poll+='<button class="btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage[pollNo],\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);$(this).remove();">View results</button>';
 					
 				}
 
@@ -824,7 +566,7 @@ echo json_encode($row7);?>;
 			poll+='</div>';
 		}
 
-		/*else if(data.pollOptionsType==2)
+		else if(data.pollOptionsType==2)
 		{
 
 			// alert("Called");
@@ -957,15 +699,15 @@ echo json_encode($row7);?>;
 			poll+='</div>';
 
 			poll+='</div>';
-		}*/
+		}
 
-		if(data.pollType==2)
+		/*if(data.pollType==2)
 		{
 			votesStorage=data.optionVotes;
 			poll+='<button class="hidden btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',0);$(this).remove();">View results</button>';
 			
 		}
-
+*/
 		if(position=="first")
 		{
 			$('#pollArea').prepend(poll).hide().fadeIn(500);
@@ -1003,11 +745,12 @@ echo json_encode($row7);?>;
 					for(i=0;i<datas.length;i++)
 					{
 						// alert(i);
-						insertPoll(datas[i],"last");
+						insertPoll(datas[i],"last",pollNumber);
 						// alert('i)');
+						pollNumber++;
 					}
 
-					$('#pollsDisplay').trigger('click');
+					// $('#pollsDisplay').trigger('click');
 
 					$('time.timeago').timeago();
 				}
