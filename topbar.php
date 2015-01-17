@@ -59,7 +59,7 @@
 			presentNotifications[i]=$(this).attr("id");
 			i++;
 		});
-		$.post('/4pi/handlers/notifications/fetchNotifications.php',{
+		$.post('/4pi/handlers/fetchNotifications.php',{
 			_presentNotifications:presentNotifications
 		})
 		.error(function(){
@@ -69,20 +69,30 @@
 			console.log(data);
 			if(checkData(data)==1)
 			{
-				data=JSON.parse(data);
-				var unreadNotificationNumber=0;
-				for(i=0;i<data.length;i++)
+				if(data==404)
 				{
-					if(data[i].isRead==-1)
-					{
-						unreadNotificationNumber++;
-					}
-					insertNotification(data[i],"first");
+
 				}
-				$('#notificationNumber').html(unreadNotificationNumber);
+				else
+				{
+					data=JSON.parse(data);
+					var unreadNotificationNumber=0;
+					for(i=0;i<data.length;i++)
+					{
+						if(data[i].isRead==-1)
+						{
+							unreadNotificationNumber++;
+						}
+						insertNotification(data[i],"first");
+					}
+					$('#notificationNumber').html(unreadNotificationNumber);
+				}
+				
 			}
 		});
 	}
+
+	fetchNotifications();
 
 	function insertPeopleSearch(data,val)
 	{
