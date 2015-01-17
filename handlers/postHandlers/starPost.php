@@ -4,9 +4,9 @@ session_start();
 	require_once('../fetch.php');
 
 //testing inputs begin
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B011".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B011".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_postId']="002c5f4230c72e4696a68f63591abc7c0678fc73e4ded86e5fba21d7204b416a4e6c139fd1a0635af9b005afefd6effc7b6bab5f01a2bbad72ce32fde69eedf0";
+	$_POST['_postId']="002c5f4230c72e4696a68f63591abc7c0678fc73e4ded86e5fba21d7204b416a4e6c139fd1a0635af9b005afefd6effc7b6bab5f01a2bbad72ce32fde69eedf0";*/
 
 //testing inputs end
 
