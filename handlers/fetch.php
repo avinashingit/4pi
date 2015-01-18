@@ -260,7 +260,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	{
 		$conn = new QoB();
 		$commentTable="p".$postId."c";
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
@@ -277,11 +277,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
-	function getFewCommentsByPostId($postId)
+	function getFewCommentsByPostId($postId,$commentCount=3)
 	{
 		$conn = new QoB();
 		$commentTable="p".$postId."c";
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp LIMIT 0,3";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp LIMIT 0,".$commentCount;
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
@@ -724,11 +724,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		{
 			$isOwner=-1;
 		}
-		
+		$proPicLocation='../img/proPics/'.$poll['userIdHash'].'.jpg';
+		if(file_exists($proPicLocation))
+		{
+			$proPicExists=1;
+		}
+		else
+		{
+			$proPicExists=-1;
+		}
+		//Code until release of final version
+
+
+		//code until release of final version
 		$pollCreationTime=toTimeAgoFormat($poll['timestamp']);
 		$pollStatus=$poll['pollStatus'];
 		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
+							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash']);
 		return $pollObj;
 	}
 
@@ -760,15 +772,24 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$rawDate=changeToRawDateFormat($eventDate);
 		$eventCreationTime=toTimeAgoFormat($event['timestamp']);
 		$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
+		$proPicLocation='../img/proPics/'.$event['userIdHash'].'.jpg';
+		if(file_exists($proPicLocation))
+		{
+			$proPicExists=1;
+		}
+		else
+		{
+			$proPicExists=-1;
+		}
 		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);
+			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['name'], $event['userIdHash']);
 		return $eventObj;
 	}
 
 
 
-	function getPostObjectWithFewComments($post,$userId)
+	function getPostObjectWithFewComments($post,$userId,$commentCount=3)
 	{
 		$conn=new QoB();
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
@@ -790,7 +811,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 			$postOwner=-1;
 		}
 		$hasStarred=isThere($post['starredBy'],$userId);
-		$postComments=getFewCommentsByPostId($post['postId']);
+		$postComments=getFewCommentsByPostId($post['postId'],$commentCount);
 		$comments=array();
 		if($postComments!=false)
 		{
@@ -800,8 +821,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
+		$proPicLocation='../img/proPics/'.$post['userIdHash'].'.jpg';
+		if(file_exists($proPicLocation))
+		{
+			$proPicExists=1;
+		}
+		else
+		{
+			$proPicExists=-1;
+		}
 		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
-		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner);
+		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists);
 		return $postObj;
 	}
 
@@ -838,9 +868,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
-		
+		$proPicLocation='../img/proPics/'.$post['userIdHash'].'.jpg';
+		if(file_exists($proPicLocation))
+		{
+			$proPicExists=1;
+		}
+		else
+		{
+			$proPicExists=-1;
+		}
 		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
-		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner);
+		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists);
 		return $postObj;
 	}
 
@@ -857,8 +895,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		{
 			$commentOwner=-1;
 		}
+		$proPicLocation='../img/proPics/'.$comment['userIdHash'].'.jpg';
+		if(file_exists($proPicLocation))
+		{
+			$proPicExists=1;
+		}
+		else
+		{
+			$proPicExists=-1;
+		}
 		$commentObj=new miniComment($commentPostIdHash,$comment['userIdHash'],$comment['content'],$commentTime,
-								$comment['commentIdHash'],$comment['userId'],$comment['name'],$commentOwner);
+								$comment['commentIdHash'],$comment['userId'],$comment['name'], $commentOwner, $comment['gender'], $proPicExists);
 		return $commentObj;
 	}
 

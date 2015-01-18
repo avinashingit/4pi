@@ -81,7 +81,7 @@ else
 		
 
 		$finalStudentRegex=getRollNoRegex($userId);
-		$getLatestPollsSQL="SELECT poll.*, users.name FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR poll.userId=?) ";
+		$getLatestPollsSQL="SELECT poll.*, users.name,users.userIdHash,users.gender FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR poll.userId=?) ";
 		
 		$values[0]=array($finalStudentRegex => 's');
 		$values[1]=array($userId => 's');
@@ -104,7 +104,7 @@ else
 			$pollObjArray=array();
 			while(($poll=$conn->fetch($result))&&$displayCount<10)
 			{
-				$options=$poll['options'];
+				/*$options=$poll['options'];
 				$optionsArray=explode(',', $options);
 				$optionCount=count($optionsArray);
 				$hasVoted=isThere($poll['votedBy'],$userId);
@@ -127,8 +127,9 @@ else
 				$pollCreationTime=$ts->format(DateTime::ISO8601);
 				$pollStatus=$poll['pollStatus'];
 				$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-									$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);
+									$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner);*/
 				//print_r(json_encode($pollObj));
+				$pollObj=getPollObject($poll,$userId);
 				$pollObjArray[]=$pollObj;
 				$displayCount++;
 			}

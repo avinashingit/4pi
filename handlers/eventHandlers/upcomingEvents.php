@@ -85,8 +85,10 @@ $conn=new QoB();
 			$currentTime=(int)$currentTime;
 
 			$finalStudentRegex=getRollNoRegex($userId);
-			$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate>= ?)";
+			//$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate>= ?)";
 			
+			//Code till final release with approvals
+			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR userId=?) AND ( eventDate>= ?)";
 			$values[0]=array($finalStudentRegex => 's');
 			$values[1]=array($userId => 's');
 			$values[2]=array($currentDate => 'i');
@@ -109,7 +111,7 @@ $conn=new QoB();
 				$eventObjArray=array();
 				while(($event=$conn->fetch($result))&&$displayCount<10)
 				{
-					if(stripos($event['attenders'], $userId)===false)
+					/*if(stripos($event['attenders'], $userId)===false)
 					{
 						$isAttender=-1;
 					}
@@ -141,8 +143,9 @@ $conn=new QoB();
 					$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
 					$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 						$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-						$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);
+						$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);*/
 				
+					$eventObj=getEventObject($event,$userId);
 					$eventObjArray[]=$eventObj;
 					$displayCount++;
 				}
