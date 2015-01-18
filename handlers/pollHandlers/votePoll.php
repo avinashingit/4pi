@@ -174,7 +174,15 @@ else
 			{
 				sendNotification($userId,$pollOwner,9,$pollId,700);
 				sendNotification($userId,$votedBy,10,$pollId,700);
-				echo json_encode($optionsAndVotes);
+				if($poll['pollType']!=3)
+				{
+					echo json_encode($optionsAndVotes);
+				}
+				else
+				{
+					echo 3;
+				}
+				
 			}
 			else
 			{

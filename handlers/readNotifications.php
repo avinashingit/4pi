@@ -1,6 +1,6 @@
 <?php
 session_start();	
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 require_once('./../QOB/qob.php');
 require_once('fetch.php');
 //$_SESSION['jx']="999"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
@@ -50,7 +50,7 @@ else
 $conn=new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in fetch notifications")>0)
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in read notifications")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -59,7 +59,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in fetch notifications",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in read notifications",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -70,7 +70,7 @@ else
 {
 	if(($user=getUserFromHash($userIdHash))==false)
 	{
-		notifyAdmin("Critical Error In fetch notifications",$userIdHash);
+		notifyAdmin("Critical Error In read notifications",$userIdHash);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -79,21 +79,14 @@ else
 	else
 	{
 		$userId=$user['userId'];
-		$notifications=getNotifications($userId,$ProcessedHashes);
-		if($notifications!=false)
+		$result=readNotifications($userId,$ProcessedHashes);
+		if($result!=false)
 		{
-			if($notifications!=12)
-			{
-				print_r(json_encode($notifications));
-			}
-			else
-			{
-				echo 12;
-			}
+			echo 12;
 		}
 		else
 		{
-			echo 404;
+			echo 3;
 		}
 	}
 }
