@@ -4,9 +4,9 @@ require_once('../../QOB/qob.php');
 require_once('./miniPoll.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_pollId']="6c3b5a62fa26c9e18e026fdc3feae29b824103141efe1da6d93e2427511c72003b6cb3cd9a735d3719da8a3b4460e1b7e86778633efe878136467ce91d22c427";
+	$_POST['_pollId']="6c3b5a62fa26c9e18e026fdc3feae29b824103141efe1da6d93e2427511c72003b6cb3cd9a735d3719da8a3b4460e1b7e86778633efe878136467ce91d22c427";*/
 //Testing Content Ends
 
 

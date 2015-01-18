@@ -5,11 +5,11 @@ session_start();
 	require_once('miniClasses/miniComment.php');
 	//require_once('postupdater.php');
 //testing inputs begin
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B019".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B019".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_postId']="3ade034661698c76b1e1d166e9cdb24a50e36acebdf072ddf0c8c578cc6ee7a26ed3c6ea68ac1f744f9fa443810a675bd2467ab7f1c8c2922d03a4b5a8795f9a";
 	$_POST['_personTags']="";
-	$_POST['_commentContent']="People need to be patient for some time!!!";
+	$_POST['_commentContent']="People need to be patient for some time!!!";*/
 //testing inputs end
 /*
 Code 3: SUCCESS!!
