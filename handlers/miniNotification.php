@@ -25,7 +25,7 @@ class miniNotification
 		$this->objectType=$objectType;
 		$this->timestamp=$timestamp;
 		$this->isRead=$isRead;
-		$this->label=$label
+		$this->label=$label;
 	}
 
 

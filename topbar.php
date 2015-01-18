@@ -2,7 +2,6 @@
 
 <script>
 
-
 	function sendReadNotifications()
 	{
 		var readNotifications=new Array();
@@ -330,7 +329,7 @@
 
 			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
 
-				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber">2</span>
+				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
 
 				<div id="notifications" class="hidden">
 

@@ -42,7 +42,7 @@
 	{
 		var littlePost="";
 
-		littlePost+='<a href="http://localhost/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost">'+data.postDetails+'</li></a>'
+		littlePost+='<a href="http://localhost/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-envelope"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>'
 	
 		$('#rightBlock1').find('ul').append(littlePost);
 
@@ -52,7 +52,7 @@
 	{
 		var littleEvent="";
 
-		littleEvent+='<a href="http://localhost/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent">'+data.eventDetails+'</li></a>'
+		littleEvent+='<a href="http://localhost/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>'
 	
 		$('#rightBlock2').find('ul').append(littleEvent);
 
@@ -62,7 +62,7 @@
 	{
 		var littlePoll="";
 
-		littlePoll+='<a href="http://localhost/4pi/fetchSinglePoll?ref='+data.pollIdHash+'" class="list-group-item littlePoll">'+data.pollQuestion+'</li></a>'
+		littlePoll+='<a href="http://localhost/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>'
 	
 		$('#rightBlock3').find('ul').append(littlePoll);
 
