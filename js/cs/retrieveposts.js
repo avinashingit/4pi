@@ -1026,16 +1026,8 @@ function deletePost(id) {
         })
         .success(function(data) {
             data = data.trim();
-            if (data == 13) {
-                alert("Don't mess with 4pi");
-                window.location.href = "4pi/index.php";
-            } else if (data == 12) {
-                alert("Database error. Admin has been notified");
-            } else if (data == 14) {
-                alert("You have been blocked for messing with 4pi");
-                window.location.href = "4pi/index.php";
-            } else if (data == 3) {
-
+            if (checkData(data)==1)
+            {
                 $('#postArea').find('#' + id).remove();
                 alert("The post is deleted. :)");
             }
@@ -1236,7 +1228,7 @@ function starPost(id) {
             else
             {
                 $('#' + id).find('#postStarIcon').removeClass('fa-star').addClass('fa-star-o');
-                $('#' + id).find('#postStarIcon').attr("onclick", "starPost(\'id\');");
+                $('#' + id).find('#postStarIcon').attr("onclick", "starPost(\'"+id+"\');");
             }
 
         });

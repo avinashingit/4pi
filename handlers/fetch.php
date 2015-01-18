@@ -11,12 +11,12 @@
 
 
 
-//error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
 
-	require_once("../../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -264,7 +264,7 @@
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
-		$result=$conn->fetchAll($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL);
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -285,7 +285,7 @@
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
-		$result=$conn->fetchAll($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL);
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -770,6 +770,7 @@
 
 	function getPostObjectWithFewComments($post,$userId)
 	{
+		$conn=new QoB();
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
 		$postCreationTime=toTimeAgoFormat($post['timestamp']);
 		if(stripos($post['followers'],$userId)===false)
@@ -793,8 +794,9 @@
 		$comments=array();
 		if($postComments!=false)
 		{
-			foreach ($postComments as $record)
+			while ($record=$conn->fetch($postComments))
 			{
+				//var_dump($record);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
@@ -806,6 +808,7 @@
 
 	function getPostObjectWithAllComments($post,$userId)
 	{
+		$conn=new QoB();
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
 		$postCreationTime=toTimeAgoFormat($post['timestamp']);
 		if(stripos($post['followers'],$userId)===false)
@@ -829,8 +832,9 @@
 		$comments=array();
 		if($postComments!=false)
 		{
-			foreach ($postComments as $record)
+			while ($record=$conn->fetch($postComments))
 			{
+				//var_dump($record);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
@@ -909,17 +913,11 @@
 		    	if($conn->error!=""&&$result!=true)
 		    	{
 		    		//return true;
-		    		//affected rows = 2 if an update occurs, 1 if an insert occurs
-		    		if(($rows=$conn->getAffectedRows())==1)
-		    		{
-		    			$notificationId++;
-		    		}
-
 		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
 					return false;
 
 		    	}
-		    	
+		    	$notificationId++;
 		    	//echo "notifid:".$notificationId;
 			}
 			
@@ -1003,7 +1001,7 @@
 		$notificationModels[13]=array(" of your poll has been approved.");
 		$notificationModels[14]=array(" of your poll has been rejected.");
 
-		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE userId=? ";
+		$notificationFetchSQL="SELECT * FROM notifications WHERE userId=? ";
 		$values[0]=array($userId => 's');
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
@@ -1030,7 +1028,7 @@
 					$notification=$notif['actionCount'].$notificationModels[(int)$notif['type']][1];
 				}
 				
-				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen'],$notif['label']);
+				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
 				//print_r($notifObject);
 				$notificationObjArray[]=$notifObject;
 				//var_dump($notifObject);

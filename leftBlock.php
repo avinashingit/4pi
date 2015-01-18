@@ -108,3 +108,34 @@ echo '
 </div>
 
 <!-- left column code ends here -->';
+?>
+<script>
+$(document).ready(function(){
+	var sn = $("#userDetails");
+
+    var posn = sn.position();          
+
+    var windowposn = $(window).scrollTop();
+
+    if (windowposn >= posn.top-50) {
+
+        sn.addClass("stickDetails");
+
+        $('#posts').css({'margin-left':'16.5%'});
+        $('#events').css({'margin-left':'16.5%'});
+        $('#polls').css({'margin-left':'16.5%'});
+
+    }
+
+    else {
+
+       sn.removeClass("stickDetails");
+
+        $('#posts').css({'margin-left':'0%'});
+        $('#events').css({'margin-left':'0%'});
+        $('#polls').css({'margin-left':'0%'});
+
+    }
+});
+	
+</script>
