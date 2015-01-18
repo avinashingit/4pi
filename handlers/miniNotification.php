@@ -10,9 +10,10 @@ class miniNotification
 	public $objectType;
 	public $timestamp;
 	public $isRead;
+	public $label;//Post Subject or event name or poll question or thread question
 
 
-	function __construct($notificationId,$notification,$notificationType,$objectId,$objectType,$timestamp,$isRead)
+	function __construct($notificationId,$notification,$notificationType,$objectId,$objectType,$timestamp,$isRead,$label)
 	{
 		$this->notificationId=$notificationId;
 		//$this->userName=$userName;
@@ -24,6 +25,7 @@ class miniNotification
 		$this->objectType=$objectType;
 		$this->timestamp=$timestamp;
 		$this->isRead=$isRead;
+		$this->label=$label
 	}
 
 

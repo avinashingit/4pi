@@ -974,7 +974,7 @@
 		$notificationModels[13]=array(" of your poll has been approved.");
 		$notificationModels[14]=array(" of your poll has been rejected.");
 
-		$notificationFetchSQL="SELECT * FROM notifications WHERE userId=? ";
+		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE userId=? ";
 		$values[0]=array($userId => 's');
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
@@ -1001,7 +1001,7 @@
 					$notification=$notif['actionCount'].$notificationModels[(int)$notif['type']][1];
 				}
 				
-				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
+				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen'],$notif['label']);
 				//print_r($notifObject);
 				$notificationObjArray[]=$notifObject;
 				//var_dump($notifObject);
