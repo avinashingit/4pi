@@ -38,7 +38,6 @@ $ProcessedHashes=array();
 $inputHashes=$_POST['sgk'];
 if(count($inputHashes)!=0)
 {
-	$ProcessedHashes=explode(",", $inputHashes);
 	$ProcessedHashesCount=count($ProcessedHashes);
 }
 else
