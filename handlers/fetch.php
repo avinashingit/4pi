@@ -11,12 +11,12 @@
 
 
 
-error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
+//error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
 
-	require_once("../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("../../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -909,11 +909,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		    	if($conn->error!=""&&$result!=true)
 		    	{
 		    		//return true;
+		    		//affected rows = 2 if an update occurs, 1 if an insert occurs
+		    		if(($rows=$conn->getAffectedRows())==1)
+		    		{
+		    			$notificationId++;
+		    		}
+
 		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
 					return false;
 
 		    	}
-		    	$notificationId++;
+		    	
 		    	//echo "notifid:".$notificationId;
 			}
 			

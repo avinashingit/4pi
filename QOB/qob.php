@@ -799,6 +799,11 @@ class QoB
         $this->conn->autocommit(true);
     }
 
+    function getAfftectedRows()
+    {
+        return $this->$stmt->affected_rows;
+    }
+
 
 
 
