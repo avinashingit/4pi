@@ -928,7 +928,36 @@
 	}
 
 	
-
+	function readNotifications($userId,$displayedNotifArray)
+	{
+		$notifCount=count($displayedNotifArray);
+		if($notifCount!=0)
+		{
+			$conn=new QoB();
+			$i=0;
+			$notificationReadSQL="UPDATE notifications SET seen=1 WHERE userId= ? AND ( notificationIdHash = ?";
+			$values[0]=array($userId =>'s');
+			$values[1]=array($displayedNotifArray[$i] => 's');
+			for($i=0;$i<$notifCount-1;$i++)
+			{
+				$notificationReadSQL.="OR notificationIdHash= ?";
+				$values[$i+2]=array($displayedNotifArray[$i+1]=>'s');
+			}
+			$notificationReadSQL.=")";
+			$result=$conn->update($notificationReadSQL,$values);
+			if($conn->error==""&&$result!=false)
+			{
+				return true;
+			}
+			else
+			{
+				notifyAdmin("Conn.Error:".$conn->error."! In updating Notifications for userId:".$userId,$userId);
+				return false;
+			}
+			
+		}
+		
+	}
 
 	function getNotifications($userId,$displayedNotifArray)
 	{
