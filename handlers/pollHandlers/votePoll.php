@@ -33,7 +33,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 //Actual editPoll Code Starts
 $pollIdHash=$_POST['_pollId'];
 $pollAnswerVotesArray=$_POST['_votes'];
-
+// var_dump($_POST['_votes']);
 $userIdHash=$_SESSION['vj'];
 $conn= new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
@@ -147,6 +147,8 @@ else
 			{
 				$votedBy=$votedBy.",".$userId;
 			}
+
+			// var_dump($pollExistingVotesArray);
 
 			for($i=0;$i<count($pollAnswerVotesArray);$i++)
 			{

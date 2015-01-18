@@ -1,6 +1,5 @@
 
 function eventInsert(position,data)
-
 {
 	var event="";
 
@@ -151,7 +150,6 @@ function eventInsert(position,data)
 }
 
 function editEvent(id)
-
 {
 	
 	$('#editEventModal').modal('show');
@@ -467,7 +465,6 @@ $('.popOver').popover();
 $('time.timeago').timeago();
 
 function attendEvent(id)
-
 {
 
 	x=$('#'+id).find('#eventIcons').find('#eventAttendeeNumber').find('#eventAttendersValue').html();
@@ -476,7 +473,7 @@ function attendEvent(id)
 
 	y=y+1;
 
-	$('#'+id).find('#eventIcons').find('#eventAttendeeNumber').find('#eventAttendersValue').html(y)
+	$('#'+id).find('#eventIcons').find('#eventAttendeeNumber').find('#eventAttendersValue').html(y);
 
 	/*$('#'+id).find('#attend').toggleClass('visibleHidden');
 
@@ -511,12 +508,12 @@ function attendEvent(id)
 			$('#'+id).find("#attending").toggleClass('visibleHidden');
 		}
 
+
 	});
 
 }
 
 function deleteEvent(id)
-
 {
 
 	$('#deleteEventModal').modal('show');
@@ -526,7 +523,6 @@ function deleteEvent(id)
 }
 
 function deleteEventSend()
-
 {
 
 	var eventId=$('#deleteEventModal').find('#deleteEventId').html();
@@ -564,7 +560,6 @@ function deleteEventSend()
 }
 
 function latestEventsFetch(value,call)
-
 {
 	$('.row .eventMenu').find('#latestEventsButton').find('i').addClass('fa-spin');
 	var eventsCurrent=[];
@@ -579,6 +574,7 @@ function latestEventsFetch(value,call)
 	})
 	.error(function(data){
 		alert("Server overload error. Please try again. :(");
+			$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 	})
 	.success(function(data){
 		if(value=="empty")
@@ -607,6 +603,8 @@ function latestEventsFetch(value,call)
 			{
 				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
 			}
+
+			$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 			
 		}
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
@@ -615,7 +613,6 @@ function latestEventsFetch(value,call)
 }
 
 function upcomingEventsFetch(value,call)
-
 {
 
 	$('.row .eventMenu').find('#upcomingEventsButton').find('i').addClass('fa-spin');
@@ -669,13 +666,19 @@ function upcomingEventsFetch(value,call)
 }
 
 function pastCompetitionsFetch(value,call)
-
 {
 	
 	$('.row .eventMenu').find('#eventWinnersButton').find('i').addClass('fa-spin');
+	var eventsCurrent=[];
+	var i=0;
+	$('.event').each(function(){
+		eventsCurrent[i]=$(this).attr("id");
+		i++;
+	});
 
 	$.post('/4pi/handlers/eventHandlers/pastEvents.php',{
-		_call:call
+		_call:call,
+		-sgk:eventsCurrent
 	})
 	.error(function(data){
 		alert("Server overload error. Please try again. :(");

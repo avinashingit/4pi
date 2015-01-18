@@ -1,3 +1,7 @@
+<script>
+var inView="<?php echo $_SESSION['jx'];?>";
+</script>
+
 <div class="col-md-7" id="events">
 	
 	<div class="row eventMenu topMenu" style="z-index:1040;margin-bottom:20px;">
@@ -382,17 +386,27 @@
 
 	<div id="eventEmptyMessage">
 
-			<div class="row">
+		<div class="row">
 
-				<div class="col-md-12 text-center">
+			<div class="col-md-12 text-center">
 
-					<p class="text-center" id="messageEmpty"></p>
-
-				</div>
+				<p class="text-center" id="messageEmpty"></p>
 
 			</div>
 
 		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="text-center">
+
+			<button class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>;
+
+		</div>
+
+	</div>
 
 </div>
 
@@ -438,3 +452,26 @@
 }
 
 </style>
+
+<script>
+
+function fetchMoreEvents()
+{
+	$('#loadMoreEventsButton').html("Loading").attr("onclick","");
+	if(inView==1001)
+	{
+		latestEventsFetch('noempty',1);
+	}
+	else if(inView==1002)
+	{
+		upcomingEventsFetch('noempty',1)
+	}
+	else if(inView==1003)
+	{
+		pastCompetitionsFetch('noempty',1);
+	}
+
+}
+
+
+</script>

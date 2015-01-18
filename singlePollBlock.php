@@ -34,34 +34,6 @@
 
 
 <div class="col-md-7" id="polls">
-	
-	<div class="row pollMenu topMenu" style="z-index:1040;">
-		
-			<div class="btn-group btn-group-justified" style="padding:10px;">
-				
-				<div class="btn-group">
-				
-				    <button type="button" id="pollCreateButton" class="btn btn-warning" data-toggle="modal" data-target="#pollCreateModal"><a style="color:white;" ><i class="fa fa-plus"></i>&nbsp;Create Poll</a></button>
-			  	
-			  	</div>
-
-			  	<div class="btn-group">
-				
-				    <button type="button" id="latestPollsButton" class="btn btn-danger"><a style="color:white;" onclick="fetchLatestPolls(1);" ><i class="fa fa-calendar"></i>&nbsp;Latest Polls</a></button>
-			  	
-			  	</div>
-
-			  	<div class="btn-group">
-				
-				    <button type="button" id="completedPollsButton" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-clock-o"></i>&nbsp;Completed Polls</a></button>
-			  	
-			  	</div>
-				
-			</div>
-
-	</div><!-- end class pollMenu.topMenu -->
-
-	<br/><br/>
 
 
 	<!-- Modals for create poll -->
@@ -218,32 +190,12 @@
 		
 
 	</div>
-	<div id="pollEmptyMessage" class="text-center">
-
-			<p class="text-center"></p>
-
-	</div>
-
-	<div class="row">
-
-		<div class="text-center">
-
-			<button class="btn btn-lg btn-success" id="loadMorePollsButton" onclick="fetchLatestPolls(1,'noempty');">Load more</button>;
-
-		</div>
-
-	</div>
 
 </div><!-- end polls -->
 
 
 <script src="/4pi/js/cs/retrievePolls.js">
-</script>
-
-<script>
-$(document).ready(function(){
-		fetchLatestPolls(1,"empty");
-	});
+	
 </script>
 
 <div class="modal fade slow" id="pollEditModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

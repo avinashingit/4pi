@@ -34,6 +34,10 @@ function checkData(data) {
     {
         alert("Committed action is being redone. ");
     }
+    else if(data==6)
+    {
+        alert("The details you have referred to are not present. ");
+    }
     else
     {
         return 1;
@@ -366,6 +370,7 @@ function retrieveLatestPosts(value, call) {
         var i=0;
         $('.post').each(function(){
             posts[i]=$(this).attr("id");
+            console.log(posts[i]);
             i++;
         });
     }
@@ -587,7 +592,8 @@ function retrievePopularPosts(value, call) {
         });
 }
 
-function commentInsert(position, data, postId) {
+function commentInsert(position, data, postId)
+{
 
     var comment = "";
 
@@ -597,7 +603,19 @@ function commentInsert(position, data, postId) {
 
     comment += '<div class="col-md-1">';
 
-    comment += '<a href="' + genUrl + data.commentUserId + '"><img style="float:left;" class="commentProfilePicture"  src="./images/' + data.commentUserId + '.jpg" title="' + data.commentUserName + '"/></a>';
+    // alert(data.commentUserIdHash);
+
+    // if(imageExists(data.commentUserIdHash))
+    // {
+        comment += '<a href="' + genUrl + data.commentUserId + '"><img style="float:left;" class="commentProfilePicture"  src="/4pi/img/proPics/' + data.commentUserIdHash + '.jpg" title="' + data.commentUserName + '"/></a>';
+    // }
+
+    // else
+    // {
+        /*comment += '<a href="' + genUrl + data.commentUserId + '"><img style="float:left;" class="commentProfilePicture"  src="/4pi/img/defaultPerson.jpg" title="' + data.commentUserName + '"/></a>';*/
+    // }
+
+    
 
     comment += '</div>';
 
