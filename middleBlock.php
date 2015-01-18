@@ -156,7 +156,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		<div class="row text-center">
 
-		<button class="text-center btn btn-lg btn-success" onclick="fetchMorePosts(event);">Load more</button>
+		<button style="display:block;width:100%;" class="text-center btn btn-lg btn-success" onclick="fetchMorePosts(event);">Load more</button>
 
 		</div>
 

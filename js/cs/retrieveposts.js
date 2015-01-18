@@ -732,11 +732,11 @@ function postInsert(position, data1) {
 
     post += '<div class="col-md-2 col-md-offset-2" >';
 
-    post += '<div id="postSeenBy" class="text-center postBottomRowPadding">';
+    /*post += '<div id="postSeenBy" class="text-center postBottomRowPadding">';
 
     post += '<i class="fa fa-eye" title="Seen By"></i>&nbsp;<span id="postSeenByNumber">' + data1.postSeenNumber + '</span>';
 
-    post += '</div> <!-- end id postSeenBy -->';
+    post += '</div> <!-- end id postSeenBy -->';*/
 
     post += '</div> <!-- end class col-md-2 -->';
 
@@ -819,7 +819,7 @@ function postInsert(position, data1) {
 
     post += '<div>';
 
-    post += '<br/><p class="text-center">Please enter the emailId of the recipient.</p><br/>';
+    post += '<br/><p class="text-center">Please enter the email id of the recipient.</p><br/>';
 
     post += '<form class="form-horizontal text-center" role="form">';
 
@@ -1036,37 +1036,45 @@ function mailPost(id, event) {
 }
 
 function deletePost(id) {
-    $.post('./handlers/postHandlers/deletePost.php', {
-        _postId: id
-    })
-        .error(function() {
-
+    if(confirm("Do you want to delete the post?"))
+    {
+        $.post('./handlers/postHandlers/deletePost.php', {
+            _postId: id
         })
-        .success(function(data) {
-            data = data.trim();
-            if (checkData(data)==1)
-            {
-                $('#postArea').find('#' + id).remove();
-                alert("The post is deleted. :)");
-            }
-        });
+            .error(function() {
+
+            })
+            .success(function(data) {
+                data = data.trim();
+                if (checkData(data)==1)
+                {
+                    $('#postArea').find('#' + id).remove();
+                    alert("The post is deleted. :)");
+                }
+            });
+    }
+    
 }
 
 function hidePost(id) {
-    $.post('./handlers/postHandlers/hidePost.php', {
-        _postId: id
-    })
-        .error(function() {
-            alert("Server Overload. Please try later");
+    if(confirm("The post will be hidden from you. Ok?"))
+    {
+        $.post('./handlers/postHandlers/hidePost.php', {
+            _postId: id
         })
-        .success(function(data) {
+            .error(function() {
+                alert("Server Overload. Please try later");
+            })
+            .success(function(data) {
 
-            if (checkData(data) == 1) {
-                $('#postArea').find('#' + id).remove();
-                alert("The post is hidden from you. You will not see it anymore. :)");
-            }
+                if (checkData(data) == 1) {
+                    $('#postArea').find('#' + id).remove();
+                    alert("The post is hidden from you. You will not see it anymore. :)");
+                }
 
-        });
+            });
+    }
+    
 }
 
 function followPost(id) {
@@ -1255,22 +1263,25 @@ function starPost(id) {
 
 function deleteComment(cid, pid) {
 
-    $.post('handlers/postHandlers/deleteComment.php', {
-        _commentId: cid,
-        _postId: pid
-    })
-    .error(function() {
-        alert("Server Overload. Please try later.");
-    })
-    .success(function(data) {
-        if (checkData(data) == 1) {
-            $('#postArea').find('#' + pid).find('.postComments').find('#' + cid).hide();
-            var x = $('#postArea').find('#' + pid).find('#commentCount').html();
-            y = parseInt(x);
-            y = y - 1;
-            $('#postArea').find('#' + pid).find('#commentCount').html(y);
-        }
-    });
+    if(confirm("The comment will be deleted. Ok?"))
+    {
+        $.post('handlers/postHandlers/deleteComment.php', {
+            _commentId: cid,
+            _postId: pid
+        })
+        .error(function() {
+            alert("Server Overload. Please try later.");
+        })
+        .success(function(data) {
+            if (checkData(data) == 1) {
+                $('#postArea').find('#' + pid).find('.postComments').find('#' + cid).hide();
+                var x = $('#postArea').find('#' + pid).find('#commentCount').html();
+                y = parseInt(x);
+                y = y - 1;
+                $('#postArea').find('#' + pid).find('#commentCount').html(y);
+            }
+        });
+    }    
 }
 $(document).ready(function() {
     $('.popOver').popover();

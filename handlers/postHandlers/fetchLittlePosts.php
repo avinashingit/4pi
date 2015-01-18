@@ -56,7 +56,7 @@ else
 		{
 			//Success
 			$littlePostObjectArray=array();
-			while(($post=$conn->fetch($result))&&($displayCount<=2))
+			while(($post=$conn->fetch($result))&&($displayCount<=3))
 			{
 				if($post['subject']=="")
 				{
