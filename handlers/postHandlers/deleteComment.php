@@ -53,10 +53,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
 				//Detected tampered postIdHash
-				blockUserByHash($userIdHash,"Messing with postIdHash!! In DeleteComment");
-				$_SESSION=array();
-				session_destroy();
-				echo 13;
+				notifyAdmin("Suspicious postIdHash in delete comment",$userId.",sh:".$postIdHash);
+				echo 5;
+				exit();
 			}
 			else
 			{

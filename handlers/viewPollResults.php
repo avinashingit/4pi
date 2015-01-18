@@ -38,7 +38,7 @@ $userIdHash=$_SESSION['vj'];
 $conn= new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in vote Poll")>0)//Happy Birthday to Myself!! Its October 21st!! 00:00 hrs
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in vote Poll")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
