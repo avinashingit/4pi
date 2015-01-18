@@ -1,6 +1,6 @@
 <?php
 session_start();	
-//error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL ^ E_NOTICE);
 require_once('./../QOB/qob.php');
 require_once('fetch.php');
 //$_SESSION['jx']="999"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls

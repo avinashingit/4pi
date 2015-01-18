@@ -359,23 +359,6 @@
 				};
 		});
 	});
-
-var json1=<?php 
-
-$row1=array("AvinashAvinashAvinashAvinashAvinashavina",1250);
-$row2=array("Alfdasekhya",1300);
-$row3=array("Hafadsri",1000);
-$row4=array("Hafdasri",1150);
-$row5=array("da",1100);
-$row6=array("Hafdasfri",1080);
-$row7=array();
-array_push($row7,$row1);
-array_push($row7,$row2);
-array_push($row7,$row3);
-array_push($row7,$row4);
-array_push($row7,$row5);
-array_push($row7,$row6);
-echo json_encode($row7);?>;
 	//--------------------------------------------------------------------------------------------//
 	function displayChart(json,idC,id,hUh)
 	{
@@ -422,13 +405,31 @@ echo json_encode($row7);?>;
 	    });
 	}
 
-	var pollCount=0;
+	function displayPollResults(id)
+	{
+		$('#'+id).find('#pollsResultViewbutton').html("Fetching results").attr("onclick","");
+		$.post('/4pi/handlers/pollHandlers/viewPollResults.php',{
+			_pollId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+			$('#'+id).find('#pollsResultViewbutton').html("View results").attr("onclick","displayPollResults(\'"+id+"\');");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=data.trim();
+				displayChart(JSON.parse(data),id+'b',id,1);
+			}
+			
+		});
+	}
 
-	var votesStorage=new Array();
+	var pollCount=0;
 
 	var pollNumber=0;
 
-	function insertPoll(data,position,pollNo)
+	function insertPoll(data,position)
 	{
 		var poll="";
 
@@ -461,7 +462,7 @@ echo json_encode($row7);?>;
 
 				if(data.hasVoted==1)
 				{
-					poll+='<div class="hidden col-md-7" id="pollQuestion">';
+					poll+='<div class="col-md-7" id="pollQuestion">';
 
 						poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
 
@@ -554,10 +555,8 @@ echo json_encode($row7);?>;
 
 				else
 				{
-					// alert("Went");
-					votesStorage[pollNo]=data.optionVotes;
 					
-					poll+='<button class="btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage[pollNo],\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);$(this).remove();">View results</button>';
+					poll+='<button class="btn btn-md btn-primary text-center" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\');$(this).remove();">View results</button>';
 					
 				}
 
@@ -569,14 +568,13 @@ echo json_encode($row7);?>;
 		else if(data.pollOptionsType==2)
 		{
 
-			// alert("Called");
 			poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 			poll+='<br/>';
 
 			poll+='<div class="row">';
 
-				poll+='<div class="col-md-6" id="'+data.pollIdHash+'b">';
+				poll+='<div class="col-md-6 col-md-offset-3" id="'+data.pollIdHash+'b">';
 
 				poll+='</div>';
 
@@ -597,7 +595,7 @@ echo json_encode($row7);?>;
 
 				if(data.hasVoted==1)
 				{
-					poll+='<div class="hidden col-md-7" id="pollQuestion">';
+					poll+='<div class="col-md-7" id="pollQuestion">';
 
 						poll+='<div style="font-size:16px">'+data.pollQuestion+'</div>';
 
@@ -675,12 +673,12 @@ echo json_encode($row7);?>;
 
 							if(data.pollType==1 || data.pollType==2)
 							{
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 							}
 
 							else if(data.pollType==3)
 							{
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'no\',1);" class="btn btn-md btn-success">Vote</button>';
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'no\',1);" class="btn btn-md btn-success">Vote</button>';
 							}
 
 						poll+='</div>';
@@ -690,10 +688,9 @@ echo json_encode($row7);?>;
 
 				else
 				{
-					// alert("Went");
-					votesStorage=data.optionVotes;
-					poll+='<button class="btn btn-md btn-primary text-center" id="pollsDisplay" onclick="displayChart(votesStorage,\''+data.pollIdHash+'b\',\''+data.pollIdHash+'\',1);$(this).remove();">View results</button>';
-					$('#pollsDisplay').trigger('click');
+					
+					poll+='<button class="btn btn-md btn-primary text-center" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\');$(this).remove();">View results</button>';
+					
 				}
 
 			poll+='</div>';
@@ -720,7 +717,7 @@ echo json_encode($row7);?>;
 
 	//-------------------------------------------------------------------------------//
 	//fetchPolls
-	//
+	
 	function fetchLatestPolls(call)
 	{
 		$.post('./handlers/pollHandlers/latestPolls.php',{
@@ -744,13 +741,8 @@ echo json_encode($row7);?>;
 					datas=JSON.parse(data);
 					for(i=0;i<datas.length;i++)
 					{
-						// alert(i);
-						insertPoll(datas[i],"last",pollNumber);
-						// alert('i)');
-						pollNumber++;
+						insertPoll(datas[i],"last");
 					}
-
-					// $('#pollsDisplay').trigger('click');
 
 					$('time.timeago').timeago();
 				}

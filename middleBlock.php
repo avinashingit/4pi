@@ -193,6 +193,28 @@ $(document).ready(function(){
 	retrieveLatestPosts('empty','-1');	
 });
 
+$(document).ready(function(){
+	
+	var sns = $(".topMenu");
+
+    var posns = sns.position();
+
+    var windowposns = $(window).scrollTop();
+
+    if (windowposns >= posns.top-50) {
+
+        sns.addClass("stickTopMenu");
+
+    }
+
+    else {
+
+       sns.removeClass("stickTopMenu");
+
+    }	
+});
+   
+
 </script>
 
 

@@ -2,6 +2,7 @@
 
 <script>
 
+
 	function sendReadNotifications()
 	{
 		var readNotifications=new Array();

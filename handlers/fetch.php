@@ -16,7 +16,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
-	require_once("../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -264,7 +264,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
-		$result=$conn->fetchAll($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL);
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -285,7 +285,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
-		$result=$conn->fetchAll($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL);
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -770,6 +770,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	function getPostObjectWithFewComments($post,$userId)
 	{
+		$conn=new QoB();
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
 		$postCreationTime=toTimeAgoFormat($post['timestamp']);
 		if(stripos($post['followers'],$userId)===false)
@@ -793,8 +794,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$comments=array();
 		if($postComments!=false)
 		{
-			foreach ($postComments as $record)
+			while ($record=$conn->fetch($postComments))
 			{
+				//var_dump($record);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
@@ -806,6 +808,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	function getPostObjectWithAllComments($post,$userId)
 	{
+		$conn=new QoB();
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
 		$postCreationTime=toTimeAgoFormat($post['timestamp']);
 		if(stripos($post['followers'],$userId)===false)
@@ -829,8 +832,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$comments=array();
 		if($postComments!=false)
 		{
-			foreach ($postComments as $record)
+			while ($record=$conn->fetch($postComments))
 			{
+				//var_dump($record);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
