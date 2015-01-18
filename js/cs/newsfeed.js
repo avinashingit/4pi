@@ -1,53 +1,11 @@
 var done=1;
 $(document).ready(function(){
-    
-    var s = $("#rightBox");
-    
-    var pos = s.position(); 
-    
-    $(window).scroll(function() {
-    
-        var windowpos = $(window).scrollTop();
-    
-        //s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
-    
-        //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
-    
-        if (windowpos >= pos.top-50) {
-    
-            s.addClass("stick");
-    
-            //$('#topBarNew').show();
-    
-           // $('#rightBox').hide();
-    
-            //$('#topBar').hide();
-
-        } 
-
-        else {
-
-            s.removeClass("stick");
-
-            //$('#topBarNew').hide();
-
-            //$('#topBar').show();
-
-            //$('#rightBox').show();
-
-        }
 
         var sn = $("#userDetails");
 
         var posn = sn.position();          
 
-        //console.log("HAI");
-
         var windowposn = $(window).scrollTop();
-
-        //s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
-
-        //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
 
         if (windowposn >= posn.top-50) {
 
@@ -71,29 +29,19 @@ $(document).ready(function(){
 		
 		var sns = $(".topMenu");
 
-        var posns = sns.position();          
-
-        //console.log(sns);
+        var posns = sns.position();
 
         var windowposns = $(window).scrollTop();
-
-        //s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
-
-        //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
 
         if (windowposns >= posns.top-50) {
 
             sns.addClass("stickTopMenu");
-
-            // $('#posts').css({'margin-left':'16.5%'});
 
         }
 
         else {
 
            sns.removeClass("stickTopMenu");
-
-            // $('#posts').css({'margin-left':'0%'});
 
         }
 
@@ -149,33 +97,8 @@ $(document).ready(function(){
     });
 
     var detailsHeight=window.innerHeight;
-	//var heightNumber = parseInt(detailsHeight) + 500 + 'px';
 
-    //$('#userDetails').css({'height ': + ' ' + heightNumber + ' !important'});
-	//$('#userDetails').css({'background-color': ' green'});
-	//alert(heightNumber);
-
-
-
-/*********************middleBlock.php js **************************/
-
-    /*$(document).on('ready','.postComments',function(){
-    $(this).addClass('hidden');
-    });*/
-     // $('.loadmoreComments').hide();
-
-
-    $('textarea').autosize({'append':'false'});
-
-    /*$(document).on('click','#postStarIcon',function(){
-        $(this).removeClass('fa-star-o');
-        $(this).addClass('fa-star');
-    });*/
-
-    /*$(document).on('ready','.back',function(){
-        $(this).addClass('hidden');
-    });*/
-
+    // $('textarea').autosize({'append':'false'});
     $(document).on('click','.fa-bars',function(){
          $(this).parent().parent().parent().parent().hide();
          $(this).parent().parent().parent().parent().next().removeClass('hidden');
@@ -184,9 +107,7 @@ $(document).ready(function(){
     $(document).on('click','.back .fa-mail-reply',function(){
         $(this).parent().parent().parent().parent().hide();
         $(this).parent().parent().parent().parent().parent().find('.front').show();
-    });
-
-});    
+    });   
 
 
 

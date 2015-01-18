@@ -23,6 +23,8 @@ var inView="<?php echo $_SESSION['jx'];?>";
 			</div>
 
 	</div>
+
+	<br/><br/>
 				
 	<!-- Create post modal  -->
 				<div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

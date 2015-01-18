@@ -2,53 +2,78 @@
 
 <script>
 
+	function sendReadNotifications()
+	{
+		var readNotifications=new Array();
+		var i=0;
+		$('#notifications').find('.notificaion').each(function(){
+			readNotifications[i]=$(this).attr("id");
+			i++;
+		});
+
+		$.post('/4pi/handlers/readNotifications.php',{
+			_readNotifications:readNotifications
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(")
+		})
+		.success(function(data){
+
+		});
+	}
+
 	function showNotifications()
 	{
+		$('#notificationNumber').html("0");
 		$('#notifications').toggleClass('hidden').fadeIn(500);
 		$('#notifications').css({'z-index':'1052'});
+		sendReadNotifications();
 	}
 
 
 	function insertNotifications(data,position)
 	{
+		// alert("hello");
 		var notification="";
 
 		if(data.isRead==1)
 		{
-			notification+='<div class="row notification showed" id="'+data.notificationIdHash+'">';
+			notification+='<div class="row notification showed" id="'+data.notificationId+'">';
 		}
 
 		else
 		{
-			notification+='<div class="row notification pleaseShow" id="'+data.notificationIdHash+'">';
+			notification+='<div class="row notification pleaseShow" id="'+data.notificationId+'">';
 		}
 
 			notification+='<div class="col-md-12 text-left">';
 
-			if(data.objectType==700)
+			if(data.objectType==500)
 			{
-				notification+='<a href="http://localhost/4pi/posts/fetchSinglePost?ref='+data.objectId+'"><p><img width="25px" height="25px" src="/4pi/img/appImgs/postImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="http://localhost/4pi/posts/fetchSinglePost?ref='+data.objectId+'"><p><img width="25px" height="25px" src="/4pi/img/appImgs/postImg.png"/>&nbsp;&nbsp;'+data.notification+'</p>';
 
 				notification+='</a>';
 			}
-			else if(data.objectType==800)
+			else if(data.objectType==600)
 			{
-				notification+='<a href="http://localhost/4pi/events/fetchSingleEvent?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/postImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="http://localhost/4pi/events/fetchSingleEvent?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/eventImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
 
 				notification+='</a>';
 			}
-			else if(data.objectType==900)
+			else if(data.objectType==700)
 			{
-				notification+='<a href="http://localhost/4pi/polls/fetchSinglePoll.php?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/postImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="http://localhost/4pi/polls/fetchSinglePoll.php?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/pollImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
 
 				notification+='</a>';
 			}
 
-			notificatoin+='</div>';
+			notification+='</div>';
 
 		notification+='</div><!-- end class notification -->';
 
-		$('#notfications').prepend(notification).hide().fadeIn(500);
+		console.log(notification);
+
+		$('#notifications').prepend(notification);
 	}
 
 	function fetchNotifications()
@@ -79,12 +104,13 @@
 					var unreadNotificationNumber=0;
 					for(i=0;i<data.length;i++)
 					{
-						if(data[i].isRead==-1)
+						if(data[i].isRead==0)
 						{
 							unreadNotificationNumber++;
 						}
-						insertNotification(data[i],"first");
+						insertNotifications(data[i],"first");
 					}
+					console.log(unreadNotificationNumber);
 					$('#notificationNumber').html(unreadNotificationNumber);
 				}
 				
@@ -306,201 +332,6 @@
 				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber">2</span>
 
 				<div id="notifications" class="hidden">
-
-					<div class="row notification" id="notificationid">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas1</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas2</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas3</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas4</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas5</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas6</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas7</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas8</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas9</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas10</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas11</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas12</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas13</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas14</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
-
-					<div class="row notification">
-
-						<div class="col-md-12 text-left">
-
-							<a><p><img width="25px" height="25px"src="/4pi/images/COE12B009.jpg"/>&nbsp;&nbsp;
-							dfjlsafjdklsfjladsjfldkas15</p>
-
-							</a>
-
-						</div>
-
-					</div><!-- end class notification -->
 
 					
 
@@ -780,7 +611,6 @@
 		padding:5px !important;
 		font-size:13px;
 		border-bottom:1px solid #eeeeee;
-		
 		white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
 		white-space: -pre-wrap;      /* Opera 4-6 */
 		white-space: -o-pre-wrap;    /* Opera 7 */
@@ -794,11 +624,13 @@
 	.notification.showed
 	{
 		background-color:#f1f1f1;
+		/*background-color:#fff;*/
 	}
 
 	.notification.pleaseShow
 	{
 		background-color:#efefef;
+		/*background-color:#fff;*/
 	}
 
 	.notification p

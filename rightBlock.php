@@ -1,4 +1,42 @@
 <script>
+	$(document).ready(function(){
+		var s = $("#rightBox");
+    
+    var pos = s.position(); 
+    
+    $(window).scroll(function() {
+    
+        var windowpos = $(window).scrollTop();
+    
+        //s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
+    
+        //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
+    
+        if (windowpos >= pos.top+300) {
+    
+            s.addClass("stick");
+    
+            //$('#topBarNew').show();
+    
+           // $('#rightBox').hide();
+    
+            //$('#topBar').hide();
+
+        } 
+
+        else {
+
+            s.removeClass("stick");
+
+            //$('#topBarNew').hide();
+
+            //$('#topBar').show();
+
+            //$('#rightBox').show();
+
+        }
+    });
+	});
 
 	function insertLittlePost(data)
 	{

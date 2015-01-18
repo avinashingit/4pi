@@ -383,15 +383,16 @@ function retrieveLatestPosts(value, call) {
         .success(function(data) {
 
             console.log(data);
-
-
-
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
+            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'5px 0px 0px #000 inset','border-left':'1px solid #000'});
+            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'5px 0px 0px #4CAE4C inset','border-left':'1px solid #4CAE4C'});
+            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'5px 0px 0px #D2322D inset','border-left':'1px solid #D2322D'});
+    
 
             data = data.trim();
             // console.log(data);
             if (value == "empty") {
-                alert(value);
+                // alert(value);
                 $('.post').each(function() {
                     $(this).remove();
 
@@ -464,6 +465,9 @@ function retrieveImportantPosts(value, call) {
         .success(function(data) {
 
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
+            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'5px 0px 0px #3276B1 inset','border-left':'1px solid #3276B1'});
+            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'5px 0px 0px #000 inset','border-left':'1px solid #000'});
+            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'5px 0px 0px #D2322D inset','border-left':'1px solid #D2322D'});
             data = data.trim();
             console.log(data);
             if (value == "empty") {
@@ -533,6 +537,9 @@ function retrievePopularPosts(value, call) {
         })
         .success(function(data) {
             $('.row .postMenu').find('#popularPostsButton').find('i').removeClass('fa-spin');
+            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'5px 0px 0px #3276B1 inset','border-left':'1px solid #3276B1'});
+            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'5px 0px 0px #000 inset','border-left':'1px solid #000'});
+            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'5px 0px 0px #4CAE4C inset','border-left':'1px solid #4CAE4C'});
             data = data.trim();
             console.log(data);
             if (value == "empty") {
@@ -1225,6 +1232,11 @@ function starPost(id) {
             if (checkData(data) == 1) {
                 var x = JSON.parse(data);
                 $('#' + id).find('#starCount').html(x);
+            }
+            else
+            {
+                $('#' + id).find('#postStarIcon').removeClass('fa-star').addClass('fa-star-o');
+                $('#' + id).find('#postStarIcon').attr("onclick", "starPost(\'id\');");
             }
 
         });
