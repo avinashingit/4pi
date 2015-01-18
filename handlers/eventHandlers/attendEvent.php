@@ -11,11 +11,14 @@ require_once('../fetch.php');
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -63,21 +66,9 @@ $conn=new QoB();
 			$userId=$user['userId'];
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
-				if(blockUserByHash($userIdHash,"Suspicious eventIdHash in attendEvent",$eventIdHash)>0)
-				{
-					$_SESSION=array();
-					session_destroy();
-					echo 14;
-					exit();
-				}
-				else
-				{
-					notifyAdmin("Suspicious eventIdHash in attend Event",$userIdHash);
-					$_SESSION=array();
-					session_destroy();
-					echo 13;
-					exit();
-				}
+				notifyAdmin("Suspicious pollIdHash in attend Event",$userId.",sh:".$eventIdHash);
+				echo 6;
+				exit();
 			}
 			$eventOwner=$event['userId'];
 			$eventId=$event['eventId'];

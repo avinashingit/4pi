@@ -13,11 +13,13 @@ session_start();
 /*
 Code 3: SUCCESS!!
 Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -57,11 +59,9 @@ $userIdHash=$_SESSION['vj'];
 				if($post==false)
 					{
 						//Detected tampered postIdHash
-						blockUserbyHash($userIdHash,"Meddling with postIdHash in star Post","Post Id:",$post['postId']);
-						
-						$_SESSION=array();
-						session_destroy();
-						echo 13;
+						notifyAdmin("Suspicious postIdHash in starPost",$userId.",sh:".$postIdHash);
+						echo 6;
+						exit();
 					}
 					else
 					{

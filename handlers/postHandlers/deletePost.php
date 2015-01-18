@@ -12,11 +12,13 @@ session_start();
 /*
 Code 3: SUCCESS!!
 Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -31,10 +33,21 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
 		// echo "Suspicious session variable in DeletePost".$userIdHash;
-		notifyAdmin("Suspicious session variable in DeletePost",$userIdHash);
-		$_SESSION=array();
-		session_destroy();
-		echo 13;
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in editPost")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in editPost",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
 	}
 	else
 	{
@@ -53,6 +66,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$postIdHash=$_POST['_postId'];
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
+				notifyAdmin("Suspicious pollIdHash in DeletePost",$userId.",sh:".$postIdHash);
 				echo 5;
 				exit();
 			}
@@ -67,25 +81,35 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					$conn->startTransaction();
 					$UpdatePostSQL="DELETE FROM post WHERE postIdHash= ?";
 					$values[]=array($postIdHash => 's');
-					$result=$conn->update($UpdatePostSQL,$values);
-					if($conn->error==""&&$result==true)
+					$result=$conn->update($UpdatePostSQL,$values,true);
+					if($conn->error=="")
 					{
-						$DropCommentTableSQL="DROP TABLE ".$commentTableName;
-						$res=$conn->runSimpleQuery($DropCommentTableSQL);
-						if($conn->error==""&&$res==true)
+						if($result>0)
 						{
-							$conn->completeTransaction();
-							echo 3;
+							$DropCommentTableSQL="DROP TABLE IF EXISTS ".$commentTableName;
+							$res=$conn->runSimpleQuery($DropCommentTableSQL);
+							if($conn->error==""&&$res==true)
+							{
+								$conn->completeTransaction();
+								echo 3;
+							}
+							else
+							{
+								
+								$cr=$conn->error;
+								// echo $cr." For Drop Table In Delete Post".$postId.$userId;
+								$conn->rollbackTransaction();
+								notifyAdmin("Conn.Error: ".$cr." For Drop Table In Delete Post".$postId,$userId);
+								echo 12;
+							}
 						}
 						else
 						{
-							
-							$cr=$conn->error;
-							// echo $cr." For Drop Table In Delete Post".$postId.$userId;
 							$conn->rollbackTransaction();
-							notifyAdmin("Conn.Error: ".$cr." For Drop Table In Delete Post".$postId,$userId);
-							echo 12;
+							echo 5;
+							exit();
 						}
+						
 						
 					}
 					else

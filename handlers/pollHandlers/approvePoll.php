@@ -13,6 +13,7 @@ require_once('../fetch.php');
 /*
 Code 3: SUCCESS!!
 Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
@@ -83,21 +84,9 @@ else
 		}
 		if(($poll=getPollFromHash($pollIdHash))==false)
 		{
-			if(blockUserByHash($userIdHash,"Tampering pollIdHash in vote Poll",$userId.",sh:".$pollIdHash)>0)
-			{
-				$_SESSION=array();
-				session_destroy();
-				echo 14;
-				exit();
-			}
-			else
-			{
-				notifyAdmin("Suspicious pollIdHash in vote poll",$userId.",sh:".$PollIdHash);
-				$_SESSION=array();
-				session_destroy();
-				echo 13;
-				exit();
-			}
+			notifyAdmin("Suspicious pollIdHash in approve poll",$userId.",sh:".$pollIdHash);
+			echo 6;
+			exit();
 		}
 		$editPollSQL="UPDATE poll SET approvalStatus = ? WHERE pollIdHash= ?";
 

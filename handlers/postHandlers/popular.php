@@ -14,11 +14,14 @@ $_SESSION['jx']="998"; //1001 for latest Polls 1002 for upcoming polls 1003 for 
 //Testing Content Ends
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))

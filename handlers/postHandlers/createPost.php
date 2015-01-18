@@ -14,16 +14,17 @@
 	$_POST['_subject']="Reply!!"; */
 	//Inputs for testing ends  
 	
-	//echo $_SESSION['vj'].' '.$_SESSION['tn'];
-	//print_r($_SESSION);
-
-
-/*Code 3: SUCCESS!!
+/*
+Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 11: Session Variables unset!!*/
+Code 11: Session Variables unset!!
+
+*/
 
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -47,23 +48,29 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		// var_dump($_SESSION);
-		// echo hash("sha512",$userIdHash.SALT2).'<br/>'.$_SESSION['tn'];
-		notifyAdmin("Suspicious session variable in createPost",$userIdHash);
-		//$_SESSION=array();
-		//session_destroy();
-		echo 13;
-		exit();
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in Create post")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in Create post",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
 	}
 	else
 	{
-		//Checking if the user Exists with the given hash! Third Level protection!!
 		if(($user=getUserFromHash($userIdHash))==false)
 		{
-			//echo "a";
 			notifyAdmin("Critical Error!! in createPost!!",$userIdHash);
-			//$_SESSION=array();
-			//session_destroy();
+			$_SESSION=array();
+			session_destroy();
 			echo 13;
 			exit();
 		}

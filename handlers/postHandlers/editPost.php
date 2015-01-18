@@ -19,10 +19,14 @@ $_POST['_subject']="post subject 4"; */
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
+code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
+Code 11: Session Variables unset!!
+
 */
 
 
@@ -32,10 +36,21 @@ Code 10: MailError!!
 	//Checking the session varianles. Second Level Protection
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		notifyAdmin("Suspicious session variable in editPost",$userIdHash);
-		$_SESSION=array();
-		session_destroy();
-		echo 13;
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in editPost")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in editPost",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
 	}
 	else
 	{
@@ -53,11 +68,13 @@ Code 10: MailError!!
 			$postIdHash=$_POST['_postId'];
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
-				//Detected tampered postIdHash
-				blockUserByHash($userIdHash,"Messing with PostIdHash!! In editpost");
-				$_SESSION=array();
-				session_destroy();
-				echo 13;
+				//Detected possibly a tampered postIdHash
+				//blockUserByHash($userIdHash,"Messing with PostIdHash!! In editpost");
+				//$_SESSION=array();
+				//session_destroy();
+				notifyAdmin("Suspicious postIdHash in editPost",$userId.",sh:".$postIdHash);
+				echo 6;
+				exit();
 			}
 			else
 			{

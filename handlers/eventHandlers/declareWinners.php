@@ -16,11 +16,14 @@ require_once('../fetch.php');
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -43,7 +46,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$userIdHash=$_SESSION['vj'];
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		if(blockUserByHash($userIdHash,"Suspicious Session Variable in editEvent")>0)
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in declare Event Winners")>0)
 		{
 			$_SESSION=array();
 			session_destroy();
@@ -52,7 +55,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		}
 		else
 		{
-			notifyAdmin("Suspicious Session Variable in editEvent",$userIdHash.",sh:".$_SESSION['tn']);
+			notifyAdmin("Suspicious Session Variable in declare Event Winners",$userIdHash.",sh:".$_SESSION['tn']);
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
@@ -63,7 +66,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	{
 		if(($user=getUserFromHash($userIdHash))==false)
 		{
-			notifyAdmin("Critical Error In editEvent",$userIdHash);
+			notifyAdmin("Critical Error In declare Event Winners",$userIdHash);
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
@@ -74,27 +77,15 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$userId=$user['userId'];
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
-				if(blockUserByHash($userIdHash,"Tampering EventIdHash in editEvent",$userId.",sh:".$eventIdHash)>0)
-				{
-					$_SESSION=array();
-					session_destroy();
-					echo 14;
-					exit();
-				}
-				else
-				{
-					notifyAdmin("Suspicious eventIdHash in editEvent",$userId.",sh:".$eventIdHash);
-					$_SESSION=array();
-					session_destroy();
-					echo 13;
-					exit();
-				}
+				notifyAdmin("Suspicious postIdHash in declare Event Winners",$userId.",sh:".$eventIdHash);
+				echo 6;
+				exit();
 			}
 			$eventUserId=$event['userId'];
 			$eventTimestamp=$event['timestamp'];
 			if($eventUserId!=$userId)
 			{
-				if(blockUserByHash($userIdHash,"Illegal Attempt to Edit Event",$userId.",sh:".$eventIdHash)>0)
+				if(blockUserByHash($userIdHash,"Illegal Attempt to declare Event Winners",$userId.",sh:".$eventIdHash)>0)
 				{
 					$_SESSION=array();
 					session_destroy();
@@ -103,7 +94,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				}
 				else
 				{
-					notifyAdmin("Illegal Attempt to Edit Event",$userId.",sh:".$eventIdHash);
+					notifyAdmin("Illegal Attempt to declare Event Winners",$userId.",sh:".$eventIdHash);
 					$_SESSION=array();
 					session_destroy();
 					echo 13;
@@ -150,7 +141,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! While inserting in Create Event",$userId);
+				notifyAdmin("Conn.Error".$conn->error."! While inserting in declare Event Winners",$userId);
 				echo 12;
 				exit();
 			}

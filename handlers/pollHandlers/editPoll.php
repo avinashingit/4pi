@@ -17,11 +17,14 @@ require_once('../fetch.php');
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task or !
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -97,7 +100,7 @@ else
 		$userName=$user['name'];
 		if(($poll=getPollFromHash($pollIdHash))==false)
 		{
-			if(blockUserByHash($userIdHash,"Tampering pollIdHash in editPoll",$userId.",sh:".$pollIdHash)>0)
+			/*if(blockUserByHash($userIdHash,"Tampering pollIdHash in editPoll",$userId.",sh:".$pollIdHash)>0)
 			{
 				$_SESSION=array();
 				session_destroy();
@@ -111,11 +114,14 @@ else
 				session_destroy();
 				echo 13;
 				exit();
-			}
+			}*/
+			notifyAdmin("Suspicious postIdHash in editPoll",$userId.",sh:".$pollIdHash);
+			echo 6;
+			exit();
 		}
 		if($poll['approvalStatus']==1)
 		{
-			if(blockUserByHash($userIdHash,"Attempt To Edit anapproved poll",$userId.",sh:".$pollIdHash)>0)
+			/*if(blockUserByHash($userIdHash,"Attempt To Edit an approved poll",$userId.",sh:".$pollIdHash)>0)
 			{
 				$_SESSION=array();
 				session_destroy();
@@ -129,7 +135,11 @@ else
 				session_destroy();
 				echo 13;
 				exit();
-			}
+			}*/
+			notifyAdmin("Suspicious postIdHash in editPost",$userId.",sh:".$postIdHash);
+			echo 5;
+			exit();
+
 		}
 
 		$pollUserId=$poll['userId'];

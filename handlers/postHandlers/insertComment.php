@@ -5,19 +5,22 @@ session_start();
 	require_once('miniClasses/miniComment.php');
 	//require_once('postupdater.php');
 //testing inputs begin
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B019".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_postId']="3ade034661698c76b1e1d166e9cdb24a50e36acebdf072ddf0c8c578cc6ee7a26ed3c6ea68ac1f744f9fa443810a675bd2467ab7f1c8c2922d03a4b5a8795f9a";
 	$_POST['_personTags']="";
-	$_POST['_commentContent']="Shit! Our Names Dint Come Till now ra jaffa !!!";*/
+	$_POST['_commentContent']="People need to be patient for some time!!!";
 //testing inputs end
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -36,12 +39,21 @@ if($content!=""&&$postIdHash!="")
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
 		$combination=$userIdHash.",".$_SESSION['tn'];
-		blockUserByHash($userIdHash,"Suspicious session variable in InsertComment");
-		//notifyAdmin("Suspicious session variable in InsertComment",$combination);
-		echo 13;
-		$_SESSION=array();
-		session_destroy();
-		exit();
+		if(blockUserByHash($userIdHash,"Suspicious session variable in InsertComment")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in insertComment",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
 	}
 	else
 	{
@@ -59,10 +71,13 @@ if($content!=""&&$postIdHash!="")
 				if(($post=getPostFromHash($postIdHash))==false)
 				{
 					//Detected tampered postIdHash
-					blockUserByHash($userIdHash,"Tampering of PostIdHash Suspected!! In InsertComment.",$postIdHash);
+					/*blockUserByHash($userIdHash,"Tampering of PostIdHash Suspected!! In InsertComment.",$postIdHash);
 					$_SESSION=array();
 					session_destroy();
 					echo 14;
+					exit();*/
+					notifyAdmin("Suspicious postIdHash in insertComment",$userId.",sh:".$postIdHash);
+					echo 6;
 					exit();
 				}
 				else

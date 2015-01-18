@@ -11,11 +11,14 @@ session_start();
 //testing inputs end
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -30,10 +33,21 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
 		$combination=$userIdHash.",".$_SESSION['tn'];
-		notifyAdmin("Suspicious session variable in reportPost",$combination);
-		$_SESSION=array();
-		session_destroy();
-		echo 13;
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in reportPost")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in reportPost",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
 	}
 	else
 	{
@@ -52,11 +66,10 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
 				//Detected tampered postIdHash
-				blockUserByHash($userIdHash,"Messing with PostIdHash!! In reportost");
-				$_SESSION=array();
-				session_destroy();
-				echo 14;
-			}
+				notifyAdmin("Suspicious postIdHash in reportPost",$userId.",sh:".$postIdHash);
+				echo 6;
+				exit();
+	}
 			else
 			{
 

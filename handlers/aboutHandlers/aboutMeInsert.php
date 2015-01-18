@@ -15,6 +15,7 @@ require_once('../fetch.php');
 /*
 Code 3: SUCCESS!!
 Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!

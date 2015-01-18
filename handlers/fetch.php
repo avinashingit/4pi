@@ -1,5 +1,5 @@
 <?php
-//---Documentation---//
+//------Documentation------//
 //
 //
 //---Definitions of all Helper Functions for the whole Backend management.
@@ -7,14 +7,16 @@
 //---Email: majetyhk@gmail.com
 //
 //
-//---Documentation Ends ---//
-//
+//---Documentation Ends---//
+
+
+
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
 
-	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("../../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -258,7 +260,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	{
 		$conn = new QoB();
 		$commentTable="p".$postId."c";
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');

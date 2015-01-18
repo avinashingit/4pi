@@ -8,21 +8,16 @@ session_start();
  $_POST['_postId']="3ade034661698c76b1e1d166e9cdb24a50e36acebdf072ddf0c8c578cc6ee7a26ed3c6ea68ac1f744f9fa443810a675bd2467ab7f1c8c2922d03a4b5a8795f9a";*/
 	//Testing Inputs End
 
-/*Code 3: SUCCESS!!
-Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
-Code 12: Database ERROR!!
-Code 16: Erroneous Entry By USER!!
-Code 10: MailError!!
-Code 1: Mailed Again By an Old user.
-
-*/
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -59,10 +54,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
 				//Detected tampered postIdHash
-				blockUserByHash($userIdHash,"Messing with PostIdHash!! In MailPost");
-				$_SESSION=array();
-				session_destroy();
-				echo 13;
+				notifyAdmin("Suspicious postIdHash in mailPost",$userId.",sh:".$postIdHash);
+				echo 6;
+				exit();
 			}
 			else
 			{

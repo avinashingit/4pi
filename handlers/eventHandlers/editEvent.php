@@ -25,11 +25,14 @@ require_once('../fetch.php');
 
 /*
 Code 3: SUCCESS!!
+Code 5: Attempt to redo a already done task!
+Code 6: Content Unavailable!
 Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
+
 */
 
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
@@ -128,7 +131,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$userId=$user['userId'];
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
-				if(blockUserByHash($userIdHash,"Tampering EventIdHash in editEvent",$userId.",sh:".$eventIdHash)>0)
+				/*if(blockUserByHash($userIdHash,"Tampering EventIdHash in editEvent",$userId.",sh:".$eventIdHash)>0)
 				{
 					$_SESSION=array();
 					session_destroy();
@@ -142,7 +145,10 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					session_destroy();
 					echo 13;
 					exit();
-				}
+				}*/
+				notifyAdmin("Suspicious eventIdHash in editPevent",$userId.",sh:".$eventIdHash);
+				echo 6;
+				exit();
 			}
 			if(getEventStatus($event,1)=="Completed")
 			{
