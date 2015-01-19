@@ -9,7 +9,7 @@ $_SESSION['jx']="1001"; //1001 for latest events 1002 for upcoming events 1003 f
 	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 	$_POST['_refresh']=0;
-	$_POST['sgk']=array();*/
+	$_POST['_sgk']=array();*/
 
 //Testing Content Ends
 /*
@@ -35,7 +35,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['sgk'];
+$inputHashes=$_POST['_sgk'];
 if(count($ProcessedHashes)!=0)
 {
 	$ProcessedHashesCount=count($ProcessedHashes);
@@ -88,7 +88,7 @@ $conn=new QoB();
 			//$getLatestEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?) AND ( eventDate>= ?)";
 
 			//Code till final release with approvals
-			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR userId=?) AND ( eventDate>= ?)";
+			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?)";
 			
 			$values[0]=array($finalStudentRegex => 's');
 			$values[1]=array($userId => 's');
