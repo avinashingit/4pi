@@ -16,7 +16,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
-	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
+	require_once("../PHPMailer_v5.1/class.phpmailer.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -990,12 +990,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 			$values[1]=array($displayedNotifArray[$i] => 's');
 			for($i=0;$i<$notifCount-1;$i++)
 			{
-				$notificationReadSQL.="OR notificationIdHash= ?";
+				$notificationReadSQL.=" OR notificationIdHash= ?";
 				$values[$i+2]=array($displayedNotifArray[$i+1]=>'s');
 			}
-			$notificationReadSQL.=")";
+			$notificationReadSQL.=" )";
+			echo $notificationReadSQL;
 			$result=$conn->update($notificationReadSQL,$values);
-			if($conn->error==""&&$result!=false)
+			if($conn->error==""&&$result==true)
 			{
 				return true;
 			}
