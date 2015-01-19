@@ -199,9 +199,18 @@ Code 11: Session Variables unset!!
 							$comments="";
 							$postUserIdHash=$userIdHash;
 							$hasStarred=isThere($post['starredBy'],$userId);
+							$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+							if(file_exists($proPicLocation))
+							{
+								$proPicExists=1;
+							}
+							else
+							{
+								$proPicExists=-1;
+							}
 
 							$postObj=new miniPost($postIdHash,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,1);
+							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,1,$user['gender'],$proPicExists);
 							print_r(json_encode($postObj));
 					}
 					else{

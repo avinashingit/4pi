@@ -238,8 +238,18 @@ else
 			{
 				$optionsAndVotes[$i]=array($pollOptionsArray[$i] , (int)$optionVotesArray[$i]);
 			}
+			$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+			if(file_exists($proPicLocation))
+			{
+				$proPicExists=1;
+			}
+			else
+			{
+				$proPicExists=-1;
+			}
+
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1);
+					$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$user['gender'],$proPicExists,$user['userIdHash']);
 			print_r(json_encode($pollObj));
 		}
 		else

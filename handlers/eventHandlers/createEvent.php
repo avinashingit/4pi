@@ -233,10 +233,18 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$ts = new DateTime();
 				$ts->setTimestamp($timestamp);
 				$eventCreationTime=$ts->format(DateTime::ISO8601);
-
+				$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+				if(file_exists($proPicLocation))
+				{
+					$proPicExists=1;
+				}
+				else
+				{
+					$proPicExists=-1;
+				}
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
-				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime);
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash']);
 				print_r(json_encode($eventObj));
 			}
 			else
