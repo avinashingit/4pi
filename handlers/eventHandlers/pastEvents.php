@@ -94,7 +94,7 @@ $conn=new QoB();
 			$values[2]=array($currentDate => 'i');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND eventIdHash!=?";
+				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash!=?";
 				$values[$i+3]=array($ProcessedHashes[$i] => 's');
 			}
 			$SQLEndPart=" ORDER BY eventDate,eventTime";

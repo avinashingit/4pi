@@ -95,7 +95,7 @@ $conn=new QoB();
 			$values[2]=array($currentDate => 'i');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getLatestEventsSQL=$getlatestEventsSQL." AND eventIdHash!=?";
+				$getLatestEventsSQL=$getlatestEventsSQL." AND event.eventIdHash!=?";
 				$values[$i+3]=array($ProcessedHashes[$i] => 's');
 			}
 			$SQLEndPart="  ORDER BY timestamp DESC";
