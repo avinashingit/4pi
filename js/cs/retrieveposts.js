@@ -47,7 +47,7 @@ function checkData(data) {
 function callAfterAjax() {
     $('.postCommentIcon').click(function() {
 
-        //console.log($(this).parent().parent().parent().parent().next().find('.postComments'));
+        ////console.log($(this).parent().parent().parent().parent().next().find('.postComments'));
         $(this).parent().parent().parent().parent().next().find('.postComments').toggleClass('hidden');
         $(this).parent().parent().parent().parent().next().find('.postComments').show(500);
         /*      $(this).parent().parent().parent().parent().next().find('.loadmoreComments').toggleClass('hidden');
@@ -74,7 +74,7 @@ $(function() {
 
 function exchange(el, el2) {
 
-    // console.log(el);
+    // //console.log(el);
 
     $(el2).removeClass('fa-pencil').addClass('fa-close').attr("title", "Press Esc to cancel");
     commentDiv = $('#' + el);
@@ -106,7 +106,7 @@ function exchange2(el, el2, key) {
         var ie = document.all && !document.getElementById ? document.all : 0;
         var toObjId = /b$/.test(commentTextAreaDivId) ? commentTextAreaDivId.replace(/b$/, '') : commentTextAreaDivId + 'b';
         var toObj = ie ? ie[toObjId] : document.getElementById(toObjId);
-        // console.log($(toObj).find('.commentText').html());
+        // //console.log($(toObj).find('.commentText').html());
         if (/b$/.test(commentTextAreaDivId))
             $(toObj).find('.commentText').html(commentText);
         else {
@@ -172,7 +172,7 @@ function replaceIt(y, z, x, event, val) {
 
 function modifyPost(id, data) {
 
-    console.log(data);
+    //console.log(data);
     alert("Called");
     data = JSON.parse(data);
     var e = $('#' + id);
@@ -192,22 +192,22 @@ function editPost(ele) {
     $('#editPostModal').modal('show');
     var x = $(ele).parent().parent().parent().parent();
     var y = x.parent().attr("id");
-    //console.log(y);
+    ////console.log(y);
     $('#editPostId').html(y);
     var subject = x.find("#postSubject").html();
     // var postContent=x.find('#postContent').html();
-    // console.log(x.find('#postContent'));
+    // //console.log(x.find('#postContent'));
     if (x.find("#postContent").html().length > 300) {
         postContent = x.find('#postContent').find('.shortcontent').html();
         postContent += x.find('#postContent').find('.allcontent').html();
     } else {
         postContent = x.find('#postContent').html();
     }
-    // console.log(postContent);
+    // //console.log(postContent);
     var postSharedWith = x.find('#postSharedWith').html();
     var postValidity = x.find('#postValidity').html();
     var postId = x.parent().id;
-    //console.log(subject);
+    ////console.log(subject);
     $('#editPostModal').find('#editPostLivingTime').val(postValidity);
     $('#editPostModal').find('#editPostSharedWith').val(postSharedWith);
     $('#editPostModal').find('#editPostContent').css({
@@ -223,9 +223,9 @@ function editedPostSend() {
 
     //alert("HEll");    
     var postId = $('#editPostModal').find('#editPostId').html().trim();
-    // console.log(postId);
+    // //console.log(postId);
     var postSubject = $('#editPostSubject').val().trim();
-    //console.log(postSubject);
+    ////console.log(postSubject);
     var postContent = $('#editPostContent').val().trim();
     var done=1;
     if (postContent.length == 0) {
@@ -261,7 +261,7 @@ function editedPostSend() {
         .success(
             function(data) {
 
-                console.log(data);
+                //console.log(data);
                 data.trim();
 
                 
@@ -330,8 +330,8 @@ function createPost() {
     })
         .success(
             function(data) {
-                // console.log(data);
-                console.log(data);
+                // //console.log(data);
+                //console.log(data);
                 data = data.trim();
                 $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
                 $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
@@ -344,9 +344,9 @@ function createPost() {
                     alert("Please check the post details you have entered");
                 } else {
                     $('#createPostModal').modal('hide');
-                    //console.log(data);
+                    ////console.log(data);
                     var x = JSON.parse(data);
-                    //console.log(data);
+                    ////console.log(data);
                     postInsert("first", x);
                     callAfterAjax();
                 }
@@ -361,7 +361,6 @@ function createPost() {
 
 
 function retrieveLatestPosts(value, call) {
-    alert("jfld");
     $('.row .postMenu').find('#latestPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
 
@@ -371,11 +370,10 @@ function retrieveLatestPosts(value, call) {
         var i=0;
         $('.post').each(function(){
             posts[i]=$(this).attr("id");
-            console.log(posts[i]);
+            //console.log(posts[i]);
             i++;
         });
     }
-    console.log(posts);
 
     $.post('./handlers/postHandlers/latest.php', {
             _posts:posts,
@@ -388,8 +386,8 @@ function retrieveLatestPosts(value, call) {
 
         })
         .success(function(data) {
-            window.inView="<?php echo $_SESSION['jx'];?>";
-            console.log(data);
+            $('#inViewElement').html("999");
+            //console.log(data);
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid black'});
             $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
@@ -397,7 +395,7 @@ function retrieveLatestPosts(value, call) {
     
 
             data = data.trim();
-            // console.log(data);
+            // //console.log(data);
             if (value == "empty") {
                 // alert(value);
                 $('.post').each(function() {
@@ -411,7 +409,7 @@ function retrieveLatestPosts(value, call) {
 
             if (data != 404) {
                 $('#postEmptyMessage').html("");
-                // console.log(data);
+                // //console.log(data);
                 var ob = JSON.parse(data);
                 for (i = 0; i < ob.length; i++) {
                     postInsert('last', ob[i]);
@@ -450,14 +448,11 @@ function retrieveImportantPosts(value, call) {
     $('#loadMorePostsButton').show();
 
     var posts=[];
-    if(call==1)
-    {
-        var i=0;
-        $('.post').each(function(){
-            posts[i]=$(this).attr("id");
-            i++;
-        });
-    }
+    var i=0;
+    $('.post').each(function(){
+        posts[i]=$(this).attr("id");
+        i++;
+    });
 
     $.post('./handlers/postHandlers/important.php', {
         _posts:posts,
@@ -467,13 +462,12 @@ function retrieveImportantPosts(value, call) {
 
         })
         .success(function(data) {
-            window.inView="<?php echo $_SESSION['jx'];?>";
+            $('#inViewElement').html("997");
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
             $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
             $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'inset #D9534F 0px 3px 0 0','border-top':'1px solid #D9534F'});
             data = data.trim();
-            console.log(data);
             if (value == "empty") {
                 //alert(value);
                 $('.post').each(function() {
@@ -488,7 +482,7 @@ function retrieveImportantPosts(value, call) {
 
             if (data != 404) {
                 $('#postEmptyMessage').html("");
-                // console.log(data);
+                // //console.log(data);
                 var ob = JSON.parse(data);
                 for (i = 0; i < ob.length; i++) {
                     postInsert('last', ob[i]);
@@ -524,14 +518,12 @@ function retrievePopularPosts(value, call) {
     $('.row .postMenu').find('#popularPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
     var posts=[];
-    if(call==1)
-    {
-        var i=0;
-        $('.post').each(function(){
-            posts[i]=$(this).attr("id");
-            i++;
-        });
-    }
+    
+    var i=0;
+    $('.post').each(function(){
+        posts[i]=$(this).attr("id");
+        i++;
+    });
 
         $.post('./handlers/postHandlers/popular.php', {
             _posts:posts,
@@ -541,13 +533,13 @@ function retrievePopularPosts(value, call) {
 
         })
         .success(function(data) {
-            window.inView="<?php echo $_SESSION['jx'];?>";
+            $('#inViewElement').html("998");
             $('.row .postMenu').find('#popularPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
             $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
             $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
             data = data.trim();
-            console.log(data);
+            //console.log(data);
             if (value == "empty") {
                 //alert(value);
                 $('.post').each(function() {
@@ -562,7 +554,7 @@ function retrievePopularPosts(value, call) {
 
             if (data != 404) {
                 $('#postEmptyMessage').html("");
-                // console.log(data);
+                // //console.log(data);
                 var ob = JSON.parse(data);
                 for (i = 0; i < ob.length; i++) {
                     postInsert('last', ob[i]);
@@ -682,7 +674,7 @@ function postInsert(position, data1) {
 
     post += '<div class="col-md-5" id="postProfilePic">';
 
-    console.log(data1.profilePicExists);
+    //console.log(data1.profilePicExists);
 
     if(data1.profilePicExists==-1)
     {
@@ -1002,7 +994,7 @@ function retrieveComments(id)
     })
     .success(function(data){
         data=data.trim();
-        // console.log(data);
+        // //console.log(data);
         x=JSON.parse(data);
         $('#'+id).find('.postComments').html("");
         for(i=0;i<x.length;i++)
@@ -1111,7 +1103,7 @@ function followPost(id) {
         })
 
         .success(function(data) {
-            console.log(data);
+            //console.log(data);
             if (checkData(data) == 1) {
                 html = $('#' + id).find('.tab-pane#followUnfollow' + id + ' .btn').html();
 
@@ -1151,7 +1143,7 @@ function reportPost(id) {
         })
         .success(function(data) {
 
-            console.log(data);
+            //console.log(data);
             // alert(data);
             
             var check=checkData(data);
@@ -1175,7 +1167,7 @@ function insertCommentToPost(id, event) {
             alert("Empty comments are not allowed. :)");
             done=0;
         }
-        // console.log(commentContent);
+        // //console.log(commentContent);
         if(done==1)
         {
             $('#postArea').find('#' + id).find('.commentInsertArea').val("");
@@ -1194,10 +1186,10 @@ function insertCommentToPost(id, event) {
                 })
                 .success(function(data) {
                     //alert(data);
-                    //console.log(data);
+                    ////console.log(data);
                     /*if (checkData(data) == 1) {*/
 
-                        console.log(data);
+                        //console.log(data);
                         var x = JSON.parse(data);
                         commentInsert("first", x, id);
                         $('.comment').each(function() {
@@ -1222,7 +1214,7 @@ function editComment(postId, commentId,calslback) {
         done=0;
     }
     
-    //console.log(commentContent);
+    ////console.log(commentContent);
     if(done==1)
     {
         $.post('./handlers/postHandlers/editComment.php', {

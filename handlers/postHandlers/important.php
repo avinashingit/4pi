@@ -22,7 +22,6 @@ code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
 */
-var_dump($_SESSION);
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 {
 	echo 11;
@@ -34,10 +33,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['_postsList'];
-if(count($inputHashes)!=0)
+$ProcessedHashes=$_POST['_posts'];
+if(count($ProcessedHashes)!=0)
 {
-	$ProcessedHashes=explode(",", $inputHashes);
 	$ProcessedHashesCount=count($ProcessedHashes);
 }
 else

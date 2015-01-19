@@ -35,7 +35,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['_sgk'];
+$ProcessedHashes=$_POST['_sgk'];
 if(count($ProcessedHashes)!=0)
 {
 	$ProcessedHashesCount=count($ProcessedHashes);

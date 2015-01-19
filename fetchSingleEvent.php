@@ -46,6 +46,8 @@ function fetchSingleEvent()
 				eventInsert("first",data);
 
 			}
+
+			$('time.timeago').timeago();
 		}
 	});
 }
