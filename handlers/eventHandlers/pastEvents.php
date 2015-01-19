@@ -85,26 +85,26 @@ $conn=new QoB();
 			$currentDate=(int)$currentDate;
 			$currentTime=(int)$currentTime;
 			$finalStudentRegex=getRollNoRegex($userId);
-			//$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate<=?)";
+			//$getPastEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate<=?)";
 			
 			//Code till final release with approvals
-			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?)";
+			$getPastEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate<= ?)";
 			$values[0]=array($finalStudentRegex => 's');
 			$values[1]=array($userId => 's');
 			$values[2]=array($currentDate => 'i');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash!=?";
+				$getPastEventsSQL=$getPastEventsSQL." AND event.eventIdHash!=?";
 				$values[$i+3]=array($ProcessedHashes[$i] => 's');
 			}
 			$SQLEndPart=" ORDER BY eventDate,eventTime";
 			
 			
 			//var_dump($values);
-			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
-			//echo $getUpcomingEventsSQL;
+			$getPastEventsSQL=$getPastEventsSQL.$SQLEndPart;
+			//echo $getPastEventsSQL;
 			$displayCount=0;
-			$result=$conn->select($getUpcomingEventsSQL,$values);
+			$result=$conn->select($getPastEventsSQL,$values);
 			if($conn->error=="")
 			{
 				//Success

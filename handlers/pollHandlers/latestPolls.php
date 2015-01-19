@@ -87,7 +87,7 @@ else
 		$values[1]=array($userId => 's');
 		for($i=0;$i<$ProcessedHashesCount;$i++)
 		{
-			$getLatestPollsSQL=$getlatestPollsSQL." AND poll.pollIdHash!=?";
+			$getLatestPollsSQL=$getLatestPollsSQL." AND pollIdHash!=?";
 			$values[$i+2]=array($ProcessedHashes[$i] => 's');
 		}
 		$SQLEndPart=" ORDER BY timestamp DESC";
