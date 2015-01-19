@@ -3,14 +3,14 @@
         class studentSearchResult
             {
                 public $userId;
-                public $name;
+                public $uname;
                 public $userIdHash;
                 public $gender;
             
                 public function __construct($userId, $name, $userIdHash, $gender)
                     {
                         $this->userId = $userId;
-                        $this->name = $name;
+                        $this->uname = $name;
                         $this->userIdHash = $userIdHash;
                         $this->gender=$gender;
                     }

@@ -27,8 +27,7 @@
 	$groups=explode(",",$row->clubsInvolved);
 
 	$exists=0;
-
-	if(file_exists("/4pi/img/proPics/".$row->userIdHash."jpg"))
+	if(file_exists("img/proPics/".$row->userIdHash."jpg"))
 	{
 		$exists=1;
 	}
@@ -65,7 +64,7 @@ echo '
 		}
 	}
 
-	echo '	<h4 class="text-center" ><a title="'.$row->name.'"href="http://localhost/4pi/'.$row->userId.'" style="color:white;" >'.substr($row->name,0,18).'...</a></h4>
+	echo '	<h4 class="text-center" ><a title="'.ucwords(strtolower($row->name)).'"href="http://localhost/4pi/'.$row->userId.'" style="color:white;" >'.ucwords(strtolower(substr($row->name,0,18))).'...</a></h4>
 
 	</div>
 
@@ -108,13 +107,13 @@ echo '
 	<!--<a href="http://localhost/frontEnd/executiveWing/"><button style="background:linear-gradient(#5541BA, #503DB0) !important;color:white;" class="btn btn-lg">People</button></a>-->
 	';*/
 
-	echo '<p style="padding:10px;border-top:1px solid #fff;border-bottom:1px solid #fff;"><br/>This is a beta version. Please try to deploy and report the bug to the admin via feedback.<br/>';
+	echo '<p style="padding:10px;border-top:1px solid #fff;border-bottom:1px solid #fff;"><br/>This is a beta version. Please try to deploy and report the bug to the admin via <a style="cursor:pointer" onclick="$(\'#feedbackModal\').modal(\'show\');">feedback</a>.<br/>';
 	echo '<br/>
 	<table style="text-align:center" >
 		<tr>
 			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  target="_blank" class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip(\'show\');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
 			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  target="_blank"   data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Feedback"  href="#feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" onclick="$(\'#feedbackModal\').modal(\'show\');"><a  target="_blank"   data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
 			
 		</tr>
 		
@@ -169,4 +168,77 @@ $(document).ready(function(){
     }
 });
 	
+	function sendFeedback()
+	{
+		var content=$('#feedbackModal').find('#feedbackInput').val().trim();
+		if(content.length==0)
+		{
+			alert("We don't accept empty feedback.");
+		}
+		else
+		{
+			$('#feedbackModal').find('#feedbackSendButton').html("Sending").attr("onclick","");
+			$.post('/4pi/handlers/insertFeedback.php',{
+				_feedback:content
+			})
+			.error(function(){
+				alert("Server overload. Please try again :(");
+				$('#feedbackModal').find('#feedbackSendButton').html("Send").attr("onclick","sendFeedback();");
+			})
+			.success(function(data){
+				
+				if(checkData(data)==1)
+				{
+					$('#feedbackModal').modal('hide');
+					alert("Thanks for your feedback.");
+					$('#feedbackModal').find('#feedbackSendButton').html("Send").attr("onclick","sendFeedback();");
+				}
+				else
+				{
+					$('#feedbackModal').find('#feedbackSendButton').html("Send").attr("onclick","sendFeedback();");
+				}
+				
+			});
+		}
+	}
 </script>
+
+<div class="modal fade slow" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+
+	  	<div class="modal-dialog">
+
+	    	<div class="modal-content">
+
+		      	<div class="modal-header">
+
+	        		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+	        		<h4 class="modal-title"><i class="fa fa-envelope"></i> &nbsp;Feedback&nbsp;&nbsp;</h4>
+
+	      		</div>
+
+		      	<div class="modal-body">
+
+	      		    <form role="form">
+
+				  		<div class="form-group">
+
+				   			<label for="feedbackInput">Message</label>
+
+				    		<textarea type="text" name="feedbackInput" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="feedbackInput"></textarea>
+
+				  		</div>
+					
+					</form>
+
+					<br/>
+
+					<button  id="feedbackSendButton" onclick="sendFeedback();" class="btn btn-primary">Send</button>
+
+				</div>
+				
+			</div>
+
+		</div>
+
+	</div> <!-- end modals -->

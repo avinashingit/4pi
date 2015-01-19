@@ -574,9 +574,13 @@ function latestEventsFetch(value,call)
 	})
 	.error(function(data){
 		alert("Server overload error. Please try again. :(");
-			$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
+		$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 	})
 	.success(function(data){
+		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
+		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid black'});
+            $('.row .eventMenu').find('#upcomingEventsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
+            $('.row .eventMenu').find('#eventWinnersButton').css({'box-shadow':'inset #D9534F 0px 3px 0 0','border-top':'1px solid #D9534F'});
 		if(value=="empty")
 		{
 			$('.event').each(function(){
@@ -605,6 +609,7 @@ function latestEventsFetch(value,call)
 			}
 
 			$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
+			$('#loadMoreEventsButton').hide();
 			
 		}
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
@@ -631,6 +636,10 @@ function upcomingEventsFetch(value,call)
 		alert("Server overload error. Please try again. :(");
 	})
 	.success(function(data){
+		$('.row .eventMenu').find('#upcomingEventsButton').find('i').removeClass('fa-spin');
+		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
+            $('.row .eventMenu').find('#upcomingEventsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
+            $('.row .eventMenu').find('#eventWinnersButton').css({'box-shadow':'inset #D9534F 0px 3px 0 0','border-top':'1px solid #D9534F'});
 		data=data.trim();
 
 		if(value=="empty")
@@ -657,6 +666,7 @@ function upcomingEventsFetch(value,call)
 			else
 			{
 				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
+				$('#loadMoreEventsButton').hide();
 			}
 		}
 		$('.timeago').timeago();
@@ -678,12 +688,16 @@ function pastCompetitionsFetch(value,call)
 
 	$.post('/4pi/handlers/eventHandlers/pastEvents.php',{
 		_call:call,
-		-sgk:eventsCurrent
+		_sgk:eventsCurrent
 	})
 	.error(function(data){
 		alert("Server overload error. Please try again. :(");
 	})
 	.success(function(data){
+		$('.row .eventMenu').find('#eventWinnersButton').find('i').removeClass('fa-spin');
+		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
+            $('.row .eventMenu').find('#upcomingEventsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
+            $('.row .eventMenu').find('#eventWinnersButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
 		data=data.trim();
 		console.log(data);
 		if(value=="empty")
@@ -708,6 +722,7 @@ function pastCompetitionsFetch(value,call)
 			else
 			{
 				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
+				$('#loadMoreEventsButton').hide();
 			}
 		}
 	});

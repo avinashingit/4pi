@@ -356,3 +356,11 @@
 
 [2015-01-19 00:43:45             ::1                   Asia/Kolkata] 0      $$$$$$
 
+[2015-01-19 13:26:57             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') VALUES (?,?)' at line 1$$$
+
+[2015-01-19 17:19:16             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?OR notificationIdHash= ?OR notificationIdHash= ?OR notificationIdHash= ?OR noti' at line 1$$$
+
+[2015-01-19 17:19:38             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?OR notificationIdHash= ?OR notificationIdHash= ?OR notificationIdHash= ?OR noti' at line 1$$$
+
+[2015-01-19 17:19:57             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?OR notificationIdHash= ?OR notificationIdHash= ?OR notificationIdHash= ?OR noti' at line 1$$$
+

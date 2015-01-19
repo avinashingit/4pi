@@ -5,9 +5,9 @@ require_once('./../QOB/qob.php');
 require_once('fetch.php');
 //$_SESSION['jx']="999"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B014".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B014".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_presentNotifications']=array('4703b990c16af860e82f0323cfce186ab13e849364bebf262aefaa7ac4c0cb583d46e56c8161dc7922292b399cf9534f78dd5c4c102fc2421ac7b8d237d822b5','17077654b04d85cc3be5a1553ff0cf739594fdf6cc31b35d6e350aa4d7b8736933dc580559f585c3e2c6c3d3aa1cefe560c595d6718f94a0fc02dfa510e8a1de');
+	$_POST['_presentNotifications']=array();*/
 
 //Testing Content Ends
 /*
@@ -33,8 +33,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 //$refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$ProcessedHashes=$_POST['_presentNotifications'];
-var_dump($ProcessedHashes);
+$ProcessedHashes=$_POST['_readNotifications'];
+// var_dump($ProcessedHashes);
 if(count($ProcessedHashes)!=0)
 {
 	// $ProcessedHashes=explode(",", $inputHashes);
@@ -80,13 +80,13 @@ else
 	{
 		$userId=$user['userId'];
 		$result=readNotifications($userId,$ProcessedHashes);
-		if($result==true)
+		if($result!=false)
 		{
-			echo 3;
+			echo 12;
 		}
 		else
 		{
-			echo 12;
+			echo 3;
 		}
 	}
 }

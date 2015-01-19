@@ -64,3 +64,31 @@
 
 [2014-12-05 15:51:49       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'eventStatus = ? WHERE eventIdHash=?' at line 1$$$
 
+[2015-01-19 17:40:58             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:41:13             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:41:25             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:44:41             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:44:43             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:44:45             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY eventDate,eventTime' at line 1$$$
+
+[2015-01-19 17:44:50             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:44:52             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY eventDate,eventTime' at line 1$$$
+
+[2015-01-19 17:44:56             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY eventDate,eventTime' at line 1$$$
+
+[2015-01-19 17:45:01             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:46:53             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:55:46             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-19 17:55:49             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY eventDate,eventTime' at line 1$$$
+
+[2015-01-19 17:55:51             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY eventDate,eventTime' at line 1$$$
+

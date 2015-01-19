@@ -1,10 +1,10 @@
 <script>
 var inView="<?php echo $_SESSION['jx'];?>";
 </script>
-
+<script src="/4pi/js/cs/retrieveEvents.js"></script>
 <div class="col-md-7" id="events">
 	
-	<div class="row eventMenu topMenu" style="z-index:1040;margin-bottom:20px;">
+	<div class="row eventMenu topMenu" style="z-index:2;margin-bottom:20px;">
 	
 		<div class="btn-group btn-group-justified" style="padding:10px;">
 			
@@ -16,7 +16,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		  	<div class="btn-group">
 			
-			    <button type="button" id="latestEventsButton" onclick="latestEventsFetch('empty',-1);" class="btn btn-info"><a style="color:white;" ><i class="fa fa-calendar"></i>&nbsp;Latest</a></button>
+			    <button type="button" id="latestEventsButton" onclick="latestEventsFetch('empty',-1);" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-calendar"></i>&nbsp;Latest</a></button>
 		  	
 		  	</div>
 
@@ -28,7 +28,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		  	<div class="btn-group">
 			
-			    <button type="button" id="eventWinnersButton" onclick="pastCompetitionsFetch('empty',-1);" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-check"></i>&nbsp;Past Competitions</a></button>
+			    <button type="button" id="eventWinnersButton" onclick="pastCompetitionsFetch('empty',-1);" class="btn btn-danger"><a style="color:white;" ><i class="fa fa-check"></i>&nbsp;Past Competitions</a></button>
 		  	
 		  	</div>
 			
@@ -444,7 +444,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 </style>
 
-<script src="/4pi/js/cs/retrieveEvents.js"></script>
+
 
 <style>
 .clockpicker-popover{

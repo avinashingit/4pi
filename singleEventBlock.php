@@ -1,3 +1,4 @@
+
 <div class="col-md-7" id="events">
 
 	<div class="modal fade slow" id="eventCreateModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -384,7 +385,7 @@
 
 </style>
 
-<script src="/4pi/js/cs/retrieveEvents.js"></script>
+
 
 <style>
 .clockpicker-popover{
