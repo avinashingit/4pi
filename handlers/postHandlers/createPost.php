@@ -291,8 +291,17 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 						$hasStarred = -1;
 						$comments="";
 						$isOwner=1;
-							$postObj=new miniPost($postIdHash,$rawsharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,$isOwner);
+						$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+						if(file_exists($proPicLocation))
+						{
+							$proPicExists=1;
+						}
+						else
+						{
+							$proPicExists=-1;
+						}
+						$postObj=new miniPost($postIdHash,$rawsharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
+						$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,$isOwner,$user['gender'],$proPicExists);
 							
 							
 						

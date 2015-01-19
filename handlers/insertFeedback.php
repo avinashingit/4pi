@@ -30,58 +30,58 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 }
 
 
-	//Actual InsertFeedback Code Starts
-	$feedback=$_POST['_feedback'];
-	$conn= new QoB();
-	$userIdHash=$_SESSION['vj'];
-	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
+//Actual InsertFeedback Code Starts
+$feedback=$_POST['_feedback'];
+$conn= new QoB();
+$userIdHash=$_SESSION['vj'];
+if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
+{
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in InsertFeedback")>0)
 	{
-		if(blockUserByHash($userIdHash,"Suspicious Session Variable in InsertFeedback")>0)
-		{
-			$_SESSION=array();
-			session_destroy();
-			echo 14;
-			exit();
-		}
-		else
-		{
-			notifyAdmin("Suspicious Session Variable in InsertFeedback",$userIdHash.",sh:".$_SESSION['tn']);
-			$_SESSION=array();
-			session_destroy();
-			echo 13;
-			exit();
-		}
+		$_SESSION=array();
+		session_destroy();
+		echo 14;
+		exit();
 	}
 	else
 	{
-		if(($user=getUserFromHash($userIdHash))==false)
+		notifyAdmin("Suspicious Session Variable in InsertFeedback",$userIdHash.",sh:".$_SESSION['tn']);
+		$_SESSION=array();
+		session_destroy();
+		echo 13;
+		exit();
+	}
+}
+else
+{
+	if(($user=getUserFromHash($userIdHash))==false)
+	{
+		notifyAdmin("Critical Error In InsertFeedback",$userIdHash);
+		$_SESSION=array();
+		session_destroy();
+		echo 13;
+		exit();
+	}
+	else
+	{
+		$userId=$user['userId'];
+					
+		$insertFeedbackSQL="INSERT INTO feedback(userId,feedback,) VALUES (?,?)";
+		$values[0]=array($userId => 's');
+		$values[1]=array($feedback => 's');
+
+		$result=$conn->insert($insertFeedbackSQL,$values);
+		if($conn->error==""&&$result==true)
 		{
-			notifyAdmin("Critical Error In InsertFeedback",$userIdHash);
-			$_SESSION=array();
-			session_destroy();
-			echo 13;
-			exit();
+			//Success
+			echo 3;
 		}
 		else
 		{
-			$userId=$user['userId'];
-						
-			$insertFeedbackSQL="INSERT INTO feedback(userId,feedback,) VALUES (?,?)";
-			$values[0]=array($userId => 's');
-			$values[1]=array($feedback => 's');
-
-			$result=$conn->insert($insertFeedbackSQL,$values);
-			if($conn->error==""&&$result==true)
-			{
-				//Success
-				echo 3;
-			}
-			else
-			{
-				notifyAdmin("Conn.Error".$conn->error."! In InsertFeedback",$userId);
-				echo 12;
-				exit();
-			}
+			notifyAdmin("Conn.Error".$conn->error."! In InsertFeedback",$userId);
+			echo 12;
+			exit();
 		}
 	}
+}
 ?>
