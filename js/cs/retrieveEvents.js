@@ -577,6 +577,7 @@ function latestEventsFetch(value,call)
 		$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 	})
 	.success(function(data){
+		var inView="<?php echo $_SESSION['jx'];?>";
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
 		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid black'});
             $('.row .eventMenu').find('#upcomingEventsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
@@ -636,6 +637,7 @@ function upcomingEventsFetch(value,call)
 		alert("Server overload error. Please try again. :(");
 	})
 	.success(function(data){
+		var inView="<?php echo $_SESSION['jx'];?>";
 		$('.row .eventMenu').find('#upcomingEventsButton').find('i').removeClass('fa-spin');
 		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
             $('.row .eventMenu').find('#upcomingEventsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
@@ -694,6 +696,7 @@ function pastCompetitionsFetch(value,call)
 		alert("Server overload error. Please try again. :(");
 	})
 	.success(function(data){
+		var inView="<?php echo $_SESSION['jx'];?>";
 		$('.row .eventMenu').find('#eventWinnersButton').find('i').removeClass('fa-spin');
 		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
             $('.row .eventMenu').find('#upcomingEventsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});

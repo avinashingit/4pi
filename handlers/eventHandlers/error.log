@@ -94,3 +94,5 @@
 
 [2015-01-19 18:23:39             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
 
+[2015-01-19 18:35:52             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
