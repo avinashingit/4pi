@@ -568,6 +568,7 @@ function latestEventsFetch(value,call)
 		eventsCurrent[i]=$(this).attr("id");
 		i++;
 	});
+	// console.log(eventsCurrent);
 	$.post('/4pi/handlers/eventHandlers/latestEvents.php',{
 		_sgk:eventsCurrent,
 		_refresh:call
@@ -588,14 +589,14 @@ function latestEventsFetch(value,call)
 				$(this).remove();
 			});
 		}
-		//console.log(data);
+		// console.log(data);
 		data=data.trim();
 
 		if(checkData(data)==1)
 		{
 			if(data!=404)
 			{
-				var x=JSON.parse(data);
+				// var x=JSON.parse(data);
 				// //console.log(x.length);
 				for (i=0;i<x.length;i++)
 				{

@@ -110,3 +110,27 @@
 
 [2015-01-19 21:32:35             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
 
+[2015-01-19 23:20:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:21:44             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:21:57             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:22:10             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:22:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:23:00             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:23:32             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:27:56             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=? ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:28:19             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=? ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:28:39             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=? ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:28:58             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=? ORDER BY timestamp DESC' at line 1$$$
+
+[2015-01-19 23:33:44             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=? ORDER BY timestamp DESC' at line 1$$$
+

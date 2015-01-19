@@ -36,6 +36,7 @@ $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
 $ProcessedHashes=$_POST['_sgk'];
+//var_dump($ProcessedHashes);
 if(count($ProcessedHashes)!=0)
 {
 	$ProcessedHashesCount=count($ProcessedHashes);
@@ -44,7 +45,7 @@ else
 {
 	$ProcessedHashesCount=0;
 }
-
+//echo $ProcessedHashesCount;
 $conn=new QoB();
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
@@ -88,17 +89,17 @@ $conn=new QoB();
 			//$getLatestEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?) AND ( eventDate>= ?)";
 
 			//Code till final release with approvals
-			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?)";
+			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND eventDate>= ?";
 			
 			$values[0]=array($finalStudentRegex => 's');
 			$values[1]=array($userId => 's');
 			$values[2]=array($currentDate => 'i');
 			for($i=0;$i<$ProcessedHashesCount;$i++)
 			{
-				$getLatestEventsSQL=$getlatestEventsSQL." AND event.eventIdHash!=?";
+				$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash!=?";
 				$values[$i+3]=array($ProcessedHashes[$i] => 's');
 			}
-			$SQLEndPart="  ORDER BY timestamp DESC";
+			$SQLEndPart=" ORDER BY timestamp DESC";
 			
 			//var_dump($values);
 			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;

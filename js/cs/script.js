@@ -32,7 +32,7 @@ function userLogin(){
 		
 		.success(function (data){
 		//alert("HAI");
-		//alert(data);
+		// alert(data);
 		data = data.trim();
 		//alert(data);
 		////alert(data);
@@ -40,6 +40,14 @@ function userLogin(){
 			if(data=="-1")
 			{
 				$('#loginError').html("Username or password wrong!!!");
+			}
+			else if(data=="9")
+			{
+				alert("Hey, don't you know that you are blocked??Contact administrator");
+			}
+			else if(data=="22")
+			{
+				alert("Server overload. Please try again. :(");
 			}
 			else if(data=="1")
 			{

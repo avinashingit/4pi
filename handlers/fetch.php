@@ -18,7 +18,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
-
+	require_once("/../QOB/qob.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -106,7 +106,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	        }
 	    }
 	    $OsAndBrowser=$browser." On ".$os_platform;
-		$LogDetailsSQL="INSERT INTO loginDetails (userId,osbrowser) VALUES(?,?)";
+		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser) VALUES(?,?)";
 		$values[0]=array($userId => 's');
 		$values[1]=array($OsAndBrowser => 's');
 		$result=$conn->insert($LogDetailsSQL,$values);
@@ -128,7 +128,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$conn=new QoB();
 		$timestamp=time();
 		$logoutTime=toTimeAgoFormat($timestamp);
-		$logoutLogSQL="UPDATE loginLog SET logoutTime= ? WHERE logId=?";
+		$logoutLogSQL="UPDATE loginlog SET logoutTime= ? WHERE logId=?";
 		$values[0]=array($logoutTime => 's');
 		$values[1]=array($logId => 'i');
 		$result=$conn->update($logoutLogSQL,$values);
