@@ -92,3 +92,5 @@
 
 [2015-01-19 17:55:51             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY eventDate,eventTime' at line 1$$$
 
+[2015-01-19 18:23:39             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+

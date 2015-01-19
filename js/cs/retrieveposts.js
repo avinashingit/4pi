@@ -363,6 +363,7 @@ function createPost() {
 function retrieveLatestPosts(value, call) {
 
     $('.row .postMenu').find('#latestPostsButton').find('i').addClass('fa-spin');
+    $('#loadMorePostsButton').show();
 
     var posts=[];
     if(call==1)
@@ -374,14 +375,15 @@ function retrieveLatestPosts(value, call) {
             i++;
         });
     }
+    console.log(posts);
 
     $.post('./handlers/postHandlers/latest.php', {
-        _posts:posts,
-        _postOffset: 5,
-        _call: call,
-        dataType: "json",
-        contentType: 'application/json'
-    })
+            _posts:posts,
+            _postOffset: 5,
+            _call: call,
+            dataType: "json",
+            contentType: 'application/json'
+        })
         .error(function() {
 
         })
@@ -445,6 +447,7 @@ function retrieveLatestPosts(value, call) {
 function retrieveImportantPosts(value, call) {
 
     $('.row .postMenu').find('#importantPostsButton').find('i').addClass('fa-spin');
+    $('#loadMorePostsButton').show();
 
     var posts=[];
     if(call==1)
@@ -519,7 +522,7 @@ function retrieveImportantPosts(value, call) {
 
 function retrievePopularPosts(value, call) {
     $('.row .postMenu').find('#popularPostsButton').find('i').addClass('fa-spin');
-
+    $('#loadMorePostsButton').show();
     var posts=[];
     if(call==1)
     {
