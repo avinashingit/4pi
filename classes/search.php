@@ -29,7 +29,7 @@
                     {
                         $this->postIdHash = $postIdHash;
                         $this->postSubject = $postSubject;
-                        $this->postOwnerHash = $postOwnerName;
+                        $this->postOwnerHash = $postOwnerHash;
                         $this->postOwnerName = $postOwnerName;
                     }
 

@@ -77,7 +77,7 @@ echo '
 
 	<br/>';
 
-	echo '
+	/*echo '
 
 	<div id="userGroups">
 
@@ -106,32 +106,35 @@ echo '
 	<br/><br/>
 	<div class="text-center">
 	<!--<a href="http://localhost/frontEnd/executiveWing/"><button style="background:linear-gradient(#5541BA, #503DB0) !important;color:white;" class="btn btn-lg">People</button></a>-->
-	
-	<table align="center" >
-		<tr>
-			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip(\'show\');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Feedback"  href="#feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
-			
-		</tr>
-		
-		<tr>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="About"  onmouseover="$(this).tooltip(\'show\');" class="blcs" title="About"  href="/4pi/about/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-info-circle fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="WebOps"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"  href="/4pi/team/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-users fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a  data-toggle="tooltip"  title="Idea Bank"  onmouseover="$(this).tooltip(\'show\');" class=" blcs" title="Idea Bank" href="/4pi/ideaBank/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-exclamation fa-2x"></i></td>
-			
-		</tr>
-		
-		
-		
-		
-		
-	</table>
-	
-	
+	';*/
 
-	</div>
-	<br/><br/>
+	echo '<p style="padding:10px;border-top:1px solid #fff;border-bottom:1px solid #fff;"><br/>This is a beta version. Please try to deploy and report the bug to the admin via feedback.<br/>';
+	echo '<br/>
+	<table style="text-align:center" >
+		<tr>
+			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  target="_blank" class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip(\'show\');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
+			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a  target="_blank"   data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Feedback"  href="#feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
+			
+		</tr>
+		
+		<tr>
+			<td style="width:70px;height:70px;color:white;" ><a  target="_blank"   data-toggle="tooltip"  title="About"  onmouseover="$(this).tooltip(\'show\');" class="blcs" title="About"  href="/4pi/about/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-info-circle fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="WebOps"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"  href="/4pi/team/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-users fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Idea Bank"  onmouseover="$(this).tooltip(\'show\');" class=" blcs" title="Idea Bank" href="/4pi/ideaBank/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-exclamation fa-2x"></i></td>
+			
+		</tr>
+		
+		
+		
+		
+		
+	</table>';
+	
+	
+// echo '</div>';
+	
+	echo '<br/><br/>
 
 </div>
 

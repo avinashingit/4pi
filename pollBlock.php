@@ -179,9 +179,9 @@
 					    			
 					    			<input type="text" name="pollOptions" class="inputOption form-control input-sm" style="background-color:white !important;border-radius:0px;"placeholder="Option 2"></textarea>
 
-					    			<span class="input-group-addon" id="addOption">
+					    			<span style="cursor:pointer;" class="input-group-addon" onclick="createPollAddInput();" id="addOption">
 
-										<i class="fa fa-plus" onclick="createPollAddInput();"></i>
+										<i class="fa fa-plus" ></i>
 
 					    			</span>
 
@@ -228,7 +228,7 @@
 
 		<div class="text-center">
 
-			<button class="btn btn-lg btn-success" id="loadMorePollsButton" onclick="fetchLatestPolls(1,'noempty');">Load more</button>;
+			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMorePollsButton" onclick="fetchLatestPolls(1,'noempty');">Load more</button>;
 
 		</div>
 

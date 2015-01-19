@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('../QOB/qob.php');
+require_once('fetch.php');
 
 /*
 TO FRONT END DEVELOPER
@@ -26,7 +28,7 @@ Array[3] = null (emtpy)
  */
 
 
-$_POST['_inputVal']="the";
+// $_POST['_inputVal']="the";
 
 
 if(isset($_SESSION['vj']))
@@ -53,23 +55,36 @@ if(isset($_SESSION['vj']))
                         if($flag)
                             $outputString = "*".$inputString."*";
 
+                        $user=getUserFromHash($_SESSION['vj']);
+
+
                         $values[0] = array($outputString=>"s");
-                        $values[1] = array($outputString=>"s");
+                        $values[1] = array($outputString=>"s"); 
                         $values[2] = array($outputString=>"s");
                         $values[3] = array($outputString=>"s");
 
-                        $query1 = "select name, userId, userIdHash, gender from users where (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode)) desc limit 2 offset 0";
+                        $values1[0] = array($outputString=>"s");
+                        $values1[1] = array($outputString=>"s");
+                        $values1[2] = array(getRollNoRegex($user['userId'])=>'s'); 
+                        $values1[3] = array($outputString=>"s");
+                        $values1[4] = array($outputString=>"s");
 
-                        $query2 = "select P.postIdHash, P.subject, U.name as userName, U.userIdHash as userIdHash from post as P, users as U where ((match(P.subject) against (? in boolean mode)) or (match(P.content) against (? in boolean mode))) and (P.userId=U.userId) order by (match(P.subject) against (? in boolean mode))+(match(P.content) against (? in boolean mode)) desc limit 2 offset 0";
+                        $query1 = "select name, userId, userIdHash, gender from users where  (match(name) against (? in boolean mode)) or (match(userId) against (? in boolean mode)) order by (match(name) against (? in boolean mode))+(match(userId) against (? in boolean mode))  desc limit 2 offset 0";
 
-                        $query3 = "select eventName, eventIdHash from event where (match(eventName) against (? in boolean mode)) or (match(content) against (? in boolean mode)) order by (match(eventName) against (? in boolean mode))+(match(content) against (? in boolean mode)) desc limit 2 offset 0";
+                        $query2 = "select P.postIdHash, P.subject, U.name as userName, U.userIdHash as userIdHash from post as P, users as U where ((match(P.subject) against (? in boolean mode)) or (match(P.content) against (? in boolean mode))) and (P.userId=U.userId) AND P.sharedWith REGEXP ? order by (match(P.subject) against (? in boolean mode))+(match(P.content) against (? in boolean mode)) desc limit 2 offset 0";
 
-                        $query4 = "select pollIdHash, question from poll where (match(question) against (? in boolean mode)) or (match(options) against (? in boolean mode)) order by (match(question) against (? in boolean mode))+(match(options) against (? in boolean mode)) desc limit 2 offset 0";
+                        $query3 = "select eventName, eventIdHash from event where (match(eventName) against (? in boolean mode)) or (match(content) against (? in boolean mode)) AND sharedWith REGEXP ? order by (match(eventName) against (? in boolean mode))+(match(content) against (? in boolean mode)) desc limit 2 offset 0";
+
+                        $query4 = "select pollIdHash, question from poll where (match(question) against (? in boolean mode)) or (match(options) against (? in boolean mode)) AND sharedWith REGEXP ? order by (match(question) against (? in boolean mode))+(match(options) against (? in boolean mode)) desc limit 2 offset 0";
 
 
                         require_once("../QOB/qob.php");
                         $qob = new QOB();
                         $returnResults=array();
+                        $returnResults[0]=array();
+                        $returnResults[1]=array();
+                        $returnResults[2]=array();
+                        $returnResults[3]=array();
                         
                           // TO FETCH STUDENT SEARCH RESULTS   
                         $result = $qob->select($query1, $values);
@@ -109,7 +124,7 @@ if(isset($_SESSION['vj']))
 
                         
                             // TO FETCH POST SEARCH RESULTS   
-                        $result = $qob->select($query2, $values);
+                        $result = $qob->select($query2, $values1);
                         
                         if($qob->error=="")
                             {
@@ -120,6 +135,8 @@ if(isset($_SESSION['vj']))
                                         while($record = $qob->fetch($result))
                                             {
                                                 $resultObj = new postSearchResult($record['postIdHash'], $record['subject'], $record['userIdHash'], $record['userName']);
+
+                                                var_dump($resultObj);
                                                 $postSearchResults[] = $resultObj;
                                                 $count++;
                                             }
@@ -143,7 +160,7 @@ if(isset($_SESSION['vj']))
 
                         
                         //  TO FETCH EVENT SEARCH RESULTS   
-                        $result = $qob->select($query3, $values);
+                        $result = $qob->select($query3, $values1);
                         
                         if($qob->error=="")
                             {
@@ -182,7 +199,7 @@ if(isset($_SESSION['vj']))
 
                         
                         //   TO FETCH POLL SEARCH RESULTS   
-                        $result = $qob->select($query4, $values);
+                        $result = $qob->select($query4, $values1);
                         
                         if($qob->error=="")
                             {
@@ -192,7 +209,7 @@ if(isset($_SESSION['vj']))
                                         $count=0;
                                         while($record = $qob->fetch($result))
                                             {
-                                                $resultObj = new pollSearchResult($record['pollIdHash'], $record['pollDescription']);
+                                                $resultObj = new pollSearchResult($record['pollIdHash'], $record['question']);
                                                 $pollSearchResults[] = $resultObj;
                                                 $count++;
                                             }
@@ -206,7 +223,7 @@ if(isset($_SESSION['vj']))
                             }
                         else
                             {
-                               // echo $qob->error;
+                               echo $qob->error;
                                 echo '133'.'po';//database error
                             }
                              // TO FETCH POLL SEARCH RESULTS   */

@@ -42,7 +42,7 @@
 	{
 		var littlePost="";
 
-		littlePost+='<a href="http://localhost/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-envelope"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>'
+		littlePost+='<a href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-envelope"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>'
 	
 		$('#rightBlock1').find('ul').append(littlePost);
 
@@ -52,7 +52,7 @@
 	{
 		var littleEvent="";
 
-		littleEvent+='<a href="http://localhost/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>'
+		littleEvent+='<a href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>'
 	
 		$('#rightBlock2').find('ul').append(littleEvent);
 
@@ -62,7 +62,7 @@
 	{
 		var littlePoll="";
 
-		littlePoll+='<a href="http://localhost/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>'
+		littlePoll+='<a href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>'
 	
 		$('#rightBlock3').find('ul').append(littlePoll);
 
@@ -148,30 +148,21 @@
 		fetchLittlePolls();
 	});
 
-	/*setInterval(function(){
+	setInterval(function(){
 		fetchLittlePosts();
 		fetchLittleEvents();
 		fetchLittlePolls();
-	},5000);*/
+	},10000);
 
 
 
 </script>
 
-
-
-
-
-
-
-
-
-
 <div class="col-md-3" id="rightBlock" style="color:white;">
 
 	<div class="row panel" id="rightBlock1" >
 
-		<a href="newsfeed.php" style="color:white;"><div class="panel-heading text-center cursorPointer " style="font-size:18px;"><i class="fa fa-bank"></i>&nbsp;Posts</div></a>
+		<a href="newsfeed.php" style="color:white;"><div class="panel-heading text-center cursorPointer " style="font-size:18px;"><i class="fa fa-list-ul"></i>&nbsp;Posts</div></a>
 
 			<ul class="list-group">
 
@@ -179,49 +170,43 @@
 
 	</div>
 
-	<br/>
-
 	<div class=" row panel panel-success" id="rightBlock2" >
 
-		<a href="events.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-gears"></i>&nbsp;Events</div></a>
+		<a href="events.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-calendar"></i>&nbsp;Events</div></a>
 
 			<ul class="list-group">
 
 		  	</ul>
 
 	</div>
-
-	<br/>
 
 	<div class="row panel panel-info"  id="rightBlock3">
 
-		<a href="polls.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-cubes"></i>&nbsp;Polls</div></a>
+		<a href="polls.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-pie-chart"></i>&nbsp;Polls</div></a>
 
 			<ul class="list-group">
 
 		  	</ul>
 
 	</div>
-
-	<br/>
 
 	<div class="btn-group btn-group-justified" id="rightBox">
 
 	  <div class="btn-group">
 
-	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-bank" title="Events"></i></button></a>
+	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-list-ul" title="Events"></i></button></a>
 
 	  </div>
 
 	  <div class="btn-group">
 
-	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-gears" title="Threads"></i></button></a>
+	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-calendar" title="Threads"></i></button></a>
 
 	  </div>
 
 	  <div class="btn-group">
 
-	    <a href="#rightBlock3"><button type="button" class="btn" id="miniRightBlock3"><i style="color:white;" class="fa fa-cubes" title="Polls"></i></button></a>
+	    <a href="#rightBlock3"><button type="button" class="btn" id="miniRightBlock3"><i style="color:white;" class="fa fa-pie-chart" title="Polls"></i></button></a>
 
 	  </div>
 
@@ -230,3 +215,13 @@
 </div>
 
 <!-- end right block code -->
+
+<style>
+
+.list-group-item
+{
+	padding:6px !important;
+}
+
+
+</style>

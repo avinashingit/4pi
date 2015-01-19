@@ -402,7 +402,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		<div class="text-center">
 
-			<button class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>;
+			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>;
 
 		</div>
 

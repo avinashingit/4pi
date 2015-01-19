@@ -56,7 +56,7 @@ else
 		{
 			//Success
 			$littleEventsObjectArray=array();
-			while(($event=$conn->fetch($result))&&($displayCount<=2))
+			while(($event=$conn->fetch($result))&&($displayCount<=3))
 			{
 				if($event['eventName']=="")
 				{
