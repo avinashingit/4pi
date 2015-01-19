@@ -48,9 +48,7 @@ var inView= "<?php echo $_SESSION['jx']; ?>";
 	
 	
 	
-<?php
-	include_once("footer.php");
-?>
+
 
 <script>
 

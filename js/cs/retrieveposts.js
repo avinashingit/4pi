@@ -389,9 +389,9 @@ function retrieveLatestPosts(value, call) {
 
             console.log(data);
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
-            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'5px 0px 0px #000 inset','border-left':'1px solid #000'});
-            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'5px 0px 0px #4CAE4C inset','border-left':'1px solid #4CAE4C'});
-            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'5px 0px 0px #D2322D inset','border-left':'1px solid #D2322D'});
+            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid black'});
+            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
+            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'inset #D9534F 0px 3px 0 0','border-top':'1px solid #D9534F'});
     
 
             data = data.trim();
@@ -434,17 +434,13 @@ function retrieveLatestPosts(value, call) {
             }
             else if (data == 404) {
                 $('#postEmptyMessage').find('#messageEmpty').html("No posts to display.");
+                $('#loadMorePostsButton').hide();
             }
             contentLoadedPosts=0;
             done=1;
 
         });
-
-
-
 }
-
-
 
 function retrieveImportantPosts(value, call) {
 
@@ -470,9 +466,9 @@ function retrieveImportantPosts(value, call) {
         .success(function(data) {
 
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
-            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'5px 0px 0px #3276B1 inset','border-left':'1px solid #3276B1'});
-            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'5px 0px 0px #000 inset','border-left':'1px solid #000'});
-            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'5px 0px 0px #D2322D inset','border-left':'1px solid #D2322D'});
+            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
+            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
+            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'inset #D9534F 0px 3px 0 0','border-top':'1px solid #D9534F'});
             data = data.trim();
             console.log(data);
             if (value == "empty") {
@@ -514,6 +510,7 @@ function retrieveImportantPosts(value, call) {
             }
             else if (data == 404) {
                 $('#postEmptyMessage').find('#messageEmpty').html("No posts to display.");
+                $('#loadMorePostsButton').hide();
             }
             contentLoadedPosts=0;
             done=1;
@@ -542,9 +539,9 @@ function retrievePopularPosts(value, call) {
         })
         .success(function(data) {
             $('.row .postMenu').find('#popularPostsButton').find('i').removeClass('fa-spin');
-            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'5px 0px 0px #3276B1 inset','border-left':'1px solid #3276B1'});
-            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'5px 0px 0px #000 inset','border-left':'1px solid #000'});
-            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'5px 0px 0px #4CAE4C inset','border-left':'1px solid #4CAE4C'});
+            $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
+            $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
+            $('.row .postMenu').find('#popularPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
             data = data.trim();
             console.log(data);
             if (value == "empty") {
@@ -586,6 +583,7 @@ function retrievePopularPosts(value, call) {
             }
             else if (data == 404) {
                 $('#postEmptyMessage').find('#messageEmpty').html("No posts to display.");
+                $('#loadMorePostsButton').hide();
             }
             contentLoadedPosts=0;
             done=1;
@@ -680,7 +678,27 @@ function postInsert(position, data1) {
 
     post += '<div class="col-md-5" id="postProfilePic">';
 
-    post += '<a href="' + genUrl + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="./images/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+    console.log(data1.profilePicExists);
+
+    if(data1.profilePicExists==-1)
+    {
+        post += '<a href="/4pi/' + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+    }
+
+    else
+    {
+        if(data1.gender=="M")
+        {
+            post += '<a href="/4pi/'+ data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+        }
+
+       else if(data1.gender=="F")
+        {
+            post += '<a href="/4pi/' + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+        }
+    }
+
+    
 
     post += '</div> <!-- end class col-md-2 id postProfile Pic -->';
 
@@ -754,7 +772,7 @@ function postInsert(position, data1) {
 
     post += '<div class="col-md-1">';
 
-    post += '<a href="#"><img style="float:left;"src="./images/' + userIdHash + '.jpg" class="commentProfilePicture"/></a>';
+    post += '<a href="#"><img style="float:left;"src="/4pi/proPics/' + userIdHash + '.jpg" class="commentProfilePicture"/></a>';
 
     post += '</div>';
 
@@ -990,14 +1008,6 @@ function retrieveComments(id)
     });
 
 }
-
-
-
-
-
-
-
-
 
 function mailPost(id, event) {
     // alert("CLICKED");

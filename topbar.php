@@ -6,7 +6,7 @@
 	{
 		var readNotifications=new Array();
 		var i=0;
-		$('#notifications').find('.notificaion').each(function(){
+		$('#notifications').find('.notification').each(function(){
 			readNotifications[i]=$(this).attr("id");
 			i++;
 		});
@@ -18,7 +18,8 @@
 			alert("Server overload. Please try again. :(")
 		})
 		.success(function(data){
-
+			console.log(data);
+			// alert(data);
 		});
 	}
 
@@ -126,17 +127,17 @@
 		{
 			var res="";
 
-			res+='<div class="row peopleSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+			res+='<div class="row peopleSearchResult" style="border-top:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 
 			res+='<div class="col-md-11" id="userName">';
 
 			if(data.gender="M")
 			{
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 			else
 			{
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 
 
@@ -150,28 +151,29 @@
 		{
 			var res="";
 
-			res+='<div class="row peopleSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+			res+='<div class="row peopleSearchResult" style="border-top:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 
 			res+='<div class="col-md-11" id="userName">';
 
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			
 			res+='</div>';
 
 			res+='</div>';
+
 			$('#peopleSearchResult').append(res);
 		}
 	}
 
 	function checkIfPeopleImageExists(data)
 	{
-		var url="http://localhost/4pi/img/proPics/"+data.userIdHash+".jpg";
+		var url="/4pi/img/proPics/"+data.userIdHash+".jpg";
 		$.post(url,{})
 		.error(function(){
 			insertPeopleSearch(data,0);
 		})
 		.success(function(){
-			insertPeopleSearch(data,0);
+			insertPeopleSearch(data,1);
 		});
 	}
 
@@ -184,17 +186,17 @@
 	{
 		var res="";
 
-		res+='<div class="row postSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+		res+='<div class="row postSearchResult" style="border-top:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 
 		res+='<div class="col-md-11" id="postName">';
 
 		if(data.postSubject.length==0)
 		{
-			res+='<span><a href="http://localhost/4pi/posts/?ref=\''+data.postIdHash+'\'"><img src="/4pi/img/post.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.postContent+'</span></a></span>';
+			res+='<span><a title="'+data.postContent+'" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'"><img src="/4pi/img/post.jpg" alt="post" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:15px;" class="text-left">'+data.postContent.substring(0,20);+'</span></a></span>';
 		}
 		else
 		{
-			res+='<span><a href="http://localhost/4pi/posts/?ref=\''+data.postIdHash+'\'"><img src="/4pi/img/post.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.postSubject+'</span></a></span>';
+			res+='<span><a title="'+data.postSubject+'" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'"><img src="/4pi/img/post.jpg" alt="post" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:15px;" class="text-left">'+data.postSubject.substring(0,20);+'</span></a></span>';
 		}
 
 		res+='</div>';
@@ -208,11 +210,11 @@
 	{
 		var res="";
 
-		res+='<div class="row eventSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+		res+='<div class="row eventSearchResult" style="border-top:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 
 		res+='<div class="col-md-11" id="eventName">';
 
-		res+='<span><a href="http://localhost/4pi/events/?ref=\''+data.eventIdHash+'\'"><img src="/4pi/img/event.png" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:18px;" class="text-left">'+data.eventName+'</span></a></span>';
+		res+='<span><a title="'+data.eventName+'"href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'"><img src="/4pi/img/event.png" alt="event" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:15px;" class="text-left">'+data.eventName.substring(0,20);+'</span></a></span>';
 
 		res+='</div>';
 
@@ -221,15 +223,15 @@
 		$('#eventsSearch').append(res);
 	}
 
-	function globalSearchInsertEvents(data)
+	function globalSearchInsertPolls(data)
 	{
 		var res="";
 
-		res+='<div class="row pollSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
+		res+='<div class="row pollSearchResult" style="border-top:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 
 		res+='<div class="col-md-11" id="pollName">';
 
-		res+='<span><a href="http://localhost/4pi/polls/?ref=\''+data.pollIdHash+'\'"><img src="/4pi/img/poll.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:18px;" class="text-left">'+data.pollDescription+'</span></a></span>';
+		res+='<span><a title="'+data.pollDescription+'"href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'"><img src="/4pi/img/poll.jpg" alt="poll" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:15px;" class="text-left">'+data.pollDescription.substring(0,20);+'</span></a></span>';
 
 		res+='</div>';
 
@@ -240,6 +242,10 @@
 
 	function fetchGlobalSearchResults()
 	{
+		$('#peopleSearchEmptyMessage').html("");
+		$("#postsSearchEmptyMessage").html("");
+		$("#eventsSearchEmptyMessage").html("");
+		$("#pollsSearchEmptyMessage").html("");
 		var input=$('#searchBefore').val().trim();
 		$.post('/4pi/handlers/globalSearch.php',{
 			_inputVal:input
@@ -269,9 +275,9 @@
 				$(this).remove();
 			});
 
-			/*if(data[0].length==0)
+			if(data[0].length==0)
 			{
-				$('#peopleSearchEmptyMessage').html("<h4>No people found</h4>");
+				$('#peopleSearchEmptyMessage').html("<h6 style=\"padding-top:5px\">No people found</h6>");
 			}
 			else
 			{
@@ -282,7 +288,7 @@
 			}
 			if(data[1].length==0)
 			{
-				$("#postsSearchEmptyMessage").html("<h4>No posts found</h4>");
+				$("#postsSearchEmptyMessage").html("<h6 style=\"padding-top:5px\">No posts found</h6>");
 			}
 			else
 			{
@@ -294,7 +300,7 @@
 
 			if(data[2].length==0)
 			{
-				$('#eventsSearchEmptyMessage').html("<h4>No events found</h4>");
+				$('#eventsSearchEmptyMessage').html("<h6 style=\"padding-top:5px\">No events found</h6>");
 			}
 			else
 			{
@@ -305,15 +311,15 @@
 			}
 			if(data[3].length==0)
 			{
-				$('#pollsSearchEmptyMessage').html("<h4>No polls found</h4>");
+				$('#pollsSearchEmptyMessage').html("<h6 style=\"padding-top:5px\">No polls found</h6>");
 			}
 			else
 			{
 				for(i=0;i<data[3].length;i++)
 				{
-					globalSearchInsertPeople(data[3][i]);
+					globalSearchInsertPolls(data[3][i]);
 				}
-			}*/
+			}
 			
 		});
 	}
@@ -329,7 +335,7 @@
 
 			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
 
-				<a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
+				<a style="color:white !important;" href="/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
 
 				<div id="notifications" class="hidden">
 
@@ -367,7 +373,7 @@
 
 		  <div class="form-group">
 
-		    <input id="searchBefore" type="text" onkeyup="fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
+		    <input id="searchBefore" type="text" onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
 
 		  </div>
 
@@ -377,31 +383,37 @@
 
 			<div id="peopleSearch">
 
-				<h4 class="text-center">People</h4><br/>
+				<h5 class="text-center" style="padding-bottom:5px"><b>People</b></h5>
 
 				<div class="text-center" id="peopleSearchEmptyMessage"></div>
 
 			</div>
 
+			<hr>
+
 			<div id="postsSearch">
 
-				<h4 class="text-center">Posts</h4><br/>
+				<h5 class="text-center" style="padding-bottom:5px"><b>Posts</b></h5>
 
 				<div class="text-center" id="postsSearchEmptyMessage"></div>
 
 			</div>
 
+			<hr>
+
 			<div id="eventsSearch">
 
-				<h4 class="text-center">Events</h4><br/>
+				<h5 class="text-center" style="padding-bottom:5px"><b>Events</b></h5>
 
 				<div class="text-center" id="eventsSearchEmptyMessage"></div>
 
 			</div>
 
+			<hr>
+
 			<div id="pollsSearch">
 
-				<h4 class="text-center">Polls</h4><br/>
+				<h5 class="text-center" style="padding-bottom:5px"><b>Polls</b></h5>
 
 				<div class="text-center" id="pollsSearchEmptyMessage"></div>
 
@@ -600,7 +612,6 @@
 		background-color:#FFFFFF;
 		border:1px solid gray;
 		width:150%;
-		height:400px;
 		overflow-y:auto;
 		overflow-x:hidden;
 	}

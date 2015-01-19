@@ -35,7 +35,7 @@
 
 <div class="col-md-7" id="polls">
 	
-	<div class="row pollMenu topMenu" style="z-index:1040;">
+	<div class="row pollMenu topMenu" style="z-index:2;">
 		
 			<div class="btn-group btn-group-justified" style="padding:10px;">
 				

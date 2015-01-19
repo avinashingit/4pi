@@ -136,7 +136,7 @@ if(isset($_SESSION['vj']))
                                             {
                                                 $resultObj = new postSearchResult($record['postIdHash'], $record['subject'], $record['userIdHash'], $record['userName']);
 
-                                                var_dump($resultObj);
+                                                // var_dump($resultObj);
                                                 $postSearchResults[] = $resultObj;
                                                 $count++;
                                             }

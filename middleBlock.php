@@ -4,7 +4,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 </script>
 <div class="col-md-7" id="posts">
 
-	<div class="row postMenu topMenu" style="z-index:1040;" >
+	<div class="row postMenu topMenu" style="z-index:2;" >
 		
 			<div class="btn-group btn-group-justified" style="padding:10px;">
 				<div class="btn-group">

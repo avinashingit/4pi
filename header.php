@@ -124,6 +124,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 		<script src="/4pi/js/TP/jquery.shorten.js"></script>
 
 		<script src="/4pi/js/cs/retrievePosts.js"></script>
+
+		<script src="/4pi/js/cs/retrieveEvents.js"></script>
+
+		<!-- <script src="/4pi/js/cs/retrievePolls.js"></script> -->
 		
 		<script src="/4pi/js/cs/newsfeed.js"></script>
 

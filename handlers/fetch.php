@@ -868,7 +868,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
-		$proPicLocation='../img/proPics/'.$post['userIdHash'].'.jpg';
+		$proPicLocation='../img/proPics/'.$post["userIdHash"].'.jpg';
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;

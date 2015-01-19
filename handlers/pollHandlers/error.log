@@ -22,3 +22,5 @@
 
 [2015-01-04 19:20:50       127.0.0.1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE pollIdHash= ?' at line 1$$$
 
+[2015-01-19 18:14:31             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND pollIdHash!=? ORDER BY timestamp DESC' at line 1$$$
+

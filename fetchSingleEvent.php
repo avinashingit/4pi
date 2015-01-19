@@ -18,8 +18,6 @@ session_start();
 ?>
 
 
-<script src="/4pi/js/cs/retrieveEvents.js"></script>
-
 <script>
 
 function fetchSingleEvent()
@@ -52,7 +50,11 @@ function fetchSingleEvent()
 	});
 }
 
-fetchSingleEvent();
+$(document).ready(function(){
+	fetchSingleEvent();
+});
+
+
 
 </script>
 
@@ -78,14 +80,6 @@ fetchSingleEvent();
 		<!-- right block code ends here  -->
 
 	</div>
-	
-	
-	
-	
-<?php
-	include_once("footer.php");
-?>
-
 
 	<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 

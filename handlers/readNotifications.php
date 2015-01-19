@@ -33,8 +33,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 //$refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$ProcessedHashes=$_POST['_presentNotifications'];
-//var_dump($inputHashes);
+$ProcessedHashes=$_POST['_readNotifications'];
+// var_dump($ProcessedHashes);
 if(count($ProcessedHashes)!=0)
 {
 	// $ProcessedHashes=explode(",", $inputHashes);

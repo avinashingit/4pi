@@ -557,7 +557,7 @@
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 col-md-offset-2" id="pollCreatedTime">';
+							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1065,7 +1065,7 @@
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 col-md-offset-2" id="pollCreatedTime">';
+							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1253,14 +1253,22 @@
 			{
 				if(checkData(data)==1)
 				{
-					datas=JSON.parse(data);
-					for(i=0;i<datas.length;i++)
+					if(data!=404)
 					{
-						insertPoll(datas[i],"last");
+						datas=JSON.parse(data);
+						for(i=0;i<datas.length;i++)
+						{
+							insertPoll(datas[i],"last");
+						}
+						$('time.timeago').timeago();
 					}
-					$('time.timeago').timeago();
+					else
+					{
+						$('#loadMorePollsButton').hide();
+						$('#pollArea').find('#pollEmptyMessage').find('p').html("No more polls to display.");
+					}
+					
 				}
-				$('#pollArea').find('#pollEmptyMessage').find('p').html("");
 				$('#loadMorePollsButton').html("Load more").attr("onclick","fetchLatestPolls(1,'noempty');");
 			}
 		});
