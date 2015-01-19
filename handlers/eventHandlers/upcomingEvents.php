@@ -35,7 +35,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['sgk'];
+$inputHashes=$_POST['_sgk'];
 if(count($inputHashes)!=0)
 {
 	$ProcessedHashesCount=count($ProcessedHashes);
@@ -88,7 +88,7 @@ $conn=new QoB();
 			//$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate>= ?)";
 			
 			//Code till final release with approvals
-			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR userId=?) AND ( eventDate>= ?)";
+			$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?)";
 			$values[0]=array($finalStudentRegex => 's');
 			$values[1]=array($userId => 's');
 			$values[2]=array($currentDate => 'i');
