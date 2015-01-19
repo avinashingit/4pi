@@ -1242,7 +1242,7 @@
 			$('#loadMorePollsButton').html("Load more").attr("onclick","fetchLatestPolls(1,'noempty');");
 		})
 		.success(function(data){
-			var inView="<?php echo $_SESSION['jx'];?>";
+			window.inView="<?php echo $_SESSION['jx'];?>";
 			console.log(data);
 			data=data.trim();
 			if(data==404)

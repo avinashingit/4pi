@@ -458,15 +458,15 @@ var inView="<?php echo $_SESSION['jx'];?>";
 function fetchMoreEvents()
 {
 	$('#loadMoreEventsButton').html("Loading").attr("onclick","");
-	if(inView==1001)
+	if(window.inView==1001)
 	{
 		latestEventsFetch('noempty',1);
 	}
-	else if(inView==1002)
+	else if(window.inView==1002)
 	{
 		upcomingEventsFetch('noempty',1)
 	}
-	else if(inView==1003)
+	else if(window.inView==1003)
 	{
 		pastCompetitionsFetch('noempty',1);
 	}

@@ -388,7 +388,7 @@ function retrieveLatestPosts(value, call) {
 
         })
         .success(function(data) {
-            var inView="<?php echo $_SESSION['jx'];?>";
+            window.inView="<?php echo $_SESSION['jx'];?>";
             console.log(data);
             $('.row .postMenu').find('#latestPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid black'});
@@ -467,7 +467,7 @@ function retrieveImportantPosts(value, call) {
 
         })
         .success(function(data) {
-            var inView="<?php echo $_SESSION['jx'];?>";
+            window.inView="<?php echo $_SESSION['jx'];?>";
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
             $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid #000'});
@@ -533,15 +533,15 @@ function retrievePopularPosts(value, call) {
         });
     }
 
-    $.post('./handlers/postHandlers/popular.php', {
-        _posts:posts,
-        _call: call
-    })
+        $.post('./handlers/postHandlers/popular.php', {
+            _posts:posts,
+            _call: call
+        })
         .error(function() {
 
         })
         .success(function(data) {
-            var inView="<?php echo $_SESSION['jx'];?>";
+            window.inView="<?php echo $_SESSION['jx'];?>";
             $('.row .postMenu').find('#popularPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
             $('.row .postMenu').find('#importantPostsButton').css({'box-shadow':'inset #5CB85C 0px 3px 0 0','border-top':'1px solid #5CB85C'});
