@@ -43,6 +43,8 @@ date_default_timezone_set(TIME_ZONE);
 //defining the default log file name
 define("C_TIME", time());
 
+//SALT for password Hashing
+define("PASSSALT", "PSaSaSwL0RtD");
 
 //Salt for SESSION and USER Hashing
 define("SALT",211019931500);

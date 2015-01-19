@@ -804,6 +804,13 @@ class QoB
         return $this->$stmt->affected_rows;
     }
 
+    //Returns the value of Auto incremented Id generated due to last executed statement( i.e. if lst statement was insert or update).
+    //Returns id if there is a auto_incrementing field. Else return zero.
+    function getInsertId()
+    {
+        return $this->conn->insert_id;
+    }
+
 
 
 

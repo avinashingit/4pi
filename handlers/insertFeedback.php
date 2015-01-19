@@ -66,7 +66,7 @@ else
 	{
 		$userId=$user['userId'];
 					
-		$insertFeedbackSQL="INSERT INTO feedback(userId,feedback,) VALUES (?,?)";
+		$insertFeedbackSQL="INSERT INTO feedback(userId,feedback) VALUES (?,?)";
 		$values[0]=array($userId => 's');
 		$values[1]=array($feedback => 's');
 

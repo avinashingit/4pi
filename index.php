@@ -1,8 +1,12 @@
 <?php
+
 error_reporting(E_ALL ^ E_NOTICE);
 session_start();
+require_once('handlers/fetch.php');
 if($_GET['logout']=="yes")
 	{
+		$logId=$_SESSION['logId'];
+		logoutLog($logId);
 		unset($_SESSION['vj']);
 		unset($_SESSION['tn']);
 		unset($_SESSION['mq']);
