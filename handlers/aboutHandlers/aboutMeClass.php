@@ -118,7 +118,7 @@
 				}
 		}
 
-	class competitions
+	/*class competitions
 		{
 			public $competitionId;
 			public $title;
@@ -136,7 +136,7 @@
 					$this->isOwner=$isOwner;
 					return $this;
 				}
-		}
+		}*/
 		
 	class experience
 		{
