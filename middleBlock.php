@@ -1,6 +1,6 @@
 <script>
 var userIdHash="<?php echo $_SESSION['vj']; ?>";
-window.inView="<?php echo $_SESSION['jx'];?>";
+window.inView=<?php echo $_SESSION['jx'];?>;
 </script>
 <div class="col-md-7" id="posts">
 
@@ -170,22 +170,22 @@ function fetchMorePosts(e)
 {
 	$('#loadMorePostsButton').find('button').html("Loading").attr("onclick","");
 	e.preventDefault();
-	console.log(window.inView);
-    if(window.inView=="999")
+	var inViewElement=$('#inViewElement').html();
+    if(inViewElement==999)
     {
     	console.log(window.inView);
         retrieveLatestPosts("noempty",1);
         $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
     }
 
-    else if(window.inView=="998")
+    else if(inViewElement==998)
     {
     	console.log(window.inView);
         retrievePopularPosts("noempty",1);
         $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
     }
 
-    else if(window.inView=="997")
+    else if(inViewElement==997)
     {
     	console.log(inView);
         retrieveImportantPosts("noempty",1);

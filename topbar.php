@@ -18,7 +18,7 @@
 			alert("Server overload. Please try again. :(")
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			// alert(data);
 		});
 	}
@@ -72,7 +72,7 @@
 
 		notification+='</div><!-- end class notification -->';
 
-		console.log(notification);
+		//console.log(notification);
 
 		$('#notifications').prepend(notification);
 	}
@@ -92,7 +92,7 @@
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log("fjal"+data);
+			//console.log("fjal"+data);
 			if(checkData(data)==1)
 			{
 				if(data==404)
@@ -111,7 +111,7 @@
 						}
 						insertNotifications(data[i],"first");
 					}
-					console.log(unreadNotificationNumber);
+					//console.log(unreadNotificationNumber);
 					$('#notificationNumber').html(unreadNotificationNumber);
 				}
 				
@@ -254,7 +254,7 @@
 			alert("Server overload. Please try again");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			data=JSON.parse(data);
 
 			
@@ -695,3 +695,5 @@
 		height:29px !important;
 	}
 </style>
+
+<div class="hidden" id="inViewElement"></div>

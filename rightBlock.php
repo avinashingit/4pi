@@ -1,6 +1,6 @@
 <script>
 	$(document).ready(function(){
-		var s = $("#rightBox");
+		/*var s = $("#rightBox");
     
     var pos = s.position(); 
     
@@ -35,8 +35,36 @@
             //$('#rightBox').show();
 
         }
-    });
+    });*/
 	});
+
+	$.fn.isOnScreen = function(){
+    
+	    var win = $(window);
+	    
+	    var viewport = {
+	        top : win.scrollTop(),
+	        left : win.scrollLeft()
+	    };
+	    viewport.right = viewport.left + win.width();
+	    viewport.bottom = viewport.top + win.height();
+	    
+	    var bounds = this.offset();
+	    bounds.right = bounds.left + this.outerWidth() - 75;
+	    bounds.bottom = bounds.top + this.outerHeight() - 75;
+	    
+	    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+	    
+	};
+
+	if($('#rightBox').isOnScreen)
+	{
+		$('#rightBox').addClass('stick');
+	}
+	else
+	{
+		$('#rightBox').removeClass('stick');
+	}
 
 	function insertLittlePost(data)
 	{

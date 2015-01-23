@@ -86,7 +86,7 @@
 					})
 					.success(function(data){
 
-						console.log(data);
+						////console.log(data);
 						if(checkData(data)==1)
 						{
 							data=JSON.parse(data);
@@ -133,8 +133,8 @@
 	//--------------------------------------------------------------------------------------------//
 	function displayChart(json,idC,id,hUh,PollQuestion)
 	{
-		// console.log("called "+json+" "+idC+" "+id);
-		console.log(json);
+		// ////console.log("called "+json+" "+idC+" "+id);
+		////console.log(json);
 		var pollQuestion =PollQuestion;
 		// var pollQuestion="Avinash";
 		if(hUh==1)
@@ -1233,6 +1233,8 @@
 			});
 		}
 
+		////console.log(existingPolls);
+
 		$.post('./handlers/pollHandlers/latestPolls.php',{
 			_call:call,
 			_existingPolls:existingPolls
@@ -1242,12 +1244,13 @@
 			$('#loadMorePollsButton').html("Load more").attr("onclick","fetchLatestPolls(1,'noempty');");
 		})
 		.success(function(data){
-			window.inView="<?php echo $_SESSION['jx'];?>";
-			console.log(data);
+			$('#inViewElement').html("1004");
+			//////console.log(data);
 			data=data.trim();
 			if(data==404)
 			{
 				$('#pollArea').find('#pollEmptyMessage').find('p').html("No more polls to display");
+				$('#loadMorePollsButton').hide();
 			}
 
 			else
@@ -1307,7 +1310,7 @@
 						checkedOption[0]=i;
 					}
 				}
-				console.log("Option sent"+checkedOption[0]);
+				////console.log("Option sent"+checkedOption[0]);
 				$.post('./handlers/pollHandlers/votePoll.php',{
 					_pollId:pollId,
 					_votes:checkedOption[0]
@@ -1316,9 +1319,9 @@
 					alert("Server overload. Please try again. :(");
 				})
 				.success(function(data){
-					console.log(data);
+					////console.log(data);
 					datas=JSON.parse(data);
-					console.log(datas);
+					////console.log(datas);
 					if(checkData(data)==1)
 					{
 						if(pollType!=3)
@@ -1348,7 +1351,7 @@
 						count=count+1;
 					}
 				}
-				console.log(checkedOptions);
+				////console.log(checkedOptions);
 				$.post('/4pi/handlers/pollHandlers/votePoll.php',{
 					_pollId:pollId,
 					_votes:checkedOptions
@@ -1357,7 +1360,7 @@
 					alert("Server overload. Please try again. :(");
 				})
 				.success(function(data){
-					console.log(data);
+					////console.log(data);
 					if(checkData(data)==1)
 					{
 						datas=JSON.parse(data);
@@ -1389,7 +1392,7 @@
 			.success(function(data){
 				if(checkData(data)==1)
 				{
-					console.log(data);
+					////console.log(data);
 					$('#'+pollId).remove();
 				}
 			});

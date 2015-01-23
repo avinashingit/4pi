@@ -1,0 +1,449 @@
+/* Landing page index.php */
+@font-face {
+    font-family: openSans;
+    src: url(../fonts/OpenSans-Light.ttf);
+}
+
+body{
+    *background: linear-gradient(#3fa6ff,#fff) no-repeat !important;
+    *background-color: #ffffff !important;
+    background-image: url('../../img/pixels/block3.png');
+    font-family: openSans !important;
+    min-width: 540px;
+}
+a{
+    color:black;
+}
+a,a:hover{
+    text-decoration:none;
+}
+
+.center{
+    text-align: center;
+}
+
+
+
+
+
+
+.hidden{
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------------------- */
+
+/* NewsFeed */
+#icons{
+    color:white;
+    padding-top:5px;
+}
+
+#userDetails{
+    background-color:black;
+    color:white;
+    overflow-y:auto !important;
+    *max-height:580px !important;
+    margin-top:-1px;
+    z-index:-1;
+}
+
+#userGroups h5{ 
+    text-align:left;
+    font-family:'Roboto';
+}
+
+#userImage img{
+    margin:auto;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+#posts{
+    *overflow-y:auto !important;
+    *max-height:580px !important;
+}
+
+#rightBlock{
+    *background-color:black;
+    color:white;
+    *overflow-y:auto !important;
+    *max-height:580px !important;
+    padding-left: 0px;
+
+}
+#events,#threads,#polls{
+    *float:center;
+    background-color:white;
+    color:black;
+    *max-height:190px;
+    *padding:0px;
+}
+#events{
+    margin-top:15px;
+}
+
+.cursorPointer{
+    cursor:pointer;
+}
+
+#posts{
+    margin-top:5px;
+    *overflow-y:auto !important;
+    *max-height:580px;
+}
+.borderBottom{
+    border-bottom:1px solid rgba(0,0,0,0.2);
+}
+#posts p{
+    text-align:justify !important;
+}
+i {
+    cursor:pointer;
+}
+      /* #card, #card2,#card3{
+        height: 280px;
+        border:1px solid rgba(0,0,0,0.2);
+      }*/
+
+.fontSize13{
+    font-size:13px;
+}
+.fontSize9{
+    font-size:9px;
+}
+.paddingTopPostIcons{
+    padding-top:25px;
+}
+.paddingLeftPostIcons{
+    padding-left:10px;
+}
+.paddingBottomPostIcons{
+    padding-bottom:0px;
+}
+#post{
+    background-color:white;
+}
+.postLikesAndCommentIcons{
+    padding-bottom: 10px;
+}
+.stick{
+    position:fixed;
+    top:50px;
+    width:23.5%;
+}
+
+
+
+
+/*-------------------------- IDEA BANK ---------------------*/
+
+.floatRight{
+	float: right;
+}
+
+.trashRight{
+	float: right;
+	margin-right: 25px !important;
+}
+.searchback{
+	background: rgba(128,128,128,0.2);
+}
+#ideaHead{
+	padding: 10px 10px 10px 10px;
+}
+
+.spanLoadBefore{
+	padding-left: 40%;
+}
+
+.modal-body .searchIdeaContent{
+    word-wrap: break-word;
+	height: 100% ;
+}
+
+.modal-body textarea{
+	min-height: 100% !important;
+}
+
+.spanLoadAfter{
+	font-weight: bold;
+	font-size: 22px;
+	padding-left: 35%;
+}
+
+textarea.vert { resize:vertical; }
+
+#ideaOptions{
+	padding-top: 10px !important;
+	padding-left: 16px !important;
+}
+
+.form-control{
+	border-radius: 0px !important;
+}
+
+#ideaIcons{
+	margin-bottom: -5px !important;
+}
+
+.cursor{
+	cursor:pointer;
+}
+
+.ideaBankDiv{
+	text-align:center; 
+	padding-top:10px; 
+	font-size:35px;
+}
+
+#ideaText{
+	padding-bottom: 20px;
+}
+
+#ideaBody{
+	text-align:justify !important;
+	padding-top: 5px;
+	
+}
+
+.ideaContentSide{
+	background: white;
+	border:1px solid rgba(0,0,0,0.3);
+	margin-bottom: 20px;
+	*border-radius: 15px;
+}
+
+
+.colorgrad1{
+	background:linear-gradient(#369922,#49cb30);
+}
+
+.colorgrad2{
+	background:linear-gradient(#0d6c75,#1997a2);
+}
+
+.colorgrad3{
+	background:linear-gradient(#ca1c30,#b83141);
+}
+
+.colorgrad4{
+	background:linear-gradient(#581493,#75449d);
+}
+
+.colorgrad5{
+	background:linear-gradient(#8a1e88,#b330b1);
+}
+
+.colorgrad6{
+	background:linear-gradient(#c2266c,#841c4c);
+}
+
+.colorgrad7{
+	background:linear-gradient(#342784,#4936b9);
+}
+
+.colorgrad8{
+	background:linear-gradient(#2b2929,#7e797a);
+}
+
+.colorgrad9{
+	background:linear-gradient(#b18721,#8c6915);
+}
+
+.colorgrad10{
+	background:linear-gradient(#af9108,#cfab08);
+}
+
+.colorgrad11{
+	background:linear-gradient(#cf7806,#e68608);
+}
+
+.colorgrad12{
+	background:linear-gradient(#c14a2f,#af2c0e);
+}
+
+h4#ideaCreatedBy{
+	color: white;
+}
+
+.ideaStarBox{
+	border-left: 1px solid rgba(0,0,0,0.4);
+	border-top: 1px solid rgba(0,0,0,0.4);
+	border-right: 1px solid rgba(0,0,0,0.4);
+	position:absolute;
+	bottom: 0px;
+	height:25px;
+	background-color: #999;
+}
+
+.ideaDateBox{
+	border-top: 1px solid rgba(0,0,0,0.4);
+	border-left: 1px solid rgba(0,0,0,0.4);
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	height:25px;
+	background-color: #999;
+}
+
+.timeago{
+	padding-left: -15px;
+}
+
+#ideaStarCount,#ideaUnStarCount{
+	display:block !important;
+	color: #FFF;
+	position:absolute;
+	bottom: 0px;
+	right: 12px !important;
+}
+
+.ideaAppreciateIcon{
+	cursor:pointer;
+	position: absolute;
+	left: 13px;
+}
+
+.ideaDepreciateIcon{
+	cursor:pointer;
+	position: absolute;
+	left: 15px;
+	top: 0px;
+}
+
+#rowIdeaBody{
+	margin-top: 70px;
+}
+
+
+#ideaSubject{
+	padding-top: 15px; 
+	float:left;
+}
+
+#ideaEdit{
+	padding-top: 10px;
+}
+
+#ideaDelete{
+	padding-top:8px;
+}
+
+.faColor{
+	font-size: 16px !important;
+	color: white;
+}
+
+#ideaIcons{
+	height: 30px;	
+}
+
+.timeago{
+	color: #FFF !important;
+}
+
+
+#ideaButton{
+	width: 280px;
+	margin-top:9px;
+	border-radius: 3px;
+}
+
+.ideaTextCenter{
+	text-align:center;
+	padding-top:20px;
+}
+
+.bankIcon{
+	font-size: 180px;
+}
+
+div.condense {
+	*max-height: 327px;
+	overflow: hidden;
+	position: relative;
+	-webkit-transition: max-height 2s ease 0s;
+	-moz-transition: max-height 2s ease 0s;
+	-ms-transition: max-height 2s ease 0s;
+	-o-transition: max-height 2s ease 0s;
+	transition: max-height 2s ease 0s;
+}
+div.condense:hover {
+	max-height: 1999px !important;
+}
+div.condense:after {
+	content: " ";
+	width: 30px;
+	height: 45px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+div.condense:hover:after {
+	background-position: right bottom;
+}
+.fixedElement1{
+	*position:fixed;
+    *top: 80px;
+	*left: 10px;
+    *z-index:100;
+}
+
+.fixedElement {
+ /*   background-color: #c0c0c0; */
+    position:fixed; 
+    top: 80px;
+	/*right: 0;
+/*    width:100%;*/
+    z-index:100;
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity:1;
+        bottom:0px;
+    }
+    to{
+        opacity:0;
+        top:-10px;
+    }
+}
+.text-animated-one{
+    display:inline;
+    position:relative;
+    top:0px;
+    -webkit-animation:fade-in 3s ;
+
+}
+
+.fading{
+    display:inline;
+    width:100px;
+    height:100px;
+	font-size: 40px;
+	color: #6666FF;
+
+}
+
+.deactive{
+	pointer-events: none;
+    cursor: default;
+}
+
+
+/*-------------------------- End of Idea Bank --------------*/

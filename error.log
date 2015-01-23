@@ -100,3 +100,13 @@ $$$
 
 [2014-10-18 10:54:54             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
 
+[2015-01-19 22:55:18             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.logindetails' doesn't exist$$$
+
+[2015-01-19 22:55:40             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.logindetails' doesn't exist$$$
+
+[2015-01-19 22:59:57      172.17.2.1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.logindetails' doesn't exist$$$
+
+[2015-01-19 23:00:05      172.17.2.1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.logindetails' doesn't exist$$$
+
+[2015-01-19 23:01:52             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.logindetails' doesn't exist$$$
+

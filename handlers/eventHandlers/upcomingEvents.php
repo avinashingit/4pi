@@ -35,7 +35,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
-$inputHashes=$_POST['_sgk'];
+$ProcessedHashes=$_POST['_sgk'];
 if(count($inputHashes)!=0)
 {
 	$ProcessedHashesCount=count($ProcessedHashes);
@@ -102,7 +102,7 @@ $conn=new QoB();
 
 			//var_dump($values);
 			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
-			echo $getUpcomingEventsSQL;
+			// echo $getUpcomingEventsSQL;
 			$displayCount=0;
 			$result=$conn->select($getUpcomingEventsSQL,$values);
 			if($conn->error=="")
