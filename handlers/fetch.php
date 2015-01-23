@@ -18,7 +18,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
-
+	require_once("/../QOB/qob.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -106,7 +106,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	        }
 	    }
 	    $OsAndBrowser=$browser." On ".$os_platform;
-		$LogDetailsSQL="INSERT INTO loginDetails (userId,osbrowser) VALUES(?,?)";
+		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser) VALUES(?,?)";
 		$values[0]=array($userId => 's');
 		$values[1]=array($OsAndBrowser => 's');
 		$result=$conn->insert($LogDetailsSQL,$values);
@@ -128,7 +128,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$conn=new QoB();
 		$timestamp=time();
 		$logoutTime=toTimeAgoFormat($timestamp);
-		$logoutLogSQL="UPDATE loginLog SET logoutTime= ? WHERE logId=?";
+		$logoutLogSQL="UPDATE loginlog SET logoutTime= ? WHERE logId=?";
 		$values[0]=array($logoutTime => 's');
 		$values[1]=array($logId => 'i');
 		$result=$conn->update($logoutLogSQL,$values);
@@ -1157,7 +1157,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$notificationModels[13]=array(" of your poll has been approved.");
 		$notificationModels[14]=array(" of your poll has been rejected.");
 
-		$notificationFetchSQL="SELECT * FROM notifications WHERE userId=? ";
+		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE userId=? ";
 		$values[0]=array($userId => 's');
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{

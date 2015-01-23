@@ -1,6 +1,7 @@
 <?php
 session_start();
 	require_once('../../QOB/qob.php');
+	require_once("../../PHPMailer_v5.1/class.phpmailer.php");
 	require_once('../fetch.php');
 	//Testing Inputs Start
 /*$userIdHash=$_SESSION['vj']=hash("sha512","COE11B005".SALT);

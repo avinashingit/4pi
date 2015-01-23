@@ -70,7 +70,38 @@ if(($user=getUserFromHash($currentUserIdHash))==false)
 		exit();
 	}
 }
-	
+
+if ($mode=1) {
+	# AboutMe Insert
+}
+else if ($mode=2) {
+	# Academics Insert
+}
+else if ($mode=3) {
+	# Achievements Insert
+}
+else if ($mode=4) {
+	# Certifications Insert
+}
+else if ($mode=5) {
+	# Experience Insert
+}
+else if ($mode=6) {
+	# Projects Insert
+}
+else if ($mode=7) {
+	# SkillSet Insert
+}
+else if ($mode=8) {
+	# WorkshopsInsert
+}
+else {
+	# Erroneous Mode Sent
+	echo 16;
+	exit();
+}
+
+
 function aboutMeInsert($profilePic,$dob,$description,$resume,$hobbies,$mailId,$address,$phone,$city)
 {
 
@@ -80,7 +111,7 @@ function aboutMeInsert($profilePic,$dob,$description,$resume,$hobbies,$mailId,$a
 	$date1 = date_create();
 	$currentTimestamp = date_timestamp_get($date1);
 	
-	if(($profilePic != "") and ($description != "") and ($resume != "") and ($hobbies != "") and ($address != "") and ($phone != "") and ($city != "") and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
+	/*if(($profilePic != "") and ($description != "") and ($resume != "") and ($hobbies != "") and ($address != "") and ($phone != "") and ($city != "") and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 	{
 		$conObj = new QoB();
 		$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -89,7 +120,8 @@ function aboutMeInsert($profilePic,$dob,$description,$resume,$hobbies,$mailId,$a
 		{
 			if($result0 != "")
 			{
-				$userId = $result0['userId'];
+				*/
+				$userId = $user['userId'];
 				$values1 = array();
 				
 				$values1[0] = array($userId => 's');
@@ -108,13 +140,16 @@ function aboutMeInsert($profilePic,$dob,$description,$resume,$hobbies,$mailId,$a
 				if($conObj->error == "")
 				{
 					echo 'Succesfull Insert <br />';
+					/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
+						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
+						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
 				}
 				else
 				{
 					echo 'Error in Query 1 <br />';
 					echo $conObj->error.'<br />';
 				}
-			}
+			/*}
 			else
 			{
 				echo 'No values found for Query 0<br />';
@@ -129,8 +164,479 @@ function aboutMeInsert($profilePic,$dob,$description,$resume,$hobbies,$mailId,$a
 	else
 	{
 		echo 404;
-	}
+	}*/
 		
 	
 }
+
+function academicsInsert($degreeOriginal,$name,$start,$end,$cgpa)
+{		
+	$startDate = date_parse($start);
+	$startDateTimestamp = strtotime($start);
+	
+	//echo $startDateTimestamp.'<br/>';
+	
+	$endDate = date_parse($end);
+	$endDateTimestamp = strtotime($end);
+
+	//echo $endDateTimestamp.'<br/>';
+	
+	$date1 = date_create();
+	$currentTimestamp = date_timestamp_get($date1);
+	
+	
+	/*if(($degreeOriginal != '') and ($name != '') and ($cgpa !='') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp))
+	{
+		$conObj = new QoB();
+		$values0 = array(0 => array($_SESSION['vj'] => 's'));
+		$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+		if($conObj->error == "")
+		{
+			if($result0 != "")
+			{*/
+				$userId = $user['userId'];
+				$degreeId = '';
+				/*$check = 1;
+				if($degreeOriginal == "PHD")
+					{
+						$degreeId = "18118";
+					}
+				
+				else if($degreeOriginal == "MDES")
+					{
+						$degreeId = "157924";
+					}	
+				
+				else if($degreeOriginal == "BTECH")
+					{
+						$degreeId = "4239814";
+					}
+
+				
+				else if($degreeOriginal == "Secondary School")
+					{
+						$degreeId = "2187";
+					}
+
+
+				else if($degreeOriginal == "Senior Secondary School" )
+					{
+						$degreeId = "211722241110";
+					}
+					
+				else
+					{
+						$check = -1;
+					}*/
+				
+				if($check == 1)
+				{
+					$values1 = array(0 => array($userId => 's'), 1 => array($degreeId => 's'), 2 => array($name => 's'), 3 => array($startDateTimestamp => 's'), 4 => array($endDateTimestamp => 's'),5 => array($cgpa => 's'));
+					
+					$result1 = $conObj->insert("INSERT INTO academics(uid,degree,name,start,end,cgpa) VALUES(?,?,?,?,?,?)",$values1);
+					
+					if($conObj->error == "")
+					{
+						echo 'Succesfull Insert <br />';
+					}
+					else
+					{
+						echo 'Error in Query 1 <br />';
+						echo $conObj->error.'<br />';
+					}
+				}
+				else
+				{
+					echo "The degree entered is wrong please check again <br/>";
+				}
+
+			/*}
+			else
+			{
+				echo 'No values found for Query 0<br />';
+			}
+		}
+		else
+			{
+				echo 'Error in Query 0<br />';
+				echo $conObj->error.'<br />';
+			}
+	}
+	
+	else
+	{
+		echo 'No values found <br/>';
+		echo 404;
+	}*/
+	
+}
+
+function achievmentsInsert($competition,$description,$position,$achievedDate)
+	{
+		$date = date_parse($achievedDate);
+		$achievedDateTimestamp = strtotime($achievedDate);
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);	
+		
+		/*if(($competition != '') and ($description != '') and ($position != '') and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"]) ) and ($achievedDateTimestamp < $currentTimestamp))
+			{
+		
+				$conObj = new QoB();
+				$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+							{*/
+								$userId = $user['userId']; 
+							
+								echo "This is the value of timestamp <br/>";
+								echo $achievedDateTimestamp.'<br/>';
+							
+								$values1 = array(0 => array($userId => 's'), 1 => array($competition => 's'), 2 => array($description => 's'), 3 => array($position => 's'), 4 => array($achievedDateTimestamp => 's'));
+								
+								$result1 = $conObj->insert("INSERT INTO achievements(uid,competition,description,position,achieveddate) VALUES(?,?,?,?,?)",$values1);
+								
+								if($conObj->error == "")
+									{
+										echo 'Successful Insert<br />';
+									}
+								else
+									{
+										echo 'Error in Query 1 <br />';
+										echo $conObj->error.'<br />';
+									}
+							/*}
+						else
+							{
+								echo 'No values found for Query 0 <br />';
+							}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}
+			}
+		
+		else
+			{
+				echo 'No values found <br/>';
+				echo 404;
+			}*/
+		
+		
+	}
+
+function certifiedCoursesInsert($title,$start,$end,$instituteName)
+	{
+		$startDate = date_parse($start);
+		$startDateTimestamp = strtotime($start);
+		
+		//echo $startDateTimestamp.'<br/>';
+		
+		$endDate = date_parse($end);
+		$endDateTimestamp = strtotime($end);
+
+		//echo $endDateTimestamp.'<br/>';
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);
+		
+		
+		/*if(($title != '') and ($instituteName != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
+			{
+				$conObj = new QoB();
+				$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values1 = array(0 => array($userId => 's'),1 => array($title => 's'), 2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4=> array($instituteName => 's'));
+							
+							$result1 = $conObj->insert("INSERT INTO certifiedcourses(uid,title,start,end,institutename) VALUES(?,?,?,?,?)",$values1);
+							
+							if($conObj->error == "")
+								{
+									echo 'Succesfull Insert <br />';
+								}
+							else
+								{
+									echo 'Error in Query 1 <br />';
+									echo $conObj->error.'<br />';
+								}
+						/*}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}
+				
+			}
+		else
+			{
+				echo 404;
+			}*/
+		
+	}
+
+function experienceInsert($organisation,$start,$end,$title,$description)
+	{
+				
+		$startDate = date_parse($start);
+		$startDateTimestamp = strtotime($start);
+		
+		//echo $startDateTimestamp.'<br/>';
+		
+		$endDate = date_parse($end);
+		$endDateTimestamp = strtotime($end);
+
+		//echo $endDateTimestamp.'<br/>';
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);
+		
+		//echo $currentTimestamp.'<br/>';
+		
+		/*if(($organisation != '') and ($description != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
+			{
+			
+				$conObj = new QoB();
+				$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+		
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values1 = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's'), 5 => array($description => 's'));
+							
+							$result1 = $conObj->insert("INSERT INTO experience(uid,organisation,start,end,title,description) VALUES(?,?,?,?,?,?)",$values1);
+							
+							if($conObj->error == "")
+								{
+									echo 'Succesfull Insert <br />';
+								}
+							else
+								{
+									echo 'Error in Query 1 <br />';
+									echo $conObj->error.'<br />';
+								}
+					/*	}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}
+			}
+			
+		else
+			{
+				//echo 'details entered are wrong <br/>';
+				echo 404;
+			}*/
+			
+		
+	}
+
+function projectInsert($title,$role,$start,$end,$description)
+	{
+	
+		$startDate = date_parse($start);
+		$startDateTimestamp = strtotime($start);
+		
+		//echo $startDateTimestamp.'<br/>';
+		
+		$endDate = date_parse($end);
+		$endDateTimestamp = strtotime($end);
+
+		//echo $endDateTimestamp.'<br/>';
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);
+		
+		//echo $currentTimestamp.'<br/>';
+		
+		/*if(($title != '') and ($description != '') and ($role != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
+			{
+				$conObj = new QoB();
+				$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values1 = array();
+							
+							$values1[0] = array($userId => 's');
+							$values1[1] = array($title => 's');
+							$values1[2] = array($role => 's');
+							$values1[3] = array($startDateTimestamp => 's');
+							$values1[4] = array($endDateTimestamp => 's'); 
+							$values1[5] = array($description => 's');
+							
+							$result1 = $conObj->insert("INSERT INTO projects(uid,title,role,start,end,description) VALUES(?,?,?,?,?,?)",$values1);
+							if($conObj->error == "")
+								{
+									echo 'Succesfull Insert <br />';
+								}
+							else
+								{
+									echo 'Error in Query 1 <br />';
+									echo $conObj->error.'<br />';
+								}
+					/*	}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}
+			}
+			
+		else
+			{
+				echo 404;
+			}*/
+		
+	}
+
+function skillSetInsert($skill,$rating)
+	{
+		/*if(($skill!='') and ($rating != 0))
+			{
+				$conObj = new QoB();
+				$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values1 = array();
+							
+							$values1[0] = array($userId => 's'); 
+							$values1[1] = array($skill => 's');
+							$values1[2] = array($rating => 'i');
+							
+							$result1 = $conObj->insert("INSERT INTO skillset(uid,skills,rating) VALUES(?,?,?)",$values1);
+							if($conObj->error == "")
+								{
+									echo 'Successfull Insert <br />';
+								}
+							else
+								{
+									echo 'Error in Query 1 <br />';
+									echo $conObj->error.'<br />';
+								}
+						/*}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}
+			}
+		else
+			{
+				echo 404;
+			}*/
+			
+		
+	}
+
+function workshopsInsert($title,$start,$end,$place,$attendes)
+	{
+	
+		$startDate = date_parse($start);
+		$startDateTimestamp = strtotime($start);
+		
+		//echo $startDateTimestamp.'<br/>';
+		
+		$endDate = date_parse($end);
+		$endDateTimestamp = strtotime($end);
+
+		//echo $endDateTimestamp.'<br/>';
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);
+		
+		//echo $currentTimestamp.'<br/>';
+		
+		/*if(($place != '') and ($attendes != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+			{
+				$conObj = new QoB();
+				$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values1 = array();
+							
+							$values1[0] = array($userId => 's');
+							$values1[1] = array($title => 's');
+							$values1[2] = array($start => 's');
+							$values1[3] = array($end => 's');
+							$values1[4] = array($place => 's');
+							$values1[5] = array($attendes => 'i');
+							
+							$result1 = $conObj->insert("INSERT INTO workshops(uid,title,start,end,place,attendes) VALUES(?,?,?,?,?,?)",$values1);
+							
+							if($conObj->error == "")
+								{
+									echo 'Succesfull Insert <br />';
+								}
+							else
+								{
+									echo 'Error in Query 1 <br />';
+									echo $conObj->error.'<br />';
+								}
+					/*	}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}
+			}
+			
+		else	
+			{
+				echo 404;
+			}*/
+			
+		
+	}
 ?>
