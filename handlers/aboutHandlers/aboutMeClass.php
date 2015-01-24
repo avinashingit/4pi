@@ -2,7 +2,7 @@
 	class about
 	{
 		public $profilePicture;
-		public $name;
+		public $name; //alias of the user
 		public $dob;
 		public $description;
 		public $resume;
@@ -57,20 +57,22 @@
 		{
 			public $degreeId;
 			public $degree;
-			public $name;
+			public $schoolName;//alias of the
 			public $duration;
 			public $minDuration;
-			public $cgpa;
+			public $score;
+			public $scoreType;
 			public $isOwner;
 			
-			public function __construct($degreeId,$degree,$name,$duration,$minDuration,$cgpa,$isOwner)
+			public function __construct($degreeId,$degree,$schoolName,$duration,$minDuration,$score,$scoreType,$isOwner)
 				{
 					$this->degreeId=$degreeId;
 					$this->degree = $degree ;
-					$this->name = $name ;
+					$this->schoolName=$schoolName;
 					$this->duration = $duration ;
 					$this->minDuration = $minDuration;
-					$this->cgpa = $cgpa ;
+					$this->score = $score ;
+					$this->scoreType=$scoreType;
 					$this->isOwner=$isOwner;
 					return $this;
 				}
@@ -83,16 +85,16 @@
 			public $location;
 			public $description;
 			public $position;
-			public $achieveddate;
+			//public $achieveddate;
 			public $isOwner;
-			public function __construct($achievementId,$competition,$location,$description,$position,$achieveddate,$isOwner)
+			public function __construct($achievementId,$competition,$location,$description,$position,$isOwner)
 				{
 					$this->achievementId = $achievementId;
 					$this->competition = $competition;
 					$this->location = $location;
 					$this->description = $description;
 					$this->position = $position;
-					$this->achieveddate = $achieveddate;
+					//$this->achieveddate = $achieveddate;
 					$this->isOwner=$isOwner;
 					return $this;
 				}

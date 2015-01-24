@@ -23,59 +23,62 @@ Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
 
 */
-if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
-{
-	echo 11;
-	exit();
-}
-
 $conn=new QoB();
-$currentUserIdHash=$_SESSION['vj'];
+$currentUserId="Guest";
 $userId=$_POST['_userId'];
 $mode=$_POST['_mode'];
-
-if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
-{
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe")>0)
-	{
-		$_SESSION=array();
-		session_destroy();
-		echo 14;
-		exit();
-	}
-	else
-	{
-		notifyAdmin("Suspicious Session Variable in aboutMe",$userIdHash.",sh:".$_SESSION['tn']);
-		$_SESSION=array();
-		session_destroy();
-		echo 13;
-		exit();
-	}
-}
-if(($user=getUserFromHash($currentUserIdHash))==false)
-{
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe")>0)
-	{
-		$_SESSION=array();
-		session_destroy();
-		echo 14;
-		exit();
-	}
-	else
-	{
-		notifyAdmin("Suspicious Session Variable in aboutMe",$userIdHash.",sh:".$_SESSION['tn']);
-		$_SESSION=array();
-		session_destroy();
-		echo 13;
-		exit();
-	}
-}
 $isOwner=0;
-$currentUserId=$user['userId'];
-if($user['userId']==$userId)
+
+if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
 {
-	$isOwner=1;
+	$currentUserIdHash=$_SESSION['vj'];
+	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
+	{
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in aboutMe",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
+	}
+	if(($user=getUserFromHash($currentUserIdHash))==false)
+	{
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe")>0)
+		{
+			$_SESSION=array();
+			session_destroy();
+			echo 14;
+			exit();
+		}
+		else
+		{
+			notifyAdmin("Suspicious Session Variable in aboutMe",$userIdHash.",sh:".$_SESSION['tn']);
+			$_SESSION=array();
+			session_destroy();
+			echo 13;
+			exit();
+		}
+	}
+	$currentUserId=$user['userId'];
+	if($user['userId']==$userId)
+	{
+		$isOwner=1;
+	}
 }
+
+
+
+
+
 
 
 
@@ -100,7 +103,7 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT about.*,users.name,experience.organisation,experience.designation FROM about INNER JOIN users ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT about.*,users.alias,users.userIdHash,experience.organisation,experience.designation FROM about INNER JOIN users ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
 		
 		if($conObj->error == ""&&$result1 != "")
 		{
@@ -110,8 +113,9 @@ function aboutMe($userId,$mode,$isOwner)
 			$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
 			$highestDegree=getDegree($userId);
+			$proPicLocation=getProfilePicLocation($result1['userIdHash']);
 			$work=$result1['designation']." at ".$result1['organisation'];
-			$obj = new about($result1['propic'],$name,$result1['dob'],$result1['description'],$result1['resume'], 
+			$obj = new about($proPicLocation,$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
 				$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],$result1['phone'],$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
 			print_r(json_encode($obj));
 				

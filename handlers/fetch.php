@@ -455,7 +455,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	}
 
 
-
+	//Anything 'Raw' is what is fetched from front-end or something which needs to be sent to front-end
 	function changeToEventDateFormat($date)
 	{
 		$nDate=explode("/", $date);
@@ -531,9 +531,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
-	function validateDate($rawDate)
+	function validateDate($rawDate,$seperator='/')
 	{
-		$ndate=explode('/',$rawDate);
+		$ndate=explode($seperator,$rawDate);
 		//var_dump($ndate);
 		if($ndate[2]<2007||$ndate[2]>2030)
 		{
@@ -779,8 +779,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	function getDuration($start,$end)
 	{
-		$startYearMonthDate=date('Y/m/d',$start);
-		$endYearMonthDate=date('Y/m/d',$end);
+		$startYearMonthDate=date('d/m/Y',$start);
+		$endYearMonthDate=date('d/m/Y',$end);
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
 		return $duration;
 	}
@@ -789,12 +789,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	function getMinDuration($start,$end)
 	{
-		$startYearMonthDate=date('Y/m',$start);
-		$endYearMonthDate=date('Y/m',$end);
+		$startYearMonthDate=date('M,Y',$start);
+		$endYearMonthDate=date('M,Y',$end);
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
 		return $duration;
 	}
 
+
+	function toTimestamp($dateString)
+	{
+		return strtotime($dateString);
+	}
 
 
 	function toTimeAgoFormat($timestamp)
@@ -805,6 +810,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		return $timeAgoFormat;
 	}
 
+
+
+	function getProfilePicLocation($userIdHash)
+	{
+		$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+		return $proPicLocation;
+	}
+	
 
 
 	function getPollObject($poll,$userId)
