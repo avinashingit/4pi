@@ -107,7 +107,7 @@ function profilePicture($pic)
 			     				unlink("images/proPics" . $_SESSION['sessionName'].'.jpg');
 				 			}
 
-				 		move_uploaded_file($pic["profilePic"]["tmp_name"],"images/proPics".$_SESSION['sessionName'].'.jpg');
+				 		move_uploaded_file($pic["profilePic"]["tmp_name"],"img/proPics".$_SESSION['sessionName'].'.jpg');
 
 						return 1;
 					}

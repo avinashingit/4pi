@@ -1,7 +1,252 @@
-var userId=window.location.href.lastIndexOf('/');
+var userIdFromURL=window.location.href.lastIndexOf('/');
 var commonURLAbout="http://localhost/4pi/";
 // fetch and insert top  && fetch and insert bottom && fetch and insert Projects && fetch and insert skills  &&fetch and insert experiences && fetch and insert workshops && fetch and insert academics && fetch and insert certifications && fetch and insert achievements are over
 // pending skills,interests,tools
+// 
+// 
+///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
+
+
+/*$(function () {
+	$('#skills').highcharts({
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Skillset'
+    },
+    xAxis: {
+        type: 'category',
+        labels: {
+            rotation: -45,
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    },
+    yAxis: {
+        min: 0,
+		max:100,
+        title: {
+            text: 'Percentage'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: '<b>{point.y:.1f} %</b>'
+    },
+    series: [{
+        name: 'Skill',
+        data: [
+            ['Skill1', 100],
+            ['Skill2', 90],
+            ['Skill3', 80],
+            ['Karachi', 70],
+            ['Mumbai', 60],
+            ['Moscow', 50],
+            ['Karachi', 70],
+            ['Mumbai', 60],
+            ['Moscow', 50]
+        ],
+        dataLabels: {
+            enabled: true,
+            color: '#000000',
+            x: 0,
+            y: 0,
+            style: {
+                fontSize: '8px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    }]
+    });
+});
+
+// $('textarea').autosize({'append':'false'});
+
+$(document).ready(function(){
+	$('.navObject').each(function(){
+		$(this).hide();
+	});
+	// $('#skills').hide();
+	$('#skills').show();
+
+	$('.middleNavbarA').click(function(){
+		$('.middleNavbarA').each(function(){
+			$(this).css({'background-color':'','color':''});
+		});
+		$(this).css({'background-color':'black','color':'white'});
+		var href=$(this).attr("data-target");
+		
+		$('.navObject').each(function(){
+			$(this).hide();
+		});
+		$(href).show();
+		
+		
+		
+	});
+});
+
+function editPersonInfo()
+{
+	$('#editPersonInfoModal').modal('show');
+	var x=$('#editPersonInfoModal');
+	var ob2=$('#entireContent').find('#personInfo');
+	x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
+	x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
+	x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
+	x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());
+	x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
+}
+
+function editToolColumn(x,y)
+{
+	var column=x;
+	var row=y;
+	$('#editToolModal').modal('show');
+	$('#editToolModal').find('#editToolModalToolText').val($('#tools').find('#toolsColumn'+x+'Tool'+y).html());
+}
+
+function addSkill()
+{
+	$("#addSkillModal").modal('show');
+}
+
+function addTool()
+{
+	$("#addToolModal").modal('show');
+}
+
+function addProject()
+{
+	$('#addProjectModal').modal('show');
+}
+
+function editProject(n)
+{
+	$('#editProjectModal').modal('show');
+
+	var x=$('#editProjectModal');
+	var y=$('#project'+n);
+	x.find('#editProjectModalProjectId').val(n);
+	x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
+	z=y.find('#projectDuration').attr("title");
+	xz=z.split("-");
+	x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
+	x.find('#editProjectModalProjectDurationTo').val(xz[1]);
+	x.find('#editProjectModalProjectRole').val(y.find('#projectRole').html());
+	x.find('#editProjectModalProjectCompany').val(y.find('#projectCompany').html());
+	x.find('#editProjectModalProjectDescription').val(y.find('#projectDescription').html());
+}
+
+function addExperience()
+{
+	$('#addExperienceModal').modal('show');
+}
+
+function editExperience(n)
+{
+	$('#editExperienceModal').modal('show');
+
+	var x=$('#editExperienceModal');
+	var y=$('#experience'+n);
+	x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
+	x.find('#editExperienceModalRole').val(y.find('#role').html());
+	z=y.find('#duration').attr("title");
+	xz=z.split("-");
+	x.find('#editExperienceModalDurationFrom').val(xz[0]);
+	x.find('#editExperienceModalDurationTo').val(xz[1]);
+	x.find('#experienceId').val(n);
+}
+
+function addCertification()
+{
+	$('#addCertificationModal').modal('show');
+}
+
+function editCertification(n)
+{
+	$('#editCertificationModal').modal('show');
+
+	var x=$('#editCertificationModal');
+	var y=$('#certification'+n);
+	x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
+	x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
+	z=y.find('#duration').attr("title").split("-");
+	x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
+	x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
+	x.find('#editCertificationModalId').html(n);
+}
+
+function addAcademics()
+{
+	$('#addAcademicsModal').modal('show');
+}
+
+function editAcademics(n)
+{
+	$('#editAcademicsModal').modal('show');
+
+	var x=$('#editAcademicsModal');
+	var y=$('#academics'+n);
+	x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
+	x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
+	x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
+	z=y.find('#duration').attr("title").split("-");
+	x.find('#editAcademicsModalDurationFrom').val(z[0]);
+	x.find('#editAcademicsModalDurationTo').val(z[1]);
+	x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
+	x.find('#editAcademicsModalId').val(n);
+}
+
+function addWorkshop()
+{
+	$('#addWorkshopModal').modal('show');
+}
+
+function editWorkshop(n)
+{
+	$('#editWorkshopModal').modal('show');
+
+	var x=$('#editWorkshopModal');
+	var y=$('#workshop'+n);
+	x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
+	x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
+	z=y.find('#workshopDuration').attr("title").split("-");
+	x.find('#editWorkshopModalWorkshopDurationFrom').val(z[0]);
+	x.find('#editWorkshopModalWorkshopDurationTo').val(z[0]);
+	x.find('#editWorkshopModalWorkshopPeopleNumber').val(y.find('#attenderNumber').html());
+	x.find('#editWorkshopModalId').html(n);
+}
+
+function addAchievement()
+{
+	$('#addAchievementModal').modal('show');
+}
+
+function editAchievement(n)
+{
+	$('#editAchievementModal').modal('show');
+
+	var x=$('#editAchievementModal');
+	var y=$('#achievement'+n);
+	x.find('#editAchievementModalEventName').val(y.find('#eventName').html());
+	x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
+	x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
+	x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
+}*/
+
+////////////////////////////GENERIC FUNCTIONS END///////////////////
+///
+///
+///
+///
+///
+/////////////////PERSONAL INFORMATION STARTS///////////////////////
 function insertTopPart(data)
 {
 	var topPart="";
@@ -247,9 +492,16 @@ function fetchBottomPart()
 	});
 }
 
+//////////////////////////////PERSONAL INFO ENDS/////////////////////
+///
+///
+///
+///
+///////////////////////////////SKILLS STARTS////////////////////////////
+
 function insertSkills(data)
 {
-	$('#skills').highcharts({
+	$('#skills').find('#skillData').highcharts({
         chart: {
             type: 'column'
         },
@@ -315,6 +567,140 @@ function fetchSkills()
 	});
 }
 
+function addSkillSendData()
+{
+	var link=$("#addSkillModal");
+	var skillName=link.find("#addSkillModalSkillName").val().trim();
+	var skillPercentage=link.find("#addSkillModalSkillPercentage").val().trim();
+
+	if(skillName.length==0)
+	{
+		alert("Empty skills are not allowed");
+	}
+	else if(isNaN(skillPercentage))
+	{
+		alert("Our bot does not understand text");
+	}
+	else if(skillPercentage==0)
+	{
+		alert("Hey come on! Zero is not a good number here.");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/insertSkill.php',{
+			_skillName:skillName,
+			_skillPercentage:skillPercentage
+		})
+		.error(function(){
+			alert("Server overload. Please try again.:(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				insertSkills(data.JSONObject);
+				var skillNames=data.skillNames.join();
+				var skillPercentages=data.skillPercentages.join();
+				$("#skills").find("#skillNames").html(skillNames);
+				$("#skills").find("#skillPercentages").html(skillPercentages);
+			}
+		});
+	}
+}
+
+function modifySkill(data)
+{
+	insertSkills(data.JSONobject);
+}
+
+function editSkillsSendData()
+{
+	
+}
+
+function deleteSkill(id)
+{
+
+}
+
+
+////////////////////////////SKILLS ENDS/////////////////////////////////////
+///
+///
+///
+///
+//////////////////////////////TOOLS STARTS/////////////////////////////////
+
+function insertTool(data)
+{
+	var tool="";
+
+	tool+='<p class="tool">'+data+'</p><br/>';
+
+	var length=$("#tools").find(".tool").length;
+
+	if(length%3==0)
+	{
+		$("#tools").find("#toolsColumn1").append(tool);
+	}
+	else if(length%2==0)
+	{
+		$("#tools").find("#toolsColumn2").append(tool);
+	}
+	else
+	{
+		$("#tools").find('#toolColumn3').append(tool);
+	}
+
+}
+
+function fetchTools(data)
+{
+	$.post('/4pi/handlers/aboutMeHandlers/fetchTools.php',{
+
+	})
+	.error(function(){
+		alert("Server overload. Please try again.:(");
+	})
+	.success(function(data){
+		if(checkAbout(data)==1)
+		{
+			for(i=0;i<data.length;i++)
+			{
+				insertTool(data[i]);
+			}
+		}
+	});
+}
+
+function addToolSendData()
+{
+	
+}
+
+function modifyTool(data)
+{
+
+}
+
+function editToolSendData()
+{
+
+}
+
+function deleteTool(id)
+{
+
+}
+
+//////////////////////////////TOOLS ENDS/////////////////////////////////
+///
+///
+///
+///
+////////////////////////////PROJECTS STARTS////////////////////////////////
+
+
+
 function insertProjects(data,type)
 {
 	var projects="";
@@ -333,52 +719,52 @@ function insertProjects(data,type)
 	{
 		projects+='<div class="row project" id="'+data[i].projectId+'">';
 
-								projects+='<div class="row">';
+			projects+='<div class="row">';
 
-									projects+='<div class="col-md-5 text-left">';
+				projects+='<div class="col-md-5 text-left">';
 
-										projects+='<h4 class="textPadding" style="font-weight:bold;" id="projectTitle">'+data[i].projectTitle+'</h4>';
+					projects+='<h4 class="textPadding" style="font-weight:bold;" id="projectTitle">'+data[i].projectTitle+'</h4>';
 
-									projects+='</div><!-- end class col-md- 3 -->';
+				projects+='</div><!-- end class col-md- 3 -->';
 
-									projects+='<div class="col-md-4 text-left">';
+				projects+='<div class="col-md-4 text-left">';
 
-										projects+='<h4 class="textPadding"  id="projectCompany">'+data[i].projectCompany+'</h4>';
+					projects+='<h4 class="textPadding"  id="projectCompany">'+data[i].projectCompany+'</h4>';
 
-									projects+='</div><!-- end class col-md- 3 -->';
+				projects+='</div><!-- end class col-md- 3 -->';
 
-									projects+='<div class="col-md-3 text-right">';
-										
-										projects+='<h5 class="textPadding"><i onclick="editProject('+data[i].projectId+');" class="fa fa-trash"></i>&nbsp;<i onclick="deleteProject('+data[i].projectId+');" class="fa fa-pencil"></i>&nbsp;<span id="projectDuration" title="'+data[i].projectDuration+'">'+data[i].projectMinDuration+'</span></h5>';
+				projects+='<div class="col-md-3 text-right">';
+					
+					projects+='<h5 class="textPadding"><i onclick="editProject(\''+data[i].projectId+'\');" class="fa fa-trash"></i>&nbsp;<i onclick="deleteProject(\''+data[i].projectId+'\');" class="fa fa-pencil"></i>&nbsp;<span id="projectDuration" title="'+data[i].projectDuration+'">'+data[i].projectMinDuration+'</span></h5>';
 
-									projects+='</div><!-- end class col-md- 3 -->';
+				projects+='</div><!-- end class col-md- 3 -->';
 
 
-								projects+='</div><!-- end class row -->';
+			projects+='</div><!-- end class row -->';
 
-								projects+='<div class="row">';
-									
-									projects+='<div class="col-md-3 text-left">';
+			projects+='<div class="row">';
+				
+				projects+='<div class="col-md-3 text-left">';
 
-										projects+='<h5 class="textPadding" id="projectRole">'+data[i].projectRole+'</h5>';
+					projects+='<h5 class="textPadding" id="projectRole">'+data[i].projectRole+'</h5>';
 
-									projects+='</div><!-- end class col-md- 3 -->';
+				projects+='</div><!-- end class col-md- 3 -->';
 
-									projects+='<div class="col-md-9 text-right">';
+				projects+='<div class="col-md-9 text-right">';
 
-										projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">'+data[i].pojectTeam+'</span></h5>';
+					projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">'+data[i].pojectTeam+'</span></h5>';
 
-									projects+='</div><!-- end class col-md- 3 -->';
+				projects+='</div><!-- end class col-md- 3 -->';
 
-								projects+='</div><!-- end class row -->';
+			projects+='</div><!-- end class row -->';
 
-								projects+='<div class="row">';
+			projects+='<div class="row">';
 
-									projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data[i].projectDescription+'</p>';
+				projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data[i].projectDescription+'</p>';
 
-								projects+='</div><!-- end class row -->';
+			projects+='</div><!-- end class row -->';
 
-							projects+='</div>';
+		projects+='</div>';
 	}
 
 	$('#projects').find('#projectContainer').append(projects);
@@ -403,6 +789,118 @@ function fetchProjects()
 	});
 }
 
+function addProjectSendData()
+{
+	var ln=$('#addProjectModal');
+	var title=ln.find('#addProjectModalProjectTitle').val().trim();
+	var duration=ln.find('#addProjectModalProjectDurationFrom').val().trim()+"-"+ln.find('#addProjectModalProjectDurationTo').val().trim();
+	var role=ln.find('#addProjectModalProjectRole').val().trim();
+	var company=ln.find('#addProjectModalProjectCompany').val().trim();
+	var description=ln.find('#addProjectModalProjectDescription').val().trim();
+	if(title.length==0)
+	{
+		alert("Please enter the title");
+	}
+	else
+	{
+		$.post('4pi/handlers/aboutMeHandlers/addProject.php',{
+			_title:title,
+			_duration:duration,
+			_role:role,
+			_company:company,
+			_description:description
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				insertProjects(data,"single");
+			}
+		});
+	}
+}
+
+function modifyProject(data)
+{
+	var y=$('#'+data.projectId);
+	y.find('#projectTitle').html(data.title);
+	y.find('#projectDuration').html(data.minDuration);
+	y.find('#projectDuration').attr("title",data.projectDuration);
+	y.find('#projectRole').html(data.role);
+	y.find('#projectCompany').html(data.company);
+	y.find('#projectDescription').html(data.description);
+}
+
+function editProjectSendData()
+{
+	var ln=$('#editProjectModal');
+	var title=ln.find('#editProjectModalProjectTitle').val().trim();
+	var duration=ln.find('#editProjectModalProjectDurationFrom').val().trim()+"-"+ln.find('#editProjectModalProjectDurationTo').val().trim();
+	var role=ln.find('#editProjectModalProjectRole').val().trim();
+	var company=ln.find('#editProjectModalProjectCompany').val().trim();
+	var description=ln.find('#editProjectModalProjectDescription').val().trim();
+	var projectId=ln.find('editProjectModalProjectId').val();
+
+	if(title.length==0)
+	{
+		alert("Please enter the project title");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editProject.php',{
+			_title:title,
+			_duration:duration,
+			_role:role,
+			_company:company,
+			_description:description,
+			_id:projectId
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				modifyProject(data);
+			}
+		});
+	}
+}
+
+function deleteProject(id)
+{
+	if(confirm("Do you want to delete this project?"))
+	{
+		$.post('/4pi/handlers/aboutMe/deleteProject.php',{
+			_projectId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$('#projects').find('#'+id).remove();
+			}
+		});
+	}
+}
+
+
+
+
+///////////////////////PROJECTS END/////////////////////
+///
+///
+///
+///
+///////////////////////EXPERIENCE STARTS///////////////
+
+
 function insertExperience(data)
 {
 	var experience="";
@@ -421,7 +919,7 @@ function insertExperience(data)
 
 			experience+='<div class="col-md-3 text-right col-md-offset-2">';
 
-				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience('+data[i].experienceId+');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience('+data[i].experienceId+');" class="fa fa-trash"></i></div>';
+				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data[i].experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data[i].experienceId+'\');" class="fa fa-trash"></i></div>';
 
 			experience+='</div>';
 
@@ -467,7 +965,7 @@ function insertExperience(data)
 
 			experience+='<div class="col-md-3 text-right col-md-offset-2">';
 
-				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(1);" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience('+data[i].experienceId+');" class="fa fa-trash"></i></div>';
+				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data[i].experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data[i].experienceId+'\');" class="fa fa-trash"></i></div>';
 
 			experience+='</div>';
 
@@ -514,6 +1012,108 @@ function fetchExperience()
 		}
 	});
 }
+
+function addExperienceSendData()
+{
+
+	var ln=$('#addExperienceModal');
+	var companyName=ln.find('#addExperienceModalCompanyName').val().trim();
+	var role=ln.find('#addExperienceModalRole').val().trim();
+	var duration=ln.find('#addExperienceModalDurationFrom').val().trim()+"-"+ln.find('#addExperienceModalDurationTo').val().trim();
+	if(companyName.length==0)
+	{
+		alert("Please enter the name of the company");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/addExperience.php',{
+			_company:companyName,
+			_role:role,
+			_duration:duration
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				insertExperience(data,"single");
+			}
+		});
+	}
+}
+
+function modifyExperience(data)
+{
+	var link=$('#experiences').find('#'+data.experienceId);
+	link.find('#company').html(data.companyName);
+	link.find('#role').html(data.role);
+	link.find('#duration').attr("title",data.duration);
+	link.find('#duration').html(data.duration);
+}
+
+function editExperienceSendData()
+{
+	var link=$('#editExperienceModal');
+	var company=link.find('#editExperienceModalCompanyName').val().trim();
+	var role=link.find('#editExperienceModalRole').val().trim();
+	var duration=link.find('#editExperienceModalDurationFrom').val().trim()+"-"+link.find('#editExperienceModalDurationTo').val().trim();
+	var id=link.find('#experienceId').html();
+
+	if(company.length==0)
+	{
+		alert("Please enter the company name.");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editExperience.php',{
+			_experienceId:id,
+			_company:company,
+			_role:role,
+			_duration:duration
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				modifyExperience(data);
+			}
+		});
+	}
+}
+
+function deleteExperience(id)
+{
+	if(confirm("Do you want to delete the experience?"))
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/deleteExperience.php',{
+			_experienceId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$('#experiences').find('#'+id).remove();
+			}
+		});
+	}
+}
+
+
+
+
+////////////////////////EXPERIENCE ENDS///////////////
+///
+///
+///
+////////////////////////ACADEMICS STARTS/////////////
+
+
 
 function insertAcademics(data)
 {
@@ -567,7 +1167,7 @@ function insertAcademics(data)
 
 			academics+='<div class="col-md-4 text-right">';
 
-				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics('+data[i].academicsId+');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics('+data[i].academicsId+');"></i></div>';
+				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data[i].academicsId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics(\''+data[i].academicsId+'\');"></i></div>';
 
 			academics+='</div><!--end class col-md-8 -->';
 
@@ -628,7 +1228,7 @@ function insertAcademics(data)
 
 			academics+='<div class="col-md-4 text-right">';
 
-				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics('+data[i].academicsId+');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics('+data[i].academicsId+');"></i></div>';
+				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data[i].academicsId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics(\''+data[i].academicsId+'\');"></i></div>';
 
 			academics+='</div><!--end class col-md-8 -->';
 
@@ -656,6 +1256,108 @@ function fetchAcademics()
 		}
 	});
 }
+
+function addAcademicsSendData()
+{
+	var ln=$('#addAcademicsModal');
+	var degree=ln.find('#addAcademicsModalDegree').val().trim();
+	var percentage=ln.find('#addAcademicsModalPercentage').val().trim();
+	var school=ln.find('#addAcademicsModalSchoolName').val().trim();
+	var duration=ln.find('#addAcademicsModalDurationFrom').val().trim()+"-"+ln.find('#addAcademicsModalDurationTo').val().trim();
+	var location=ln.find('#addAcademicsModalSchoolLocation').val().trim();
+	if(degree.length!="")
+	{
+		alert("Please enter the degree.");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/addAcademics.php',{
+			_degree:degree,
+			_percentage:percentage,
+			_school:school,
+			_duration:duration,
+			_location:location
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				insertAcademics(data,"single");
+			}
+		});
+	}
+}
+
+function modifyAcademics(data)
+{
+	var link=$('#academics').find('#'+data.academicsId);
+	link.find('#degree').html(data.degree);
+	link.find('#percentage').html(data.percentage);
+	link.find('#school').html(data.school);
+	link.find('#location').html(data.location);
+	link.find('#duration').attr("title",data.minDuration);
+	link.find('#duration').html(data.duration);
+}
+
+function editAcademicsSendData()
+{
+	var link=$('#editAcademicsModal');
+	var degree=link.find('#editAcademicsModalDegree').val().trim();
+	var percentage=link.find('#editAcademicsModalPercentage').val().trim();
+	var school=link.find('#editAcademicsModalSchoolName').val().trim();
+	var location=link.find('#editAcademicsModalSchoolLocation').val().trim();
+	var duration=link.find('#editAcademicsModalDurationFrom').val().trim()+"-"+link.find('#editAcademicsModalDurationTo').val().trim();
+	var id=link.find('#editAcademicsModalId').html();
+	if(degree.length==0)
+	{
+		alert("We hope you have a degree name.")
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editAcademics.php',{
+			_academicsId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				modifyAcademics(data);
+			}
+		});
+	}
+}
+
+function deleteAcademics(id)
+{
+	if(confirm("Do you want to delete this?"))
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/deleteAcademics.php',{
+			_academicsId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$('#academics').find('#'+id).remove();
+			}
+		});
+	}
+}
+
+
+/////////////////////////ACADEMICS ENDS/////////////////
+///
+///
+///
+/////////////////////////WORKSHOPS STARTS///////////////
+
 
 function insertWorkshop(data)
 {
@@ -692,7 +1394,7 @@ function insertWorkshop(data)
 
 				workshop+='<div class="col-md-4 text-right col-md-offset-2">';
 
-					workshop+='<div style="font-size:15px;" id="workshopDuration" title="'+data[i].Duration+'">'+data[i].minDuration+'</div>';
+					workshop+='<div style="font-size:15px;" id="workshopDuration" title="'+data[i].duration+'">'+data[i].minDuration+'</div>';
 
 				workshop+='</div><!-- end classc col-md-3 -->';
 
@@ -779,6 +1481,107 @@ function fetchWorkshops()
 		}
 	});
 }
+
+function addWorkshopSendData()
+{
+	var ln=$('#addWorkshopModal');
+	var name=ln.find('#addWorkshopModalWorkshopName').val().trim();
+	var location=ln.find('#addWorkshopModalWorkshopLocation').val().trim();
+	var duration=ln.find('#addWorkshopModalWorkshopDurationFrom').val().trim()+"-"+ln.find('#addWorkshopModalWorkshopDurationTo').val().trim();
+	var peopleNumber=ln.find('#addWorkshopModalWorkshopPeopleNumber').val().trim();
+	if(name.length==0)
+	{
+		alert("Please enter the workshop name.");
+	}
+	else
+	{
+		$.post("/4pi/handlers/aboutMeHandlers/addWorkshop.php",{
+			_name:name,
+			_location:location,
+			_duration:duration,
+			_peopleNumber:peopleNumber
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				insertWorkshop(data,"single");
+			}
+		});
+	}
+}
+
+function modifyWorkshop(data)
+{
+	var link=$('#workshops').find('#'+data.workshopId);
+	link.find('#workshopName').html(data.name);
+	link.find('#workshopLocation').html(data.location);
+	link.find('#workshopDuration').html(data.duration).attr("title",data.minDuration);
+	link.find("#attendeeNumber").html(data.numPeopleAttended);
+}
+
+function editWorkshopSendData()
+{
+	var link=$('#editWorkshopModal');
+	var id=link.find('#editWorkshopModalId').html();
+	var name=link.find('#editWorkshopModalWorkshopName').val().trim();
+	var location=link.find('#editWorkshopModalWorkshopLocation').val().trim();
+	var duration=link.find('#editWorkshopModalWorkshopDurationFrom').val().trim()+"-"+link.find('#editWorkshopModalWorkshopDurationTo').val().trim();
+	var attendeeNumber=link.find('#editWorkshopModalWorkshopPeopleNumber').val().trim();
+	if(name.length==0)
+	{
+		alert("We hope a name was given to the workshop.");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editWorkshop.php',{
+			_workshopId:id,
+			_workshopName:name,
+			_workshopLocation:location,
+			_workshopDuration:duration,
+			_attendeeNumber:attendeeNumber
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				modifyWorkshop(data);
+			}
+		});
+	}
+}
+
+function deleteWorkshop(id)
+{
+	if(confirm("Do you want to delete this?"))
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/deleteWorkshop.php',{
+			_workshopId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$('#workshops').find('#'+id).remove();
+			}
+		});
+	}
+}
+
+
+/////////////////////////WORKSHOPS ENDS//////////////////
+//
+//
+//
+//
+//////////////////////////CERTIFICATIONS STARTS////////////
 
 function insertCertification(data)
 {
@@ -886,6 +1689,104 @@ function fetchCertifications()
 	});
 }
 
+function addCertificationSendData()
+{
+	var ln=$('#addCertificationModal');
+	var name=ln.find('#addCertificationModalCourseName').val().trim();
+	var institute=ln.find('#addCertificationModalInstitute').val().trim();
+	var duration=ln.find('#addCertificationModalDurationFrom').val().trim()+"-"+ln.find('#addCertificationModalDurationTo').val().trim();
+
+	if(name.length==0)
+	{
+		alert("Please enter the course name");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/addCertification.php',{
+			_name:name,
+			_institute:institute,
+			_duration:duration
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				data=JSON.parse(data);
+				insertWorkshop(data,"single");
+			}
+		});
+	}
+}
+
+function modifyCertification(data)
+{
+	var link=$('#certifications').find('#'+data.certificationId);
+	link.find('#courseName').html(data.courseName);
+	link.find('#institute').html(data.institute);
+	link.find('#duration').attr("title",data.duration).html(data.minDuration);
+}
+
+function editCertificationSendData()
+{
+	var link=$('#editCertificationModal');
+	var courseName=link.find('#editCertificationModalCourseName').val().trim();
+	var institute=link.find('#editCertificationModalInstitute').val().trim();
+	var duration=link.find('#editCertificationModalCertificationDurationFrom').val().trim()+"-"+link.find('#editCertificationModalDurationTo').val().trim();
+	var id=link.find('#editCertificationModalId').html();
+	if(courseName.length==0)
+	{
+		alert("Course name is compulsory.");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editCertification.php',{
+			_certificationId:id,
+			_courseName:courseName,
+			_institute:institute,
+			_duration:duration
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				modifyCertification(data);
+			}
+		});
+	}
+}
+
+function deleteCertification(id)
+{
+	if(confirm("Do you want to delete this?"))
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/deleteCertification.php',{
+			_certificationId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$('#certifications').find('#'+id).remove();
+			}
+		});
+	}
+}
+
+
+
+/////////////////////CERTIFICATONS ENDS//////////////////
+///
+///
+///
+///
+//////////////////////ACHIEVEMENTS STARTS////////////////
+
 function insertAchievements(data)
 {
 	var achievements="";
@@ -915,7 +1816,7 @@ function insertAchievements(data)
 
 				achievements+='<div class="col-md-6 text-left">';
 
-					achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'data[i].location+'</span></div>';
+					achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'+data[i].location+'</span></div>';
 
 				achievements+='</div><!-- end class col-md-6 -->';
 
@@ -966,7 +1867,7 @@ function insertAchievements(data)
 
 				achievements+='<div class="col-md-6 text-left">';
 
-					achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'data[i].location+'</span></div>';
+					achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'+data[i].location+'</span></div>';
 
 				achievements+='</div><!-- end class col-md-6 -->';
 
@@ -1009,168 +1910,6 @@ function fetchAchievements()
 	});
 }
 
-function addProjectSendData()
-{
-	var ln=$('#addProjectModal');
-	var title=ln.find('#addProjectModalProjectTitle').val().trim();
-	var duration=ln.find('#addProjectModalProjectDurationFrom').val().trim()+"-"+ln.find('#addProjectModalProjectDurationTo').val().trim();
-	var role=ln.find('#addProjectModalProjectRole').val().trim();
-	var company=ln.find('#addProjectModalProjectCompany').val().trim();
-	var description=ln.find('#addProjectModalProjectDescription').val().trim();
-	if(title.length==0)
-	{
-		alert("Please enter the title");
-	}
-	else
-	{
-		$.post('4pi/handlers/aboutMeHandlers/addProject.php',{
-			_title:title,
-			_duration:duration,
-			_role:role,
-			_company:company,
-			_description:description
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				data=JSON.parse(data);
-				insertProjects(data,"single");
-			}
-		});
-	}
-}
-
-function addExperienceSendData()
-{
-
-	var ln=$('#addExperienceModal');
-	var companyName=ln.find('#addExperienceModalCompanyName').val().trim();
-	var role=ln.find('#addExperienceModalRole').val().trim();
-	var duration=ln.find('#addExperienceModalDurationFrom').val().trim()+"-"+ln.find('#addExperienceModalDurationTo').val().trim();
-	if(companyName.length==0)
-	{
-		alert("Please enter the name of the company");
-	}
-	else
-	{
-		$.post('/4pi/handlers/aboutMeHandlers/addExperience.php',{
-			_company:companyName,
-			_role:role,
-			_duration:duration
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				data=JSON.parse(data);
-				insertExperience(data,"single");
-			}
-		});
-	}
-}
-
-function addAcademicsSendData()
-{
-	var ln=$('#addAcademicsModal');
-	var degree=ln.find('#addAcademicsModalDegree').val().trim();
-	var percentage=ln.find('#addAcademicsModalPercentage').val().trim();
-	var school=ln.find('#addAcademicsModalSchoolName').val().trim();
-	var duration=ln.find('#addAcademicsModalDurationFrom').val().trim()+"-"+ln.find('#addAcademicsModalDurationTo').val().trim();
-	var location=ln.find('#addAcademicsModalSchoolLocation').val().trim();
-	if(degree.length!="")
-	{
-		alert("Please enter the degree.");
-	}
-	else
-	{
-		$.post('/4pi/handlers/aboutMeHandlers/addAcademics.php',{
-			_degree:degree,
-			_percentage:percentage,
-			_school:school,
-			_duration:duration,
-			_location:location
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(functino(data){
-			if(checkData(data)==1)
-			{
-				data=JSON.parse(data);
-				insertAcademics(data,"single");
-			}
-		});
-	}
-}
-
-function addWorkshopSendData()
-{
-	var ln=$('#addWorkshopModal');
-	var name=ln.find('#addWorkshopModalWorkshopName').val().trim();
-	var location=ln.find('#addWorkshopModalWorkshopLocation').val().trim();
-	var duration=ln.find('#addWorkshopModalWorkshopDurationFrom').val().trim()+"-"+ln.find('#addWorkshopModalWorkshopDurationTo').val().trim();
-	var peopleNumber=ln.find('#addWorkshopModalWorkshopPeopleNumber').val().trim();
-	if(name.length==0)
-	{
-		alert("Please enter the workshop name.");
-	}
-	else
-	{
-		$.post("/4pi/handlers/aboutMeHandlers/addWorkshop.php",{
-			_name:name,
-			_location:location,
-			_duration:duration,
-			_peopleNumber:peopleNumber
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				data=JSON.parse(data);
-				insertWorkshop(data,"single");
-			}
-		});
-	}
-}
-
-function addCertificationSendData()
-{
-	var ln=$('#addCertificationModal');
-	var name=ln.find('#addCertificationModalCourseName').val().trim();
-	var institute=ln.find('#addCertificationModalInstitute').val().trim();
-	var duration=ln.find('#addCertificationModalDurationFrom').val().trim()+"-"+ln.find('#addCertificationModalDurationTo').val().trim();
-
-	if(name.length==0)
-	{
-		alert("Please enter the course name");
-	}
-	else
-	{
-		$.post('/4pi/handlers/aboutMeHandlers/addCertification.php',{
-			_name:name,
-			_institute:institute,
-			_duration:duration
-		})
-		.error(function(){
-			alert("Server overload. Please try again. :(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				data=JSON.parse(data);
-				insertWorkshop(data,"single");
-			}
-		});
-	}
-}
-
 function addAchievementSendData()
 {
 	var ln=$('#addAchievementModal');
@@ -1201,80 +1940,154 @@ function addAchievementSendData()
 	}
 }
 
-function modifyProject(data)
+function modifyAchievement(data)
 {
-	var y=$('#'+data.projectId);
-	y.find('#projectTitle').html(data.title);
-	y.find('#projectDuration').html(data.minDuration);
-	y.find('#projectDuration').attr("title",data.projectDuration);
-	y.find('#projectRole').html(data.role);
-	y.find('#projectCompany').html(data.company);
-	y.find('#projectDescription').html(data.description);
+	var link=$('#achievements').find('#'+data.achievementId);
+	link.find('#eventName').html(data.eventName);
+	link.find('#eventLocation').html(data.eventLocation);
+	link.find('#eventDuration').html(data.eventYear);
+	link.find('#eventDescription').html(data.eventDescription);
 }
 
-function editProjectSendData()
+function editAchievementSendData()
 {
-	var ln=$('#editProjectModal');
-	var title=ln.find('#editProjectModalProjectTitle').val().trim();
-	var duration=ln.find('#editProjectModalProjectDurationFrom').val().trim()+"-"+ln.find('#editProjectModalProjectDurationTo').val().trim();
-	var role=ln.find('#editProjectModalProjectRole').val().trim();
-	var company=ln.find('#editProjectModalProjectCompany').val().trim();
-	var description=ln.find('#editProjectModalProjectDescription').val().trim();
-	var projectId=ln.find('editProjectModalProjectId').val();
-
-	if(title.length==0)
+	var link=$('#editAchievementModal');
+	var name=link.find('#editAchievementModalEventName').val().trim();
+	var location=link.find('#editAchievementModalLocation').val().trim();
+	var year=link.find('#editAchievementModalYear').val().trim();
+	var description=link.find('#editAchievementModalDescription').val().trim();
+	var id=link.find('#editAchievementModalId').html();
+	if(eventName.length==0)
 	{
-		alert("Please enter the project title");
+		alert("Please enter the event name.");
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editProject.php',{
-			_title:title,
-			_duration:duration,
-			_role:role,
-			_company:company,
-			_description:description,
-			_id:projectId
+		$.post('/4pi/handlers/aboutMeHandlers/editAchievement.php',{
+			_achievementId:id,
+			_name:name,
+			_location:location,
+			_year:year,
+			_description:description
 		})
 		.error(function(){
-			alert("Server overload. Please try again. :(");
+			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				data=JSON.parse(data);
-				modifyProject(data);
+				modifyAchievement(data);
 			}
 		});
 	}
 }
 
-function editSkillsSendData()
+function deleteAchivement(id)
+{
+	if(confirm("Do you want to delete this?"))
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/deleteAchivement.php',{
+			_achievementId:id
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$('#achievements').find('#'+id).remove();
+			}
+		});
+	}
+}
+
+
+/////////////////////////ACHIEVEMENTS ENDS/////////////////
+///
+///
+///
+///
+////////////////////////////INTERESTS STARTS//////////////////
+
+function insertInterest(data)
+{
+
+}
+
+function fetchInterests(data)
+{
+
+}
+
+function addInterestSendData()
+{
+
+}
+
+function modifyInterest(data)
+{
+
+}
+
+function editInterestSendData()
+{
+
+}
+
+function deleteInterest(id)
 {
 	
 }
 
-function editExperienceSendData()
+
+/////////////////////////////INTERESTS ENDS//////////////////////
+///
+///
+///
+///
+/////////////////////////////////LEAVE MESSAGE/////////////////////////////////////
+
+function leaveMessage()
 {
-	
+	var link=$('#leaveMessageForm');
+	var name=link.find('#leaveMessageName').val();
+	var email=link.find('#leaveMessageEmail').val();
+	var message=link.find('#leaveMessageTextMessage').val();
+	if(name.length==0 || email.length==0 || message.length==0)
+	{
+		alert("Please fill all the fields");
+	}
+	else
+	{
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	   	 if(re.test(email))
+	   	 {
+	   	 	$.post('/4pi/handlers/aboutMeHandlers/leaveMessage.php',{
+	   	 		_name:name,
+	   	 		_email:email,
+	   	 		_message:message,
+	   	 		_userId:userIdFromURL
+	   	 	})
+	   	 	.error(function(){
+	   	 		alert("Server overload. Please try again.");
+	   	 	})
+	   	 	.success(function(data){
+	   	 		if(checkData(data)==1)
+	   	 		{
+	   	 			alert("Thank you. The message is delivered.")
+	   	 		}
+	   	 	});
+	   	 }
+	   	 else
+	   	 {
+	   	 	alert("Enter proper email");
+	   	 }
+	}
 }
 
-function editAcademicsSendData()
-{
 
-}
+///////////////////////////////LEAVE MESSAGE ENDS////////////////////////////////
 
-function editWorkshopSendData()
-{
 
-}
 
-function editCertificationSendData()
-{
 
-}
-
-function editAchievementSendData()
-{
-
-}

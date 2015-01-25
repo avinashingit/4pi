@@ -1,6 +1,6 @@
 <!-- basically the top bar i.e. the header part of the newsfeed, is common to all the users -->
 
-<script>
+<script>/*
 
 	function sendReadNotifications()
 	{
@@ -322,7 +322,7 @@
 			}
 			
 		});
-	}
+	}*/
 
 </script>
 

@@ -49,10 +49,31 @@
 		resize:none;
 	}
 
-	.project,.tool,.experience,.certification,.academics,.workshop,.achievement,.interest
+	.project,.tool,.experience,.certification,.academics,.workshop,.achievement
 	{
 		padding:15px;
 		cursor:pointer;
+	}
+
+	.interest,.tool
+	{
+		background-color:rgba(0, 0, 0, 0.05);
+		padding:8px;
+		padding-left:12px;
+		font-size:15px;
+		margin-bottom:10px;
+		cursor:pointer;
+	}
+	.interestEdit
+	{
+		color:#005A89;
+		padding-right:5px;
+	}
+
+	.interest:hover, .tool:hover
+	{
+		background-color:rgba(220, 220, 220, 0.05);
+		box-shadow: 5px 0px 0px 0px rgba(80, 183, 154, 1) inset;
 	}
 
 	.project
@@ -119,11 +140,11 @@
 	}
 
 </style>
-
+<!-- <script src="aboutMe.js"></script> -->
 <script>
 
 	$(function () {
-    	$('#skills').highcharts({
+    	$('#skills').find('#skillData').highcharts({
         chart: {
             type: 'column'
         },
@@ -226,6 +247,21 @@
 		$('#editToolModal').find('#editToolModalToolText').val($('#tools').find('#toolsColumn'+x+'Tool'+y).html());
 	}
 
+	function addSkill()
+	{
+		$("#addSkillModal").modal('show');
+	}
+
+	function editSkills()
+	{
+		$("#editSkillModal").modal('show');
+
+		var skills=$("#skills").find("#skillNames").html();
+		var percentages=$("#skills").find("#skillPercentages").html();
+
+
+	}
+
 	function addTool()
 	{
 		$("#addToolModal").modal('show');
@@ -244,7 +280,7 @@
 		var y=$('#project'+n);
 		x.find('#editProjectModalProjectId').val(n);
 		x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
-		z=y.find('#projectDuration').html();
+		z=y.find('#projectDuration').attr("title");
 		xz=z.split("-");
 		x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
 		x.find('#editProjectModalProjectDurationTo').val(xz[1]);
@@ -266,10 +302,11 @@
 		var y=$('#experience'+n);
 		x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
 		x.find('#editExperienceModalRole').val(y.find('#role').html());
-		z=y.find('#duration').html();
+		z=y.find('#duration').attr("title");
 		xz=z.split("-");
-		x.find('#editExperienceModalDurationHours').val(xz[0]);
-		x.find('#editExperienceModalDurationMin').val(xz[1]);
+		x.find('#editExperienceModalDurationFrom').val(xz[0]);
+		x.find('#editExperienceModalDurationTo').val(xz[1]);
+		x.find('#experienceId').val(n);
 	}
 
 	function addCertification()
@@ -285,7 +322,10 @@
 		var y=$('#certification'+n);
 		x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
 		x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
-		x.find('#editCertificationModalDuration').val(y.find('#duration').html());
+		z=y.find('#duration').attr("title").split("-");
+		x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
+		x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
+		x.find('#editCertificationModalId').html(n);
 	}
 
 	function addAcademics()
@@ -302,8 +342,11 @@
 		x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
 		x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
 		x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
-		x.find('#editAcademicsModalDuration').val(y.find('#duration').html());
+		z=y.find('#duration').attr("title").split("-");
+		x.find('#editAcademicsModalDurationFrom').val(z[0]);
+		x.find('#editAcademicsModalDurationTo').val(z[1]);
 		x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
+		x.find('#editAcademicsModalId').val(n);
 	}
 
 	function addWorkshop()
@@ -319,8 +362,11 @@
 		var y=$('#workshop'+n);
 		x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
 		x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
-		x.find('#editWorkshopModalWorkshopDuration').val(y.find('#workshopDuration').html());
+		z=y.find('#workshopDuration').attr("title").split("-");
+		x.find('#editWorkshopModalWorkshopDurationFrom').val(z[0]);
+		x.find('#editWorkshopModalWorkshopDurationTo').val(z[0]);
 		x.find('#editWorkshopModalWorkshopPeopleNumber').val(y.find('#attenderNumber').html());
+		x.find('#editWorkshopModalId').html(n);
 	}
 
 	function addAchievement()
@@ -451,13 +497,28 @@
 
 					<div class="row">
 
-						
+						<div class="col-md-2 text-left">
+
+							<h3><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Skills</h3>
+
+						</div>
+
+						<div class="col-md-2 col-md-offset-8 text-right">
+
+							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-danger" onclick="deleteSkill();"><i class="fa fa-trash"></i></button>
+
+						</div>
+
+					</div>
+
+					<div class="row" id="skillData">
+
 
 					</div>
 
 				</div><!-- end id skills -->
 
-				<!-- <div class="navObject" id="tools">
+				<div class="navObject" id="tools">
 				
 					<div class="row" id="toolsetHeading">
 				
@@ -472,10 +533,10 @@
 							<a class="cursorPointer" onclick="addTool();"><h5 class="text-center"><i class="fa fa-plus" ></i>&nbsp; Add </h5></a>
 				
 						</div>
-				
-						<br/>
-				
-					</div>end id toolsetHeading
+
+					</div>
+
+					<br/>
 				
 					<div class="row" id="toolContent">
 				
@@ -493,7 +554,7 @@
 				
 							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,6);"></i>&nbsp;<span id="toolsColumn1Tool6">Tool 6</span></p><br/>
 				
-						</div>end id toolsColumn1
+						</div>
 				
 						<div class="col-md-4 text-center" id="toolsColumn2">
 				
@@ -509,7 +570,7 @@
 				
 							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,6);"></i>&nbsp;<span id="toolsColumn2Tool6">Tool 6</span></p><br/>
 				
-						</div>end id toolsColumn1
+						</div>
 				
 						<div class="col-md-4 text-center" id="toolsColumn3">
 				
@@ -525,103 +586,103 @@
 				
 							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,6);"></i>&nbsp;<span id="toolsColumn3Tool6">Tool 6</span></p><br/>
 				
-						</div>end id toolsColumn1
+						</div>
 				
-					</div>end id toolContent
+					</div>
+				
+				</div>
+
+				<!-- <div class="navObject" id="tools">
+				
+					<div class="row" id="toolContainer">
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1 col-md-offset-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+				
+						<div class="col-md-1" id="tool1">
+				
+							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
+				
+						</div>
+					
+					</div>end class row
 				
 				</div>end id tools -->
-
-				<div class="navObject" id="tools">
-
-					<div class="row" id="toolContainer">
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1 col-md-offset-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-
-						<div class="col-md-1" id="tool1">
-
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-
-						</div>
-	
-					</div><!-- end class row -->
-
-				</div><!-- end id tools -->
 
 				<div class="navObject" id="projects">
 
@@ -2590,6 +2651,80 @@
 
 				<div class="navObject" id="interests">
 
+					<div class="container">
+
+						<div class="row">
+
+							<div class="col-md-2 text-left">
+
+								<h3><i class="fa fa-star"></i>&nbsp;&nbsp;Interests</h3>
+
+							</div>
+
+							<div class="col-md-2 col-md-offset-8 text-right">
+
+								<button class="btn btn-md btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
+
+							</div>
+
+						</div>
+
+						<br/>
+
+						<div class="row">
+
+							<div class="col-md-4 text-left" id="interestsContainer1">
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+							</div>
+
+							<div class="col-md-4 text-left" id="interestsContainer2">
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+							</div>
+
+							<div class="col-md-4 text-left" id="interestsContainer3">
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+
+							</div>
+
+						</div>
+
+					</div>
+
 				</div><!-- end id interests -->
 
 			</div><!-- end id middle content -->
@@ -2604,7 +2739,7 @@
 
 					<div class="row">
 
-						<div class="col-md-5" style="border-right:1px solid #E6E6E6;">
+						<div class="col-md-5" id="leaveMessageForm" style="border-right:1px solid #E6E6E6;">
 
 							<div class="row">
 
@@ -2616,13 +2751,13 @@
 
 							<form>
 
-								<input type="text" id="leaveMessageName" class="form-control" placeholder="Your name"><br/>
+								<input type="text" id="leaveMessageName" class="form-control" placeholder="Your name" required><br/>
 
-								<input type="text" id="leaveMessageEmail" class="form-control" placeholder="Your email"><br/>
+								<input type="email" id="leaveMessageEmail" class="form-control" placeholder="Your email. It will not be disclosed." required><br/>
 
-								<textarea type="text" id="leaveMessageTextMessage" class="form-control" placeholder="Your message"></textarea><br/>
+								<textarea type="text" id="leaveMessageTextMessage" class="form-control" placeholder="Your message" required></textarea><br/>
 
-								<button class="btn btn-primary">Send</button>
+								<button class="btn btn-primary" onclick="leaveMessage();">Send</button>
 
 
 							</form>
@@ -2783,6 +2918,112 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div><!-- /.modal-content -->
+
+	</div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->
+
+<div class="modal fade" id="addSkillModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add skill</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<input type="text" id="addSkillModalSkillName" class="form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">
+
+						</div>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="addSkillSendData();">Add</button>
+
+			</div>
+
+		</div><!-- /.modal-content -->
+
+	</div><!-- /.modal-dialog -->
+
+</div><!-- /.modal -->
+
+<div class="modal fade" id="editSkillModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit skill</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form id="editSkillModalForm">
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<input type="text" id="editSkillModalSkillName" class="form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<input type="text" id="editSkillModalSkillPercentage" class="form-control">
+
+						</div>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="editSkillsSendData();">Save</button>
 
 			</div>
 
@@ -3115,7 +3356,7 @@
 
 </div>
 
-<div class="modal fade" id="editExperience Modal">
+<div class="modal fade" id="editExperienceModal">
 
 	<div class="modal-dialog">
 
@@ -3129,6 +3370,8 @@
 				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit experience</h4>
 
 			</div>
+
+			<div class="hidden" id="experienceId"></div>
 
 			<div class="modal-body">
 
@@ -3152,7 +3395,7 @@
 
 							<label for="experienceDurationHours">From</label>
 
-							<input type="text" id="editExperienceModalDurationHours" class="form-control">
+							<input type="text" id="editExperienceModalDurationFrom" class="form-control">
 
 						</div>
 
@@ -3160,7 +3403,7 @@
 
 							<label for="experienceDurationMin">To</label>
 
-							<input type="text" id="editExperienceModalDurationMin" class="form-control">
+							<input type="text" id="editExperienceModalDurationTo" class="form-control">
 
 						</div>
 
@@ -3202,6 +3445,8 @@
 				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Add institution</h4>
 
 			</div>
+
+
 
 			<div class="modal-body">
 
@@ -3285,6 +3530,8 @@
 
 			</div>
 
+			<div class="hidden" id="editAcademicsModalId"></div>
+
 			<div class="modal-body">
 
 				<form>
@@ -3307,11 +3554,29 @@
 
 					<br/>
 
-					<label for="duration">Duration</label>
+					<div class="row">
 
-					<input type="text" id="editAcademicsModalDuration" class="form-control">
+						<div class="col-md-6">
 
-					<br/>
+							<label for="duration">From</label>
+
+							<input type="text" id="editAcademicsModalDurationFrom" class="form-control">
+
+							<br/>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="duration">To</label>
+
+							<input type="text" id="editAcademicsModalDurationTo" class="form-control">
+
+							<br/>
+
+						</div>
+
+					</div>
 
 					<label for="location">Location</label>
 
@@ -3425,6 +3690,8 @@
 
 			</div>
 
+			<div class="hidden" id="editWorkshopModalId"></div>
+
 			<div class="modal-body">
 
 				<form>
@@ -3441,11 +3708,31 @@
 
 					<br/>
 
-					<label for="duration">Duration</label>
+					<div class="row">
 
-					<input type="text" id="editWorkshopModalWorkshopDuration" class="form-control">
+						<div class="col-md-6">
 
-					<br/>
+							<label for="duration">From</label>
+
+							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control">
+
+							<br/>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="duration">To</label>
+
+							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control">
+
+							<br/>
+
+						</div>
+
+					</div>
+
+					
 
 					<label for="number">Number of people attended</label>
 
@@ -3555,6 +3842,8 @@
 
 			</div>
 
+			<div class="hidden" id="editCertificationModalId"></div>
+
 			<div class="modal-body">
 
 				<form>
@@ -3571,11 +3860,29 @@
 
 					<br/>
 
-					<label for="certificationDuration">Duration</label>
+					<div class="row">
 
-					<input type="text" id="editCertificationModalDuration" class="form-control">
+						<div class="col-md-6">
 
-					<br/>
+							<label for="duration">From</label>
+
+							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control">
+
+							<br/>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="duration">To</label>
+
+							<input type="text" id="editCertificationModalCertificationDurationFromTo" class="form-control">
+
+							<br/>
+
+						</div>
+
+					</div>
 
 					<br/>
 
@@ -3673,6 +3980,8 @@
 
 			</div>
 
+			<div class="hidden" id="editAchievementModalId"></div>
+
 			<div class="modal-body">
 
 				<form>
@@ -3721,15 +4030,14 @@
 
 
 
-
 <script>
 
-$( ".datepicker" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		dateFormat:"dd/mm/yy"
-	});
+	$( ".datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat:"dd/mm/yy"
+		});
 
-// $('.datepicker').css({'z-index':'1052'});
+	// $('.datepicker').css({'z-index':'1052'});
 
 </script>
