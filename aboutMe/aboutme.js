@@ -1,9 +1,32 @@
+/***************************************************************
+
+
+File: aboutme.js
+
+FileDescription: This file contains all the actions related to a persons aboutMe page.
+				 The actions include
+				 1. Skills insert, delete, add, fetch, modify
+				 2. Tools insert, delete, add, fetch, modify
+				 3. Academics insert, delete, add, fetch, modify
+				 4. Workshops insert, delete, add, fetch, modify
+				 5. Certificatoins insert, delete, add, fetch, modify
+				 6. Courses insert, delete, add, fetch, modify
+				 7. Achievements insert, delete, add, fetch, modify
+				 8. Projects insert, delete, add, fetch, modify
+				 9. Experience insert, delete, add, fetch, modify
+				 10. Intersts insert, delete, add, fetch, modify
+				 11. Personal information insert, edit, fetch, modify
+
+Author: Avinash Kadimisetty (www.kavinash.in)
+
+Last edited: 25-01-2015				 
+
+
+*********************************************************************/
+
+
 var userIdFromURL=window.location.href.lastIndexOf('/');
 var commonURLAbout="http://localhost/4pi/";
-// fetch and insert top  && fetch and insert bottom && fetch and insert Projects && fetch and insert skills  &&fetch and insert experiences && fetch and insert workshops && fetch and insert academics && fetch and insert certifications && fetch and insert achievements are over
-// pending skills,interests,tools
-// 
-// 
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
 
 
@@ -247,6 +270,9 @@ function editAchievement(n)
 ///
 ///
 /////////////////PERSONAL INFORMATION STARTS///////////////////////
+
+//function to insert top part. It accepts data as a JSON object and inserts the object in to the web page
+
 function insertTopPart(data)
 {
 	var topPart="";
@@ -309,6 +335,8 @@ function insertTopPart(data)
 	$('#topContent').html(topPart);
 }
 
+//function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
+
 function fetchTopPart()
 {
 	$.post('/4pi/handlers/aboutMeHandlers/fetchTopPart.php',{
@@ -327,6 +355,8 @@ function fetchTopPart()
 		}
 	});
 }
+
+//function to insert bottom part. It accepts data as a JSON object and inserts the object in to the web document
 
 function insertBottomPart(data)
 {
@@ -473,6 +503,8 @@ function insertBottomPart(data)
 	$('#bottomContent').html(bottomPart);
 }
 
+//function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
+
 function fetchBottomPart()
 {
 	$.post('/4pi/handlers/aboutMeHandlers/fetchBottomPart.php',{
@@ -551,17 +583,14 @@ function insertSkills(data)
 function fetchSkills()
 {
 	$.post('/4pi/handlers/aboutMeHandlers/fetchSkills.php',{
-		_userId:userId
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkdata(data)==1)
+		if(checkAbout(data)==1)
 		{
-			console.log(checkData(data)+" this is checkdata");
-			// x=JSON.parse(data);
 			insertSkills(data);
 		}
 	});
@@ -614,12 +643,43 @@ function modifySkill(data)
 
 function editSkillsSendData()
 {
-	
-}
+	var link=$("#editSkillsModal");
+	var skills=new Array();
+	var i=0;
+	link.find("skillsForm").find('.skillName').each(function(){
+		skills[i]=$(this).val();
+		i++;
+	});
 
-function deleteSkill(id)
-{
+	var error=0;
+	for(j=0;j<skills.length;j++)
+	{
+		if(skills[j].length==0)
+		{
+			error=1;
+		}
+	}
 
+	if(error==0)
+	{
+		alert("Please enter all the skills");
+	}
+
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editSkills.php',{
+			_skills:skills
+		})
+		.error(function(){
+			alert("Server overload. Please try again.:(");
+		})
+		.success(function(data){
+			if(checkAbout(data)==1)
+			{
+				modifySkills(data);
+			}
+		})
+	}
 }
 
 
@@ -637,20 +697,9 @@ function insertTool(data)
 	tool+='<p class="tool">'+data+'</p><br/>';
 
 	var length=$("#tools").find(".tool").length;
+	var position=(length%3)+1;
 
-	if(length%3==0)
-	{
-		$("#tools").find("#toolsColumn1").append(tool);
-	}
-	else if(length%2==0)
-	{
-		$("#tools").find("#toolsColumn2").append(tool);
-	}
-	else
-	{
-		$("#tools").find('#toolColumn3').append(tool);
-	}
-
+	$("#tools").find('#toolsColumn'+position).append(tool);
 }
 
 function fetchTools(data)
@@ -674,22 +723,79 @@ function fetchTools(data)
 
 function addToolSendData()
 {
-	
+	var toolName=$("#addToolModal").find("#toolName").val().trim();
+
+	if(toolName.length==0)
+	{
+		alert("Please enter the tool name");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/addTool.php',{
+			_toolName:toolName
+		})
+		.error(function(){
+			alert("Server overload. Please try again");
+		})
+		.success(function(data){
+			if(checkAbout(data)==1)
+			{
+				insertTool(data);
+			}
+		})
+	}
 }
 
-function modifyTool(data)
+function modifyTools(data)
 {
-
+	$("tools").find('.tool').each(function(){
+		$(this).remove();
+	});
+	for(i=0;i<data.length;i++)
+	{
+		insertTool(data[i]);
+	}
 }
 
 function editToolSendData()
 {
+	var link=$("#editToolsModal");
+	var intersts=new Array();
+	var i=0;
+	link.find("toolsForm").find('.toolName').each(function(){
+		tools[i]=$(this).val();
+		i++;
+	});
 
-}
+	var error=0;
+	for(j=0;j<tools.length;j++)
+	{
+		if(tools[j].length==0)
+		{
+			error=1;
+		}
+	}
 
-function deleteTool(id)
-{
+	if(error==0)
+	{
+		alert("Please enter all the tools");
+	}
 
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editTools.php',{
+			_tools:tools
+		})
+		.error(function(){
+			alert("Server overload. Please try again.:(");
+		})
+		.success(function(data){
+			if(checkAbout(data)==1)
+			{
+				modifyTools(data);
+			}
+		})
+	}
 }
 
 //////////////////////////////TOOLS ENDS/////////////////////////////////
@@ -2011,34 +2117,109 @@ function deleteAchivement(id)
 
 function insertInterest(data)
 {
+	var noOfInterests=$("#interests").find('.interest').length;
+	var position=(noOfInterests%3)+1;
 
+	var interest="";
+	interest+='<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>'+data+'</span></div>';
+
+	$('#intersts').find("#interestsContainer"+position).append(interest);
 }
 
 function fetchInterests(data)
 {
+	$.post('/4pi/handlers/aboutMeHandlers/fetchInterests.php',{
 
+	})
+	.error(function(){
+
+	})
+	.success(function(data){
+		if(checkAbout(data)==1)
+		{
+			for(i=0;i<data.length;i++)
+			{
+				insertInterest(data[i]);
+			}
+		}
+	})
 }
 
 function addInterestSendData()
 {
-
+	var interestName=$('#addInterestModal').find("#interestName").val().trim();
+	if(interestName.length==0)
+	{
+		alert("Please enter interest");
+	}
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/addInterst.php',{
+			_interestName:interestName
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			if(checkAbout(data)==1)
+			{
+				insertInterest(data);
+			}
+		});
+	}
 }
 
-function modifyInterest(data)
+function modifyInterests(data)
 {
-
+	$('#interests').find('.interest').each(function(){
+		$(this).remove();
+	});
+	for(i=0;i<data.length;i++)
+	{
+		insertInterst(data[i]);
+	}
 }
 
 function editInterestSendData()
 {
+	var link=$("#editInterestsModal");
+	var intersts=new Array();
+	var i=0;
+	link.find("interstsForm").find('.interestName').each(function(){
+		interests[i]=$(this).val();
+		i++;
+	});
 
+	var error=0;
+	for(j=0;j<interests.length;j++)
+	{
+		if(interests[j].length==0)
+		{
+			error=1;
+		}
+	}
+
+	if(error==0)
+	{
+		alert("Please enter all the intersts");
+	}
+
+	else
+	{
+		$.post('/4pi/handlers/aboutMeHandlers/editIntersts.php',{
+			_interests:interests
+		})
+		.error(function(){
+			alert("Server overload. Please try again.:(");
+		})
+		.success(function(data){
+			if(checkAbout(data)==1)
+			{
+				modifyInterests(data);
+			}
+		})
+	}
 }
-
-function deleteInterest(id)
-{
-	
-}
-
 
 /////////////////////////////INTERESTS ENDS//////////////////////
 ///
