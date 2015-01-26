@@ -95,10 +95,9 @@ if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
 	{
 		$isOwner=1;
 	}
-	aboutMe($userId,$mode,$isOwner);
 }
 
-
+aboutMe($userId,$mode,$isOwner);
 
 
 
