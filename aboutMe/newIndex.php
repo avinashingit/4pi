@@ -138,7 +138,6 @@
 		background-color:black;
 		height:100%;
 	}
-
 </style>
 <!-- <script src="aboutMe.js"></script> -->
 <script>
@@ -385,9 +384,6 @@
 		x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
 	}
-
-
-
 </script>
 
 <body style="padding-top:0px;">
@@ -591,98 +587,6 @@
 					</div>
 				
 				</div>
-
-				<!-- <div class="navObject" id="tools">
-				
-					<div class="row" id="toolContainer">
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1 col-md-offset-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-				
-						<div class="col-md-1" id="tool1">
-				
-							<img src="/4pi/img/hpics/1.jpg" class="img-responsive img-circle">
-				
-						</div>
-					
-					</div>end class row
-				
-				</div>end id tools -->
 
 				<div class="navObject" id="projects">
 

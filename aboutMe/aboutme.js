@@ -347,9 +347,9 @@ function fetchTopPart()
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkdata(data)==1)
+		if(checkAbout(data)==1)
 		{
-			console.log(checkData(data)+" this is checkdata");
+			console.log(checkAbout(data)+" this is checkAbout");
 			x=JSON.parse(data);
 			insertTopPart(x);
 		}
@@ -515,9 +515,9 @@ function fetchBottomPart()
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkdata(data)==1)
+		if(checkAbout(data)==1)
 		{
-			console.log(checkData(data)+" this is checkdata");
+			console.log(checkAbout(data)+" this is checkAbout");
 			x=JSON.parse(data);
 			insertBottomPart(x);
 		}
@@ -624,7 +624,7 @@ function addSkillSendData()
 			alert("Server overload. Please try again.:(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				insertSkills(data.JSONObject);
 				var skillNames=data.skillNames.join();
@@ -886,9 +886,9 @@ function fetchProjects()
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkdata(data)==1)
+		if(checkAbout(data)==1)
 		{
-			console.log(checkData(data)+" this is checkdata");
+			console.log(checkAbout(data)+" this is checkAbout");
 			x=JSON.parse(data);
 			insertProjects(x,"multiple");
 		}
@@ -920,7 +920,7 @@ function addProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
 				insertProjects(data,"single");
@@ -968,7 +968,7 @@ function editProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
 				modifyProject(data);
@@ -988,7 +988,7 @@ function deleteProject(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				$('#projects').find('#'+id).remove();
 			}
@@ -1010,96 +1010,50 @@ function deleteProject(id)
 function insertExperience(data)
 {
 	var experience="";
-	
-	for(i=0;i<data.length;i+=2)
-	{
-		experience+='<div class="row experience" id="'+data[i].experienceId+'">';
 
-		experience+='<div class="row">';
+	experience+='<div class="row experience" id="'+data.experienceId+'">';
 
-			experience+='<div class="text-left col-md-7">';
+	experience+='<div class="row">';
 
-				experience+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-suitcase"></i>&nbsp;<span id="company">'+data[i].company+'</span></div>';
+		experience+='<div class="text-left col-md-7">';
 
-			experience+='</div>';
-
-			experience+='<div class="col-md-3 text-right col-md-offset-2">';
-
-				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data[i].experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data[i].experienceId+'\');" class="fa fa-trash"></i></div>';
-
-			experience+='</div>';
+			experience+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-suitcase"></i>&nbsp;<span id="company">'+data.company+'</span></div>';
 
 		experience+='</div>';
 
-		experience+='<br/>';
+		experience+='<div class="col-md-3 text-right col-md-offset-2">';
 
-		experience+='<div class="row">';
-
-			experience+='<div class="text-left col-md-7">';
-
-				experience+='<div style="font-size:16px;" class="text-left" id="role">'+data[i].role+'</div>';
-
-			experience+='</div>';
-
-			experience+='<div class="col-md-5">';
-
-				experience+='<div style="font-size:16px;" title="'+data[i].duration+'" class="text-right" id="duration">'+data[i].minDuration+'</div>';
-
-			experience+='</div>';
+			experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="fa fa-trash"></i></div>';
 
 		experience+='</div>';
 
+	experience+='</div>';
 
+	experience+='<br/>';
 
-		experience+='</div><!-- end class experience -->';
-	}
+	experience+='<div class="row">';
 
-	$('#experiences').find('#experienceContainer1').html(experience);
-	experience="";
-	for(i=1;i<data.length;i+=2)
-	{
-		
-		experience+='<div class="row experience" id="'+data[i].experienceId+'">';
+		experience+='<div class="text-left col-md-7">';
 
-		experience+='<div class="row">';
-
-			experience+='<div class="text-left col-md-7">';
-
-				experience+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-suitcase"></i>&nbsp;<span id="company">'+data[i].company+'</span></div>';
-
-			experience+='</div>';
-
-			experience+='<div class="col-md-3 text-right col-md-offset-2">';
-
-				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data[i].experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data[i].experienceId+'\');" class="fa fa-trash"></i></div>';
-
-			experience+='</div>';
+			experience+='<div style="font-size:16px;" class="text-left" id="role">'+data.role+'</div>';
 
 		experience+='</div>';
 
-		experience+='<br/>';
+		experience+='<div class="col-md-5">';
 
-		experience+='<div class="row">';
-
-			experience+='<div class="text-left col-md-7">';
-
-				experience+='<div style="font-size:16px;" class="text-left" id="role">'+data[i].role+'</div>';
-
-			experience+='</div>';
-
-			experience+='<div class="col-md-5">';
-
-				experience+='<div style="font-size:16px;" title="'+data[i].duration+'" class="text-right" id="duration">'+data[i].minDuration+'</div>';
-
-			experience+='</div>';
+			experience+='<div style="font-size:16px;" title="'+data.duration+'" class="text-right" id="duration">'+data.minDuration+'</div>';
 
 		experience+='</div>';
 
+	experience+='</div>';
 
+	experience+='</div><!-- end class experience -->';
 
-		experience+='</div><!-- end class experience -->';
-	}
-	$('#experiences').find('#experienceContainer2').html(experience);
+	var length=$("#experience").find(".experience").length;
+
+	var position=length%2+1;
+
+	$('#experiences').find('#experienceContainer'+position).append(experience);
 }
 
 function fetchExperience()
@@ -1111,10 +1065,13 @@ function fetchExperience()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkData(data)==1)
+		if(checkAbout(data)==1)
 		{
 			x=JSON.parse(data);
-			insertExperience(x);
+			for(i=0;i<x.length;i++)
+			{
+				insertExperience(x[i]);
+			}
 		}
 	});
 }
@@ -1141,10 +1098,10 @@ function addExperienceSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
-				insertExperience(data,"single");
+				insertExperience(data);
 			}
 		});
 	}
@@ -1183,7 +1140,7 @@ function editExperienceSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				modifyExperience(data);
 			}
@@ -1202,7 +1159,7 @@ function deleteExperience(id)
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				$('#experiences').find('#'+id).remove();
 			}
@@ -1225,125 +1182,66 @@ function insertAcademics(data)
 {
 	var academics="";
 
-	for(i=0;i<data.length;i+=2)
-	{
-		academics+='<div class="row academics" id="'+data[i].academicsId+'">';
+	academics+='<div class="row academics" id="'+data.academicsId+'">';
 
-		academics+='<div class="row">';
+	academics+='<div class="row">';
 
-			academics+='<div class="col-md-4 text-left">';
+		academics+='<div class="col-md-4 text-left">';
 
-				academics+='<div style="font-size:18px;" id="degree">'+data[i].degree+'</div>';
+			academics+='<div style="font-size:18px;" id="degree">'+data.degree+'</div>';
 
-			academics+='</div>';
+		academics+='</div>';
 
-			academics+='<div class="col-md-2 col-md-offset-6 text-center">';
+		academics+='<div class="col-md-2 col-md-offset-6 text-center">';
 
-				academics+='<div style="font-size:16px;" class="percentage" id="percentage">'+data[i].percentage+'%</div>';
+			academics+='<div style="font-size:16px;" class="percentage" id="percentage">'+data.percentage+'%</div>';
 
-			academics+='</div>';
+		academics+='</div>';
 
-		academics+='</div><!-- end class row -->';
+	academics+='</div><!-- end class row -->';
 
-		academics+='<br/>';
+	academics+='<br/>';
 
-		academics+='<div class="row">';
+	academics+='<div class="row">';
 
-			academics+='<div class="col-md-4 text-left">';
+		academics+='<div class="col-md-4 text-left">';
 
-				academics+='<em><div style="font-size:14px;" id="school">'+data[i].schoolName+'</div></em>';
+			academics+='<em><div style="font-size:14px;" id="school">'+data.schoolName+'</div></em>';
 
-			academics+='</div>';
+		academics+='</div>';
 
-			academics+='<div class="col-md-4 col-md-offset-4 text-right">';
+		academics+='<div class="col-md-4 col-md-offset-4 text-right">';
 
-				academics+='<div style="font-size:14px;" title="'+data[i].duration+'"id="duration">'+data[i].minDuration+'</div>';
+			academics+='<div style="font-size:14px;" title="'+data.duration+'"id="duration">'+data.minDuration+'</div>';
 
-			academics+='</div>';
+		academics+='</div>';
 
-		academics+='</div><!-- end class row -->';
+	academics+='</div><!-- end class row -->';
 
-		academics+='<div class="row">';
+	academics+='<div class="row">';
 
-			academics+='<div class="col-md-8 text-left">';
+		academics+='<div class="col-md-8 text-left">';
 
-				academics+='<div style="font-size:14px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="location">'+data[i].location+'</span></div>';
+			academics+='<div style="font-size:14px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="location">'+data.location+'</span></div>';
 
-			academics+='</div><!--end class col-md-8 -->';
+		academics+='</div><!--end class col-md-8 -->';
 
-			academics+='<div class="col-md-4 text-right">';
+		academics+='<div class="col-md-4 text-right">';
 
-				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data[i].academicsId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics(\''+data[i].academicsId+'\');"></i></div>';
+			academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data.academicsId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics(\''+data.academicsId+'\');"></i></div>';
 
-			academics+='</div><!--end class col-md-8 -->';
+		academics+='</div><!--end class col-md-8 -->';
 
-		academics+='</div><!-- end class row -->';
+	academics+='</div><!-- end class row -->';
 
 
-		academics+='</div><!-- end class academics -->';
-	}
-	$('#academics').find('#academicsContainer1').html(academics);
+	academics+='</div><!-- end class academics -->';
 
-	academics="";
+	var length=$("#academics").find('.academics').length;
 
-	for(i=1;i<data.length;i+=2)
-	{
-		academics+='<div class="row academics" id="'+data[i].academicsId+'">';
+	var position=length%2+1;
 
-		academics+='<div class="row">';
-
-			academics+='<div class="col-md-4 text-left">';
-
-				academics+='<div style="font-size:18px;" id="degree">'+data[i].degree+'</div>';
-
-			academics+='</div>';
-
-			academics+='<div class="col-md-2 col-md-offset-6 text-center">';
-
-				academics+='<div style="font-size:16px;" class="percentage" id="percentage">'+data[i].percentage+'%</div>';
-
-			academics+='</div>';
-
-		academics+='</div><!-- end class row -->';
-
-		academics+='<br/>';
-
-		academics+='<div class="row">';
-
-			academics+='<div class="col-md-4 text-left">';
-
-				academics+='<em><div style="font-size:14px;" id="school">'+data[i].schoolName+'</div></em>';
-
-			academics+='</div>';
-
-			academics+='<div class="col-md-4 col-md-offset-4 text-right">';
-
-				academics+='<div style="font-size:14px;" title="'+data[i].duration+'"id="duration">'+data[i].minDuration+'</div>';
-
-			academics+='</div>';
-
-		academics+='</div><!-- end class row -->';
-
-		academics+='<div class="row">';
-
-			academics+='<div class="col-md-8 text-left">';
-
-				academics+='<div style="font-size:14px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="location">'+data[i].location+'</span></div>';
-
-			academics+='</div><!--end class col-md-8 -->';
-
-			academics+='<div class="col-md-4 text-right">';
-
-				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data[i].academicsId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics(\''+data[i].academicsId+'\');"></i></div>';
-
-			academics+='</div><!--end class col-md-8 -->';
-
-		academics+='</div><!-- end class row -->';
-
-
-		academics+='</div><!-- end class academics -->';
-	}
-	$('#academics').find('#academicsContainer2').html(academics);
+	$('#academics').find('#academicsContainer'+position).append(academics);
 }
 
 function fetchAcademics()
@@ -1355,10 +1253,14 @@ function fetchAcademics()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkData(data)==1)
+		if(checkAbout(data)==1)
 		{
 			x=JSON.parse(data);
-			insertAcademics(x);
+			for(i=0;i<x.length;i++)
+			{
+				insertAcademics(x[i]);
+			}
+			
 		}
 	});
 }
@@ -1388,10 +1290,10 @@ function addAcademicsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
-				insertAcademics(data,"single");
+				insertAcademics(data);
 			}
 		});
 	}
@@ -1430,8 +1332,9 @@ function editAcademicsSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
+				data=JSON.parse(data);
 				modifyAcademics(data);
 			}
 		});
@@ -1449,7 +1352,7 @@ function deleteAcademics(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				$('#academics').find('#'+id).remove();
 			}
@@ -1468,107 +1371,59 @@ function deleteAcademics(id)
 function insertWorkshop(data)
 {
 	var workshop="";
-	for(i=0;i<data.length;i+=2)
-	{
-		workshop+='<div class="row workshop" id="'+data[i].workshopId+'">';
 
-			workshop+='<div class="row">';
+	workshop+='<div class="row workshop" id="'+data.workshopId+'">';
 
-				workshop+='<div class="col-md-6 text-left">';
+		workshop+='<div class="row">';
 
-					workshop+='<div style="font-size:18px;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data[i].name+'</span></div>';
+			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='</div><!-- end class col-md-6 -->';
+				workshop+='<div style="font-size:18px;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data.name+'</span></div>';
 
-				workshop+='<div class="col-md-3 text-right col-md-offset-3">';
+			workshop+='</div><!-- end class col-md-6 -->';
 
-					workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop('+data[i].workshopId+');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop('+data[i].workshopId+');" class="fa fa-trash"></i></div>';
+			workshop+='<div class="col-md-3 text-right col-md-offset-3">';
 
-				workshop+='</div><!-- end classc col-md-3 -->';
+				workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop(\''+data.workshopId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop(\''+data.workshopId+'\');" class="fa fa-trash"></i></div>';
 
-			workshop+='</div><!-- end class row -->';
+			workshop+='</div><!-- end classc col-md-3 -->';
 
-			workshop+='<br/>';
+		workshop+='</div><!-- end class row -->';
 
-			workshop+='<div class="row">';
+		workshop+='<br/>';
 
-				workshop+='<div class="col-md-6 text-left">';
+		workshop+='<div class="row">';
 
-					workshop+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="workshopLocation">'+data[i].location+'</span></div>';
+			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='</div><!-- end class col-md-6 -->';
+				workshop+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="workshopLocation">'+data.location+'</span></div>';
 
-				workshop+='<div class="col-md-4 text-right col-md-offset-2">';
+			workshop+='</div><!-- end class col-md-6 -->';
 
-					workshop+='<div style="font-size:15px;" id="workshopDuration" title="'+data[i].duration+'">'+data[i].minDuration+'</div>';
+			workshop+='<div class="col-md-4 text-right col-md-offset-2">';
 
-				workshop+='</div><!-- end classc col-md-3 -->';
+				workshop+='<div style="font-size:15px;" id="workshopDuration" title="'+data.duration+'">'+data.minDuration+'</div>';
 
-			workshop+='</div><!-- end class row -->';
+			workshop+='</div><!-- end classc col-md-3 -->';
 
-			if(data[i].numPeopleAttended!="")
-			{
-				workshop+='<div class="col-md-6 text-left">';
+		workshop+='</div><!-- end class row -->';
 
-					workshop+='<em><div style="font-size:14px;"><span id="attenderNumber">'+data[i].numPeopleAttended+'</span>&nbsp; people attended</div></em>';
+		if(data.numPeopleAttended!="")
+		{
+			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='</div>';
-			}
+				workshop+='<em><div style="font-size:14px;"><span id="attenderNumber">'+data.numPeopleAttended+'</span>&nbsp; people attended</div></em>';
 
-		workshop+='</div><!-- end class workshop -->';
-	}
-	$('#workshops').find('#workshopContainer1').html(workshop);
-	workshop="";
-	for(i=1;i<data.length;i+=2)
-	{
-		workshop+='<div class="row workshop" id="'+data[i].workshopId+'">';
+			workshop+='</div>';
+		}
 
-			workshop+='<div class="row">';
+	workshop+='</div><!-- end class workshop -->';
 
-				workshop+='<div class="col-md-6 text-left">';
+	var length=$("#workshops").find(".workshop").length;
 
-					workshop+='<div style="font-size:18px;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data[i].name+'</span></div>';
+	var position=length%2+1;
 
-				workshop+='</div><!-- end class col-md-6 -->';
-
-				workshop+='<div class="col-md-3 text-right col-md-offset-3">';
-
-					workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop('+data[i].workshopId+');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop('+data[i].workshopId+');" class="fa fa-trash"></i></div>';
-
-				workshop+='</div><!-- end classc col-md-3 -->';
-
-			workshop+='</div><!-- end class row -->';
-
-			workshop+='<br/>';
-
-			workshop+='<div class="row">';
-
-				workshop+='<div class="col-md-6 text-left">';
-
-					workshop+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="workshopLocation">'+data[i].location+'</span></div>';
-
-				workshop+='</div><!-- end class col-md-6 -->';
-
-				workshop+='<div class="col-md-4 text-right col-md-offset-2">';
-
-					workshop+='<div style="font-size:15px;" id="workshopDuration" title="'+data[i].Duration+'">'+data[i].minDuration+'</div>';
-
-				workshop+='</div><!-- end classc col-md-3 -->';
-
-			workshop+='</div><!-- end class row -->';
-
-			if(data[i].numPeopleAttended!="")
-			{
-				workshop+='<div class="col-md-6 text-left">';
-
-					workshop+='<em><div style="font-size:14px;"><span id="attenderNumber">'+data[i].numPeopleAttended+'</span>&nbsp; people attended</div></em>';
-
-				workshop+='</div>';
-			}
-
-		workshop+='</div><!-- end class workshop -->';
-	}
-	$('#workshops').find('#workshopContainer2').html(workshop);
+	$('#workshops').find('#workshopContainer'+position).append(workshop);
 }
 
 function fetchWorkshops()
@@ -1580,10 +1435,15 @@ function fetchWorkshops()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkData(data)==1)
+		if(checkAbout(data)==1)
 		{
 			x=JSON.parse(data);
-			insertWorkshop(x);
+
+			for(i=0;i<x.length;i++)
+			{
+				insertWorkshop(x[i]);
+			}
+			
 		}
 	});
 }
@@ -1611,10 +1471,10 @@ function addWorkshopSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
-				insertWorkshop(data,"single");
+				insertWorkshop(data);
 			}
 		});
 	}
@@ -1654,7 +1514,7 @@ function editWorkshopSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				modifyWorkshop(data);
 			}
@@ -1673,7 +1533,7 @@ function deleteWorkshop(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				$('#workshops').find('#'+id).remove();
 			}
@@ -1692,90 +1552,50 @@ function deleteWorkshop(id)
 function insertCertification(data)
 {
 	var certification="";
-	for(i=0;i<data.length;i+=2)
-	{
-		certification+='<div class="row certification" id="'+data[i].certificationId+'">';
 
-			certification+='<div class="row">';
+	certification+='<div class="row certification" id="'+data.certificationId+'">';
 
-				certification+='<div class="text-left col-md-7">';
+		certification+='<div class="row">';
 
-					certification+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-chevron-right"></i>&nbsp;<span id="courseName">'+data[i].courseName+'</span></div>';
+			certification+='<div class="text-left col-md-7">';
 
-				certification+='</div>';
-
-				certification+='<div class="col-md-3 text-right col-md-offset-2">';
-
-					certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification('+data[i].certificationId+');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification('+data[i].certificationId+');" class="fa fa-trash"></i</div>';
-
-				certification+='</div>';
+				certification+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-chevron-right"></i>&nbsp;<span id="courseName">'+data.courseName+'</span></div>';
 
 			certification+='</div>';
 
-			certification+='<br/>';
+			certification+='<div class="col-md-3 text-right col-md-offset-2">';
 
-			certification+='<div class="row">';
-
-				certification+='<div class="text-left col-md-7">';
-
-					certification+='<div style="font-size:16px;" class="text-left"<i class="fa fa-map-marker"></i>&nbsp;<span id="institute">'+data[i].institute+'</span></div>';
-
-				certification+='</div>';
-
-				certification+='<div class="col-md-5">';
-
-					certification+='<div title="'+data[i].duration+'" style="font-size:16px;" class="text-right" id="duration">'+data[i].minDuration+'</div>';
-
-				certification+='</div>';
+				certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.certificationId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.certificationId+'\');" class="fa fa-trash"></i</div>';
 
 			certification+='</div>';
 
-		certification+='</div><!-- end class certification -->';
-	}
-	$('#certifications').find('#certificationContainer1').html(certification);
-	certification="";
-	for(i=1;i<data.length;i+=2)
-	{
+		certification+='</div>';
 
-		certification+='<div class="row certification" id="'+data[i].certificationId+'">';
+		certification+='<br/>';
 
-			certification+='<div class="row">';
+		certification+='<div class="row">';
 
-				certification+='<div class="text-left col-md-7">';
+			certification+='<div class="text-left col-md-7">';
 
-					certification+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-chevron-right"></i>&nbsp;<span id="courseName">'+data[i].courseName+'</span></div>';
-
-				certification+='</div>';
-
-				certification+='<div class="col-md-3 text-right col-md-offset-2">';
-
-					certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification('+data[i].certificationId+');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification('+data[i].certificationId+');" class="fa fa-trash"></i</div>';
-
-				certification+='</div>';
+				certification+='<div style="font-size:16px;" class="text-left"<i class="fa fa-map-marker"></i>&nbsp;<span id="institute">'+data.institute+'</span></div>';
 
 			certification+='</div>';
 
-			certification+='<br/>';
+			certification+='<div class="col-md-5">';
 
-			certification+='<div class="row">';
-
-				certification+='<div class="text-left col-md-7">';
-
-					certification+='<div style="font-size:16px;" class="text-left"<i class="fa fa-map-marker"></i>&nbsp;<span id="institute">'+data[i].institute+'</span></div>';
-
-				certification+='</div>';
-
-				certification+='<div class="col-md-5">';
-
-					certification+='<div title="'+data[i].duration+'" style="font-size:16px;" class="text-right" id="duration">'+data[i].minDuration+'</div>';
-
-				certification+='</div>';
+				certification+='<div title="'+data.duration+'" style="font-size:16px;" class="text-right" id="duration">'+data.minDuration+'</div>';
 
 			certification+='</div>';
 
-		certification+='</div><!-- end class certification -->';
-	}
-	$('#certifications').find('#certificationContainer2').html(certification);
+		certification+='</div>';
+
+	certification+='</div><!-- end class certification -->';
+
+	var length=$("#certifications").find('.certification').length;
+
+	var position=length%2+1;
+
+	$('#certifications').find('#certificationContainer'+position).append(certification);
 }
 
 function fetchCertifications()
@@ -1787,10 +1607,14 @@ function fetchCertifications()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkData(data)==1)
+		if(checkAbout(data)==1)
 		{
 			x=JSON.parse(data);
-			insertCertification(x);
+			for(i=0;i,x.length;i++)
+			{
+				insertCertification(x[i]);
+			}
+			
 		}
 	});
 }
@@ -1817,10 +1641,10 @@ function addCertificationSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
-				insertWorkshop(data,"single");
+				insertCertification(data);
 			}
 		});
 	}
@@ -1857,8 +1681,9 @@ function editCertificationSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
+				data=JSON.parse(data);
 				modifyCertification(data);
 			}
 		});
@@ -1876,7 +1701,7 @@ function deleteCertification(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				$('#certifications').find('#'+id).remove();
 			}
@@ -1896,106 +1721,58 @@ function deleteCertification(id)
 function insertAchievements(data)
 {
 	var achievements="";
-	for(i=0;i<data.length;i+=2)
-	{
-		achievements+='<div class="row achievement" id="'+data[i].achievementId+'">';
 
-			achievements+='<div class="row">';
+	achievements+='<div class="row achievement" id="'+data.achievementId+'">';
 
-				achievements+='<div class="col-md-6 text-left">';
-
-					achievements+='<div style="font-size:18px;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data[i].eventName+'</span></div>';
-
-				achievements+='</div><!-- end class col-md-6 -->';
-
-				achievements+='<div class="col-md-3 text-right col-md-offset-3">';
-
-					achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement('+data[i].achievementId+');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAchievement('+data[i].achievementId+');"></i></div>';
-
-				achievements+='</div><!-- end classc col-md-3 -->';
-
-			achievements+='</div><!-- end class row -->';
-
-			achievements+='<br/>';
-
-			achievements+='<div class="row">';
-
-				achievements+='<div class="col-md-6 text-left">';
-
-					achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'+data[i].location+'</span></div>';
-
-				achievements+='</div><!-- end class col-md-6 -->';
-
-				achievements+='<div class="col-md-4 text-right col-md-offset-2">';
-
-					achievements+='<div style="font-size:15px;" title="'+data[i].duration+'" id="eventDuration">'+data[i].minDuration+'</div>';
-
-				achievements+='</div><!-- end classc col-md-3 -->';
-
-			achievements+='</div><!-- end class row -->';
-
-			achievements+='<br/>';
+		achievements+='<div class="row">';
 
 			achievements+='<div class="col-md-6 text-left">';
 
-				achievements+='<div style="font-size:14px;" id="eventDescription">'+data[i].description+'</div>';
+				achievements+='<div style="font-size:18px;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data.eventName+'</span></div>';
 
-			achievements+='</div>';
+			achievements+='</div><!-- end class col-md-6 -->';
 
-		achievements+='</div><!-- end class achievement -->';
-	}
-	$('#achievements').find('#achievementContainer').html(achievements);
-	achievements="";
-	for(i=1;i<data.length;i+=2)
-	{
+			achievements+='<div class="col-md-3 text-right col-md-offset-3">';
 
-		achievements+='<div class="row achievement" id="'+data[i].achievementId+'">';
+				achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
 
-			achievements+='<div class="row">';
+			achievements+='</div><!-- end classc col-md-3 -->';
 
-				achievements+='<div class="col-md-6 text-left">';
+		achievements+='</div><!-- end class row -->';
 
-					achievements+='<div style="font-size:18px;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data[i].eventName+'</span></div>';
+		achievements+='<br/>';
 
-				achievements+='</div><!-- end class col-md-6 -->';
-
-				achievements+='<div class="col-md-3 text-right col-md-offset-3">';
-
-					achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement('+data[i].achievementId+');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAchievement('+data[i].achievementId+');"></i></div>';
-
-				achievements+='</div><!-- end classc col-md-3 -->';
-
-			achievements+='</div><!-- end class row -->';
-
-			achievements+='<br/>';
-
-			achievements+='<div class="row">';
-
-				achievements+='<div class="col-md-6 text-left">';
-
-					achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'+data[i].location+'</span></div>';
-
-				achievements+='</div><!-- end class col-md-6 -->';
-
-				achievements+='<div class="col-md-4 text-right col-md-offset-2">';
-
-					achievements+='<div style="font-size:15px;" title="'+data[i].duration+'" id="eventDuration">'+data[i].minDuration+'</div>';
-
-				achievements+='</div><!-- end classc col-md-3 -->';
-
-			achievements+='</div><!-- end class row -->';
-
-			achievements+='<br/>';
+		achievements+='<div class="row">';
 
 			achievements+='<div class="col-md-6 text-left">';
 
-				achievements+='<div style="font-size:14px;" id="eventDescription">'+data[i].description+'</div>';
+				achievements+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="eventLocation">'+data.location+'</span></div>';
 
-			achievements+='</div>';
+			achievements+='</div><!-- end class col-md-6 -->';
 
-		achievements+='</div><!-- end class achievement -->';
-	}
-	$('#achievements').find('#achievementContainer').html(achievements);
+			achievements+='<div class="col-md-4 text-right col-md-offset-2">';
+
+				achievements+='<div style="font-size:15px;" title="'+data.duration+'" id="eventDuration">'+data.minDuration+'</div>';
+
+			achievements+='</div><!-- end classc col-md-3 -->';
+
+		achievements+='</div><!-- end class row -->';
+
+		achievements+='<br/>';
+
+		achievements+='<div class="col-md-6 text-left">';
+
+			achievements+='<div style="font-size:14px;" id="eventDescription">'+data.description+'</div>';
+
+		achievements+='</div>';
+
+	achievements+='</div><!-- end class achievement -->';
+
+	var length=$("#achievements").find('.achievement').length;
+
+	var position=length%2+1;
+
+	$('#achievements').find('#achievementContainer'+position).append(achievements);
 }
 
 function fetchAchievements()
@@ -2008,10 +1785,15 @@ function fetchAchievements()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkData(data)==1)
+		if(checkAbout(data)==1)
 		{
 			x=JSON.parse(data);
-			insertAchievements(x);
+
+			for(i=0;i<x.length;i++)
+			{
+				insertAchievements(x[i]);
+			}
+			
 		}
 	});
 }
@@ -2037,10 +1819,10 @@ function addAchievementSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				data=JSON.parse(data);
-				insertAchievements(data,"single");
+				insertAchievements(data);
 			}
 		});
 	}
@@ -2080,8 +1862,9 @@ function editAchievementSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
+				data=JSON.parse(data);
 				modifyAchievement(data);
 			}
 		});
@@ -2099,7 +1882,7 @@ function deleteAchivement(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkData(data)==1)
+			if(checkAbout(data)==1)
 			{
 				$('#achievements').find('#'+id).remove();
 			}
@@ -2253,7 +2036,7 @@ function leaveMessage()
 	   	 		alert("Server overload. Please try again.");
 	   	 	})
 	   	 	.success(function(data){
-	   	 		if(checkData(data)==1)
+	   	 		if(checkAbout(data)==1)
 	   	 		{
 	   	 			alert("Thank you. The message is delivered.")
 	   	 		}
