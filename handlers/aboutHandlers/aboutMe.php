@@ -1,5 +1,16 @@
 <?php
-
+//------Credits------//
+//
+//
+//---Definitions of all Fetching Functions for aboutMe.
+//---Author : K Roopesh Reddy ,COE12B025.
+//---Email : coe12b025@iiitdm.ac.in
+//
+//---Editor -1: Hari Krishna Majety , COE12B013.
+//---Email: majetyhk@gmail.com
+//
+//
+//---Credits Ends---//
 session_start();
 require_once('../../QOB/qob.php');
 require_once('aboutMeClass.php');

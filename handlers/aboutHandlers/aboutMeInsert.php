@@ -6,7 +6,7 @@
 //---Author : K Roopesh Reddy ,COE12B025.
 //---Email : coe12b025@iiitdm.ac.in
 //
-//---Editor: Hari Krishna Majety , COE12B013.
+//---Editor-1: Hari Krishna Majety , COE12B013.
 //---Email: majetyhk@gmail.com
 //
 //
@@ -635,6 +635,19 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 					{
 						if($result0 != "")
 						{*/
+							//Turn off Featuring for other experiences of user to set it for upcoming experince.
+							if($featuring = 1)
+							{
+								$conn=new QoB();
+								$val[0]=array($userId => 's');
+								$res=$conn->update("UPDATE experience SET isfeaturing=0 WHERE userId=?",$val);
+								if($conn->error!="")
+								{
+									echo 12;
+									exit();
+								}
+							}
+
 							$userId = $user['userId'];
 							$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
 							
@@ -848,8 +861,8 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 							
 							$values[0] = array($userId => 's');
 							$values[1] = array($title => 's');
-							$values[2] = array($start => 's');
-							$values[3] = array($end => 's');
+							$values[2] = array($startDateTimestamp => 's');
+							$values[3] = array($endDateTimestamp => 's');
 							$values[4] = array($place => 's');
 							$values[5] = array($attendCount => 'i');
 							

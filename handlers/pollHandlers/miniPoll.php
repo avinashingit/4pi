@@ -1,4 +1,14 @@
 <?php
+
+//------Credits------//
+//
+//
+//---Author : Hari Krishna Majety ,COE12B013.
+//---Email: majetyhk@gmail.com
+//
+//
+//---Credits Ends---//
+
 class miniPoll
 {
 	public $pollIdHash;

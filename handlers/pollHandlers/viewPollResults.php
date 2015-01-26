@@ -1,4 +1,15 @@
 <?php
+
+//------Credits------//
+//
+//
+//---Definitions of all Helper Functions for the whole Backend management.
+//---Author : Hari Krishna Majety ,COE12B013.
+//---Email: majetyhk@gmail.com
+//
+//
+//---Credits Ends---//
+
 session_start();	
 require_once('../../QOB/qob.php');
 require_once('./miniPoll.php');
