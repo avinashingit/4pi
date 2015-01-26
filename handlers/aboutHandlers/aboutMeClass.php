@@ -236,14 +236,16 @@
 	
 	class skillSet
 		{
+			public $jsonObj; 
 			public $skills;
 			public $rating;
 			public $isOwner;
-			public function __construct($skills,$rating,$isOwner)
+			public function __construct($skills,$rating,$isOwner,$jsonObj)
 				{	
 					$this->skills = $skills;
 					$this->rating = $rating;
 					$this->isOwner=$isOwner;
+					$this->jsonObj=$jsonObj;
 					return $this;
 				}
 		}		
