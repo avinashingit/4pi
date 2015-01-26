@@ -177,13 +177,13 @@ else if ($mode=5) {
 else if ($mode=6) {
 
 	# Projects Insert
-	$titl=$_POST[''];
+	$title=$_POST[''];
 	$role=$_POST[''];
 	$start=$_POST[''];
 	$end=$_POST[''];
 	$description=$_POST[''];
 
-	projectInsert($user,$title,$role,$start,$end,$description)
+	projectInsert($user,$_POST['_projectTitle'],$role,$start,$end,$description)
 }
 else if ($mode=7) {
 
@@ -193,7 +193,7 @@ else if ($mode=7) {
 
 	skillSetInsert($user,$skill,$rating)
 }
-else if ($mode=8) {\
+else if ($mode=8) {
 
 	# WorkshopsInsert
 	$title=$_POST[''];
@@ -203,6 +203,11 @@ else if ($mode=8) {\
 	$attendes=$_POST[''];
 
 	workshopsInsert($user,$title,$start,$end,$place,$attendes)
+}
+else if ($mode=9)
+{
+	#toolkit insert
+	toolkitInsert($user,$tools);
 }
 else {
 	# Erroneous Mode Sent
@@ -477,7 +482,7 @@ function achievmentsInsert($user,$competition,$description,$position,$location,a
 								
 								if($conObj->error == "")
 									{
-										$achievementId="ach".$conObj->getInsertId();
+										$achievementId="a".$conObj->getInsertId();
 										$obj= new achievements($achievementId,$competition,$location,$description,$position,1);
 										print_r(json_encode($obj));
 									}
@@ -548,7 +553,8 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 									//echo 'Succesfull Insert <br />';
 									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-									$courseId=$conObj->getInsertId();
+									$courseId="c".$conObj->getInsertId();
+
 									$courseObj = new certifiedCourses($courseId,$title,$duration,$minDuration,$instituteName,1);
 									print_r(json_encode($courseObj));
 								}
@@ -614,14 +620,14 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 							$userId = $user['userId'];
 							$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
 							
-							$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,start,end,title) VALUES(?,?,?,?,?)",$values);
+							$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,start,end,title,featuring) VALUES(?,?,?,?,?,?)",$values);
 							
 							if($conObj->error == "")
 								{
 									//echo 'Succesfull Insert <br />';
 									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-									$experienceId=$conObj->getInsertId();
+									$experienceId="e".$conObj->getInsertId();
 									$experienceObj=new experience($experienceId,$organisation,$duration,$minDuration,$designation,1);
 									print_r(json_encode($experienceObj));
 								}
@@ -647,13 +653,14 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 		else
 			{
 				//echo 'details entered are wrong <br/>';
-				echo 404;
+				echo 16;
+				exit();
 			}
 			
 		
 	}
 
-function projectInsert($user,$title,$role,$durationString,$description,$teamMembers)
+function projectInsert($user,$title,$role,$durationString,$description,$teamMembers,$organisation)
 	{
 		$timeString=explode("-",$durationString);
 		$start=$timeString[0];
@@ -694,15 +701,16 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 							$values[4] = array($endDateTimestamp => 's'); 
 							$values[5] = array($description => 's');
 							$values[6] = array($teamMembers => 's');
+							$values[7] = array($organisation => 's');
 							
-							$result1 = $conObj->insert("INSERT INTO projects(userId,title,role,start,end, description,teamMembers) VALUES(?,?,?,?,?, ?,?)",$values);
+							$result1 = $conObj->insert("INSERT INTO projects(userId,projectName,role,start,end, description,teamMembers,organisation) VALUES(?,?,?,?,?, ?,?,?)",$values);
 							if($conObj->error == "")
 								{
 									//echo 'Succesfull Insert <br />';
 									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-									$projectId=$conObj->getInsertId();
-									$projectObj=new projects($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,1);
+									$projectId="p".$conObj->getInsertId();
+									$projectObj=new projects($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,$organisation,1);
 									print_r(json_encode($projectObj));
 								}
 							else
@@ -726,15 +734,16 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 			
 		else
 			{
-				echo 404;
+				echo 16;
+				exit();
 			}
 		
 	}
 
 function skillSetInsert($user,$skill,$rating)
 	{
-		if(($skill!='') and ($rating != 0))
-			{
+		/*if(($skill!='') and ($rating != 0))
+			{*/
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
 				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
@@ -748,8 +757,10 @@ function skillSetInsert($user,$skill,$rating)
 							$values[0] = array($userId => 's'); 
 							$values[1] = array($skill => 's');
 							$values[2] = array($rating => 's');
+							$values[3] = array($skill => 's');
+							$values[4] = array($rating => 's');
 							
-							$result1 = $conObj->insert("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)",$values);
+							$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
 							if($conObj->error == "")
 								{
 									//echo 'Successfull Insert <br />';
@@ -773,11 +784,12 @@ function skillSetInsert($user,$skill,$rating)
 						echo 'Error in Query 0<br />';
 						echo $conObj->error.'<br />';
 					}*/
-			}
+			/*}
 		else
 			{
-				echo 404;
-			}
+				echo 16;
+				exit();
+			}*/
 			
 		
 	}
@@ -823,11 +835,16 @@ function workshopsInsert($user,$title,$durationString,$place,$attendes)
 							$values[4] = array($place => 's');
 							$values[5] = array($attendes => 'i');
 							
-							$result1 = $conObj->insert("INSERT INTO workshops(uid,title,start,end,place,attendes) VALUES(?,?,?,?,?,?)",$values);
+							$result1 = $conObj->insert("INSERT INTO workshops(userId,workshopName,start,end,place,attendes) VALUES(?,?,?,?,?,?)",$values);
 							
 							if($conObj->error == "")
 								{
-									echo 'Succesfull Insert <br />';
+									//echo 'Succesfull Insert <br />';
+									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+									$workshopId="w".$conObj->getInsertId();
+									$workshopObj=new workshops($workshopId,$duration,$minDuration,$title,$place,$attendees,1);
+									print_r(json_encode($projectObj));
 								}
 							else
 								{
@@ -850,9 +867,116 @@ function workshopsInsert($user,$title,$durationString,$place,$attendes)
 			
 		else	
 			{
-				echo 404;
+				echo 16;
+				exit();
 			}
 			
 		
 	}
+
+
+	function toolkitInsert($user,$tools)
+	{
+		/*if($tools!='')
+			{*/
+				$conObj = new QoB();
+				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values = array();
+							
+							$values[0] = array($userId => 's'); 
+							$values[1] = array($tools => 's');
+							$values[2] = array($tools => 's');
+							
+							$result1 = $conObj->update("INSERT INTO toolkit(userId,tools) VALUES(?,?) ON DUPLICATE KEY UPDATE tools=?",$values);
+							if($conObj->error == "")
+								{
+									//echo 'Successfull Insert <br />';
+									$toolsObj=new toolkit($tools,1);
+									print_r(json_encode($toolsObj));
+								}
+							else
+								{
+									notifyAdmin("Conn.Error".$conObj->error."! While creating record in toolkit",$userId);
+									echo 12;
+									exit();
+								}
+						/*}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}*/
+		/*	}
+		else
+			{
+				echo 16;
+				exit();
+			}*/
+			
+		
+	}
+
+	function interestsInsert($user,$interests)
+	{
+		/*if($interests!='')
+			{*/
+				$conObj = new QoB();
+				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
+				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				if($conObj->error == "")
+					{
+						if($result0 != "")
+						{*/
+							$userId = $user['userId'];
+							$values = array();
+							
+							$values[0] = array($userId => 's'); 
+							$values[1] = array($interests => 's');
+							$values[2] = array($interests => 's');
+							
+							$result1 = $conObj->update("INSERT INTO interests(userId,interests) VALUES(?,?)  ON DUPLICATE KEY UPDATE interests=?",$values);
+							if($conObj->error == "")
+								{
+									//echo 'Successfull Insert <br />';
+									$toolsObj=new toolkit($tools,1);
+									print_r(json_encode($toolsObj));
+								}
+							else
+								{
+									notifyAdmin("Conn.Error".$conObj->error."! While creating record in toolkit",$userId);
+									echo 12;
+									exit();
+								}
+						/*}
+						else
+						{
+							echo 'No values found for Query 0<br />';
+						}
+					}
+				else
+					{
+						echo 'Error in Query 0<br />';
+						echo $conObj->error.'<br />';
+					}*/
+			/*}
+		else
+			{
+				echo 16;
+				exit();
+			}*/
+			
+		
+	}
+
 ?>

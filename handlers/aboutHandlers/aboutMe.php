@@ -22,8 +22,18 @@ Code 12: Database ERROR!!
 code 14: Suspicious Behaviour and Blocked!
 Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
-
 */
+// Id Types
+/*
+academics(degree) - d.*
+achievements - a.*
+courses - c.*
+experience - e.*
+projects - p.*
+workshops - w.*
+*/
+//
+
 $conn=new QoB();
 $currentUserId="Guest";
 $userId=$_POST['_userId'];
@@ -146,7 +156,7 @@ function aboutMe($userId,$mode,$isOwner)
 			while($achievements = $conObj->fetch($result1))
 			{	
 				$date1 = date("d-m-y" , $$achievements['achieveddate']);
-				$obj = new achievements($achievements['achievementId'],$achievements['competition'],$achievements['location'],$achievements['description'],$achievements['position'],$date1,$isOwner);
+				$obj = new achievements("a".$achievements['achievementId'],$achievements['competition'],$achievements['location'],$achievements['description'],$achievements['position'],$date1,$isOwner);
 				$outputa[$noOfElementsA] = $obj;
 				$noOfElementsA++;
 			}
@@ -231,7 +241,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$academics['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);								
-				$obj = new academics($academics['degreeId'],$academics['degree'],$academics['name'],$duration,$minDuration,$academics['cgpa'],$isOwner);
+				$obj = new academics("d".$academics['degreeId'],$academics['degree'],$academics['name'],$duration,$minDuration,$academics['cgpa'],$isOwner);
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}
@@ -262,7 +272,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$courses['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new certifiedCourses($courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
+				$obj = new certifiedCourses("c".$courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
@@ -320,7 +330,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$experience['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new experience($experience['experienceId'],$experience['organisation'],$duration,$minDuration,$experience['designation'],$experience['jobDescription'],$isOwner);
+				$obj = new experience("e".$experience['experienceId'],$experience['organisation'],$duration,$minDuration,$experience['designation'],$experience['jobDescription'],$isOwner);
 				$outputa[$noOfElementsE] = $obj;
 				$noOfElementsE++;
 			}
@@ -403,7 +413,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$projects['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new projects($projects['projectId'],$projects['title'],$projects['role'],$duration,$minDuration,$projects['description'],$projects['teamMembers'],$isOwner);
+				$obj = new projects("p".$projects['projectId'],$projects['projectName'],$projects['role'],$duration,$minDuration,$projects['description'],$projects['teamMembers'],$isOwner);
 				$outputa[$noOfElementsP] = $obj;
 				$noOfElementsP++;
 			}
@@ -484,7 +494,7 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of workshop
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM workshops WHERE uid = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM workshops WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsW = 0;
@@ -494,7 +504,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$workshops['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new workshops($workshops['workshopId'],$workshops['title'],$duration,$minDuration,$workshops['place'],$workshops['attendersCount'],$isOwner);
+				$obj = new workshops("w".$workshops['workshopId'],$workshops['workshopName'],$duration,$minDuration,$workshops['place'],$workshops['attendersCount'],$isOwner);
 				$outputa[$noOfElementsW] = $obj;
 				$noOfElementsW++;
 			}

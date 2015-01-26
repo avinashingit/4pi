@@ -147,8 +147,9 @@
 			public $duration;
 			public $minDuration;
 			public $designation;
+			public $isFeaturing;
 			public $isOwner;
-			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$isOwner)
+			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$isFeaturing,$isOwner)
 				{
 					$this->experienceId=$experienceId;
 					$this->organisation = $organisation;
@@ -156,6 +157,7 @@
 					$this->minDuration = $minDuration;
 					$this->designation = $designation;
 					//$this->description = $description;
+					$this->isFeaturing=$isFeaturing;
 					$this->isOwner=$isOwner;
 					return $this;
 				}
@@ -201,8 +203,9 @@
 			public $minDuration;
 			public $description;
 			public $teamMembers;
+			public $organisation;
 			public $isOwner;
-			public function __construct($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,$isOwner)
+			public function __construct($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,$organisation,$isOwner)
 				{
 					$this->projectId=$projectId;
 					$this->projectTitle = $title;
@@ -211,6 +214,7 @@
 					$this->minDuration = $minDuration;
 					$this->description = $description;
 					$this->teamMembers = $teamMembers;
+					$this->organisation = $organisation;
 					$this->isOwner=$isOwner;
 					return $this;
 				}
@@ -261,12 +265,24 @@
 				}
 		}
 
+	class interests
+		{
+			public $interests;
+			public $isOwner;
+			public function __construct($interests,$isOwner)
+				{	
+					$this->interests = $interests;
+					$this->isOwner=$isOwner;
+					return $this;
+				}
+		}
+
 	class workshops
 		{
 			public $workshopId;
 			public $duration;
 			public $minDuration;
-			public $title;
+			public $workshopName;
 			public $place;
 			public $attendees;
 			public $isOwner;
@@ -275,7 +291,7 @@
 					$this->workshopId=$workshopId;
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
-					$this->title = $title;
+					$this->workshopName= $title;
 					$this->place = $place;
 					$this->attendees = $attendees;
 					$this->isOwner=$isOwner;
