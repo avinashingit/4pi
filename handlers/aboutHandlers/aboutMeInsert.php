@@ -777,9 +777,22 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 
 function skillSetInsert($user,$skill,$rating)
 	{
+		$skillArray=explode(',',$skill);
+		$ratingArray=explode(',',$rating);
+		if(count($skillArray)!=count($ratingArray))
+		{
+			echo 16;
+			exit();
+		}
+		$i=0;
+		while($i<count($skillArray))
+		{
+			$outObj[$i]=array($skillArray[$i],(int)$ratingArray[$i]);
+		}
 		/*if(($skill!='') and ($rating != 0))
 			{*/
 				$conObj = new QoB();
+
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
 				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
 				if($conObj->error == "")
@@ -799,7 +812,8 @@ function skillSetInsert($user,$skill,$rating)
 							if($conObj->error == "")
 								{
 									//echo 'Successfull Insert <br />';
-									$skillsObj=new skillSet($skills,$rating,1);
+
+									$skillsObj=new skillSet(json_encode($outObj),$skillArray,$ratingArray,1);
 									print_r(json_encode($skillsObj));
 								}
 							else
