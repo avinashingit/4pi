@@ -6,7 +6,7 @@
 //---Author : K Roopesh Reddy ,COE12B025.
 //---Email : coe12b025@iiitdm.ac.in
 //
-//---Editor: Hari Krishna Majety , COE12B013.
+//---Editor-1: Hari Krishna Majety , COE12B013.
 //---Email: majetyhk@gmail.com
 //
 //
@@ -197,15 +197,8 @@ else if ($mode=6) {
 
 	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_teamMembers'],$_POST['_projectCompany']);
 }
+
 else if ($mode=7) {
-
-	# SkillSet Insert
-	$skill=$_POST[''];
-	$rating=$_POST[''];
-
-	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
-}
-else if ($mode=8) {
 
 	# WorkshopsInsert
 	$title=$_POST[''];
@@ -215,6 +208,14 @@ else if ($mode=8) {
 	$attendCount=$_POST[''];
 
 	workshopsInsert($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']);
+}
+else if ($mode=8) {
+
+	# SkillSet Insert
+	$skill=$_POST[''];
+	$rating=$_POST[''];
+
+	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
 }
 else if ($mode=9)
 {
@@ -234,7 +235,10 @@ else {
 
 function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId)
 {
-
+	$phoneArray=$phone;
+	$showPhoneArray=$showPhone;
+	$phone=implode(',',$phone);
+	$showPhone=implode(',',$showPhone);
 	$date = date_parse($dob);
 	$dobTimestamp = strtotime($dob);
 	
@@ -318,7 +322,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
 					$aboutObj = new about($profilePic,$userAlias,$dob,$description,$resume,$highestDegree,
-						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
+						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phoneArray,$showPhoneArray,
 						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 					print_r(json_encode($aboutObj));
 				}
@@ -635,6 +639,19 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 					{
 						if($result0 != "")
 						{*/
+							//Turn off Featuring for other experiences of user to set it for upcoming experince.
+							if($featuring = 1)
+							{
+								$conn=new QoB();
+								$val[0]=array($userId => 's');
+								$res=$conn->update("UPDATE experience SET isfeaturing=0 WHERE userId=?",$val);
+								if($conn->error!="")
+								{
+									echo 12;
+									exit();
+								}
+							}
+
 							$userId = $user['userId'];
 							$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
 							
@@ -848,8 +865,8 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 							
 							$values[0] = array($userId => 's');
 							$values[1] = array($title => 's');
-							$values[2] = array($start => 's');
-							$values[3] = array($end => 's');
+							$values[2] = array($startDateTimestamp => 's');
+							$values[3] = array($endDateTimestamp => 's');
 							$values[4] = array($place => 's');
 							$values[5] = array($attendCount => 'i');
 							
