@@ -25,8 +25,10 @@ Last edited: 25-01-2015
 *********************************************************************/
 
 
-/*var userIdFromURL=window.location.href.lastIndexOf('/');
-var userId=userIdFromURL;*/
+//var userIdFromURL=window.location.href.lastIndexOf('/');
+//var userId = window.location.href.substring(userIdFromURL+1,userIdFromURL+10);
+//var userId=userIdFromURL;
+//alert(userId);
 
 /*var userId="COE12B025";*/
 var commonURLAbout="/4pi/";
@@ -283,7 +285,7 @@ function insertTopPart(data)
 
 	topPart+='<div class="col-md-2" id="personPicture">';
 
-		topPart+='<a href="'+commonURLAbout+userId+'" class="thumbnail"><img src="../img/hpics/'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a>';
+		topPart+='<a href="'+commonURLAbout+userId+'" class="thumbnail"><img src="'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a>';
 
 		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
@@ -337,9 +339,162 @@ function insertTopPart(data)
 	topPart+='</div>';
 
 	$('#topContent').html(topPart);
+
+	insertBottomPart(data);
 }
 
 //function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
+//
+
+function insertBottomPart(data)
+{
+
+	// alert("Valdl");
+
+	var bottomPart="";
+
+	bottomPart+='<br/>';
+
+	bottomPart+='<div id="contact">';
+
+		bottomPart+='<div class="row">';
+
+			bottomPart+='<div class="col-md-5" style="border-right:1px solid #E6E6E6;">';
+
+				bottomPart+='<div class="row">';
+
+					bottomPart+='<h4 style="color:rgba(3, 184, 206, 1) ;"><i class="fa fa-envelope"></i>&nbsp;Leave a message</h4>';
+
+				bottomPart+='</div>';
+
+				bottomPart+='<br/>';
+
+				bottomPart+='<form>';
+
+					bottomPart+='<input type="text" id="leaveMessageName" class="form-control" placeholder="Your name"><br/>';
+
+					bottomPart+='<input type="text" id="leaveMessageEmail" class="form-control" placeholder="Your email"><br/>';
+
+					bottomPart+='<textarea type="text" id="leaveMessageTextMessage" class="form-control" placeholder="Your message"></textarea><br/>';
+
+					bottomPart+='<button class="btn btn-primary">Send</button>';
+
+
+				bottomPart+='</form>';
+
+
+			bottomPart+='</div><!-- end class col-md-6 -->';
+
+			bottomPart+='<div class="col-md-6 col-md-offset-1" id="contactsContainer">';
+
+				bottomPart+='<div class="row">';
+
+					bottomPart+='<h4 style="color:rgba(222, 123, 26, 1);"><i class="fa fa-share-alt"></i>&nbsp;Lets get connected</h4>';
+
+					bottomPart+='<i onclick="editContacts();" class="fa fa-pencil text-right"></i>';
+
+				bottomPart+='</div>';
+
+				bottomPart+='<br/>';
+
+				bottomPart+='<div class="row" >';
+
+				if(data.facebookId!="")
+				{
+					bottomPart+='<div class="col-md-2" id="facebookURL">';
+						bottomPart+='<a href="'+data.facebookId+'" class="icon-button facebook" ><i class="fa fa-facebook" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+					bottomPart+='</div>';
+				}
+					
+				if(data.twitterId!="")
+				{
+					bottomPart+='<div class="col-md-2" id="twitterURL">';
+						bottomPart+='<a href="'+data.twitterId+'"  class="icon-button twitter"><i class="fa fa-twitter" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+					bottomPart+='</div>';
+				}
+
+				if(data.googleId!="")
+				{
+					bottomPart+='<div class="col-md-2" id="googlePlusURL">';
+						bottomPart+='<a href="'+data.googleId+'" class="icon-button google-plus"><i class="fa fa-google-plus" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+					bottomPart+='</div>';
+				}
+
+				if(data.linkedinId!="")
+				{
+					bottomPart+='<div class="col-md-2" id="linkedInURL">';
+						bottomPart+='<a href="'+data.linkedinId+'" class="icon-button linkedin"><i class="fa fa-linkedin" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+					bottomPart+='</div>';
+				}
+
+				if(data.pinterestId!="")
+				{
+					bottomPart+='<div class="col-md-2" id="pinterestURL">';
+						bottomPart+='<a href="'+data.pinterestId+'" class="icon-button pinterest"><i class="fa fa-pinterest" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+					bottomPart+='</div>';
+				}
+
+				bottomPart+='</div>';
+
+				bottomPart+='<br/>';
+
+				bottomPart+='<div class="row">';
+
+					bottomPart+='<div class="text-left col-md-4">';
+
+						bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-envelope"></i>&nbsp;Email(s)</h4>';
+
+						bottomPart+='<br/>';
+							
+						bottomPart+='<p id="userEmail2">'+data.mailId+'</p>';
+
+						bottomPart+='<p id="userEmail1">'+userId+'@iiitdm.ac.in</p>';
+
+					bottomPart+='</div>';
+
+				if(data.address.length!=0)
+				{
+					bottomPart+='<div class="text-left col-md-4">';
+
+						bottomPart+='<h4 style="color:rgba(80, 183, 154, 1);"><i class="fa fa-map-marker"></i>&nbsp;Address</h4>';
+
+						bottomPart+='<br/>';
+
+						bottomPart+='<p id="address">'+data.address+'</p>';
+
+					bottomPart+='</div>';
+				}
+
+				if(data.phone.length!=0)
+				{
+					bottomPart+='<div class="text-left col-md-4">';
+
+						bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-mobile-phone"></i>&nbsp;Contact</h4>';
+
+						bottomPart+='<br/>';
+
+						for(var i=0;i<data.phone.length;i++)
+						{
+							if(data.showPhone[i]==1)
+							{
+								var x=i+1;
+								bottomPart+='<p id="userPhone'+x+'">'+data.phone[i]+'</p>';
+							}
+						}
+
+					bottomPart+='</div>';
+				}
+
+				bottomPart+='</div>';
+
+			bottomPart+='</div><!-- end class col-md-6 -->';
+
+		bottomPart+='</div><!-- end class row -->';
+
+	bottomPart+='</div><!--end id contact -->';
+
+	$('#bottomContent').html(bottomPart);
+}
 
 function fetchTopPart()
 {
@@ -369,171 +524,6 @@ $(document).ready(function(){
 
 //function to insert bottom part. It accepts data as a JSON object and inserts the object in to the web document
 
-function insertBottomPart(data)
-{
-	var bottomPart="";
-
-				bottomPart+='<br/>';
-
-				bottomPart+='<div id="contact">';
-
-					bottomPart+='<div class="row">';
-
-						bottomPart+='<div class="col-md-5" style="border-right:1px solid #E6E6E6;">';
-
-							bottomPart+='<div class="row">';
-
-								bottomPart+='<h4 style="color:rgba(3, 184, 206, 1) ;"><i class="fa fa-envelope"></i>&nbsp;Leave a message</h4>';
-
-							bottomPart+='</div>';
-
-							bottomPart+='<br/>';
-
-							bottomPart+='<form>';
-
-								bottomPart+='<input type="text" id="leaveMessageName" class="form-control" placeholder="Your name"><br/>';
-
-								bottomPart+='<input type="text" id="leaveMessageEmail" class="form-control" placeholder="Your email"><br/>';
-
-								bottomPart+='<textarea type="text" id="leaveMessageTextMessage" class="form-control" placeholder="Your message"></textarea><br/>';
-
-								bottomPart+='<button class="btn btn-primary">Send</button>';
-
-
-							bottomPart+='</form>';
-
-
-						bottomPart+='</div><!-- end class col-md-6 -->';
-
-						bottomPart+='<div class="col-md-6 col-md-offset-1" id="contactsContainer">';
-
-							bottomPart+='<div class="row">';
-	
-								bottomPart+='<h4 style="color:rgba(222, 123, 26, 1);"><i class="fa fa-share-alt"></i>&nbsp;Lets get connected</h4>';
-
-							bottomPart+='</div>';
-
-							bottomPart+='<br/>';
-
-							bottomPart+='<div class="row" >';
-
-							if(data.facebookId!="")
-							{
-								bottomPart+='<div class="col-md-2" id="facebookURL">';
-									bottomPart+='<a href="'+data.facebookId+'" class="icon-button facebook" ><i class="fa fa-facebook" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
-								bottomPart+='</div>';
-							}
-								
-							if(data.twitterId!="")
-							{
-								bottomPart+='<div class="col-md-2" id="twitterURL">';
-									bottomPart+='<a href="'+data.twitterId+'"  class="icon-button twitter"><i class="fa fa-twitter" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
-								bottomPart+='</div>';
-							}
-
-							if(data.gplusId!="")
-							{
-								bottomPart+='<div class="col-md-2" id="googlePlusURL">';
-									bottomPart+='<a href="#" class="icon-button google-plus"><i class="fa fa-google-plus" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
-								bottomPart+='</div>';
-							}
-
-							if(data.linkedinId!="")
-							{
-								bottomPart+='<div class="col-md-2" id-"linkedInURL">';
-									bottomPart+='<a href="#" class="icon-button linkedin"><i class="fa fa-linkedin" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
-								bottomPart+='</div>';
-							}
-
-							if(data.pinterestId!="")
-							{
-								bottomPart+='<div class="col-md-2" id="pinterestURL">';
-									bottomPart+='<a href="#" class="icon-button pinterest"><i class="fa fa-pinterest" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
-								bottomPart+='</div>';
-							}
-
-							bottomPart+='</div>';
-
-							bottomPart+='<br/>';
-
-							bottomPart+='<div class="row">';
-
-							if(data.userEmails.length!=0)
-							{
-								bottomPart+='<div class="text-left col-md-4">';
-
-									bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-envelope"></i>&nbsp;Email(s)</h4>';
-
-									bottomPart+='<br/>';
-
-									for(i=0;i<data.userEmails.length;i++)
-									{
-										bottomPart+='<p id="email'+i+1+'">'+data.userEmails[i]+'</p>';
-									}
-
-								bottomPart+='</div>';
-							}
-
-							if(data.address.length!=0)
-							{
-								bottomPart+='<div class="text-left col-md-4">';
-
-									bottomPart+='<h4 style="color:rgba(80, 183, 154, 1);"><i class="fa fa-map-marker"></i>&nbsp;Address</h4>';
-
-									bottomPart+='<br/>';
-
-									bottomPart+='<p id="address">'+data.address+'</p>';
-
-								bottomPart+='</div>';
-							}
-
-							if(data.contact.length!=0)
-							{
-								bottomPart+='<div class="text-left col-md-4">';
-
-									bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-mobile-phone"></i>&nbsp;Contact</h4>';
-
-									bottomPart+='<br/>';
-
-									for(i=0;i<data.contacts.length;i++)
-									{
-										bottomPart+='<p id="userPhone'+i+1+'">'+data.contacts[i]+'</p>';
-									}
-
-								bottomPart+='</div>';
-							}
-
-							bottomPart+='</div>';
-
-						bottomPart+='</div><!-- end class col-md-6 -->';
-
-					bottomPart+='</div><!-- end class row -->';
-
-				bottomPart+='</div><!--end id contact -->';
-
-	$('#bottomContent').html(bottomPart);
-}
-
-//function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
-
-function fetchBottomPart()
-{
-	$.post('/4pi/handlers/aboutMeHandlers/fetchBottomPart.php',{
-		_userId:userId
-	})
-	.error(function(){
-		alert("Server overload. Please try again. :(");
-	})
-	.success(function(data){
-		console.log(data);
-		if(checkData(data)==1)
-		{
-			console.log(checkData(data)+" this is checkData");
-			x=JSON.parse(data);
-			insertBottomPart(x);
-		}
-	});
-}
 
 function editContactInfoSendData()
 {

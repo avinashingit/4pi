@@ -7,6 +7,8 @@ var userId="<?php echo $_GET['userId'];?>";
 
 </script>
 
+<script src="aboutMe.js"></script>
+
 <style>
 
 	.container
@@ -304,59 +306,6 @@ var userId="<?php echo $_GET['userId'];?>";
 
 </div>
 
-<!-- <div class="modal fade" id="addSkillModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add skill</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<input type="text" id="addSkillModalSkillName" class="form-control">
-
-						</div>
-
-						<div class="col-md-6">
-
-							<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">
-
-						</div>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary" onclick="addSkillSendData();">Add</button>
-
-			</div>
-
-		</div>/.modal-content
-
-	</div>/.modal-dialog
-
-</div>
-
 <div class="modal fade" id="editSkillModal">
 
 	<div class="modal-dialog">
@@ -373,203 +322,36 @@ var userId="<?php echo $_GET['userId'];?>";
 			</div>
 
 			<div class="modal-body">
-
+			
 				<form id="editSkillModalForm">
-
+							
 					<div class="row">
-
+							
 						<div class="col-md-6">
-
+							
 							<input type="text" id="editSkillModalSkillName" class="form-control">
-
+							
 						</div>
-
+							
 						<div class="col-md-6">
-
+							
 							<input type="text" id="editSkillModalSkillPercentage" class="form-control">
-
-						</div>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary" onclick="editSkillsSendData();">Save</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="editToolModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit tool</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="tool">Tool</label>
-
-					<input type="text" id="editToolModalToolText" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addToolModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add tool</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="tool">Tool</label>
-
-					<input type="text" id="addToolModalToolText" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addProjectModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add Project</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="projectTitle">Project title</label>
-
-					<input type="text" id="addProjectModalProjectTitle" class="form-control">
-
-					<br/>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<label for="projectDuration">Project Duration From</label>
-
-							<input type="text" id="addProjectModalProjectDurationFrom" class="datepicker form-control">
-
-						</div>
-
-						<div class="col-md-6">
-
-							<label for="projectDuration">Project Duration To</label>
-
-							<input type="text" id="addProjectModalProjectDurationTo" class="datepicker form-control">
-
+							
 						</div>
 
 					</div>
-
+							
 					<br/>
-
-					<label for="projectRole">Position</label>
-
-					<input type="text" id="addProjectModalProjectRole" class="form-control">
-
-					<br/>
-
-					<label for="projectCompany">Company</label>
-
-					<input type="text" id="addProjectModalProjectCompany" class="form-control">
-
-					<br/>
-
-					<label for="projectDescription">Project description</label>
-
-					<textarea type="text" id="addProjectModalProjectDescription" class="form-control"></textarea>
-
-					<br/>
-
-				</form>
-
+							
+				</form> 
+			
 			</div>
 
 			<div class="modal-footer">
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" onclick="addProjectSendData();" class="btn btn-primary">Add</button>
+				<button type="button" class="btn btn-primary" onclick="editSkillSendData();">Save</button>
 
 			</div>
 
@@ -579,837 +361,13 @@ var userId="<?php echo $_GET['userId'];?>";
 
 </div>
 
-<div class="modal fade" id="editProjectModal">
 
-	<div class="modal-dialog">
 
-		<div class="modal-content">
 
-			<div class="modal-header">
 
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit Project</h4>
 
-			</div>
 
-			<div class="modal-body">
 
-				<form>
-
-					<input type="text" id="#editProjectModalProjectId" class="hidden">
-
-					<label for="projectTitle">Project title</label>
-
-					<input type="text" id="editProjectModalProjectTitle" class="form-control">
-
-					<br/>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<label for="projectDuration">From</label>
-
-							<input type="text" id="editProjectModalProjectDurationFrom" class="datepicker form-control">
-
-						</div>
-
-						<div class="col-md-6">
-
-							<label for="projectDuration">To</label>
-
-							<input type="text" id="editProjectModalProjectDurationTo" class="datepicker form-control">
-
-						</div>
-
-					</div>
-
-					<br/>
-
-					<label for="projectRole">Position</label>
-
-					<input type="text" id="editProjectModalProjectRole" class="form-control">
-
-					<br/>
-
-					<label for="projectCompany">Company</label>
-
-					<input type="text" id="editProjectModalProjectCompany" class="form-control">
-
-					<br/>
-
-					<label for="projectDescription">Project description</label>
-
-					<textarea type="text" id="editProjectModalProjectDescription" class="form-control"></textarea>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" onclick="editProjectSendData();" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addExperienceModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add experience</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="companyName">Company/organisation</label>
-
-					<input type="text" id="addExperienceModalCompanyName" class="form-control">
-
-					<br/>
-
-					<label for="experienceRole">Role/position</label>
-
-					<input type="text" id="addExperienceModalRole" class="form-control">
-
-					<br/>
-
-					<div class="col-md-6">
-
-						<label for="experienceDuration">From</label>
-
-						<input type="text" id="addExperienceModalDurationFrom" class="datepicker form-control">
-
-					</div>
-
-					<div class="col-md-6">
-
-						<label for="experienceDuration">To</label>
-
-						<input type="text" id="addExperienceModalDurationTo" class="datepicker form-control">
-
-					</div>
-
-					<br/>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" onclick="addExperienceSendData();" class="btn btn-primary">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="editExperienceModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit experience</h4>
-
-			</div>
-
-			<div class="hidden" id="experienceId"></div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="companyName">Company/organisation</label>
-
-					<input type="text" id="editExperienceModalCompanyName" class="form-control">
-
-					<br/>
-
-					<label for="experienceRole">Role/position</label>
-
-					<input type="text" id="editExperienceModalRole" class="form-control">
-
-					<br/>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<label for="experienceDurationHours">From</label>
-
-							<input type="text" id="editExperienceModalDurationFrom" class="form-control">
-
-						</div>
-
-						<div class="col-md-6">
-
-							<label for="experienceDurationMin">To</label>
-
-							<input type="text" id="editExperienceModalDurationTo" class="form-control">
-
-						</div>
-
-					</div>
-
-					<br/>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addAcademicsModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Add institution</h4>
-
-			</div>
-
-
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="degree">Degree</label>
-
-					<input type="text" id="addAcademicsModalDegree" class="form-control">
-
-					<br/>
-
-					<label for="percentage">Percentage/CGPA</label>
-
-					<input type="text" id="addAcademicsModalPercentage" class="form-control">
-
-					<br/>
-
-					<label for="schoolName">School/Institution name</label>
-
-					<input type="text" id="addAcademicsModalSchoolName" class="form-control">
-
-					<br/>
-
-					<label for="location">Location</label>
-
-					<input type="text" id="addAcademicsModalSchoolLocation" class="form-control">
-
-					<br/>
-
-					<div class="col-md-6">
-
-						<label for="duration">From</label>
-
-						<input type="text" id="addAcademicsModalDurationFrom" class="datepicker form-control">
-
-					</div>
-
-					<div class="col-md-6">
-
-						<label for="duration">To</label>
-
-						<input type="text" id="addAcademicsModalDurationTo" class="datepicker form-control">
-
-					</div>
-
-					<br/>
-					<br/>
-
-					
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" onclick="addAcademicsSendData();" class="btn btn-primary">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="editAcademicsModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Edit institution</h4>
-
-			</div>
-
-			<div class="hidden" id="editAcademicsModalId"></div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="degree">Degree</label>
-
-					<input type="text" id="editAcademicsModalDegree" class="form-control">
-
-					<br/>
-
-					<label for="percentage">Percentage/CGPA</label>
-
-					<input type="text" id="editAcademicsModalPercentage" class="form-control">
-
-					<br/>
-
-					<label for="schoolName">School/Institution name</label>
-
-					<input type="text" id="editAcademicsModalSchoolName" class="form-control">
-
-					<br/>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<label for="duration">From</label>
-
-							<input type="text" id="editAcademicsModalDurationFrom" class="form-control">
-
-							<br/>
-
-						</div>
-
-						<div class="col-md-6">
-
-							<label for="duration">To</label>
-
-							<input type="text" id="editAcademicsModalDurationTo" class="form-control">
-
-							<br/>
-
-						</div>
-
-					</div>
-
-					<label for="location">Location</label>
-
-					<input type="text" id="editAcademicsModalSchoolLocation" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addWorkshopModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Add workshop</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="workshopName">Workshop name</label>
-
-					<input type="text" id="addWorkshopModalWorkshopName" class="form-control">
-
-					<br/>
-
-					<label for="location">Location</label>
-
-					<input type="text" id="addWorkshopModalWorkshopLocation" class="form-control">
-
-					<br/>
-
-					<div class="col-md-6">
-
-						<label for="duration">From</label>
-
-						<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control">
-
-					</div>
-					
-					<div class="col-md-6">
-
-						<label for="duration">To</label>
-
-						<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control">
-
-					</div>
-
-					<br/>
-
-					<label for="number">Number of people attended</label>
-
-					<input type="text" id="addWorkshopModalWorkshopPeopleNumber" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" onclick="addWorkshopSendData();" class="btn btn-primary">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="editWorkshopModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Editworkshop</h4>
-
-			</div>
-
-			<div class="hidden" id="editWorkshopModalId"></div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="workshopName">Workshop name</label>
-
-					<input type="text" id="editWorkshopModalWorkshopName" class="form-control">
-
-					<br/>
-
-					<label for="location">Location</label>
-
-					<input type="text" id="editWorkshopModalWorkshopLocation" class="form-control">
-
-					<br/>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<label for="duration">From</label>
-
-							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control">
-
-							<br/>
-
-						</div>
-
-						<div class="col-md-6">
-
-							<label for="duration">To</label>
-
-							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control">
-
-							<br/>
-
-						</div>
-
-					</div>
-
-					
-
-					<label for="number">Number of people attended</label>
-
-					<input type="text" id="editWorkshopModalWorkshopPeopleNumber" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addCertificationModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add certification</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="courseName">Course name</label>
-
-					<input type="text" id="addCertificationModalCourseName" class="form-control">
-
-					<br/>
-
-					<label for="institute">Institute</label>
-
-					<input type="text" id="addCertificationModalInstitute" class="form-control">
-
-					<br/>
-
-					<div class="col-md-6">
-
-						<label for="experienceDuration">From</label>
-
-						<input type="text" id="addCertificationModalDurationFrom" class="form-control">
-
-					</div>
-
-					<div class="col-md-6">
-
-						<label for="experienceDuration">To</label>
-
-						<input type="text" id="addCertificationModalDurationTo" class="form-control">
-
-					</div>
-
-					<br/>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" onclick="addCertificationSendData();" class="btn btn-primary">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="editCertificationModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit certification</h4>
-
-			</div>
-
-			<div class="hidden" id="editCertificationModalId"></div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="courseName">Course name</label>
-
-					<input type="text" id="editCertificationModalCourseName" class="form-control">
-
-					<br/>
-
-					<label for="certificationInstitute">Institute</label>
-
-					<input type="text" id="editCertificationModalInstitute" class="form-control">
-
-					<br/>
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<label for="duration">From</label>
-
-							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control">
-
-							<br/>
-
-						</div>
-
-						<div class="col-md-6">
-
-							<label for="duration">To</label>
-
-							<input type="text" id="editCertificationModalCertificationDurationFromTo" class="form-control">
-
-							<br/>
-
-						</div>
-
-					</div>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="addAchievementModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-trophy"></i>&nbsp;Add achievement</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="workshopName">Event name</label>
-
-					<input type="text" id="addAchievementModalEventName" class="form-control">
-
-					<br/>
-
-					<label for="location">Venue</label>
-
-					<input type="text" id="addAchievementModalLocation" class="form-control">
-
-					<br/>
-
-					<label for="duration">Year</label>
-
-					<input type="text" id="addAchievementModalYear" class="form-control">
-
-					<br/>
-
-					<label for="number">Description</label>
-
-					<textarea type="text" id="addAchievementModalDescription" class="form-control"></textarea>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" onclick="addAchievementSendData();" class="btn btn-primary">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-<div class="modal fade" id="editAchievementModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-trophy"></i>&nbsp;Edit achievement</h4>
-
-			</div>
-
-			<div class="hidden" id="editAchievementModalId"></div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="workshopName">Event name</label>
-
-					<input type="text" id="editAchievementModalEventName" class="form-control">
-
-					<br/>
-
-					<label for="location">Venue</label>
-
-					<input type="text" id="editAchievementModalLocation" class="form-control">
-
-					<br/>
-
-					<label for="duration">Year</label>
-
-					<input type="text" id="editAchievementModalYear" class="form-control">
-
-					<br/>
-
-					<label for="number">Description</label>
-
-					<textarea type="text" id="editAchievementModalDescription" class="form-control"></textarea>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div> -->
-
-
-
-
-
-<!-- <script src="aboutMe.js"></script> -->
 <script>
 
 	$(function () {
@@ -1452,9 +410,7 @@ var userId="<?php echo $_GET['userId'];?>";
                 ['Karachi', 70],
                 ['Mumbai', 60],
                 ['Moscow', 50],
-                ['Karachi', 70],
-                ['Mumbai', 60],
-                ['Moscow', 50]
+                ['Karachi', 70]
             ],
             dataLabels: {
                 enabled: true,
@@ -1521,7 +477,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		link.find("#pinURL").val(link2.find("#pinterestURL").find('a').attr("href"));
 		link.find("#email1").val(link2.find("#userEmail1").html());
 		link.find("#email2").val(link2.find("#userEmail2").html());
-		link.find("#address").val(link2.find("#addresss").html());
+		link.find("#address").val(link2.find("#address").html());
 		link.find("#contactNumber1").val(link2.find("#userPhone1").html());
 		link.find("#contactNumber2").val(link2.find("#userPhone2").html());
 	}
@@ -1549,7 +505,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 	}
 
-	/*function addTool()
+	function addTool()
 	{
 		$("#addToolModal").modal('show');
 	}
@@ -1567,8 +523,8 @@ var userId="<?php echo $_GET['userId'];?>";
 		var y=$('#project'+n);
 		x.find('#editProjectModalProjectId').val(n);
 		x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
-		z=y.find('#projectDuration').attr("title");
-		xz=z.split("-");
+		var z=y.find('#projectDuration').attr("title");
+		var xz=z.split("-");
 		x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
 		x.find('#editProjectModalProjectDurationTo').val(xz[1]);
 		x.find('#editProjectModalProjectRole').val(y.find('#projectRole').html());
@@ -1589,8 +545,8 @@ var userId="<?php echo $_GET['userId'];?>";
 		var y=$('#experience'+n);
 		x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
 		x.find('#editExperienceModalRole').val(y.find('#role').html());
-		z=y.find('#duration').attr("title");
-		xz=z.split("-");
+		var z=y.find('#duration').attr("title");
+		var xz=z.split("-");
 		x.find('#editExperienceModalDurationFrom').val(xz[0]);
 		x.find('#editExperienceModalDurationTo').val(xz[1]);
 		x.find('#experienceId').val(n);
@@ -1609,7 +565,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		var y=$('#certification'+n);
 		x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
 		x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
-		z=y.find('#duration').attr("title").split("-");
+		var z=y.find('#duration').attr("title").split("-");
 		x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
 		x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
 		x.find('#editCertificationModalId').html(n);
@@ -1629,7 +585,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
 		x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
 		x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
-		z=y.find('#duration').attr("title").split("-");
+		var z=y.find('#duration').attr("title").split("-");
 		x.find('#editAcademicsModalDurationFrom').val(z[0]);
 		x.find('#editAcademicsModalDurationTo').val(z[1]);
 		x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
@@ -1649,7 +605,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		var y=$('#workshop'+n);
 		x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
 		x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
-		z=y.find('#workshopDuration').attr("title").split("-");
+		var z=y.find('#workshopDuration').attr("title").split("-");
 		x.find('#editWorkshopModalWorkshopDurationFrom').val(z[0]);
 		x.find('#editWorkshopModalWorkshopDurationTo').val(z[0]);
 		x.find('#editWorkshopModalWorkshopPeopleNumber').val(y.find('#attenderNumber').html());
@@ -1671,7 +627,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
 		x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
-	}*/
+	}
 
 
 </script>
@@ -4017,7 +2973,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 									<br/>
 
-									<p id="addresss">IIITD&M Kancheepuram, Chennai, Tamil Nadu</p>
+									<p id="address">IIITD&M Kancheepuram, Chennai, Tamil Nadu</p>
 
 								</div>
 
@@ -4062,3 +3018,1055 @@ var userId="<?php echo $_GET['userId'];?>";
 	// $('.datepicker').css({'z-index':'1052'});
 
 </script>
+
+<div class="modal fade" id="addSkillModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add skill</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<input type="text" id="addSkillModalSkillName" class="form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">
+
+						</div>
+
+					</div>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="addSkillSendData();">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<div class="modal fade" id="editToolModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit tool</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="tool">Tool</label>
+
+					<input type="text" id="editToolModalToolText" class="form-control">
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addToolModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add tool</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="tool">Tool</label>
+
+					<input type="text" id="addToolModalToolText" class="form-control">
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addProjectModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add Project</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="projectTitle">Project title</label>
+
+					<input type="text" id="addProjectModalProjectTitle" class="form-control">
+
+					<br/>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label for="projectDuration">Project Duration From</label>
+
+							<input type="text" id="addProjectModalProjectDurationFrom" class="datepicker form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="projectDuration">Project Duration To</label>
+
+							<input type="text" id="addProjectModalProjectDurationTo" class="datepicker form-control">
+
+						</div>
+
+					</div>
+
+					<br/>
+
+					<label for="projectRole">Position</label>
+
+					<input type="text" id="addProjectModalProjectRole" class="form-control">
+
+					<br/>
+
+					<label for="projectCompany">Company</label>
+
+					<input type="text" id="addProjectModalProjectCompany" class="form-control">
+
+					<br/>
+
+					<label for="projectDescription">Project description</label>
+
+					<textarea type="text" id="addProjectModalProjectDescription" class="form-control"></textarea>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="addProjectSendData();" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editProjectModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit Project</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<input type="text" id="#editProjectModalProjectId" class="hidden">
+
+					<label for="projectTitle">Project title</label>
+
+					<input type="text" id="editProjectModalProjectTitle" class="form-control">
+
+					<br/>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label for="projectDuration">From</label>
+
+							<input type="text" id="editProjectModalProjectDurationFrom" class="datepicker form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="projectDuration">To</label>
+
+							<input type="text" id="editProjectModalProjectDurationTo" class="datepicker form-control">
+
+						</div>
+
+					</div>
+
+					<br/>
+
+					<label for="projectRole">Position</label>
+
+					<input type="text" id="editProjectModalProjectRole" class="form-control">
+
+					<br/>
+
+					<label for="projectCompany">Company</label>
+
+					<input type="text" id="editProjectModalProjectCompany" class="form-control">
+
+					<br/>
+
+					<label for="projectDescription">Project description</label>
+
+					<textarea type="text" id="editProjectModalProjectDescription" class="form-control"></textarea>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="editProjectSendData();" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addExperienceModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add experience</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="companyName">Company/organisation</label>
+
+					<input type="text" id="addExperienceModalCompanyName" class="form-control">
+
+					<br/>
+
+					<label for="experienceRole">Role/position</label>
+
+					<input type="text" id="addExperienceModalRole" class="form-control">
+
+					<br/>
+
+					<div class="col-md-6">
+
+						<label for="experienceDuration">From</label>
+
+						<input type="text" id="addExperienceModalDurationFrom" class="datepicker form-control">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label for="experienceDuration">To</label>
+
+						<input type="text" id="addExperienceModalDurationTo" class="datepicker form-control">
+
+					</div>
+
+					<br/>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="addExperienceSendData();" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editExperienceModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit experience</h4>
+
+			</div>
+
+			<div class="hidden" id="experienceId"></div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="companyName">Company/organisation</label>
+
+					<input type="text" id="editExperienceModalCompanyName" class="form-control">
+
+					<br/>
+
+					<label for="experienceRole">Role/position</label>
+
+					<input type="text" id="editExperienceModalRole" class="form-control">
+
+					<br/>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label for="experienceDurationHours">From</label>
+
+							<input type="text" id="editExperienceModalDurationFrom" class="form-control">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="experienceDurationMin">To</label>
+
+							<input type="text" id="editExperienceModalDurationTo" class="form-control">
+
+						</div>
+
+					</div>
+
+					<br/>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addAcademicsModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Add institution</h4>
+
+			</div>
+
+
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="degree">Degree</label>
+
+					<input type="text" id="addAcademicsModalDegree" class="form-control">
+
+					<br/>
+
+					<label for="percentage">Percentage/CGPA</label>
+
+					<input type="text" id="addAcademicsModalPercentage" class="form-control">
+
+					<br/>
+
+					<label for="schoolName">School/Institution name</label>
+
+					<input type="text" id="addAcademicsModalSchoolName" class="form-control">
+
+					<br/>
+
+					<label for="location">Location</label>
+
+					<input type="text" id="addAcademicsModalSchoolLocation" class="form-control">
+
+					<br/>
+
+					<div class="col-md-6">
+
+						<label for="duration">From</label>
+
+						<input type="text" id="addAcademicsModalDurationFrom" class="datepicker form-control">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label for="duration">To</label>
+
+						<input type="text" id="addAcademicsModalDurationTo" class="datepicker form-control">
+
+					</div>
+
+					<br/>
+					<br/>
+
+					
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="addAcademicsSendData();" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editAcademicsModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Edit institution</h4>
+
+			</div>
+
+			<div class="hidden" id="editAcademicsModalId"></div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="degree">Degree</label>
+
+					<input type="text" id="editAcademicsModalDegree" class="form-control">
+
+					<br/>
+
+					<label for="percentage">Percentage/CGPA</label>
+
+					<input type="text" id="editAcademicsModalPercentage" class="form-control">
+
+					<br/>
+
+					<label for="schoolName">School/Institution name</label>
+
+					<input type="text" id="editAcademicsModalSchoolName" class="form-control">
+
+					<br/>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label for="duration">From</label>
+
+							<input type="text" id="editAcademicsModalDurationFrom" class="form-control">
+
+							<br/>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="duration">To</label>
+
+							<input type="text" id="editAcademicsModalDurationTo" class="form-control">
+
+							<br/>
+
+						</div>
+
+					</div>
+
+					<label for="location">Location</label>
+
+					<input type="text" id="editAcademicsModalSchoolLocation" class="form-control">
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addWorkshopModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Add workshop</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="workshopName">Workshop name</label>
+
+					<input type="text" id="addWorkshopModalWorkshopName" class="form-control">
+
+					<br/>
+
+					<label for="location">Location</label>
+
+					<input type="text" id="addWorkshopModalWorkshopLocation" class="form-control">
+
+					<br/>
+
+					<div class="col-md-6">
+
+						<label for="duration">From</label>
+
+						<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control">
+
+					</div>
+					
+					<div class="col-md-6">
+
+						<label for="duration">To</label>
+
+						<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control">
+
+					</div>
+
+					<br/>
+
+					<label for="number">Number of people attended</label>
+
+					<input type="text" id="addWorkshopModalWorkshopPeopleNumber" class="form-control">
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="addWorkshopSendData();" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editWorkshopModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-plus"></i>&nbsp;Editworkshop</h4>
+
+			</div>
+
+			<div class="hidden" id="editWorkshopModalId"></div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="workshopName">Workshop name</label>
+
+					<input type="text" id="editWorkshopModalWorkshopName" class="form-control">
+
+					<br/>
+
+					<label for="location">Location</label>
+
+					<input type="text" id="editWorkshopModalWorkshopLocation" class="form-control">
+
+					<br/>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label for="duration">From</label>
+
+							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control">
+
+							<br/>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="duration">To</label>
+
+							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control">
+
+							<br/>
+
+						</div>
+
+					</div>
+
+					
+
+					<label for="number">Number of people attended</label>
+
+					<input type="text" id="editWorkshopModalWorkshopPeopleNumber" class="form-control">
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addCertificationModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add certification</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="courseName">Course name</label>
+
+					<input type="text" id="addCertificationModalCourseName" class="form-control">
+
+					<br/>
+
+					<label for="institute">Institute</label>
+
+					<input type="text" id="addCertificationModalInstitute" class="form-control">
+
+					<br/>
+
+					<div class="col-md-6">
+
+						<label for="experienceDuration">From</label>
+
+						<input type="text" id="addCertificationModalDurationFrom" class="form-control">
+
+					</div>
+
+					<div class="col-md-6">
+
+						<label for="experienceDuration">To</label>
+
+						<input type="text" id="addCertificationModalDurationTo" class="form-control">
+
+					</div>
+
+					<br/>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="addCertificationSendData();" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editCertificationModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit certification</h4>
+
+			</div>
+
+			<div class="hidden" id="editCertificationModalId"></div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="courseName">Course name</label>
+
+					<input type="text" id="editCertificationModalCourseName" class="form-control">
+
+					<br/>
+
+					<label for="certificationInstitute">Institute</label>
+
+					<input type="text" id="editCertificationModalInstitute" class="form-control">
+
+					<br/>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label for="duration">From</label>
+
+							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control">
+
+							<br/>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="duration">To</label>
+
+							<input type="text" id="editCertificationModalCertificationDurationFromTo" class="form-control">
+
+							<br/>
+
+						</div>
+
+					</div>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addAchievementModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-trophy"></i>&nbsp;Add achievement</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="workshopName">Event name</label>
+
+					<input type="text" id="addAchievementModalEventName" class="form-control">
+
+					<br/>
+
+					<label for="location">Venue</label>
+
+					<input type="text" id="addAchievementModalLocation" class="form-control">
+
+					<br/>
+
+					<label for="duration">Year</label>
+
+					<input type="text" id="addAchievementModalYear" class="form-control">
+
+					<br/>
+
+					<label for="number">Description</label>
+
+					<textarea type="text" id="addAchievementModalDescription" class="form-control"></textarea>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="addAchievementSendData();" class="btn btn-primary">Add</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editAchievementModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-trophy"></i>&nbsp;Edit achievement</h4>
+
+			</div>
+
+			<div class="hidden" id="editAchievementModalId"></div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="workshopName">Event name</label>
+
+					<input type="text" id="editAchievementModalEventName" class="form-control">
+
+					<br/>
+
+					<label for="location">Venue</label>
+
+					<input type="text" id="editAchievementModalLocation" class="form-control">
+
+					<br/>
+
+					<label for="duration">Year</label>
+
+					<input type="text" id="editAchievementModalYear" class="form-control">
+
+					<br/>
+
+					<label for="number">Description</label>
+
+					<textarea type="text" id="editAchievementModalDescription" class="form-control"></textarea>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
