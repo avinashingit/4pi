@@ -1,5 +1,5 @@
 <?php
-//------Documentation------//
+//------Credits------//
 //
 //
 //---Definitions of all Helper Functions for the whole Backend management.
@@ -7,7 +7,7 @@
 //---Email: majetyhk@gmail.com
 //
 //
-//---Documentation Ends---//
+//---Credits Ends---//
 
 
 

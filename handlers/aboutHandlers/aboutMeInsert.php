@@ -1,5 +1,16 @@
 <?php
-
+//------Credits------//
+//
+//
+//---Definitions of all Insert Functions for aboutMe.
+//---Author : K Roopesh Reddy ,COE12B025.
+//---Email : coe12b025@iiitdm.ac.in
+//
+//---Editor: Hari Krishna Majety , COE12B013.
+//---Email: majetyhk@gmail.com
+//
+//
+//---Credits Ends---//
 session_start();
 require_once('../../QOB/qob.php');
 require_once('./miniPoll.php');
@@ -262,7 +273,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 		}
 	}
 	
-	if(($profilePic != "") and ($description != "") and ($resume != "") and ($hobbies != "") and ($address != "") and ($phone != "") and ($city != "") and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
+	if(($description != "") and ($resume != "") and ($hobbies != "") and ($address != "") and ($phone != "") and ($city != "") and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 	{
 		$conObj = new QoB();
 		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -306,7 +317,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 					/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
 						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
-					$aboutObj = new about($profilePicture,$userAlias,$dob,$description,$resume,$highestDegree,
+					$aboutObj = new about($profilePic,$userAlias,$dob,$description,$resume,$highestDegree,
 						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 					print_r(json_encode($aboutObj));
@@ -448,14 +459,15 @@ function academicsInsert($user,$degree,$schoolName,$durationString,$score,$score
 	else
 	{
 		//echo 'No values found <br/>';
-		echo 404;
+		echo 16;
+		exit();
 	}
 	
 }
 		
 
 
-function achievmentsInsert($user,$competition,$description,$position,$location,achievedDate='')
+function achievmentsInsert($user,$competition,$description,$position,$location,$achievedDate='')
 	{
 
 		$date = date_parse($achievedDate);
@@ -475,7 +487,6 @@ function achievmentsInsert($user,$competition,$description,$position,$location,a
 					{
 						if($result0 != "")
 							{*/ 
-								$conObj = new QoB();
 								$userId = $user['userId']; 
 							
 								//echo "This is the value of timestamp <br/>";
@@ -518,6 +529,8 @@ function achievmentsInsert($user,$competition,$description,$position,$location,a
 		
 		
 	}
+
+}
 
 function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 	{
