@@ -197,15 +197,8 @@ else if ($mode=6) {
 
 	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_teamMembers'],$_POST['_projectCompany']);
 }
+
 else if ($mode=7) {
-
-	# SkillSet Insert
-	$skill=$_POST[''];
-	$rating=$_POST[''];
-
-	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
-}
-else if ($mode=8) {
 
 	# WorkshopsInsert
 	$title=$_POST[''];
@@ -215,6 +208,14 @@ else if ($mode=8) {
 	$attendCount=$_POST[''];
 
 	workshopsInsert($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']);
+}
+else if ($mode=8) {
+
+	# SkillSet Insert
+	$skill=$_POST[''];
+	$rating=$_POST[''];
+
+	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
 }
 else if ($mode=9)
 {
