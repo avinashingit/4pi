@@ -125,7 +125,10 @@ else
 
 function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId)
 	{
-
+		$phoneArray=$phone;
+		$showPhoneArray=$showPhone;
+		$phone=implode(',',$phone);
+		$showPhone=implode(',',$showPhone);
 		$date = date_parse($dob);
 		$dobTimestamp = strtotime($dob);
 		
@@ -190,7 +193,7 @@ function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$addre
 			if($conObj->error == "")
 			{
 				$aboutObj = new about($profilePic,$userAlias,$dob,$description,$resume,$highestDegree,
-					$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
+					$currentProfession,$hobbies,$mailId,$showMailId,$address,$phoneArray,$showPhoneArray,
 					$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 				print_r(json_encode($aboutObj));
 			}
