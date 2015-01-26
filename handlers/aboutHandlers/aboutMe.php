@@ -5,11 +5,12 @@ require_once('../../QOB/qob.php');
 require_once('aboutMeClass.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE13B001".SALT);
+	$userIdHash=$_SESSION['vj'];
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_userId']='COE12B025';
-	$_POST['_mode']=1;
+	/*$_POST['_userId']='COE12B009';
+	$_POST['_mode']=1;*/
 
+	// var_dump($_POST);
 
 //Testing Content Ends
 	
@@ -113,11 +114,11 @@ function aboutMe($userId,$mode,$isOwner)
 	$conObj = new QoB();
 	if($mode == 1)
 	{
-		echo 'entered mode :'.$mode;
+		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
-		var_dump($result1);
+		// var_dump($result1);
 		if($conObj->error == "")
 		{
 			

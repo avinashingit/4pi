@@ -25,10 +25,12 @@ Last edited: 25-01-2015
 *********************************************************************/
 
 
-var userIdFromURL=window.location.href.lastIndexOf('/');
-var commonURLAbout="http://localhost/4pi/";
-///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
+/*var userIdFromURL=window.location.href.lastIndexOf('/');
+var userId=userIdFromURL;*/
 
+/*var userId="COE12B025";*/
+var commonURLAbout="/4pi/";
+///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
 
 /*$(function () {
 	$('#skills').highcharts({
@@ -275,62 +277,64 @@ function editAchievement(n)
 
 function insertTopPart(data)
 {
+	alert("Called");
+	console.log(data);
 	var topPart="";
 
-				topPart+='<div class="col-md-2" id="personPicture">';
+	topPart+='<div class="col-md-2" id="personPicture">';
 
-					topPart+='<a href="'+commonURLAbout+userId+'" class="thumbnail"><img src="../img/hpics/'+data.profilePictureHash+'.jpg"  alt="'+data.userName+'" class="img-responsive"/></a>';
+		topPart+='<a href="'+commonURLAbout+userId+'" class="thumbnail"><img src="../img/hpics/'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a>';
 
-					topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
+		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
-				topPart+='</div><!-- end id personPicture -->';
+	topPart+='</div><!-- end id personPicture -->';
 
-				topPart+='<div class="col-md-10" id="personInfo">';
-					
-					topPart+='<div class="row" id="personName">';
+	topPart+='<div class="col-md-10" id="personInfo">';
+		
+		topPart+='<div class="row" id="personName">';
 
-						topPart+='<div class="col-md-11">';
+			topPart+='<div class="col-md-11">';
 
-							topPart+='<h3 id="personNameText">'+data.userName+'</h3><br/>';
+				topPart+='<h3 id="personNameText">'+data.name+'</h3><br/>';
 
-						topPart+='</div>';
+			topPart+='</div>';
 
-						topPart+='<div class="col-md-1 text-right">';
+			topPart+='<div class="col-md-1 text-right">';
 
-							topPart+='<i class="fa fa-pencil" title="Edit" onclick="editPersonInfo();"></i>';
+				topPart+='<i class="fa fa-pencil" title="Edit" onclick="editPersonInfo();"></i>';
 
-						topPart+='</div>';
+			topPart+='</div>';
 
-					topPart+='</div><!-- end id person name -->';
+		topPart+='</div><!-- end id person name -->';
 
-					topPart+='<div class="row" id="personDetails">';
+		topPart+='<div class="row" id="personDetails">';
 
-						topPart+='<div class="col-md-3">';
+			topPart+='<div class="col-md-3">';
 
-							topPart+='<div class="text-left" id="personDOB">'+data.userDOB+'</div><br/>';
+				topPart+='<div class="text-left" id="personDOB">'+data.dob+'</div><br/>';
 
-							topPart+='<div class="text-left" id="personHighestDegree">'+data.personHighestDegree+'</div><br/>';
+				topPart+='<div class="text-left" id="personHighestDegree">'+data.highestDegree+'</div><br/>';
 
-							topPart+='<div class="text-left" id="personCurrentProfession">'+data.persnCurrentProfession+'</div><br/>';
+				topPart+='<div class="text-left" id="personCurrentProfession">'+data.currentProfession+'</div><br/>';
 
-							topPart+='<div class="text-left" id="personResumeLink">';
+				topPart+='<div class="text-left" id="personResumeLink">';
 
-								topPart+='<a href="'+data.resumeLink+'"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+					topPart+='<a href="'+data.resume+'"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
 
-							topPart+='</div><!-- end person resume link id -->';
+				topPart+='</div><!-- end person resume link id -->';
 
-						topPart+='</div>';
+			topPart+='</div>';
 
-						topPart+='<div class="col-md-9" id="personDescription">';
+			topPart+='<div class="col-md-9" id="personDescription">';
 
-							topPart+='<p style="text-align:justify;line-height:22px;">'+data.aboutPerson+'</p>';
+				topPart+='<p style="text-align:justify;line-height:22px;">'+data.description+'</p>';
 
-						topPart+='</div><!-- end class col-md-8 -->';
+			topPart+='</div><!-- end class col-md-8 -->';
 
-					topPart+='</div><!-- end person details id -->';
+		topPart+='</div><!-- end person details id -->';
 
 
-				topPart+='</div>';
+	topPart+='</div>';
 
 	$('#topContent').html(topPart);
 }
@@ -339,22 +343,29 @@ function insertTopPart(data)
 
 function fetchTopPart()
 {
-	$.post('/4pi/handlers/aboutMeHandlers/fetchTopPart.php',{
-		_userId:userId
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:1
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
-		if(checkAbout(data)==1)
+		// console.log(data);
+		if(checkData(data)==1)
 		{
-			console.log(checkAbout(data)+" this is checkAbout");
+			console.log(checkData(data)+" this is checkData");
+			// console.log(data);
 			x=JSON.parse(data);
 			insertTopPart(x);
 		}
 	});
 }
+
+$(document).ready(function(){
+	fetchTopPart();
+	// fetchSkills();
+});
 
 //function to insert bottom part. It accepts data as a JSON object and inserts the object in to the web document
 
@@ -394,7 +405,7 @@ function insertBottomPart(data)
 
 						bottomPart+='</div><!-- end class col-md-6 -->';
 
-						bottomPart+='<div class="col-md-6 col-md-offset-1">';
+						bottomPart+='<div class="col-md-6 col-md-offset-1" id="contactsContainer">';
 
 							bottomPart+='<div class="row">';
 	
@@ -408,35 +419,35 @@ function insertBottomPart(data)
 
 							if(data.facebookId!="")
 							{
-								bottomPart+='<div class="col-md-2">';
+								bottomPart+='<div class="col-md-2" id="facebookURL">';
 									bottomPart+='<a href="'+data.facebookId+'" class="icon-button facebook" ><i class="fa fa-facebook" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 								bottomPart+='</div>';
 							}
 								
 							if(data.twitterId!="")
 							{
-								bottomPart+='<div class="col-md-2">';
+								bottomPart+='<div class="col-md-2" id="twitterURL">';
 									bottomPart+='<a href="'+data.twitterId+'"  class="icon-button twitter"><i class="fa fa-twitter" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 								bottomPart+='</div>';
 							}
 
 							if(data.gplusId!="")
 							{
-								bottomPart+='<div class="col-md-2">';
+								bottomPart+='<div class="col-md-2" id="googlePlusURL">';
 									bottomPart+='<a href="#" class="icon-button google-plus"><i class="fa fa-google-plus" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 								bottomPart+='</div>';
 							}
 
 							if(data.linkedinId!="")
 							{
-								bottomPart+='<div class="col-md-2">';
+								bottomPart+='<div class="col-md-2" id-"linkedInURL">';
 									bottomPart+='<a href="#" class="icon-button linkedin"><i class="fa fa-linkedin" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 								bottomPart+='</div>';
 							}
 
 							if(data.pinterestId!="")
 							{
-								bottomPart+='<div class="col-md-2">';
+								bottomPart+='<div class="col-md-2" id="pinterestURL">';
 									bottomPart+='<a href="#" class="icon-button pinterest"><i class="fa fa-pinterest" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 								bottomPart+='</div>';
 							}
@@ -457,7 +468,7 @@ function insertBottomPart(data)
 
 									for(i=0;i<data.userEmails.length;i++)
 									{
-										bottomPart+='<p>'+data.userEmails[i]+'</p>';
+										bottomPart+='<p id="email'+i+1+'">'+data.userEmails[i]+'</p>';
 									}
 
 								bottomPart+='</div>';
@@ -471,7 +482,7 @@ function insertBottomPart(data)
 
 									bottomPart+='<br/>';
 
-									bottomPart+='<p>'+data.address+'</p>';
+									bottomPart+='<p id="address">'+data.address+'</p>';
 
 								bottomPart+='</div>';
 							}
@@ -486,7 +497,7 @@ function insertBottomPart(data)
 
 									for(i=0;i<data.contacts.length;i++)
 									{
-										bottomPart+='<p>'+data.contacts[i]+'</p>';
+										bottomPart+='<p id="userPhone'+i+1+'">'+data.contacts[i]+'</p>';
 									}
 
 								bottomPart+='</div>';
@@ -515,13 +526,42 @@ function fetchBottomPart()
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
-			console.log(checkAbout(data)+" this is checkAbout");
+			console.log(checkData(data)+" this is checkData");
 			x=JSON.parse(data);
 			insertBottomPart(x);
 		}
 	});
+}
+
+function editContactInfoSendData()
+{
+	var link=$("#editContactsModal");
+	var fbURL=link.find("#fbURL").val().trim();
+	var gplusURL=link.find("#gplusURL").val().trim();
+	var inURL=link.find("#inURL").val().trim();
+	var pinURL=link.find("#pinURL").val().trim();
+	var twitterURL=link.find("#twitterURL").val().trim();
+	var emailId=link.find("#email2").val().trim();
+	var address=link.find("#address").val().trim();
+	var phone1=link.find("#contactNumber1").val().trim();
+	var phone2=link.find("#contactNumber2").val().trim();
+	var phone=[phone1,phone2];
+	$.post('/4pi/handlers/aboutHandlers/editBottomPart.php',{
+		_userId:userId
+	})
+	.error(function(){
+		alert("Server overload. Please try again.");
+	})
+	.success(function(data){
+		if(checkData(data)==1)
+		{
+			insertBottomPart(data);
+		}
+	});
+
+	
 }
 
 //////////////////////////////PERSONAL INFO ENDS/////////////////////
@@ -533,6 +573,7 @@ function fetchBottomPart()
 
 function insertSkills(data)
 {
+	alert("Called insert");
 	$('#skills').find('#skillData').highcharts({
         chart: {
             type: 'column'
@@ -582,14 +623,17 @@ function insertSkills(data)
 
 function fetchSkills()
 {
-	$.post('/4pi/handlers/aboutMeHandlers/fetchSkills.php',{
+	alert("Called");
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:10
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			insertSkills(data);
 		}
@@ -624,7 +668,7 @@ function addSkillSendData()
 			alert("Server overload. Please try again.:(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				insertSkills(data.JSONObject);
 				var skillNames=data.skillNames.join();
@@ -674,7 +718,7 @@ function editSkillsSendData()
 			alert("Server overload. Please try again.:(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				modifySkills(data);
 			}
@@ -711,7 +755,7 @@ function fetchTools(data)
 		alert("Server overload. Please try again.:(");
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			for(i=0;i<data.length;i++)
 			{
@@ -738,7 +782,7 @@ function addToolSendData()
 			alert("Server overload. Please try again");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				insertTool(data);
 			}
@@ -790,7 +834,7 @@ function editToolSendData()
 			alert("Server overload. Please try again.:(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				modifyTools(data);
 			}
@@ -886,9 +930,9 @@ function fetchProjects()
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
-			console.log(checkAbout(data)+" this is checkAbout");
+			console.log(checkData(data)+" this is checkData");
 			x=JSON.parse(data);
 			insertProjects(x,"multiple");
 		}
@@ -920,7 +964,7 @@ function addProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				insertProjects(data,"single");
@@ -968,7 +1012,7 @@ function editProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				modifyProject(data);
@@ -988,7 +1032,7 @@ function deleteProject(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				$('#projects').find('#'+id).remove();
 			}
@@ -1065,7 +1109,7 @@ function fetchExperience()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
 			for(i=0;i<x.length;i++)
@@ -1098,7 +1142,7 @@ function addExperienceSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				insertExperience(data);
@@ -1140,7 +1184,7 @@ function editExperienceSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				modifyExperience(data);
 			}
@@ -1159,7 +1203,7 @@ function deleteExperience(id)
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				$('#experiences').find('#'+id).remove();
 			}
@@ -1253,7 +1297,7 @@ function fetchAcademics()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
 			for(i=0;i<x.length;i++)
@@ -1290,7 +1334,7 @@ function addAcademicsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				insertAcademics(data);
@@ -1332,7 +1376,7 @@ function editAcademicsSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				modifyAcademics(data);
@@ -1352,7 +1396,7 @@ function deleteAcademics(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				$('#academics').find('#'+id).remove();
 			}
@@ -1435,7 +1479,7 @@ function fetchWorkshops()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
 
@@ -1471,7 +1515,7 @@ function addWorkshopSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				insertWorkshop(data);
@@ -1514,7 +1558,7 @@ function editWorkshopSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				modifyWorkshop(data);
 			}
@@ -1533,7 +1577,7 @@ function deleteWorkshop(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				$('#workshops').find('#'+id).remove();
 			}
@@ -1607,7 +1651,7 @@ function fetchCertifications()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
 			for(i=0;i,x.length;i++)
@@ -1641,7 +1685,7 @@ function addCertificationSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				insertCertification(data);
@@ -1681,7 +1725,7 @@ function editCertificationSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				modifyCertification(data);
@@ -1701,7 +1745,7 @@ function deleteCertification(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				$('#certifications').find('#'+id).remove();
 			}
@@ -1785,7 +1829,7 @@ function fetchAchievements()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
 
@@ -1819,7 +1863,7 @@ function addAchievementSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				insertAchievements(data);
@@ -1862,7 +1906,7 @@ function editAchievementSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
 				modifyAchievement(data);
@@ -1882,7 +1926,7 @@ function deleteAchivement(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				$('#achievements').find('#'+id).remove();
 			}
@@ -1918,7 +1962,7 @@ function fetchInterests(data)
 
 	})
 	.success(function(data){
-		if(checkAbout(data)==1)
+		if(checkData(data)==1)
 		{
 			for(i=0;i<data.length;i++)
 			{
@@ -1944,7 +1988,7 @@ function addInterestSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				insertInterest(data);
 			}
@@ -1996,7 +2040,7 @@ function editInterestSendData()
 			alert("Server overload. Please try again.:(");
 		})
 		.success(function(data){
-			if(checkAbout(data)==1)
+			if(checkData(data)==1)
 			{
 				modifyInterests(data);
 			}
@@ -2036,7 +2080,7 @@ function leaveMessage()
 	   	 		alert("Server overload. Please try again.");
 	   	 	})
 	   	 	.success(function(data){
-	   	 		if(checkAbout(data)==1)
+	   	 		if(checkData(data)==1)
 	   	 		{
 	   	 			alert("Thank you. The message is delivered.")
 	   	 		}
