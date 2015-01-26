@@ -116,23 +116,32 @@ function aboutMe($userId,$mode,$isOwner)
 		echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT about.*,users.alias,users.userIdHash,experience.organisation,experience.designation FROM about INNER JOIN users ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
 		var_dump($result1);
-		if($conObj->error == ""&&$result1 != "")
+		if($conObj->error == "")
 		{
-					
-			$date1 = date("d-m-y" , $result1['dob']);
-			/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
-			$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
-			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
-			$highestDegree=getDegree($userId);
-			$proPicLocation=getProfilePicLocation($result1['userIdHash']);
-			$work="Student";
-			if($result1['organisation']!="")
-				$work=$result1['designation']." at ".$result1['organisation'];
-			$obj = new about($proPicLocation,$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
-				$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],$result1['phone'],$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
-			print_r(json_encode($obj));
+			
+			if($result1 != "")
+			{
+				$date1 = date("d-m-y" , $result1['dob']);
+				/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
+				$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
+				$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
+				$highestDegree=getDegree($userId);
+				$proPicLocation=getProfilePicLocation($result1['userIdHash']);
+				$work="Student";
+				if($result1['organisation']!="")
+					$work=$result1['designation']." at ".$result1['organisation'];
+				$obj = new about($proPicLocation,$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
+					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],$result1['phone'],$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
+				print_r(json_encode($obj));
+			}
+			else
+			{
+				echo 404;
+				exit();
+			}		
+			
 				
 		}
 		else
@@ -435,11 +444,19 @@ function aboutMe($userId,$mode,$isOwner)
 		//To fetch Details of skillset
 		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->fetchAll("SELECT * FROM skillset WHERE userId = ?",$values1);
-		if($conObj->error == ""&&$result1!="")
+		if($conObj->error == "")
 		{
-			$obj = new skillSet($skillSets['skills'],$skillSets['rating'],$isOwner);
+			if($result1!="")
+			{
+				$obj = new skillSet($result1['skills'],$result1['rating'],$isOwner);
 			
-			print_r(json_encode($obj));
+				print_r(json_encode($obj));
+			}
+			else
+			{
+				echo 404;
+			}
+			
 		}
 		else
 		{
@@ -473,15 +490,24 @@ function aboutMe($userId,$mode,$isOwner)
 		}*/
 	}
 		
-	elseif($mode == 12)
+	else if($mode == 12)
 	{
 		//To fetch Details of toolkit
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM toolkit WHERE userId = ?",$values1);
+		$result1 = $conObj->fetchAll("SELECT * FROM toolkit WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
-			$obj = new toolkit($toolkit['tools'],$isOwner);
-			print_r(json_encode($obj));
+			if($result1!="")
+			{
+				$obj = new toolkit($result1['tools'],$isOwner);
+				print_r(json_encode($obj));
+			}
+			else
+			{
+				echo 404;
+				exit();
+			}
+			
 		}
 		else
 		{
@@ -490,7 +516,7 @@ function aboutMe($userId,$mode,$isOwner)
 		}
 	}
 		
-	elseif($mode == 13)
+	else if($mode == 13)
 	{
 		//To fetch Details of workshop
 		$values1 = array(0 => array($userId => 's'));
@@ -512,11 +538,37 @@ function aboutMe($userId,$mode,$isOwner)
 			if($noOfElementsW == 0)
 			{
 				echo 404;
+				exit();
 			}
 		}
 		else
 		{
 			notifyAdmin("Conn.Error: ".$conn->error."! In fetching workshops of aboutMe:".$userId,$currentUserId);
+			echo 12;
+		}
+	}
+	else if($mode == 14)
+	{
+		//To fetch Details of interests
+		$values1 = array(0 => array($userId => 's'));
+		$result1 = $conObj->fetchAll("SELECT * FROM interests WHERE userId = ?",$values1);
+		if($conObj->error == "")
+		{
+			if($result1!="")
+			{
+				$obj = new toolkit($result1['tools'],$isOwner);
+				print_r(json_encode($obj));
+			}
+			else
+			{
+				echo 404;
+				exit();
+			}
+			
+		}
+		else
+		{
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching toolkit of aboutMe:".$userId,$currentUserId);
 			echo 12;
 		}
 	}

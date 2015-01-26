@@ -147,7 +147,7 @@ else if ($mode=3) {
 	$location=$_POST['_location'];
 	$achievedDate=$_POST['_achievedDate'];
 */
-	achievmentsInsert($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievedDate'])
+	achievmentsInsert($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievedDate']);
 }
 else if ($mode=4) {
 
@@ -160,7 +160,7 @@ else if ($mode=4) {
 	//$end=$timeString[1];
 	//$instituteName=$_POST['_institute'];
 
-	certifiedCoursesInsert($user,$_POST['_courseName'],$_POST['_duration'],$_POST['_institute'])
+	certifiedCoursesInsert($user,$_POST['_courseName'],$_POST['_duration'],$_POST['_institute']);
 }
 else if ($mode=5) {
 
@@ -181,9 +181,10 @@ else if ($mode=6) {
 	$role=$_POST[''];
 	$start=$_POST[''];
 	$end=$_POST[''];
-	$description=$_POST[''];
+	$teamMembers=$_POST['']
+	$company=$_POST[''];
 
-	projectInsert($user,$_POST['_projectTitle'],$role,$start,$end,$description)
+	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_teamMembers'],$_POST['_projectCompany']);
 }
 else if ($mode=7) {
 
@@ -191,7 +192,7 @@ else if ($mode=7) {
 	$skill=$_POST[''];
 	$rating=$_POST[''];
 
-	skillSetInsert($user,$skill,$rating)
+	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
 }
 else if ($mode=8) {
 
@@ -200,14 +201,18 @@ else if ($mode=8) {
 	$start=$_POST[''];
 	$end=$_POST[''];
 	$place=$_POST[''];
-	$attendes=$_POST[''];
+	$attendCount=$_POST[''];
 
-	workshopsInsert($user,$title,$start,$end,$place,$attendes)
+	workshopsInsert($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']);
 }
 else if ($mode=9)
 {
 	#toolkit insert
-	toolkitInsert($user,$tools);
+	toolkitInsert($user,$_POST['_tools']);
+}
+else if ($mode = 10)
+{
+	interestsInsert($user,$_POST['_interests']);
 }
 else {
 	# Erroneous Mode Sent
@@ -442,7 +447,7 @@ function academicsInsert($user,$degree,$schoolName,$durationString,$score,$score
 	
 	else
 	{
-		echo 'No values found <br/>';
+		//echo 'No values found <br/>';
 		echo 404;
 	}
 	
@@ -473,8 +478,8 @@ function achievmentsInsert($user,$competition,$description,$position,$location,a
 								$conObj = new QoB();
 								$userId = $user['userId']; 
 							
-								echo "This is the value of timestamp <br/>";
-								echo $achievedDateTimestamp.'<br/>';
+								//echo "This is the value of timestamp <br/>";
+								//echo $achievedDateTimestamp.'<br/>';
 							
 								$values = array(0 => array($userId => 's'), 1 => array($competition => 's'), 2 => array($description => 's'), 3 => array($position => 's'), 4 => array($location => 's'), 5=>array($achievedDate => 's'));
 								
@@ -759,7 +764,7 @@ function skillSetInsert($user,$skill,$rating)
 							$values[2] = array($rating => 's');
 							$values[3] = array($skill => 's');
 							$values[4] = array($rating => 's');
-							
+
 							$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
 							if($conObj->error == "")
 								{
@@ -794,7 +799,7 @@ function skillSetInsert($user,$skill,$rating)
 		
 	}
 
-function workshopsInsert($user,$title,$durationString,$place,$attendes)
+function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 	{
 		$timeString=explode("-",$durationString);
 		$start=$timeString[0];
@@ -815,7 +820,7 @@ function workshopsInsert($user,$title,$durationString,$place,$attendes)
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($place != '') and ($attendes != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if(($place != '') and ($attendCount != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -833,9 +838,9 @@ function workshopsInsert($user,$title,$durationString,$place,$attendes)
 							$values[2] = array($start => 's');
 							$values[3] = array($end => 's');
 							$values[4] = array($place => 's');
-							$values[5] = array($attendes => 'i');
+							$values[5] = array($attendCount => 'i');
 							
-							$result1 = $conObj->insert("INSERT INTO workshops(userId,workshopName,start,end,place,attendes) VALUES(?,?,?,?,?,?)",$values);
+							$result1 = $conObj->insert("INSERT INTO workshops(userId,workshopName,start,end,place,attendCount) VALUES(?,?,?,?,?,?)",$values);
 							
 							if($conObj->error == "")
 								{
@@ -843,7 +848,7 @@ function workshopsInsert($user,$title,$durationString,$place,$attendes)
 									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 									$workshopId="w".$conObj->getInsertId();
-									$workshopObj=new workshops($workshopId,$duration,$minDuration,$title,$place,$attendees,1);
+									$workshopObj=new workshops($workshopId,$duration,$minDuration,$title,$place,$attendCount,1);
 									print_r(json_encode($projectObj));
 								}
 							else

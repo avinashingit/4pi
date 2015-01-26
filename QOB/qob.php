@@ -799,16 +799,23 @@ class QoB
         $this->conn->autocommit(true);
     }
 
+    //returns number of affected rows in case of insert or update
     function getAfftectedRows()
     {
         return $this->$stmt->affected_rows;
     }
 
-    //Returns the value of Auto incremented Id generated due to last executed statement( i.e. if lst statement was insert or update).
+    //Returns the value of Auto incremented Id generated due to last executed statement( i.e. if last statement was insert or update).
     //Returns id if there is a auto_incrementing field. Else return zero.
     function getInsertId()
     {
         return $this->conn->insert_id;
+    }
+
+    //Returns Fetched Row count (if the last function called is fetchAll or select)
+    function getFetchedRowCount()
+    {
+        return $this->$stmt->num_rows;
     }
 
 
