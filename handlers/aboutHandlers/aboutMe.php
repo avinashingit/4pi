@@ -2,13 +2,14 @@
 
 session_start();
 require_once('../../QOB/qob.php');
-require_once('./miniPoll.php');
+require_once('aboutMeClass.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE13B001".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_refresh']=0;
-	$_POST['sgk']=array();*/
+	$_POST['_userId']='COE12B025';
+	$_POST['_mode']=1;
+
 
 //Testing Content Ends
 	
@@ -73,6 +74,7 @@ if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
 	{
 		$isOwner=1;
 	}
+	aboutMe($userId,$mode,$isOwner);
 }
 
 
@@ -101,10 +103,11 @@ function aboutMe($userId,$mode,$isOwner)
 	$conObj = new QoB();
 	if($mode == 1)
 	{
+		echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->fetchAll("SELECT about.*,users.alias,users.userIdHash,experience.organisation,experience.designation FROM about INNER JOIN users ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
-		
+		var_dump($result1);
 		if($conObj->error == ""&&$result1 != "")
 		{
 					
@@ -114,7 +117,9 @@ function aboutMe($userId,$mode,$isOwner)
 			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
 			$highestDegree=getDegree($userId);
 			$proPicLocation=getProfilePicLocation($result1['userIdHash']);
-			$work=$result1['designation']." at ".$result1['organisation'];
+			$work="Student";
+			if($result1['organisation']!="")
+				$work=$result1['designation']." at ".$result1['organisation'];
 			$obj = new about($proPicLocation,$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
 				$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],$result1['phone'],$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
 			print_r(json_encode($obj));
@@ -130,7 +135,7 @@ function aboutMe($userId,$mode,$isOwner)
 		
 	}
 		
-	elseif($mode == 2)
+	else if($mode == 2)
 	{
 		//To fetch Details of achievements
 		$values1 = array(0 => array($userId => 's'));
@@ -159,7 +164,7 @@ function aboutMe($userId,$mode,$isOwner)
 		}
 	}
 		
-	elseif($mode == 3)
+	else if($mode == 3)
 	{
 		//To fetch Details of academics
 		
@@ -243,7 +248,7 @@ function aboutMe($userId,$mode,$isOwner)
 		}
 	}
 		
-	elseif($mode == 4)
+	else if($mode == 4)
 	{
 		//To fetch Details of certifiedCourses
 		$values1 = array(0 => array($userId => 's'));
@@ -254,10 +259,10 @@ function aboutMe($userId,$mode,$isOwner)
 			while($courses = $conObj->fetch($result1))
 			{	
 				$startDateTimestamp=$courses['start'];
-				$endDateTimestamp=$course['end'];
+				$endDateTimestamp=$courses['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new certifiedCourses($course['courseId']$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
+				$obj = new certifiedCourses($courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
@@ -342,7 +347,7 @@ function aboutMe($userId,$mode,$isOwner)
 			$noOfElementsM = 0;
 			while($leaveMessage = $conObj->fetch($result1))
 			{
-				$obj = new leaveMessage($leaveMessage['leaveMessageId']$leaveMessage['name'],$leaveMessage['mailid'],$leaveMessage['message'],$isOwner);
+				$obj = new leaveMessage($leaveMessage['leaveMessageId'],$leaveMessage['name'],$leaveMessage['mailid'],$leaveMessage['message'],$isOwner);
 				$outputa[$noOfElementsM] = $obj;
 				$noOfElementsM++;
 			}
@@ -504,7 +509,12 @@ function aboutMe($userId,$mode,$isOwner)
 			notifyAdmin("Conn.Error: ".$conn->error."! In fetching workshops of aboutMe:".$userId,$currentUserId);
 			echo 12;
 		}
-	}	
+	}
+	else
+	{
+		notifyAdmin("Wrong mode sent:".$userId,$currentUserId);
+		echo 16;
+	}
 	
 	
 }

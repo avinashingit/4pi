@@ -16,9 +16,6 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
-
-	require_once("/../PHPMailer_v5.1/class.phpmailer.php");
-	require_once("/../QOB/qob.php");
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
 	require_once("postHandlers/miniClasses/miniComment.php");
@@ -535,7 +532,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	{
 		$ndate=explode($seperator,$rawDate);
 		//var_dump($ndate);
-		if($ndate[2]<2007||$ndate[2]>2030)
+		if($ndate[2]<1947||$ndate[2]>2050)
 		{
 			return false;
 		}

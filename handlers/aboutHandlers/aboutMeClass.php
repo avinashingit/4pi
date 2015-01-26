@@ -147,16 +147,15 @@
 			public $duration;
 			public $minDuration;
 			public $designation;
-			public $description;
 			public $isOwner;
-			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$description,$isOwner)
+			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$isOwner)
 				{
 					$this->experienceId=$experienceId;
 					$this->organisation = $organisation;
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
 					$this->designation = $designation;
-					$this->description = $description;
+					//$this->description = $description;
 					$this->isOwner=$isOwner;
 					return $this;
 				}
@@ -196,7 +195,7 @@
 	class projects
 		{
 			public $projectId;
-			public $title;
+			public $projectTitle;
 			public $role;
 			public $duration;
 			public $minDuration;
@@ -206,7 +205,7 @@
 			public function __construct($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,$isOwner)
 				{
 					$this->projectId=$projectId;
-					$this->title = $title;
+					$this->projectTitle = $title;
 					$this->duration = $duration;
 					$this->role = $role;
 					$this->minDuration = $minDuration;
