@@ -116,6 +116,21 @@ else if($mode=7)
 	#workshop Edit
 	workshopsEdit($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended'],$_POST['_workshopId']);
 }
+else if($mode = 8)
+{
+	# SkillSet Insert
+	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
+}
+else if($mode = 9)
+{
+	#toolkit insert
+	toolkitInsert($user,$_POST['_tools']);
+}
+else if($mode = 10)
+{
+	#interests Insert
+	interestsInsert($user,$_POST['_interests']);
+}
 else 
 {
 	# Erroneous Mode Sent
@@ -434,7 +449,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 				$userId = $user['userId'];
 				$values = array(0 => array($organisation => 's'),1 => array($startDateTimestamp => 's'),2 => array($endDateTimestamp => 's'), 3 => array($title => 's') , 4 => array($featuring => 'i'), 5 => array($userId => 's'),6 => array($experienceId => 'i'));
 				
-				$result1 = $conObj->insert("UPDATE experience SET organisation=?,start=?,end=?,title=?,featuring=? WHERE userId=? AND experienceId =?",$values);
+				$result1 = $conObj->update("UPDATE experience SET organisation=?,start=?,end=?,title=?,featuring=? WHERE userId=? AND experienceId =?",$values);
 				
 				if($conObj->error == "")
 				{
@@ -509,7 +524,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 				$values[6] = array($organisation => 's');
 				$values[7] = array($userId => 's');
 				$values[8] = array($projectId => 's')
-				$result1 = $conObj->insert("UPDATE projects SET projectName=?,role=?,start=?,end=?, description=?,teamMembers=?,organisation=? WHERE userId =? AND projectId=?",$values);
+				$result1 = $conObj->update("UPDATE projects SET projectName=?,role=?,start=?,end=?, description=?,teamMembers=?,organisation=? WHERE userId =? AND projectId=?",$values);
 				if($conObj->error == "")
 				{
 					//echo 'Succesfull Insert <br />';
@@ -581,7 +596,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				$values[5] = array($userId => 's');
 				$values[6] = array($workshopId => 'i');
 
-				$result1 = $conObj->insert("UPDATE workshops SET workshopName=?,start=?,end=?,place=?,attendCount=? WHERE userId=? AND workshopId=?",$values);
+				$result1 = $conObj->update("UPDATE workshops SET workshopName=?,start=?,end=?,place=?,attendCount=? WHERE userId=? AND workshopId=?",$values);
 				
 				if($conObj->error == "")
 				{
@@ -615,4 +630,362 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				exit();
 			}	
 	}
+
+	function skillSetEdit($user,$skillArray,$ratingArray)
+	{
+		/*$skillArray=explode(',',$skill);
+		$ratingArray=explode(',',$rating);*/
+		$skillArrayCount=count($skillArray);
+		$ratingArrayCount=count($ratingArray);
+		if($skillArrayCount!=$ratingArrayCount)
+		{
+			echo 16;
+			exit();
+		}
+
+		if($skillArrayCount==0)
+		{
+			echo 16;
+			exit();
+		}
+
+		$i=0;
+		$userId = $user['userId'];
+		/*$skillRecord=getSkillsByUser($userId);
+		
+		$existingSkills=$skillRecord['skills'];
+		$existingRating=$skillRecord['rating'];
+		$existingSkillsArray=explode(',', $existingSkills);
+		$existingRatingArray=explode(',', $existingRating);*/
+		$existingSkills="";
+		$existingRating="";
+		$existingSkillsArray=array();
+		$existingRatingArray=array();
+
+		$hasRepeated=false;
+		$repeatedSkills=array();
+		for ($k=0;$k=$skillArrayCount;$k++) 
+		{
+			$skill=trim($skillArray[$k]);
+			if(stripos($existingSkills,$skill)===false)
+			{
+				$existingSkillsArray[]=$skill;
+				$existingRatingArray[]=$ratingArray[$k];
+				if($existingSkills=="")
+				{
+					$existingSkills=$skill;
+					$existingRating=$ratingArray[$k];
+				}
+				else
+				{
+					$existingSkills.=",".$skill;
+					$existingRating.=",".$ratingArray[$k];
+				}
+			}
+			else
+			{
+				$hasRepeated=true;
+				$repeatedSkills[]=$skill;
+			}
+			# code...
+		}
+
+		if($hasRepeated)
+		{
+			$repeatedSkills=implode(', ',$repeatedSkills);
+			$message=$repeatedSkills. " already exists.";
+			$errorCode=19; //Code 19 for partial success
+		}
+
+		while($i<count($existingSkillsArray))
+		{
+			$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+		}
+		
+		$conObj = new QoB();
+		$updatedSkills=implode(',',$existingSkillsArray);
+		$updatedRating=implode(',',$existingRatingArray);
+		
+					
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($updatedSkills => 's');
+		$values[2] = array($updatedRating => 's');
+		$values[3] = array($updatedSkills => 's');
+		$values[4] = array($updatedRating => 's');
+
+		$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
+		if($conObj->error == "")
+			{
+				//echo 'Successfull Insert <br />';
+
+				$skillsObj=new skillSet(json_encode($outObj),$exitstingSkillsArray,$existingRatingArray,1,$message,$errorCode);
+				print_r(json_encode($skillsObj));
+			}
+		else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in skillset",$userId);
+				echo 12;
+				exit();
+			}
+						
+			
+		
+	}
+
+	function toolkitEdit($user,$toolsArray)
+	{
+		
+		$toolsArrayCount=count($toolsArray);
+
+		if($toolsArrayCount==0)
+		{
+			echo 16;
+			exit();
+		}
+
+		$i=0;
+		$userId = $user['userId'];
+		//$toolRecord=getToolsByUser($userId);
+		
+		//$existingTools=$toolRecord['skills'];
+
+		//$existingToolsArray=explode(',', $existingTools);
+		$existingTools="";
+		$existingToolsArray=array();
+
+		$hasRepeated=false;
+		$repeatedTools=array();
+		for ($k=0;$k=$toolArrayCount;$k++) 
+		{
+			$tool=trim($toolArray[$k]);
+			if(stripos($existingTools,$tool)===false)
+			{
+				$existingToolsArray[]=$tool;
+				if($existingTools=="")
+				{
+					$existingTools=$tool;
+				}
+				else
+				{
+					$existingTools.=",".$tool;
+				}
+			}
+			else
+			{
+				$hasRepeated=true;
+				$repeatedTools[]=$tool;
+			}
+		}
+
+		if($hasRepeated)
+		{
+			$repeatedTools=implode(', ',$repeatedTools);
+			$message=$repeatedTools. " already exists.";
+			$errorCode=19; //Code 19 for partial success
+		}
+
+		$conObj = new QoB();
+		
+		$updatedTools=implode(',',$existingToolsArray);
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($updatedTools => 's');
+		$values[2] = array($updatedTools => 's');
+		
+		$result1 = $conObj->update("INSERT INTO toolkit(userId,tools) VALUES(?,?) ON DUPLICATE KEY UPDATE tools=?",$values);
+		if($conObj->error == "")
+			{
+				//echo 'Successfull Insert <br />';
+				$toolsObj=new toolkit($existingToolsArray,1,$message,$errorCode);
+				print_r(json_encode($toolsObj));
+			}
+		else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in toolkit",$userId);
+				echo 12;
+				exit();
+			}	
+		
+	}
+
+	function interestsEdit($user,$interestsArray)
+	{
+		
+		$interestsArrayCount=count($interestsArray);
+
+		if($interestsArrayCount==0)
+		{
+			echo 16;
+			exit();
+		}
+
+		$i=0;
+		$userId = $user['userId'];
+		$interestRecord=getInterestsByUser($userId);
+		
+		$existingInterests=$interestRecord['skills'];
+
+		$existingInterestsArray=explode(',', $existingInterests);
+
+		$existingInterests="";
+		$existingInterestsArray=array();
+
+		$hasRepeated=false;
+		$repeatedInterests=array();
+		for ($k=0;$k=$interestArrayCount;$k++) 
+		{
+			$interest=trim($interestArray[$k]);
+			if(stripos($existingInterests,$interest)===false)
+			{
+				$existingInterestsArray[]=$interest;
+				if($existingInterests=="")
+				{
+					$existingInterests=$interest;
+				}
+				else
+				{
+					$existingInterests.=",".interest;
+				}
+			}
+			else
+			{
+				$hasRepeated=true;
+				$repeatedInterests[]=$interest;
+			}
+		}
+
+		if($hasRepeated)
+		{
+			$repeatedInterests=implode(', ',$repeatedInterests);
+			$message=$repeatedInterests. " already exists.";
+			$errorCode=19; //Code 19 for partial success
+		}
+
+		$conObj = new QoB();
+		
+		$updatedInterests=implode(',',$existingInterestsArray);
+		$userId = $user['userId'];
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($updatedInterests => 's');
+		$values[2] = array($updatedInterests => 's');
+		
+		$result1 = $conObj->update("INSERT INTO interests(userId,interests) VALUES(?,?)  ON DUPLICATE KEY UPDATE interests=?",$values);
+		if($conObj->error == "")
+			{
+				//echo 'Successfull Insert <br />';
+				$interestsObj=new interests($existingInterestsArray,1,$message,$errorCode);
+				print_r(json_encode($interestsObj));
+			}
+		else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in interests",$userId);
+				echo 12;
+				exit();
+			}		
+	}
+
+
+//Old Working Functions - Dropped as they wont check repititions
+/*function skillSetInsert($user,$skill,$rating)
+	{
+		$skillArray=explode(',',$skill);
+		$ratingArray=explode(',',$rating);
+		if(count($skillArray)!=count($ratingArray))
+		{
+			echo 16;
+			exit();
+		}
+		$i=0;
+		while($i<count($skillArray))
+		{
+			$outObj[$i]=array($skillArray[$i],(int)$ratingArray[$i]);
+		}
+		
+		$conObj = new QoB();
+
+		
+		$userId = $user['userId'];
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($skill => 's');
+		$values[2] = array($rating => 's');
+		$values[3] = array($skill => 's');
+		$values[4] = array($rating => 's');
+
+		$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
+		if($conObj->error == "")
+			{
+				//echo 'Successfull Insert <br />';
+
+				$skillsObj=new skillSet(json_encode($outObj),$skillArray,$ratingArray,1);
+				print_r(json_encode($skillsObj));
+			}
+		else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in skillset",$userId);
+				echo 12;
+				exit();	
+			}	
+		
+	}
+
+	function toolkitInsert($user,$tools)
+	{
+		
+		$conObj = new QoB();
+		
+		$userId = $user['userId'];
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($tools => 's');
+		$values[2] = array($tools => 's');
+		
+		$result1 = $conObj->update("INSERT INTO toolkit(userId,tools) VALUES(?,?) ON DUPLICATE KEY UPDATE tools=?",$values);
+		if($conObj->error == "")
+			{
+				//echo 'Successfull Insert <br />';
+				$toolsObj=new toolkit($tools,1);
+				print_r(json_encode($toolsObj));
+			}
+		else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in toolkit",$userId);
+				echo 12;
+				exit();
+			}
+								
+	}
+
+	function interestsInsert($user,$interests)
+	{
+		$conObj = new QoB();
+				
+		$userId = $user['userId'];
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($interests => 's');
+		$values[2] = array($interests => 's');
+		
+		$result1 = $conObj->update("INSERT INTO interests(userId,interests) VALUES(?,?)  ON DUPLICATE KEY UPDATE interests=?",$values);
+		if($conObj->error == "")
+			{
+				//echo 'Successfull Insert <br />';
+				$toolsObj=new toolkit($tools,1);
+				print_r(json_encode($toolsObj));
+			}
+		else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in toolkit",$userId);
+				echo 12;
+				exit();
+			}		
+	}*/
 ?>

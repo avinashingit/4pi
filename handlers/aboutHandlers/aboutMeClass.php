@@ -240,12 +240,16 @@
 			public $skills;
 			public $rating;
 			public $isOwner;
-			public function __construct($skills,$rating,$isOwner,$jsonObj)
+			public $message;
+			public $errorCode;
+			public function __construct($skills,$rating,$isOwner,$jsonObj,$message='',$errorCode=3)
 				{	
 					$this->skills = $skills;
 					$this->rating = $rating;
 					$this->isOwner=$isOwner;
 					$this->jsonObj=$jsonObj;
+					$this->message=$message;
+					$this->errorCode=$errorCode;
 					return $this;
 				}
 		}		
@@ -273,10 +277,14 @@
 		{
 			public $tools;
 			public $isOwner;
-			public function __construct($tools,$isOwner)
+			public $message;
+			public $errorCode;
+			public function __construct($tools,$isOwner,$message='',$errorCode=3)
 				{	
 					$this->tools = $tools;
 					$this->isOwner=$isOwner;
+					$this->message=$message;
+					$this->errorCode=$errorCode;
 					return $this;
 				}
 		}
@@ -285,10 +293,14 @@
 		{
 			public $interests;
 			public $isOwner;
-			public function __construct($interests,$isOwner)
+			public $message;
+			public $errorCode;
+			public function __construct($interests,$isOwner,$message='',$errorCode=3)
 				{	
 					$this->interests = $interests;
 					$this->isOwner=$isOwner;
+					$this->message=$message;
+					$this->errorCode=$errorCode;
 					return $this;
 				}
 		}
@@ -316,18 +328,7 @@
 		}
 
 			
-				
-		
-	
-
 			
-		
-		
-		
-	
-
-	
-	
 	
 	
 ?>

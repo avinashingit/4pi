@@ -206,6 +206,50 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		}
 	}
 
+	function getSkillsByUser($userId)
+	{
+		$conn=new QoB();
+		$values = array(0 => array($userId => 's'));
+		$result = $conn->fetchAll("SELECT * FROM skillset WHERE userId = ?",$values,false);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getToolsByUser($userId)
+	{
+		$conn=new QoB();
+		$values = array(0 => array($userId => 's'));
+		$result = $conn->fetchAll("SELECT * FROM toolkit WHERE userId = ?",$values,false);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getinterestsByUser($userId)
+	{
+		$conn=new QoB();
+		$values = array(0 => array($userId => 's'));
+		$result = $conn->fetchAll("SELECT * FROM interests WHERE userId = ?",$values,false);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	function hasReported($userId,$hiddenTo)
 	{
@@ -1021,6 +1065,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 								$comment['commentIdHash'],$comment['userId'],$comment['name'], $commentOwner, $comment['gender'], $proPicExists);
 		return $commentObj;
 	}
+
 
 
 	//Object Type 500-Post,600-Event, 700-Poll,0-Miscellaneous
