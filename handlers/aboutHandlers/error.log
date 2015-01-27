@@ -8,3 +8,5 @@
 
 [2015-01-26 19:43:43       127.0.0.1                   Asia/Kolkata] 1054   $$$Unknown column 'userId' in 'where clause'$$$
 
+[2015-01-26 22:14:02             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.experience' doesn't exist$$$
+

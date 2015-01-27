@@ -1,10 +1,20 @@
 <?php 
 	include('../header_adv.php');
-	
 ?>
+<script>
 
+var userId="<?php echo $_GET['userId'];?>";
+
+</script>
+
+<script src="aboutMe.js"></script>
 
 <style>
+
+	.editSkillInputClass, .addSkillInputClass, .addToolInputClass, .editToolInputClass, .addInterestInputClass, .editInterestInputClass
+	{
+		margin-bottom:25px;
+	}
 
 	.container
 	{
@@ -139,7 +149,255 @@
 		height:100%;
 	}
 </style>
-<!-- <script src="aboutMe.js"></script> -->
+
+<div class="modal fade" id="editContactsModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit info</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="">Facebook link</label>
+
+					<input type="text" id="fbURL" class="form-control">
+
+					<br/>
+
+					<label for="">Twitter link</label>
+
+					<input type="text" id="twitterURL" class="form-control">
+
+					<br/>
+
+					<label for="">Google+ link</label>
+
+					<input type="text" id="gplusURL" class="form-control">
+
+					<br/>
+
+					<label for="">Linkedin link</label>
+
+					<input type="text" id="inURL" class="form-control">
+
+					<br/>
+					<label for="">Pinterest link</label>
+
+					<input type="text" id="pinURL" class="form-control">
+
+					<br/>
+
+					<label for="">Email id</label>
+
+					<input type="text" id="email2" class="form-control">
+
+					<br/>
+
+					<label for="">Address</label>
+
+					<input type="text" id="address" class="form-control">
+
+					<br/>
+
+					<label for="">Contact number 1</label>
+
+					<input type="text" id="contactNumber1" class="form-control"></input>
+
+					<br/>
+
+					<label for="">Contact number 2</label>
+
+					<input type="text" id="contactNumber2" class="form-control"></input>
+
+					<br/>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" onclick="editContactInfoSendData();" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div><!-- /.modal-content -->
+
+	</div><!-- /.modal-dialog -->
+
+</div>
+
+<div class="modal fade" id="editPersonInfoModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit personal info</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<label for="personName">Name</label>
+
+					<input type="text" id="editPersonInfoModalPersonName" class="form-control">
+
+					<br/>
+
+					<label for="personDOB">Date of birth</label>
+
+					<input type="text" id="editPersonInfoModalPersonDOB" class="form-control">
+
+					<br/>
+
+					<label for="personHighestDegree">Highest degree</label>
+
+					<input type="text" id="editPersonInfoModalPersonHighestDegree" class="form-control">
+
+					<br/>
+
+					<label for="personCurrentProfession">Current profession</label>
+
+					<input type="text" id="editPersonInfoModalPersonCurrentProfession" class="form-control">
+
+					<br/>
+
+					<label for="personDescription">About you</label>
+
+					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" class="form-control"></textarea>
+
+					<br/>
+
+					<label for="personImage">Your image</label>
+
+					<input type="file" id="editPersonInfoModalPersonImage">
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div><!-- /.modal-content -->
+
+	</div><!-- /.modal-dialog -->
+
+</div>
+
+<div class="modal fade" id="editSkillModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit skill</h4>
+
+			</div>
+
+			<div class="modal-body">
+			
+				<form id="editSkillModalForm">
+							
+					<div class="row">
+
+					</div>
+							
+					<br/>
+							
+				</form> 
+			
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="editSkillSendData();">Save</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="editToolModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit tools</h4>
+
+			</div>
+
+			<div class="modal-body">
+			
+				<form id="editToolsModalForm">
+							
+					<div class="row">
+
+					</div>
+							
+					<br/>
+							
+				</form> 
+			
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="editToolsSendData();">Save</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
 <script>
 
 	$(function () {
@@ -182,9 +440,7 @@
                 ['Karachi', 70],
                 ['Mumbai', 60],
                 ['Moscow', 50],
-                ['Karachi', 70],
-                ['Mumbai', 60],
-                ['Moscow', 50]
+                ['Karachi', 70]
             ],
             dataLabels: {
                 enabled: true,
@@ -238,32 +494,126 @@
 		x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
 	}
 
-	function editToolColumn(x,y)
+	function editContacts()
 	{
-		var column=x;
-		var row=y;
-		$('#editToolModal').modal('show');
-		$('#editToolModal').find('#editToolModalToolText').val($('#tools').find('#toolsColumn'+x+'Tool'+y).html());
+		$("#editContactsModal").modal('show');
+
+		var link=$("#editContactsModal");
+		var link2=$("#bottomContent").find("#contactsContainer");
+		link.find("#fbURL").val(link2.find("#facebookURL").find('a').attr("href"));
+		link.find("#twitterURL").val(link2.find("#twitterURL").find('a').attr("href"));
+		link.find("#gplusURL").val(link2.find("#googlePlusURL").find('a').attr("href"));
+		link.find("#inURL").val(link2.find("#linkedInURL").find('a').attr("href"));
+		link.find("#pinURL").val(link2.find("#pinterestURL").find('a').attr("href"));
+		link.find("#email1").val(link2.find("#userEmail1").html());
+		link.find("#email2").val(link2.find("#userEmail2").html());
+		link.find("#address").val(link2.find("#address").html());
+		link.find("#contactNumber1").val(link2.find("#userPhone1").html());
+		link.find("#contactNumber2").val(link2.find("#userPhone2").html());
 	}
 
 	function addSkill()
 	{
 		$("#addSkillModal").modal('show');
+
+		$("#addSkillModal").find('.extraInputs').remove();
 	}
 
 	function editSkills()
 	{
 		$("#editSkillModal").modal('show');
 
+		$("#editSkillModal").find(".editSkillInputClass").remove();
+
 		var skills=$("#skills").find("#skillNames").html();
 		var percentages=$("#skills").find("#skillPercentages").html();
 
+		var skillArray=skills.split(",");
+		var percentagesArray=percentages.split(",");
 
+		for(var i=0; i< skillArray.length; i++)
+		{
+
+			var input="";
+
+			input+='<div class="row editSkillInputClass">';
+
+				input+='<div class="col-md-5">';
+
+					input+='<input type="text" id="editSkillModalSkillName" class="form-control" value="'+skillArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-5">';
+
+					input+='<input type="number" pattern="[0-9]*" min="0" max="100" id="editSkillModalSkillPercentage" class="form-control" value="'+percentagesArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-2">';
+
+					input+='<span class="input-group-addon" id="deleteOption">';
+
+						input+='<i class="fa fa-close" title="Delete skill" onclick="editSkillDeleteInput(this);"></i>';
+
+					input+='</span>';
+
+				input+='</div>';
+
+			input+='</div>';
+
+			$("#editSkillModal").find('form').append(input);
+		}
 	}
 
 	function addTool()
 	{
 		$("#addToolModal").modal('show');
+		
+		$("#addToolModal").find('.extraInput').remove();
+	}
+
+	function editTools()
+	{
+		$("#editToolModal").modal('show');
+
+		$("#editToolModal").find('form').find('.editToolInputClass').remove();
+
+		var toolArray=new Array();
+		var i=0;
+
+		$("#tools").find('.tool').each(function(){
+			toolArray[i]=$(this).find("#toolName").html();
+			i++;
+		});
+
+		for(var i=0;i<toolArray.length;i++)
+		{
+			var input="";
+
+			input+='<div class="row editToolInputClass">';
+
+				input+='<div class="col-md-10">';
+
+					input+='<input type="text" id="editToolModalToolName" class="form-control" value="'+toolArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-2">';
+
+					input+='<span class="input-group-addon" id="deleteOption">';
+
+						input+='<i class="fa fa-close" title="Delete tool" onclick="editToolDeleteInput(this);"></i>';
+
+					input+='</span>';
+
+				input+='</div>';
+
+			input+='</div>';
+
+			$("#editToolModal").find('form').append(input);
+
+		}
 	}
 
 	function addProject()
@@ -279,8 +629,8 @@
 		var y=$('#project'+n);
 		x.find('#editProjectModalProjectId').val(n);
 		x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
-		z=y.find('#projectDuration').attr("title");
-		xz=z.split("-");
+		var z=y.find('#projectDuration').attr("title");
+		var xz=z.split("-");
 		x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
 		x.find('#editProjectModalProjectDurationTo').val(xz[1]);
 		x.find('#editProjectModalProjectRole').val(y.find('#projectRole').html());
@@ -301,8 +651,8 @@
 		var y=$('#experience'+n);
 		x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
 		x.find('#editExperienceModalRole').val(y.find('#role').html());
-		z=y.find('#duration').attr("title");
-		xz=z.split("-");
+		var z=y.find('#duration').attr("title");
+		var xz=z.split("-");
 		x.find('#editExperienceModalDurationFrom').val(xz[0]);
 		x.find('#editExperienceModalDurationTo').val(xz[1]);
 		x.find('#experienceId').val(n);
@@ -321,7 +671,7 @@
 		var y=$('#certification'+n);
 		x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
 		x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
-		z=y.find('#duration').attr("title").split("-");
+		var z=y.find('#duration').attr("title").split("-");
 		x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
 		x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
 		x.find('#editCertificationModalId').html(n);
@@ -341,7 +691,7 @@
 		x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
 		x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
 		x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
-		z=y.find('#duration').attr("title").split("-");
+		var z=y.find('#duration').attr("title").split("-");
 		x.find('#editAcademicsModalDurationFrom').val(z[0]);
 		x.find('#editAcademicsModalDurationTo').val(z[1]);
 		x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
@@ -361,7 +711,7 @@
 		var y=$('#workshop'+n);
 		x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
 		x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
-		z=y.find('#workshopDuration').attr("title").split("-");
+		var z=y.find('#workshopDuration').attr("title").split("-");
 		x.find('#editWorkshopModalWorkshopDurationFrom').val(z[0]);
 		x.find('#editWorkshopModalWorkshopDurationTo').val(z[0]);
 		x.find('#editWorkshopModalWorkshopPeopleNumber').val(y.find('#attenderNumber').html());
@@ -384,6 +734,8 @@
 		x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
 	}
+
+
 </script>
 
 <body style="padding-top:0px;">
@@ -507,6 +859,10 @@
 
 					</div>
 
+					<div id="skillNames" class="hidden">Animals,Fruits,Humans,Trees,Nature</div>
+
+					<div id="skillPercentages" class="hidden">20,30,40,50,60</div>
+
 					<div class="row" id="skillData">
 
 
@@ -537,50 +893,344 @@
 					<div class="row" id="toolContent">
 				
 						<div class="col-md-4 text-center" id="toolsColumn1">
-				
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(1,1);"></i>&nbsp;<span id="toolsColumn1Tool1">Tool 1</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,2);"></i>&nbsp;<span id="toolsColumn1Tool2">Tool 2</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,3);"></i>&nbsp;<span id="toolsColumn1Tool3">Tool 3</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,4);"></i>&nbsp;<span id="toolsColumn1Tool4">Tool 4</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,5);"></i>&nbsp;<span id="toolsColumn1Tool5">Tool 5</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,6);"></i>&nbsp;<span id="toolsColumn1Tool6">Tool 6</span></p><br/>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
 				
 						</div>
-				
+
 						<div class="col-md-4 text-center" id="toolsColumn2">
-				
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(2,1);"></i>&nbsp;<span id="toolsColumn2Tool1">Tool 1</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,2);"></i>&nbsp;<span id="toolsColumn2Tool2">Tool 2</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,3);"></i>&nbsp;<span id="toolsColumn2Tool3">Tool 3</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,4);"></i>&nbsp;<span id="toolsColumn2Tool4">Tool 4</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,5);"></i>&nbsp;<span id="toolsColumn2Tool5">Tool 5</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,6);"></i>&nbsp;<span id="toolsColumn2Tool6">Tool 6</span></p><br/>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
 				
 						</div>
-				
+
 						<div class="col-md-4 text-center" id="toolsColumn3">
-				
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(3,1);"></i>&nbsp;<span id="toolsColumn3Tool1">Tool 1</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,2);"></i>&nbsp;<span id="toolsColumn3Tool2">Tool 2</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,3);"></i>&nbsp;<span id="toolsColumn3Tool3">Tool 3</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,4);"></i>&nbsp;<span id="toolsColumn3Tool4">Tool 4</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,5);"></i>&nbsp;<span id="toolsColumn3Tool5">Tool 5</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,6);"></i>&nbsp;<span id="toolsColumn3Tool6">Tool 6</span></p><br/>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
 				
 						</div>
 				
@@ -2669,11 +3319,13 @@
 
 						</div><!-- end class col-md-6 -->
 
-						<div class="col-md-6 col-md-offset-1">
+						<div class="col-md-6 col-md-offset-1" id="contactsContainer">
 
 							<div class="row">
 	
 								<h4 style="color:rgba(222, 123, 26, 1);"><i class="fa fa-share-alt"></i>&nbsp;Lets get connected</h4>
+
+								<i onclick="editContacts();" class="fa fa-pencil text-right"></i>
 
 							</div>
 
@@ -2681,23 +3333,23 @@
 
 							<div class="row" >
 								
-								<div class="col-md-2">
+								<div class="col-md-2" id="facebookURL">
 									<a href="#" class="icon-button facebook" ><i class="fa fa-facebook" style="font-size:25px;margin-top:15px;"></i><span></span></a>
 								</div>
 								
-								<div class="col-md-2">
+								<div class="col-md-2" id="twitterURL">
 									<a href="#"  class="icon-button twitter"><i class="fa fa-twitter" style="font-size:25px;margin-top:15px;"></i><span></span></a>
 								</div>
 								
-								<div class="col-md-2">
+								<div class="col-md-2" id="googlePlusURL">
 									<a href="#" class="icon-button google-plus"><i class="fa fa-google-plus" style="font-size:25px;margin-top:15px;"></i><span></span></a>
 								</div>
 								
-								<div class="col-md-2">
+								<div class="col-md-2" id="linkedInURL">
 									<a href="#" class="icon-button linkedin"><i class="fa fa-linkedin" style="font-size:25px;margin-top:15px;"></i><span></span></a>
 								</div>
 								
-								<div class="col-md-2">
+								<div class="col-md-2" id="pinterestURL">
 									<a href="#" class="icon-button pinterest"><i class="fa fa-pinterest" style="font-size:25px;margin-top:15px;"></i><span></span></a>
 								</div>
 
@@ -2713,9 +3365,9 @@
 
 									<br/>
 
-									<p>kavinash366@gmail.com</p>
+									<p id="userEmail1">kavinash366@gmail.com</p>
 
-									<p>COE12B009@iiitdm.ac.in</p>
+									<p id="userEmail2">COE12B009@iiitdm.ac.in</p>
 
 								</div>
 
@@ -2725,9 +3377,7 @@
 
 									<br/>
 
-									<p>IIITD&M Kancheepuram</p>
-
-									<p>Chennai, Tamil Nadu</p>
+									<p id="address">IIITD&M Kancheepuram, Chennai, Tamil Nadu</p>
 
 								</div>
 
@@ -2737,9 +3387,9 @@
 
 									<br/>
 
-									<p>+91-729-910-2491</p>
+									<p id="userPhone1">+91-729-910-2491</p>
 
-									<p>+91-812-542-0661</p>
+									<p id="userPhone2">+91-812-542-0661</p>
 
 								</div>
 
@@ -2760,76 +3410,18 @@
 
 </body>
 
-<div class="modal fade" id="editPersonInfoModal">
 
-	<div class="modal-dialog">
+<script>
 
-		<div class="modal-content">
+	$( ".datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat:"dd/mm/yy"
+		});
 
-			<div class="modal-header">
+	// $('.datepicker').css({'z-index':'1052'});
 
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit personal info</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="personName">Name</label>
-
-					<input type="text" id="editPersonInfoModalPersonName" class="form-control">
-
-					<br/>
-
-					<label for="personDOB">Date of birth</label>
-
-					<input type="text" id="editPersonInfoModalPersonDOB" class="form-control">
-
-					<br/>
-
-					<label for="personHighestDegree">Highest degree</label>
-
-					<input type="text" id="editPersonInfoModalPersonHighestDegree" class="form-control">
-
-					<br/>
-
-					<label for="personCurrentProfession">Current profession</label>
-
-					<input type="text" id="editPersonInfoModalPersonCurrentProfession" class="form-control">
-
-					<br/>
-
-					<label for="personDescription">About you</label>
-
-					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" class="form-control"></textarea>
-
-					<br/>
-
-					<label for="personImage">Your image</label>
-
-					<input type="file" id="editPersonInfoModalPersonImage">
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div><!-- /.modal-content -->
-
-	</div><!-- /.modal-dialog -->
-
-</div><!-- /.modal -->
+</script>
 
 <div class="modal fade" id="addSkillModal">
 
@@ -2850,21 +3442,31 @@
 
 				<form>
 
-					<div class="row">
+					<div class="row addSkillInputClass">
 
-						<div class="col-md-6">
+						<div class="col-md-5">
 
 							<input type="text" id="addSkillModalSkillName" class="form-control">
 
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-5">
 
 							<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">
 
 						</div>
 
-					<br/>
+						<div class="col-md-2">
+
+			    			<span style="cursor:pointer;" class="input-group-addon" onclick="addSkillAddInput();" id="addOption">
+
+								<i class="fa fa-plus" ></i>
+
+			    			</span>
+
+						</div>
+
+					</div>
 
 				</form>
 
@@ -2878,107 +3480,11 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
-</div><!-- /.modal -->
-
-<div class="modal fade" id="editSkillModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit skill</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form id="editSkillModalForm">
-
-					<div class="row">
-
-						<div class="col-md-6">
-
-							<input type="text" id="editSkillModalSkillName" class="form-control">
-
-						</div>
-
-						<div class="col-md-6">
-
-							<input type="text" id="editSkillModalSkillPercentage" class="form-control">
-
-						</div>
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary" onclick="editSkillsSendData();">Save</button>
-
-			</div>
-
-		</div><!-- /.modal-content -->
-
-	</div><!-- /.modal-dialog -->
-
-</div><!-- /.modal -->
-
-<div class="modal fade" id="editToolModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit tool</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="tool">Tool</label>
-
-					<input type="text" id="editToolModalToolText" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
-
-			</div>
-
-		</div><!-- /.modal-content -->
-
-	</div><!-- /.modal-dialog -->
-
-</div><!-- /.modal -->
+</div>
 
 <div class="modal fade" id="addToolModal">
 
@@ -2999,11 +3505,25 @@
 
 				<form>
 
-					<label for="tool">Tool</label>
+					<div class="row addToolInputClass">
 
-					<input type="text" id="addToolModalToolText" class="form-control">
+						<div class="col-md-10">
 
-					<br/>
+							<input type="text" placeholder="Tool name" id="addToolModalToolText" class="form-control">
+
+						</div>
+
+						<div class="col-md-2">
+
+							<span style="cursor:pointer;" class="input-group-addon" onclick="addToolAddInput();" id="addOption">
+
+								<i class="fa fa-plus" ></i>
+
+			    			</span>
+
+						</div>
+
+					</div>
 
 				</form>
 
@@ -3013,15 +3533,15 @@
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" class="btn btn-primary" onclick="addToolsSendData();">Add</button>
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
-</div><!-- /.modal -->
+</div>
 
 <div class="modal fade" id="addProjectModal">
 
@@ -3100,9 +3620,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3185,9 +3705,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3254,9 +3774,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3329,9 +3849,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3413,9 +3933,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3500,9 +4020,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3573,9 +4093,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3656,9 +4176,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3725,9 +4245,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3802,9 +4322,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3863,9 +4383,9 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
 
@@ -3926,22 +4446,8 @@
 
 			</div>
 
-		</div><!-- /.modal-content -->
+		</div>
 
-	</div><!-- /.modal-dialog -->
+	</div>
 
 </div>
-
-
-
-<script>
-
-	$( ".datepicker" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			dateFormat:"dd/mm/yy"
-		});
-
-	// $('.datepicker').css({'z-index':'1052'});
-
-</script>

@@ -1,26 +1,16 @@
 <?php
-//------Credits------//
-//
-//
-//---Definitions of all Fetching Functions for aboutMe.
-//---Author : K Roopesh Reddy ,COE12B025.
-//---Email : coe12b025@iiitdm.ac.in
-//
-//---Editor -1: Hari Krishna Majety , COE12B013.
-//---Email: majetyhk@gmail.com
-//
-//
-//---Credits Ends---//
+
 session_start();
 require_once('../../QOB/qob.php');
 require_once('aboutMeClass.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE13B001".SALT);
+	$userIdHash=$_SESSION['vj'];
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_userId']='COE12B025';
-	$_POST['_mode']=7;
+	/*$_POST['_userId']='COE12B009';
+	$_POST['_mode']=1;*/
 
+	// var_dump($_POST);
 
 //Testing Content Ends
 	
@@ -95,9 +85,10 @@ if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
 	{
 		$isOwner=1;
 	}
+	aboutMe($userId,$mode,$isOwner);
 }
 
-aboutMe($userId,$mode,$isOwner);
+
 
 
 
@@ -123,11 +114,11 @@ function aboutMe($userId,$mode,$isOwner)
 	$conObj = new QoB();
 	if($mode == 1)
 	{
-		echo 'entered mode :'.$mode;
+		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
-		var_dump($result1);
+		// var_dump($result1);
 		if($conObj->error == "")
 		{
 			
@@ -143,7 +134,7 @@ function aboutMe($userId,$mode,$isOwner)
 				if($result1['organisation']!="")
 					$work=$result1['designation']." at ".$result1['organisation'];
 				$obj = new about($proPicLocation,$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
-					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),explode(',',$result1['showPhone']),$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
+					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],$result1['phone'],$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
 				print_r(json_encode($obj));
 			}
 			else
@@ -281,7 +272,7 @@ function aboutMe($userId,$mode,$isOwner)
 	{
 		//To fetch Details of certifiedCourses
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->select("SELECT * FROM certifiedcourses WHERE userId = ?",$values1);
+		$result1 = $conObj->select("SELECT * FROM certifiedCourses WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsC = 0;
@@ -308,7 +299,7 @@ function aboutMe($userId,$mode,$isOwner)
 		}
 	}
 
-	elseif($mode == 11)
+	elseif($mode == 5)
 	{
 		/*//To fetch Details of competitions
 		$values1 = array(0 => array($userId => 's'));
@@ -335,7 +326,7 @@ function aboutMe($userId,$mode,$isOwner)
 		}*/
 	}
 	
-	elseif($mode == 5)
+	elseif($mode == 6)
 	{
 		//To fetch Details of experience
 		$values1 = array(0 => array($userId=> 's'));
@@ -366,10 +357,10 @@ function aboutMe($userId,$mode,$isOwner)
 		}
 	}
 	
-	elseif($mode == 14)
+	elseif($mode == 7)
 	{
 		//To fetch Details of leaveMessage
-		/*$values1 = array(0 => array($userId => 's'));
+		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->select("SELECT * FROM leavemessage WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
@@ -390,10 +381,10 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			notifyAdmin("Conn.Error: ".$conn->error."! In fetching leave Message of aboutMe:".$userId,$currentUserId);
 			echo 12;
-		}*/
+		}
 	}
 		
-	elseif($mode == 12)
+	elseif($mode == 8)
 	{
 		/*//To fetch Details of objective
 		$values1 = array(0 => array($userId => 's'));
@@ -418,7 +409,7 @@ function aboutMe($userId,$mode,$isOwner)
 		}*/
 	}
 	
-	elseif($mode == 6)
+	elseif($mode == 9)
 	{
 		//To fetch Details of projects
 		$values1 = array(0 => array($userId => 's'));
@@ -448,7 +439,85 @@ function aboutMe($userId,$mode,$isOwner)
 			echo 12;
 		}
 	}	
-	else if($mode == 7)
+	
+	elseif($mode == 10)
+	{
+		//To fetch Details of skillset
+		$values1 = array(0 => array($userId => 's'));
+		$result1 = $conObj->fetchAll("SELECT * FROM skillset WHERE userId = ?",$values1);
+		if($conObj->error == "")
+		{
+			if($result1!="")
+			{
+				$obj = new skillSet($result1['skills'],$result1['rating'],$isOwner);
+			
+				print_r(json_encode($obj));
+			}
+			else
+			{
+				echo 404;
+			}
+			
+		}
+		else
+		{
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching skillSet of aboutMe:".$userId,$currentUserId);
+			echo 12;
+		}
+
+	}
+	
+	elseif($mode == 11)
+	{
+		/*//To fetch Details of socialmedia
+		$values1 = array(0 => array($userId => 's'));
+		$result1 = $conObj->fetchall("SELECT * FROM socialmedia WHERE uid = ?",$values1);
+		if($conObj->error == "")
+		{
+			if($result1!="")
+			{
+				$obj = new socialmedia($result1['facebookId'],$result1['googleId'],$result1['twitterId'],$result1['linkedinId'],$isOwner);
+				print_r($obj);
+			}
+			else
+			{
+				echo 'No values found for Query 1 in mode 11<br />';
+			}
+		}
+		else
+		{
+			echo 'Error in Query 1 in mode 11 <br/>';
+			echo $conObj->error;
+		}*/
+	}
+		
+	else if($mode == 12)
+	{
+		//To fetch Details of toolkit
+		$values1 = array(0 => array($userId => 's'));
+		$result1 = $conObj->fetchAll("SELECT * FROM toolkit WHERE userId = ?",$values1);
+		if($conObj->error == "")
+		{
+			if($result1!="")
+			{
+				$obj = new toolkit($result1['tools'],$isOwner);
+				print_r(json_encode($obj));
+			}
+			else
+			{
+				echo 404;
+				exit();
+			}
+			
+		}
+		else
+		{
+			notifyAdmin("Conn.Error: ".$conn->error."! In fetching toolkit of aboutMe:".$userId,$currentUserId);
+			echo 12;
+		}
+	}
+		
+	else if($mode == 13)
 	{
 		//To fetch Details of workshop
 		$values1 = array(0 => array($userId => 's'));
@@ -479,85 +548,7 @@ function aboutMe($userId,$mode,$isOwner)
 			echo 12;
 		}
 	}
-	elseif($mode == 8)
-	{
-		//To fetch Details of skillset
-		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT * FROM skillset WHERE userId = ?",$values1);
-		if($conObj->error == "")
-		{
-			if($result1!="")
-			{
-				$obj = new skillSet($result1['skills'],$result1['rating'],$isOwner);
-			
-				print_r(json_encode($obj));
-			}
-			else
-			{
-				echo 404;
-			}
-			
-		}
-		else
-		{
-			notifyAdmin("Conn.Error: ".$conn->error."! In fetching skillSet of aboutMe:".$userId,$currentUserId);
-			echo 12;
-		}
-
-	}
-	
-	elseif($mode == 13)
-	{
-		/*//To fetch Details of socialmedia
-		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchall("SELECT * FROM socialmedia WHERE uid = ?",$values1);
-		if($conObj->error == "")
-		{
-			if($result1!="")
-			{
-				$obj = new socialmedia($result1['facebookId'],$result1['googleId'],$result1['twitterId'],$result1['linkedinId'],$isOwner);
-				print_r($obj);
-			}
-			else
-			{
-				echo 'No values found for Query 1 in mode 11<br />';
-			}
-		}
-		else
-		{
-			echo 'Error in Query 1 in mode 11 <br/>';
-			echo $conObj->error;
-		}*/
-	}
-		
-	else if($mode == 9)
-	{
-		//To fetch Details of toolkit
-		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT * FROM toolkit WHERE userId = ?",$values1);
-		if($conObj->error == "")
-		{
-			if($result1!="")
-			{
-				$obj = new toolkit($result1['tools'],$isOwner);
-				print_r(json_encode($obj));
-			}
-			else
-			{
-				echo 404;
-				exit();
-			}
-			
-		}
-		else
-		{
-			notifyAdmin("Conn.Error: ".$conn->error."! In fetching toolkit of aboutMe:".$userId,$currentUserId);
-			echo 12;
-		}
-	}
-		
-	
-	else if($mode == 10)
+	else if($mode == 14)
 	{
 		//To fetch Details of interests
 		$values1 = array(0 => array($userId => 's'));
@@ -566,7 +557,7 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			if($result1!="")
 			{
-				$obj = new interests($result1['interests'],$isOwner);
+				$obj = new toolkit($result1['tools'],$isOwner);
 				print_r(json_encode($obj));
 			}
 			else
