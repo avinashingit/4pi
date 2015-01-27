@@ -34,6 +34,108 @@ Last edited: 25-01-2015
 var commonURLAbout="/4pi/";
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
 
+$(document).ready(function(){
+	fetchSkills();
+});
+
+function addSkillAddInput()
+{
+	var link=$("#addSkillModal");
+
+	var input="";
+
+	input+='<div class="row addSkillInputClass extraInputs">';
+
+		input+='<div class="col-md-5">';
+
+			input+='<input type="text" id="addSkillModalSkillName" class="form-control">';
+
+		input+='</div>';
+
+		input+='<div class="col-md-5">';
+
+			input+='<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">';
+
+		input+='</div>';
+
+		input+='<div class="col-md-2">';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addSkillAddInput();" id="addOption">';
+
+				input+='<i class="fa fa-plus" ></i>';
+
+			input+='</span>';
+
+			input+='<span class="input-group-addon" id="deleteOption">';
+
+				input+='<i class="fa fa-minus" onclick="addSkillDeleteInput(this);"></i>';
+
+			input+='</span>';
+
+		input+='</div>';
+
+	input+='</div>';
+
+	link.find("form").append(input);
+}
+
+function addSkillDeleteInput(el)
+{
+	$(el).parent().parent().parent().remove();
+}
+
+function editSkillDeleteInput(el)
+{
+	$(el).parent().parent().parent().remove();
+}
+
+function addToolAddInput()
+{
+	var link=$("#addToolModal");
+
+	var input="";
+
+	input+='<div class="row addToolInputClass extraInput">';
+
+		input+='<div class="col-md-10">';
+
+			input+='<input type="text" placeholder="Tool name" id="addToolModalToolText" class="form-control">';
+
+		input+='</div>';
+
+		input+='<div class="col-md-2">';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addToolAddInput();" id="addOption">';
+
+				input+='<i class="fa fa-plus" ></i>';
+
+			input+='</span>';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addToolDeleteInput(this);" id="addOption">';
+
+				input+='<i class="fa fa-minus" ></i>';
+
+			input+='</span>';
+
+		input+='</div>';
+
+	input+='</div>';
+
+	link.find('form').append(input);
+}
+
+function addToolDeleteInput(el)
+{
+	$(el).parent().parent().remove();
+}
+
+function editToolDeleteInput(el)
+{
+	$(el).parent().parent().parent().remove();
+}
+
+
+
 /*$(function () {
 	$('#skills').highcharts({
     chart: {
@@ -343,9 +445,6 @@ function insertTopPart(data)
 	insertBottomPart(data);
 }
 
-//function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
-//
-
 function insertBottomPart(data)
 {
 
@@ -496,6 +595,8 @@ function insertBottomPart(data)
 	$('#bottomContent').html(bottomPart);
 }
 
+//function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
+
 function fetchTopPart()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
@@ -516,14 +617,6 @@ function fetchTopPart()
 		}
 	});
 }
-
-$(document).ready(function(){
-	fetchTopPart();
-	// fetchSkills();
-});
-
-//function to insert bottom part. It accepts data as a JSON object and inserts the object in to the web document
-
 
 function editContactInfoSendData()
 {
@@ -550,8 +643,6 @@ function editContactInfoSendData()
 			insertBottomPart(data);
 		}
 	});
-
-	
 }
 
 //////////////////////////////PERSONAL INFO ENDS/////////////////////
@@ -625,7 +716,9 @@ function fetchSkills()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			insertSkills(data);
+			insertSkills(data.jsonObj);
+			$("#skills").find("#skillNames").html(data.skills);
+			$("#skills").find("#skillPercentages").html(data.rating);
 		}
 	});
 }
@@ -633,38 +726,58 @@ function fetchSkills()
 function addSkillSendData()
 {
 	var link=$("#addSkillModal");
-	var skillName=link.find("#addSkillModalSkillName").val().trim();
-	var skillPercentage=link.find("#addSkillModalSkillPercentage").val().trim();
 
-	if(skillName.length==0)
+	var skillArray=new Array();
+	var percentageArray=new Array();
+
+	var i=0;
+
+	link.find(".addSkillInputClass").each(function(){
+		skillArray[i]=$(this).find('#addSkillModalSkillName').val().trim();
+		percentageArray[i]=$(this).find('#addSkillModalSkillPercentage').val().trim();
+		i++;
+	});
+
+	var empty=0;
+	var inputProblem=0;
+
+	for(var i=0;i<skillArray.length;i++)
 	{
-		alert("Empty skills are not allowed");
+		if(skillArray[i].length==0 || percentageArray[i].length==0)
+		{
+			empty=1;
+		}
+
+		else if(isNaN(percentageArray[i]))
+		{
+			inputProblem=1;
+		}
 	}
-	else if(isNaN(skillPercentage))
+
+	if(empty!=0)
 	{
-		alert("Our bot does not understand text");
+		alert("Empty fields are not accepted");
 	}
-	else if(skillPercentage==0)
+	else if(inputProblem!=0)
 	{
-		alert("Hey come on! Zero is not a good number here.");
+		alert("Numbers only accepted in rating fields");
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/insertSkill.php',{
-			_skillName:skillName,
-			_skillPercentage:skillPercentage
+		$.post('/4pi/handlers/aboutHandlers/insertSkills.php',{
+			_skillArray:skillArray,
+			_percentageArray:percentageArray,
+			_userId:userId
 		})
 		.error(function(){
-			alert("Server overload. Please try again.:(");
+			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				insertSkills(data.JSONObject);
-				var skillNames=data.skillNames.join();
-				var skillPercentages=data.skillPercentages.join();
-				$("#skills").find("#skillNames").html(skillNames);
-				$("#skills").find("#skillPercentages").html(skillPercentages);
+				insertSkills(data.JSONobject);
+				$("#skills").find("#skillNames").html(data.skillArray);
+				$("#skills").find("#skillPercentages").html(data.skillPercentages);
 			}
 		});
 	}
@@ -675,45 +788,67 @@ function modifySkill(data)
 	insertSkills(data.JSONobject);
 }
 
-function editSkillsSendData()
+function editSkillSendData()
 {
-	var link=$("#editSkillsModal");
-	var skills=new Array();
+	var link=$("#editSkillModal");
+
+	var skillArray=new Array();
+	var percentageArray=new Array();
+
 	var i=0;
-	link.find("skillsForm").find('.skillName').each(function(){
-		skills[i]=$(this).val();
+	var empty=0;
+	var inputProblem=0;
+
+	link.find("form").find(".editSkillInputClass").each(function(){
+		skillArray[i]=$(this).find("#editSkillModalSkillName").val().trim();
+		percentageArray[i]=$(this).find("#editSkillModalSkillPercentage").val().trim();
 		i++;
 	});
 
-	var error=0;
-	for(j=0;j<skills.length;j++)
+	var empty=0;
+	var inputProblem=0;
+
+	for(var i=0;i<skillArray.length;i++)
 	{
-		if(skills[j].length==0)
+		if(skillArray[i].length==0 || percentageArray[i].length==0)
 		{
-			error=1;
+			empty=1;
+		}
+
+		else if(isNaN(percentageArray[i]))
+		{
+			inputProblem=1;
 		}
 	}
 
-	if(error==0)
+	if(empty!=0)
 	{
-		alert("Please enter all the skills");
+		alert("Empty fields are not accepted");
 	}
-
+	else if(inputProblem!=0)
+	{
+		alert("Numbers only accepted in rating fields");
+	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editSkills.php',{
-			_skills:skills
+		$.post('/4pi/handlers/aboutHandlers/editSkills.php',{
+			_skillArray:skillArray,
+			_percentageArray:percentageArray,
+			_userId:userId
 		})
 		.error(function(){
-			alert("Server overload. Please try again.:(");
+			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				modifySkills(data);
+				modifySkill(data);
+				$("#skills").find("#skillNames").html(data.skillArray);
+				$("#skills").find("#skillPercentages").html(data.skillPercentages);
 			}
-		})
+		});
 	}
+
 }
 
 
@@ -728,7 +863,27 @@ function insertTool(data)
 {
 	var tool="";
 
-	tool+='<p class="tool">'+data+'</p><br/>';
+	tool+='<div class="row tool">';
+
+		tool+='<div class="col-md-2 text-center">';
+
+			tool+='<i class="fa fa-pencil" onclick="editTools();"></i>';
+
+		tool+='</div>';
+
+		tool+='<div class="col-md-8 text-center">';
+
+			tool+='<p id="toolName">'+data+'</p>';
+
+		tool+='</div>';
+
+		tool+='<div class="col-md-2 text-center">';
+
+			tool+='<i class="fa fa-close" onclick="deleteTool(this);"></i>';
+
+		tool+='</div>';
+
+	tool+='</div>';
 
 	var length=$("#tools").find(".tool").length;
 	var position=(length%3)+1;
@@ -755,28 +910,53 @@ function fetchTools(data)
 	});
 }
 
-function addToolSendData()
+function addToolsSendData()
 {
-	var toolName=$("#addToolModal").find("#toolName").val().trim();
+	var link=$("#addToolModal");
 
-	if(toolName.length==0)
+	var toolArray=new Array();
+	var i=0;
+
+	link.find(".addToolInputClass").each(function(){
+		toolArray[i]=$(this).find('#addToolModalToolText').val().trim();
+		i++;
+	});
+
+	var empty=0;
+	for(var i=0;i<toolArray.length;i++)
 	{
-		alert("Please enter the tool name");
+		if(toolArray[i].length==0)
+		{
+			empty=1;
+		}
+	}
+
+	if(empty==1)
+	{
+		alert("Empty tools are not allwoed");
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/addTool.php',{
-			_toolName:toolName
+		$.post('/4pi/handlers/aboutHandlers/insertTools.php',{
+			_toolArray:toolArray,
+			_userId:userId
 		})
 		.error(function(){
-			alert("Server overload. Please try again");
+			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				insertTool(data);
+				$("#tools").find("#toolsColumn1").html("");
+				$("#tools").find("#toolsColumn2").html("");
+				$("#tools").find("#toolsColumn3").html("");
+				var x=JSON.parse(data);
+				for(i=0;i<x.length;i++)
+				{
+					insertTool(x[i]);
+				}
 			}
-		})
+		});
 	}
 }
 
@@ -791,46 +971,57 @@ function modifyTools(data)
 	}
 }
 
-function editToolSendData()
+function editToolsSendData()
 {
-	var link=$("#editToolsModal");
-	var intersts=new Array();
+
+	var link=$("#editToolModal");
+
+	var toolArray=new Array();
 	var i=0;
-	link.find("toolsForm").find('.toolName').each(function(){
-		tools[i]=$(this).val();
+
+	link.find(".editToolInputClass").each(function(){
+		toolArray[i]=$(this).find('#editToolModalToolName').val().trim();
 		i++;
 	});
 
-	var error=0;
-	for(j=0;j<tools.length;j++)
+	var empty=0;
+	for(var i=0;i<toolArray.length;i++)
 	{
-		if(tools[j].length==0)
+		if(toolArray[i].length==0)
 		{
-			error=1;
+			empty=1;
 		}
 	}
 
-	if(error==0)
+	if(empty==1)
 	{
-		alert("Please enter all the tools");
+		alert("Empty tools are not allwoed");
 	}
-
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editTools.php',{
-			_tools:tools
+		$.post('/4pi/handlers/aboutHandlers/editTools.php',{
+			_toolArray:toolArray,
+			_userId:userId
 		})
 		.error(function(){
-			alert("Server overload. Please try again.:(");
+			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				modifyTools(data);
+				$("#tools").find("#toolsColumn1").html("");
+				$("#tools").find("#toolsColumn2").html("");
+				$("#tools").find("#toolsColumn3").html("");
+				var x=JSON.parse(data);
+				for(i=0;i<x.length;i++)
+				{
+					insertTool(x[i]);
+				}
 			}
-		})
+		});
 	}
 }
+
 
 //////////////////////////////TOOLS ENDS/////////////////////////////////
 ///
@@ -1946,10 +2137,10 @@ function insertInterest(data)
 function fetchInterests(data)
 {
 	$.post('/4pi/handlers/aboutMeHandlers/fetchInterests.php',{
-
+		_userId:userId
 	})
 	.error(function(){
-
+		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
 		if(checkData(data)==1)
@@ -1964,26 +2155,6 @@ function fetchInterests(data)
 
 function addInterestSendData()
 {
-	var interestName=$('#addInterestModal').find("#interestName").val().trim();
-	if(interestName.length==0)
-	{
-		alert("Please enter interest");
-	}
-	else
-	{
-		$.post('/4pi/handlers/aboutMeHandlers/addInterst.php',{
-			_interestName:interestName
-		})
-		.error(function(){
-			alert("Server overload. Please try again.");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				insertInterest(data);
-			}
-		});
-	}
 }
 
 function modifyInterests(data)
@@ -1999,43 +2170,6 @@ function modifyInterests(data)
 
 function editInterestSendData()
 {
-	var link=$("#editInterestsModal");
-	var intersts=new Array();
-	var i=0;
-	link.find("interstsForm").find('.interestName').each(function(){
-		interests[i]=$(this).val();
-		i++;
-	});
-
-	var error=0;
-	for(j=0;j<interests.length;j++)
-	{
-		if(interests[j].length==0)
-		{
-			error=1;
-		}
-	}
-
-	if(error==0)
-	{
-		alert("Please enter all the intersts");
-	}
-
-	else
-	{
-		$.post('/4pi/handlers/aboutMeHandlers/editIntersts.php',{
-			_interests:interests
-		})
-		.error(function(){
-			alert("Server overload. Please try again.:(");
-		})
-		.success(function(data){
-			if(checkData(data)==1)
-			{
-				modifyInterests(data);
-			}
-		})
-	}
 }
 
 /////////////////////////////INTERESTS ENDS//////////////////////

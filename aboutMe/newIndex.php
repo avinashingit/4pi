@@ -11,6 +11,11 @@ var userId="<?php echo $_GET['userId'];?>";
 
 <style>
 
+	.editSkillInputClass, .addSkillInputClass, .addToolInputClass, .editToolInputClass, .addInterestInputClass, .editInterestInputClass
+	{
+		margin-bottom:25px;
+	}
+
 	.container
 	{
 		background-color:white;
@@ -326,18 +331,6 @@ var userId="<?php echo $_GET['userId'];?>";
 				<form id="editSkillModalForm">
 							
 					<div class="row">
-							
-						<div class="col-md-6">
-							
-							<input type="text" id="editSkillModalSkillName" class="form-control">
-							
-						</div>
-							
-						<div class="col-md-6">
-							
-							<input type="text" id="editSkillModalSkillPercentage" class="form-control">
-							
-						</div>
 
 					</div>
 							
@@ -361,11 +354,48 @@ var userId="<?php echo $_GET['userId'];?>";
 
 </div>
 
+<div class="modal fade" id="editToolModal">
 
+	<div class="modal-dialog">
 
+		<div class="modal-content">
 
+			<div class="modal-header">
 
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit tools</h4>
 
+			</div>
+
+			<div class="modal-body">
+			
+				<form id="editToolsModalForm">
+							
+					<div class="row">
+
+					</div>
+							
+					<br/>
+							
+				</form> 
+			
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="editToolsSendData();">Save</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
 
 
 <script>
@@ -482,32 +512,108 @@ var userId="<?php echo $_GET['userId'];?>";
 		link.find("#contactNumber2").val(link2.find("#userPhone2").html());
 	}
 
-	function editToolColumn(x,y)
-	{
-		var column=x;
-		var row=y;
-		$('#editToolModal').modal('show');
-		$('#editToolModal').find('#editToolModalToolText').val($('#tools').find('#toolsColumn'+x+'Tool'+y).html());
-	}
-
 	function addSkill()
 	{
 		$("#addSkillModal").modal('show');
+
+		$("#addSkillModal").find('.extraInputs').remove();
 	}
 
 	function editSkills()
 	{
 		$("#editSkillModal").modal('show');
 
+		$("#editSkillModal").find(".editSkillInputClass").remove();
+
 		var skills=$("#skills").find("#skillNames").html();
 		var percentages=$("#skills").find("#skillPercentages").html();
 
+		var skillArray=skills.split(",");
+		var percentagesArray=percentages.split(",");
 
+		for(var i=0; i< skillArray.length; i++)
+		{
+
+			var input="";
+
+			input+='<div class="row editSkillInputClass">';
+
+				input+='<div class="col-md-5">';
+
+					input+='<input type="text" id="editSkillModalSkillName" class="form-control" value="'+skillArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-5">';
+
+					input+='<input type="number" pattern="[0-9]*" min="0" max="100" id="editSkillModalSkillPercentage" class="form-control" value="'+percentagesArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-2">';
+
+					input+='<span class="input-group-addon" id="deleteOption">';
+
+						input+='<i class="fa fa-close" title="Delete skill" onclick="editSkillDeleteInput(this);"></i>';
+
+					input+='</span>';
+
+				input+='</div>';
+
+			input+='</div>';
+
+			$("#editSkillModal").find('form').append(input);
+		}
 	}
 
 	function addTool()
 	{
 		$("#addToolModal").modal('show');
+		
+		$("#addToolModal").find('.extraInput').remove();
+	}
+
+	function editTools()
+	{
+		$("#editToolModal").modal('show');
+
+		$("#editToolModal").find('form').find('.editToolInputClass').remove();
+
+		var toolArray=new Array();
+		var i=0;
+
+		$("#tools").find('.tool').each(function(){
+			toolArray[i]=$(this).find("#toolName").html();
+			i++;
+		});
+
+		for(var i=0;i<toolArray.length;i++)
+		{
+			var input="";
+
+			input+='<div class="row editToolInputClass">';
+
+				input+='<div class="col-md-10">';
+
+					input+='<input type="text" id="editToolModalToolName" class="form-control" value="'+toolArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-2">';
+
+					input+='<span class="input-group-addon" id="deleteOption">';
+
+						input+='<i class="fa fa-close" title="Delete tool" onclick="editToolDeleteInput(this);"></i>';
+
+					input+='</span>';
+
+				input+='</div>';
+
+			input+='</div>';
+
+			$("#editToolModal").find('form').append(input);
+
+		}
 	}
 
 	function addProject()
@@ -753,6 +859,10 @@ var userId="<?php echo $_GET['userId'];?>";
 
 					</div>
 
+					<div id="skillNames" class="hidden">Animals,Fruits,Humans,Trees,Nature</div>
+
+					<div id="skillPercentages" class="hidden">20,30,40,50,60</div>
+
 					<div class="row" id="skillData">
 
 
@@ -783,50 +893,344 @@ var userId="<?php echo $_GET['userId'];?>";
 					<div class="row" id="toolContent">
 				
 						<div class="col-md-4 text-center" id="toolsColumn1">
-				
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(1,1);"></i>&nbsp;<span id="toolsColumn1Tool1">Tool 1</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,2);"></i>&nbsp;<span id="toolsColumn1Tool2">Tool 2</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,3);"></i>&nbsp;<span id="toolsColumn1Tool3">Tool 3</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,4);"></i>&nbsp;<span id="toolsColumn1Tool4">Tool 4</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,5);"></i>&nbsp;<span id="toolsColumn1Tool5">Tool 5</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(1,6);"></i>&nbsp;<span id="toolsColumn1Tool6">Tool 6</span></p><br/>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
 				
 						</div>
-				
+
 						<div class="col-md-4 text-center" id="toolsColumn2">
-				
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(2,1);"></i>&nbsp;<span id="toolsColumn2Tool1">Tool 1</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,2);"></i>&nbsp;<span id="toolsColumn2Tool2">Tool 2</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,3);"></i>&nbsp;<span id="toolsColumn2Tool3">Tool 3</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,4);"></i>&nbsp;<span id="toolsColumn2Tool4">Tool 4</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,5);"></i>&nbsp;<span id="toolsColumn2Tool5">Tool 5</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(2,6);"></i>&nbsp;<span id="toolsColumn2Tool6">Tool 6</span></p><br/>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
 				
 						</div>
-				
+
 						<div class="col-md-4 text-center" id="toolsColumn3">
-				
-							<p class="tool"><i class="fa fa-pencil" onclick="editToolColumn(3,1);"></i>&nbsp;<span id="toolsColumn3Tool1">Tool 1</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,2);"></i>&nbsp;<span id="toolsColumn3Tool2">Tool 2</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,3);"></i>&nbsp;<span id="toolsColumn3Tool3">Tool 3</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,4);"></i>&nbsp;<span id="toolsColumn3Tool4">Tool 4</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,5);"></i>&nbsp;<span id="toolsColumn3Tool5">Tool 5</span></p><br/>
-				
-							<p class="tool"><i class="fa fa-pencil"onclick="editToolColumn(3,6);"></i>&nbsp;<span id="toolsColumn3Tool6">Tool 6</span></p><br/>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
+
+							<div class="row tool">
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-pencil" onclick="editTools();"></i>
+
+								</div>
+
+								<div class="col-md-8 text-center">
+
+									<p id="toolName">Tool 1</p>
+
+								</div>
+
+								<div class="col-md-2 text-center">
+
+									<i class="fa fa-close" onclick="deleteTool(this);"></i>
+
+								</div>
+
+							</div>
 				
 						</div>
 				
@@ -3038,23 +3442,31 @@ var userId="<?php echo $_GET['userId'];?>";
 
 				<form>
 
-					<div class="row">
+					<div class="row addSkillInputClass">
 
-						<div class="col-md-6">
+						<div class="col-md-5">
 
 							<input type="text" id="addSkillModalSkillName" class="form-control">
 
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-5">
 
 							<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">
 
 						</div>
 
-					</div>
+						<div class="col-md-2">
 
-					<br/>
+			    			<span style="cursor:pointer;" class="input-group-addon" onclick="addSkillAddInput();" id="addOption">
+
+								<i class="fa fa-plus" ></i>
+
+			    			</span>
+
+						</div>
+
+					</div>
 
 				</form>
 
@@ -3065,51 +3477,6 @@ var userId="<?php echo $_GET['userId'];?>";
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="addSkillSendData();">Add</button>
-
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
-
-
-<div class="modal fade" id="editToolModal">
-
-	<div class="modal-dialog">
-
-		<div class="modal-content">
-
-			<div class="modal-header">
-
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
-				&times;</span><span class="sr-only">Close</span></button>
-				
-				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit tool</h4>
-
-			</div>
-
-			<div class="modal-body">
-
-				<form>
-
-					<label for="tool">Tool</label>
-
-					<input type="text" id="editToolModalToolText" class="form-control">
-
-					<br/>
-
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-				<button type="button" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -3138,11 +3505,25 @@ var userId="<?php echo $_GET['userId'];?>";
 
 				<form>
 
-					<label for="tool">Tool</label>
+					<div class="row addToolInputClass">
 
-					<input type="text" id="addToolModalToolText" class="form-control">
+						<div class="col-md-10">
 
-					<br/>
+							<input type="text" placeholder="Tool name" id="addToolModalToolText" class="form-control">
+
+						</div>
+
+						<div class="col-md-2">
+
+							<span style="cursor:pointer;" class="input-group-addon" onclick="addToolAddInput();" id="addOption">
+
+								<i class="fa fa-plus" ></i>
+
+			    			</span>
+
+						</div>
+
+					</div>
 
 				</form>
 
@@ -3152,7 +3533,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Add</button>
+				<button type="button" class="btn btn-primary" onclick="addToolsSendData();">Add</button>
 
 			</div>
 
