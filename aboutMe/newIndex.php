@@ -397,6 +397,49 @@ var userId="<?php echo $_GET['userId'];?>";
 
 </div>
 
+<div class="modal fade" id="editInterestModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Edit interests</h4>
+
+			</div>
+
+			<div class="modal-body">
+			
+				<form id="editInterestsModalForm">
+							
+					<div class="row">
+
+					</div>
+							
+					<br/>
+							
+				</form> 
+			
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="editInterestsSendData();">Save</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
 
 <script>
 
@@ -733,6 +776,56 @@ var userId="<?php echo $_GET['userId'];?>";
 		x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
 		x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
+	}
+
+	function addInterest()
+	{
+		$("#addInterestModal").modal('show');
+
+		$("#addInterestModal").find(".extraInput").remove();
+	}
+
+	function editInterests()
+	{	
+		$("#editInterestModal").modal('show');
+
+		$("#editInterestModal").find('form').find('.editInterestInputClass').remove();
+
+		var interestsArray=new Array();
+		var i=0;
+
+		$("#interests").find('.interest').each(function(){
+			interestsArray[i]=$(this).find("#interestName").html();
+			i++;
+		});
+
+		for(var i=0;i<interestsArray.length;i++)
+		{
+			var input="";
+
+			input+='<div class="row editInterestInputClass">';
+
+				input+='<div class="col-md-10">';
+
+					input+='<input type="text" id="editInterestModalInterestName" class="form-control" value="'+interestsArray[i]+'">';
+
+				input+='</div>';
+
+				input+='<div class="col-md-2">';
+
+					input+='<span class="input-group-addon" id="deleteOption">';
+
+						input+='<i class="fa fa-close" title="Delete tool" onclick="editInterestDeleteInput(this);"></i>';
+
+					input+='</span>';
+
+				input+='</div>';
+
+			input+='</div>';
+
+			$("#editInterestModal").find('form').append(input);
+
+		}
 	}
 
 
@@ -3217,7 +3310,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<div class="col-md-2 col-md-offset-8 text-right">
 
-								<button class="btn btn-md btn-success"><i class="fa fa-plus"></i>&nbsp;Add</button>
+								<button class="btn btn-md btn-success" onclick="addInterest();"><i class="fa fa-plus"></i>&nbsp;Add</button>
 
 							</div>
 
@@ -3229,49 +3322,217 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<div class="col-md-4 text-left" id="interestsContainer1">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+								<div class="row interest">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+									<div class="col-md-2">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+									<div class="col-md-10">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
 
 							</div>
 
 							<div class="col-md-4 text-left" id="interestsContainer2">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+								<div class="row interest">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+									<div class="col-md-2">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+									<div class="col-md-10">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
 
 							</div>
 
 							<div class="col-md-4 text-left" id="interestsContainer3">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+								<div class="row interest">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+									<div class="col-md-2">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+									<div class="col-md-10">
 
-								<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>Interest1</span></div>
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
+
+								<div class="row interest">
+
+									<div class="col-md-2">
+
+										<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>
+	
+									</div>
+
+
+									<div class="col-md-10">
+
+										<p id="interestName">Interest1</p>
+
+									</div>
+
+								</div>
 
 							</div>
 
@@ -4443,6 +4704,63 @@ var userId="<?php echo $_GET['userId'];?>";
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="addInterestModal">
+
+	<div class="modal-dialog">
+
+		<div class="modal-content">
+
+			<div class="modal-header">
+
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+				&times;</span><span class="sr-only">Close</span></button>
+				
+				<h4 class="modal-title"><i class="fa fa-pencil"></i>&nbsp;Add interests</h4>
+
+			</div>
+
+			<div class="modal-body">
+
+				<form>
+
+					<div class="row addInterestInputClass">
+
+						<div class="col-md-10">
+
+							<input type="text" placeholder="Interest" id="addInterestModalInterestName" class="form-control">
+
+						</div>
+
+						<div class="col-md-2">
+
+							<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestAddInput();" id="addOption">
+
+								<i class="fa fa-plus" ></i>
+
+			    			</span>
+
+						</div>
+
+					</div>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+				<button type="button" class="btn btn-primary" onclick="addInterestsSendData();">Add</button>
 
 			</div>
 

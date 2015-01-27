@@ -17,9 +17,13 @@ FileDescription: This file contains all the actions related to a persons aboutMe
 				 10. Intersts insert, delete, add, fetch, modify
 				 11. Personal information insert, edit, fetch, modify
 
-Author: Avinash Kadimisetty (www.kavinash.in)
+Author: Avinash Kadimisetty, COE12B009 (www.kavinash.in)
 
-Last edited: 25-01-2015				 
+Last edited: 28-01-2015
+
+To do:
+
+Test fetch, insert, edit , delete		 
 
 
 *********************************************************************/
@@ -135,239 +139,50 @@ function editToolDeleteInput(el)
 }
 
 
-
-/*$(function () {
-	$('#skills').highcharts({
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Skillset'
-    },
-    xAxis: {
-        type: 'category',
-        labels: {
-            rotation: -45,
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-		max:100,
-        title: {
-            text: 'Percentage'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: '<b>{point.y:.1f} %</b>'
-    },
-    series: [{
-        name: 'Skill',
-        data: [
-            ['Skill1', 100],
-            ['Skill2', 90],
-            ['Skill3', 80],
-            ['Karachi', 70],
-            ['Mumbai', 60],
-            ['Moscow', 50],
-            ['Karachi', 70],
-            ['Mumbai', 60],
-            ['Moscow', 50]
-        ],
-        dataLabels: {
-            enabled: true,
-            color: '#000000',
-            x: 0,
-            y: 0,
-            style: {
-                fontSize: '8px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-    });
-});
-
-// $('textarea').autosize({'append':'false'});
-
-$(document).ready(function(){
-	$('.navObject').each(function(){
-		$(this).hide();
-	});
-	// $('#skills').hide();
-	$('#skills').show();
-
-	$('.middleNavbarA').click(function(){
-		$('.middleNavbarA').each(function(){
-			$(this).css({'background-color':'','color':''});
-		});
-		$(this).css({'background-color':'black','color':'white'});
-		var href=$(this).attr("data-target");
-		
-		$('.navObject').each(function(){
-			$(this).hide();
-		});
-		$(href).show();
-		
-		
-		
-	});
-});
-
-function editPersonInfo()
+function addInterestAddInput()
 {
-	$('#editPersonInfoModal').modal('show');
-	var x=$('#editPersonInfoModal');
-	var ob2=$('#entireContent').find('#personInfo');
-	x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
-	x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
-	x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
-	x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());
-	x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
+	var link=$("#addInterestModal");
+
+	var input="";
+
+	input+='<div class="row addInterestInputClass extraInput">';
+
+		input+='<div class="col-md-10">';
+
+			input+='<input type="text" placeholder="Interest" id="addInterestModalInterestName" class="form-control">';
+
+		input+='</div>';
+
+		input+='<div class="col-md-2">';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestAddInput();" id="addOption">';
+
+				input+='<i class="fa fa-plus" ></i>';
+
+			input+='</span>';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestDeleteInput(this);" id="addOption">';
+
+				input+='<i class="fa fa-minus" ></i>';
+
+			input+='</span>';
+
+		input+='</div>';
+
+	input+='</div>';
+
+	link.find('form').append(input);
 }
 
-function editToolColumn(x,y)
+function addInterestDeleteInput(el)
 {
-	var column=x;
-	var row=y;
-	$('#editToolModal').modal('show');
-	$('#editToolModal').find('#editToolModalToolText').val($('#tools').find('#toolsColumn'+x+'Tool'+y).html());
+	$(el).parent().parent().remove();
 }
 
-function addSkill()
+function editInterestDeleteInput(el)
 {
-	$("#addSkillModal").modal('show');
+	$(el).parent().parent().parent().remove();
 }
-
-function addTool()
-{
-	$("#addToolModal").modal('show');
-}
-
-function addProject()
-{
-	$('#addProjectModal').modal('show');
-}
-
-function editProject(n)
-{
-	$('#editProjectModal').modal('show');
-
-	var x=$('#editProjectModal');
-	var y=$('#project'+n);
-	x.find('#editProjectModalProjectId').val(n);
-	x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
-	z=y.find('#projectDuration').attr("title");
-	xz=z.split("-");
-	x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
-	x.find('#editProjectModalProjectDurationTo').val(xz[1]);
-	x.find('#editProjectModalProjectRole').val(y.find('#projectRole').html());
-	x.find('#editProjectModalProjectCompany').val(y.find('#projectCompany').html());
-	x.find('#editProjectModalProjectDescription').val(y.find('#projectDescription').html());
-}
-
-function addExperience()
-{
-	$('#addExperienceModal').modal('show');
-}
-
-function editExperience(n)
-{
-	$('#editExperienceModal').modal('show');
-
-	var x=$('#editExperienceModal');
-	var y=$('#experience'+n);
-	x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
-	x.find('#editExperienceModalRole').val(y.find('#role').html());
-	z=y.find('#duration').attr("title");
-	xz=z.split("-");
-	x.find('#editExperienceModalDurationFrom').val(xz[0]);
-	x.find('#editExperienceModalDurationTo').val(xz[1]);
-	x.find('#experienceId').val(n);
-}
-
-function addCertification()
-{
-	$('#addCertificationModal').modal('show');
-}
-
-function editCertification(n)
-{
-	$('#editCertificationModal').modal('show');
-
-	var x=$('#editCertificationModal');
-	var y=$('#certification'+n);
-	x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
-	x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
-	z=y.find('#duration').attr("title").split("-");
-	x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
-	x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
-	x.find('#editCertificationModalId').html(n);
-}
-
-function addAcademics()
-{
-	$('#addAcademicsModal').modal('show');
-}
-
-function editAcademics(n)
-{
-	$('#editAcademicsModal').modal('show');
-
-	var x=$('#editAcademicsModal');
-	var y=$('#academics'+n);
-	x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
-	x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
-	x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
-	z=y.find('#duration').attr("title").split("-");
-	x.find('#editAcademicsModalDurationFrom').val(z[0]);
-	x.find('#editAcademicsModalDurationTo').val(z[1]);
-	x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
-	x.find('#editAcademicsModalId').val(n);
-}
-
-function addWorkshop()
-{
-	$('#addWorkshopModal').modal('show');
-}
-
-function editWorkshop(n)
-{
-	$('#editWorkshopModal').modal('show');
-
-	var x=$('#editWorkshopModal');
-	var y=$('#workshop'+n);
-	x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
-	x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
-	z=y.find('#workshopDuration').attr("title").split("-");
-	x.find('#editWorkshopModalWorkshopDurationFrom').val(z[0]);
-	x.find('#editWorkshopModalWorkshopDurationTo').val(z[0]);
-	x.find('#editWorkshopModalWorkshopPeopleNumber').val(y.find('#attenderNumber').html());
-	x.find('#editWorkshopModalId').html(n);
-}
-
-function addAchievement()
-{
-	$('#addAchievementModal').modal('show');
-}
-
-function editAchievement(n)
-{
-	$('#editAchievementModal').modal('show');
-
-	var x=$('#editAchievementModal');
-	var y=$('#achievement'+n);
-	x.find('#editAchievementModalEventName').val(y.find('#eventName').html());
-	x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
-	x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
-	x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
-}*/
 
 ////////////////////////////GENERIC FUNCTIONS END///////////////////
 ///
@@ -607,11 +422,9 @@ function fetchTopPart()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		// console.log(data);
+		console.log(data);
 		if(checkData(data)==1)
 		{
-			console.log(checkData(data)+" this is checkData");
-			// console.log(data);
 			x=JSON.parse(data);
 			insertTopPart(x);
 		}
@@ -707,19 +520,19 @@ function fetchSkills()
 	alert("Called");
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
-		_mode:10
+		_mode:8
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
 		console.log(data);
-		if(checkData(data)==1)
+		/*if(checkData(data)==1)
 		{
 			insertSkills(data.jsonObj);
 			$("#skills").find("#skillNames").html(data.skills);
 			$("#skills").find("#skillPercentages").html(data.rating);
-		}
+		}*/
 	});
 }
 
@@ -2096,7 +1909,7 @@ function editAchievementSendData()
 	}
 }
 
-function deleteAchivement(id)
+function deleteAchievement(id)
 {
 	if(confirm("Do you want to delete this?"))
 	{
@@ -2129,7 +1942,23 @@ function insertInterest(data)
 	var position=(noOfInterests%3)+1;
 
 	var interest="";
-	interest+='<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>'+data+'</span></div>';
+
+	interest+='<div class="row interest">';
+
+		interest+='<div class="col-md-2">';
+
+			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>';
+
+		interest+='</div>';
+
+
+		interest+='<div class="col-md-10">';
+
+			interest+='<p id="interestName">'+data+'</p>';
+
+		interest+='</div>';
+
+	interest+='</div>';
 
 	$('#intersts').find("#interestsContainer"+position).append(interest);
 }
@@ -2153,8 +1982,53 @@ function fetchInterests(data)
 	})
 }
 
-function addInterestSendData()
+function addInterestsSendData()
 {
+	var link=$("#addInterestModal");
+
+	var interestArray=new Array();
+	var i=0;
+
+	link.find(".addInterestInputClass").each(function(){
+		interestArray[i]=$(this).find("#interestName").html();
+		i++;
+	});
+
+	var empty=0;
+
+	for(var i=0;i<interestArray.length;i++)
+	{
+		if(interestArray[i].length==0)
+		{
+			empty=1;
+		}
+	}
+
+	if(empty==1)
+	{
+		alert("Incomplete fields somewhere");
+	}
+
+	else
+	{
+		$.post('/4pi/handlers/aboutHandlers/insertInterests.php',{
+			_userId:userId,
+			_interestsArray:interestsArray
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$("#interests").find('.interest').remove();
+				for(var i=0;i<data.length;i++)
+				{
+					insertInterests(data[i]);
+				}
+			}
+		});
+	}
 }
 
 function modifyInterests(data)
@@ -2170,6 +2044,52 @@ function modifyInterests(data)
 
 function editInterestSendData()
 {
+
+	var link=$("#editInterestModal");
+
+	var interestArray=new Array();
+	var i=0;
+
+	link.find(".editInterestInputClass").each(function(){
+		interestArray[i]=$(this).find("#interestName").html();
+		i++;
+	});
+
+	var empty=0;
+
+	for(var i=0;i<interestArray.length;i++)
+	{
+		if(interestArray[i].length==0)
+		{
+			empty=1;
+		}
+	}
+
+	if(empty==1)
+	{
+		alert("Incomplete fields somewhere");
+	}
+
+	else
+	{
+		$.post('/4pi/handlers/aboutHandlers/editInterests.php',{
+			_userId:userId,
+			_interestsArray:interestsArray
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$("#interests").find('.interest').remove();
+				for(var i=0;i<data.length;i++)
+				{
+					insertInterests(data[i]);
+				}
+			}
+		});
+	}
 }
 
 /////////////////////////////INTERESTS ENDS//////////////////////
