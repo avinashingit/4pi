@@ -407,7 +407,15 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			if($result1!="")
 			{
-				$obj = new skillSet($result1['skills'],$result1['rating'],$isOwner);
+				$existingSkills=$result1['skills'];
+				$existingRating=$result1['rating'];
+				$existingSkillsArray=explode(',', $existingSkills);
+				$existingRatingArray=explode(',', $existingRating);
+				while($i<count($existingSkillsArray))
+				{
+					$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+				}
+				$obj = new skillSet(json_encode($outObj),$result1['skills'],$result1['rating'],$isOwner);
 			
 				print_r(json_encode($obj));
 			}

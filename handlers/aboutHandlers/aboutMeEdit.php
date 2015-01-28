@@ -432,18 +432,20 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 		if(($organisation != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
-				
+				$conObj->startTransaction();
 				//Turn off Featuring for other experiences of user to set it for upcoming experince.
 				if($featuring = 1)
 				{
 					$conn=new QoB();
 					$val[0]=array($userId => 's');
-					$res=$conn->update("UPDATE experience SET isfeaturing=0 WHERE userId=?",$val);
-					if($conn->error!="")
-					{
-						echo 12;
-						exit();
-					}
+					$res=$conObj->update("UPDATE experience SET isfeaturing=0 WHERE userId=?",$val);
+					if(($cr=$conn->error)!="")
+						{
+							$conObj->rollbackTransaction();
+							notifyAdmin("Conn Error: ".$cr."in experience Edit 1"$experienceId,$userId);
+							echo 12;
+							exit();
+						}
 				}
 
 				$userId = $user['userId'];
@@ -456,6 +458,19 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 					//echo 'Succesfull Insert <br />';
 					if($conObj->getAffectedRows()==1)
 					{
+						$conn=new QoB();
+						$val[0]=array($$experienceId=> 'i');
+						$val[1]=array($userId => 's');
+						
+						$res=$conObj->update("UPDATE about SET work = ? WHERE userId=?",$val);
+						if(($cr=$conObj->error)!="")
+						{
+							$conObj->rollbackTransaction();
+							notifyAdmin("Conn Error: ".$cr."in experience Edit 2"$experienceId,$userId);
+							echo 12;
+							exit();
+						}
+						$conObj->completeTransaction();
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 						//$experienceId="e".$conObj->getInsertId();
@@ -464,6 +479,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 					}
 					else
 					{
+						$conObj->rollbackTransaction();
 						notifyAdmin("suspicious attempt to change content in experience:".$experienceId,$userId);
 						echo 6;
 						exit();
@@ -471,7 +487,9 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 				}
 				else
 				{
-					notifyAdmin("Conn.Error".$conObj->error."! While Editing record in experience",$userId);
+					$cr=$conObj->error;
+					$conObj->rollbackTransaction();
+					notifyAdmin("Conn.Error".$cr."! While Editing record in experience",$userId);
 					echo 12;
 					exit();
 				}			

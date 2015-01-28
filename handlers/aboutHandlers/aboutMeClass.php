@@ -161,7 +161,7 @@
 			public $duration;
 			public $minDuration;
 			public $designation;
-			public $isFeaturing;
+			public $isFeaturing;//whether should be displayed in bottom part or not.
 			public $isOwner;
 			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$isFeaturing,$isOwner)
 				{
