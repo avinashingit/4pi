@@ -34,19 +34,32 @@ Test fetch, insert, edit , delete
 
 /*var userId="COE12B025";*/
 var commonURLAbout="/4pi/";
+
+var userOptionsVisibility=0;
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
 
 $(document).ready(function(){
-	/*fetchTopPart();
+	fetchTopPart();
 	fetchSkills();
 	fetchTools();
 	fetchProjects();
+	fetchExperience();
+	fetchAcademics();
 	fetchWorkshops();
 	fetchCertifications();
 	fetchAchievements();
-	fetchInterests();*/
-	fetchAcademics();
+	fetchInterests();
+	showUserOptions();
 });
+
+function showUserOptions()
+{
+	if(userOptionsVisibility==0)
+	{
+		$(document).find('.visibleForUser').remove();
+	}
+}
+
 
 function addSkillAddInput()
 {
@@ -205,7 +218,7 @@ function insertTopPart(data)
 
 	topPart+='<div class="col-md-2" id="personPicture">';
 
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
 
 		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
@@ -221,11 +234,14 @@ function insertTopPart(data)
 
 			topPart+='</div>';
 
-			topPart+='<div class="col-md-1 text-right">';
+			if(data.isOwner==1)
+			{
+				topPart+='<div class="col-md-1 visibleForUser text-right">';
 
-				topPart+='<i class="fa fa-pencil" title="Edit" onclick="editPersonInfo();"></i>';
+					topPart+='<i class="fa fa-pencil" title="Edit" onclick="editPersonInfo();"></i>';
 
-			topPart+='</div>';
+				topPart+='</div>';
+			}
 
 		topPart+='</div><!-- end id person name -->';
 
@@ -241,7 +257,7 @@ function insertTopPart(data)
 
 				topPart+='<div class="text-left" id="personResumeLink">';
 
-					topPart+='<a href="'+data.resume+'"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+					topPart+='<a href="/4pi/files/resumes/'+data.resume+'"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
 
 				topPart+='</div><!-- end person resume link id -->';
 
@@ -259,8 +275,6 @@ function insertTopPart(data)
 	topPart+='</div>';
 
 	$('#topContent').html(topPart);
-
-	insertBottomPart(data);
 }
 
 function insertBottomPart(data)
@@ -303,9 +317,20 @@ function insertBottomPart(data)
 
 				bottomPart+='<div class="row">';
 
-					bottomPart+='<h4 style="color:rgba(222, 123, 26, 1);"><i class="fa fa-share-alt"></i>&nbsp;Lets get connected</h4>';
+					bottomPart+='<div class="col-md-6">';
 
-					bottomPart+='<i onclick="editContacts();" class="fa fa-pencil text-right"></i>';
+						bottomPart+='<h4 style="color:rgba(222, 123, 26, 1);"><i class="fa fa-share-alt"></i>&nbsp;Lets get connected</h4>';
+
+					bottomPart+='</div>';
+
+					if(data.isOwner==1)
+					{
+						bottomPart+='<div class="col-md-1 visibleForUser col-md-offset-5">';
+					
+							bottomPart+='<i onclick="editContacts();" class="fa fa-pencil text-right"></i>';
+
+						bottomPart+='</div>';
+					}
 
 				bottomPart+='</div>';
 
@@ -423,8 +448,16 @@ function fetchTopPart()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
-			insertTopPart(x);
+			if(data!=404)
+			{
+				if(data.isOwner==1)
+				{
+					userOptionsVisibility=1;
+				}
+				x=JSON.parse(data);
+				insertTopPart(x);
+				insertBottomPart(x);
+			}
 		}
 	});
 }
@@ -544,7 +577,7 @@ function insertSkills(data)
 
 function fetchSkills()
 {
-	alert("Called");
+	// alert("Called");
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
 		_mode:8
@@ -556,10 +589,13 @@ function fetchSkills()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			data=JSON.parse(data);
-			$("#skills").find("#skillNames").html(data.skills);
-			$("#skills").find("#skillPercentages").html(data.rating);
-			insertSkills(data.jsonObj);
+			if(data!=404)
+			{
+				data=JSON.parse(data);
+				$("#skills").find("#skillNames").html(data.skills);
+				$("#skills").find("#skillPercentages").html(data.rating);
+				insertSkills(data.jsonObj);
+			}
 		}
 	});
 }
@@ -763,13 +799,17 @@ function fetchTools(data)
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			data=JSON.parse(data);
-			$("#tools").find(".tool").remove();
-			var tools=data.tools.split(",");
-			for(i=0;i<tools.length;i++)
+			if(data!=404)
 			{
-				insertTool(tools[i], data.isOwner);
+				data=JSON.parse(data);
+				$("#tools").find(".tool").remove();
+				var tools=data.tools.split(",");
+				for(i=0;i<tools.length;i++)
+				{
+					insertTool(tools[i], data.isOwner);
+				}
 			}
+			
 		}
 	});
 }
@@ -918,7 +958,14 @@ function insertProjects(data)
 
 			projects+='<div class="col-md-3 text-right">';
 				
-				projects+='<h5 class="textPadding"><span id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span>&nbsp;&nbsp;<i onclick="editProject(\''+data.projectId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="fa fa-trash"></i>&nbsp;</h5>';
+				projects+='<h5 class="textPadding"><span id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span>&nbsp;&nbsp;';
+
+				if(data.isOwner==1)
+				{
+					projects+='<i onclick="editProject(\''+data.projectId+'\');" class="fa fa-pencil visibleForUser"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="fa fa-trash visibleForUser"></i>';
+				}
+				
+				projects+='</h5>';
 
 			projects+='</div><!-- end class col-md- 3 -->';
 
@@ -969,13 +1016,17 @@ function fetchProjects()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			// console.log(checkData(data)+" this is checkData");
-			$(".project").remove();
-			x=JSON.parse(data);
-			for(var i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				insertProjects(x[i]);
+				// console.log(checkData(data)+" this is checkData");
+				$(".project").remove();
+				x=JSON.parse(data);
+				for(var i=0;i<x.length;i++)
+				{
+					insertProjects(x[i]);
+				}
 			}
+			
 		}
 	});
 }
@@ -1107,15 +1158,18 @@ function insertExperience(data)
 
 		experience+='<div class="text-left col-md-7">';
 
-			experience+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-suitcase"></i>&nbsp;<span id="company">'+data.company+'</span></div>';
+			experience+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-suitcase"></i>&nbsp;<span id="company">'+data.organisation+'</span></div>';
 
 		experience+='</div>';
 
-		experience+='<div class="col-md-3 text-right col-md-offset-2">';
+		if(data.isOwner==1)
+		{
+			experience+='<div class="col-md-3 visibleForUser text-right col-md-offset-2">';
 
-			experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="fa fa-trash"></i></div>';
+				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="fa fa-trash"></i></div>';
 
-		experience+='</div>';
+			experience+='</div>';
+		}
 
 	experience+='</div>';
 
@@ -1125,7 +1179,7 @@ function insertExperience(data)
 
 		experience+='<div class="text-left col-md-7">';
 
-			experience+='<div style="font-size:16px;" class="text-left" id="role">'+data.role+'</div>';
+			experience+='<div style="font-size:16px;" class="text-left" id="role">'+data.designation+'</div>';
 
 		experience+='</div>';
 
@@ -1148,7 +1202,7 @@ function insertExperience(data)
 
 function fetchExperience()
 {
-	$.post('./4pi/handlers/aboutMeHandlers/fetchExperience.php',{
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
 		_mode:5
 	})
@@ -1156,12 +1210,18 @@ function fetchExperience()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
-			for(i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				insertExperience(x[i]);
+				x=JSON.parse(data);
+
+				$('.experience').remove();
+				for(i=0;i<x.length;i++)
+				{
+					insertExperience(x[i]);
+				}
 			}
 		}
 	});
@@ -1317,11 +1377,14 @@ function insertAcademics(data)
 
 		academics+='</div><!--end class col-md-8 -->';
 
-		academics+='<div class="col-md-4 text-right">';
+		if(data.isOwner==1)
+		{
+			academics+='<div class="col-md-4 visibleForUser text-right">';
 
-			academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data.degreeId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAcademics(\''+data.degreeId+'\');"></i></div>';
+				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data.degreeId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAcademics(\''+data.degreeId+'\');"></i></div>';
 
-		academics+='</div><!--end class col-md-8 -->';
+			academics+='</div><!--end class col-md-8 -->';
+		}
 
 	academics+='</div><!-- end class row -->';
 
@@ -1348,14 +1411,16 @@ function fetchAcademics()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
-
-			$('.academics').remove();
-			for(i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				insertAcademics(x[i]);
+				x=JSON.parse(data);
+
+				$('.academics').remove();
+				for(i=0;i<x.length;i++)
+				{
+					insertAcademics(x[i]);
+				}
 			}
-			
 		}
 	});
 }
@@ -1477,11 +1542,16 @@ function insertWorkshop(data)
 
 			workshop+='</div><!-- end class col-md-6 -->';
 
-			workshop+='<div class="col-md-3 text-right col-md-offset-3">';
+			if(data.isOwner==1)
+			{
+				workshop+='<div class="col-md-3 visibleForUser text-right col-md-offset-3">';
 
-				workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop(\''+data.workshopId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop(\''+data.workshopId+'\');" class="fa fa-trash"></i></div>';
+					workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop(\''+data.workshopId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop(\''+data.workshopId+'\');" class="fa fa-trash"></i></div>';
 
-			workshop+='</div><!-- end classc col-md-3 -->';
+				workshop+='</div><!-- end classc col-md-3 -->';
+			}
+
+			
 
 		workshop+='</div><!-- end class row -->';
 
@@ -1534,15 +1604,18 @@ function fetchWorkshops()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
 
-			$('.workshop').remove();
-
-			for(i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				insertWorkshop(x[i]);
+				x=JSON.parse(data);
+
+				$('.workshop').remove();
+
+				for(i=0;i<x.length;i++)
+				{
+					insertWorkshop(x[i]);
+				}
 			}
-			
 		}
 	});
 }
@@ -1662,11 +1735,14 @@ function insertCertification(data)
 
 			certification+='</div>';
 
-			certification+='<div class="col-md-3 text-right col-md-offset-2">';
+			if(data.isOwner==1)
+			{
+				certification+='<div class="col-md-3 visibleForUser text-right col-md-offset-2">';
 
-				certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="fa fa-trash"></i></div>';
+					certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="fa fa-trash"></i></div>';
 
-			certification+='</div>';
+				certification+='</div>';
+			}
 
 		certification+='</div>';
 
@@ -1710,13 +1786,15 @@ function fetchCertifications()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
-			$('.certification').remove();
-			for(i=0;i,x.length;i++)
+			if(data!=404)
 			{
-				insertCertification(x[i]);
+				x=JSON.parse(data);
+				$('.certification').remove();
+				for(i=0;i,x.length;i++)
+				{
+					insertCertification(x[i]);
+				}
 			}
-			
 		}
 	});
 }
@@ -1834,11 +1912,16 @@ function insertAchievements(data)
 
 			achievements+='</div><!-- end class col-md-6 -->';
 
-			achievements+='<div class="col-md-3 text-right col-md-offset-3">';
+			if(data.isOwner==1)
+			{
+				achievements+='<div class="col-md-3 visibleForUser text-right col-md-offset-3">';
 
-				achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
+					achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
 
-			achievements+='</div><!-- end classc col-md-3 -->';
+				achievements+='</div><!-- end classc col-md-3 -->';
+			}
+
+			
 
 		achievements+='</div><!-- end class row -->';
 
@@ -1895,15 +1978,17 @@ function fetchAchievements()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			x=JSON.parse(data);
-
-			$('.achievement').remove();
-
-			for(i=0;i<x.length;i++)
+			if(data!=404)
 			{
-				insertAchievements(x[i]);
+				x=JSON.parse(data);
+
+				$('.achievement').remove();
+
+				for(i=0;i<x.length;i++)
+				{
+					insertAchievements(x[i]);
+				}
 			}
-			
 		}
 	});
 }
@@ -2011,7 +2096,7 @@ function deleteAchievement(id)
 ///
 ////////////////////////////INTERESTS STARTS//////////////////
 
-function insertInterest(data)
+function insertInterest(data,isOwner)
 {
 	var noOfInterests=$("#interests").find('.interest').length;
 	var position=(noOfInterests%3)+1;
@@ -2020,10 +2105,13 @@ function insertInterest(data)
 
 	interest+='<div class="row interest">';
 
-		interest+='<div class="col-md-2">';
+		interest+='<div class="col-md-2 visibleForUser">';
 
+		if(isOwner==1)
+		{
 			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>';
-
+		}
+		
 		interest+='</div>';
 
 
@@ -2051,18 +2139,22 @@ function fetchInterests(data)
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			var x=JSON.parse(data);
-
-			$('.interest').remove();
-
-			var interests=x.interests.split(",");
-
-			console.log(interests);
-
-			for(var i=0;i<interests.length;i++)
+			if(data!=404)
 			{
-				insertInterest(interests[i]);
+				var x=JSON.parse(data);
+
+				$('.interest').remove();
+
+				var interests=x.interests.split(",");
+
+				console.log(interests);
+
+				for(var i=0;i<interests.length;i++)
+				{
+					insertInterest(interests[i],x.isOwner);
+				}
 			}
+			
 		}
 	})
 }

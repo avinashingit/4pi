@@ -1,8 +1,10 @@
  <?php
 session_start();
-	require_once('ideahandlers/createIdeapost.php');
-	require_once('../QOB/qob.php');
-	require_once('../handlers/fetch.php');
+$_SESSION['vj'];
+	require_once('/handlers/ideahandlers/createIdeapost.php');
+	require_once('/QOB/qob.php');
+	require_once('/handlers/fetch.php');
+// require_once('../connection1.php');
  
  require_once('ideaHeader.php');
  ?>
@@ -461,7 +463,7 @@ function retrieveLatestPosts(value, call) {
 }
 
 
-var genUrl = "/4pi/";
+var genUrl = "http://localhost/4pi/";
 function postInsert(position, data1, num, len) {
 	var res;
 	var idCol;
@@ -839,7 +841,7 @@ function stopClick(id) {
 		})
 		.success(function(data){
 			data = data.trim();
-			// console.log(data);
+			console.log(data);
 			data=JSON.parse(data);
 			$('.ideaPeopleSearchResult').each(function(){
 				$(this).remove();
@@ -853,7 +855,7 @@ function stopClick(id) {
 			}
 			else
 			{
-			// console.log(data);
+			console.log(data);
 				$('#ideaPeopleSearchEmptyMessage').html("");
 				for(i=0;i<data[0].length;i++)
 				{
