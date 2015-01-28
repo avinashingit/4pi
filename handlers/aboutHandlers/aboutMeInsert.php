@@ -135,6 +135,17 @@ if ($mode=1) {
 }
 else if ($mode=2) {
 
+	# Achievements Insert
+	/*$competition=$_POST['_eventName'];
+	$description=$_POST['_description'];
+	$position=$_POST['_position'];
+	$location=$_POST['_location'];
+	$achievedDate=$_POST['_achievedDate'];
+*/
+	achievmentsInsert($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievedDate']);
+}
+else if ($mode=3) {
+
 	# Academics Insert
 	/*$degreeName=$_POST['_degree'];
 	$schoolName=$_POST['_schoolName'];
@@ -146,20 +157,10 @@ else if ($mode=2) {
 	$score=$_POST['_score'];
 	$scoreType=$_POST['_scoreType'];*/
 
-	academicsInsert($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType']);
+	academicsInsert($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['location'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType']);
 
 }
-else if ($mode=3) {
 
-	# Achievements Insert
-	/*$competition=$_POST['_eventName'];
-	$description=$_POST['_description'];
-	$position=$_POST['_position'];
-	$location=$_POST['_location'];
-	$achievedDate=$_POST['_achievedDate'];
-*/
-	achievmentsInsert($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievedDate']);
-}
 else if ($mode=4) {
 
 	# Certifications Insert
@@ -246,7 +247,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 	$date1 = date_create();
 	$currentTimestamp = date_timestamp_get($date1);
 
-	$profilePic=getProfilePicLocation($userIdHash);
+	//$profilePic=getProfilePicLocation($userIdHash);
 
 	if($_FILES["file"]["name"]!='')
 	{
@@ -278,7 +279,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 		}
 	}
 	
-	if(($description != "") and ($resume != "") and ($hobbies != "") and ($address != "") and ($phone != "") and ($city != "") and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
+	if(!(($description == "") and ($resume == "") and ($hobbies == "") and ($address == "") and ($phone == "") and ($city == "")) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 	{
 		$conObj = new QoB();
 		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -322,7 +323,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 					/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
 						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
-					$aboutObj = new about($profilePic,$userAlias,$dob,$description,$resume,$highestDegree,
+					$aboutObj = new about($userAlias,$dob,$description,$resume,$highestDegree,
 						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phoneArray,$showPhoneArray,
 						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 					print_r(json_encode($aboutObj));
@@ -356,7 +357,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 	
 }
 
-function academicsInsert($user,$degree,$schoolName,$durationString,$score,$scoreType)
+function academicsInsert($user,$degree,$schoolName,$location,$durationString,$score,$scoreType)
 {	
 	$timeString=explode("-",$durationString);
 	$start=$timeString[0];
@@ -376,7 +377,7 @@ function academicsInsert($user,$degree,$schoolName,$durationString,$score,$score
 	$currentTimestamp = date_timestamp_get($date1);
 	
 	
-	if(($degreeName != '') and ($name != '') and ($score !='') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp))
+	if(!(($degreeName == '') and ($name == '') and ($score =='')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp))
 	{
 		$conObj = new QoB();
 		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -433,7 +434,7 @@ function academicsInsert($user,$degree,$schoolName,$durationString,$score,$score
 						$duration=getDuration($start,$end);
 						$minDuration=getMinDuration($start,$end);
 						$degreeId="d".$conObj->getInsertId();
-						$degreeObj= new academics($degreeId,$degree,$schoolName,$duration,$minDuration,$score,$scoreType,1);
+						$degreeObj= new academics($degreeId,$degree,$schoolName,$location,$duration,$minDuration,$score,$scoreType,1);
 						print_r(json_encode($degreeObj));
 					}
 					else
@@ -481,7 +482,7 @@ function achievmentsInsert($user,$competition,$description,$position,$location,$
 		$date1 = date_create();
 		$currentTimestamp = date_timestamp_get($date1);	
 		
-		if(($competition != '') and ($description != '') and ($position != '') and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"]) ) and ($achievedDateTimestamp < $currentTimestamp))
+		if(!(($competition == '') and ($description == '') and ($position == '')) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"]) ) and ($achievedDateTimestamp < $currentTimestamp))
 			{
 		
 				$conObj = new QoB();
@@ -557,7 +558,7 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 		$currentTimestamp = date_timestamp_get($date1);
 		
 		
-		if(($title != '') and ($instituteName != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
+		if(!(($title == '') and ($instituteName == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -576,7 +577,7 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 									//echo 'Succesfull Insert <br />';
 									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-									$courseId="c".$conObj->getInsertId();
+									$courseId="C".$conObj->getInsertId();
 
 									$courseObj = new certifiedCourses($courseId,$title,$duration,$minDuration,$instituteName,1);
 									print_r(json_encode($courseObj));
@@ -629,7 +630,7 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($organisation != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
+		if(!(($organisation == '') and ($title == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
 			{
 			
 				$conObj = new QoB();
@@ -717,7 +718,7 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($title != '') and ($description != '') and ($role != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
+		if(!(($title == '') and ($description == '') and ($role == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -797,7 +798,7 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($place != '') and ($attendCount != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if(!(($place == '') and ($attendCount == '') and ($title == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -858,119 +859,121 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 
 function skillSetInsert($user,$skillArray,$ratingArray)
 	{
-		/*$skillArray=explode(',',$skill);
-		$ratingArray=explode(',',$rating);*/
-		$skillArrayCount=count($skillArray);
-		$ratingArrayCount=count($ratingArray);
-		if($skillArrayCount!=$ratingArrayCount)
+		if(!(($skill=='') and ($rating == '')))
 		{
-			echo 16;
-			exit();
-		}
-
-		if($skillArrayCount==0)
-		{
-			echo 16;
-			exit();
-		}
-
-		$i=0;
-		$userId = $user['userId'];
-		$skillRecord=getSkillsByUser($userId);
-		
-		$existingSkills=$skillRecord['skills'];
-		$existingRating=$skillRecord['rating'];
-		$existingSkillsArray=explode(',', $existingSkills);
-		$existingRatingArray=explode(',', $existingRating);
-
-		$hasRepeated=false;
-		$repeatedSkills=array();
-		for ($k=0;$k=$skillArrayCount;$k++) 
-		{
-			$skill=trim($skillArray[$k]);
-			if(stripos($existingSkills,$skill)===false)
+			/*$skillArray=explode(',',$skill);
+			$ratingArray=explode(',',$rating);*/
+			$skillArrayCount=count($skillArray);
+			$ratingArrayCount=count($ratingArray);
+			if($skillArrayCount!=$ratingArrayCount)
 			{
-				$existingSkillsArray[]=$skill;
-				$existingRatingArray[]=$ratingArray[$k];
+				echo 16;
+				exit();
 			}
-			else
+
+			if($skillArrayCount==0)
 			{
-				$hasRepeated=true;
-				$repeatedSkills[]=$skill;
+				echo 16;
+				exit();
 			}
-			# code...
-		}
 
-		if($hasRepeated)
-		{
-			$repeatedSkills=implode(', ',$repeatedSkills);
-			$message=$repeatedSkills. " already exists.";
-			$errorCode=19; //Code 19 for partial success
-		}
+			$i=0;
+			$userId = $user['userId'];
+			$skillRecord=getSkillsByUser($userId);
+			
+			$existingSkills=$skillRecord['skills'];
+			$existingRating=$skillRecord['rating'];
+			$existingSkillsArray=explode(',', $existingSkills);
+			$existingRatingArray=explode(',', $existingRating);
 
-		while($i<count($existingSkillsArray))
-		{
-			$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
-		}
-		/*if(($skill!='') and ($rating != 0))
-			{*/
-				$conObj = new QoB();
-				$updatedSkills=implode(',',$existingSkillsArray);
-				$updatedRating=implode(',',$existingRatingArray);
-				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
-				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
-				if($conObj->error == "")
-					{
-						if($result0 != "")
-						{*/
-							
-							$values = array();
-							
-							$values[0] = array($userId => 's'); 
-							$values[1] = array($updatedSkills => 's');
-							$values[2] = array($updatedRating => 's');
-							$values[3] = array($updatedSkills => 's');
-							$values[4] = array($updatedRating => 's');
+			$hasRepeated=false;
+			$repeatedSkills=array();
+			for ($k=0;$k=$skillArrayCount;$k++) 
+			{
+				$skill=trim($skillArray[$k]);
+				if(stripos($existingSkills,$skill)===false)
+				{
+					$existingSkillsArray[]=$skill;
+					$existingRatingArray[]=$ratingArray[$k];
+				}
+				else
+				{
+					$hasRepeated=true;
+					$repeatedSkills[]=$skill;
+				}
+				# code...
+			}
 
-							$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
-							if($conObj->error == "")
+			if($hasRepeated)
+			{
+				$repeatedSkills=implode(', ',$repeatedSkills);
+				$message=$repeatedSkills. " already exists.";
+				$errorCode=19; //Code 19 for partial success
+			}
+
+			while($i<count($existingSkillsArray))
+			{
+				$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+			}
+			/*if(($skill!='') and ($rating != 0))
+				{*/
+					$conObj = new QoB();
+					$updatedSkills=implode(',',$existingSkillsArray);
+					$updatedRating=implode(',',$existingRatingArray);
+					/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
+					$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+					if($conObj->error == "")
+						{
+							if($result0 != "")
+							{*/
+								
+								$values = array();
+								
+								$values[0] = array($userId => 's'); 
+								$values[1] = array($updatedSkills => 's');
+								$values[2] = array($updatedRating => 's');
+								$values[3] = array($updatedSkills => 's');
+								$values[4] = array($updatedRating => 's');
+
+								$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
+								if($conObj->error == "")
 								{
 									//echo 'Successfull Insert <br />';
 
 									$skillsObj=new skillSet(json_encode($outObj),$exitstingSkillsArray,$existingRatingArray,1,$message,$errorCode);
 									print_r(json_encode($skillsObj));
 								}
-							else
+								else
 								{
 									notifyAdmin("Conn.Error".$conObj->error."! While creating record in skillset",$userId);
 									echo 12;
 									exit();
 								}
-						/*}
-						else
-						{
-							echo 'No values found for Query 0<br />';
+							/*}
+							else
+							{
+								echo 'No values found for Query 0<br />';
+							}
 						}
-					}
-				else
-					{
-						echo 'Error in Query 0<br />';
-						echo $conObj->error.'<br />';
-					}*/
-			/*}
+					else
+						{
+							echo 'Error in Query 0<br />';
+							echo $conObj->error.'<br />';
+						}*/
+		}
 		else
-			{
-				echo 16;
-				exit();
-			}*/
+		{
+			echo 16;
+			exit();
+		}
 			
 		
 	}
 
 	function toolkitInsert($user,$toolsArray)
 	{
-		/*if($tools!='')
-			{*/
+		if($tools!='')
+			{
 				$toolsArrayCount=count($toolsArray);
 
 				if($toolsArrayCount==0)
@@ -1049,20 +1052,20 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						echo 'Error in Query 0<br />';
 						echo $conObj->error.'<br />';
 					}*/
-		/*	}
+			}
 		else
 			{
 				echo 16;
 				exit();
-			}*/
+			}
 			
 		
 	}
 
 	function interestsInsert($user,$interestsArray)
 	{
-		/*if($interests!='')
-			{*/
+		if($interests!='')
+			{
 				$interestsArrayCount=count($interestsArray);
 
 				if($interestsArrayCount==0)
@@ -1142,12 +1145,12 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						echo 'Error in Query 0<br />';
 						echo $conObj->error.'<br />';
 					}*/
-			/*}
+			}
 		else
 			{
 				echo 16;
 				exit();
-			}*/
+			}
 			
 		
 	}

@@ -15,7 +15,7 @@
 
 	class about
 	{
-		public $profilePicture;
+		//public $profilePicture;
 		public $name; //alias of the user
 		public $dob;
 		public $description;
@@ -36,24 +36,92 @@
 		public $pinterestId;
 		public $isOwner;
 		
-		public function __construct($profilePicture,$name,$dob,$description,$resume,$highestDegree,
+		public function __construct($name,$dob,$description,$resume,$highestDegree,
 			$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)
 			{
-				$this->profilePicture = $profilePicture;
+				//$this->profilePicture = $profilePicture;
 				$this->name = $name; 
 				$this->dob = $dob;	
 				$this->description = $description;
+				/*if(=='null')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}*/
 				$this->resume = $resume;
 				$this->highestDegree=$highestDegree;
 				$this->currentProfession=$currentProfession;
 				$this->hobbies = $hobbies;
+				/*if(=='null')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}*/
 				$this->mailId = $mailId;
 				$this->showMailId=$showMailId;
-				$this->address = $address;	
+				$this->address = $address;
+			/*	if(=='null')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}*/
 				$this->phone = $phone;
 				$this->showPhone=$showPhone;
 				$this->city = $city;
+				/*if(=='#')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}
+
+				if(=='#')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}
+
+				if(=='#')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}
+
+				if(=='#')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}
+
+				if(=='#')
+				{
+					$this->='';
+				}
+				else
+				{
+					$this->=$
+				}*/
 				$this->facebookId=$facebookId;
 				$this->twitterId=$twitterId;
 				$this->googleId=$googleId;
@@ -71,18 +139,29 @@
 		{
 			public $degreeId;
 			public $degree;
-			public $schoolName;//alias of the
+			public $schoolName;
+			
+			public $location;
 			public $duration;
 			public $minDuration;
 			public $score;
 			public $scoreType;
 			public $isOwner;
 			
-			public function __construct($degreeId,$degree,$schoolName,$duration,$minDuration,$score,$scoreType,$isOwner)
+			public function __construct($degreeId,$degree,$schoolName,$location,$duration,$minDuration,$score,$scoreType,$isOwner)
 				{
 					$this->degreeId=$degreeId;
 					$this->degree = $degree ;
 					$this->schoolName=$schoolName;
+					if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}
+					$this->location=$location;
 					$this->duration = $duration ;
 					$this->minDuration = $minDuration;
 					$this->score = $score ;
@@ -107,6 +186,14 @@
 					$this->competition = $competition;
 					$this->location = $location;
 					$this->description = $description;
+					/*if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}*/
 					$this->position = $position;
 					//$this->achieveddate = $achieveddate;
 					$this->isOwner=$isOwner;
@@ -227,7 +314,23 @@
 					$this->role = $role;
 					$this->minDuration = $minDuration;
 					$this->description = $description;
+					/*if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}*/
 					$this->teamMembers = $teamMembers;
+					/*if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}*/
 					$this->organisation = $organisation;
 					$this->isOwner=$isOwner;
 					return $this;
@@ -282,6 +385,14 @@
 			public function __construct($tools,$isOwner,$message='',$errorCode=3)
 				{	
 					$this->tools = $tools;
+					/*if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}*/
 					$this->isOwner=$isOwner;
 					$this->message=$message;
 					$this->errorCode=$errorCode;
@@ -298,6 +409,14 @@
 			public function __construct($interests,$isOwner,$message='',$errorCode=3)
 				{	
 					$this->interests = $interests;
+					/*if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}*/
 					$this->isOwner=$isOwner;
 					$this->message=$message;
 					$this->errorCode=$errorCode;
@@ -308,19 +427,27 @@
 	class workshops
 		{
 			public $workshopId;
+			public $workshopName;
 			public $duration;
 			public $minDuration;
-			public $workshopName;
 			public $place;
 			public $attendees;
 			public $isOwner;
-			public function __construct($workshopId,$duration,$minDuration,$title,$place,$attendees,$isOwner)
+			public function __construct($workshopId,$title,$duration,$minDuration,$place,$attendees,$isOwner)
 				{	
 					$this->workshopId=$workshopId;
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
 					$this->workshopName= $title;
 					$this->place = $place;
+					/*if(=='null')
+					{
+						$this->='';
+					}
+					else
+					{
+						$this->=$
+					}*/
 					$this->attendees = $attendees;
 					$this->isOwner=$isOwner;
 					return $this;

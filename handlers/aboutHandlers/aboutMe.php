@@ -36,7 +36,7 @@ Code 11: Session Variables unset!!
 /*
 academics(degree) - d.*
 achievements - a.*
-courses - c.*
+courses - C.* Its Capital C. Careful!!
 experience - e.*
 projects - p.*
 workshops - w.*
@@ -124,7 +124,7 @@ function aboutMe($userId,$mode,$isOwner)
 		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
 		// var_dump($result1);
 		if($conObj->error == "")
 		{
@@ -136,12 +136,12 @@ function aboutMe($userId,$mode,$isOwner)
 				$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 				$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
 				$highestDegree=getDegree($userId);
-				$proPicLocation=getProfilePicLocation($result1['userIdHash']);
+				//$proPicLocation=getProfilePicLocation($result1['userIdHash']);
 				$work="Student";
 				if($result1['organisation']!="")
 					$work=$result1['designation']." at ".$result1['organisation'];
-				$obj = new about($proPicLocation,$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
-					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),explode(',',$result1['showPhone']),$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],isOwner);
+				$obj = new about($result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
+					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),explode(',',$result1['showPhone']),$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$isOwner);
 				print_r(json_encode($obj));
 			}
 			else
@@ -258,7 +258,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$academics['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);								
-				$obj = new academics("d".$academics['degreeId'],$academics['degree'],$academics['name'],$duration,$minDuration,$academics['cgpa'],$isOwner);
+				$obj = new academics("d".$academics['degreeId'],$academics['degree'], $academics['name'],$academics['location'],$duration,$minDuration,$academics['cgpa'],$isOwner);
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}
@@ -289,7 +289,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$courses['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new certifiedCourses("c".$courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
+				$obj = new certifiedCourses("cc".$courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
@@ -323,7 +323,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsE] = $obj;
 				$noOfElementsE++;
 			}
-			print_r($outputa);
+			print_r(json_encode($outputa));
 			if($noOfElementsE == 0)
 			{
 				echo 404;

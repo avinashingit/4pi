@@ -88,13 +88,13 @@ if($mode =1)
 }
 else if($mode=2)
 {
-	#academics Edit
-	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']);
+	#achievements Edit
+	achievmentsEdit($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']);
 }
 else if($mode=3)
 {
-	#achievements Edit
-	achievmentsEdit($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']);
+	#academics Edit
+	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']);
 }
 else if($mode=4)
 {
@@ -150,7 +150,7 @@ function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$addre
 		$date1 = date_create();
 		$currentTimestamp = date_timestamp_get($date1);
 
-		$profilePic=getProfilePicLocation($userIdHash);
+		//$profilePic=getProfilePicLocation($userIdHash);
 		if($_FILES["file"]["name"]!='')
 		{
 			$resume=$_FILES['file']['name'];
@@ -176,8 +176,8 @@ function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$addre
 				}
 			}
 		}
-		
-		if(($description != "") and ($resume != "") and ($hobbies != "") and ($address != "") and ($phone != "") and ($city != "") and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
+
+		if(!(($description == "") and ($resume == "") and ($hobbies == "") and ($address == "") and ($phone == "") and ($city == "")) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 		{
 			$conObj = new QoB();
 			
@@ -207,7 +207,7 @@ function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$addre
 			
 			if($conObj->error == "")
 			{
-				$aboutObj = new about($profilePic,$userAlias,$dob,$description,$resume,$highestDegree,
+				$aboutObj = new about($userAlias,$dob,$description,$resume,$highestDegree,
 					$currentProfession,$hobbies,$mailId,$showMailId,$address,$phoneArray,$showPhoneArray,
 					$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 				print_r(json_encode($aboutObj));
@@ -249,7 +249,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		$currentTimestamp = date_timestamp_get($date1);
 		
 		
-		if(($degreeName != '') and ($name != '') and ($score !='') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp))
+		if(!(($degreeName == '') and ($name == '') and ($score =='')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp))
 		{
 			$conObj = new QoB();
 			
@@ -269,7 +269,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 					$duration=getDuration($start,$end);
 					$minDuration=getMinDuration($start,$end);
 					//$degreeId="d".$conObj->getInsertId();
-					$degreeObj= new academics($degreeIdString,$degree,$schoolName,$duration,$minDuration,$score,$scoreType,1);
+					$degreeObj= new academics($degreeIdString,$degree,$schoolName,$location,$duration,$minDuration,$score,$scoreType,1);
 					print_r(json_encode($degreeObj));
 				}
 				else
@@ -304,7 +304,7 @@ function achievmentsEdit($user,$competition,$description,$position,$location,$ac
 		$date1 = date_create();
 		$currentTimestamp = date_timestamp_get($date1);	
 		
-		if(($competition != '') and ($description != '') and ($position != '') and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"]) ) and ($achievedDateTimestamp < $currentTimestamp))
+		if(!(($competition == '') and ($description == '') and ($position == '')) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"]) ) and ($achievedDateTimestamp < $currentTimestamp))
 		{
 
 			$conObj = new QoB();
@@ -362,7 +362,7 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 		$currentTimestamp = date_timestamp_get($date1);
 		
 		
-		if(($title != '') and ($instituteName != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
+		if(!(($title == '') and ($instituteName == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				
@@ -429,7 +429,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($organisation != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
+		if(!(($organisation == '') and ($title == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
 				$conObj->startTransaction();
@@ -525,7 +525,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($title != '') and ($description != '') and ($role != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
+		if(!(($title == '') and ($description == '') and ($role == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				
@@ -598,7 +598,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(($place != '') and ($attendCount != '') and ($title != '') and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if(!(($place == '') and ($attendCount == '') and ($title == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
 			
@@ -651,102 +651,104 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function skillSetEdit($user,$skillArray,$ratingArray)
 	{
-		/*$skillArray=explode(',',$skill);
-		$ratingArray=explode(',',$rating);*/
-		$skillArrayCount=count($skillArray);
-		$ratingArrayCount=count($ratingArray);
-		if($skillArrayCount!=$ratingArrayCount)
-		{
-			echo 16;
-			exit();
-		}
-
-		if($skillArrayCount==0)
-		{
-			echo 16;
-			exit();
-		}
-
-		$i=0;
-		$userId = $user['userId'];
-		/*$skillRecord=getSkillsByUser($userId);
 		
-		$existingSkills=$skillRecord['skills'];
-		$existingRating=$skillRecord['rating'];
-		$existingSkillsArray=explode(',', $existingSkills);
-		$existingRatingArray=explode(',', $existingRating);*/
-		$existingSkills="";
-		$existingRating="";
-		$existingSkillsArray=array();
-		$existingRatingArray=array();
-
-		$hasRepeated=false;
-		$repeatedSkills=array();
-		for ($k=0;$k=$skillArrayCount;$k++) 
-		{
-			$skill=trim($skillArray[$k]);
-			if(stripos($existingSkills,$skill)===false)
+			/*$skillArray=explode(',',$skill);
+			$ratingArray=explode(',',$rating);*/
+			$skillArrayCount=count($skillArray);
+			$ratingArrayCount=count($ratingArray);
+			if($skillArrayCount!=$ratingArrayCount)
 			{
-				$existingSkillsArray[]=$skill;
-				$existingRatingArray[]=$ratingArray[$k];
-				if($existingSkills=="")
+				echo 16;
+				exit();
+			}
+
+			if($skillArrayCount==0)
+			{
+				echo 16;
+				exit();
+			}
+
+			$i=0;
+			$userId = $user['userId'];
+			/*$skillRecord=getSkillsByUser($userId);
+			
+			$existingSkills=$skillRecord['skills'];
+			$existingRating=$skillRecord['rating'];
+			$existingSkillsArray=explode(',', $existingSkills);
+			$existingRatingArray=explode(',', $existingRating);*/
+			$existingSkills="";
+			$existingRating="";
+			$existingSkillsArray=array();
+			$existingRatingArray=array();
+
+			$hasRepeated=false;
+			$repeatedSkills=array();
+			for ($k=0;$k=$skillArrayCount;$k++) 
+			{
+				$skill=trim($skillArray[$k]);
+				if(stripos($existingSkills,$skill)===false)
 				{
-					$existingSkills=$skill;
-					$existingRating=$ratingArray[$k];
+					$existingSkillsArray[]=$skill;
+					$existingRatingArray[]=$ratingArray[$k];
+					if($existingSkills=="")
+					{
+						$existingSkills=$skill;
+						$existingRating=$ratingArray[$k];
+					}
+					else
+					{
+						$existingSkills.=",".$skill;
+						$existingRating.=",".$ratingArray[$k];
+					}
 				}
 				else
 				{
-					$existingSkills.=",".$skill;
-					$existingRating.=",".$ratingArray[$k];
+					$hasRepeated=true;
+					$repeatedSkills[]=$skill;
 				}
+				# code...
 			}
+
+			if($hasRepeated)
+			{
+				$repeatedSkills=implode(', ',$repeatedSkills);
+				$message=$repeatedSkills. " already exists.";
+				$errorCode=19; //Code 19 for partial success
+			}
+
+			while($i<count($existingSkillsArray))
+			{
+				$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+			}
+			
+			$conObj = new QoB();
+			$updatedSkills=implode(',',$existingSkillsArray);
+			$updatedRating=implode(',',$existingRatingArray);
+			
+						
+			$values = array();
+			
+			$values[0] = array($userId => 's'); 
+			$values[1] = array($updatedSkills => 's');
+			$values[2] = array($updatedRating => 's');
+			$values[3] = array($updatedSkills => 's');
+			$values[4] = array($updatedRating => 's');
+
+			$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
+			if($conObj->error == "")
+				{
+					//echo 'Successfull Insert <br />';
+
+					$skillsObj=new skillSet(json_encode($outObj),$exitstingSkillsArray,$existingRatingArray,1,$message,$errorCode);
+					print_r(json_encode($skillsObj));
+				}
 			else
-			{
-				$hasRepeated=true;
-				$repeatedSkills[]=$skill;
-			}
-			# code...
-		}
+				{
+					notifyAdmin("Conn.Error".$conObj->error."! While creating record in skillset",$userId);
+					echo 12;
+					exit();
+				}
 
-		if($hasRepeated)
-		{
-			$repeatedSkills=implode(', ',$repeatedSkills);
-			$message=$repeatedSkills. " already exists.";
-			$errorCode=19; //Code 19 for partial success
-		}
-
-		while($i<count($existingSkillsArray))
-		{
-			$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
-		}
-		
-		$conObj = new QoB();
-		$updatedSkills=implode(',',$existingSkillsArray);
-		$updatedRating=implode(',',$existingRatingArray);
-		
-					
-		$values = array();
-		
-		$values[0] = array($userId => 's'); 
-		$values[1] = array($updatedSkills => 's');
-		$values[2] = array($updatedRating => 's');
-		$values[3] = array($updatedSkills => 's');
-		$values[4] = array($updatedRating => 's');
-
-		$result1 = $conObj->update("INSERT INTO skillset(userId,skills,rating) VALUES(?,?,?)  ON DUPLICATE KEY UPDATE skills = ? , rating = ?",$values);
-		if($conObj->error == "")
-			{
-				//echo 'Successfull Insert <br />';
-
-				$skillsObj=new skillSet(json_encode($outObj),$exitstingSkillsArray,$existingRatingArray,1,$message,$errorCode);
-				print_r(json_encode($skillsObj));
-			}
-		else
-			{
-				notifyAdmin("Conn.Error".$conObj->error."! While creating record in skillset",$userId);
-				echo 12;
-				exit();
-			}
 						
 			
 		
