@@ -17,9 +17,13 @@ FileDescription: This file contains all the actions related to a persons aboutMe
 				 10. Intersts insert, delete, add, fetch, modify
 				 11. Personal information insert, edit, fetch, modify
 
-Author: Avinash Kadimisetty (www.kavinash.in)
+Author: Avinash Kadimisetty, COE12B009 (www.kavinash.in)
 
-Last edited: 25-01-2015				 
+Last edited: 28-01-2015
+
+To do:
+
+Test fetch, insert, edit , delete		 
 
 
 *********************************************************************/
@@ -35,7 +39,7 @@ var commonURLAbout="/4pi/";
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
 
 $(document).ready(function(){
-	fetchSkills();
+	fetchTools();
 });
 
 function addSkillAddInput()
@@ -135,239 +139,50 @@ function editToolDeleteInput(el)
 }
 
 
-
-/*$(function () {
-	$('#skills').highcharts({
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Skillset'
-    },
-    xAxis: {
-        type: 'category',
-        labels: {
-            rotation: -45,
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-		max:100,
-        title: {
-            text: 'Percentage'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: '<b>{point.y:.1f} %</b>'
-    },
-    series: [{
-        name: 'Skill',
-        data: [
-            ['Skill1', 100],
-            ['Skill2', 90],
-            ['Skill3', 80],
-            ['Karachi', 70],
-            ['Mumbai', 60],
-            ['Moscow', 50],
-            ['Karachi', 70],
-            ['Mumbai', 60],
-            ['Moscow', 50]
-        ],
-        dataLabels: {
-            enabled: true,
-            color: '#000000',
-            x: 0,
-            y: 0,
-            style: {
-                fontSize: '8px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-    });
-});
-
-// $('textarea').autosize({'append':'false'});
-
-$(document).ready(function(){
-	$('.navObject').each(function(){
-		$(this).hide();
-	});
-	// $('#skills').hide();
-	$('#skills').show();
-
-	$('.middleNavbarA').click(function(){
-		$('.middleNavbarA').each(function(){
-			$(this).css({'background-color':'','color':''});
-		});
-		$(this).css({'background-color':'black','color':'white'});
-		var href=$(this).attr("data-target");
-		
-		$('.navObject').each(function(){
-			$(this).hide();
-		});
-		$(href).show();
-		
-		
-		
-	});
-});
-
-function editPersonInfo()
+function addInterestAddInput()
 {
-	$('#editPersonInfoModal').modal('show');
-	var x=$('#editPersonInfoModal');
-	var ob2=$('#entireContent').find('#personInfo');
-	x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
-	x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
-	x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
-	x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());
-	x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
+	var link=$("#addInterestModal");
+
+	var input="";
+
+	input+='<div class="row addInterestInputClass extraInput">';
+
+		input+='<div class="col-md-10">';
+
+			input+='<input type="text" placeholder="Interest" id="addInterestModalInterestName" class="form-control">';
+
+		input+='</div>';
+
+		input+='<div class="col-md-2">';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestAddInput();" id="addOption">';
+
+				input+='<i class="fa fa-plus" ></i>';
+
+			input+='</span>';
+
+			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestDeleteInput(this);" id="addOption">';
+
+				input+='<i class="fa fa-minus" ></i>';
+
+			input+='</span>';
+
+		input+='</div>';
+
+	input+='</div>';
+
+	link.find('form').append(input);
 }
 
-function editToolColumn(x,y)
+function addInterestDeleteInput(el)
 {
-	var column=x;
-	var row=y;
-	$('#editToolModal').modal('show');
-	$('#editToolModal').find('#editToolModalToolText').val($('#tools').find('#toolsColumn'+x+'Tool'+y).html());
+	$(el).parent().parent().remove();
 }
 
-function addSkill()
+function editInterestDeleteInput(el)
 {
-	$("#addSkillModal").modal('show');
+	$(el).parent().parent().parent().remove();
 }
-
-function addTool()
-{
-	$("#addToolModal").modal('show');
-}
-
-function addProject()
-{
-	$('#addProjectModal').modal('show');
-}
-
-function editProject(n)
-{
-	$('#editProjectModal').modal('show');
-
-	var x=$('#editProjectModal');
-	var y=$('#project'+n);
-	x.find('#editProjectModalProjectId').val(n);
-	x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
-	z=y.find('#projectDuration').attr("title");
-	xz=z.split("-");
-	x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
-	x.find('#editProjectModalProjectDurationTo').val(xz[1]);
-	x.find('#editProjectModalProjectRole').val(y.find('#projectRole').html());
-	x.find('#editProjectModalProjectCompany').val(y.find('#projectCompany').html());
-	x.find('#editProjectModalProjectDescription').val(y.find('#projectDescription').html());
-}
-
-function addExperience()
-{
-	$('#addExperienceModal').modal('show');
-}
-
-function editExperience(n)
-{
-	$('#editExperienceModal').modal('show');
-
-	var x=$('#editExperienceModal');
-	var y=$('#experience'+n);
-	x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
-	x.find('#editExperienceModalRole').val(y.find('#role').html());
-	z=y.find('#duration').attr("title");
-	xz=z.split("-");
-	x.find('#editExperienceModalDurationFrom').val(xz[0]);
-	x.find('#editExperienceModalDurationTo').val(xz[1]);
-	x.find('#experienceId').val(n);
-}
-
-function addCertification()
-{
-	$('#addCertificationModal').modal('show');
-}
-
-function editCertification(n)
-{
-	$('#editCertificationModal').modal('show');
-
-	var x=$('#editCertificationModal');
-	var y=$('#certification'+n);
-	x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
-	x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
-	z=y.find('#duration').attr("title").split("-");
-	x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
-	x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
-	x.find('#editCertificationModalId').html(n);
-}
-
-function addAcademics()
-{
-	$('#addAcademicsModal').modal('show');
-}
-
-function editAcademics(n)
-{
-	$('#editAcademicsModal').modal('show');
-
-	var x=$('#editAcademicsModal');
-	var y=$('#academics'+n);
-	x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
-	x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
-	x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
-	z=y.find('#duration').attr("title").split("-");
-	x.find('#editAcademicsModalDurationFrom').val(z[0]);
-	x.find('#editAcademicsModalDurationTo').val(z[1]);
-	x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
-	x.find('#editAcademicsModalId').val(n);
-}
-
-function addWorkshop()
-{
-	$('#addWorkshopModal').modal('show');
-}
-
-function editWorkshop(n)
-{
-	$('#editWorkshopModal').modal('show');
-
-	var x=$('#editWorkshopModal');
-	var y=$('#workshop'+n);
-	x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
-	x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
-	z=y.find('#workshopDuration').attr("title").split("-");
-	x.find('#editWorkshopModalWorkshopDurationFrom').val(z[0]);
-	x.find('#editWorkshopModalWorkshopDurationTo').val(z[0]);
-	x.find('#editWorkshopModalWorkshopPeopleNumber').val(y.find('#attenderNumber').html());
-	x.find('#editWorkshopModalId').html(n);
-}
-
-function addAchievement()
-{
-	$('#addAchievementModal').modal('show');
-}
-
-function editAchievement(n)
-{
-	$('#editAchievementModal').modal('show');
-
-	var x=$('#editAchievementModal');
-	var y=$('#achievement'+n);
-	x.find('#editAchievementModalEventName').val(y.find('#eventName').html());
-	x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
-	x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
-	x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
-}*/
 
 ////////////////////////////GENERIC FUNCTIONS END///////////////////
 ///
@@ -381,13 +196,11 @@ function editAchievement(n)
 
 function insertTopPart(data)
 {
-	alert("Called");
-	console.log(data);
 	var topPart="";
 
 	topPart+='<div class="col-md-2" id="personPicture">';
 
-		topPart+='<a href="'+commonURLAbout+userId+'" class="thumbnail"><img src="'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a>';
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
 
 		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
@@ -399,7 +212,7 @@ function insertTopPart(data)
 
 			topPart+='<div class="col-md-11">';
 
-				topPart+='<h3 id="personNameText">'+data.name+'</h3><br/>';
+				topPart+='<h3 class="profileName" id="personNameText">'+data.name+'</h3><br/>';
 
 			topPart+='</div>';
 
@@ -447,9 +260,6 @@ function insertTopPart(data)
 
 function insertBottomPart(data)
 {
-
-	// alert("Valdl");
-
 	var bottomPart="";
 
 	bottomPart+='<br/>';
@@ -595,8 +405,6 @@ function insertBottomPart(data)
 	$('#bottomContent').html(bottomPart);
 }
 
-//function to fetch top part. This function fetches data from the server and gives it to insert function to put in to the web page.
-
 function fetchTopPart()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
@@ -607,11 +415,9 @@ function fetchTopPart()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		// console.log(data);
+		console.log(data);
 		if(checkData(data)==1)
 		{
-			console.log(checkData(data)+" this is checkData");
-			// console.log(data);
 			x=JSON.parse(data);
 			insertTopPart(x);
 		}
@@ -645,6 +451,26 @@ function editContactInfoSendData()
 	});
 }
 
+
+//to check this function, this is not working.
+function editTopPartSendData()
+{
+	var new_data=new FormData();
+
+	var link=$("#editPersonInfoModal").find("#topPartEditForm");
+
+	console.log(link.find("#editPersonInfoModalPersonName").val().trim());
+
+	new_data.append("_alias","hello");
+	new_data.append("_dob",link.find("#editPersonInfoModalPersonDOB").val().trim());
+	new_data.append("_description",link.find("#editPersonInfoModalPersonDescription").val().trim());
+	new_data.append("_profilePic",link.find("#editPersonInfoModalPersonImage").val().trim());
+
+	new_data.append("_resume",link.find("#editPersonInfoModalPersonResume").val().trim());
+
+	console.log(new_data);
+}
+
 //////////////////////////////PERSONAL INFO ENDS/////////////////////
 ///
 ///
@@ -654,7 +480,7 @@ function editContactInfoSendData()
 
 function insertSkills(data)
 {
-	alert("Called insert");
+	data=JSON.parse(data);
 	$('#skills').find('#skillData').highcharts({
         chart: {
             type: 'column'
@@ -704,10 +530,9 @@ function insertSkills(data)
 
 function fetchSkills()
 {
-	alert("Called");
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
-		_mode:10
+		_mode:8
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
@@ -775,9 +600,14 @@ function addSkillSendData()
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				insertSkills(data.JSONobject);
-				$("#skills").find("#skillNames").html(data.skillArray);
-				$("#skills").find("#skillPercentages").html(data.skillPercentages);
+				insertSkills(data.jsonObj);
+				$("#skills").find("#skillNames").html(data.skills);
+				$("#skills").find("#skillPercentages").html(data.rating);
+
+				if(data.message.length!=0)
+				{
+					alert(data.message);
+				}
 			}
 		});
 	}
@@ -785,7 +615,7 @@ function addSkillSendData()
 
 function modifySkill(data)
 {
-	insertSkills(data.JSONobject);
+	insertSkills(data);
 }
 
 function editSkillSendData()
@@ -804,6 +634,8 @@ function editSkillSendData()
 		percentageArray[i]=$(this).find("#editSkillModalSkillPercentage").val().trim();
 		i++;
 	});
+
+	console.log(skillArray);
 
 	var empty=0;
 	var inputProblem=0;
@@ -842,9 +674,14 @@ function editSkillSendData()
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				modifySkill(data);
-				$("#skills").find("#skillNames").html(data.skillArray);
-				$("#skills").find("#skillPercentages").html(data.skillPercentages);
+				modifySkill(data.jsonObj);
+				$("#skills").find("#skillNames").html(data.skills);
+				$("#skills").find("#skillPercentages").html(data.rating);
+
+				if(data.message.length!=0)
+				{
+					alert(data.message);
+				}
 			}
 		});
 	}
@@ -861,6 +698,7 @@ function editSkillSendData()
 
 function insertTool(data)
 {
+	console.log(data);
 	var tool="";
 
 	tool+='<div class="row tool">';
@@ -893,15 +731,19 @@ function insertTool(data)
 
 function fetchTools(data)
 {
-	$.post('/4pi/handlers/aboutMeHandlers/fetchTools.php',{
+	$.post('/4pi/handlers/aboutHandlers/fetchTools.php',{
 
 	})
 	.error(function(){
 		alert("Server overload. Please try again.:(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
+			data=JSON.parse(data);
+			$("#tools").find(".tool").remove();
+
 			for(i=0;i<data.length;i++)
 			{
 				insertTool(data[i]);
@@ -945,11 +787,10 @@ function addToolsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
-				$("#tools").find("#toolsColumn1").html("");
-				$("#tools").find("#toolsColumn2").html("");
-				$("#tools").find("#toolsColumn3").html("");
+				$("#tools").find('.tool').remove();
 				var x=JSON.parse(data);
 				for(i=0;i<x.length;i++)
 				{
@@ -1032,79 +873,68 @@ function editToolsSendData()
 
 
 
-function insertProjects(data,type)
+function insertProjects(data)
 {
 	var projects="";
 
-	if(type=="single")
-	{
-		x=1;
-	}
 
-	else
-	{
-		x=data.length;
-	}
+	projects+='<div class="row project" id="'+data.projectId+'">';
 
-	for(i=0;i<x;i=i+1)
-	{
-		projects+='<div class="row project" id="'+data[i].projectId+'">';
+		projects+='<div class="row">';
 
-			projects+='<div class="row">';
+			projects+='<div class="col-md-5 text-left">';
 
-				projects+='<div class="col-md-5 text-left">';
+				projects+='<h4 class="textPadding" style="font-weight:bold;" id="projectTitle">'+data.projectTitle+'</h4>';
 
-					projects+='<h4 class="textPadding" style="font-weight:bold;" id="projectTitle">'+data[i].projectTitle+'</h4>';
+			projects+='</div><!-- end class col-md- 3 -->';
 
-				projects+='</div><!-- end class col-md- 3 -->';
+			projects+='<div class="col-md-4 text-left">';
 
-				projects+='<div class="col-md-4 text-left">';
+				projects+='<h4 class="textPadding"  id="projectCompany">'+data.organisation+'</h4>';
 
-					projects+='<h4 class="textPadding"  id="projectCompany">'+data[i].projectCompany+'</h4>';
+			projects+='</div><!-- end class col-md- 3 -->';
 
-				projects+='</div><!-- end class col-md- 3 -->';
-
-				projects+='<div class="col-md-3 text-right">';
-					
-					projects+='<h5 class="textPadding"><i onclick="editProject(\''+data[i].projectId+'\');" class="fa fa-trash"></i>&nbsp;<i onclick="deleteProject(\''+data[i].projectId+'\');" class="fa fa-pencil"></i>&nbsp;<span id="projectDuration" title="'+data[i].projectDuration+'">'+data[i].projectMinDuration+'</span></h5>';
-
-				projects+='</div><!-- end class col-md- 3 -->';
-
-
-			projects+='</div><!-- end class row -->';
-
-			projects+='<div class="row">';
+			projects+='<div class="col-md-3 text-right">';
 				
-				projects+='<div class="col-md-3 text-left">';
+				projects+='<h5 class="textPadding"><span id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span><i onclick="editProject(\''+data.projectId+'\');" class="fa fa-trash"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="fa fa-pencil"></i>&nbsp;</h5>';
 
-					projects+='<h5 class="textPadding" id="projectRole">'+data[i].projectRole+'</h5>';
+			projects+='</div><!-- end class col-md- 3 -->';
 
-				projects+='</div><!-- end class col-md- 3 -->';
 
-				projects+='<div class="col-md-9 text-right">';
+		projects+='</div><!-- end class row -->';
 
-					projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">'+data[i].pojectTeam+'</span></h5>';
+		projects+='<div class="row">';
+			
+			projects+='<div class="col-md-3 text-left">';
 
-				projects+='</div><!-- end class col-md- 3 -->';
+				projects+='<h5 class="textPadding" id="projectRole">'+data.role+'</h5>';
 
-			projects+='</div><!-- end class row -->';
+			projects+='</div><!-- end class col-md- 3 -->';
 
-			projects+='<div class="row">';
+			projects+='<div class="col-md-9 text-right">';
 
-				projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data[i].projectDescription+'</p>';
+				projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">'+data.teamMembers+'</span></h5>';
 
-			projects+='</div><!-- end class row -->';
+			projects+='</div><!-- end class col-md- 3 -->';
 
-		projects+='</div>';
-	}
+		projects+='</div><!-- end class row -->';
 
+		projects+='<div class="row">';
+
+			projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data.description+'</p>';
+
+		projects+='</div><!-- end class row -->';
+
+	projects+='</div>';
+	
 	$('#projects').find('#projectContainer').append(projects);
 }
 
 function fetchProjects()
 {
-	$.post('/4pi/handlers/aboutMeHandlers/fetchProjects.php',{
-		_userId:userId
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:6
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
@@ -1115,7 +945,10 @@ function fetchProjects()
 		{
 			console.log(checkData(data)+" this is checkData");
 			x=JSON.parse(data);
-			insertProjects(x,"multiple");
+			for(var i=0;i<x.length;i++)
+			{
+				insertProjects(x[i]);
+			}
 		}
 	});
 }
@@ -1124,6 +957,7 @@ function addProjectSendData()
 {
 	var ln=$('#addProjectModal');
 	var title=ln.find('#addProjectModalProjectTitle').val().trim();
+	var team=ln.find('#addProjectModalProjectTeam').val().trim();
 	var duration=ln.find('#addProjectModalProjectDurationFrom').val().trim()+"-"+ln.find('#addProjectModalProjectDurationTo').val().trim();
 	var role=ln.find('#addProjectModalProjectRole').val().trim();
 	var company=ln.find('#addProjectModalProjectCompany').val().trim();
@@ -1139,7 +973,8 @@ function addProjectSendData()
 			_duration:duration,
 			_role:role,
 			_company:company,
-			_description:description
+			_description:description,
+			_team:team
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1148,7 +983,7 @@ function addProjectSendData()
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
-				insertProjects(data,"single");
+				insertProjects(data);
 			}
 		});
 	}
@@ -1157,11 +992,12 @@ function addProjectSendData()
 function modifyProject(data)
 {
 	var y=$('#'+data.projectId);
-	y.find('#projectTitle').html(data.title);
+	y.find('#projectTitle').html(data.projectTitle);
 	y.find('#projectDuration').html(data.minDuration);
-	y.find('#projectDuration').attr("title",data.projectDuration);
+	y.find('#projectDuration').attr("title",data.duration);
 	y.find('#projectRole').html(data.role);
-	y.find('#projectCompany').html(data.company);
+	y.find('#projectCompany').html(data.organisation);
+	y.find('#projectTeam').html(data.teamMembers);
 	y.find('#projectDescription').html(data.description);
 }
 
@@ -1169,6 +1005,7 @@ function editProjectSendData()
 {
 	var ln=$('#editProjectModal');
 	var title=ln.find('#editProjectModalProjectTitle').val().trim();
+	var team=ln.find('#editProjectModalProjectTeam').val().trim();
 	var duration=ln.find('#editProjectModalProjectDurationFrom').val().trim()+"-"+ln.find('#editProjectModalProjectDurationTo').val().trim();
 	var role=ln.find('#editProjectModalProjectRole').val().trim();
 	var company=ln.find('#editProjectModalProjectCompany').val().trim();
@@ -1181,13 +1018,14 @@ function editProjectSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editProject.php',{
+		$.post('/4pi/handlers/aboutHandlers/editProject.php',{
 			_title:title,
 			_duration:duration,
 			_role:role,
 			_company:company,
 			_description:description,
-			_id:projectId
+			_id:projectId,
+			_team:team
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1338,7 +1176,7 @@ function modifyExperience(data)
 	link.find('#company').html(data.companyName);
 	link.find('#role').html(data.role);
 	link.find('#duration').attr("title",data.duration);
-	link.find('#duration').html(data.duration);
+	link.find('#duration').html(data.minDuration);
 }
 
 function editExperienceSendData()
@@ -1531,8 +1369,8 @@ function modifyAcademics(data)
 	link.find('#percentage').html(data.percentage);
 	link.find('#school').html(data.school);
 	link.find('#location').html(data.location);
-	link.find('#duration').attr("title",data.minDuration);
-	link.find('#duration').html(data.duration);
+	link.find('#duration').attr("title",data.duration);
+	link.find('#duration').html(data.minDuration);
 }
 
 function editAcademicsSendData()
@@ -1603,7 +1441,7 @@ function insertWorkshop(data)
 
 			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='<div style="font-size:18px;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data.name+'</span></div>';
+				workshop+='<div style="font-size:18px;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data.workshopName+'</span></div>';
 
 			workshop+='</div><!-- end class col-md-6 -->';
 
@@ -1621,7 +1459,7 @@ function insertWorkshop(data)
 
 			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="workshopLocation">'+data.location+'</span></div>';
+				workshop+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="workshopLocation">'+data.place+'</span></div>';
 
 			workshop+='</div><!-- end class col-md-6 -->';
 
@@ -1633,11 +1471,11 @@ function insertWorkshop(data)
 
 		workshop+='</div><!-- end class row -->';
 
-		if(data.numPeopleAttended!="")
+		if(data.attendees!="")
 		{
 			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='<em><div style="font-size:14px;"><span id="attenderNumber">'+data.numPeopleAttended+'</span>&nbsp; people attended</div></em>';
+				workshop+='<em><div style="font-size:14px;"><span id="attenderNumber">'+data.attendees+'</span>&nbsp; people attended</div></em>';
 
 			workshop+='</div>';
 		}
@@ -1653,8 +1491,9 @@ function insertWorkshop(data)
 
 function fetchWorkshops()
 {
-	$.post('./4pi/handlers/aboutMeHandlers/fetchWorkshops.php',{
-		_userId:userId
+	$.post('./4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:7
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
@@ -1686,7 +1525,7 @@ function addWorkshopSendData()
 	}
 	else
 	{
-		$.post("/4pi/handlers/aboutMeHandlers/addWorkshop.php",{
+		$.post("/4pi/handlers/aboutHandlers/insertWorkshop.php",{
 			_name:name,
 			_location:location,
 			_duration:duration,
@@ -1708,10 +1547,10 @@ function addWorkshopSendData()
 function modifyWorkshop(data)
 {
 	var link=$('#workshops').find('#'+data.workshopId);
-	link.find('#workshopName').html(data.name);
-	link.find('#workshopLocation').html(data.location);
-	link.find('#workshopDuration').html(data.duration).attr("title",data.minDuration);
-	link.find("#attendeeNumber").html(data.numPeopleAttended);
+	link.find('#workshopName').html(data.workshopName);
+	link.find('#workshopLocation').html(data.place);
+	link.find('#workshopDuration').html(data.minDuration).attr("title",data.duration);
+	link.find("#attendeeNumber").html(data.attendees);
 }
 
 function editWorkshopSendData()
@@ -1778,19 +1617,19 @@ function insertCertification(data)
 {
 	var certification="";
 
-	certification+='<div class="row certification" id="'+data.certificationId+'">';
+	certification+='<div class="row certification" id="'+data.courseId+'">';
 
 		certification+='<div class="row">';
 
 			certification+='<div class="text-left col-md-7">';
 
-				certification+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-chevron-right"></i>&nbsp;<span id="courseName">'+data.courseName+'</span></div>';
+				certification+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-chevron-right"></i>&nbsp;<span id="courseName">'+data.title+'</span></div>';
 
 			certification+='</div>';
 
 			certification+='<div class="col-md-3 text-right col-md-offset-2">';
 
-				certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.certificationId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.certificationId+'\');" class="fa fa-trash"></i</div>';
+				certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="fa fa-trash"></i</div>';
 
 			certification+='</div>';
 
@@ -1802,7 +1641,7 @@ function insertCertification(data)
 
 			certification+='<div class="text-left col-md-7">';
 
-				certification+='<div style="font-size:16px;" class="text-left"<i class="fa fa-map-marker"></i>&nbsp;<span id="institute">'+data.institute+'</span></div>';
+				certification+='<div style="font-size:16px;" class="text-left"<i class="fa fa-map-marker"></i>&nbsp;<span id="institute">'+data.institutename+'</span></div>';
 
 			certification+='</div>';
 
@@ -1825,8 +1664,9 @@ function insertCertification(data)
 
 function fetchCertifications()
 {
-	$.post('./4pi/handlers/aboutMeHandlers/fetchCertifications.php',{
-		_userId:userId
+	$.post('./4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:4
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
@@ -1877,10 +1717,10 @@ function addCertificationSendData()
 
 function modifyCertification(data)
 {
-	var link=$('#certifications').find('#'+data.certificationId);
-	link.find('#courseName').html(data.courseName);
-	link.find('#institute').html(data.institute);
-	link.find('#duration').attr("title",data.duration).html(data.minDuration);
+	var link=$('#certifications').find('#'+data.courseId);
+	link.find('#courseName').html(data.title);
+	link.find('#institute').html(data.institutename);
+	link.find('#duration').attr("title",data.minDuration).html(data.duration);
 }
 
 function editCertificationSendData()
@@ -1953,7 +1793,7 @@ function insertAchievements(data)
 
 			achievements+='<div class="col-md-6 text-left">';
 
-				achievements+='<div style="font-size:18px;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data.eventName+'</span></div>';
+				achievements+='<div style="font-size:18px;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data.competition+'</span></div>';
 
 			achievements+='</div><!-- end class col-md-6 -->';
 
@@ -1977,7 +1817,7 @@ function insertAchievements(data)
 
 			achievements+='<div class="col-md-4 text-right col-md-offset-2">';
 
-				achievements+='<div style="font-size:15px;" title="'+data.duration+'" id="eventDuration">'+data.minDuration+'</div>';
+				achievements+='<div style="font-size:15px;" id="eventPosition">'+data.position+'</div>';
 
 			achievements+='</div><!-- end classc col-md-3 -->';
 
@@ -2003,8 +1843,9 @@ function insertAchievements(data)
 function fetchAchievements()
 {
 
-	$.post('./4pi/handlers/aboutMeHandlers/fetchAchievements.php',{
-		_userId:userId
+	$.post('./4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:4
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
@@ -2029,16 +1870,19 @@ function addAchievementSendData()
 	var name=ln.find('#addAchievementModalEventName').val().trim();
 	var location=ln.find('#addAchievementModalLocation').val().trim();
 	var description=ln.find('#addAchievementModalDescription').val().trim();
+	var position=ln.find('#addAchievementModalPosition').val().trim();
 	if(name.length==0)
 	{
 		alert("Please enter the event name");
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/addAchievement.php',{
+		$.post('/4pi/handlers/aboutHandlers/addAchievement.php',{
 			_name:name,
 			_location:location,
-			_description:description
+			_description:description,
+			_position:position,
+			_userId:userId
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -2056,10 +1900,10 @@ function addAchievementSendData()
 function modifyAchievement(data)
 {
 	var link=$('#achievements').find('#'+data.achievementId);
-	link.find('#eventName').html(data.eventName);
-	link.find('#eventLocation').html(data.eventLocation);
-	link.find('#eventDuration').html(data.eventYear);
-	link.find('#eventDescription').html(data.eventDescription);
+	link.find('#eventName').html(data.competition);
+	link.find('#eventLocation').html(data.location);
+	link.find('#eventPosition').html(data.position);
+	link.find('#eventDescription').html(data.description);
 }
 
 function editAchievementSendData()
@@ -2067,7 +1911,7 @@ function editAchievementSendData()
 	var link=$('#editAchievementModal');
 	var name=link.find('#editAchievementModalEventName').val().trim();
 	var location=link.find('#editAchievementModalLocation').val().trim();
-	var year=link.find('#editAchievementModalYear').val().trim();
+	var position=link.find('#editAchievementModalPosition').val().trim();
 	var description=link.find('#editAchievementModalDescription').val().trim();
 	var id=link.find('#editAchievementModalId').html();
 	if(eventName.length==0)
@@ -2076,11 +1920,11 @@ function editAchievementSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editAchievement.php',{
+		$.post('/4pi/handlers/aboutHandlers/editAchievement.php',{
 			_achievementId:id,
 			_name:name,
 			_location:location,
-			_year:year,
+			_position:position,
 			_description:description
 		})
 		.error(function(){
@@ -2096,7 +1940,7 @@ function editAchievementSendData()
 	}
 }
 
-function deleteAchivement(id)
+function deleteAchievement(id)
 {
 	if(confirm("Do you want to delete this?"))
 	{
@@ -2129,7 +1973,23 @@ function insertInterest(data)
 	var position=(noOfInterests%3)+1;
 
 	var interest="";
-	interest+='<div class="interest"><i class="fa fa-pencil interestEdit" onclick="editInterests();"></i><span>'+data+'</span></div>';
+
+	interest+='<div class="row interest">';
+
+		interest+='<div class="col-md-2">';
+
+			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>';
+
+		interest+='</div>';
+
+
+		interest+='<div class="col-md-10">';
+
+			interest+='<p id="interestName">'+data+'</p>';
+
+		interest+='</div>';
+
+	interest+='</div>';
 
 	$('#intersts').find("#interestsContainer"+position).append(interest);
 }
@@ -2153,8 +2013,53 @@ function fetchInterests(data)
 	})
 }
 
-function addInterestSendData()
+function addInterestsSendData()
 {
+	var link=$("#addInterestModal");
+
+	var interestArray=new Array();
+	var i=0;
+
+	link.find(".addInterestInputClass").each(function(){
+		interestArray[i]=$(this).find("#interestName").html();
+		i++;
+	});
+
+	var empty=0;
+
+	for(var i=0;i<interestArray.length;i++)
+	{
+		if(interestArray[i].length==0)
+		{
+			empty=1;
+		}
+	}
+
+	if(empty==1)
+	{
+		alert("Incomplete fields somewhere");
+	}
+
+	else
+	{
+		$.post('/4pi/handlers/aboutHandlers/insertInterests.php',{
+			_userId:userId,
+			_interestsArray:interestsArray
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$("#interests").find('.interest').remove();
+				for(var i=0;i<data.length;i++)
+				{
+					insertInterests(data[i]);
+				}
+			}
+		});
+	}
 }
 
 function modifyInterests(data)
@@ -2170,6 +2075,52 @@ function modifyInterests(data)
 
 function editInterestSendData()
 {
+
+	var link=$("#editInterestModal");
+
+	var interestArray=new Array();
+	var i=0;
+
+	link.find(".editInterestInputClass").each(function(){
+		interestArray[i]=$(this).find("#interestName").html();
+		i++;
+	});
+
+	var empty=0;
+
+	for(var i=0;i<interestArray.length;i++)
+	{
+		if(interestArray[i].length==0)
+		{
+			empty=1;
+		}
+	}
+
+	if(empty==1)
+	{
+		alert("Incomplete fields somewhere");
+	}
+
+	else
+	{
+		$.post('/4pi/handlers/aboutHandlers/editInterests.php',{
+			_userId:userId,
+			_interestsArray:interestsArray
+		})
+		.error(function(){
+			alert("Server overload. Please try again. :(");
+		})
+		.success(function(data){
+			if(checkData(data)==1)
+			{
+				$("#interests").find('.interest').remove();
+				for(var i=0;i<data.length;i++)
+				{
+					insertInterests(data[i]);
+				}
+			}
+		});
+	}
 }
 
 /////////////////////////////INTERESTS ENDS//////////////////////
