@@ -1,6 +1,5 @@
 /***************************************************************
 
-
 File: aboutme.js
 
 FileDescription: This file contains all the actions related to a persons aboutMe page.
@@ -25,7 +24,6 @@ To do:
 
 Test fetch, insert, edit , delete		 
 
-
 *********************************************************************/
 
 
@@ -39,7 +37,15 @@ var commonURLAbout="/4pi/";
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
 
 $(document).ready(function(){
+	/*fetchTopPart();
+	fetchSkills();
 	fetchTools();
+	fetchProjects();
+	fetchWorkshops();
+	fetchCertifications();
+	fetchAchievements();
+	fetchInterests();*/
+	fetchAcademics();
 });
 
 function addSkillAddInput()
@@ -137,7 +143,6 @@ function editToolDeleteInput(el)
 {
 	$(el).parent().parent().parent().remove();
 }
-
 
 function addInterestAddInput()
 {
@@ -451,11 +456,9 @@ function editContactInfoSendData()
 	});
 }
 
-
-//to check this function, this is not working.
 function editTopPartSendData()
 {
-	var new_data=new FormData();
+	var new_data=new FormData($("#editPersonInfoModal").find("#topPartEditForm")[0]);
 
 	var link=$("#editPersonInfoModal").find("#topPartEditForm");
 
@@ -464,11 +467,22 @@ function editTopPartSendData()
 	new_data.append("_alias","hello");
 	new_data.append("_dob",link.find("#editPersonInfoModalPersonDOB").val().trim());
 	new_data.append("_description",link.find("#editPersonInfoModalPersonDescription").val().trim());
-	new_data.append("_profilePic",link.find("#editPersonInfoModalPersonImage").val().trim());
+	new_data.append("_profilePic",link.find("#editPersonInfoModalPersonImage")[0].files[0]);
 
-	new_data.append("_resume",link.find("#editPersonInfoModalPersonResume").val().trim());
+	new_data.append("_resume",link.find("#editPersonInfoModalPersonResume")[0].files[0]);
 
-	console.log(new_data);
+	// console.log(new_data);
+	// 
+	$.ajax({
+		url:'/4pi/handlers/aboutHandlers/editTopPart.php',
+		type:'POST',
+		data:new_data,
+		processData: false,
+    	contentType: false,
+    	success:function(data){
+    		console.log(data);
+    	}
+	});
 }
 
 //////////////////////////////PERSONAL INFO ENDS/////////////////////
@@ -530,6 +544,7 @@ function insertSkills(data)
 
 function fetchSkills()
 {
+	alert("Called");
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
 		_mode:8
@@ -541,9 +556,10 @@ function fetchSkills()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			insertSkills(data.jsonObj);
+			data=JSON.parse(data);
 			$("#skills").find("#skillNames").html(data.skills);
 			$("#skills").find("#skillPercentages").html(data.rating);
+			insertSkills(data.jsonObj);
 		}
 	});
 }
@@ -685,7 +701,6 @@ function editSkillSendData()
 			}
 		});
 	}
-
 }
 
 
@@ -696,7 +711,7 @@ function editSkillSendData()
 ///
 //////////////////////////////TOOLS STARTS/////////////////////////////////
 
-function insertTool(data)
+function insertTool(data,isOwner)
 {
 	console.log(data);
 	var tool="";
@@ -705,7 +720,10 @@ function insertTool(data)
 
 		tool+='<div class="col-md-2 text-center">';
 
-			tool+='<i class="fa fa-pencil" onclick="editTools();"></i>';
+			if(isOwner==1)
+			{
+				tool+='<i class="fa fa-pencil" onclick="editTools();"></i>';
+			}
 
 		tool+='</div>';
 
@@ -717,7 +735,10 @@ function insertTool(data)
 
 		tool+='<div class="col-md-2 text-center">';
 
-			tool+='<i class="fa fa-close" onclick="deleteTool(this);"></i>';
+			if(isOwner==1)
+			{
+				tool+='<i class="fa fa-close" onclick="deleteTool(this);"></i>';
+			}
 
 		tool+='</div>';
 
@@ -731,8 +752,9 @@ function insertTool(data)
 
 function fetchTools(data)
 {
-	$.post('/4pi/handlers/aboutHandlers/fetchTools.php',{
-
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:9
 	})
 	.error(function(){
 		alert("Server overload. Please try again.:(");
@@ -743,10 +765,10 @@ function fetchTools(data)
 		{
 			data=JSON.parse(data);
 			$("#tools").find(".tool").remove();
-
-			for(i=0;i<data.length;i++)
+			var tools=data.tools.split(",");
+			for(i=0;i<tools.length;i++)
 			{
-				insertTool(data[i]);
+				insertTool(tools[i], data.isOwner);
 			}
 		}
 	});
@@ -896,7 +918,7 @@ function insertProjects(data)
 
 			projects+='<div class="col-md-3 text-right">';
 				
-				projects+='<h5 class="textPadding"><span id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span><i onclick="editProject(\''+data.projectId+'\');" class="fa fa-trash"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="fa fa-pencil"></i>&nbsp;</h5>';
+				projects+='<h5 class="textPadding"><span id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span>&nbsp;&nbsp;<i onclick="editProject(\''+data.projectId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="fa fa-trash"></i>&nbsp;</h5>';
 
 			projects+='</div><!-- end class col-md- 3 -->';
 
@@ -921,7 +943,11 @@ function insertProjects(data)
 
 		projects+='<div class="row">';
 
-			projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data.description+'</p>';
+			projects+='<div class="col-md-12 text-center">';
+
+				projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data.description+'</p>';
+
+			projects+='</div>';
 
 		projects+='</div><!-- end class row -->';
 
@@ -943,7 +969,8 @@ function fetchProjects()
 		console.log(data);
 		if(checkData(data)==1)
 		{
-			console.log(checkData(data)+" this is checkData");
+			// console.log(checkData(data)+" this is checkData");
+			$(".project").remove();
 			x=JSON.parse(data);
 			for(var i=0;i<x.length;i++)
 			{
@@ -1122,7 +1149,8 @@ function insertExperience(data)
 function fetchExperience()
 {
 	$.post('./4pi/handlers/aboutMeHandlers/fetchExperience.php',{
-		_userId:userId
+		_userId:userId,
+		_mode:5
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
@@ -1245,7 +1273,7 @@ function insertAcademics(data)
 {
 	var academics="";
 
-	academics+='<div class="row academics" id="'+data.academicsId+'">';
+	academics+='<div class="row academics" id="'+data.degreeId+'">';
 
 	academics+='<div class="row">';
 
@@ -1257,7 +1285,7 @@ function insertAcademics(data)
 
 		academics+='<div class="col-md-2 col-md-offset-6 text-center">';
 
-			academics+='<div style="font-size:16px;" class="percentage" id="percentage">'+data.percentage+'%</div>';
+			academics+='<div style="font-size:16px;" class="percentage" id="percentage">'+data.score+'</div>';
 
 		academics+='</div>';
 
@@ -1291,7 +1319,7 @@ function insertAcademics(data)
 
 		academics+='<div class="col-md-4 text-right">';
 
-			academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data.academicsId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAcademics(\''+data.academicsId+'\');"></i></div>';
+			academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data.degreeId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAcademics(\''+data.degreeId+'\');"></i></div>';
 
 		academics+='</div><!--end class col-md-8 -->';
 
@@ -1309,16 +1337,20 @@ function insertAcademics(data)
 
 function fetchAcademics()
 {
-	$.post('./4pi/handlers/aboutMeHandlers/fetchAcademics.php',{
-		_userId:userId
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:3
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
+
+			$('.academics').remove();
 			for(i=0;i<x.length;i++)
 			{
 				insertAcademics(x[i]);
@@ -1491,7 +1523,7 @@ function insertWorkshop(data)
 
 function fetchWorkshops()
 {
-	$.post('./4pi/handlers/aboutHandlers/aboutMe.php',{
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
 		_mode:7
 	})
@@ -1499,9 +1531,12 @@ function fetchWorkshops()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
+
+			$('.workshop').remove();
 
 			for(i=0;i<x.length;i++)
 			{
@@ -1629,7 +1664,7 @@ function insertCertification(data)
 
 			certification+='<div class="col-md-3 text-right col-md-offset-2">';
 
-				certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="fa fa-trash"></i</div>';
+				certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="fa fa-trash"></i></div>';
 
 			certification+='</div>';
 
@@ -1664,7 +1699,7 @@ function insertCertification(data)
 
 function fetchCertifications()
 {
-	$.post('./4pi/handlers/aboutHandlers/aboutMe.php',{
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
 		_mode:4
 	})
@@ -1672,9 +1707,11 @@ function fetchCertifications()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
+			$('.certification').remove();
 			for(i=0;i,x.length;i++)
 			{
 				insertCertification(x[i]);
@@ -1799,7 +1836,7 @@ function insertAchievements(data)
 
 			achievements+='<div class="col-md-3 text-right col-md-offset-3">';
 
-				achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="fa fa-pencil" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
+				achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
 
 			achievements+='</div><!-- end classc col-md-3 -->';
 
@@ -1825,9 +1862,13 @@ function insertAchievements(data)
 
 		achievements+='<br/>';
 
-		achievements+='<div class="col-md-6 text-left">';
+		achievements+='<div class="row">';
 
-			achievements+='<div style="font-size:14px;" id="eventDescription">'+data.description+'</div>';
+			achievements+='<div class="col-md-12 text-left">';
+
+				achievements+='<div style="font-size:14px;" id="eventDescription">'+data.description+'</div>';
+
+			achievements+='</div>';
 
 		achievements+='</div>';
 
@@ -1843,17 +1884,20 @@ function insertAchievements(data)
 function fetchAchievements()
 {
 
-	$.post('./4pi/handlers/aboutHandlers/aboutMe.php',{
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
 		_userId:userId,
-		_mode:4
+		_mode:2
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
 			x=JSON.parse(data);
+
+			$('.achievement').remove();
 
 			for(i=0;i<x.length;i++)
 			{
@@ -1991,23 +2035,33 @@ function insertInterest(data)
 
 	interest+='</div>';
 
-	$('#intersts').find("#interestsContainer"+position).append(interest);
+	$('#interests').find("#interestsContainer"+position).append(interest);
 }
 
 function fetchInterests(data)
 {
-	$.post('/4pi/handlers/aboutMeHandlers/fetchInterests.php',{
-		_userId:userId
+	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
+		_userId:userId,
+		_mode:10
 	})
 	.error(function(){
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
-			for(i=0;i<data.length;i++)
+			var x=JSON.parse(data);
+
+			$('.interest').remove();
+
+			var interests=x.interests.split(",");
+
+			console.log(interests);
+
+			for(var i=0;i<interests.length;i++)
 			{
-				insertInterest(data[i]);
+				insertInterest(interests[i]);
 			}
 		}
 	})

@@ -18,7 +18,7 @@
 	//$userIdHash=$_SESSION['vj'];
 	//$_POST['_ideaPostId'] =28;
 	
-	$postId=$_POST['_ideaPostId'];
+	$postId=$_POST['_ideaPostIdHash'];
 	
 	$conn=new QoB();
 	$userIdHash=$_SESSION['vj']='0a806b877dee1e24a717de81ced1c7a4453d3f6f5a289110a1107ed0815c3302095f67c06174d3b244f7e169df9dde115babc9f0bef5765d40c547159b9d1c22';
@@ -44,9 +44,9 @@
 			else
 			{
 				
-				$getLatestPostsSQL="SELECT * FROM ideaposttable WHERE ideaPostId = ?";
+				$getLatestPostsSQL="SELECT * FROM ideaposttable WHERE ideaPostIdHash = ?";
 		
-				$values[]=array($postId => 'i');
+				$values[]=array($postId => 's');
 				
 				$posts=$conn->select($getLatestPostsSQL,$values);
 				
@@ -55,7 +55,7 @@
 					$i=0;
 					$finalArray = array();
 					
-					while($result = $conn->fetch($posts))
+					if($result = $conn->fetch($posts))
 					{
 						if(strcasecmp($userIdHash,$result['userIdHash']) == 0)
 						{
@@ -100,7 +100,10 @@
 						//$displayCount=$displayCount+1;
 						print_r(json_encode($obj));
 					}
-					
+					else{
+						echo 404;
+						exit();
+					}	
 				}
 				else
 				{

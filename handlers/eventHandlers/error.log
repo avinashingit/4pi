@@ -134,3 +134,7 @@
 
 [2015-01-19 23:33:44             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND event.eventIdHash!=? ORDER BY timestamp DESC' at line 1$$$
 
+[2015-01-28 19:28:38             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.event' doesn't exist$$$
+
+[2015-01-28 19:28:50             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.event' doesn't exist$$$
+

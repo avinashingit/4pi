@@ -121,11 +121,11 @@ function aboutMe($userId,$mode,$isOwner)
 	$conObj = new QoB();
 	if($mode == 1)
 	{
-		echo 'entered mode :'.$mode;
+		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE about.userId = ?",$values1,false);
-		var_dump($result1);
+		// var_dump($result1);
 		if($conObj->error == "")
 		{
 			
@@ -177,7 +177,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsA] = $obj;
 				$noOfElementsA++;
 			}
-			print_r($outputa);	
+			print_r(json_encode($outputa));	
 			if($noOfElementsA == 0)
 			{
 				echo 404;
@@ -262,7 +262,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}
-			print_r($outputa);
+			print_r(json_encode($outputa));
 			if($noOfElementsAc == 0)
 			{
 				echo 404;		
@@ -293,7 +293,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
-			print_r($outputa);
+			print_r(json_encode($outputa));
 			if($noOfElementsC == 0)
 			{
 				echo 404;
@@ -353,7 +353,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsP] = $obj;
 				$noOfElementsP++;
 			}
-			print_r($outputa);	
+			print_r(json_encode($outputa));	
 			if($noOfElementsP == 0)
 			{
 				echo 404;
@@ -383,7 +383,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsW] = $obj;
 				$noOfElementsW++;
 			}
-			print_r($outputa);
+			print_r(json_encode($outputa));
 			if($noOfElementsW == 0)
 			{
 				echo 404;
@@ -409,11 +409,13 @@ function aboutMe($userId,$mode,$isOwner)
 				$existingRating=$result1['rating'];
 				$existingSkillsArray=explode(',', $existingSkills);
 				$existingRatingArray=explode(',', $existingRating);
+				$i=0;
 				while($i<count($existingSkillsArray))
 				{
 					$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+					$i++;
 				}
-				$obj = new skillSet(json_encode($outObj),$result1['skills'],$result1['rating'],$isOwner);
+				$obj = new skillSet($result1['skills'],$result1['rating'],$isOwner,json_encode($outObj),"","");
 			
 				print_r(json_encode($obj));
 			}

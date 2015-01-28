@@ -26,4 +26,7 @@ for($i=0;$i<count($tools)-1;$i++)
 }
 print_r(json_encode($data));*/
 
+var_dump($_POST);
+var_dump($_FILES);
+
 ?>

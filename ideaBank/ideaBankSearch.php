@@ -26,7 +26,7 @@ $userIdHash=$_SESSION['vj']='0a806b877dee1e24a717de81ced1c7a4453d3f6f5a289110a11
 //$_POST['_inputVal'] = "the";
 
 if(isset($_SESSION['vj']))
-    {
+	{
 		$userIdHash=$_SESSION['vj']='0a806b877dee1e24a717de81ced1c7a4453d3f6f5a289110a1107ed0815c3302095f67c06174d3b244f7e169df9dde115babc9f0bef5765d40c547159b9d1c22';
         require_once("ideaHandlers/miniClasses/ideasearchclass.php");
 		//include("ideaHandlers/miniClasses/miniIdeaPost.php");
@@ -86,9 +86,9 @@ if(isset($_SESSION['vj']))
                                         if(!$count)
                                           ; //echo 131;//no results found
                                         else
-										{
-                                            $returnResults[0]=$studentSearchResults;
-										}
+											{
+												$returnResults[0]=$studentSearchResults;
+											}
                                     }
                                 else
                                     echo 132;//logical error
@@ -133,12 +133,12 @@ if(isset($_SESSION['vj']))
                                     {
 										$userIdHash=$_SESSION['vj'];
 										if(($user=getUserFromHash($userIdHash))==false)
-										{
-											//notifyAdmin("Critical Error!! In createPost",$userIdHash);
-											$_SESSION=array();
-											session_destroy();
-											return 13;
-										}
+											{
+												//notifyAdmin("Critical Error!! In createPost",$userIdHash);
+												$_SESSION=array();
+												session_destroy();
+												return 13;
+											}
 										else
 										{
 										

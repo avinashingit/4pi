@@ -4,6 +4,11 @@
 <script>
 
 var userId="<?php echo $_GET['userId'];?>";
+if(userId=="")
+{
+	alert("The url does not exist");
+	window.location.href="/4pi";
+}
 
 </script>
 
@@ -303,7 +308,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 			<div class="modal-body">
 
-				<form id="topPartEditForm">
+				<form id="topPartEditForm" method="post">
 
 					<label for="personName">Name</label>
 
@@ -355,7 +360,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary" onclick="editTopPartSendData();">Save changes</button>
+				<button class="btn btn-primary" onclick="editTopPartSendData();">Save changes</button>
 
 			</div>
 
@@ -729,7 +734,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		$('#editProjectModal').modal('show');
 
 		var x=$('#editProjectModal');
-		var y=$('#project'+n);
+		var y=$('#'+n);
 		x.find('#editProjectModalProjectId').val(n);
 		x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
 		x.find('#editProjectModalProjectTeam').val(y.find('#projectTeam').html());
@@ -836,7 +841,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		var y=$('#'+n);
 		x.find('#editAchievementModalEventName').val(y.find('#eventName').html());
 		x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
-		x.find('#editAchievementModalPositionr').val(y.find('#eventPosition').html());
+		x.find('#editAchievementModalPosition').val(y.find('#eventPosition').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
 	}
 

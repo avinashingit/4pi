@@ -163,6 +163,9 @@ i {
 .searchback{
 	background: rgba(128,128,128,0.2);
 }
+#loadMoreDiv{
+	clear: both !important;
+}
 #ideaHead{
 	padding: 10px 10px 10px 10px;
 }
@@ -171,22 +174,12 @@ i {
 	padding-left: 40%;
 }
 
-.modal-body .searchIdeaContent{
-    word-wrap: break-word;
-	height: 100% ;
-}
-
-.modal-body textarea{
-	min-height: 100% !important;
-}
 
 .spanLoadAfter{
 	font-weight: bold;
 	font-size: 22px;
 	padding-left: 35%;
 }
-
-textarea.vert { resize:vertical; }
 
 #ideaOptions{
 	padding-top: 10px !important;
@@ -305,7 +298,7 @@ h4#ideaCreatedBy{
 	padding-left: -15px;
 }
 
-#ideaStarCount,#ideaUnStarCount{
+.ideaStarCount,#ideaUnStarCount{
 	display:block !important;
 	color: #FFF;
 	position:absolute;
@@ -445,5 +438,34 @@ div.condense:hover:after {
     cursor: default;
 }
 
+
+
+
+
+
+	#ideaSearchResults1{
+		position:absolute;
+		z-index:154897;
+		border:1px solid gray;
+		padding:0px;
+		top: 42px !important;
+		margin-left: 15px !important;
+		width:94.5% !important ;
+	}
+	#ideaSearch{
+		padding-left:0px;
+	}
+	#topBarNew{
+		position:abolsute;
+	}
+	.sticky{
+		position:fixed;
+		top:0px;
+		z-index:99;
+		width:93%;
+	}
+	.scrollactive{
+		width: 50% !important;
+	}
 
 /*-------------------------- End of Idea Bank --------------*/

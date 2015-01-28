@@ -1,182 +1,3 @@
- <?php
-session_start();
-	require_once('ideahandlers/createIdeapost.php');
-	require_once('../QOB/qob.php');
-	require_once('../handlers/fetch.php');
- 
- require_once('ideaHeader.php');
- ?>
- 
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="row">
-    	<div class="col-md-1" >
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              	<div id="brand" class="text-center"> 
-					<a href="../index.php"><img src="./images/fourpi.png" width="40px" height="auto" style="padding-top:7px;"/></a>
-				</div>
-            </div>
-        </div>
-        <div class="col-md-4 " >
-        	<div class="btn-group " >        
-            	<div class="btn-group">
-                	<button type="button" id="ideaButton" class="btn btn-success" data-toggle="modal" data-target="#idea"><a href="#" style="color:white;" ><i class="fa fa-plus" id="plusId"></i>&nbsp;<span id="postingIdea">Post New Idea</span></a></button>
-                </div>
-             </div><!--End of btn-group -->
-        </div><!--End of col-md-4 -->
-        <div class="col-md-4">
-        <a href="index.php"><img src="images/logo1.png" height="42px;" style="padding-top: 3px;"></a>
-        </div>
-		<div class="col-md-3">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="ideaSearch">
-              <form class="navbar-form navbar-left floatRight" role="search" >
-                <div class="form-group">
-                  <input id="ideaSearchBefore" autocomplete="off" type="text" onkeyup="fetchIdeaSearchResults();" class="form-control searchExpand" placeholder="Search">
-                </div>
-              </form>
-			  
-			  <div id="ideaSearchResults1" style="background-color:white;">
-
-				<div id="ideaPeopleSearch">
-
-				<h4 class="text-center searchback">People</h4><br/>
-
-				<div style="margin-top: -20px !important;" class="text-center" id="ideaPeopleSearchEmptyMessage"></div>
-
-				</div>
-
-				<div id="ideaPostsSearch">
-
-				<h4 class="text-center searchback">Ideas</h4><br/>
-
-				<div style="margin-top: -20px !important;" class="text-center" id="ideaPostsSearchEmptyMessage"></div>
-
-				</div>
-			  </div><!-- Idea Search Results1 -->
-			  
-            </div><!-- /.navbar-collapse -->
-			
-        </div>
-	</div>
-  </div><!-- /.container-fluid -->
-</nav>
-
-
-<div class="row classRowBody"  id="rowIdeaBody">
-	
-    <div class="col-md-1 ">
-    <div class="fixedElement1" >
-	
-    <img src="images/logo2.png" /></div>
-    </div>
-	<div id="final1"></div>
-	<div class="col-md-9" >
-	
-	<div id="final">
-	
-	<div class="col-md-4"  id="fc">
-	
-	</div>
-	
-	<div class="col-md-4" id="sc">
-	<!--<div style="postion: absolute !important;bottom: 0px !important" id="finalbottom"></div> -->
-	</div>
-	
-	<div class="col-md-4"  id="tc">
-	
-	</div>
-	
-	</div>
-	
-	<div id="loadMoreDiv"></div>
-	
-	</div>
-	
-	
-	<div class="col-md-2 col-md-offset-10 fixedElement text-center" style="color:grey;">
-	<div class="fading hidden" id="oneplus">
-        <div class="text-animated-one">+1</div>    
-    </div>
-	<i class="fa fa-university " style="font-size: 180px; padding-bottom: 5px; " ></i>
-	<div class="odometer" id="odometer" style="font-size: 20px;">0</div>
-	</div>
-
-
-                         <!--create post modal -->   
-                            <div class="modal fade" id="idea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                              
-                                <div class="modal-content">
-                                
-                                  <div class="modal-header">
-                                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus"></i> &nbsp;Create New Idea&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Maximum size of the post can be 3MB. Post content can contain upto 8000 characters."></i>]</h4>
-                                  </div>
-                                  
-                                  <div class="modal-body">
-									<form role="form">
-                                      <div class="form-group">
-                                        <label for="ideaContent">Description</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post description is compulsory."></i>]
-                                        <textarea type="text" name="ideaContent" id="createIdeaContent" style="background-color:white;border-radius:0px;resize:none;" class="form-control" ></textarea>
-                                      </div>
-                                    </form><br />
-                                    
-                                  </div>
-                                  
-                                  <div class="modal-footer">
-									<button onclick="createIdeaPost();" class="btn btn-primary">Post Idea</button>
-                                  </div>
-                                  
-                                </div>
-                                
-                              </div>
-                              
-                            </div>
-                        <!--End of create post modal -->
-                        
-                <!-- Edit post modal  -->
-						<div class="modal fade" id="editIdeaModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="editIdeaModal" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;<strong></span><span class="sr-only">Close</span></strong></button>
-						        <h4 class="modal-title" id="editIdea"><i class="fa fa-pencil"></i> &nbsp;Edit Idea</h4>
-						      </div>
-							  <div id="editIdeaPostId" class="hidden"></div>
-						      <div class="modal-body">
-                                   <form role="form">
-                                      <div class="form-group">
-                                        <label for="ideaContent">Description</label>
-                                        <textarea type="text" name="ideaContent" id="editIdeaContent" style="background-color:white;border-radius:0px;" class="form-control" ></textarea>
-                                      </div>
-								  <input class="hidden" id="postId" name="postId">
-								</form><br />
-								<button onclick="editedPostSend();" id="editIdeaButton" class="btn btn-primary">Update Idea</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-				<!-- Edit post modal -->
-				
-</div><!--End of ROW tag -->
-<span id="noIdeas"></span>
-<?php
-	include_once("../footer.php");
-?>
-</body>
-</html>
-
-<script>
 	var ob;
 	
 	//$('.form-control').css({'border-radius':'0px !important'}); 
@@ -461,7 +282,7 @@ function retrieveLatestPosts(value, call) {
 }
 
 
-var genUrl = "/4pi/";
+var genUrl = "http://localhost/4pi/";
 function postInsert(position, data1, num, len) {
 	var res;
 	var idCol;
@@ -487,7 +308,7 @@ function postInsert(position, data1, num, len) {
 	
 	post+='<div class="col-md-8" id="ideaProfilePic">';
 	
-	data1.name = toTitleCase(data1.name);
+	data1.name = data1.name.toLowerCase();
 	
 	if( data1.name.length>14 )
 	{
@@ -499,7 +320,7 @@ function postInsert(position, data1, num, len) {
 		res = data1.name;
 	}
 
-	post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="../img/people/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
+	post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="../img/people/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+' '+ res +'</h4></a>';
 
 	post+='</div> <!-- end class col-md-8 id ideaProfile Pic --> ';
 						
@@ -590,10 +411,6 @@ function postInsert(position, data1, num, len) {
 
 }
 
-function toTitleCase(str)
-{
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
 
 function deleteIdea(id){
 	if (confirm("Do you really want to delete your Idea ??") == true) {
@@ -839,7 +656,7 @@ function stopClick(id) {
 		})
 		.success(function(data){
 			data = data.trim();
-			// console.log(data);
+			console.log(data);
 			data=JSON.parse(data);
 			$('.ideaPeopleSearchResult').each(function(){
 				$(this).remove();
@@ -853,7 +670,7 @@ function stopClick(id) {
 			}
 			else
 			{
-			// console.log(data);
+			console.log(data);
 				$('#ideaPeopleSearchEmptyMessage').html("");
 				for(i=0;i<data[0].length;i++)
 				{
@@ -911,18 +728,15 @@ function checkData(data) {
     if (data == 12) {
         alert("Could not save your action into the database");
         return -1;
-    }
-	else if (data == 13) {
+    } else if (data == 13) {
         alert("You don't mess with 4pi");
         window.location.href = "/4pi/index.php";
         return -1;
-    } 
-	else if (data == 14) {
+    } else if (data == 14) {
         alert("You have been blocked for messing with 4pi. Contact Admin @4pi");
         window.location.href = "/4pi/index.php";
         return -1;
-    }
-	else if (data == 16) {
+    } else if (data == 16) {
         alert("Invalid Input");
         return -1;
     } 
@@ -930,10 +744,3 @@ function checkData(data) {
         return 1;
     }
 }
-
-</script>
-
-<style>
-
-</style>
-	
