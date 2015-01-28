@@ -258,7 +258,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$academics['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);								
-				$obj = new academics("d".$academics['degreeId'],$academics['degree'], $academics['name'],$academics['location'],$duration,$minDuration,$academics['score'],$academics['scoreType'],$isOwner);
+				$obj = new academics("d".$academics['degreeId'],$academics['degree'], $academics['schoolName'],$academics['location'],$duration,$minDuration,$academics['score'],$academics['scoreType'],$isOwner);
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}

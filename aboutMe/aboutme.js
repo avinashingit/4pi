@@ -982,7 +982,17 @@ function insertProjects(data)
 
 			projects+='<div class="col-md-9 text-right">';
 
-				projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">'+data.teamMembers+'</span></h5>';
+				if(data.teamMembers.length==0)
+				{
+					projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">Not specified</span></h5>';
+				}
+
+				else
+				{
+					projects+='<h5 class="textPadding" ><b>Team: </b><span id="projectTeam">'+data.teamMembers+'</span></h5>';
+				}
+
+				
 
 			projects+='</div><!-- end class col-md- 3 -->';
 
