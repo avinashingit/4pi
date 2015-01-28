@@ -1011,9 +1011,9 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-2 visibleForUser col-md-offset-8 text-right">
+						<div class="col-md-2 col-md-offset-8 text-right">
 
-							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="fa fa-pencil"></i></button>
+							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-danger" onclick="deleteSkill();"><i class="fa fa-trash"></i></button>
 
 						</div>
 
@@ -1040,7 +1040,7 @@ if(userId=="")
 				
 						</div>
 				
-						<div class="col-md-1 visibleForUser col-md-offset-9">
+						<div class="col-md-1 col-md-offset-9">
 				
 							<a class="cursorPointer" onclick="addTool();"><h5 class="text-center"><i class="fa fa-plus" ></i>&nbsp; Add </h5></a>
 				
@@ -1408,7 +1408,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-2 visibleForUser text-right col-md-offset-6">
+						<div class="col-md-2 text-right col-md-offset-6">
 		
 							<button  onclick="addProject();" class="btn btn-success"> <span class="cursorPointer"><i class="fa fa-plus"></i>&nbsp;Add</span></button>
 
@@ -1586,7 +1586,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
+						<div class="col-md-3 text-right col-md-offset-4">
 		
 							<button class="btn btn-success" onclick="addExperience();"> <h5><i class="fa fa-plus"></i>Add</h5></button>
 
@@ -1940,7 +1940,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
+						<div class="col-md-3 text-right col-md-offset-4">
 		
 							<button class="btn btn-success"  onclick="addAcademics();"><h5><i class="fa fa-plus"></i>Add</h5>
 
@@ -2415,7 +2415,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-3  visibleForUser text-right col-md-offset-4">
+						<div class="col-md-3 text-right col-md-offset-4">
 		
 							<button  onclick="addWorkshop();" class="btn btn-success"><h5><i class="fa fa-plus"></i>&nbsp;Add</h5></button>
 
@@ -2801,7 +2801,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
+						<div class="col-md-3 text-right col-md-offset-4">
 		
 							<button class="btn btn-success"  onclick="addCertification();"> <h5><i class="fa fa-plus"></i>Add</h5></button>
 
@@ -3063,7 +3063,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
+						<div class="col-md-3 text-right col-md-offset-4">
 		
 							<button class="btn btn-success"  onclick="addAchievement();"> <h5><i class="fa fa-plus"></i>&nbsp;Add</h5></button>
 
@@ -3375,7 +3375,7 @@ if(userId=="")
 
 							</div>
 
-							<div class="col-md-2 visibleForUser col-md-offset-8 text-right">
+							<div class="col-md-2 col-md-offset-8 text-right">
 
 								<button class="btn btn-md btn-success" onclick="addInterest();"><i class="fa fa-plus"></i>&nbsp;Add</button>
 
