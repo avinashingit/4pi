@@ -11,6 +11,44 @@ var userId="<?php echo $_GET['userId'];?>";
 
 <style>
 
+	#personPicture img
+	{
+		border-radius:78px;
+		border:1px solid #cecece;
+		padding:5px;
+	}
+
+	.profileName
+	{
+		color:#003B93;
+	}
+
+	#personRollNumber
+	{
+		color:#D40000;
+	}
+
+	#personDOB
+	{
+		color:#125900;
+	}
+
+	#personHighestDegree
+	{
+		color:#710000;
+	}
+
+	#personCurrentProfession
+	{
+		color:#6F0052;
+	}
+
+	.modal-content
+	{
+		overflow-y: auto;
+		height:500px;
+	}
+
 	.editSkillInputClass, .addSkillInputClass, .addToolInputClass, .editToolInputClass, .addInterestInputClass, .editInterestInputClass
 	{
 		margin-bottom:25px;
@@ -41,7 +79,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 	.middleNavbarA
 	{
-		padding:14px 13px !important;
+		padding:14px 20px !important;
 	}
 
 	.textPadding
@@ -80,11 +118,19 @@ var userId="<?php echo $_GET['userId'];?>";
 		padding-right:5px;
 	}
 
-	.interest:hover, .tool:hover
+	.interest:hover
 	{
 		background-color:rgba(220, 220, 220, 0.05);
-		box-shadow: 5px 0px 0px 0px rgba(80, 183, 154, 1) inset;
+		box-shadow: 5px 0px 0px 0px #710024 inset;
 	}
+
+	.tool:hover
+	{
+		background-color:rgba(220, 220, 220, 0.05);
+		box-shadow: 5px 0px 0px 0px #00004D inset;
+	}
+
+	
 
 	.project
 	{
@@ -99,7 +145,7 @@ var userId="<?php echo $_GET['userId'];?>";
 	.project:hover
 	{
 		background-color: rgba(0,0,0,0.02);
-		box-shadow: 5px 0px 0px 0px rgba(80, 183, 154, 1) inset;
+		box-shadow: 5px 0px 0px 0px #176F56 inset;
 	}
 
 	.experience:hover
@@ -117,13 +163,13 @@ var userId="<?php echo $_GET['userId'];?>";
 	.workshop:hover
 	{
 		background-color: rgba(0,0,0,0.02);
-		box-shadow: 5px 0px 0px 0px rgba(3, 184, 206, 1) inset;
+		box-shadow: 5px 0px 0px 0px #007887 inset;
 	}
 
 	.achievement:hover
 	{
 		background-color: rgba(0,0,0,0.02);
-		box-shadow: 5px 0px 0px 0px rgba(3, 184, 206, 1) inset;
+		box-shadow: 5px 0px 0px 0px #008322 inset;
 	}
 
 	.certification:hover
@@ -257,7 +303,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 			<div class="modal-body">
 
-				<form>
+				<form id="topPartEditForm">
 
 					<label for="personName">Name</label>
 
@@ -267,21 +313,21 @@ var userId="<?php echo $_GET['userId'];?>";
 
 					<label for="personDOB">Date of birth</label>
 
-					<input type="text" id="editPersonInfoModalPersonDOB" class="form-control">
+					<input id="editPersonInfoModalPersonDOB" class="form-control datepicker">
 
 					<br/>
 
-					<label for="personHighestDegree">Highest degree</label>
-
-					<input type="text" id="editPersonInfoModalPersonHighestDegree" class="form-control">
-
+					<!-- <label for="personHighestDegree">Highest degree</label>
+					
+					<input type="text" class="" id="editPersonInfoModalPersonHighestDegree" class="form-control">
+					
 					<br/>
-
+					
 					<label for="personCurrentProfession">Current profession</label>
-
+					
 					<input type="text" id="editPersonInfoModalPersonCurrentProfession" class="form-control">
-
-					<br/>
+					
+					<br/> -->
 
 					<label for="personDescription">About you</label>
 
@@ -293,6 +339,14 @@ var userId="<?php echo $_GET['userId'];?>";
 
 					<input type="file" id="editPersonInfoModalPersonImage">
 
+					<br/>
+
+					<label for="personResume">Your resume</label>
+
+					<input type="file" id="editPersonInfoModalPersonResume">
+
+					<br/>
+
 				</form>
 
 			</div>
@@ -301,7 +355,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-primary" onclick="editTopPartSendData();">Save changes</button>
 
 			</div>
 
@@ -507,6 +561,12 @@ var userId="<?php echo $_GET['userId'];?>";
 		});
 		// $('#skills').hide();
 		$('#skills').show();
+		$('.middleNavbarA').each(function(){
+			if($(this).attr("data-target")=="#skills")
+				{
+					$(this).css({'background-color':'black','color':'white'});
+				}
+			});
 
 		$('.middleNavbarA').click(function(){
 			$('.middleNavbarA').each(function(){
@@ -532,8 +592,8 @@ var userId="<?php echo $_GET['userId'];?>";
 		var ob2=$('#entireContent').find('#personInfo');
 		x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
 		x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
-		x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
-		x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());
+		/*x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
+		x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());*/
 		x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
 	}
 
@@ -672,6 +732,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		var y=$('#project'+n);
 		x.find('#editProjectModalProjectId').val(n);
 		x.find('#editProjectModalProjectTitle').val(y.find('#projectTitle').html());
+		x.find('#editProjectModalProjectTeam').val(y.find('#projectTeam').html());
 		var z=y.find('#projectDuration').attr("title");
 		var xz=z.split("-");
 		x.find('#editProjectModalProjectDurationFrom').val(xz[0]);
@@ -691,7 +752,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		$('#editExperienceModal').modal('show');
 
 		var x=$('#editExperienceModal');
-		var y=$('#experience'+n);
+		var y=$('#'+n);
 		x.find('#editExperienceModalCompanyName').val(y.find('#company').html());
 		x.find('#editExperienceModalRole').val(y.find('#role').html());
 		var z=y.find('#duration').attr("title");
@@ -711,10 +772,11 @@ var userId="<?php echo $_GET['userId'];?>";
 		$('#editCertificationModal').modal('show');
 
 		var x=$('#editCertificationModal');
-		var y=$('#certification'+n);
+		var y=$('#'+n);
 		x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
 		x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
 		var z=y.find('#duration').attr("title").split("-");
+		console.log(z);
 		x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
 		x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
 		x.find('#editCertificationModalId').html(n);
@@ -730,7 +792,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		$('#editAcademicsModal').modal('show');
 
 		var x=$('#editAcademicsModal');
-		var y=$('#academics'+n);
+		var y=$('#'+n);
 		x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
 		x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
 		x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
@@ -751,7 +813,7 @@ var userId="<?php echo $_GET['userId'];?>";
 		$('#editWorkshopModal').modal('show');
 
 		var x=$('#editWorkshopModal');
-		var y=$('#workshop'+n);
+		var y=$('#'+n);
 		x.find('#editWorkshopModalWorkshopName').val(y.find('#workshopName').html());
 		x.find('#editWorkshopModalWorkshopLocation').val(y.find('#workshopLocation').html());
 		var z=y.find('#workshopDuration').attr("title").split("-");
@@ -771,10 +833,10 @@ var userId="<?php echo $_GET['userId'];?>";
 		$('#editAchievementModal').modal('show');
 
 		var x=$('#editAchievementModal');
-		var y=$('#achievement'+n);
+		var y=$('#'+n);
 		x.find('#editAchievementModalEventName').val(y.find('#eventName').html());
 		x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
-		x.find('#editAchievementModalYear').val(y.find('#eventDuration').html());
+		x.find('#editAchievementModalPositionr').val(y.find('#eventPosition').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
 	}
 
@@ -845,7 +907,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 				<div class="col-md-2" id="personPicture">
 
-					<a href="#" class="thumbnail"><img src="../img/hpics/1.jpg"  alt="Avinash Kadimisetty" class="img-responsive"/></a>
+					<a href="#" class=""><img src="../img/hpics/1.jpg"  alt="Avinash Kadimisetty" class="img-responsive"/></a><br/>
 
 					<h4 class="text-center" id="personRollNumber">COE12B009</h4>
 
@@ -926,7 +988,7 @@ var userId="<?php echo $_GET['userId'];?>";
 							
 							<li><a class="middleNavbarA" data-target="#interests"><i class="fa fa-star"></i> &nbsp; Interests</a></li>
 							
-							<li><a class="middleNavbarA"  data-target="#contact"><i class="fa fa-envelope"></i> &nbsp; Contact</a></li>
+							<!-- <li><a class="middleNavbarA"  data-target="#contact"><i class="fa fa-envelope"></i> &nbsp; Contact</a></li> -->
 
 						</ul>
 					
@@ -940,7 +1002,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<div class="col-md-2 text-left">
 
-							<h3><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Skills</h3>
+							<h3 style="color:#6F0052"><i class="fa fa-bar-chart"></i>&nbsp;&nbsp;Skills</h3>
 
 						</div>
 
@@ -969,7 +1031,7 @@ var userId="<?php echo $_GET['userId'];?>";
 				
 						<div class="col-md-2">
 				
-							<h3 class="text-center" style="color:blue;"><i class="fa fa-wrench"></i>&nbsp; Tool set</h3>
+							<h3 class="text-center" style="color:#00004D;"><i class="fa fa-wrench"></i>&nbsp; Tool set</h3>
 				
 						</div>
 				
@@ -1337,7 +1399,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<div class="col-md-4 text-left">
 
-							<h3 style="color:rgba(80, 183, 154, 1);"><i class="fa fa-database"></i>&nbsp;Projects</h3>
+							<h3 style="color:#176F56;"><i class="fa fa-database"></i>&nbsp;Projects</h3>
 
 						</div>
 
@@ -2344,7 +2406,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<div class="col-md-5">
 
-							<h3  style="color:rgba(3, 184, 206, 1);" class="text-left"><i class="fa fa-gears"></i>&nbsp;Workshops</h3>
+							<h3  style="color:#007887;" class="text-left"><i class="fa fa-gears"></i>&nbsp;Workshops</h3>
 
 						</div>
 
@@ -2778,7 +2840,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 									<div class="col-md-5">
 	
-										<div style="font-size:16px;" class="text-right" id="duration">Duration</div>
+										<div style="font-size:16px;" class="text-right" title="22/07/2014-25/08/2014" id="duration">Duration</div>
 
 									</div>
 
@@ -2992,7 +3054,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<div class="col-md-5">
 
-							<h3 style="color:rgba(3, 184, 206, 1);" class="text-left"><i class="fa fa-trophy"></i>&nbsp;Achievements</h3>
+							<h3 style="color:#008322;" class="text-left"><i class="fa fa-trophy"></i>&nbsp;Achievements</h3>
 
 						</div>
 
@@ -3304,7 +3366,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<div class="col-md-2 text-left">
 
-								<h3><i class="fa fa-star"></i>&nbsp;&nbsp;Interests</h3>
+								<h3 style="color:#710024"><i class="fa fa-star"></i>&nbsp;&nbsp;Interests</h3>
 
 							</div>
 
@@ -3672,17 +3734,6 @@ var userId="<?php echo $_GET['userId'];?>";
 </body>
 
 
-<script>
-
-	$( ".datepicker" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			dateFormat:"dd/mm/yy"
-		});
-
-	// $('.datepicker').css({'z-index':'1052'});
-
-</script>
 
 <div class="modal fade" id="addSkillModal">
 
@@ -3829,6 +3880,12 @@ var userId="<?php echo $_GET['userId'];?>";
 
 					<br/>
 
+					<label for="projectTitle">Project team</label>
+
+					<input type="text" id="addProjectModalProjectTeam" class="form-control">
+
+					<br/>
+
 					<div class="row">
 
 						<div class="col-md-6">
@@ -3911,6 +3968,12 @@ var userId="<?php echo $_GET['userId'];?>";
 					<label for="projectTitle">Project title</label>
 
 					<input type="text" id="editProjectModalProjectTitle" class="form-control">
+
+					<br/>
+
+					<label for="projectTitle">Project team</label>
+
+					<input type="text" id="editProjectModalProjectTeam" class="form-control">
 
 					<br/>
 
@@ -4080,7 +4143,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="experienceDurationHours">From</label>
 
-							<input type="text" id="editExperienceModalDurationFrom" class="form-control">
+							<input type="text" id="editExperienceModalDurationFrom" class="form-control datepicker">
 
 						</div>
 
@@ -4088,7 +4151,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="experienceDurationMin">To</label>
 
-							<input type="text" id="editExperienceModalDurationTo" class="form-control">
+							<input type="text" id="editExperienceModalDurationTo" class="form-control datepicker">
 
 						</div>
 
@@ -4165,7 +4228,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<label for="duration">From</label>
 
-						<input type="text" id="addAcademicsModalDurationFrom" class="datepicker form-control">
+						<input type="text" id="addAcademicsModalDurationFrom" class="datepicker form-control datepicker">
 
 					</div>
 
@@ -4173,7 +4236,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<label for="duration">To</label>
 
-						<input type="text" id="addAcademicsModalDurationTo" class="datepicker form-control">
+						<input type="text" id="addAcademicsModalDurationTo" class="datepicker form-control datepicker">
 
 					</div>
 
@@ -4245,7 +4308,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="duration">From</label>
 
-							<input type="text" id="editAcademicsModalDurationFrom" class="form-control">
+							<input type="text" id="editAcademicsModalDurationFrom" class="form-control datepicker">
 
 							<br/>
 
@@ -4255,7 +4318,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="duration">To</label>
 
-							<input type="text" id="editAcademicsModalDurationTo" class="form-control">
+							<input type="text" id="editAcademicsModalDurationTo" class="form-control datepicker">
 
 							<br/>
 
@@ -4322,7 +4385,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<label for="duration">From</label>
 
-						<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control">
+						<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control datepicker">
 
 					</div>
 					
@@ -4330,7 +4393,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<label for="duration">To</label>
 
-						<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control">
+						<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control datepicker">
 
 					</div>
 
@@ -4399,7 +4462,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="duration">From</label>
 
-							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control">
+							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control datepicker">
 
 							<br/>
 
@@ -4409,7 +4472,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="duration">To</label>
 
-							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control">
+							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control datepicker">
 
 							<br/>
 
@@ -4478,7 +4541,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<label for="experienceDuration">From</label>
 
-						<input type="text" id="addCertificationModalDurationFrom" class="form-control">
+						<input type="text" id="addCertificationModalDurationFrom" class="form-control datepicker">
 
 					</div>
 
@@ -4486,7 +4549,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 						<label for="experienceDuration">To</label>
 
-						<input type="text" id="addCertificationModalDurationTo" class="form-control">
+						<input type="text" id="addCertificationModalDurationTo" class="form-control datepicker">
 
 					</div>
 
@@ -4551,7 +4614,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="duration">From</label>
 
-							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control">
+							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control datepicker">
 
 							<br/>
 
@@ -4561,7 +4624,7 @@ var userId="<?php echo $_GET['userId'];?>";
 
 							<label for="duration">To</label>
 
-							<input type="text" id="editCertificationModalCertificationDurationFromTo" class="form-control">
+							<input type="text" id="editCertificationModalCertificationDurationTo" class="form-control datepicker">
 
 							<br/>
 
@@ -4620,9 +4683,9 @@ var userId="<?php echo $_GET['userId'];?>";
 
 					<br/>
 
-					<label for="duration">Year</label>
+					<label for="duration">Position</label>
 
-					<input type="text" id="addAchievementModalYear" class="form-control">
+					<input type="text" id="addAchievementModalPosition" class="form-control">
 
 					<br/>
 
@@ -4683,9 +4746,9 @@ var userId="<?php echo $_GET['userId'];?>";
 
 					<br/>
 
-					<label for="duration">Year</label>
+					<label for="duration">Position</label>
 
-					<input type="text" id="editAchievementModalYear" class="form-control">
+					<input type="text" id="editAchievementModalPosition" class="form-control">
 
 					<br/>
 
@@ -4769,3 +4832,16 @@ var userId="<?php echo $_GET['userId'];?>";
 	</div>
 
 </div>
+
+
+<script>
+
+	$( ".datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat:"dd/mm/yy"
+		});
+
+	// $('.datepicker').css({'z-index':'1052'});
+
+</script>
