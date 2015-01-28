@@ -218,7 +218,7 @@ function insertTopPart(data)
 
 	topPart+='<div class="col-md-2" id="personPicture">';
 
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.profilePicture+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
 
 		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
@@ -2111,7 +2111,7 @@ function insertInterest(data,isOwner)
 		{
 			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>';
 		}
-		
+
 		interest+='</div>';
 
 

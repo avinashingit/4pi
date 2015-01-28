@@ -15,7 +15,7 @@
 
 	class about
 	{
-		//public $profilePicture;
+		public $userIdHash;
 		public $name; //alias of the user
 		public $dob;
 		public $description;
@@ -36,11 +36,11 @@
 		public $pinterestId;
 		public $isOwner;
 		
-		public function __construct($name,$dob,$description,$resume,$highestDegree,
+		public function __construct($userIdHash,$name,$dob,$description,$resume,$highestDegree,
 			$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)
 			{
-				//$this->profilePicture = $profilePicture;
+				$this->userIdHash = $userIdHash;
 				$this->name = $name; 
 				$this->dob = $dob;	
 				$this->description = $description;
@@ -153,14 +153,6 @@
 					$this->degreeId=$degreeId;
 					$this->degree = $degree ;
 					$this->schoolName=$schoolName;
-					if(=='null')
-					{
-						$this->='';
-					}
-					else
-					{
-						$this->=$
-					}
 					$this->location=$location;
 					$this->duration = $duration ;
 					$this->minDuration = $minDuration;
@@ -178,7 +170,6 @@
 			public $location;
 			public $description;
 			public $position;
-			//public $achieveddate;
 			public $isOwner;
 			public function __construct($achievementId,$competition,$location,$description,$position,$isOwner)
 				{

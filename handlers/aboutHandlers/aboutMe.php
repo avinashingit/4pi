@@ -140,7 +140,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$work="Student";
 				if($result1['organisation']!="")
 					$work=$result1['designation']." at ".$result1['organisation'];
-				$obj = new about($result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
+				$obj = new about($result1['userIdHash'],$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
 					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),explode(',',$result1['showPhone']),$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$isOwner);
 				print_r(json_encode($obj));
 			}
@@ -172,8 +172,8 @@ function aboutMe($userId,$mode,$isOwner)
 			$noOfElementsA = 0;
 			while($achievements = $conObj->fetch($result1))
 			{	
-				$date1 = date("d-m-y" , $$achievements['achieveddate']);
-				$obj = new achievements("a".$achievements['achievementId'],$achievements['competition'],$achievements['location'],$achievements['description'],$achievements['position'],$date1,$isOwner);
+				//$date1 = date("d-m-y" , $$achievements['achieveddate']);
+				$obj = new achievements("a".$achievements['achievementId'],$achievements['competition'],$achievements['location'],$achievements['description'],$achievements['position'],$isOwner);
 				$outputa[$noOfElementsA] = $obj;
 				$noOfElementsA++;
 			}
@@ -258,7 +258,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$academics['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);								
-				$obj = new academics("d".$academics['degreeId'],$academics['degree'], $academics['name'],$academics['location'],$duration,$minDuration,$academics['cgpa'],$isOwner);
+				$obj = new academics("d".$academics['degreeId'],$academics['degree'], $academics['name'],$academics['location'],$duration,$minDuration,$academics['score'],$academics['scoreType'],$isOwner);
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}
@@ -289,7 +289,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$courses['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new certifiedCourses("cc".$courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
+				$obj = new certifiedCourses("C".$courses['courseId'],$courses['courseName'],$duration,$minDuration,$courses['instituteName'],$isOwner);
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
@@ -349,7 +349,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$projects['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new projects("p".$projects['projectId'],$projects['projectName'],$projects['role'],$duration,$minDuration,$projects['description'],$projects['teamMembers'],$isOwner);
+				$obj = new projects("p".$projects['projectId'],$projects['projectName'],$projects['role'],$duration,$minDuration,$projects['description'],$projects['teamMembers'],$projects['organisation'],$isOwner);
 				$outputa[$noOfElementsP] = $obj;
 				$noOfElementsP++;
 			}
