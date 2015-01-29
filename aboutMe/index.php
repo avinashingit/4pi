@@ -342,7 +342,7 @@ if(userId=="")
 
 					<label for="personImage">Your image</label>
 
-					<input type="file" id="editPersonInfoModalPersonImage">
+					<input type="file" accept="image/jpeg" id="editPersonInfoModalPersonImage">
 
 					<br/>
 

@@ -11,7 +11,7 @@
 
 session_start();
 require_once('../../QOB/qob.php');
-require_once('./miniPoll.php');
+require_once('../pollHandlers/miniPoll.php');
 require_once('../fetch.php');
 //Testing Content Starts
 	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
@@ -88,32 +88,32 @@ $mode=$_POST['_mode'];
 }
 else */
 
-if($mode=2)
+if($mode==2)
 {
 	#academics Edit
 	academicsDelete($user,$_POST['_degreeId']);
 }
-else if($mode=3)
+else if($mode==3)
 {
 	#achievements Edit
 	achievementsDelete($user,$_POST['_achievementId']);
 }
-else if($mode=4)
+else if($mode==4)
 {
 	#certifiedCourses Edit
 	coursesDelete($user,$_POST['_courseId']);
 }
-else if($mode=5)
+else if($mode==5)
 {
 	#experience Edit
 	experienceDelete($user,$_POST['_experienceId']);
 }
-else if($mode=6)
+else if($mode==6)
 {
 	#projects Edit
 	projectDelete($user,$_POST['_projectId']);
 }
-else if($mode=7)
+else if($mode==7)
 {
 	#workshop Edit
 	workshopsDelete($user,$_POST['_workshopId']);
