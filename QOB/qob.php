@@ -800,9 +800,9 @@ class QoB
     }
 
     //returns number of affected rows in case of insert or update
-    function getAfftectedRows()
+    function getAffectedRows()
     {
-        return $this->$stmt->affected_rows;
+        return $this->stmt->affected_rows;
     }
 
     //Returns the value of Auto incremented Id generated due to last executed statement( i.e. if last statement was insert or update).

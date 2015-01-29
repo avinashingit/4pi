@@ -84,7 +84,7 @@ if(($user=getUserFromHash($userIdHash))==false)
 $userId=$user['userId'];
 $mode=$_POST['_mode'];
 
-if ($mode=1) {
+if ($mode==1) {
 
 	# AboutMe Insert
 	/*$dob=$_POST['_dob'];
@@ -133,7 +133,7 @@ if ($mode=1) {
 	aboutMeInsert($user,$_POST['_dob'],$_POST['_description'],$_POST['_hobbies'],$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
 
 }
-else if ($mode=2) {
+else if ($mode==2) {
 
 	# Achievements Insert
 	/*$competition=$_POST['_eventName'];
@@ -144,7 +144,7 @@ else if ($mode=2) {
 */
 	achievmentsInsert($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievedDate']);
 }
-else if ($mode=3) {
+else if ($mode==3) {
 
 	# Academics Insert
 	/*$degreeName=$_POST['_degree'];
@@ -161,7 +161,7 @@ else if ($mode=3) {
 
 }
 
-else if ($mode=4) {
+else if ($mode==4) {
 
 	# Certifications Insert
 	//$title=$_POST['_courseName'];
@@ -174,7 +174,7 @@ else if ($mode=4) {
 
 	certifiedCoursesInsert($user,$_POST['_courseName'],$_POST['_duration'],$_POST['_institute']);
 }
-else if ($mode=5) {
+else if ($mode==5) {
 
 	# Experience Insert
 	//$organisation=$_POST[''];
@@ -186,7 +186,7 @@ else if ($mode=5) {
 
 	experienceInsert($user,$_POST['_company'],$_POST['duration'],$_POST['_role']);
 }
-else if ($mode=6) {
+else if ($mode==6) {
 
 	# Projects Insert
 	$title=$_POST[''];
@@ -196,10 +196,10 @@ else if ($mode=6) {
 	$teamMembers=$_POST['']
 	$company=$_POST[''];
 
-	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_teamMembers'],$_POST['_projectCompany']);
+	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_projectDescription'],$_POST['_teamMembers'],$_POST['_projectCompany']);
 }
 
-else if ($mode=7) {
+else if ($mode==7) {
 
 	# WorkshopsInsert
 	$title=$_POST[''];
@@ -210,7 +210,7 @@ else if ($mode=7) {
 
 	workshopsInsert($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']);
 }
-else if ($mode=8) {
+else if ($mode==8) {
 
 	# SkillSet Insert
 	$skill=$_POST[''];
@@ -218,12 +218,12 @@ else if ($mode=8) {
 
 	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
 }
-else if ($mode=9)
+else if ($mode==9)
 {
 	#toolkit insert
 	toolkitInsert($user,$_POST['_tools']);
 }
-else if ($mode = 10)
+else if ($mode == 10)
 {
 	#interests Insert
 	interestsInsert($user,$_POST['_interests']);

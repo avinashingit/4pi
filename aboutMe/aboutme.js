@@ -18,7 +18,7 @@ FileDescription: This file contains all the actions related to a persons aboutMe
 
 Author: Avinash Kadimisetty, COE12B009 (www.kavinash.in)
 
-Last edited: 28-01-2015
+Last edited: 29-01-2015
 
 To do:
 
@@ -54,10 +54,10 @@ $(document).ready(function(){
 
 function showUserOptions()
 {
-	if(userOptionsVisibility==0)
+	/*if(userOptionsVisibility==0)
 	{
 		$(document).find('.visibleForUser').remove();
-	}
+	}*/
 }
 
 
@@ -641,15 +641,17 @@ function addSkillSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/insertSkills.php',{
-			_skillArray:skillArray,
-			_percentageArray:percentageArray,
-			_userId:userId
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
+			_skill:skillArray,
+			_rating:percentageArray,
+			_userId:userId,
+			_mode:8
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				insertSkills(data.jsonObj);
@@ -842,8 +844,9 @@ function addToolsSendData()
 	else
 	{
 		$.post('/4pi/handlers/aboutHandlers/insertTools.php',{
-			_toolArray:toolArray,
-			_userId:userId
+			_tools:toolArray,
+			_userId:userId,
+			_mode:9
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1057,12 +1060,12 @@ function addProjectSendData()
 	else
 	{
 		$.post('4pi/handlers/aboutMeHandlers/addProject.php',{
-			_title:title,
+			_projectTitle:title,
 			_duration:duration,
-			_role:role,
-			_company:company,
-			_description:description,
-			_team:team
+			_projectPosition:role,
+			_projectCompany:company,
+			_projectDescription:description,
+			_teamMembers:team
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1132,13 +1135,15 @@ function deleteProject(id)
 {
 	if(confirm("Do you want to delete this project?"))
 	{
-		$.post('/4pi/handlers/aboutMe/deleteProject.php',{
-			_projectId:id
+		$.post('/4pi/handlers/aboutHandlers/aboutMeDelete.php',{
+			_projectId:id,
+			_mode:6
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#projects').find('#'+id).remove();
@@ -1313,13 +1318,15 @@ function deleteExperience(id)
 {
 	if(confirm("Do you want to delete the experience?"))
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/deleteExperience.php',{
-			_experienceId:id
+		$.post('/4pi/handlers/aboutHandlers/aboutMeDelete.php',{
+			_experienceId:id,
+			_mode:5
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#experiences').find('#'+id).remove();
@@ -1515,13 +1522,15 @@ function deleteAcademics(id)
 {
 	if(confirm("Do you want to delete this?"))
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/deleteAcademics.php',{
-			_academicsId:id
+		$.post('/4pi/handlers/aboutHandlers/aboutMeDelete.php',{
+			_degreeId:id,
+			_mode:2
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#academics').find('#'+id).remove();
@@ -1644,10 +1653,10 @@ function addWorkshopSendData()
 	else
 	{
 		$.post("/4pi/handlers/aboutHandlers/insertWorkshop.php",{
-			_name:name,
+			_workshopName:name,
 			_location:location,
 			_duration:duration,
-			_peopleNumber:peopleNumber
+			_peopleAttended:peopleNumber
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1708,13 +1717,15 @@ function deleteWorkshop(id)
 {
 	if(confirm("Do you want to delete this?"))
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/deleteWorkshop.php',{
-			_workshopId:id
+		$.post('/4pi/handlers/aboutHandlers/aboutMeDelete.php',{
+			_workshopId:id,
+			_mode:7
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#workshops').find('#'+id).remove();
@@ -1823,7 +1834,7 @@ function addCertificationSendData()
 	else
 	{
 		$.post('/4pi/handlers/aboutMeHandlers/addCertification.php',{
-			_name:name,
+			_courseName:name,
 			_institute:institute,
 			_duration:duration
 		})
@@ -1884,13 +1895,15 @@ function deleteCertification(id)
 {
 	if(confirm("Do you want to delete this?"))
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/deleteCertification.php',{
-			_certificationId:id
+		$.post('/4pi/handlers/aboutHandlers/aboutMeDelete.php',{
+			_courseId:id,
+			_mode:4
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#certifications').find('#'+id).remove();
@@ -2017,7 +2030,7 @@ function addAchievementSendData()
 	else
 	{
 		$.post('/4pi/handlers/aboutHandlers/addAchievement.php',{
-			_name:name,
+			_eventName:name,
 			_location:location,
 			_description:description,
 			_position:position,
@@ -2083,13 +2096,15 @@ function deleteAchievement(id)
 {
 	if(confirm("Do you want to delete this?"))
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/deleteAchivement.php',{
-			_achievementId:id
+		$.post('/4pi/handlers/aboutHandlers/aboutMeDelete.php',{
+			_achievementId:id,
+			_mode:3
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#achievements').find('#'+id).remove();
@@ -2200,7 +2215,7 @@ function addInterestsSendData()
 	{
 		$.post('/4pi/handlers/aboutHandlers/insertInterests.php',{
 			_userId:userId,
-			_interestsArray:interestsArray
+			_interests:interestsArray
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
