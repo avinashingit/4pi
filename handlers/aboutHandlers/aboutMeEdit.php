@@ -746,7 +746,8 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 				# code...
 			}
-
+			$message="";
+			$errorCode=3;
 			if($hasRepeated)
 			{
 				$repeatedSkills=implode(', ',$repeatedSkills);
@@ -778,7 +779,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				{
 					//echo 'Successfull Insert <br />';
 
-					$skillsObj=new skillSet(json_encode($outObj),$exitstingSkillsArray,$existingRatingArray,1,$message,$errorCode);
+					$skillsObj=new skillSet($exitstingSkillsArray,$existingRatingArray,1,json_encode($outObj),$message,$errorCode);
 					print_r(json_encode($skillsObj));
 				}
 			else
@@ -842,7 +843,8 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				$repeatedTools[]=$tool;
 			}
 		}
-
+		$message="";
+		$errorCode=3;
 		if($hasRepeated)
 		{
 			$repeatedTools=implode(', ',$repeatedTools);
@@ -920,7 +922,8 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				$repeatedInterests[]=$interest;
 			}
 		}
-
+		$message="";
+		$errorCode=3;
 		if($hasRepeated)
 		{
 			$repeatedInterests=implode(', ',$repeatedInterests);

@@ -903,7 +903,8 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				}
 				# code...
 			}
-
+			$message="";
+			$errorCode=3;
 			if($hasRepeated)
 			{
 				$repeatedSkills=implode(', ',$repeatedSkills);
@@ -941,7 +942,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 								{
 									//echo 'Successfull Insert <br />';
 
-									$skillsObj=new skillSet(json_encode($outObj),$exitstingSkillsArray,$existingRatingArray,1,$message,$errorCode);
+									$skillsObj=new skillSet($exitstingSkillsArray,$existingRatingArray,1,json_encode($outObj),$message,$errorCode);
 									print_r(json_encode($skillsObj));
 								}
 								else
@@ -1007,7 +1008,8 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						$repeatedTools[]=$tool;
 					}
 				}
-
+				$message="";
+				$errorCode=3;
 				if($hasRepeated)
 				{
 					$repeatedTools=implode(', ',$repeatedTools);
@@ -1099,7 +1101,8 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						$repeatedInterests[]=$interest;
 					}
 				}
-
+				$message="";
+				$errorCode=3;
 				if($hasRepeated)
 				{
 					$repeatedInterests=implode(', ',$repeatedInterests);
