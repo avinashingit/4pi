@@ -1,7 +1,7 @@
 <?php
-	require_once('../../QOB/qob.php');
+	require_once('/../../QOB/qob.php');
 	require_once('/miniClasses/miniIdeaPost.php');
-	require_once('../../handlers/fetch.php');
+	require_once('/../../handlers/fetch.php');
 	
 
 /*
@@ -10,20 +10,18 @@ Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
 Code 12: Database ERROR!!
 Code 16: Erroneous Entry By USER!!
 */
-//$_POST['_ideaContent']="HELLO IM TESTING U. hello im testing dmnsvbds !!!!!!";
+
 	
 		$conn=new QoB();
 		$content=$_POST['_ideaContent'];//1
-		//echo $_POST['_ideaContent']."<br />";
-		$userIdHash=$_SESSION['vj']='0a806b877dee1e24a717de81ced1c7a4453d3f6f5a289110a1107ed0815c3302095f67c06174d3b244f7e169df9dde115babc9f0bef5765d40c547159b9d1c22';
-		$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+		$userIdHash=$_SESSION['vj'];
 		if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 		{
 				$combination=$userIdHash.",".$_SESSION['tn'];
 				notifyAdmin("Suspicious Session variable in CreatePost",$combination);
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 		}
 		else
 		{ 
@@ -32,16 +30,13 @@ Code 16: Erroneous Entry By USER!!
 				notifyAdmin("Critical Error!! In createPost",$userIdHash);
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 			}
 			else
 			{
 				$ideaPostUserName=$user['name'];
 				$userId=$user['userId'];
 				
-				//$displayStatus=1;//25
-				
-				//$userIdHash;//26
 				//$postId ia genrated Automatically so !!27!!
 				
 				$FetchMaxPostIDSQL="SELECT MAX(ideaPostId) as ideaPostId FROM ideaposttable";
@@ -51,9 +46,7 @@ Code 16: Erroneous Entry By USER!!
 				{
 					$pid = $pid+1;
 				}
-				//echo $pid."<br />";
 				$ideaPostId=$pid+1;
-				//echo $ideaPostId."<br />";
 				$ideaPostIdHash = hash("sha512", $ideaPostId.SALT);
 
 				//$files=$_POST['_files'];
@@ -88,22 +81,6 @@ Code 16: Erroneous Entry By USER!!
 				//------------------------------------------------------------------------!!!!!-----
 				if($conn->error=="")
 				{
-				     // *****************  Do Nothing   ********************
-					//echo "Successful<br />";
-					 /*
-					 $CreateCommentTableSQL='CREATE TABLE `'.DB.'`.`'.'p'.$ideaPostId ;
-					
-					//$nconn = @new mysqli(HOST, USER, PASSWORD, DB);
-					//$conn->runSimpleQuery($CreateCommentTableSQL);
-					//$preparedStatement=$nconn->prepare($CreateCommentTableSQL);
-					if($conn->error!="")
-					{
-						echo 12;
-						
-						$conn->rollbackTransaction();
-					}
-					else
-					{*/
 					$postUserIdHash=$userIdHash;
 					$ideaUserId = $userId;
 					$postUserName=$user['name'];
@@ -129,8 +106,6 @@ Code 16: Erroneous Entry By USER!!
 				{
 					//echo "Before<br />";
 					echo $conn->error;
-					//echo "After<br />";
-					//$conn->rollbackTransaction();
 				} 
 			
 			}	//------------------------------------------------------------------------!!!!!-----

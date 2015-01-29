@@ -15,8 +15,7 @@ Code 10: MailError!!
 */
 
 //Actual Code Starts
-		//$_POST['_ideaDescription'] = "Hello i'm testing just for testing purpose !!!...  Cut my life into pieces....";
-		//$_POST['_ideaPostId'] = 17;
+
 		$conn=new QoB();
 		//1		
 		$ideaPostId=$_POST['_ideaPostId'];
@@ -25,7 +24,6 @@ Code 10: MailError!!
 		$ideaPost=getIdeaPostFromHash($ideaPostId);
 		$userId=$ideaPost['userId'];
 		$userIdHash=hash("sha512",$userId.SALT);
-		$_SESSION['vj'] = $userIdHash;
 
 		if($userIdHash!=$_SESSION['vj'])
 		{
@@ -34,13 +32,13 @@ Code 10: MailError!!
 				notifyAdmin("Suspicious session Variable",$userId);
 				$_SESSION=array();
 				session_destroy();
-				return 14;
+				echo 14;
 			}
 			else
 			{
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 			}	
 		}
 		else{
@@ -51,7 +49,7 @@ Code 10: MailError!!
 					notifyAdmin("Critical Error!! In createPost",$userIdHash);
 					$_SESSION=array();
 					session_destroy();
-					return 13;
+					echo 13;
 				}
 				else
 				{
@@ -71,7 +69,6 @@ Code 10: MailError!!
 					//------------------------------------------------------------------------!!!!!-----
 					if($conn->error=="")
 					{
-						//************* Do Nothing ***********************
 							$postUserIdHash=$userIdHash;
 							//$userId
 							$postUserName=$user['name'];

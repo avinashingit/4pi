@@ -7,7 +7,6 @@
 $conn=new QoB();
 $ideaPostId = $_POST['_ideaPostId'];
 $userIdHash=$_SESSION['vj'];
-$_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 //Checking the session varianles. Second Level Protection
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['sh'])
 	{
@@ -15,7 +14,7 @@ $_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 		
 		$_SESSION=array();
 		session_destroy();
-		return 13;
+		echo 13;
 	}
 	else
 	{
@@ -25,7 +24,7 @@ $_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 				notifyAdmin("Critical Error!! in Insert Comment");
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 			}
 			else
 			{
@@ -38,7 +37,7 @@ $_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 						//echo 'hello <br />';
 						$_SESSION=array();
 						session_destroy();
-						return 13;
+						echo 13;
 					}
 					else
 					{
@@ -74,9 +73,9 @@ $_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 							
 							else
 								{
-									echo 'Error in Query 2 of Mode 1<br />';
+									//echo 'Error in Query 2 of Mode 1<br />';
 									//echo $conObj->error;
-									return -1;
+									echo -1;
 								}
 						}
 						else
@@ -86,7 +85,7 @@ $_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 							//echo "else hai session destroy<br />";
 							$_SESSION=array();
 							session_destroy();
-							return 13;
+							echo 13;
 						}
 					}
 				

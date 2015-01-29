@@ -8,11 +8,11 @@
 			res+='<div class="col-md-11" id="userName">';
 			if(data.gender="M")
 			{
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
 			}
 			else
 			{
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
 			}
 			res+='</div>';
 			res+='</div>';
@@ -23,7 +23,7 @@
 			var res="";
 			res+='<div class="row peopleSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 			res+='<div class="col-md-11" id="userName">';
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a href="/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
 			
 			res+='</div>';
 			res+='</div>';
@@ -32,7 +32,7 @@
 	}
 	function checkIfPeopleImageExists(data)
 	{
-		var url="http://localhost/4pi/img/proPics/"+data.userIdHash+".jpg";
+		var url="/4pi/img/proPics/"+data.userIdHash+".jpg";
 		$.post(url,{})
 		.error(function(){
 			insertPeopleSearch(data,0);
@@ -52,11 +52,11 @@
 		res+='<div class="col-md-11" id="postName">';
 		if(data.postSubject.length==0)
 		{
-			res+='<span><a href="http://localhost/4pi/posts/?ref=\''+data.postIdHash+'\'"><img src="/4pi/img/post.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.postContent+'</span></a></span>';
+			res+='<span><a href="/4pi/posts/?ref=\''+data.postIdHash+'\'"><img src="/4pi/img/post.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.postContent+'</span></a></span>';
 		}
 		else
 		{
-			res+='<span><a href="http://localhost/4pi/posts/?ref=\''+data.postIdHash+'\'"><img src="/4pi/img/post.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.postSubject+'</span></a></span>';
+			res+='<span><a href="/4pi/posts/?ref=\''+data.postIdHash+'\'"><img src="/4pi/img/post.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.postSubject+'</span></a></span>';
 		}
 		res+='</div>';
 		res+='</div>';
@@ -67,7 +67,7 @@
 		var res="";
 		res+='<div class="row eventSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 		res+='<div class="col-md-11" id="eventName">';
-		res+='<span><a href="http://localhost/4pi/events/?ref=\''+data.eventIdHash+'\'"><img src="/4pi/img/event.png" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:18px;" class="text-left">'+data.eventName+'</span></a></span>';
+		res+='<span><a href="/4pi/events/?ref=\''+data.eventIdHash+'\'"><img src="/4pi/img/event.png" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:18px;" class="text-left">'+data.eventName+'</span></a></span>';
 		res+='</div>';
 		res+='</div>';
 		$('#eventsSearch').append(res);
@@ -77,7 +77,7 @@
 		var res="";
 		res+='<div class="row pollSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 		res+='<div class="col-md-11" id="pollName">';
-		res+='<span><a href="http://localhost/4pi/polls/?ref=\''+data.pollIdHash+'\'"><img src="/4pi/img/poll.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:18px;" class="text-left">'+data.pollDescription+'</span></a></span>';
+		res+='<span><a href="/4pi/polls/?ref=\''+data.pollIdHash+'\'"><img src="/4pi/img/poll.jpg" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:18px;" class="text-left">'+data.pollDescription+'</span></a></span>';
 		res+='</div>';
 		res+='</div>';
 		$('#pollsSearch').append(res);
@@ -162,7 +162,7 @@
 
 		<div id="icons" style="position:absolute;top:0;left:0;right:0;bottom:0;">
 
-			<div  class="text-center" style="padding-top:5px;font-size:20px;" ><a style="color:white !important;" href="http://localhost/4pi"><i class="fa fa-home colorWhite"></i></a><!-- &nbsp;&nbsp;&nbsp;&nbsp; --><!-- <i class="fa fa-comment  colorWhite"></i> -->
+			<div  class="text-center" style="padding-top:5px;font-size:20px;" ><a style="color:white !important;" href="/4pi"><i class="fa fa-home colorWhite"></i></a><!-- &nbsp;&nbsp;&nbsp;&nbsp; --><!-- <i class="fa fa-comment  colorWhite"></i> -->
 			
 			    <div class="btn-group">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

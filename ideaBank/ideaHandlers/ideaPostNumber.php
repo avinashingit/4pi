@@ -21,7 +21,7 @@ Code 16: Erroneous Entry By USER!!
 				notifyAdmin("Suspicious Session variable in CreatePost",$combination);
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 		}
 		else
 		{ 
@@ -30,7 +30,7 @@ Code 16: Erroneous Entry By USER!!
 				notifyAdmin("Critical Error!! In createPost",$userIdHash);
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 			}
 			else
 			{

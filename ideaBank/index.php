@@ -1,11 +1,6 @@
  <?php
 session_start();
-$_SESSION['vj'];
-	require_once('/handlers/ideahandlers/createIdeapost.php');
-	require_once('/QOB/qob.php');
-	require_once('/handlers/fetch.php');
-// require_once('../connection1.php');
- 
+
  require_once('ideaHeader.php');
  ?>
  
@@ -198,7 +193,7 @@ $('.searchExpand').focusout(function(){
 
 function callAfterAjax(){
 
- var y = $.post('http://localhost/4pi/ideaBank/ideaHandlers/ideaPostNumber.php')
+ var y = $.post('/4pi/ideaBank/ideaHandlers/ideaPostNumber.php')
 
           .error(function() {
                 alert("Post Creation Failed" + y.status);
@@ -323,7 +318,7 @@ function createIdeaPost() {
             $('.navbar .navbar-inverse').find('#ideaButton').find('.fa-plus').addClass('fa-spin');
             $('#idea').modal('hide');
 			//$('#loadMoreIdeaPostsButton').remove();
-            var y = $.post('http://localhost/4pi/ideaBank/ideaHandlers/createIdeaPost.php', {
+            var y = $.post('/4pi/ideaBank/ideaHandlers/createIdeaPost.php', {
                 _ideaContent: ideaContent,
                 //_files:files,
             })
@@ -409,7 +404,7 @@ function retrieveLatestPosts(value, call) {
 		//console.log($('#final').children());
     }
 	
-    $.post('http://localhost/4pi/ideaBank/ideaHandlers/retrieveIdeaPost.php', {
+    $.post('/4pi/ideaBank/ideaHandlers/retrieveIdeaPost.php', {
 		_ideaPosts: posts,
         _postOffset: 6,
         _call: call,
@@ -463,7 +458,7 @@ function retrieveLatestPosts(value, call) {
 }
 
 
-var genUrl = "http://localhost/4pi/";
+var genUrl = "/4pi/";
 function postInsert(position, data1, num, len) {
 	var res;
 	var idCol;
@@ -605,7 +600,7 @@ function deleteIdea(id){
 	$('#trashId'+id).html(".....");
 	$('#ideaContent'+id).fadeOut(3000).delay(3000).html();
 	//$('#ideaContent'+id).fadeIn(3000).html("<h4>Your Idea is getting deleted. Please wait !!! ");
-	 $.post('http://localhost/4pi/ideaBank/ideaHandlers/deleteIdeaPost.php',{
+	 $.post('/4pi/ideaBank/ideaHandlers/deleteIdeaPost.php',{
 		_ideaPostId : id
 	 })
 	
@@ -673,7 +668,7 @@ function editedPostSend() {
     if (postContent.length == 0) {
         alert("Post content is to be filled");
     } else {
-        var y = $.post('http://localhost/4pi/ideaBank/ideaHandlers/editIdeaPost.php', {
+        var y = $.post('/4pi/ideaBank/ideaHandlers/editIdeaPost.php', {
                 //_subject: postSubject,
                 _ideaDescription : postContent,
                 /*_files:files,*/
@@ -720,7 +715,7 @@ function starClick(id) {
 	//$('#search' + id).find('#appreciate'+id+'').attr("onclick", "");
 	//$('#search' + id).find('.ideaStarCount').html(' '+count);
 	
-    $.post('http://localhost/4pi/ideaBank/ideaHandlers/appreciatePost.php', {
+    $.post('/4pi/ideaBank/ideaHandlers/appreciatePost.php', {
         _ideaPostId: id
     })
         .error(function() {
@@ -748,7 +743,7 @@ function stopClick(id) {
 	val = val+1;
 	count = val.toString();
 	$('#' + id).find('#ideaUnStarCount').html(' '+count);
-    $.post('http://localhost/4pi/ideaBank/ideaHandlers/depreciatePost.php', {
+    $.post('/4pi/ideaBank/ideaHandlers/depreciatePost.php', {
         _ideaPostId: id
     })
         .error(function() {
@@ -779,11 +774,11 @@ function stopClick(id) {
 			res+='<div class="col-md-11" id="userName">';
 			if(data.gender=="M")
 			{
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img class="img-circle" src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a href="/4pi/'+data.userId+'"><img class="img-circle" src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
 			}
 			else
 			{
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img class="img-circle" src="/4pi/img/defaultWoman1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a href="4pi/'+data.userId+'"><img class="img-circle" src="/4pi/img/defaultWoman1.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
 			}
 			res+='</div>';
 			res+='</div>';
@@ -794,7 +789,7 @@ function stopClick(id) {
 			var res="";
 			res+='<div class="row ideaPeopleSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 			res+='<div class="col-md-11" id="userName">';
-			res+='<span><a href="http://localhost/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
+			res+='<span><a href="/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.name+'" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:18px;" class="text-left">'+data.name+'</span></a></span>';
 			
 			res+='</div>';
 			res+='</div>';
@@ -803,7 +798,7 @@ function stopClick(id) {
 	}
 	function checkIfPeopleImageExists(data)
 	{
-		var url="http://localhost/4pi/img/proPics/"+data.userIdHash+".jpg";
+		var url="/4pi/img/proPics/"+data.userIdHash+".jpg";
 		$.post(url,{})
 		.error(function(){
 			insertPeopleSearch(data,0);
@@ -833,7 +828,7 @@ function stopClick(id) {
 	function fetchIdeaSearchResults()
 	{
 		var input=$('#ideaSearchBefore').val().trim();
-		$.post('http://localhost/4pi/ideaBank/ideaBankSearch.php',{
+		$.post('/4pi/ideaBank/ideaBankSearch.php',{
 			_inputVal:input
 		})
 		.error(function(){

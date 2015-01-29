@@ -10,16 +10,14 @@ Code 16: Erroneous Entry By USER!!
 Code 10: MailError!!
 */
 	$conn= new QoB();
-	$userIdHash=$_SESSION['vj']='0a806b877dee1e24a717de81ced1c7a4453d3f6f5a289110a1107ed0815c3302095f67c06174d3b244f7e169df9dde115babc9f0bef5765d40c547159b9d1c22';
+	$userIdHash=$_SESSION['vj'];
 	//Checking the session varianles. Second Level Protection
-	//$_POST['_ideaPostId'] = 16;
-	$_SESSION['sh'] = hash("sha512",$userIdHash.SALT2);
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['sh'])
 	{
 		notifyAdmin("Suspicious session variable in DeletePost",$userIdHash);
 		$_SESSION=array();
 		session_destroy();
-		return 13;
+		echo 13;
 	}
 	else
 	{
@@ -31,7 +29,7 @@ Code 10: MailError!!
 			notifyAdmin("Critical Error!! in DeletePost!!",$userIdHash);
 			$_SESSION=array();
 			session_destroy();
-			return 13;
+			echo 13;
 		}
 		else
 		{
@@ -44,7 +42,7 @@ Code 10: MailError!!
 				blockUserByHash($userIdHash,"Messing with postIdHash!! In DeletePost");
 				$_SESSION=array();
 				session_destroy();
-				return 13;
+				echo 13;
 			}
 			else
 			{
@@ -60,32 +58,13 @@ Code 10: MailError!!
 					$conn->update($UpdatePostSQL,$values);
 					if($conn->error=="")
 					{
-						//echo "Succesfull<br />";
-						//************ Do Nothing ************//
-						/*
-						$DropCommentTableSQL="DROP TABLE ".$commentTableName;
-						$conn->runSimpleQuery($DropCommentTableSQL);
-						if($conn->error=="")
-						{
-							$conn->completeTransaction();
-							return 3;
-						}
-						else
-						{
-							notifyAdmin($conn->error,$userId);
-							$conn->rollbackTransaction();
-							return 12;
-						}
-						*/
-						echo "3";
-						return 3;
+						
+						echo 3;
+						//return 3;
 					}
 					else
 					{
-						//notifyAdmin($conn->error,$userId.","(string)$ideaPostId);
-						//echo "Hai <br />";
-						$conn->rollbackTransaction();
-						return 12;
+						echo 12;
 					}
 				}
 				else
@@ -94,7 +73,7 @@ Code 10: MailError!!
 					//echo "Hello<br />";
 					$_SESSION=array();
 					session_destroy();
-					return 13;
+					echo 13;
 				}
 			}
 		}

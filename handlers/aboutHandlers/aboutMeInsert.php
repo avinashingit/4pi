@@ -699,17 +699,22 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 
 function projectInsert($user,$title,$role,$durationString,$description,$teamMembers,$organisation)
 	{
+		echo $durationString;
 		$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 	
 		$startDate = date_parse($start);
 		$startDateTimestamp = strtotime($start);
+
+		print_r($startDate);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
 		$endDate = date_parse($end);
 		$endDateTimestamp = strtotime($end);
+
+		/*echo $endDate;*/
 
 		//echo $endDateTimestamp.'<br/>';
 		
@@ -718,7 +723,7 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(!(($title == '') and ($description == '') and ($role == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
+		if(!(($title == '') and ($description == '') and ($role == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp)  and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -995,9 +1000,9 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 
 				$hasRepeated=false;
 				$repeatedTools=array();
-				for ($k=0;$k<$toolArrayCount;$k++) 
+				for ($k=0;$k<$toolsArrayCount;$k++) 
 				{
-					$tool=trim($toolArray[$k]);
+					$tool=trim($toolsArray[$k]);
 					if(isThereInCSV($existingTools,$tool)===false)
 					{
 						$existingToolsArray[]=$tool;
@@ -1024,6 +1029,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 					{
 						if($result0 != "")
 						{*/
+							// var_dump($existingToolsArray);
 							$updatedTools=implode(',',$existingToolsArray);
 							$values = array();
 							

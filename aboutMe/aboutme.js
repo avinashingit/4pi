@@ -60,6 +60,10 @@ function showUserOptions()
 	}*/
 }
 
+/*function showValueForSlider(el)
+{
+	$(el).parent().find("#sliderValueAddModal").html($(el).val());
+}*/
 
 function addSkillAddInput()
 {
@@ -83,7 +87,7 @@ function addSkillAddInput()
 
 		input+='<div class="col-md-2">';
 
-			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addSkillAddInput();" id="addOption">';
+			input+='<span style="cursor:pointer;" class="hidden input-group-addon" onclick="addSkillAddInput();" id="addOption">';
 
 				input+='<i class="fa fa-plus" ></i>';
 
@@ -128,7 +132,7 @@ function addToolAddInput()
 
 		input+='<div class="col-md-2">';
 
-			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addToolAddInput();" id="addOption">';
+			input+='<span style="cursor:pointer;" class="hidden input-group-addon" onclick="addToolAddInput();" id="addOption">';
 
 				input+='<i class="fa fa-plus" ></i>';
 
@@ -173,7 +177,7 @@ function addInterestAddInput()
 
 		input+='<div class="col-md-2">';
 
-			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestAddInput();" id="addOption">';
+			input+='<span style="cursor:pointer;" class="hidden input-group-addon" onclick="addInterestAddInput();" id="addOption">';
 
 				input+='<i class="fa fa-plus" ></i>';
 
@@ -522,7 +526,7 @@ function editTopPartSendData()
 		// console.log(new_data);
 		// 
 		$.ajax({
-			url:'/4pi/handlers/aboutHandlers/editTopPart.php',
+			url:'/4pi/handlers/aboutHandlers/aboutMeEdit.php',
 			type:'POST',
 			data:new_data,
 			processData: false,
@@ -778,7 +782,7 @@ function insertTool(data,isOwner)
 
 			if(isOwner==1)
 			{
-				tool+='<i class="fa fa-pencil" onclick="editTools();"></i>';
+				tool+='<i class="fa fa-pencil" onclick="editTools(this,\'edit\');"></i>';
 			}
 
 		tool+='</div>';
@@ -793,7 +797,7 @@ function insertTool(data,isOwner)
 
 			if(isOwner==1)
 			{
-				tool+='<i class="fa fa-close" onclick="deleteTool(this);"></i>';
+				tool+='<i class="fa fa-close" onclick="editTools(this,\'delete\');"></i>';
 			}
 
 		tool+='</div>';
@@ -874,10 +878,11 @@ function addToolsSendData()
 			if(checkData(data)==1)
 			{
 				$("#tools").find('.tool').remove();
-				var x=JSON.parse(data);
+				data=JSON.parse(data);
+				var x=data.tools;
 				for(i=0;i<x.length;i++)
 				{
-					insertTool(x[i]);
+					insertTool(x[i],data.isOwner);
 				}
 			}
 		});
@@ -1077,7 +1082,7 @@ function addProjectSendData()
 	}
 	else
 	{
-		$.post('4pi/handlers/aboutHandlers/aboutMeInsert.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_projectTitle:title,
 			_duration:duration,
 			_projectPosition:role,
@@ -1090,6 +1095,7 @@ function addProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2178,15 +2184,24 @@ function insertInterest(data,isOwner)
 
 		if(isOwner==1)
 		{
-			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests();"></i>';
+			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests(this,\'edit\');"></i>';
 		}
 
 		interest+='</div>';
 
 
-		interest+='<div class="col-md-10">';
+		interest+='<div class="col-md-8">';
 
 			interest+='<p id="interestName">'+data+'</p>';
+
+		interest+='</div>';
+
+		interest+='<div class="col-md-2 visibleForUser">';
+
+		if(isOwner==1)
+		{
+			interest+='<i class="fa fa-trash interestEdit" onclick="editInterests(this,\'delete\');"></i>';
+		}
 
 		interest+='</div>';
 

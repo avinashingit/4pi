@@ -48,10 +48,10 @@ if(userId=="")
 		color:#6F0052;
 	}
 
-	.modal-content
+	.modal-body
 	{
 		overflow-y: auto;
-		height:500px;
+		max-height:450px;
 	}
 
 	.editSkillInputClass, .addSkillInputClass, .addToolInputClass, .editToolInputClass, .addInterestInputClass, .editInterestInputClass
@@ -89,7 +89,8 @@ if(userId=="")
 
 	.textPadding
 	{
-		padding:5px;
+		padding-top:5px;
+		padding-bottom:5px;
 	}
 
 	.cursorPointer
@@ -444,6 +445,8 @@ if(userId=="")
 
 			<div class="modal-footer">
 
+				<button type="button" class="btn btn-success" onclick="editToolAddInput();">Add input</button>
+
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="editToolsSendData();">Save</button>
@@ -486,6 +489,8 @@ if(userId=="")
 			</div>
 
 			<div class="modal-footer">
+
+				<button type="button" class="btn btn-success" onclick="editInterestAddInput();">Add input</button>
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -681,47 +686,112 @@ if(userId=="")
 		$("#addToolModal").find('.extraInput').remove();
 	}
 
-	function editTools()
+	function editTools(el,type)
 	{
-		$("#editToolModal").modal('show');
-
-		$("#editToolModal").find('form').find('.editToolInputClass').remove();
-
-		var toolArray=new Array();
-		var i=0;
-
-		$("#tools").find('.tool').each(function(){
-			toolArray[i]=$(this).find("#toolName").html();
-			i++;
-		});
-
-		for(var i=0;i<toolArray.length;i++)
+		if(type=="edit")
 		{
-			var input="";
+			$("#editToolModal").modal('show');
 
-			input+='<div class="row editToolInputClass">';
+			$("#editToolModal").find('form').find('.editToolInputClass').remove();
 
-				input+='<div class="col-md-10">';
+			var currentTool=$(el).parent().parent().find("#toolName").html();
 
-					input+='<input type="text" id="editToolModalToolName" class="form-control" value="'+toolArray[i]+'">';
+			var toolArray=new Array();
+			var i=0;
+
+			$("#tools").find('.tool').each(function(){
+				toolArray[i]=$(this).find("#toolName").html();
+				i++;
+			});
+
+			for(var i=0;i<toolArray.length;i++)
+			{
+				var input="";
+
+				if(toolArray[i]==currentTool)
+				{
+					input+='<div class="row editToolInputClass">';
+				}
+				else
+				{
+					input+='<div class="row hidden editToolInputClass">';
+				}
+
+					input+='<div class="col-md-10">';
+
+						input+='<input type="text" id="editToolModalToolName" class="form-control" value="'+toolArray[i]+'">';
+
+					input+='</div>';
+
+					input+='<div class="col-md-2">';
+
+						input+='<span class="input-group-addon hidden" id="deleteOption">';
+
+							input+='<i class="fa fa-close" title="Delete tool" onclick="editToolDeleteInput(this);"></i>';
+
+						input+='</span>';
+
+					input+='</div>';
 
 				input+='</div>';
 
-				input+='<div class="col-md-2">';
+				$("#editToolModal").find('form').append(input);
 
-					input+='<span class="input-group-addon" id="deleteOption">';
-
-						input+='<i class="fa fa-close" title="Delete tool" onclick="editToolDeleteInput(this);"></i>';
-
-					input+='</span>';
-
-				input+='</div>';
-
-			input+='</div>';
-
-			$("#editToolModal").find('form').append(input);
-
+			}
 		}
+
+		else
+		{
+			if(confirm("Do you want to delete this tool?"))
+			{
+				// $("#editToolModal").modal('show');
+
+				$("#editToolModal").find('form').find('.editToolInputClass').remove();
+
+				var currentTool=$(el).parent().parent().find("#toolName").html();
+
+				var toolArray=new Array();
+				var i=0;
+
+				$("#tools").find('.tool').each(function(){
+					toolArray[i]=$(this).find("#toolName").html();
+					i++;
+				});
+
+				for(var i=0;i<toolArray.length;i++)
+				{
+					var input="";
+
+					if(toolArray[i]!=currentTool)
+					{
+						input+='<div class="row editToolInputClass">';
+
+						input+='<div class="col-md-10">';
+
+							input+='<input type="text" id="editToolModalToolName" class="form-control" value="'+toolArray[i]+'">';
+
+						input+='</div>';
+
+						input+='<div class="col-md-2">';
+
+							input+='<span class="input-group-addon hidden" id="deleteOption">';
+
+								input+='<i class="fa fa-close" title="Delete tool" onclick="editToolDeleteInput(this);"></i>';
+
+							input+='</span>';
+
+						input+='</div>';
+
+					input+='</div>';
+
+					$("#editToolModal").find('form').append(input);
+				}
+
+				}
+			}
+			
+		}
+	
 	}
 
 	function addProject()
@@ -854,46 +924,111 @@ if(userId=="")
 		$("#addInterestModal").find(".extraInput").remove();
 	}
 
-	function editInterests()
+	function editInterests(el,type)
 	{	
-		$("#editInterestModal").modal('show');
 
-		$("#editInterestModal").find('form').find('.editInterestInputClass').remove();
+		var currentInterest=$(el).parent().parent().find("#interestName").html();
 
-		var interestsArray=new Array();
-		var i=0;
-
-		$("#interests").find('.interest').each(function(){
-			interestsArray[i]=$(this).find("#interestName").html();
-			i++;
-		});
-
-		for(var i=0;i<interestsArray.length;i++)
+		if(type=="edit")
 		{
-			var input="";
+			$("#editInterestModal").modal('show');
 
-			input+='<div class="row editInterestInputClass">';
+			$("#editInterestModal").find('form').find('.editInterestInputClass').remove();
 
-				input+='<div class="col-md-10">';
+			var interestsArray=new Array();
+			var i=0;
 
-					input+='<input type="text" id="editInterestModalInterestName" class="form-control" value="'+interestsArray[i]+'">';
+			$("#interests").find('.interest').each(function(){
+				interestsArray[i]=$(this).find("#interestName").html();
+				i++;
+			});
+
+			for(var i=0;i<interestsArray.length;i++)
+			{
+				var input="";
+
+				if(interestsArray[i]==currentInterest)
+				{
+					input+='<div class="row editInterestInputClass">';
+				}
+
+				else
+				{
+					input+='<div class="row hidden editInterestInputClass">';
+				}
+
+					input+='<div class="col-md-10">';
+
+						input+='<input type="text" id="editInterestModalInterestName" class="form-control" value="'+interestsArray[i]+'">';
+
+					input+='</div>';
+
+					input+='<div class="col-md-2">';
+
+						input+='<span class="input-group-addon hidden" id="deleteOption">';
+
+							input+='<i class="fa fa-close" title="Delete tool" onclick="editInterestDeleteInput(this);"></i>';
+
+						input+='</span>';
+
+					input+='</div>';
 
 				input+='</div>';
 
-				input+='<div class="col-md-2">';
+				$("#editInterestModal").find('form').append(input);
 
-					input+='<span class="input-group-addon" id="deleteOption">';
+			}
+		}
 
-						input+='<i class="fa fa-close" title="Delete tool" onclick="editInterestDeleteInput(this);"></i>';
+		else
+		{
+			if(confirm("Do you want to delete this interest?"))
+			{
+				$("#editInterestModal").find('form').find('.editInterestInputClass').remove();
 
-					input+='</span>';
+				var interestsArray=new Array();
+				var i=0;
 
-				input+='</div>';
+				$("#interests").find('.interest').each(function(){
+					interestsArray[i]=$(this).find("#interestName").html();
+					i++;
+				});
 
-			input+='</div>';
+				for(var i=0;i<interestsArray.length;i++)
+				{
+					var input="";
 
-			$("#editInterestModal").find('form').append(input);
+					if(interestsArray[i]!=currentInterest)
+					{
+						input+='<div class="row editInterestInputClass">';
 
+							input+='<div class="col-md-10">';
+
+								input+='<input type="text" id="editInterestModalInterestName" class="form-control" value="'+interestsArray[i]+'">';
+
+							input+='</div>';
+
+							input+='<div class="col-md-2">';
+
+								input+='<span class="input-group-addon hidden" id="deleteOption">';
+
+									input+='<i class="fa fa-close" title="Delete tool" onclick="editInterestDeleteInput(this);"></i>';
+
+								input+='</span>';
+
+							input+='</div>';
+
+						input+='</div>';
+
+						$("#editInterestModal").find('form').append(input);
+					}
+
+					
+
+				}
+			}
+
+			
 		}
 	}
 
@@ -3771,7 +3906,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">
+							<input type="range" min="0" style="border:none;" max="100" id="addSkillModalSkillPercentage" onchange="showValueForSlider(this);" class="form-control"><span id="sliderValueAddModal"></span>
 
 						</div>
 
@@ -3832,7 +3967,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-2">
+						<div class="col-md-2 hidden">
 
 							<span style="cursor:pointer;" class="input-group-addon" onclick="addToolAddInput();" id="addOption">
 
@@ -3849,6 +3984,8 @@ if(userId=="")
 			</div>
 
 			<div class="modal-footer">
+
+				<button type="button" class="btn btn-success" onclick="addToolAddInput();">Add input</button>
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
@@ -4890,7 +5027,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-2">
+						<div class="col-md-2 hidden">
 
 							<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestAddInput();" id="addOption">
 
@@ -4907,6 +5044,8 @@ if(userId=="")
 			</div>
 
 			<div class="modal-footer">
+
+				<button type="button" class="btn btn-success" onclick="addInterestAddInput();">Add input</button>
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
