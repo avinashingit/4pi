@@ -81,52 +81,52 @@ if(($user=getUserFromHash($userIdHash))==false)
 }
 $userId=$user['userId'];
 $mode=$_POST['_mode'];
-if($mode =1)
+if($mode= =1)
 {
 	#about Edit
 	aboutMeEdit($user,$_POST['_dob'],$_POST['_description'],$_POST['_hobbies'],$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
 }
-else if($mode=2)
+else if($mode==2)
 {
 	#achievements Edit
 	achievmentsEdit($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']);
 }
-else if($mode=3)
+else if($mode==3)
 {
 	#academics Edit
 	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']);
 }
-else if($mode=4)
+else if($mode==4)
 {
 	#certifiedCourses Edit
 	certifiedCoursesEdit($user,$_POST['_courseName'],$_POST['_duration'],$_POST['_institute'],$_POST['_courseId']);
 }
-else if($mode=5)
+else if($mode==5)
 {
 	#experience Edit
-	experienceEdit($user,$_POST['_company'],$_POST['duration'],$_POST['_role'],$_POST['_experienceId']);
+	experienceEdit($user,$_POST['_company'],$_POST['duration'],$_POST['_role'],$_POST['_experienceId'],$_POST['_isFeaturring']);
 }
-else if($mode=6)
+else if($mode==6)
 {
 	#projects Edit
-	projectEdit($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_teamMembers'],$_POST['_projectCompany'],$_POST['_projectId']);
+	projectEdit($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_projectDescription'],$_POST['_teamMembers'],$_POST['_projectCompany'],$_POST['_projectId']);
 }
-else if($mode=7)
+else if($mode==7)
 {
 	#workshop Edit
 	workshopsEdit($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended'],$_POST['_workshopId']);
 }
-else if($mode = 8)
+else if($mode == 8)
 {
 	# SkillSet Insert
 	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
 }
-else if($mode = 9)
+else if($mode == 9)
 {
 	#toolkit insert
 	toolkitInsert($user,$_POST['_tools']);
 }
-else if($mode = 10)
+else if($mode ==10)
 {
 	#interests Insert
 	interestsInsert($user,$_POST['_interests']);
@@ -151,18 +151,18 @@ function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$addre
 		$currentTimestamp = date_timestamp_get($date1);
 
 		//$profilePic=getProfilePicLocation($userIdHash);
-		if($_FILES["file"]["name"]!='')
+		if($_FILES["_resume"]["name"]!='')
 		{
-			$resume=$_FILES['file']['name'];
+			$resume=$_FILES['_resume']['name'];
 			$allowedExts = array("pdf", "png","jpg","jpeg","docx","doc");
-			$extension = end(explode(".", $_FILES["file"]["name"][$i]));
-			if ((($_FILES["file"]["type"] == "application/pdf")	|| ($_FILES["file"]["type"] == "image/png")	|| ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "application/docx")) && ($_FILES["file"]["size"] < 8192576) && in_array($extension, $allowedExts))
+			$extension = end(explode(".", $_FILES["_resume"]["name"]));
+			if ((($_FILES["_resume"]["type"] == "application/pdf")	|| ($_FILES["_resume"]["type"] == "image/png")	|| ($_FILES["_resume"]["type"] == "image/jpeg") || ($_FILES["_resume"]["type"] == "image/jpg") || ($_FILES["_resume"]["type"] == "application/docx")) && ($_FILES["_resume"]["size"] < 8192576) && in_array($extension, $allowedExts))
 			{
-				if ($_FILES["file"]["error"] > 0)
+				if ($_FILES["_resume"]["error"] > 0)
 				{
 					echo 6;
 					//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
-					notifyAdmin("Resume Upload Error Code: " . $_FILES["file"]["error"] ,$userId);
+					notifyAdmin("Resume Upload Error Code: " . $_FILES["_resume"]["error"] ,$userId);
 					exit();
 				}
 				else
@@ -171,11 +171,48 @@ function aboutMeEdit($user,$dob,$description,$hobbies,$mailId,$showMailId,$addre
 					{
 						array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
 					}
-					move_uploaded_file($_FILE["file"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
+					move_uploaded_file($_FILE["_resume"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
 					$resume=$userId.$extension;
 				}
 			}
 		}
+		if($_FILES["_profilePic"]["name"]!='')
+		{
+			$userIdHash=$user['userIdHash'];
+			$resume=$_FILES['_profilePic']['name'];
+			$allowedExts = array("jpg","jpeg");
+			$extension = end(explode(".", $_FILES["_profilePic"]["name"]));
+			if (( ($_FILES["_profilePic"]["type"] == "image/jpeg") || ($_FILES["_profilePic"]["type"] == "image/jpg") ) && ($_FILES["_profilePic"]["size"] <= 4194304) && in_array($extension, $allowedExts))
+			{
+				if ($_FILES["_profilePic"]["error"] > 0)
+				{
+					echo 6;
+					//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
+					notifyAdmin("Propic Upload Error Code: " . $_FILES["_profilePic"]["error"] ,$userId);
+					exit();
+				}
+				else
+				{
+					if (array_map('file_exists',glob(__DIR__."/../../img/proPics/$userIdHash.jpg")))
+					{
+						array_map('unlink',glob(__DIR__."/../../img/proPics/$userIdHash.jpg"));
+					}
+					/*$tempImage=imagecreatefromjpeg($_FILES["_profilePic"]["tmp_name"])
+					$destination="../../img/proPics/".$userIdHash.'.jpg';
+					$quality=getQuality($_FILES["_profilePic"]["size"]);
+					imagejpeg($tempImage, $destination, $quality);*/
+
+					$thumb = new Imagick();
+					$thumb->readImage($_FILES["_profilePic"]["tmp_name"]);
+					$thumb->resizeImage(320,240,Imagick::FILTER_CATROM,1);
+					$thumb->writeImage($_FILES["_profilePic"]["tmp_name"]);
+					$thumb->destroy();
+					/*move_uploaded_file($_FILES["_profilePic"]["tmp_name"],"../../img/proPics/".$userIdHash.'.jpg');*/
+					
+				}
+			}
+		}
+
 
 		if(!(($description == "") and ($resume == "") and ($hobbies == "") and ($address == "") and ($phone == "") and ($city == "")) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 		{
@@ -651,7 +688,8 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function skillSetEdit($user,$skillArray,$ratingArray)
 	{
-		
+		/*if(!((count($skillArray)==0) and (count($ratingArray) == 0)))
+		{*/
 			/*$skillArray=explode(',',$skill);
 			$ratingArray=explode(',',$rating);*/
 			$skillArrayCount=count($skillArray);
@@ -683,10 +721,10 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 			$hasRepeated=false;
 			$repeatedSkills=array();
-			for ($k=0;$k=$skillArrayCount;$k++) 
+			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=trim($skillArray[$k]);
-				if(stripos($existingSkills,$skill)===false)
+				if(isThereInCSV($existingSkills,$skill)===false)
 				{
 					$existingSkillsArray[]=$skill;
 					$existingRatingArray[]=$ratingArray[$k];
@@ -719,6 +757,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			while($i<count($existingSkillsArray))
 			{
 				$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+				$i++;
 			}
 			
 			$conObj = new QoB();
@@ -748,7 +787,12 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 					echo 12;
 					exit();
 				}
-
+		/*}
+		else
+		{
+			echo 16;
+			exit();
+		}*/
 						
 			
 		
@@ -777,10 +821,10 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 		$hasRepeated=false;
 		$repeatedTools=array();
-		for ($k=0;$k=$toolArrayCount;$k++) 
+		for ($k=0;$k<$toolArrayCount;$k++) 
 		{
 			$tool=trim($toolArray[$k]);
-			if(stripos($existingTools,$tool)===false)
+			if(isThereInCSV($existingTools,$tool)===false)
 			{
 				$existingToolsArray[]=$tool;
 				if($existingTools=="")
@@ -855,10 +899,10 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 		$hasRepeated=false;
 		$repeatedInterests=array();
-		for ($k=0;$k=$interestArrayCount;$k++) 
+		for ($k=0;$k<$interestArrayCount;$k++) 
 		{
 			$interest=trim($interestArray[$k]);
-			if(stripos($existingInterests,$interest)===false)
+			if(isThereInCSV($existingInterests,$interest)===false)
 			{
 				$existingInterestsArray[]=$interest;
 				if($existingInterests=="")

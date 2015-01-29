@@ -184,7 +184,7 @@ else if ($mode==5) {
 	//$title=$_POST[''];
 	//$description=$_POST[''];
 
-	experienceInsert($user,$_POST['_company'],$_POST['duration'],$_POST['_role']);
+	experienceInsert($user,$_POST['_company'],$_POST['duration'],$_POST['_role'],$_POST['isfeaturing']);
 }
 else if ($mode==6) {
 
@@ -202,19 +202,19 @@ else if ($mode==6) {
 else if ($mode==7) {
 
 	# WorkshopsInsert
-	$title=$_POST[''];
+/*	$title=$_POST[''];
 	$start=$_POST[''];
 	$end=$_POST[''];
 	$place=$_POST[''];
-	$attendCount=$_POST[''];
+	$attendCount=$_POST[''];*/
 
 	workshopsInsert($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']);
 }
 else if ($mode==8) {
 
 	# SkillSet Insert
-	$skill=$_POST[''];
-	$rating=$_POST[''];
+/*	$skill=$_POST[''];
+	$rating=$_POST[''];*/
 
 	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
 }
@@ -251,16 +251,16 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 
 	if($_FILES["file"]["name"]!='')
 	{
-		$resume=$_FILES['file']['name'];
+		$resume=$_FILES['_resume']['name'];
 		$allowedExts = array("pdf", "png","jpg","jpeg","docx","doc");
-		$extension = end(explode(".", $_FILES["file"]["name"][$i]));
-		if ((($_FILES["file"]["type"] == "application/pdf")	|| ($_FILES["file"]["type"] == "image/png")	|| ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "application/docx")) && ($_FILES["file"]["size"] < 8192576) && in_array($extension, $allowedExts))
+		$extension = end(explode(".", $_FILES["_resume"]["name"][$i]));
+		if ((($_FILES["_resume"]["type"] == "application/pdf")	|| ($_FILES["_resume"]["type"] == "image/png")	|| ($_FILES["_resume"]["type"] == "image/jpeg") || ($_FILES["_resume"]["type"] == "image/jpg") || ($_FILES["_resume"]["type"] == "application/docx")) && ($_FILES["_resume"]["size"] < 8192576) && in_array($extension, $allowedExts))
 		{
 			if ($_FILES["file"]["error"] > 0)
 			{
 				echo 6;
 				//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
-				notifyAdmin("Resume Upload Error Code: " . $_FILES["file"]["error"] ,$userId);
+				notifyAdmin("Resume Upload Error Code: " . $_FILES["_resume"]["error"] ,$userId);
 				exit();
 			}
 			else
@@ -273,7 +273,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 				{
 					array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
 				}
-				move_uploaded_file($_FILE["file"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
+				move_uploaded_file($_FILE["_resume"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
 				$resume=$userId.$extension;
 			}
 		}
@@ -859,8 +859,8 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 
 function skillSetInsert($user,$skillArray,$ratingArray)
 	{
-		if(!((count($skillArray)==0) and (count($ratingArray) == 0)))
-		{
+		/*if(!((count($skillArray)==0) and (count($ratingArray) == 0)))
+		{*/
 			/*$skillArray=explode(',',$skill);
 			$ratingArray=explode(',',$rating);*/
 			$skillArrayCount=count($skillArray);
@@ -891,7 +891,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=trim($skillArray[$k]);
-				if(stripos($existingSkills,$skill)===false)
+				if(isThereInCSV($existingSkills,$skill)===false)
 				{
 					$existingSkillsArray[]=$skill;
 					$existingRatingArray[]=$ratingArray[$k];
@@ -961,20 +961,20 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 							echo 'Error in Query 0<br />';
 							echo $conObj->error.'<br />';
 						}*/
-		}
+		/*}
 		else
 		{
 			echo 16;
 			exit();
-		}
+		}*/
 			
 		
 	}
 
 	function toolkitInsert($user,$toolsArray)
 	{
-		if($tools!='')
-			{
+		/*if(count($toolsArray)!=0)
+			{*/
 				$toolsArrayCount=count($toolsArray);
 
 				if($toolsArrayCount==0)
@@ -994,10 +994,10 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 
 				$hasRepeated=false;
 				$repeatedTools=array();
-				for ($k=0;$k=$toolArrayCount;$k++) 
+				for ($k=0;$k<$toolArrayCount;$k++) 
 				{
 					$tool=trim($toolArray[$k]);
-					if(stripos($existingTools,$tool)===false)
+					if(isThereInCSV($existingTools,$tool)===false)
 					{
 						$existingToolsArray[]=$tool;
 					}
@@ -1053,20 +1053,20 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						echo 'Error in Query 0<br />';
 						echo $conObj->error.'<br />';
 					}*/
-			}
+			/*}
 		else
 			{
 				echo 16;
 				exit();
-			}
+			}*/
 			
 		
 	}
 
 	function interestsInsert($user,$interestsArray)
 	{
-		if($interests!='')
-			{
+		/*if(count($interestsArray)!=0)
+			{*/
 				$interestsArrayCount=count($interestsArray);
 
 				if($interestsArrayCount==0)
@@ -1086,10 +1086,10 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 
 				$hasRepeated=false;
 				$repeatedInterests=array();
-				for ($k=0;$k=$interestArrayCount;$k++) 
+				for ($k=0;$k<$interestArrayCount;$k++) 
 				{
 					$interest=trim($interestArray[$k]);
-					if(stripos($existingInterests,$interest)===false)
+					if(isThereInCSV($existingInterests,$interest)===false)
 					{
 						$existingInterestsArray[]=$interest;
 					}
@@ -1146,12 +1146,12 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						echo 'Error in Query 0<br />';
 						echo $conObj->error.'<br />';
 					}*/
-			}
+			/*}
 		else
 			{
 				echo 16;
 				exit();
-			}
+			}*/
 			
 		
 	}

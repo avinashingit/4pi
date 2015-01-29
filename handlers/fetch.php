@@ -6,6 +6,9 @@
 //---Author : Hari Krishna Majety ,COE12B013.
 //---Email: majetyhk@gmail.com
 //
+//Some Statements Which help you understand some typical variable names.
+// 1- You Search for a 'Needle' in a 'Haystack'
+// 2- Anything 'Raw' is what is fetched from front-end or something which needs to be sent to front-end
 //
 //---Credits Ends---//
 
@@ -236,7 +239,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		}
 	}
 
-	function getinterestsByUser($userId)
+	function getInterestsByUser($userId)
 	{
 		$conn=new QoB();
 		$values = array(0 => array($userId => 's'));
@@ -557,7 +560,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	}
 
 
-
+	//Try to avaoid. Use Carefully. Prefer isThereInCSV() than this.
 	function isThere($haystack,$needle)
 	{
 		if(stripos($haystack, $needle)===false)
@@ -750,6 +753,18 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	}
 	
 
+	function isThereInCSV($haystack,$needle)
+	{
+		$finalRegexString=isThereInCSVRegex($needle);
+		if(preg_match('/'.$finalRegexString.'/',$haystack))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	function isCoCAS($userId)
 	{
@@ -859,6 +874,48 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		return $proPicLocation;
 	}
 	
+	function getQuatlity($size)
+	{
+		$RequiredSize=32768;
+		if($size<=$RequiredSize)
+		{
+			$quality=100;
+		}
+		else if($size>$RequiredSize and $size<=2*$requiredSize)
+		{
+			$quality=100/2;
+		}
+		else if($size>2*$RequiredSize and $size<=4*$requiredSize)
+		{
+			$quality=100/4;
+		}
+		else if($size>4*$RequiredSize and $size<=8*$requiredSize)
+		{
+			$quality=100/8;
+		}
+		else if($size>8*$RequiredSize and $size<=16*$requiredSize)
+		{
+			$quality=100/16;
+		}
+		else if($size>16*$RequiredSize and $size<=32*$requiredSize)
+		{
+			$quality=100/32;
+		}
+		else if($size>32*$RequiredSize and $size<=64*$requiredSize)
+		{
+			$quality=100/64;
+		}
+		else if($size>64*$RequiredSize and $size<=128*$requiredSize)
+		{
+			$quality=100/128;
+		}
+		else
+		{
+			$quality=100/128;
+		}
+		return $quality;
+
+	}
 
 
 	function getPollObject($poll,$userId)
