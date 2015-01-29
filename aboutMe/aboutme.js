@@ -654,6 +654,7 @@ function addSkillSendData()
 			console.log(data);
 			if(checkData(data)==1)
 			{
+				data=JSON.parse(data);
 				insertSkills(data.jsonObj);
 				$("#skills").find("#skillNames").html(data.skills);
 				$("#skills").find("#skillPercentages").html(data.rating);

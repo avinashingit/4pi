@@ -13,8 +13,8 @@
 //---Credits Ends---//
 session_start();
 require_once('../../QOB/qob.php');
-require_once('./miniPoll.php');
 require_once('../fetch.php');
+require_once('aboutMeClass.php');
 //Testing Content Starts
 	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
@@ -157,7 +157,7 @@ else if ($mode==3) {
 	$score=$_POST['_score'];
 	$scoreType=$_POST['_scoreType'];*/
 
-	academicsInsert($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['location'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType']);
+	academicsInsert($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['location'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType']);
 
 }
 
@@ -193,7 +193,7 @@ else if ($mode==6) {
 	$role=$_POST[''];
 	$start=$_POST[''];
 	$end=$_POST[''];
-	$teamMembers=$_POST['']
+	$teamMembers=$_POST[''];
 	$company=$_POST[''];
 
 	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_projectDescription'],$_POST['_teamMembers'],$_POST['_projectCompany']);
@@ -859,7 +859,7 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 
 function skillSetInsert($user,$skillArray,$ratingArray)
 	{
-		if(!(($skill=='') and ($rating == '')))
+		if(!((count($skillArray)==0) and (count($ratingArray) == 0)))
 		{
 			/*$skillArray=explode(',',$skill);
 			$ratingArray=explode(',',$rating);*/
@@ -888,7 +888,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 
 			$hasRepeated=false;
 			$repeatedSkills=array();
-			for ($k=0;$k=$skillArrayCount;$k++) 
+			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=trim($skillArray[$k]);
 				if(stripos($existingSkills,$skill)===false)
@@ -914,6 +914,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			while($i<count($existingSkillsArray))
 			{
 				$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
+				$i++;
 			}
 			/*if(($skill!='') and ($rating != 0))
 				{*/
