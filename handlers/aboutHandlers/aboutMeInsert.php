@@ -988,7 +988,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				$userId = $user['userId'];
 				$toolRecord=getToolsByUser($userId);
 				
-				$existingTools=$toolRecord['skills'];
+				$existingTools=$toolRecord['tools'];
 
 				$existingToolsArray=explode(',', $existingTools);
 
@@ -1081,7 +1081,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				$userId = $user['userId'];
 				$interestRecord=getInterestsByUser($userId);
 				
-				$existingInterests=$interestRecord['skills'];
+				$existingInterests=$interestRecord['interests'];
 
 				$existingInterestsArray=explode(',', $existingInterests);
 

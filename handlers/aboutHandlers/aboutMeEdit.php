@@ -890,11 +890,11 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 		$i=0;
 		$userId = $user['userId'];
-		$interestRecord=getInterestsByUser($userId);
+		/*$interestRecord=getInterestsByUser($userId);
 		
-		$existingInterests=$interestRecord['skills'];
+		$existingInterests=$interestRecord['interests'];
 
-		$existingInterestsArray=explode(',', $existingInterests);
+		$existingInterestsArray=explode(',', $existingInterests);*/
 
 		$existingInterests="";
 		$existingInterestsArray=array();
