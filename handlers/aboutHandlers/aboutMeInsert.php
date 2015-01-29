@@ -242,7 +242,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 	$phone=implode(',',$phone);
 	$showPhone=implode(',',$showPhone);
 	$date = date_parse($dob);
-	$dobTimestamp = strtotime($dob);
+	$dobTimestamp = dateStringToTimestamp($dob);
 	
 	$date1 = date_create();
 	$currentTimestamp = date_timestamp_get($date1);
@@ -364,12 +364,12 @@ function academicsInsert($user,$degree,$schoolName,$location,$durationString,$sc
 	$end=$timeString[1];
 
 	$startDate = date_parse($start);
-	$startDateTimestamp = strtotime($start);
+	$startDateTimestamp = dateStringToTimestamp($start);
 	
 	//echo $startDateTimestamp.'<br/>';
 	
 	$endDate = date_parse($end);
-	$endDateTimestamp = strtotime($end);
+	$endDateTimestamp = dateStringToTimestamp($end);
 
 	//echo $endDateTimestamp.'<br/>';
 	
@@ -377,7 +377,7 @@ function academicsInsert($user,$degree,$schoolName,$location,$durationString,$sc
 	$currentTimestamp = date_timestamp_get($date1);
 	
 	
-	if(!(($degreeName == '') and ($name == '') and ($score =='')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp))
+	if(!(($degreeName == '') and ($name == '') and ($score =='')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp)and ($scoreType==0 || $scoreType==1)
 	{
 		$conObj = new QoB();
 		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -477,7 +477,7 @@ function achievmentsInsert($user,$competition,$description,$position,$location,$
 	{
 
 		$date = date_parse($achievedDate);
-		$achievedDateTimestamp = strtotime($achievedDate);
+		$achievedDateTimestamp = dateStringToTimestamp($achievedDate);
 		
 		$date1 = date_create();
 		$currentTimestamp = date_timestamp_get($date1);	
@@ -545,12 +545,12 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 		$end=$timeString[1];
 
 		$startDate = date_parse($start);
-		$startDateTimestamp = strtotime($start);
+		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
 		$endDate = date_parse($end);
-		$endDateTimestamp = strtotime($end);
+		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
 		
@@ -616,12 +616,12 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 		$end=$timeString[1];
 				
 		$startDate = date_parse($start);
-		$startDateTimestamp = strtotime($start);
+		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
 		$endDate = date_parse($end);
-		$endDateTimestamp = strtotime($end);
+		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
 		
@@ -705,14 +705,14 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 		$end=$timeString[1];
 	
 		$startDate = date_parse($start);
-		$startDateTimestamp = strtotime($start);
+		$startDateTimestamp = dateStringToTimestamp($start);
 
 		print_r($startDate);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
 		$endDate = date_parse($end);
-		$endDateTimestamp = strtotime($end);
+		$endDateTimestamp = dateStringToTimestamp($end);
 
 		/*echo $endDate;*/
 
@@ -789,12 +789,12 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 		$end=$timeString[1];
 
 		$startDate = date_parse($start);
-		$startDateTimestamp = strtotime($start);
+		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
 		$endDate = date_parse($end);
-		$endDateTimestamp = strtotime($end);
+		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
 		
@@ -893,6 +893,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 
 			$hasRepeated=false;
 			$repeatedSkills=array();
+			$updatedSkillCount=$skillCount;
 			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=trim($skillArray[$k]);
@@ -900,6 +901,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				{
 					$existingSkillsArray[]=$skill;
 					$existingRatingArray[]=$ratingArray[$k];
+					$updatedToolCount++;
 				}
 				else
 				{
@@ -907,6 +909,21 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 					$repeatedSkills[]=$skill;
 				}
 				# code...
+			}
+			for($i=0;$i<$updatedSkillCount-1;$i++)
+			{
+				for($j=0;$j<$updatedSkillCount-1;$j++)
+				{
+					if($existingRatingArray[$j]<$existingRatingArray[$j+1])
+					{
+						$temp1=$existingRatingArray[$j];
+						$temp2=$existingSkillsArray[$j];
+						$existingRatingArray[$j]=$existingRatingArray[$j+1];
+						$existingSkillsArray[$j]=$existingSkillsArray[$j+1]
+						$existingRatingArray[$j+1]=$temp1;
+						$existingSkillsArray[$j+1]=$temp2;
+					}
+				}
 			}
 			$message="";
 			$errorCode=3;
@@ -1164,5 +1181,20 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			
 		
 	}
+
+	/*function leaveMessageInsert($receiverUserId,$senderName,$senderMailId,$message)
+	{
+		$conn=new QoB();
+		$values = array(0 => array($userId => 's'));
+		$result = $conn->fetchAll("INSERT INTO interests() WHERE userId = ?",$values,false);
+		if($conn->error==""&&$result!="")
+		{
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}*/
 
 ?>

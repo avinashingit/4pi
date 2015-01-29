@@ -105,10 +105,12 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	            $browser    =   $value;
 	        }
 	    }
+	    $ipAddress=$_SERVER['REMOTE_ADDR'];
 	    $OsAndBrowser=$browser." On ".$os_platform;
-		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser) VALUES(?,?)";
+		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser,ipaddress) VALUES(?,?)";
 		$values[0]=array($userId => 's');
 		$values[1]=array($OsAndBrowser => 's');
+		$values[2]=array($ipAddress => 's');
 		$result=$conn->insert($LogDetailsSQL,$values);
 		if($conn->error==""&&$result==true)
 		{
@@ -633,6 +635,25 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 			return false;
 		}
 		return true;
+	}
+
+
+	
+	function dateStringToTimestamp($dateString,$seperator='/')
+	{
+		if(validateDate($dateString,$seperator))
+		{
+			$splitDate=explode($seperator,$dateString);
+			$year=$splitDate[2];
+			$month=$splitDate[1];
+			$day=$splitDate[0];
+			$timestamp = mktime(0, 0, 0, $month, $day, $year);
+			return $timestamp;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 

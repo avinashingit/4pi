@@ -558,14 +558,14 @@ function aboutMe($userId,$mode,$isOwner)
 	elseif($mode == 14)
 	{
 		//To fetch Details of leaveMessage
-		/*$values1 = array(0 => array($userId => 's'));
+		$values1 = array(0 => array($userId => 's'));
 		$result1 = $conObj->select("SELECT * FROM leavemessage WHERE userId = ?",$values1);
 		if($conObj->error == "")
 		{
 			$noOfElementsM = 0;
 			while($leaveMessage = $conObj->fetch($result1))
 			{
-				$obj = new leaveMessage($leaveMessage['leaveMessageId'],$leaveMessage['name'],$leaveMessage['mailid'],$leaveMessage['message'],$isOwner);
+				$obj = new leaveMessage("L".$leaveMessage['leaveMessageId'],$leaveMessage['name'],$leaveMessage['mailid'],$leaveMessage['message'],$isOwner);
 				$outputa[$noOfElementsM] = $obj;
 				$noOfElementsM++;
 			}
@@ -579,7 +579,7 @@ function aboutMe($userId,$mode,$isOwner)
 		{
 			notifyAdmin("Conn.Error: ".$conn->error."! In fetching leave Message of aboutMe:".$userId,$currentUserId);
 			echo 12;
-		}*/
+		}
 	}
 	else
 	{
