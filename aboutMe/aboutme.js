@@ -475,7 +475,7 @@ function editContactInfoSendData()
 	var phone1=link.find("#contactNumber1").val().trim();
 	var phone2=link.find("#contactNumber2").val().trim();
 	var phone=[phone1,phone2];
-	$.post('/4pi/handlers/aboutHandlers/editBottomPart.php',{
+	$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 		_userId:userId
 	})
 	.error(function(){
@@ -491,31 +491,48 @@ function editContactInfoSendData()
 
 function editTopPartSendData()
 {
-	var new_data=new FormData($("#editPersonInfoModal").find("#topPartEditForm")[0]);
-
 	var link=$("#editPersonInfoModal").find("#topPartEditForm");
 
-	console.log(link.find("#editPersonInfoModalPersonName").val().trim());
+	var sFileName=link.find("#editPersonInfoModalPersonImage").val();
 
-	new_data.append("_alias","hello");
-	new_data.append("_dob",link.find("#editPersonInfoModalPersonDOB").val().trim());
-	new_data.append("_description",link.find("#editPersonInfoModalPersonDescription").val().trim());
-	new_data.append("_profilePic",link.find("#editPersonInfoModalPersonImage")[0].files[0]);
+	alert(sFileName);
 
-	new_data.append("_resume",link.find("#editPersonInfoModalPersonResume")[0].files[0]);
+	var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
 
-	// console.log(new_data);
-	// 
-	$.ajax({
-		url:'/4pi/handlers/aboutHandlers/editTopPart.php',
-		type:'POST',
-		data:new_data,
-		processData: false,
-    	contentType: false,
-    	success:function(data){
-    		console.log(data);
-    	}
-	});
+	if(sFileExtension!=".jpg")
+	{
+		alert("Only .jpg files images are allowed");
+	}
+	else
+	{
+		var new_data=new FormData($("#editPersonInfoModal").find("#topPartEditForm")[0]);
+
+		
+
+		console.log(link.find("#editPersonInfoModalPersonName").val().trim());
+
+		new_data.append("_alias","hello");
+		new_data.append("_dob",link.find("#editPersonInfoModalPersonDOB").val().trim());
+		new_data.append("_description",link.find("#editPersonInfoModalPersonDescription").val().trim());
+
+		new_data.append("_resume",link.find("#editPersonInfoModalPersonResume")[0].files[0]);
+
+		new_data.append("_profilePic",link.find("#editPersonInfoModalPersonImage")[0].files[0]);
+
+		// console.log(new_data);
+		// 
+		$.ajax({
+			url:'/4pi/handlers/aboutHandlers/editTopPart.php',
+			type:'POST',
+			data:new_data,
+			processData: false,
+	    	contentType: false,
+	    	success:function(data){
+	    		console.log(data);
+	    	}
+		});
+	}
+	
 }
 
 //////////////////////////////PERSONAL INFO ENDS/////////////////////
@@ -844,7 +861,7 @@ function addToolsSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/insertTools.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_tools:toolArray,
 			_userId:userId,
 			_mode:9
@@ -1060,13 +1077,14 @@ function addProjectSendData()
 	}
 	else
 	{
-		$.post('4pi/handlers/aboutMeHandlers/addProject.php',{
+		$.post('4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_projectTitle:title,
 			_duration:duration,
 			_projectPosition:role,
 			_projectCompany:company,
 			_projectDescription:description,
-			_teamMembers:team
+			_teamMembers:team,
+			_mode:6
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1170,6 +1188,8 @@ function insertExperience(data)
 
 	experience+='<div class="row experience" id="'+data.experienceId+'">';
 
+	experience+='<div class="hidden" id="featuring">'+data.isFeaturing+'</div>';
+
 	experience+='<div class="row">';
 
 		experience+='<div class="text-left col-md-7">';
@@ -1250,16 +1270,19 @@ function addExperienceSendData()
 	var companyName=ln.find('#addExperienceModalCompanyName').val().trim();
 	var role=ln.find('#addExperienceModalRole').val().trim();
 	var duration=ln.find('#addExperienceModalDurationFrom').val().trim()+"-"+ln.find('#addExperienceModalDurationTo').val().trim();
+	var featuring=ln.find("#addExperienceModalFeature").val();
 	if(companyName.length==0)
 	{
 		alert("Please enter the name of the company");
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/addExperience.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_company:companyName,
 			_role:role,
-			_duration:duration
+			_duration:duration,
+			_isFeaturing:featuring,
+			_mode:5
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -1281,6 +1304,7 @@ function modifyExperience(data)
 	link.find('#role').html(data.role);
 	link.find('#duration').attr("title",data.duration);
 	link.find('#duration').html(data.minDuration);
+	link.find("#featuring").html(data.isFeaturing);
 }
 
 function editExperienceSendData()
@@ -1289,6 +1313,7 @@ function editExperienceSendData()
 	var company=link.find('#editExperienceModalCompanyName').val().trim();
 	var role=link.find('#editExperienceModalRole').val().trim();
 	var duration=link.find('#editExperienceModalDurationFrom').val().trim()+"-"+link.find('#editExperienceModalDurationTo').val().trim();
+	var isFeaturing=link.find("#editExperienceModalFeature").val();
 	var id=link.find('#experienceId').html();
 
 	if(company.length==0)
@@ -1301,7 +1326,8 @@ function editExperienceSendData()
 			_experienceId:id,
 			_company:company,
 			_role:role,
-			_duration:duration
+			_duration:duration,
+			_isFeaturing:isFeaturing
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
@@ -1352,6 +1378,8 @@ function insertAcademics(data)
 	var academics="";
 
 	academics+='<div class="row academics" id="'+data.degreeId+'">';
+
+	academics+='<div class="hidden" id="scoreType">'+data.scoreType+'</div>';
 
 	academics+='<div class="row">';
 
@@ -1451,23 +1479,26 @@ function addAcademicsSendData()
 	var school=ln.find('#addAcademicsModalSchoolName').val().trim();
 	var duration=ln.find('#addAcademicsModalDurationFrom').val().trim()+"-"+ln.find('#addAcademicsModalDurationTo').val().trim();
 	var location=ln.find('#addAcademicsModalSchoolLocation').val().trim();
+	var scoreType=ln.find("#addAcademicsModalPercentage").val().trim();
 	if(degree.length!="")
 	{
 		alert("Please enter the degree.");
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/addAcademics.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_degree:degree,
-			_percentage:percentage,
-			_school:school,
+			_score:percentage,
+			_schoolName:school,
 			_duration:duration,
-			_location:location
+			location:location,
+			_scoreType:scoreType
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1486,6 +1517,7 @@ function modifyAcademics(data)
 	link.find('#location').html(data.location);
 	link.find('#duration').attr("title",data.duration);
 	link.find('#duration').html(data.minDuration);
+	link.find('#scoreType').html(data.scoreType);
 }
 
 function editAcademicsSendData()
@@ -1494,6 +1526,7 @@ function editAcademicsSendData()
 	var degree=link.find('#editAcademicsModalDegree').val().trim();
 	var percentage=link.find('#editAcademicsModalPercentage').val().trim();
 	var school=link.find('#editAcademicsModalSchoolName').val().trim();
+	var scoreType=link.find('#editAcademicsModalPercentageType').val().trim();
 	var location=link.find('#editAcademicsModalSchoolLocation').val().trim();
 	var duration=link.find('#editAcademicsModalDurationFrom').val().trim()+"-"+link.find('#editAcademicsModalDurationTo').val().trim();
 	var id=link.find('#editAcademicsModalId').html();
@@ -1504,7 +1537,13 @@ function editAcademicsSendData()
 	else
 	{
 		$.post('/4pi/handlers/aboutMeHandlers/editAcademics.php',{
-			_academicsId:id
+			_academicsId:id,
+			_degree:degree,
+			_percentage:percentage,
+			_school:school,
+			_scoreType:scoreType,
+			_location:location,
+			_duration:duration
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
@@ -1653,16 +1692,18 @@ function addWorkshopSendData()
 	}
 	else
 	{
-		$.post("/4pi/handlers/aboutHandlers/insertWorkshop.php",{
+		$.post("/4pi/handlers/aboutHandlers/aboutMeInsert.php",{
 			_workshopName:name,
 			_location:location,
 			_duration:duration,
-			_peopleAttended:peopleNumber
+			_peopleAttended:peopleNumber,
+			_mode:7
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1834,10 +1875,11 @@ function addCertificationSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/addCertification.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_courseName:name,
 			_institute:institute,
-			_duration:duration
+			_duration:duration,
+			_mode:4
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -2030,12 +2072,13 @@ function addAchievementSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/addAchievement.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_eventName:name,
 			_location:location,
 			_description:description,
 			_position:position,
-			_userId:userId
+			_userId:userId,
+			_mode:2
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
@@ -2214,14 +2257,16 @@ function addInterestsSendData()
 
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/insertInterests.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_userId:userId,
-			_interests:interestsArray
+			_interests:interestsArray,
+			_mode:10
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$("#interests").find('.interest').remove();

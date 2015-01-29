@@ -342,7 +342,7 @@ if(userId=="")
 
 					<label for="personImage">Your image</label>
 
-					<input type="file" accept="image/jpeg" id="editPersonInfoModalPersonImage">
+					<input type="file" accept="images/jpeg" id="editPersonInfoModalPersonImage">
 
 					<br/>
 
@@ -765,6 +765,7 @@ if(userId=="")
 		x.find('#editExperienceModalDurationFrom').val(xz[0]);
 		x.find('#editExperienceModalDurationTo').val(xz[1]);
 		x.find('#experienceId').val(n);
+		x.find('#editExperienceModalFeature').val(y.find("#featuring").html());
 	}
 
 	function addCertification()
@@ -806,6 +807,7 @@ if(userId=="")
 		x.find('#editAcademicsModalDurationTo').val(z[1]);
 		x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
 		x.find('#editAcademicsModalId').val(n);
+		x.find("#editAcademicsModalPercentageType").val(y.find("#scoreType").html());
 	}
 
 	function addWorkshop()
@@ -4071,6 +4073,34 @@ if(userId=="")
 
 					<br/>
 
+					<label for="experienceFeaturing">Feature in the personal info?</label>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
+							<label>
+
+								No&nbsp;&nbsp;<input type="radio" id="addExperienceModalFeature" value="0" class="form-control">
+
+							</label>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label>
+
+								Yes&nbsp;&nbsp;<input type="radio" id="addExperienceModalFeature" value="1" class="form-control">
+
+							</label>
+
+						</div>
+
+					</div>
+
+					<br/>
+
 					<div class="col-md-6">
 
 						<label for="experienceDuration">From</label>
@@ -4146,6 +4176,30 @@ if(userId=="")
 
 						<div class="col-md-6">
 
+							<label>
+
+								No&nbsp;&nbsp;<input type="radio" id="editExperienceModalFeature" value="0" class="form-control">
+
+							</label>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label>
+
+								Yes&nbsp;&nbsp;<input type="radio" id="editExperienceModalFeature" value="1" class="form-control">
+
+							</label>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-6">
+
 							<label for="experienceDurationHours">From</label>
 
 							<input type="text" id="editExperienceModalDurationFrom" class="form-control datepicker">
@@ -4211,9 +4265,23 @@ if(userId=="")
 
 					<br/>
 
-					<label for="percentage">Percentage/CGPA</label>
+					<label for="percentage">Score</label>
 
 					<input type="text" id="addAcademicsModalPercentage" class="form-control">
+
+					<br/>
+
+					<label for="percentageType">Score type</label>
+
+					<select id="addAcademicsModalPercentageType" class="form-control">
+	
+						<option value="1">Percentage</option>
+
+						<option value="2">CGPA on 10</option>
+
+						<option value="3">CGPA on 4</option>
+
+					</select>
 
 					<br/>
 
@@ -4298,6 +4366,20 @@ if(userId=="")
 					<label for="percentage">Percentage/CGPA</label>
 
 					<input type="text" id="editAcademicsModalPercentage" class="form-control">
+
+					<br/>
+
+					<label for="percentageType">Score type</label>
+
+					<select id="editAcademicsModalPercentageType" class="form-control">
+	
+						<option value="1">Percentage</option>
+
+						<option value="2">CGPA on 10</option>
+
+						<option value="3">CGPA on 4</option>
+
+					</select>
 
 					<br/>
 
