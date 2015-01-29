@@ -48,23 +48,22 @@ echo '
 
 	if($exists==1)
 	{
-		echo 'fdl';
-		echo '<a href="http://localhost/4pi/'.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/proPics/'.$row->userIdHash.'.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
+		echo '<a href="/4pi/aboutMe/index.php?userId='.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/proPics/'.$row->userIdHash.'.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
 	}
 
 	else
 	{
 		if($row->gender=="M")
 		{
-			echo '<a href="http://localhost/4pi/'.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/defaultMan1.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
+			echo '<a href="/4pi/aboutMe/index.php?userId='.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/defaultMan1.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
 		}
 		else
 		{
-			echo '<a href="http://localhost/4pi/'.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/defaultWoman1.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
+			echo '<a href="/4pi/aboutMe/index.php?userId='.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/defaultWoman1.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
 		}
 	}
 
-	echo '	<h4 class="text-center" ><a title="'.ucwords(strtolower($row->name)).'"href="http://localhost/4pi/'.$row->userId.'" style="color:white;" >'.ucwords(strtolower(substr($row->name,0,18))).'...</a></h4>
+	echo '	<h4 class="text-center" ><a title="'.ucwords(strtolower($row->name)).'"href="/4pi/aboutMe/index.php?userId='.$row->userId.'" style="color:white;" >'.ucwords(strtolower(substr($row->name,0,18))).'...</a></h4>
 
 	</div>
 

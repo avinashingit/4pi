@@ -280,7 +280,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="editContactInfoSendData();" class="btn btn-primary">Save changes</button>
 
@@ -359,7 +359,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button class="btn btn-primary" onclick="editTopPartSendData();">Save changes</button>
 
@@ -402,7 +402,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="editSkillSendData();">Save</button>
 
@@ -445,9 +445,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-success" onclick="editToolAddInput();">Add input</button>
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="editToolsSendData();">Save</button>
 
@@ -490,9 +488,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-success" onclick="editInterestAddInput();">Add input</button>
-
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="editInterestsSendData();">Save</button>
 
@@ -861,6 +857,7 @@ if(userId=="")
 	function addAcademics()
 	{
 		$('#addAcademicsModal').modal('show');
+		$('#addAcademicsModal').find("#CGPAElements").hide();
 	}
 
 	function editAcademics(n)
@@ -869,15 +866,27 @@ if(userId=="")
 
 		var x=$('#editAcademicsModal');
 		var y=$('#'+n);
+		var scoreType=y.find("#scoreType").html();
+		if(scoreType==1)
+		{
+			x.find("#CGPAElements").hide();
+			$("#editAcademicsModalPercentage").val(y.find("#percentage").html().split('%')[0]);
+		}
+		else
+		{
+			x.find("#PercentageElements").hide();
+			$("#editAcademicsModalCGPA").val(y.find("#percentage").html().split('/')[0]);
+			$("#editAcademicsModalCGPAScale").val(y.find("#percentage").html().split('/')[1]);
+		}
 		x.find('#editAcademicsModalDegree').val(y.find('#degree').html());
-		x.find('#editAcademicsModalPercentage').val(y.find('#percentage').html());
+		x.find("#editAcademicsModalPercentageType").val(y.find("#scoreType").html());
 		x.find('#editAcademicsModalSchoolName').val(y.find('#school').html());
 		var z=y.find('#duration').attr("title").split("-");
 		x.find('#editAcademicsModalDurationFrom').val(z[0]);
 		x.find('#editAcademicsModalDurationTo').val(z[1]);
 		x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
 		x.find('#editAcademicsModalId').val(n);
-		x.find("#editAcademicsModalPercentageType").val(y.find("#scoreType").html());
+		
 	}
 
 	function addWorkshop()
@@ -3910,7 +3919,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-2">
+						<div class="col-md-2 hidden">
 
 			    			<span style="cursor:pointer;" class="input-group-addon" onclick="addSkillAddInput();" id="addOption">
 
@@ -3928,7 +3937,9 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-success" onclick="addSkillAddInput();">Add input</button>
+
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="addSkillSendData();">Add</button>
 
@@ -3987,7 +3998,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-success" onclick="addToolAddInput();">Add input</button>
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="addToolsSendData();">Add</button>
 
@@ -4076,7 +4087,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="addProjectSendData();" class="btn btn-primary">Add</button>
 
@@ -4167,7 +4178,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="editProjectSendData();" class="btn btn-primary">Save changes</button>
 
@@ -4264,7 +4275,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="addExperienceSendData();" class="btn btn-primary">Add</button>
 
@@ -4308,6 +4319,8 @@ if(userId=="")
 					<input type="text" id="editExperienceModalRole" class="form-control">
 
 					<br/>
+
+					<label>Feature in personal info?</label>
 
 					<div class="row">
 
@@ -4363,7 +4376,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
 
@@ -4402,25 +4415,51 @@ if(userId=="")
 
 					<br/>
 
-					<label for="percentage">Score</label>
-
-					<input type="text" id="addAcademicsModalPercentage" class="form-control">
-
-					<br/>
-
 					<label for="percentageType">Score type</label>
 
-					<select id="addAcademicsModalPercentageType" class="form-control">
+					<select onchange="if($(this).val()==1){$('#CGPAElements').hide();$('#PercentageElements').show();}else{$('#PercentageElements').hide();$('#CGPAElements').show();}" id="addAcademicsModalPercentageType" class="form-control">
 	
 						<option value="1">Percentage</option>
 
-						<option value="2">CGPA on 10</option>
-
-						<option value="3">CGPA on 4</option>
+						<option value="2">CGPA</option>
 
 					</select>
 
 					<br/>
+
+					<div id="PercentageElements">
+
+						<label for="percentage">Percentage</label>
+
+						<input placeholder="95.5" type="number" id="addAcademicsModalPercentage" class="form-control">
+
+						<br/>
+
+					</div>
+
+					<div id="CGPAElements">
+
+						<label for="percentage">CGPA</label>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<input plcaeholder="CGPA" type="text" id="addAcademicsModalCGPA" class="form-control">
+
+							</div>
+
+							<div class="col-md-6">
+
+								<input plcaseholder="Scale. Eg. 10" type="number" id="addAcademicsModalCGPAScale" class="form-control">
+
+							</div>
+
+						</div>
+
+						<br/>
+
+					</div>
 
 					<label for="schoolName">School/Institution name</label>
 
@@ -4461,7 +4500,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="addAcademicsSendData();" class="btn btn-primary">Add</button>
 
@@ -4500,25 +4539,51 @@ if(userId=="")
 
 					<br/>
 
-					<label for="percentage">Percentage/CGPA</label>
-
-					<input type="text" id="editAcademicsModalPercentage" class="form-control">
-
-					<br/>
-
 					<label for="percentageType">Score type</label>
 
-					<select id="editAcademicsModalPercentageType" class="form-control">
+					<select onchange="if($(this).val()==1){$('#CGPAElements').hide();$('#PercentageElements').show();}else{$('#PercentageElements').hide();$('#CGPAElements').show();}" id="editAcademicsModalPercentageType" class="form-control">
 	
 						<option value="1">Percentage</option>
 
-						<option value="2">CGPA on 10</option>
-
-						<option value="3">CGPA on 4</option>
+						<option value="2">CGPA</option>
 
 					</select>
 
 					<br/>
+
+					<div id="PercentageElements">
+
+						<label for="percentage">Percentage</label>
+
+						<input placeholder="95.5" type="number" id="editAcademicsModalPercentage" class="form-control">
+
+						<br/>
+
+					</div>
+
+					<div id="CGPAElements">
+
+						<label for="percentage">CGPA</label>
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<input plcaeholder="CGPA" type="text" id="editAcademicsModalCGPA" class="form-control">
+
+							</div>
+
+							<div class="col-md-6">
+
+								<input plcaseholder="Scale. Eg. 10" type="number" id="editAcademicsModalCGPAScale" class="form-control">
+
+							</div>
+
+						</div>
+
+						<br/>
+
+					</div>
 
 					<label for="schoolName">School/Institution name</label>
 
@@ -4562,7 +4627,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
 
@@ -4635,7 +4700,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="addWorkshopSendData();" class="btn btn-primary">Add</button>
 
@@ -4718,7 +4783,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
 
@@ -4787,7 +4852,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="addCertificationSendData();" class="btn btn-primary">Add</button>
 
@@ -4864,7 +4929,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
 
@@ -4925,7 +4990,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" onclick="addAchievementSendData();" class="btn btn-primary">Add</button>
 
@@ -4988,7 +5053,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary">Save changes</button>
 
@@ -5047,7 +5112,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-success" onclick="addInterestAddInput();">Add input</button>
 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
 				<button type="button" class="btn btn-primary" onclick="addInterestsSendData();">Add</button>
 

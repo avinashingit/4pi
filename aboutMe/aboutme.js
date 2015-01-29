@@ -35,8 +35,15 @@ Test fetch, insert, edit , delete
 /*var userId="COE12B025";*/
 var commonURLAbout="/4pi/";
 
-var userOptionsVisibility=0;
+window.userOptionsVisibility=0;
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////
+function showUserOptions()
+{
+	if(window.userOptionsVisibility==0)
+	{
+		$(document).find('.visibleForUser').remove();
+	}
+}
 
 $(document).ready(function(){
 	fetchTopPart();
@@ -49,21 +56,76 @@ $(document).ready(function(){
 	fetchCertifications();
 	fetchAchievements();
 	fetchInterests();
-	showUserOptions();
+	// showUserOptions();
 });
 
-function showUserOptions()
+function afterAjaxCallDisplay()
 {
-	/*if(userOptionsVisibility==0)
-	{
-		$(document).find('.visibleForUser').remove();
-	}*/
+	$('.showOnHover').hide();
+	$('.project').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.project').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.tool').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.tool').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.interest').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.interest').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.certification').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.certification').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.academics').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.academics').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.achievement').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.achievement').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.experience').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.experience').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
+
+	$('.workshop').mouseover(function(){
+		$(this).find(".showOnHover").show();
+	});
+	$('.workshop').mouseout(function(){
+		$(this).find(".showOnHover").hide();
+	});
 }
 
-/*function showValueForSlider(el)
+
+
+function showValueForSlider(el)
 {
+	alert("Hello");
 	$(el).parent().find("#sliderValueAddModal").html($(el).val());
-}*/
+}
 
 function addSkillAddInput()
 {
@@ -93,7 +155,7 @@ function addSkillAddInput()
 
 			input+='</span>';
 
-			input+='<span class="input-group-addon" id="deleteOption">';
+			input+='<span class="btn btn-sm btn-default" id="deleteOption">';
 
 				input+='<i class="fa fa-minus" onclick="addSkillDeleteInput(this);"></i>';
 
@@ -138,7 +200,7 @@ function addToolAddInput()
 
 			input+='</span>';
 
-			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addToolDeleteInput(this);" id="addOption">';
+			input+='<span style="cursor:pointer;" class="btn btn-sm btn-default" onclick="addToolDeleteInput(this);" id="addOption">';
 
 				input+='<i class="fa fa-minus" ></i>';
 
@@ -183,7 +245,7 @@ function addInterestAddInput()
 
 			input+='</span>';
 
-			input+='<span style="cursor:pointer;" class="input-group-addon" onclick="addInterestDeleteInput(this);" id="addOption">';
+			input+='<span style="cursor:pointer;" class="btn btn-sm btn-default" onclick="addInterestDeleteInput(this);" id="addOption">';
 
 				input+='<i class="fa fa-minus" ></i>';
 
@@ -456,7 +518,7 @@ function fetchTopPart()
 			{
 				if(data.isOwner==1)
 				{
-					userOptionsVisibility=1;
+					window.userOptionsVisibility=1;
 				}
 				x=JSON.parse(data);
 				insertTopPart(x);
@@ -782,7 +844,7 @@ function insertTool(data,isOwner)
 
 			if(isOwner==1)
 			{
-				tool+='<i class="fa fa-pencil" onclick="editTools(this,\'edit\');"></i>';
+				tool+='<i class="showOnHover fa fa-pencil" onclick="editTools(this,\'edit\');"></i>';
 			}
 
 		tool+='</div>';
@@ -797,7 +859,7 @@ function insertTool(data,isOwner)
 
 			if(isOwner==1)
 			{
-				tool+='<i class="fa fa-close" onclick="editTools(this,\'delete\');"></i>';
+				tool+='<i class="showOnHover fa fa-close" onclick="editTools(this,\'delete\');"></i>';
 			}
 
 		tool+='</div>';
@@ -832,6 +894,7 @@ function fetchTools(data)
 				{
 					insertTool(tools[i], data.isOwner);
 				}
+				afterAjaxCallDisplay();
 			}
 			
 		}
@@ -983,13 +1046,13 @@ function insertProjects(data)
 			projects+='</div><!-- end class col-md- 3 -->';
 
 			projects+='<div class="col-md-3 text-right">';
-				
-				projects+='<h5 class="textPadding"><span id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span>&nbsp;&nbsp;';
 
 				if(data.isOwner==1)
 				{
-					projects+='<i onclick="editProject(\''+data.projectId+'\');" class="fa fa-pencil visibleForUser"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="fa fa-trash visibleForUser"></i>';
+					projects+='<h5 class="textPadding text-right"><i onclick="editProject(\''+data.projectId+'\');" class="showOnHover fa fa-pencil visibleForUser"></i>&nbsp;<i onclick="deleteProject(\''+data.projectId+'\');" class="showOnHover fa fa-trash visibleForUser"></i>&nbsp;&nbsp;';
 				}
+				
+				projects+='<span class="text-right" id="projectDuration" title="'+data.duration+'">'+data.minDuration+'</span>&nbsp;&nbsp;';
 				
 				projects+='</h5>';
 
@@ -1061,6 +1124,8 @@ function fetchProjects()
 				{
 					insertProjects(x[i]);
 				}
+
+				afterAjaxCallDisplay();
 			}
 			
 		}
@@ -1208,7 +1273,7 @@ function insertExperience(data)
 		{
 			experience+='<div class="col-md-3 visibleForUser text-right col-md-offset-2">';
 
-				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="fa fa-trash"></i></div>';
+				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="shoOnHover fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="showOnHover fa fa-trash"></i></div>';
 
 			experience+='</div>';
 		}
@@ -1264,6 +1329,7 @@ function fetchExperience()
 				{
 					insertExperience(x[i]);
 				}
+				afterAjaxCallDisplay();
 			}
 		}
 	});
@@ -1433,7 +1499,7 @@ function insertAcademics(data)
 		{
 			academics+='<div class="col-md-4 visibleForUser text-right">';
 
-				academics+='<div style="font-size:14px;"><i class="fa fa-pencil" onclick="editAcademics(\''+data.degreeId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAcademics(\''+data.degreeId+'\');"></i></div>';
+				academics+='<div style="font-size:14px;"><i class="showOnHover fa fa-pencil" onclick="editAcademics(\''+data.degreeId+'\');"></i>&nbsp;<i class="showOnHover fa fa-trash" onclick="deleteAcademics(\''+data.degreeId+'\');"></i></div>';
 
 			academics+='</div><!--end class col-md-8 -->';
 		}
@@ -1472,6 +1538,7 @@ function fetchAcademics()
 				{
 					insertAcademics(x[i]);
 				}
+				afterAjaxCallDisplay();
 			}
 		}
 	});
@@ -1481,11 +1548,19 @@ function addAcademicsSendData()
 {
 	var ln=$('#addAcademicsModal');
 	var degree=ln.find('#addAcademicsModalDegree').val().trim();
-	var percentage=ln.find('#addAcademicsModalPercentage').val().trim();
+	
 	var school=ln.find('#addAcademicsModalSchoolName').val().trim();
 	var duration=ln.find('#addAcademicsModalDurationFrom').val().trim()+"-"+ln.find('#addAcademicsModalDurationTo').val().trim();
 	var location=ln.find('#addAcademicsModalSchoolLocation').val().trim();
 	var scoreType=ln.find("#addAcademicsModalPercentage").val().trim();
+	if(scoreType==1)
+	{
+		var percentage=ln.find('#addAcademicsModalPercentage').val().trim();
+	}
+	else
+	{
+		var percentage=ln.find('#addAcademicsModalCGPA').val().trim()+"/"+ln.find('#addAcademicsModalCGPAScale').val().trim();
+	}
 	if(degree.length!="")
 	{
 		alert("Please enter the degree.");
@@ -1530,12 +1605,19 @@ function editAcademicsSendData()
 {
 	var link=$('#editAcademicsModal');
 	var degree=link.find('#editAcademicsModalDegree').val().trim();
-	var percentage=link.find('#editAcademicsModalPercentage').val().trim();
 	var school=link.find('#editAcademicsModalSchoolName').val().trim();
 	var scoreType=link.find('#editAcademicsModalPercentageType').val().trim();
 	var location=link.find('#editAcademicsModalSchoolLocation').val().trim();
 	var duration=link.find('#editAcademicsModalDurationFrom').val().trim()+"-"+link.find('#editAcademicsModalDurationTo').val().trim();
 	var id=link.find('#editAcademicsModalId').html();
+	if(scoreType==1)
+	{
+		var percentage=ln.find('#editAcademicsModalPercentage').val().trim();
+	}
+	else
+	{
+		var percentage=ln.find('#editAcademicsModalCGPA').val().trim()+"/"+ln.find('#editAcademicsModalCGPAScale').val().trim();
+	}
 	if(degree.length==0)
 	{
 		alert("We hope you have a degree name.")
@@ -1611,7 +1693,7 @@ function insertWorkshop(data)
 			{
 				workshop+='<div class="col-md-3 visibleForUser text-right col-md-offset-3">';
 
-					workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop(\''+data.workshopId+'\');" class="fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop(\''+data.workshopId+'\');" class="fa fa-trash"></i></div>';
+					workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop(\''+data.workshopId+'\');" class="showOnHover fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop(\''+data.workshopId+'\');" class="showOnHover fa fa-trash"></i></div>';
 
 				workshop+='</div><!-- end classc col-md-3 -->';
 			}
@@ -1680,6 +1762,7 @@ function fetchWorkshops()
 				{
 					insertWorkshop(x[i]);
 				}
+				afterAjaxCallDisplay();
 			}
 		}
 	});
@@ -1808,7 +1891,7 @@ function insertCertification(data)
 			{
 				certification+='<div class="col-md-3 visibleForUser text-right col-md-offset-2">';
 
-					certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="fa fa-trash"></i></div>';
+					certification+='<div style="font-size:14px;" class="text-right textPadding" ><i onclick="editCertification(\''+data.courseId+'\');" class="showOnHover fa fa-pencil"></i>&nbsp;<i onclick="deleteCertification(\''+data.courseId+'\');" class="showOnHover fa fa-trash"></i></div>';
 
 				certification+='</div>';
 			}
@@ -1863,6 +1946,7 @@ function fetchCertifications()
 				{
 					insertCertification(x[i]);
 				}
+				afterAjaxCallDisplay();
 			}
 		}
 	});
@@ -1988,7 +2072,7 @@ function insertAchievements(data)
 			{
 				achievements+='<div class="col-md-3 visibleForUser text-right col-md-offset-3">';
 
-					achievements+='<div  style="font-size:14px;"><i class="fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="fa fa-trash" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
+					achievements+='<div  style="font-size:14px;"><i class="showOnHover fa fa-pencil" onclick="editAchievement(\''+data.achievementId+'\');"></i>&nbsp;<i class="showOnHover fa fa-trash" onclick="deleteAchievement(\''+data.achievementId+'\');"></i></div>';
 
 				achievements+='</div><!-- end classc col-md-3 -->';
 			}
@@ -2060,6 +2144,7 @@ function fetchAchievements()
 				{
 					insertAchievements(x[i]);
 				}
+				afterAjaxCallDisplay();
 			}
 		}
 	});
@@ -2184,7 +2269,7 @@ function insertInterest(data,isOwner)
 
 		if(isOwner==1)
 		{
-			interest+='<i class="fa fa-pencil interestEdit" onclick="editInterests(this,\'edit\');"></i>';
+			interest+='<i class="showOnHover fa fa-pencil interestEdit" onclick="editInterests(this,\'edit\');"></i>';
 		}
 
 		interest+='</div>';
@@ -2200,7 +2285,7 @@ function insertInterest(data,isOwner)
 
 		if(isOwner==1)
 		{
-			interest+='<i class="fa fa-trash interestEdit" onclick="editInterests(this,\'delete\');"></i>';
+			interest+='<i class="showOnHover fa fa-trash interestEdit" onclick="editInterests(this,\'delete\');"></i>';
 		}
 
 		interest+='</div>';
@@ -2237,6 +2322,7 @@ function fetchInterests(data)
 				{
 					insertInterest(interests[i],x.isOwner);
 				}
+				afterAjaxCallDisplay();
 			}
 			
 		}

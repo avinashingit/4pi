@@ -49,7 +49,7 @@ else
 		$userId=$user['userId'];
 		$finalStudentRegex=getRollNoRegex($userId);
 		$values[0]=array($finalStudentRegex => 's');
-		$getLatestEventsSQL="SELECT event.* FROM event WHERE (sharedWith REGEXP ?) ORDER BY timestamp DESC";
+		$getLatestEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?) ORDER BY timestamp DESC";
 		$result=$conn->select($getLatestEventsSQL,$values);
 		$displayCount=0;
 		if($conn->error=="")

@@ -678,19 +678,19 @@ function postInsert(position, data1) {
 
     if(data1.profilePicExists==-1)
     {
-        post += '<a href="/4pi/' + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+        post += '<a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
     }
 
     else
     {
         if(data1.gender=="M")
         {
-            post += '<a href="/4pi/'+ data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+            post += '<a href="/4pi/aboutMe/index.php?userId='+ data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
         }
 
        else if(data1.gender=="F")
         {
-            post += '<a href="/4pi/' + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
+            post += '<a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><h5 id="postCreatedBy"><img title="' + data1.postUserName + '" src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</h5></a>';
         }
     }
 

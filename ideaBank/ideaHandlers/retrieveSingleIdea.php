@@ -1,4 +1,5 @@
 <?php
+session_start();
 	require_once('../../QOB/qob.php');
 	require_once('../../handlers/fetch.php');
 	require_once('/miniClasses/miniIdeaPost.php');
