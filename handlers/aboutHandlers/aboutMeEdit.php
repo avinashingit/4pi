@@ -11,13 +11,25 @@
 
 session_start();
 require_once('../../QOB/qob.php');
-require_once('./miniPoll.php');
 require_once('../fetch.php');
+require_once('aboutMeClass.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","MDS13M001".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B025".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_refresh']=0;
-	$_POST['sgk']=array();*/
+	$_POST['_mode']=3;
+	$_POST['_degree']="Name Of The Event";
+	$_POST['_description']=" Description of the Event I won";
+	$_POST['_duration']="27/01/2015-28/01/2015";
+	$_POST['_location']="The Location of the Event";
+	$_POST['_position']="Prize";
+	$_POST['_score']="5";
+	$_POST['_scoreType']="2";
+	$_POST['_schoolName']='some school';
+	$_POST['_degreeId']='d5';
+
+//$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']
+
+//$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']
 
 //Testing Content Ends
 	
@@ -94,7 +106,7 @@ else if($mode==2)
 else if($mode==3)
 {
 	//#academics Edit
-	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration']),$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']);
+	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']);
 }
 else if($mode==4)
 {
@@ -119,17 +131,17 @@ else if($mode==7)
 else if($mode == 8)
 {
 	//# SkillSet Insert
-	skillSetInsert($user,$_POST['_skill'],$_POST['_rating']);
+	skillSetEdit($user,$_POST['_skill'],$_POST['_rating']);
 }
 else if($mode == 9)
 {
 	//#toolkit insert
-	toolkitInsert($user,$_POST['_tools']);
+	toolkitEdit($user,$_POST['_tools']);
 }
 else if($mode ==10)
 {
 	//#interests Insert
-	interestsInsert($user,$_POST['_interests']);
+	interestsEdit($user,$_POST['_interests']);
 }
 else if($mode ==11)
 {
@@ -149,7 +161,8 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 		$showPhoneArray=$showPhone;
 		$phone=implode(',',$phone);
 		$showPhone=implode(',',$showPhone);
-		$date = date_parse($dob);
+		
+		//$date = date_parse($dob);
 		$dobTimestamp = dateStringToTimestamp($dob);
 		
 		$date1 = date_create();
@@ -219,7 +232,7 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 		}
 
 
-		if((($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
+		if(($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 		{
 			$conObj = new QoB();
 			
@@ -268,7 +281,7 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 			exit();
 		}
 	}
-function aboutMeBottomEdit($mailId,$showMailId,$address,$phone,$showPhone, $city, $fbLink, $twitterLink,$g+Link, $inLink, $ptrestLink)
+function aboutMeBottomEdit($mailId,$showMailId,$address,$phone,$showPhone, $city, $fbId, $twitterId,$googleId, $inId, $ptrestId)
 {
 	$userAlias=$user['alias'];
 	$conObj=new QoB();
@@ -302,20 +315,69 @@ function aboutMeBottomEdit($mailId,$showMailId,$address,$phone,$showPhone, $city
 
 }
 
+function achievmentsEdit($user,$competition,$description,$position,$location,$achievementIdString,$achievedDate='')
+	{
+		$achievementId=(int)substr($achievementIdString, 1);
+		//No AchievedDate for now
+		/*$date = date_parse($achievedDate);
+		$achievedDateTimestamp = dateStringToTimestamp($achievedDate);*/
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);	
+		
+		if(  $competition!="")
+		{
+
+			$conObj = new QoB();
+			
+			$userId = $user['userId']; 
+		
+			$values = array(0  => array($competition => 's'), 1 => array($description => 's'), 2 => array($position => 's'), 3 => array($location => 's'), 4=>array($achievedDate => 's'), 5=> array($userId => 's'), 6=>array($achievementId => 'i'));
+			
+			$result1 = $conObj->update("UPDATE achievements SET competition=?, description=?, position=?, location=?, achievedDate=? WHERE userId = ? AND achievementId = ? ",$values);
+			
+			if($conObj->error == "")
+			{
+				if(($rows=$conObj->getAffectedRows())==1)
+				{
+					echo $rows;
+					//$achievementId="a".$conObj->getInsertId();
+					$obj= new achievements($achievementIdString,$competition,$location,$description,$position,1);
+					print_r(json_encode($obj));
+				}
+				else
+				{
+					echo $rows;
+					notifyAdmin("suspicious attempt to change content in achievements:".$achievementId,$userId);
+					echo 6;
+					exit();
+				}	
+			}
+			else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While editing record in achievements",$userId);
+				echo 12;
+				exit();
+
+			}
+		}
+	}
+
+
 function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreType,$degreeIdString)
 	{	
 		$degreeId=(int)substr($degreeIdString, 1);
-
+		echo $degreeId;
 		$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
-
-		$startDate = date_parse($start);
+		var_dump($timeString);
+		//$startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		//endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -324,7 +386,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		$currentTimestamp = dateStringToTimestamp($date1);
 		
 		
-		if((($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp) and ($scoreType==0 || $scoreType==1))
+		if(($scoreType==2 || $scoreType==1))
 		{
 			$conObj = new QoB();
 			
@@ -369,51 +431,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		
 	}
 
-function achievmentsEdit($user,$competition,$description,$position,$location,$achievementIdString,$achievedDate='')
-	{
-		$achievementId=(int)substr($achievementIdString, 1);
 
-		$date = date_parse($achievedDate);
-		$achievedDateTimestamp = dateStringToTimestamp($achievedDate);
-		
-		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);	
-		
-		if((($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"]) ) and ($achievedDateTimestamp < $currentTimestamp))
-		{
-
-			$conObj = new QoB();
-			
-			$userId = $user['userId']; 
-		
-			$values = array(0  => array($competition => 's'), 1 => array($description => 's'), 2 => array($position => 's'), 3 => array($location => 's'), 4=>array($achievedDate => 's'), 5=> array($userId => 's'), 6=>array($achievementId => 's'));
-			
-			$result1 = $conObj->update("UPDATE achievements SET competition=?, description=?, position=?, location=?, achievedDate=?, WHERE userId = ? AND achievementId = ? ",$values);
-			
-			if($conObj->error == "")
-			{
-				if($conObj->getAffectedRows()==1)
-				{
-					//$achievementId="a".$conObj->getInsertId();
-					$obj= new achievements($achievementIdString,$competition,$location,$description,$position,1);
-					print_r(json_encode($obj));
-				}
-				else
-				{
-					notifyAdmin("suspicious attempt to change content in achievements:".$achievementId,$userId);
-					echo 6;
-					exit();
-				}	
-			}
-			else
-			{
-				notifyAdmin("Conn.Error".$conObj->error."! While editing record in achievements",$userId);
-				echo 12;
-				exit();
-
-			}
-		}
-	}
 
 function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$courseIdString)
 	{
@@ -423,12 +441,12 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 		$start=$timeString[0];
 		$end=$timeString[1];
 
-		$startDate = date_parse($start);
+		//$startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		//$endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -437,7 +455,7 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 		$currentTimestamp = date_timestamp_get($date1);
 		
 		
-		if((($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
+		if( ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp)  and ($startDateTimestamp < $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				
@@ -489,12 +507,12 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 		$start=$timeString[0];
 		$end=$timeString[1];
 				
-		$startDate = date_parse($start);
+		//$startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		//$endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -504,12 +522,12 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if((($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
+		if($organisation!="" and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
 				$conObj->startTransaction();
 				//Turn off Featuring for other experiences of user to set it for upcoming experince.
-				if($featuring = 1)
+				if($featuring == 1)
 				{
 					$conn=new QoB();
 					$val[0]=array($userId => 's');
@@ -517,7 +535,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 					if(($cr=$conn->error)!="")
 						{
 							$conObj->rollbackTransaction();
-							notifyAdmin("Conn Error: ".$cr."in experience Edit 1"$experienceId,$userId);
+							notifyAdmin("Conn Error: ".$cr."in experience Edit 1".$experienceId,$userId);
 							echo 12;
 							exit();
 						}
@@ -531,7 +549,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 				if($conObj->error == "")
 				{
 					//echo 'Succesfull Insert <br />';
-					if($conObj->getAffectedRows()==1)
+					if($conObj->getAffectedRows()==1 && $featuring==1)
 					{
 						$conn=new QoB();
 						$val[0]=array($$experienceId=> 'i');
@@ -541,7 +559,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 						if(($cr=$conObj->error)!="")
 						{
 							$conObj->rollbackTransaction();
-							notifyAdmin("Conn Error: ".$cr."in experience Edit 2"$experienceId,$userId);
+							notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
 							echo 12;
 							exit();
 						}
@@ -585,12 +603,12 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 		$start=$timeString[0];
 		$end=$timeString[1];
 
-		$startDate = date_parse($start);
+		//$startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		//$endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -600,7 +618,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if((($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
+		if($title!="" and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and($startDateTimestamp <= $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				
@@ -616,7 +634,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 				$values[5] = array($teamMembers => 's');
 				$values[6] = array($organisation => 's');
 				$values[7] = array($userId => 's');
-				$values[8] = array($projectId => 's')
+				$values[8] = array($projectId => 's');
 				$result1 = $conObj->update("UPDATE projects SET projectName=?,role=?,start=?,end=?, description=?,teamMembers=?,organisation=? WHERE userId =? AND projectId=?",$values);
 				if($conObj->error == "")
 				{
@@ -658,12 +676,12 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		$start=$timeString[0];
 		$end=$timeString[1];
 
-		$startDate = date_parse($start);
+		//$startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		//$endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -673,7 +691,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if((($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if($title!="" and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
 			{
 				$conObj = new QoB();
 			
@@ -762,7 +780,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=trim($skillArray[$k]);
-				if(isThereInCSV($existingSkills,$skill)===false)
+				if(isThereInCSV($existingSkills,$skill)==false)
 				{
 					$existingSkillsArray[]=$skill;
 					$existingRatingArray[]=$ratingArray[$k];
@@ -779,8 +797,15 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 				else
 				{
-					$hasRepeated=true;
-					$repeatedSkills[]=$skill;
+					if($skill=="")
+					{
+						$empty=true;
+					}
+					else
+					{
+						$hasRepeated=true;
+						$repeatedSkills[]=$skill;
+					}
 				}
 				# code...
 			}
@@ -793,7 +818,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 						$temp1=$existingRatingArray[$j];
 						$temp2=$existingSkillsArray[$j];
 						$existingRatingArray[$j]=$existingRatingArray[$j+1];
-						$existingSkillsArray[$j]=$existingSkillsArray[$j+1]
+						$existingSkillsArray[$j]=$existingSkillsArray[$j+1];
 						$existingRatingArray[$j+1]=$temp1;
 						$existingSkillsArray[$j+1]=$temp2;
 					}
@@ -854,14 +879,15 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function toolkitEdit($user,$toolsArray)
 	{
-		
-		$toolsArrayCount=count($toolsArray);
+		var_dump($toolsArray);
 
-		if($toolsArrayCount==0)
+		$toolsArrayCount=count($toolsArray);
+		echo $toolsArrayCount;
+		/*if($toolsArrayCount==0)
 		{
 			echo 16;
 			exit();
-		}
+		}*/
 
 		$i=0;
 		$userId = $user['userId'];
@@ -872,13 +898,13 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		//$existingToolsArray=explode(',', $existingTools);
 		$existingTools="";
 		$existingToolsArray=array();
-
+		$empty=false;
 		$hasRepeated=false;
 		$repeatedTools=array();
-		for ($k=0;$k<$toolArrayCount;$k++) 
+		for ($k=0;$k<$toolsArrayCount;$k++) 
 		{
-			$tool=trim($toolArray[$k]);
-			if(isThereInCSV($existingTools,$tool)===false)
+			$tool=trim($toolsArray[$k]);
+			if(isThereInCSV($existingTools,$tool)==false)
 			{
 				$existingToolsArray[]=$tool;
 				if($existingTools=="")
@@ -892,17 +918,30 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			}
 			else
 			{
-				$hasRepeated=true;
-				$repeatedTools[]=$tool;
+				if($tool=="")
+				{
+					$empty=true;
+				}
+				else
+				{
+					$hasRepeated=true;
+					$repeatedTools[]=$tool;
+				}
+				
 			}
 		}
 		
 		$message="";
+		if($empty)
+		{
+			echo 16;
+			exit();
+		}
 		$errorCode=3;
 		if($hasRepeated)
 		{
 			$repeatedTools=implode(', ',$repeatedTools);
-			$message=$repeatedTools. " already exists.";
+			$message=$repeatedTools. " exists.";
 			$errorCode=19; //Code 19 for partial success
 		}
 
@@ -936,11 +975,11 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		
 		$interestsArrayCount=count($interestsArray);
 
-		if($interestsArrayCount==0)
+		/*if($interestsArrayCount==0)
 		{
 			echo 16;
 			exit();
-		}
+		}*/
 
 		$i=0;
 		$userId = $user['userId'];
@@ -955,10 +994,10 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 		$hasRepeated=false;
 		$repeatedInterests=array();
-		for ($k=0;$k<$interestArrayCount;$k++) 
+		for ($k=0;$k<$interestsArrayCount;$k++) 
 		{
-			$interest=trim($interestArray[$k]);
-			if(isThereInCSV($existingInterests,$interest)===false)
+			$interest=trim($interestsArray[$k]);
+			if(isThereInCSV($existingInterests,$interest)==false)
 			{
 				$existingInterestsArray[]=$interest;
 				if($existingInterests=="")
@@ -972,11 +1011,23 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			}
 			else
 			{
-				$hasRepeated=true;
-				$repeatedInterests[]=$interest;
+				if($interest=="")
+				{
+					$empty=true;
+				}
+				else
+				{
+					$hasRepeated=true;
+					$repeatedInterests[]=$interest;
+				}
 			}
 		}
 		$message="";
+		if($empty)
+		{
+			echo 16;
+			exit();
+		}
 		$errorCode=3;
 		if($hasRepeated)
 		{

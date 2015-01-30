@@ -815,7 +815,7 @@ class QoB
     //Returns Fetched Row count (if the last function called is fetchAll or select)
     function getFetchedRowCount()
     {
-        return $this->$stmt->num_rows;
+        return $this->stmt->num_rows;
     }
 
 

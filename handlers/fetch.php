@@ -767,13 +767,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		return $finalRegexString;
 	}
 
+	//cause for malfunction in isThereInCSV() if the needle is an empty string. That Function returns true if empty string is passed as needle.
 	function isThereInCSVRegex($needle)
 	{
 		$finalRegexString="(,".$needle.",?)|(^".$needle.",?)";
 		return $finalRegexString;
 	}
 	
-
+	//Remember that function returns true if the needle is empty.
 	function isThereInCSV($haystack,$needle)
 	{
 		$finalRegexString=isThereInCSVRegex($needle);
