@@ -1,6 +1,6 @@
 <!-- basically the top bar i.e. the header part of the newsfeed, is common to all the users -->
 
-<script>
+<script>/*
 
 	function sendReadNotifications()
 	{
@@ -322,7 +322,7 @@
 			}
 			
 		});
-	}
+	}*/
 
 </script>
 
@@ -331,49 +331,57 @@
 
 	<div id="logo" class="col-md-2">
 
-		<div id="icons" style="position:absolute;top:0;left:0;right:0;bottom:0;">
+		<?php 
+			if(isset($_SESSION['vj']))
+			{
+				echo '<div id="icons" style="position:absolute;top:0;left:0;right:0;bottom:0;">
 
-			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
+						<div  class="text-center" style="padding-top:5px;font-size:20px;" >
 
-				<a style="color:white !important;" href="/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
+							<a style="color:white !important;" href="/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
 
-				<div id="notifications" class="hidden">
+							<div id="notifications" class="hidden">
 
-					
+								
 
 
-				</div>
-			
-			    <div class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-cog fa-lg" style="font-size:20px;color:white;" ></i>
-					<span class="caret" style="color:white;" ></span>
-					</a>
-					<ul class="dropdown-menu text-left" >
-						<li><a href="/4pi/index.php?logout=yes"><i class="fa fa-reply"></i> Logout</a></li>
-						<li><a href="settings.php"><i class="fa fa-pencil"></i> Settings</a></li>
-					</ul>
-				</div>
-			
-			</div>
+							</div>
+						
+						    <div class="btn-group">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-cog fa-lg" style="font-size:20px;color:white;" ></i>
+								<span class="caret" style="color:white;" ></span>
+								</a>
+								<ul class="dropdown-menu text-left" >
+									<li><a href="/4pi/index.php?logout=yes"><i class="fa fa-reply"></i> Logout</a></li>
+									<li><a href="settings.php"><i class="fa fa-pencil"></i> Settings</a></li>
+								</ul>
+							</div>
+						
+						</div>
 
-		</div>
+					</div>';
+			}
+		?>
+
+		
 
 	</div>
 
 	<div id="brand" class="text-center col-md-2 col-md-offset-3"> 
 
-		<a href="index.php"><img id="pilogo" src="/4pi/img/appImgs/fourpi.svg" width="45" height="auto" style="padding-top:3px;"/></a>
+		<a href="/4pi/index.php"><img id="pilogo" src="/4pi/img/appImgs/fourpi.svg" width="45" height="auto" style="padding-top:3px;"/></a>
 
 	</div>
 
-	<div id="search" class="col-md-3 col-md-offset-2">
+	<?php 
+		if(isset($_SESSION['vj'])) {echo '<div id="search" class="col-md-3 col-md-offset-2">
 
 		<form class="navbar-form" role="search" style="padding-right:20px !important;">
 
 		  <div class="form-group">
 
-		    <input id="searchBefore" type="text" onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
+		    <input id="searchBefore" type="text" onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$(\'#searchResults1\').removeClass(\'hidden\');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
 
 		  </div>
 
@@ -421,7 +429,10 @@
 
 		</div>
 
-	</div>
+		</div>';}  
+	?>
+
+	
 
 </div>
 

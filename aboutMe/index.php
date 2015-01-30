@@ -1047,7 +1047,7 @@ if(userId=="")
 <body style="padding-top:0px;">
 
 	<?php
-		include('../topBar.php');
+		include('../topBarForAboutMe.php');
 	?>
 
 	<div class="container">
