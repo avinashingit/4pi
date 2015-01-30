@@ -177,10 +177,14 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsA] = $obj;
 				$noOfElementsA++;
 			}
-			print_r(json_encode($outputa));	
+			
 			if($noOfElementsA == 0)
 			{
 				echo 404;
+			}
+			else
+			{
+				print_r(json_encode($outputa));	
 			}
 			
 		}
@@ -262,10 +266,14 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsAc] = $obj;
 				$noOfElementsAc++;
 			}
-			print_r(json_encode($outputa));
+			
 			if($noOfElementsAc == 0)
 			{
 				echo 404;		
+			}
+			else
+			{
+				print_r(json_encode($outputa));
 			}
 		}
 		else
@@ -293,10 +301,14 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsC] = $obj;
 				$noOfElementsC++;
 			}
-			print_r(json_encode($outputa));
+			
 			if($noOfElementsC == 0)
 			{
 				echo 404;
+			}
+			else
+			{
+				print_r(json_encode($outputa));
 			}
 		}
 		else
@@ -323,10 +335,14 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsE] = $obj;
 				$noOfElementsE++;
 			}
-			print_r(json_encode($outputa));
+			
 			if($noOfElementsE == 0)
 			{
 				echo 404;
+			}
+			else
+			{
+				print_r(json_encode($outputa));
 			}
 		}
 		else
@@ -353,10 +369,14 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsP] = $obj;
 				$noOfElementsP++;
 			}
-			print_r(json_encode($outputa));	
+			
 			if($noOfElementsP == 0)
 			{
 				echo 404;
+			}
+			else
+			{
+				print_r(json_encode($outputa));	
 			}
 		}
 		else
@@ -383,11 +403,15 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsW] = $obj;
 				$noOfElementsW++;
 			}
-			print_r(json_encode($outputa));
+			
 			if($noOfElementsW == 0)
 			{
 				echo 404;
 				exit();
+			}
+			else
+			{
+				print_r(json_encode($outputa));
 			}
 		}
 		else
@@ -569,10 +593,14 @@ function aboutMe($userId,$mode,$isOwner)
 				$outputa[$noOfElementsM] = $obj;
 				$noOfElementsM++;
 			}
-			print_r($outputa);
+			
 			if($noOfElementsM == 0)
 			{
 				echo 404;
+			}
+			else
+			{
+				print_r(json_encode($outputa));
 			}
 		}
 		else
