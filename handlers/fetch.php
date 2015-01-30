@@ -107,7 +107,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	    }
 	    $ipAddress=$_SERVER['REMOTE_ADDR'];
 	    $OsAndBrowser=$browser." On ".$os_platform;
-		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser,ipaddress) VALUES(?,?)";
+		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser,ipaddress) VALUES(?,?,?)";
 		$values[0]=array($userId => 's');
 		$values[1]=array($OsAndBrowser => 's');
 		$values[2]=array($ipAddress => 's');

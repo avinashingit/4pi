@@ -377,7 +377,7 @@ function academicsInsert($user,$degree,$schoolName,$location,$durationString,$sc
 	$currentTimestamp = date_timestamp_get($date1);
 	
 	
-	if(!(($degreeName == '') and ($name == '') and ($score =='')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp)and ($scoreType==0 || $scoreType==1)
+	if(!(($degreeName == '') and ($name == '') and ($score =='')) and (($startDate["error_count"] == 0) and ($startDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp < $endDateTimestamp)and ($scoreType==0 || $scoreType==1)))
 	{
 		$conObj = new QoB();
 		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -544,12 +544,12 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 		$start=$timeString[0];
 		$end=$timeString[1];
 
-		$startDate = date_parse($start);
+		// $startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		// $endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -558,7 +558,7 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 		$currentTimestamp = date_timestamp_get($date1);
 		
 		
-		if(!(($title == '') and ($instituteName == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
+		if(!(($title == '') and ($instituteName == '')) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and ($startDateTimestamp < $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -615,12 +615,12 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 		$start=$timeString[0];
 		$end=$timeString[1];
 				
-		$startDate = date_parse($start);
+		// $startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		// $endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -630,7 +630,7 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(!(($organisation == '') and ($title == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp - $endDateTimestamp !=0) and($startDateTimestamp <=$endDateTimestamp))
+		if(!(($organisation == '') and ($title == '')) and ($startDateTimestamp < $currentTimestamp) and($startDateTimestamp <=$endDateTimestamp))
 			{
 			
 				$conObj = new QoB();
@@ -642,7 +642,7 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 						if($result0 != "")
 						{*/
 							//Turn off Featuring for other experiences of user to set it for upcoming experince.
-							if($featuring = 1)
+							if($featuring == 1)
 							{
 								$conn=new QoB();
 								$val[0]=array($userId => 's');
@@ -657,7 +657,7 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 							$userId = $user['userId'];
 							$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
 							
-							$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,start,end,title,featuring) VALUES(?,?,?,?,?,?)",$values);
+							$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,startDate,endDate,designation,featuring) VALUES(?,?,?,?,?,?)",$values);
 							
 							if($conObj->error == "")
 								{
@@ -699,19 +699,16 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 
 function projectInsert($user,$title,$role,$durationString,$description,$teamMembers,$organisation)
 	{
-		echo $durationString;
 		$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 	
-		$startDate = date_parse($start);
+		// $startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
-
-		print_r($startDate);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		// $endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		/*echo $endDate;*/
@@ -723,7 +720,7 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(!(($title == '') and ($description == '') and ($role == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp)  and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
+		if(!(($title == '') and ($description == '') and ($role == '')) and ($startDateTimestamp < $currentTimestamp)  and ($startDateTimestamp - $endDateTimestamp !=0)and($startDateTimestamp <= $endDateTimestamp))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -788,12 +785,12 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 		$start=$timeString[0];
 		$end=$timeString[1];
 
-		$startDate = date_parse($start);
+		// $startDate = date_parse($start);
 		$startDateTimestamp = dateStringToTimestamp($start);
 		
 		//echo $startDateTimestamp.'<br/>';
 		
-		$endDate = date_parse($end);
+		// $endDate = date_parse($end);
 		$endDateTimestamp = dateStringToTimestamp($end);
 
 		//echo $endDateTimestamp.'<br/>';
@@ -803,7 +800,7 @@ function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if(!(($place == '') and ($attendCount == '') and ($title == '')) and (($startDate["error_count"] == 0) and checkdate($startDate["month"], $startDate["day"], $startDate["year"])) and (($endDate["error_count"] == 0) and checkdate($endDate["month"], $endDate["day"], $endDate["year"])) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if(!(($place == '') and ($attendCount == '') and ($title == '')) and (($startDate["error_count"] == 0) and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp)))
 			{
 				$conObj = new QoB();
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
@@ -919,7 +916,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 						$temp1=$existingRatingArray[$j];
 						$temp2=$existingSkillsArray[$j];
 						$existingRatingArray[$j]=$existingRatingArray[$j+1];
-						$existingSkillsArray[$j]=$existingSkillsArray[$j+1]
+						$existingSkillsArray[$j]=$existingSkillsArray[$j+1];
 						$existingRatingArray[$j+1]=$temp1;
 						$existingSkillsArray[$j+1]=$temp2;
 					}

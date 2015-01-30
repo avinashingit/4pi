@@ -20,19 +20,17 @@ function userLogin(){
 	if(error==0)
 	{
 		//alert("called");
-		var x=$.post('loginBackend.php',{
+		$.post('/4pi/loginBackend.php',{
 			_username:username,
 			_password:password
 		})
 		
-		.error(function(){
-			alert("Server Overload. Please try after a few seconds");
+		.error(function(data){
+			alert("Server Overload. Please try after a few seconds"+data);
 			//return false;
 		})
 		
 		.success(function (data){
-		//alert("HAI");
-		// alert(data);
 		data = data.trim();
 		//alert(data);
 		////alert(data);

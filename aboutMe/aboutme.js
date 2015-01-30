@@ -45,6 +45,11 @@ function showUserOptions()
 	}
 }
 
+function closeModal(id)
+{
+	$('#'+id).modal('hide');
+}
+
 $(document).ready(function(){
 	fetchTopPart();
 	fetchSkills();
@@ -550,7 +555,8 @@ function editContactInfoSendData()
 	.success(function(data){
 		if(checkData(data)==1)
 		{
-			insertBottomPart(data);
+			insertBottomPart(JSOn.parse(data));
+			closeModal('editContactsModal');
 		}
 	});
 }
@@ -595,6 +601,8 @@ function editTopPartSendData()
 	    	contentType: false,
 	    	success:function(data){
 	    		console.log(data);
+	    		insertTopPart(JSON.parse(data));
+	    		closeModal('editPersonInfoModal');
 	    	}
 		});
 	}
@@ -746,6 +754,7 @@ function addSkillSendData()
 				{
 					alert(data.message);
 				}
+				closeModal('addSkillModal');
 			}
 		});
 	}
@@ -1091,7 +1100,7 @@ function insertProjects(data)
 
 			projects+='<div class="col-md-12 text-center">';
 
-				projects+='<p class="text-center" style="text-align:justify;" id="projectDescription">'+data.description+'</p>';
+				projects+='<p class="text-center" style="word-wrap:break-word;text-align:justify;" id="projectDescription">'+data.description+'</p>';
 
 			projects+='</div>';
 
@@ -1318,6 +1327,7 @@ function fetchExperience()
 	})
 	.success(function(data){
 		console.log(data);
+		alert(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1360,6 +1370,7 @@ function addExperienceSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
