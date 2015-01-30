@@ -16,15 +16,8 @@ require_once('../../QOB/qob.php');
 require_once('../fetch.php');
 require_once('aboutMeClass.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B025".SALT);
+	$userIdHash=$_SESSION['vj'];
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_mode']=10;
-	$_POST['_interests']=array("art");
-	$_POST['_role']=" Description of the Event I won";
-	$_POST['_duration']="27/01/2015-28/01/2015";
-	$_POST['_location']="The Location of the Event";
-	$_POST['_peopleAttended']="5";
-	$_POST['_scoreType']="2";
 
 //$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['isfeaturing']
 //$_POST['_degree'],$_POST['_schoolName'],$_POST['location'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType']
@@ -382,6 +375,8 @@ function academicsInsert($user,$degree,$schoolName,$location,$durationString,$sc
 	$endDateTimestamp = dateStringToTimestamp($end);
 
 	//echo $endDateTimestamp." ";
+	//
+	echo $scoreType;
 	
 	$date1 = date_create();
 	$currentTimestamp = date_timestamp_get($date1);
@@ -1125,7 +1120,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 	{
 		/*if(count($interestsArray)!=0)
 			{*/
-				var_dump($interestsArray);
+				// var_dump($interestsArray);
 				$interestsArrayCount=count($interestsArray);
 
 				if($interestsArrayCount==0)

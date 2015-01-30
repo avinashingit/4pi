@@ -1584,7 +1584,8 @@ function addAcademicsSendData()
 			_schoolName:school,
 			_duration:duration,
 			location:location,
-			_scoreType:scoreType
+			_scoreType:scoreType,
+			_mode:3
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
