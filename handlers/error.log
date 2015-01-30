@@ -366,3 +366,11 @@
 
 [2015-01-19 21:14:33             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') VALUES (?,?)' at line 1$$$
 
+[2015-01-30 18:28:48             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-30 18:30:34             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-30 18:30:51             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+
+[2015-01-30 18:30:57             ::1                   Asia/Kolkata] 1052   $$$Column 'userId' in where clause is ambiguous$$$
+

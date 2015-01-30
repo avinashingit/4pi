@@ -1572,7 +1572,7 @@ function addAcademicsSendData()
 	{
 		var percentage=ln.find('#addAcademicsModalCGPA').val().trim()+"/"+ln.find('#addAcademicsModalCGPAScale').val().trim();
 	}
-	if(degree.length!="")
+	if(degree.length==0)
 	{
 		alert("Please enter the degree.");
 	}
@@ -2186,6 +2186,7 @@ function addAchievementSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2348,7 +2349,7 @@ function addInterestsSendData()
 	var i=0;
 
 	link.find(".addInterestInputClass").each(function(){
-		interestArray[i]=$(this).find("#interestName").html();
+		interestArray[i]=$(this).find("#addInterestModalInterestName").val();
 		i++;
 	});
 
@@ -2371,7 +2372,7 @@ function addInterestsSendData()
 	{
 		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_userId:userId,
-			_interests:interestsArray,
+			_interests:interestArray,
 			_mode:10
 		})
 		.error(function(){
@@ -2381,10 +2382,11 @@ function addInterestsSendData()
 			console.log(data);
 			if(checkData(data)==1)
 			{
+				var x=JSON.parse(data);
 				$("#interests").find('.interest').remove();
-				for(var i=0;i<data.length;i++)
+				for(var i=0;i<x.interests.length;i++)
 				{
-					insertInterests(data[i]);
+					insertInterest(x.interests[i],x.isOwner);
 				}
 			}
 		});

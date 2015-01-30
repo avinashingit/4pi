@@ -10,3 +10,9 @@
 
 [2015-01-26 22:14:02             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.experience' doesn't exist$$$
 
+[2015-01-30 11:44:28             ::1                   Asia/Kolkata] 1054   $$$Unknown column 'isfeaturing' in 'field list'$$$
+
+[2015-01-30 11:44:50             ::1                   Asia/Kolkata] 1054   $$$Unknown column 'start' in 'field list'$$$
+
+[2015-01-30 11:46:17             ::1                   Asia/Kolkata] 1054   $$$Unknown column 'title' in 'field list'$$$
+
