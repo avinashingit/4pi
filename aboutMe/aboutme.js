@@ -556,7 +556,7 @@ function editContactInfoSendData()
 		if(checkData(data)==1)
 		{
 			insertBottomPart(JSOn.parse(data));
-			closeModal('editContactsModal');
+			link.modal('hide');
 		}
 	});
 }
@@ -602,7 +602,7 @@ function editTopPartSendData()
 	    	success:function(data){
 	    		console.log(data);
 	    		insertTopPart(JSON.parse(data));
-	    		closeModal('editPersonInfoModal');
+	    		$('#editPersonInfoModal').modal('hide');
 	    	}
 		});
 	}
@@ -754,7 +754,7 @@ function addSkillSendData()
 				{
 					alert(data.message);
 				}
-				closeModal('addSkillModal');
+				$('#addSkillModal').modal('hide');
 			}
 		});
 	}
@@ -829,6 +829,8 @@ function editSkillSendData()
 				{
 					alert(data.message);
 				}
+
+				$("#editSkillModal").modal('hide');
 			}
 		});
 	}
@@ -956,6 +958,7 @@ function addToolsSendData()
 				{
 					insertTool(x[i],data.isOwner);
 				}
+				$("#addToolModal").modal('hide');
 			}
 		});
 	}
@@ -1018,6 +1021,8 @@ function editToolsSendData()
 				{
 					insertTool(x[i]);
 				}
+
+				$("#editToolModal").modal('hide');
 			}
 		});
 	}
@@ -1174,6 +1179,7 @@ function addProjectSendData()
 			{
 				data=JSON.parse(data);
 				insertProjects(data);
+				$("#addProjectModal").modal('hide');
 			}
 		});
 	}
@@ -1225,6 +1231,7 @@ function editProjectSendData()
 			{
 				data=JSON.parse(data);
 				modifyProject(data);
+				$("#editProjectModal").modal('hide');
 			}
 		});
 	}
@@ -1375,6 +1382,7 @@ function addExperienceSendData()
 			{
 				data=JSON.parse(data);
 				insertExperience(data);
+				$("#addExperienceModal").modal('hide');
 			}
 		});
 	}
@@ -1419,6 +1427,7 @@ function editExperienceSendData()
 			if(checkData(data)==1)
 			{
 				modifyExperience(data);
+				$("#editExperienceModal").modal('hide');
 			}
 		});
 	}
@@ -1596,6 +1605,7 @@ function addAcademicsSendData()
 			{
 				data=JSON.parse(data);
 				insertAcademics(data);
+				$("#addAcademicsModal").modal('hide');
 			}
 		});
 	}
@@ -1653,6 +1663,7 @@ function editAcademicsSendData()
 			{
 				data=JSON.parse(data);
 				modifyAcademics(data);
+				$("#editAcademicsModal").modal('hide');
 			}
 		});
 	}
@@ -1809,6 +1820,7 @@ function addWorkshopSendData()
 			{
 				data=JSON.parse(data);
 				insertWorkshop(data);
+				$("#addWorkshopModal").modal('hide');
 			}
 		});
 	}
@@ -1851,6 +1863,7 @@ function editWorkshopSendData()
 			if(checkData(data)==1)
 			{
 				modifyWorkshop(data);
+				$("#editWorkshopModal").modal('hide');
 			}
 		});
 	}
@@ -1991,6 +2004,7 @@ function addCertificationSendData()
 			{
 				data=JSON.parse(data);
 				insertCertification(data);
+				$("#addCertificationModal").modal('hide');
 			}
 		});
 	}
@@ -2031,6 +2045,7 @@ function editCertificationSendData()
 			{
 				data=JSON.parse(data);
 				modifyCertification(data);
+				$("#editCertificationModal").modal('hide');
 			}
 		});
 	}
@@ -2192,6 +2207,7 @@ function addAchievementSendData()
 			{
 				data=JSON.parse(data);
 				insertAchievements(data);
+				$("#addAchievementModal").modal('hide');
 			}
 		});
 	}
@@ -2235,6 +2251,7 @@ function editAchievementSendData()
 			{
 				data=JSON.parse(data);
 				modifyAchievement(data);
+				$("#editAchievementModal").modal('hide');
 			}
 		});
 	}
@@ -2389,6 +2406,8 @@ function addInterestsSendData()
 				{
 					insertInterest(x.interests[i],x.isOwner);
 				}
+
+				$("#addInterestModal").modal('hide');
 			}
 		});
 	}
@@ -2450,6 +2469,8 @@ function editInterestSendData()
 				{
 					insertInterests(data[i]);
 				}
+
+				$("#editInterestModal").modal('hide');
 			}
 		});
 	}
