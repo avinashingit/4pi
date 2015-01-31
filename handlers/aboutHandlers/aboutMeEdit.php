@@ -14,24 +14,31 @@ require_once('../../QOB/qob.php');
 require_once('../fetch.php');
 require_once('aboutMeClass.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B025".SALT);
+	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B025".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_mode']=3;
-	$_POST['_degree']="Name Of The Event";
-	$_POST['_description']=" Description of the Event I won";
+	$_POST['_mode']=10;
+	$_POST['_workshopName']="Name Of The Role";
+	$_POST['_projectDescription']=" Description of the Event I won";
 	$_POST['_duration']="27/01/2015-28/01/2015";
 	$_POST['_location']="The Location of the Event";
-	$_POST['_position']="Prize";
-	$_POST['_score']="5";
-	$_POST['_scoreType']="2";
-	$_POST['_schoolName']='some school';
-	$_POST['_degreeId']='d5';
+	$_POST['_teamMembers']="Me,You";
+	$_POST['_interests']=array("matlab","php","php");
+	$_POST['_rating']=array(10);
+	$_POST['_projectCompany']='some school';
+	$_POST['_workshopId']='p2';*/
+
+//$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_projectDescription'],$_POST['_teamMembers'],$_POST['_projectCompany'],$_POST['_projectId']
+
+//$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['_experienceId'],$_POST['_isfeaturing']
 
 //$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']
 
 //$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']
 
+//$_POST['_courseName'],$_POST['_duration'],$_POST['_institute'],$_POST['_courseId']
 //Testing Content Ends
+
+//$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended'],$_POST['_workshopId']
 	
 /* Return Codes and their meanings.
 Code 3: SUCCESS!!
@@ -44,6 +51,17 @@ Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
 
 */
+
+// Id Types
+/*
+academics(degree) - d.*
+achievements - a.*
+courses - C.* Its Capital C. Careful!!
+experience - e.*
+projects - p.*
+workshops - w.*
+*/
+//
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 {
 	echo 11;
@@ -106,7 +124,7 @@ else if($mode==2)
 else if($mode==3)
 {
 	//#academics Edit
-	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId']);
+	academicsEdit($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType'],$_POST['_degreeId'],$_POST['_location']);
 }
 else if($mode==4)
 {
@@ -116,7 +134,7 @@ else if($mode==4)
 else if($mode==5)
 {
 	//#experience Edit
-	experienceEdit($user,$_POST['_company'],$_POST['duration'],$_POST['_role'],$_POST['_experienceId'],$_POST['_isFeaturring']);
+	experienceEdit($user,$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['_experienceId'],$_POST['_isfeaturing']);
 }
 else if($mode==6)
 {
@@ -317,13 +335,14 @@ function aboutMeBottomEdit($mailId,$showMailId,$address,$phone,$showPhone, $city
 
 function achievmentsEdit($user,$competition,$description,$position,$location,$achievementIdString,$achievedDate='')
 	{
+
 		$achievementId=(int)substr($achievementIdString, 1);
 		//No AchievedDate for now
 		/*$date = date_parse($achievedDate);
 		$achievedDateTimestamp = dateStringToTimestamp($achievedDate);*/
 		
-		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);	
+		/*$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);	*/
 		
 		if(  $competition!="")
 		{
@@ -338,9 +357,9 @@ function achievmentsEdit($user,$competition,$description,$position,$location,$ac
 			
 			if($conObj->error == "")
 			{
-				if(($rows=$conObj->getAffectedRows())==1)
+				if(($rows=$conObj->getMatchedRowsOnUpdate())==1)
 				{
-					echo $rows;
+					//echo $rows;
 					//$achievementId="a".$conObj->getInsertId();
 					$obj= new achievements($achievementIdString,$competition,$location,$description,$position,1);
 					print_r(json_encode($obj));
@@ -364,11 +383,11 @@ function achievmentsEdit($user,$competition,$description,$position,$location,$ac
 	}
 
 
-function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreType,$degreeIdString)
+function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreType,$degreeIdString,$location)
 	{	
 		$degreeId=(int)substr($degreeIdString, 1);
-		echo $degreeId;
-		$timeString=explode("-",$durationString);
+		//echo $degreeId;
+		/*$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 		var_dump($timeString);
@@ -383,28 +402,31 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		//echo $endDateTimestamp.'<br/>';
 		
 		$date1 = date_create();
-		$currentTimestamp = dateStringToTimestamp($date1);
+		$currentTimestamp = dateStringToTimestamp($date1);*/
 		
 		
-		if(($scoreType==2 || $scoreType==1))
+		if(($degree!="") and (($time=validateAboutMeDateString($durationString))!=false)and ($scoreType==2 || $scoreType==1))
 		{
+			var_dump($time);
+			$startDateTimestamp=$time['start'];
+			$endDateTimestamp=$time['end'];
 			$conObj = new QoB();
 			
 			$userAlias=$user['alias'];
 			$userId = $user['userId'];
 			//$degreeId = '';
 			
-			$values = array(0 => array($degree => 's'), 1 => array($schoolName => 's'), 2 => array($startDateTimestamp => 's'), 3 => array($endDateTimestamp => 's'),4 => array($score => 's'),5 => array($scoreType => 'i'),6 => array($userId => 's'),7 =>array($degreeId=> 'i') );
+			$values = array(0 => array($degree => 's'), 1 => array($schoolName => 's'), 2 => array($startDateTimestamp => 's'), 3 => array($endDateTimestamp => 's'),4 => array($score => 's'),5 => array($scoreType => 'i'),6 => array($location => 's'),7 => array($userId => 's'),8 =>array($degreeId=> 'i') );
 			
-			$result1 = $conObj->update("UPDATE academics SET degree=?,schoolName=?,start=?,end=?, score=?,scoreType=? WHERE userId =? AND degreeId=?",$values);
+			$result1 = $conObj->update("UPDATE academics SET degree=?,schoolName=?,start=?,end=?, score=?,scoreType=?,location =? WHERE userId =? AND degreeId=?",$values);
 			
 			if($conObj->error == "")
 			{
 				/*echo 'Succesfull Insert <br />';*/
-				if($conObj->getAffectedRows()==1)
+				if($conObj->getMatchedRowsOnUpdate()==1)
 				{
-					$duration=getDuration($start,$end);
-					$minDuration=getMinDuration($start,$end);
+					$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+					$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 					//$degreeId="d".$conObj->getInsertId();
 					$degreeObj= new academics($degreeIdString,$degree,$schoolName,$location,$duration,$minDuration,$score,$scoreType,1);
 					print_r(json_encode($degreeObj));
@@ -436,8 +458,8 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$courseIdString)
 	{
 		$courseId=(int)substr($courseIdString, 1);
-
-		$timeString=explode("-",$durationString);
+		//echo $courseId;
+		/*$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 
@@ -452,11 +474,13 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 		//echo $endDateTimestamp.'<br/>';
 		
 		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);
+		$currentTimestamp = date_timestamp_get($date1);*/
 		
 		
-		if( ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp)  and ($startDateTimestamp < $endDateTimestamp))
+		if($title!="" and (($time=validateAboutMeDateString($durationString))!=false))
 			{
+				$startDateTimestamp=$time['start'];
+				$endDateTimestamp=$time['end'];
 				$conObj = new QoB();
 				
 				$userId = $user['userId'];
@@ -467,7 +491,7 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 				if($conObj->error == "")
 				{
 					//echo 'Succesfull Insert <br />';
-					if($conObj->getAffectedRows()==1)
+					if($conObj->getMatchedRowsOnUpdate()==1)
 					{
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
@@ -499,11 +523,11 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 	}
 
 
-function experienceEdit($user,$organisation,$durationString,$title,$featuring,$experienceIdString)
+function experienceEdit($user,$organisation,$durationString,$title,$experienceIdString,$featuring)
 	{
-		$experienceId=(int)substr($experienceIdString, 1);
-
-		$timeString=explode("-",$durationString);
+		$experienceId=(int) substr($experienceIdString, 1);
+		//echo $experienceId;
+		/*$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 				
@@ -518,13 +542,16 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 		//echo $endDateTimestamp.'<br/>';
 		
 		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);
+		$currentTimestamp = date_timestamp_get($date1);*/
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if($organisation!="" and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if($organisation!="" and (($time=validateAboutMeDateString($durationString))!=false))
 			{
+				$startDateTimestamp=$time['start'];
+				$endDateTimestamp=$time['end'];
 				$conObj = new QoB();
+				//$conObj->setMySQLiRealConnect();
 				$conObj->startTransaction();
 				//Turn off Featuring for other experiences of user to set it for upcoming experince.
 				if($featuring == 1)
@@ -540,38 +567,45 @@ function experienceEdit($user,$organisation,$durationString,$title,$featuring,$e
 							exit();
 						}
 				}
-
+				
 				$userId = $user['userId'];
 				$values = array(0 => array($organisation => 's'),1 => array($startDateTimestamp => 's'),2 => array($endDateTimestamp => 's'), 3 => array($title => 's') , 4 => array($featuring => 'i'), 5 => array($userId => 's'),6 => array($experienceId => 'i'));
-				
-				$result1 = $conObj->update("UPDATE experience SET organisation=?,start=?,end=?,title=?,featuring=? WHERE userId=? AND experienceId =?",$values);
-				
+				//echo 'before Query';
+				//var_dump($values);
+				$result1 = $conObj->update("UPDATE experience SET organisation=?,start=?,end=?,designation=?,featuring= ? WHERE userId=? AND experienceId = ?",$values);
+				//var_dump($result1);
 				if($conObj->error == "")
 				{
 					//echo 'Succesfull Insert <br />';
-					if($conObj->getAffectedRows()==1 && $featuring==1)
+					//$conObj->setMySQLiRealConnect();
+					
+					if($conObj->getMatchedRowsOnUpdate()==1)
 					{
-						$conn=new QoB();
-						$val[0]=array($$experienceId=> 'i');
-						$val[1]=array($userId => 's');
-						
-						$res=$conObj->update("UPDATE about SET work = ? WHERE userId=?",$val);
-						if(($cr=$conObj->error)!="")
+						if($featuring==1)
 						{
-							$conObj->rollbackTransaction();
-							notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
-							echo 12;
-							exit();
+							
+							$val[0]=array($$experienceId=> 'i');
+							$val[1]=array($userId => 's');
+							
+							$res=$conObj->update("UPDATE about SET work = ? WHERE userId=?",$val);
+							if(($cr=$conObj->error)!="")
+							{
+								$conObj->rollbackTransaction();
+								notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
+								echo 12;
+								exit();
+							}
 						}
 						$conObj->completeTransaction();
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 						//$experienceId="e".$conObj->getInsertId();
-						$experienceObj=new experience($experienceIdString,$organisation,$duration,$minDuration,$designation,1);
+						$experienceObj=new experience($experienceIdString,$organisation,$duration,$minDuration,$title,$featuring,1);
 						print_r(json_encode($experienceObj));
 					}
 					else
 					{
+						//$cr=$conObj->error;
 						$conObj->rollbackTransaction();
 						notifyAdmin("suspicious attempt to change content in experience:".$experienceId,$userId);
 						echo 6;
@@ -599,7 +633,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 	{
 		$projectId=(int)substr($projectIdString, 1);
 
-		$timeString=explode("-",$durationString);
+		/*$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 
@@ -614,12 +648,14 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 		//echo $endDateTimestamp.'<br/>';
 		
 		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);
+		$currentTimestamp = date_timestamp_get($date1);*/
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if($title!="" and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and($startDateTimestamp <= $endDateTimestamp))
+		if($title!="" and (($time=validateAboutMeDateString($durationString))!=false))
 			{
+				$startDateTimestamp=$time['start'];
+				$endDateTimestamp=$time['end'];
 				$conObj = new QoB();
 				
 				$userId = $user['userId'];
@@ -639,7 +675,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 				if($conObj->error == "")
 				{
 					//echo 'Succesfull Insert <br />';
-					if($conObj->getAffectedRows()==1)
+					if($conObj->getMatchedRowsOnUpdate()==1)
 					{
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
@@ -672,7 +708,7 @@ function projectEdit($user,$title,$role,$durationString,$description,$teamMember
 function workshopsEdit($user,$title,$durationString,$place,$attendCount,$workshopIdString)
 	{
 		$workshopId=(int)substr($workshopIdString, 1);
-		$timeString=explode("-",$durationString);
+		/*$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
 
@@ -687,12 +723,14 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		//echo $endDateTimestamp.'<br/>';
 		
 		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);
+		$currentTimestamp = date_timestamp_get($date1);*/
 		
 		//echo $currentTimestamp.'<br/>';
 		
-		if($title!="" and ($startDateTimestamp < $currentTimestamp) and ($endDateTimestamp < $currentTimestamp) and ($startDateTimestamp <=$endDateTimestamp))
+		if($title!="" and (($time=validateAboutMeDateString($durationString))!=false))
 			{
+				$startDateTimestamp=$time['start'];
+				$endDateTimestamp=$time['end'];
 				$conObj = new QoB();
 			
 				$userId = $user['userId'];
@@ -707,18 +745,18 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				$values[5] = array($userId => 's');
 				$values[6] = array($workshopId => 'i');
 
-				$result1 = $conObj->update("UPDATE workshops SET workshopName=?,start=?,end=?,place=?,attendCount=? WHERE userId=? AND workshopId=?",$values);
+				$result1 = $conObj->update("UPDATE workshops SET workshopName=?,start=?,end=?,place=?,attendersCount=? WHERE userId=? AND workshopId=?",$values);
 				
 				if($conObj->error == "")
 				{
 					//echo 'Succesfull Insert <br />';
-					if($conObj->getAffectedRows()==1)
+					if($conObj->getMatchedRowsOnUpdate()==1)
 					{
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 						//$workshopId="w".$conObj->getInsertId();
 						$workshopObj=new workshops($workshopIdString,$duration,$minDuration,$title,$place,$attendCount,1);
-						print_r(json_encode($projectObj));
+						print_r(json_encode($workshopObj));
 					}
 					else
 					{
@@ -744,12 +782,24 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function skillSetEdit($user,$skillArray,$ratingArray)
 	{
+		if(!(is_array($skillArray)&&is_array($ratingArray)))
+		{
+			echo 16;
+			exit();
+		}
+
 		/*if(!((count($skillArray)==0) and (count($ratingArray) == 0)))
 		{*/
 			/*$skillArray=explode(',',$skill);
 			$ratingArray=explode(',',$rating);*/
 			$skillArrayCount=count($skillArray);
 			$ratingArrayCount=count($ratingArray);
+			/*var_dump($skillArray);
+			echo "<br>";
+			var_dump($ratingArray);
+			echo "<br>";
+			echo $skillArrayCount."and".$ratingArrayCount;
+			echo "<br>";*/
 			if($skillArrayCount!=$ratingArrayCount)
 			{
 				echo 16;
@@ -775,13 +825,17 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			$existingSkillsArray=array();
 			$existingRatingArray=array();
 
+			$empty=false;
 			$hasRepeated=false;
 			$repeatedSkills=array();
 			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
-				$skill=trim($skillArray[$k]);
+				$skill=$skillArray[$k];
+				//echo $skill;
 				if(isThereInCSV($existingSkills,$skill)==false)
 				{
+					/*echo "is not there in csv";
+					echo "<br>";*/
 					$existingSkillsArray[]=$skill;
 					$existingRatingArray[]=$ratingArray[$k];
 					if($existingSkills=="")
@@ -809,6 +863,8 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 				# code...
 			}
+			/*var_dump($existingSkillsArray);
+			echo "<br>";*/
 			for($i=0;$i<$skillArrayCount-1;$i++)
 			{
 				for($j=0;$j<$skillArrayCount-1;$j++)
@@ -825,6 +881,11 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 			}
 			$message="";
+			if($empty)
+			{
+				echo 16;
+				exit();
+			}
 			$errorCode=3;
 			if($hasRepeated)
 			{
@@ -857,7 +918,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				{
 					//echo 'Successfull Insert <br />';
 
-					$skillsObj=new skillSet($exitstingSkillsArray,$existingRatingArray,1,json_encode($outObj),$message,$errorCode);
+					$skillsObj=new skillSet($existingSkillsArray,$existingRatingArray,1,json_encode($outObj),$message,$errorCode);
 					print_r(json_encode($skillsObj));
 				}
 			else
@@ -879,10 +940,15 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function toolkitEdit($user,$toolsArray)
 	{
-		var_dump($toolsArray);
+		//var_dump($toolsArray);
 
+		if(!(is_array($toolsArray)))
+		{
+			echo 16;
+			exit();
+		}
 		$toolsArrayCount=count($toolsArray);
-		echo $toolsArrayCount;
+		//echo $toolsArrayCount;
 		/*if($toolsArrayCount==0)
 		{
 			echo 16;
@@ -972,6 +1038,11 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function interestsEdit($user,$interestsArray)
 	{
+		if(!(is_array($interestsArray)))
+		{
+			echo 16;
+			exit();
+		}
 		
 		$interestsArrayCount=count($interestsArray);
 
@@ -981,7 +1052,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			exit();
 		}*/
 
-		$i=0;
+		$i=  0;
 		$userId = $user['userId'];
 		/*$interestRecord=getInterestsByUser($userId);
 		
@@ -992,13 +1063,16 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		$existingInterests="";
 		$existingInterestsArray=array();
 
+		$empty=false;
 		$hasRepeated=false;
 		$repeatedInterests=array();
 		for ($k=0;$k<$interestsArrayCount;$k++) 
 		{
 			$interest=trim($interestsArray[$k]);
+			//echo $existingInterests."s<br>";
 			if(isThereInCSV($existingInterests,$interest)==false)
 			{
+				//echo "is not there in csv";
 				$existingInterestsArray[]=$interest;
 				if($existingInterests=="")
 				{
@@ -1006,7 +1080,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 				else
 				{
-					$existingInterests.=",".interest;
+					$existingInterests.=",".$interest;
 				}
 			}
 			else

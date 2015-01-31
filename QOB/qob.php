@@ -818,7 +818,18 @@ class QoB
         return $this->stmt->num_rows;
     }
 
+    //Some Problem. Needs to be checked
+    function setMySQLiRealConnect()
+    {
+        $con=mysqli_init();
+        $this->conn=$con->real_connect(HOST,USER,PASSWORD,DB,MYSQLI::MYSQLI_CLIENT_FOUND_ROWS);
+    }
 
+    function getMatchedRowsOnUpdate()
+    {
+        preg_match_all('!\d+!', $this->conn->info, $m);
+        return $m[0][0];
+    }
 
 
   }/* End of QoB */

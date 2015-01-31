@@ -673,6 +673,68 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 
 
+	function validateAboutMeDateString($dateString)
+	{
+		$time=array();
+		$currentTime=time();
+		if($dateString!="")
+		{
+
+			$timestring=explode('-', $dateString);
+			//var_dump($timestring);
+			$start=$timestring[0];
+			$end=$timestring[1];
+			if($start!="")
+			{
+				if(($time['start']=dateStringToTimestamp($start))==false)
+				{
+					//echo "Returning False1";
+					return false;
+				}
+
+			}
+			else
+			{
+				//echo "Start Empty";
+				$time['start']="";
+			}
+			if($end!="")
+			{
+				if(($time['end']=dateStringToTimestamp($end))==false)
+				{
+					//echo "Returning False2";
+					return false;
+				}
+				else 
+				{
+					var_dump($time);
+					echo $currentTime;
+					if($time['start']<$currentTime&&$time['start']<$time['end'])
+					{
+						return $time;
+					}
+					else
+					{
+						//echo "Returning False3";
+						return false;
+					}
+				}
+			}
+			else
+			{
+				//echo "End Empty";
+				$time['end']="";
+			}
+		}
+		else
+		{
+			//echo "String Empty";
+			$time['start']="";
+			$time['end']="";
+			return $time;
+		}
+	}
+
 	function getEventStatus($event,$isAttending)
 	{
 		date_default_timezone_set("Asia/Kolkata");
