@@ -45,8 +45,8 @@ workshops - w.*
 
 $conn=new QoB();
 $currentUserId="Guest";
-$userId=$_POST['_userId'];
-$mode=$_POST['_mode'];
+$userId=$_POST['_userId']="COE12B025";
+$mode=$_POST['_mode']=8;
 $isOwner=0;
 
 if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
@@ -433,6 +433,24 @@ function aboutMe($userId,$mode,$isOwner)
 				$existingRating=$result1['rating'];
 				$existingSkillsArray=explode(',', $existingSkills);
 				$existingRatingArray=explode(',', $existingRating);
+				$existingSkillCount=count($existingSkillsArray);
+				for($i=0;$i<$existingSkillCount-1;$i++)
+				{
+					for($j=0;$j<$existingSkillCount-1;$j++)
+					{
+						//echo $existingRatingArray[$j];
+						if($existingRatingArray[$j]<$existingRatingArray[$j+1])
+						{
+							//echo $existingRatingArray[$j+1];
+							$temp1=$existingRatingArray[$j];
+							$temp2=$existingSkillsArray[$j];
+							$existingRatingArray[$j]=$existingRatingArray[$j+1];
+							$existingSkillsArray[$j]=$existingSkillsArray[$j+1];
+							$existingRatingArray[$j+1]=$temp1;
+							$existingSkillsArray[$j+1]=$temp2;
+						}
+					}
+				}
 				$i=0;
 				while($i<count($existingSkillsArray))
 				{

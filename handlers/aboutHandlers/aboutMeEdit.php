@@ -828,6 +828,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			$empty=false;
 			$hasRepeated=false;
 			$repeatedSkills=array();
+			$updatedSkillCount=0;
 			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=$skillArray[$k];
@@ -838,6 +839,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 					echo "<br>";*/
 					$existingSkillsArray[]=$skill;
 					$existingRatingArray[]=$ratingArray[$k];
+					$updatedSkillCount++;
 					if($existingSkills=="")
 					{
 						$existingSkills=$skill;
@@ -865,9 +867,9 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			}
 			/*var_dump($existingSkillsArray);
 			echo "<br>";*/
-			for($i=0;$i<$skillArrayCount-1;$i++)
+			for($i=0;$i<$updatedSkillCount-1;$i++)
 			{
-				for($j=0;$j<$skillArrayCount-1;$j++)
+				for($j=0;$j<$updatedSkillCount-1;$j++)
 				{
 					if($existingRatingArray[$j]<$existingRatingArray[$j+1])
 					{
