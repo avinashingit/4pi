@@ -187,18 +187,18 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 		$currentTimestamp = date_timestamp_get($date1);
 
 		//$profilePic=getProfilePicLocation($userIdHash);
-		if($_FILES["_resume"]["name"]!='')
+		if($_FILES['_resume']['name']!='')
 		{
 			$resume=$_FILES['_resume']['name'];
 			$allowedExts = array("pdf", "png","jpg","jpeg","docx","doc");
-			$extension = end(explode(".", $_FILES["_resume"]["name"]));
-			if ((($_FILES["_resume"]["type"] == "application/pdf")	|| ($_FILES["_resume"]["type"] == "image/png")	|| ($_FILES["_resume"]["type"] == "image/jpeg") || ($_FILES["_resume"]["type"] == "image/jpg") || ($_FILES["_resume"]["type"] == "application/docx")) && ($_FILES["_resume"]["size"] < 8192576) && in_array($extension, $allowedExts))
+			$extension = end(explode(".", $_FILES['_resume']['name']));
+			if ((($_FILES['_resume']['type'] == "application/pdf")	|| ($_FILES['_resume']['type'] == "image/png")	|| ($_FILES['_resume']['type'] == "image/jpeg") || ($_FILES['_resume']['type'] == "image/jpg") || ($_FILES['_resume']['type'] == "application/docx")) && ($_FILES['_resume']['size'] < 8192576) && in_array($extension, $allowedExts))
 			{
-				if ($_FILES["_resume"]["error"] > 0)
+				if ($_FILES['_resume']['error'] > 0)
 				{
 					echo 6;
-					//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
-					notifyAdmin("Resume Upload Error Code: " . $_FILES["_resume"]["error"] ,$userId);
+					//echo "Return Code: " . $_FILES['file']['error'][$i] . "<br>";
+					notifyAdmin("Resume Upload Error Code: " . $_FILES['_resume']['error'] ,$userId);
 					exit();
 				}
 				else
@@ -207,24 +207,25 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 					{
 						array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
 					}
-					move_uploaded_file($_FILE["_resume"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
+					move_uploaded_file($_FILE['_resume']['tmp_name'],"../../files/resumes/".$userId.'.'.$extension);
 					$resume=$userId.$extension;
 				}
 			}
 		}
-		if($_FILES["_profilePic"]["name"]!='')
+		if($_FILES['_profilePic']['name']!='')
 		{
-			$userIdHash=$user['userIdHash'];
+			uploadPicture($_FILES['_profilePic'],$user);
+			/*$userIdHash=$user['userIdHash'];
 			$resume=$_FILES['_profilePic']['name'];
 			$allowedExts = array("jpg","jpeg");
-			$extension = end(explode(".", $_FILES["_profilePic"]["name"]));
-			if (( ($_FILES["_profilePic"]["type"] == "image/jpeg") || ($_FILES["_profilePic"]["type"] == "image/jpg") ) && ($_FILES["_profilePic"]["size"] <= 4194304) && in_array($extension, $allowedExts))
+			$extension = end(explode(".", $_FILES['_profilePic']['name']));
+			if (( ($_FILES['_profilePic']['type'] == "image/jpeg") || ($_FILES['_profilePic']['type'] == "image/jpg") ) && ($_FILES['_profilePic']['size'] <= 4194304) && in_array($extension, $allowedExts))
 			{
-				if ($_FILES["_profilePic"]["error"] > 0)
+				if ($_FILES['_profilePic']['error'] > 0)
 				{
 					echo 6;
-					//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
-					notifyAdmin("Propic Upload Error Code: " . $_FILES["_profilePic"]["error"] ,$userId);
+					//echo "Return Code: " . $_FILES['file']['error'][$i] . "<br>";
+					notifyAdmin("Propic Upload Error Code: " . $_FILES['_profilePic']['error'] ,$userId);
 					exit();
 				}
 				else
@@ -233,17 +234,17 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 					{
 						array_map('unlink',glob(__DIR__."/../../img/proPics/$userIdHash.jpg"));
 					}
-					/*$tempImage=imagecreatefromjpeg($_FILES["_profilePic"]["tmp_name"])
-					$destination="../../img/proPics/".$userIdHash.'.jpg';
-					$quality=getQuality($_FILES["_profilePic"]["size"]);
-					imagejpeg($tempImage, $destination, $quality);*/
+					//$tempImage=imagecreatefromjpeg($_FILES['_profilePic']['tmp_name'])
+					//$destination="../../img/proPics/".$userIdHash.'.jpg';
+					//$quality=getQuality($_FILES['_profilePic']['size']);
+					//imagejpeg($tempImage, $destination, $quality);
 
 					$thumb = new Imagick();
-					$thumb->readImage($_FILES["_profilePic"]["tmp_name"]);
+					$thumb->readImage($_FILES['_profilePic']['tmp_name']);
 					$thumb->resizeImage(200,200,Imagick::FILTER_CATROM,1);
-					$thumb->writeImage($_FILES["_profilePic"]["tmp_name"]);
-					$thumb->destroy();
-					/*move_uploaded_file($_FILES["_profilePic"]["tmp_name"],"../../img/proPics/".$userIdHash.'.jpg');*/
+					$thumb->writeImage($_FILES['_profilePic']['tmp_name']);
+					$thumb->destroy();*/
+					/*move_uploaded_file($_FILES['_profilePic']['tmp_name'],"../../img/proPics/".$userIdHash.'.jpg');*/
 					
 				}
 			}
@@ -405,8 +406,14 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		$currentTimestamp = dateStringToTimestamp($date1);*/
 		
 		
-		if(($degree!="") and (($time=validateAboutMeDateString($durationString))!=false)and ($scoreType==2 || $scoreType==1))
+		if(!($scoreType!="" and ($scoreType==2 || $scoreType==1))
 		{
+			echo 16;
+			exit();
+		}
+		if(!($degree=="") and (($time=validateAboutMeDateString($durationString))!=false) )
+		{
+		
 			var_dump($time);
 			$startDateTimestamp=$time['start'];
 			$endDateTimestamp=$time['end'];
@@ -833,29 +840,29 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			{
 				$skill=$skillArray[$k];
 				//echo $skill;
-				if(isThereInCSV($existingSkills,$skill)==false)
+				if($skill=="")
 				{
-					/*echo "is not there in csv";
-					echo "<br>";*/
-					$existingSkillsArray[]=$skill;
-					$existingRatingArray[]=$ratingArray[$k];
-					$updatedSkillCount++;
-					if($existingSkills=="")
-					{
-						$existingSkills=$skill;
-						$existingRating=$ratingArray[$k];
-					}
-					else
-					{
-						$existingSkills.=",".$skill;
-						$existingRating.=",".$ratingArray[$k];
-					}
+					$empty=true;
 				}
 				else
 				{
-					if($skill=="")
+					if(isThereInCSV($existingSkills,$skill)==false)
 					{
-						$empty=true;
+						/*echo "is not there in csv";
+						echo "<br>";*/
+						$existingSkillsArray[]=$skill;
+						$existingRatingArray[]=$ratingArray[$k];
+						$updatedSkillCount++;
+						if($existingSkills=="")
+						{
+							$existingSkills=$skill;
+							$existingRating=$ratingArray[$k];
+						}
+						else
+						{
+							$existingSkills.=",".$skill;
+							$existingRating.=",".$ratingArray[$k];
+						}
 					}
 					else
 					{
@@ -883,16 +890,17 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 			}
 			$message="";
+			$errorCode=3;
 			if($empty)
 			{
-				echo 16;
-				exit();
+				$message="Some Fields left empty. Please Fill or Remove them. ";
+				$errorCode=19;
 			}
-			$errorCode=3;
+			
 			if($hasRepeated)
 			{
 				$repeatedSkills=implode(', ',$repeatedSkills);
-				$message=$repeatedSkills. " already exists.";
+				$message.=$repeatedSkills. " already exists.";
 				$errorCode=19; //Code 19 for partial success
 			}
 
@@ -972,44 +980,46 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		for ($k=0;$k<$toolsArrayCount;$k++) 
 		{
 			$tool=trim($toolsArray[$k]);
-			if(isThereInCSV($existingTools,$tool)==false)
+			if($tool=="")
 			{
-				$existingToolsArray[]=$tool;
-				if($existingTools=="")
-				{
-					$existingTools=$tool;
-				}
-				else
-				{
-					$existingTools.=",".$tool;
-				}
+				$empty=true;
 			}
 			else
 			{
-				if($tool=="")
+				if(isThereInCSV($existingTools,$tool)==false)
 				{
-					$empty=true;
+					$existingToolsArray[]=$tool;
+					if($existingTools=="")
+					{
+						$existingTools=$tool;
+					}
+					else
+					{
+						$existingTools.=",".$tool;
+					}
 				}
 				else
 				{
-					$hasRepeated=true;
-					$repeatedTools[]=$tool;
+					
+						$hasRepeated=true;
+						$repeatedTools[]=$tool;
+					}
+					
 				}
-				
 			}
 		}
 		
 		$message="";
+		$errorCode=3;
 		if($empty)
 		{
-			echo 16;
-			exit();
+			$message="Some Fields left empty. Please Fill or Remove them. ";
+			$errorCode=19;
 		}
-		$errorCode=3;
 		if($hasRepeated)
 		{
 			$repeatedTools=implode(', ',$repeatedTools);
-			$message=$repeatedTools. " exists.";
+			$message.=$repeatedTools. " exists.";
 			$errorCode=19; //Code 19 for partial success
 		}
 
@@ -1072,43 +1082,45 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		{
 			$interest=trim($interestsArray[$k]);
 			//echo $existingInterests."s<br>";
-			if(isThereInCSV($existingInterests,$interest)==false)
+			if($interest=="")
 			{
-				//echo "is not there in csv";
-				$existingInterestsArray[]=$interest;
-				if($existingInterests=="")
-				{
-					$existingInterests=$interest;
-				}
-				else
-				{
-					$existingInterests.=",".$interest;
-				}
+				$empty=true;
 			}
 			else
 			{
-				if($interest=="")
+				if(isThereInCSV($existingInterests,$interest)==false)
 				{
-					$empty=true;
+					//echo "is not there in csv";
+					$existingInterestsArray[]=$interest;
+					if($existingInterests=="")
+					{
+						$existingInterests=$interest;
+					}
+					else
+					{
+						$existingInterests.=",".$interest;
+					}
 				}
 				else
 				{
 					$hasRepeated=true;
 					$repeatedInterests[]=$interest;
+					
 				}
 			}
 		}
 		$message="";
+		$errorCode=3;
 		if($empty)
 		{
-			echo 16;
-			exit();
+			$message="Some Fields left empty. Please Fill or Remove them. ";
+			$errorCode=19;
 		}
-		$errorCode=3;
+		
 		if($hasRepeated)
 		{
 			$repeatedInterests=implode(', ',$repeatedInterests);
-			$message=$repeatedInterests. " already exists.";
+			$message.=$repeatedInterests. " already exists.";
 			$errorCode=19; //Code 19 for partial success
 		}
 

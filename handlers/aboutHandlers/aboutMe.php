@@ -433,7 +433,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$existingRating=$result1['rating'];
 				$existingSkillsArray=explode(',', $existingSkills);
 				$existingRatingArray=explode(',', $existingRating);
-				$existingSkillCount=count($existingSkillsArray);
+				/*$existingSkillCount=count($existingSkillsArray);
 				for($i=0;$i<$existingSkillCount-1;$i++)
 				{
 					for($j=0;$j<$existingSkillCount-1;$j++)
@@ -450,7 +450,7 @@ function aboutMe($userId,$mode,$isOwner)
 							$existingSkillsArray[$j+1]=$temp2;
 						}
 					}
-				}
+				}*/
 				$i=0;
 				while($i<count($existingSkillsArray))
 				{

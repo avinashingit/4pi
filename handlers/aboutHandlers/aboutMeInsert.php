@@ -16,9 +16,9 @@ require_once('../../QOB/qob.php');
 require_once('../fetch.php');
 require_once('aboutMeClass.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B024".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B014".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_skill']=array("matlab","php","php","MySQL");
+	$_POST['_skill']=array("matlab","php","php","");
 	$_POST['_rating']=array(10,20,15,9);
 	$_POST['_mode']=8;
 
@@ -395,8 +395,12 @@ function academicsInsert($user,$degree,$schoolName,$location,$durationString,$sc
 	$date1 = date_create();
 	$currentTimestamp = date_timestamp_get($date1);*/
 	//echo $currentTimestamp;
-	
-	if(!($degree=="") and (($time=validateAboutMeDateString($durationString))!=false) and ($scoreType==2 || $scoreType==1))
+	if(!($scoreType!="" and ($scoreType==2 || $scoreType==1))
+	{
+		echo 16;
+		exit();
+	}
+	if(!($degree=="") and (($time=validateAboutMeDateString($durationString))!=false) )
 	{
 		$startDateTimestamp=$time['start'];
 		$endDateTimestamp=$time['end'];
@@ -921,10 +925,20 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			$skillRecord=getSkillsByUser($userId);
 			
 			$existingSkills=$skillRecord['skills'];
+			var_dump($existingSkills);
 			$existingRating=$skillRecord['rating'];
-			$existingSkillsArray=explode(',', $existingSkills);
-			$existingRatingArray=explode(',', $existingRating);
-
+			if($existingSkills!="")
+			{
+				$existingSkillsArray=explode(',', $existingSkills);
+				$existingRatingArray=explode(',', $existingRating);
+			}
+			else
+			{
+				$existingSkillsArray=array();
+				$existingRatingArray=array();
+			}
+			echo "<br>";
+			var_dump($existingSkillsArray);
 			$empty=false;
 			$hasRepeated=false;
 			$repeatedSkills=array();
@@ -932,27 +946,28 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			for ($k=0;$k<$skillArrayCount;$k++) 
 			{
 				$skill=trim($skillArray[$k]);
-				if(isThereInCSV($existingSkills,$skill)===false)
+				if($skill=="")
 				{
-					$existingSkillsArray[]=$skill;
-					$existingRatingArray[]=$ratingArray[$k];
-					$updatedSkillCount++;
-					if($existingSkills=="")
-					{
-						$existingSkills=$skill;
-						$existingRating=$ratingArray[$k];
-					}
-					else
-					{
-						$existingSkills.=",".$skill;
-						$existingRating.=",".$ratingArray[$k];
-					}
+					$empty=true;
 				}
 				else
 				{
-					if($skill=="")
+					if(isThereInCSV($existingSkills,$skill)==false)
 					{
-						$empty=true;
+						$existingSkillsArray[]=$skill;
+						$existingRatingArray[]=$ratingArray[$k];
+						$updatedSkillCount++;
+						if($existingSkills=="")
+						{
+							$existingSkills=$skill;
+							$existingRating=$ratingArray[$k];
+						}
+						else
+						{
+							$existingSkills.=",".$skill;
+							$existingRating.=",".$ratingArray[$k];
+						}
+						echo "$existingSkills";
 					}
 					else
 					{
@@ -982,16 +997,16 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			}
 			//Sorting Ends
 			$message="";
+			$errorCode=3;
 			if($empty)
 			{
-				echo 16;
-				exit();
+				$message="Some Fields left empty. Please Fill or Remove them. ";
+				$errorCode=19;
 			}
-			$errorCode=3;
 			if($hasRepeated)
 			{
 				$repeatedSkills=implode(', ',$repeatedSkills);
-				$message=$repeatedSkills. " already exists.";
+				$message.=$repeatedSkills. " already exists.";
 				$errorCode=19; //Code 19 for partial success
 			}
 			$i=0;
@@ -1077,8 +1092,15 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				$toolRecord=getToolsByUser($userId);
 				
 				$existingTools=$toolRecord['tools'];
-
-				$existingToolsArray=explode(',', $existingTools);
+				if($existingTools!="")
+				{
+					$existingToolsArray=explode(',', $existingTools);
+				}
+				else
+				{
+					$existingToolsArray=array();
+				}
+				
 
 				$empty=false;
 				$hasRepeated=false;
@@ -1086,23 +1108,23 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				for ($k=0;$k<$toolsArrayCount;$k++) 
 				{
 					$tool=trim($toolsArray[$k]);
-					if(isThereInCSV($existingTools,$tool)==false)
+					if($tool=="")
 					{
-						$existingToolsArray[]=$tool;
-						if($existingTools=="")
-						{
-							$existingTools=$tool;
-						}
-						else
-						{
-							$existingTools.=",".$tool;
-						}
+						$empty=true;
 					}
 					else
 					{
-						if($tool=="")
+						if(isThereInCSV($existingTools,$tool)==false)
 						{
-							$empty=true;
+							$existingToolsArray[]=$tool;
+							if($existingTools=="")
+							{
+								$existingTools=$tool;
+							}
+							else
+							{
+								$existingTools.=",".$tool;
+							}
 						}
 						else
 						{
@@ -1112,16 +1134,16 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 					}
 				}
 				$message="";
+				$errorCode=3;
 				if($empty)
 				{
-					echo 16;
-					exit();
+					$message="Some Fields left empty. Please Fill or Remove them. ";
+					$errorCode=19;
 				}
-				$errorCode=3;
 				if($hasRepeated)
 				{
 					$repeatedTools=implode(', ',$repeatedTools);
-					$message=$repeatedTools. " already exists.";
+					$message.=$repeatedTools. " already exists.";
 					$errorCode=19; //Code 19 for partial success
 				}
 
@@ -1195,12 +1217,19 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				$i=0;
 				$userId = $user['userId'];
 				$interestRecord=getInterestsByUser($userId);
-				
+				var_dump($interestRecord);
 				$existingInterests=$interestRecord['interests'];
+				if($existingInterests!="")
+				{
+					$existingInterestsArray=explode(',', $existingInterests);
+				}
+				else
+				{
+					$existingInterestsArray=array();
+				}
+				
 
-				$existingInterestsArray=explode(',', $existingInterests);
-
-				//var_dump($existingInterestsArray);
+				var_dump($existingInterestsArray);
 				$hasRepeated=false;
 				$empty=false;
 				$repeatedInterests=array();
@@ -1208,23 +1237,24 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				{
 					$interest=trim($interestsArray[$k]);
 					//echo $existingInterests." and ".$interest;
-					if(isThereInCSV($existingInterests,$interest)==false)
+					if($interest=="")
 					{
-						$existingInterestsArray[]=$interest;
-						if($existingInterests=="")
-						{
-							$existingInterests=$interest;
-						}
-						else
-						{
-							$existingInterests.=",".$interest;
-						}
+						$empty=true;
 					}
 					else
 					{
-						if($interest=="")
+						if(isThereInCSV($existingInterests,$interest)==false)
 						{
-							$empty=true;
+							$existingInterestsArray[]=$interest;
+							if($existingInterests=="")
+							{
+								$existingInterests=$interest;
+							}
+							else
+							{
+								$existingInterests.=",".$interest;
+							}
+							echo $existingInterests."<br>";
 						}
 						else
 						{
@@ -1237,16 +1267,17 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				//echo "<br> after edit";
 				//var_dump($existingInterestsArray);
 				$message="";
+				$errorCode=3;
 				if($empty)
 				{
-					echo 16;
-					exit();
+					$message="Some Fields left empty. Please Fill or Remove them. ";
+					$errorCode=19;
 				}
-				$errorCode=3;
+				
 				if($hasRepeated)
 				{
 					$repeatedInterests=implode(', ',$repeatedInterests);
-					$message=$repeatedInterests. " already exists.";
+					$message.=$repeatedInterests. " already exists.";
 					$errorCode=19; //Code 19 for partial success
 				}
 

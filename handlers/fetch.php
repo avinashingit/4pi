@@ -25,7 +25,45 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	require_once("eventHandlers/miniEvent.php");
 	require_once("pollHandlers/miniPoll.php");
 
-		
+	function uploadPicture($file,$user)
+	{
+		if($file["name"]!='')
+		{
+			$userIdHash=$user['userIdHash'];
+			$resume=$file['name'];
+			$allowedExts = array("jpg","jpeg");
+			$extension = end(explode(".", $file["name"]));
+			if (( ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") ) && ($file["size"] <= 4194304) && in_array($extension, $allowedExts))
+			{
+				if ($file["error"] > 0)
+				{
+					echo 6;
+					notifyAdmin("Propic Upload Error Code: " . $file["error"] ,$userId);
+					exit();
+				}
+				else
+				{
+					if (array_map('file_exists',glob(__DIR__."/../../img/proPics/$userIdHash.jpg")))
+					{
+						array_map('unlink',glob(__DIR__."/../../img/proPics/$userIdHash.jpg"));
+					}
+					
+					$uploadedfile = $file['tmp_name'];
+					$src = imagecreatefromjpeg($uploadedfile);
+					list($width,$height)=getimagesize($uploadedfile);
+					$newwidth=200;
+					$newheight=($height/$width)*$newwidth;
+					$tmp=imagecreatetruecolor($newwidth,$newheight);
+					imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
+					$fileLocation="/../../img/proPics/$userIdHash.jpg";
+					imagejpeg($tmp,$fileLocation,100);
+					imagedestroy($src);
+					imagedestroy($tmp);
+					return true;
+				}
+			}
+		}
+	}	
 
 	function getUserFromHash($userHash)
 	{
