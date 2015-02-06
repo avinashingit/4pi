@@ -1,4 +1,5 @@
 <?php
+
 //------Credits------//
 //
 //
@@ -114,12 +115,12 @@ $mode=$_POST['_mode'];
 if($mode==1)
 {
 	//#about Edit
-	aboutMeEdit($user,$_POST['_dob'],$_POST['_description']);
+	aboutMeEdit($user,$_POST['_alias'],$_POST['_dob'],$_POST['_description'],$_POST['_highestDegree'], $_POST['_currentProfession']);
 }
 else if($mode==2)
 {
 	//#achievements Edit
-	achievmentsEdit($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']);
+	achievementsEdit($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievementId'],$_POST['_achievedDate']);
 }
 else if($mode==3)
 {
@@ -134,7 +135,7 @@ else if($mode==4)
 else if($mode==5)
 {
 	//#experience Edit
-	experienceEdit($user,$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['_experienceId'],$_POST['_isfeaturing']);
+	experienceEdit($user,$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['_experienceId'],$_POST['_isFeaturing']);
 }
 else if($mode==6)
 {
@@ -164,7 +165,7 @@ else if($mode ==10)
 else if($mode ==11)
 {
 	//bottomPartEdit
-	aboutMeBottomEdit($_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
+	aboutMeBottomEdit($user,$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
 }
 else 
 {
@@ -173,8 +174,10 @@ else
 	exit();
 }
 
-function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId)
+function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
+			$currentProfession)
 	{
+		//var_dump($_POST);
 		$phoneArray=$phone;
 		$showPhoneArray=$showPhone;
 		$phone=implode(',',$phone);
@@ -185,14 +188,14 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 		
 		$date1 = date_create();
 		$currentTimestamp = date_timestamp_get($date1);
-
+		$userId=$user['userId'];
 		//$profilePic=getProfilePicLocation($userIdHash);
 		if($_FILES['_resume']['name']!='')
 		{
 			$resume=$_FILES['_resume']['name'];
-			$allowedExts = array("pdf", "png","jpg","jpeg","docx","doc");
+			$allowedExts = array("pdf");
 			$extension = end(explode(".", $_FILES['_resume']['name']));
-			if ((($_FILES['_resume']['type'] == "application/pdf")	|| ($_FILES['_resume']['type'] == "image/png")	|| ($_FILES['_resume']['type'] == "image/jpeg") || ($_FILES['_resume']['type'] == "image/jpg") || ($_FILES['_resume']['type'] == "application/docx")) && ($_FILES['_resume']['size'] < 8192576) && in_array($extension, $allowedExts))
+			if ((($_FILES['_resume']['type'] == "application/pdf") && ($_FILES['_resume']['size'] < 8192576) && in_array($extension, $allowedExts)))
 			{
 				if ($_FILES['_resume']['error'] > 0)
 				{
@@ -207,14 +210,28 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 					{
 						array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
 					}
-					move_uploaded_file($_FILE['_resume']['tmp_name'],"../../files/resumes/".$userId.'.'.$extension);
-					$resume=$userId.$extension;
+					$resumeFileName=$userId.".".$extension;
+					if(move_uploaded_file($_FILES['_resume']['tmp_name'],__DIR__."/../../files/resumes/".$resumeFileName))
+					{
+						echo $resumeFileName;
+						echo "Uploaded Resume successfully";
+					}
+					else
+					{
+						echo "Uploaded Resume unsuccessfull";
+					}
+					//$resume=$userId.$extension;
+					
 				}
 			}
 		}
 		if($_FILES['_profilePic']['name']!='')
 		{
-			uploadPicture($_FILES['_profilePic'],$user);
+			if(uploadPicture($_FILES['_profilePic'],$user))
+			{
+
+			}
+
 			/*$userIdHash=$user['userIdHash'];
 			$resume=$_FILES['_profilePic']['name'];
 			$allowedExts = array("jpg","jpeg");
@@ -245,24 +262,20 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 					$thumb->writeImage($_FILES['_profilePic']['tmp_name']);
 					$thumb->destroy();*/
 					/*move_uploaded_file($_FILES['_profilePic']['tmp_name'],"../../img/proPics/".$userIdHash.'.jpg');*/
-					
-				}
+
 			}
-		}
-
-
 		if(($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 		{
 			$conObj = new QoB();
 			
-			$userAlias=$user['alias'];
+			//$userAlias=$user['alias'];
 			$userId = $user['userId'];
 			$values = array();
 			$highestDegree=getDegree($userId);
 			
 			$values[0] = array($dob => 's');
 			$values[1] = array($description => 's');
-			$values[2] = array($resume => 's');
+			//$values[2] = array($resume => 's');
 			//$values[3] = array($hobbies => 's');
 			/*$values[3] = array($mailId => 's');
 			$values[4] = array($address => 's');
@@ -275,15 +288,15 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 			$values[11]= array($googleId => 's');
 			$values[12]= array($linkedinId => 's');
 			$values[13]= array($pinterestId => 's');*/
+			$values[2]= array($userAlias => 's');
 			$values[3]= array($userId => 's');
 
 			
-			$result1 = $conObj->update("UPDATE about SET dob=?,description=?,resume=? WHERE userId= ?",$values);
+			$result1 = $conObj->update("UPDATE about,users SET about.dob=?, about.description=?, users.alias=? WHERE about.userId= ? AND users.userId=about.userId ",$values);
 			
 			if($conObj->error == "")
 			{
-				$aboutObj = new about($userAlias,$dob,$description,$resume,$highestDegree,
-					'','','', '','','','', '','','','','',1);
+				$aboutObj = new aboutMeTop($user['userIdHash'],$user['name'],$userAlias,$dob,$description,$highestDegree,$currentProfession, 1);
 				print_r(json_encode($aboutObj));
 			}
 			else
@@ -300,27 +313,29 @@ function aboutMeEdit($user,$dob,$description,$mailId,$showMailId,$address,$phone
 			exit();
 		}
 	}
-function aboutMeBottomEdit($mailId,$showMailId,$address,$phone,$showPhone, $city, $fbId, $twitterId,$googleId, $inId, $ptrestId)
+function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phone,$showPhone, $city, $facebookId, $twitterId,$googleId, $linkedinId, $pinterestId)
 {
+	var_dump($_POST);
 	$userAlias=$user['alias'];
+	$phone=implode(',',$phone);
 	$conObj=new QoB();
-	$values[1] = array($mailId => 's');
-	$values[2] = array($address => 's');
-	$values[3] = array($phone => 's');
-	$values[4] = array($city => 's');
-	$values[5] = array($showMailId => 's');
-	$values[6] = array($showPhone => 's');
-	$values[7]= array($facebookId => 's');
-	$values[8]= array($twitterId=> 's');
-	$values[9]= array($googleId => 's');
-	$values[10]= array($linkedinId => 's');
-	$values[11]= array($pinterestId => 's');
-	$values[12]= array($userId => 's');
+	$values[0] = array($mailId => 's');
+	$values[1] = array($address => 's');
+	$values[2] = array($phone => 's');
+	$values[3] = array($city => 's');
+	$values[4] = array($showMailId => 's');
+	$values[5] = array($showPhone => 's');
+	$values[6]= array($facebookId => 's');
+	$values[7]= array($twitterId=> 's');
+	$values[8]= array($googleId => 's');
+	$values[9]= array($linkedinId => 's');
+	$values[10]= array($pinterestId => 's');
+	$values[11]= array($userId => 's');
+	//var_dump($values);
 	$result=$conObj->update("UPDATE about SET mailid=?,address=?,phone=?,city=?, showMailId=?,showPhone=?,facebookId=?,twitterId=?,googleId=?, linkedinId=?,pinterestId=? WHERE userId= ?",$values);
 	if($conObj->error == "")
 	{
-		$aboutObj = new about($userAlias,"",'','','',
-			'','',$mailId,$showMailId, $address,$phoneArray,$showPhoneArray,
+		$aboutObj = new aboutMeBottom($mailId,$showMailId, $address,$phoneArray,$showPhoneArray,
 			$city, $facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 		print_r(json_encode($aboutObj));
 	}
@@ -334,7 +349,7 @@ function aboutMeBottomEdit($mailId,$showMailId,$address,$phone,$showPhone, $city
 
 }
 
-function achievmentsEdit($user,$competition,$description,$position,$location,$achievementIdString,$achievedDate='')
+function achievementsEdit($user,$competition,$description,$position,$location,$achievementIdString,$achievedDate='')
 	{
 
 		$achievementId=(int)substr($achievementIdString, 1);
@@ -385,7 +400,7 @@ function achievmentsEdit($user,$competition,$description,$position,$location,$ac
 
 
 function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreType,$degreeIdString,$location)
-	{	
+	{
 		$degreeId=(int)substr($degreeIdString, 1);
 		//echo $degreeId;
 		/*$timeString=explode("-",$durationString);
@@ -406,7 +421,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		$currentTimestamp = dateStringToTimestamp($date1);*/
 		
 		
-		if(!($scoreType!="" and ($scoreType==2 || $scoreType==1))
+		if(!($scoreType!="" and ($scoreType==2 || $scoreType==1)))
 		{
 			echo 16;
 			exit();
@@ -414,7 +429,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 		if(!($degree=="") and (($time=validateAboutMeDateString($durationString))!=false) )
 		{
 		
-			var_dump($time);
+			//var_dump($time);
 			$startDateTimestamp=$time['start'];
 			$endDateTimestamp=$time['end'];
 			$conObj = new QoB();
@@ -430,7 +445,7 @@ function academicsEdit($user,$degree,$schoolName,$durationString,$score,$scoreTy
 			if($conObj->error == "")
 			{
 				/*echo 'Succesfull Insert <br />';*/
-				if($conObj->getMatchedRowsOnUpdate()==1)
+				if(($conObj->getMatchedRowsOnUpdate())==1)
 				{
 					$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 					$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
@@ -533,25 +548,6 @@ function certifiedCoursesEdit($user,$title,$durationString,$instituteName,$cours
 function experienceEdit($user,$organisation,$durationString,$title,$experienceIdString,$featuring)
 	{
 		$experienceId=(int) substr($experienceIdString, 1);
-		//echo $experienceId;
-		/*$timeString=explode("-",$durationString);
-		$start=$timeString[0];
-		$end=$timeString[1];
-				
-		//$startDate = date_parse($start);
-		$startDateTimestamp = dateStringToTimestamp($start);
-		
-		//echo $startDateTimestamp.'<br/>';
-		
-		//$endDate = date_parse($end);
-		$endDateTimestamp = dateStringToTimestamp($end);
-
-		//echo $endDateTimestamp.'<br/>';
-		
-		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);*/
-		
-		//echo $currentTimestamp.'<br/>';
 		
 		if($organisation!="" and (($time=validateAboutMeDateString($durationString))!=false))
 			{
@@ -563,14 +559,13 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 				//Turn off Featuring for other experiences of user to set it for upcoming experince.
 				if($featuring == 1)
 				{
-					$conn=new QoB();
 					$val[0]=array($userId => 's');
 					$res=$conObj->update("UPDATE experience SET isfeaturing=0 WHERE userId=?",$val);
 					if(($cr=$conn->error)!="")
 						{
 							$conObj->rollbackTransaction();
 							notifyAdmin("Conn Error: ".$cr."in experience Edit 1".$experienceId,$userId);
-							echo 12;
+							echo 112;
 							exit();
 						}
 				}
@@ -579,7 +574,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 				$values = array(0 => array($organisation => 's'),1 => array($startDateTimestamp => 's'),2 => array($endDateTimestamp => 's'), 3 => array($title => 's') , 4 => array($featuring => 'i'), 5 => array($userId => 's'),6 => array($experienceId => 'i'));
 				//echo 'before Query';
 				//var_dump($values);
-				$result1 = $conObj->update("UPDATE experience SET organisation=?,start=?,end=?,designation=?,featuring= ? WHERE userId=? AND experienceId = ?",$values);
+				$result1 = $conObj->update("UPDATE experience SET organisation=?,startDate=?,endDate=?,designation=?,featuring= ? WHERE userId=? AND experienceId = ?",$values);
 				//var_dump($result1);
 				if($conObj->error == "")
 				{
@@ -599,7 +594,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 							{
 								$conObj->rollbackTransaction();
 								notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
-								echo 12;
+								echo 122;
 								exit();
 							}
 						}
@@ -622,9 +617,10 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 				else
 				{
 					$cr=$conObj->error;
+					echo $cr;
 					$conObj->rollbackTransaction();
 					notifyAdmin("Conn.Error".$cr."! While Editing record in experience",$userId);
-					echo 12;
+					echo 123;
 					exit();
 				}			
 			}
@@ -762,7 +758,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 						//$workshopId="w".$conObj->getInsertId();
-						$workshopObj=new workshops($workshopIdString,$duration,$minDuration,$title,$place,$attendCount,1);
+						$workshopObj=new workshops($workshopIdString,$title,$duration,$minDuration,$place,$attendCount,1);
 						print_r(json_encode($workshopObj));
 					}
 					else
@@ -874,9 +870,9 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			}
 			/*var_dump($existingSkillsArray);
 			echo "<br>";*/
-			for($i=0;$i<$updatedSkillCount-1;$i++)
+			for($i=0;$i<count($existingRatingArray)-1;$i++)
 			{
-				for($j=0;$j<$updatedSkillCount-1;$j++)
+				for($j=0;$j<count($existingRatingArray)-1;$j++)
 				{
 					if($existingRatingArray[$j]<$existingRatingArray[$j+1])
 					{
@@ -903,13 +899,12 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				$message.=$repeatedSkills. " already exists.";
 				$errorCode=19; //Code 19 for partial success
 			}
-
+			$i=0;
 			while($i<count($existingSkillsArray))
 			{
 				$outObj[$i]=array($existingSkillsArray[$i],(int)$existingRatingArray[$i]);
 				$i++;
 			}
-			
 			$conObj = new QoB();
 			$updatedSkills=implode(',',$existingSkillsArray);
 			$updatedRating=implode(',',$existingRatingArray);
@@ -928,7 +923,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				{
 					//echo 'Successfull Insert <br />';
 
-					$skillsObj=new skillSet($existingSkillsArray,$existingRatingArray,1,json_encode($outObj),$message,$errorCode);
+					$skillsObj=new skillSet($updatedSkills,$updatedRating,1,json_encode($outObj),$message,$errorCode);
 					print_r(json_encode($skillsObj));
 				}
 			else
@@ -1001,10 +996,8 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				else
 				{
 					
-						$hasRepeated=true;
-						$repeatedTools[]=$tool;
-					}
-					
+					$hasRepeated=true;
+					$repeatedTools[]=$tool;
 				}
 			}
 		}
@@ -1036,7 +1029,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		if($conObj->error == "")
 			{
 				//echo 'Successfull Insert <br />';
-				$toolsObj=new toolkit($existingToolsArray,1,$message,$errorCode);
+				$toolsObj=new toolkit($updatedTools,1,$message,$errorCode);
 				print_r(json_encode($toolsObj));
 			}
 		else
@@ -1050,11 +1043,6 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 
 	function interestsEdit($user,$interestsArray)
 	{
-		if(!(is_array($interestsArray)))
-		{
-			echo 16;
-			exit();
-		}
 		
 		$interestsArrayCount=count($interestsArray);
 
@@ -1138,7 +1126,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 		if($conObj->error == "")
 			{
 				//echo 'Successfull Insert <br />';
-				$interestsObj=new interests($existingInterestsArray,1,$message,$errorCode);
+				$interestsObj=new interests($updatedInterests,1,$message,$errorCode);
 				print_r(json_encode($interestsObj));
 			}
 		else

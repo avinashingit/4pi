@@ -16,9 +16,9 @@ require_once('../../QOB/qob.php');
 require_once('aboutMeClass.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj'];
+	$userIdHash=$_SESSION['vj']=hash("sha512",'COE12B025'.SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-
+	$_POST['_mode']=1;
 
 //Testing Content Ends
 	
@@ -44,9 +44,8 @@ workshops - w.*
 //
 
 $conn=new QoB();
-$currentUserId="Guest";
-$userId=$_POST['_userId']="COE12B025";
-$mode=$_POST['_mode']=8;
+$userId=$_POST['_userId'];
+$mode=$_POST['_mode'];
 $isOwner=0;
 
 if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
@@ -124,7 +123,7 @@ function aboutMe($userId,$mode,$isOwner)
 		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
 		// var_dump($result1);
 		if($conObj->error == "")
 		{
@@ -135,13 +134,22 @@ function aboutMe($userId,$mode,$isOwner)
 				/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
 				$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
 				$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
+				$proPicLocation=__DIR__.'/../../img/proPics/'.$result1['userIdHash'].'.jpg';
+				if(file_exists($proPicLocation))
+				{
+					$proPicExists=1;
+				}
+				else
+				{
+					$proPicExists=-1;
+				}
 				$highestDegree=getDegree($userId);
 				//$proPicLocation=getProfilePicLocation($result1['userIdHash']);
 				$work="Student";
 				if($result1['organisation']!="")
 					$work=$result1['designation']." at ".$result1['organisation'];
-				$obj = new about($result1['userIdHash'],$result1['alias'],$result1['dob'],$result1['description'],$result1['resume'], 
-					$highestDegree,$work, $result1['hobbies'],$result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),explode(',',$result1['showPhone']),$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$isOwner);
+				$obj = new about($result1['userIdHash'],$result1['name'],$result1['alias'],$result1['dob'],$result1['description'], 
+					$highestDegree,$work, $result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$result1['gender'],$proPicExists,$isOwner);
 				print_r(json_encode($obj));
 			}
 			else

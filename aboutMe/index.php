@@ -16,6 +16,14 @@ if(userId=="")
 
 <style>
 
+	.skillValue
+	{
+		padding-top:5px;
+		padding-bottom:5px;
+		background-color:#C2C2C2;
+		color:#000;
+	}
+
 	#personPicture img
 	{
 		border-radius:78px;
@@ -221,56 +229,126 @@ if(userId=="")
 
 				<form>
 
-					<label for="">Facebook link</label>
+					<div class="row">
 
-					<input type="text" id="fbURL" class="form-control">
+						<div class="col-md-6">
 
-					<br/>
+							<label for=""><i title="Facebook" class="fa fa-facebook"></i></label>
 
-					<label for="">Twitter link</label>
+							<input type="text" id="fbURL" class="form-control" placeholder="Facebook">
 
-					<input type="text" id="twitterURL" class="form-control">
+						</div>
 
-					<br/>
+						<div class="col-md-6">
 
-					<label for="">Google+ link</label>
+							<label for=""><i title="Twitter" class="fa fa-twitter"></i></label>
 
-					<input type="text" id="gplusURL" class="form-control">
+							<input type="text" id="twitterURL" class="form-control" placeholder="Twitter">
 
-					<br/>
+						</div>
 
-					<label for="">Linkedin link</label>
-
-					<input type="text" id="inURL" class="form-control">
-
-					<br/>
-					<label for="">Pinterest link</label>
-
-					<input type="text" id="pinURL" class="form-control">
+					</div>
 
 					<br/>
 
-					<label for="">Email id</label>
+					<div class="row">
 
-					<input type="text" id="email2" class="form-control">
+						<div class="col-md-6">
+
+							<label for=""><i title="Google plus" class="fa fa-google-plus"></i></label>
+
+							<input type="text" id="gplusURL" class="form-control" placeholder="Google plus">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for=""><i title="Linkedin" class="fa fa-linkedin"></i></label>
+
+							<input type="text" id="inURL" class="form-control" placeholder="Linkedin">
+
+						</div>
+						
+					</div>
 
 					<br/>
 
-					<label for="">Address</label>
+					<div class="row">
 
-					<input type="text" id="address" class="form-control">
+						<div class="col-md-6">
+
+							<label for=""><i title="Instagram" class="fa fa-instagram"></i></label>
+
+							<input type="text" id="pinURL" class="form-control" placeholder="Instagram">
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for=""><i class="fa fa-map-marker"></i>&nbsp;Address</label>
+
+							<input type="text" id="address" class="form-control">
+
+						</div>
+						
+					</div>
 
 					<br/>
 
-					<label for="">Contact number 1</label>
+					<div class="row">
 
-					<input type="text" id="contactNumber1" class="form-control"></input>
+						<div class="col-md-6">
+
+							<label for=""><i class="fa fa-at"></i>&nbsp;Email id</label>
+
+							<input type="email" id="email2" class="form-control">
+
+						</div>
+
+						<div class="col-md-3">
+
+							<label for=""><i class="fa fa-mobile"></i>&nbsp;Contact 1</label>
+
+							<input type="text" id="contactNumber1" class="form-control"></input>
+
+						</div>
+
+						<div class="col-md-3">
+
+							<label for=""><i class="fa fa-mobile"></i>&nbsp;Contact 2</label>
+
+							<input type="text" id="contactNumber2" class="form-control"></input>
+
+						</div>
+
+					</div>
 
 					<br/>
 
-					<label for="">Contact number 2</label>
+					<div class="row">
 
-					<input type="text" id="contactNumber2" class="form-control"></input>
+						<div class="col-md-6">
+
+							<label for="">Show email id [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your email id to others"></i>]</label><br>
+
+							<label>Yes &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="1" name="showEmailIdValue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+							<label>No &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="2" name="showEmailIdValue"></label>
+
+						</div>
+
+						<div class="col-md-6">
+
+							<label for="">Show contacts [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your contacts id to others"></i>]</label><br/>
+
+							<label>Yes &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="1" name="showContactsValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+							<label>No &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="2" name="showContactsValue"></label>
+
+						</div>
+
+
+					</div>
 
 					<br/>
 
@@ -784,6 +862,8 @@ if(userId=="")
 				}
 
 				}
+
+				editToolsSendData();
 			}
 			
 		}
@@ -885,7 +965,7 @@ if(userId=="")
 		x.find('#editAcademicsModalDurationFrom').val(z[0]);
 		x.find('#editAcademicsModalDurationTo').val(z[1]);
 		x.find('#editAcademicsModalSchoolLocation').val(y.find('#location').html());
-		x.find('#editAcademicsModalId').val(n);
+		x.find('#editAcademicsModalId').html(n);
 		
 	}
 
@@ -924,6 +1004,7 @@ if(userId=="")
 		x.find('#editAchievementModalLocation').val(y.find('#eventLocation').html());
 		x.find('#editAchievementModalPosition').val(y.find('#eventPosition').html());
 		x.find('#editAchievementModalDescription').val(y.find('#eventDescription').html());
+		x.find("#editAchievementModalId").html(n);
 	}
 
 	function addInterest()
@@ -1032,7 +1113,7 @@ if(userId=="")
 						$("#editInterestModal").find('form').append(input);
 					}
 
-					
+					editInterestsSendData()
 
 				}
 			}
@@ -1446,9 +1527,15 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-5">
+						<div class="col-md-4">
 
-							<input type="range" min="0" style="border:none;" max="100" id="addSkillModalSkillPercentage" onchange="showValueForSlider(this);" class="form-control"><span id="sliderValueAddModal"></span>
+							<input type="range" min="0" style="border:none;" max="100" id="addSkillModalSkillPercentage" onchange="$(this).parent().parent().find('#sliderValueAddModal').parent().removeClass('hidden');showValueForSlider(this);" class="form-control">
+
+						</div>
+
+						<div class="hidden col-md-1 text-center skillValue" >
+
+							<span id="sliderValueAddModal" style="padding-top:10px;"></span>
 
 						</div>
 
@@ -1470,7 +1557,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-success" onclick="addSkillAddInput();">Add input</button>
+				<button type="button" class="btn btn-success" onclick="addSkillAddInput();">Add more skills</button>
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -1529,7 +1616,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-success" onclick="addToolAddInput();">Add input</button>
+				<button type="button" class="btn btn-success" onclick="addToolAddInput();">Add more tools</button>
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -1651,7 +1738,7 @@ if(userId=="")
 
 				<form>
 
-					<input type="text" id="#editProjectModalProjectId" class="hidden">
+					<input type="text" id="editProjectModalProjectId" class="hidden">
 
 					<label for="projectTitle">Project title</label>
 
@@ -1911,7 +1998,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" onclick="editExperienceSendData();" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -1950,7 +2037,7 @@ if(userId=="")
 
 					<label for="percentageType">Score type</label>
 
-					<select onchange="if($(this).val()==1){$('#CGPAElements').hide();$('#PercentageElements').show();}else{$('#PercentageElements').hide();$('#CGPAElements').show();}" id="addAcademicsModalPercentageType" class="form-control">
+					<select onchange="if($(this).val()==1){$('#CGPAElements').hide();$('#PercentageElements').show();}else{$('#PercentageElements').hide();$('#CGPAElements').show();}" id="addAcademicsModalPercentageType" class="form-control" value="1">
 	
 						<option value="1">Percentage</option>
 
@@ -2074,7 +2161,7 @@ if(userId=="")
 
 					<label for="percentageType">Score type</label>
 
-					<select onchange="if($(this).val()==1){$('#CGPAElements').hide();$('#PercentageElements').show();}else{$('#PercentageElements').hide();$('#CGPAElements').show();}" id="editAcademicsModalPercentageType" class="form-control">
+					<select onchange="alert($(this).val());if($(this).val()==1){alert('hi');$('#editAcademicsModal').find('#CGPAElements').hide();$('#editAcademicsModal').find('#PercentageElements').show();}else{$('#editAcademicsModal').find('#PercentageElements').hide();$('#editAcademicsModal').find('#CGPAElements').show();}" id="editAcademicsModalPercentageType" class="form-control">
 	
 						<option value="1">Percentage</option>
 
@@ -2162,7 +2249,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" onclick="editAcademicsSendData();" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -2318,7 +2405,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" onclick="editWorkshopSendData();" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -2464,7 +2551,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" onclick="editCertificationSendData();" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -2588,7 +2675,7 @@ if(userId=="")
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" onclick="editAchievementSendData();" class="btn btn-primary">Save changes</button>
 
 			</div>
 
@@ -2643,7 +2730,7 @@ if(userId=="")
 
 			<div class="modal-footer">
 
-				<button type="button" class="btn btn-success" onclick="addInterestAddInput();">Add input</button>
+				<button type="button" class="btn btn-success" onclick="addInterestAddInput();">Add more interests</button>
 
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
@@ -2660,11 +2747,15 @@ if(userId=="")
 
 <script>
 
-	$( ".datepicker" ).datepicker({
+	$(document).ready(function(){
+		$( ".datepicker" ).datepicker({
 			changeMonth: true,
 			changeYear: true,
 			dateFormat:"dd/mm/yy"
 		});
+	});
+
+	
 
 	// $('.datepicker').css({'z-index':'1052'});
 

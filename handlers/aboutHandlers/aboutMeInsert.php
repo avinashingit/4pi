@@ -16,40 +16,8 @@ require_once('../../QOB/qob.php');
 require_once('../fetch.php');
 require_once('aboutMeClass.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B014".SALT);
+	$userIdHash=$_SESSION['vj'];
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_skill']=array("matlab","php","php","");
-	$_POST['_rating']=array(10,20,15,9);
-	$_POST['_mode']=8;
-
-//$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['isfeaturing']
-//$_POST['_degree'],$_POST['_schoolName'],$_POST['location'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType']
-//$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']
-
-//Testing Content Ends
-	
-/*
-Code 3: SUCCESS!!
-Code 5: Attempt to redo a already done task!
-Code 6: Content Unavailable!
-Code 13: SECURITY ALERT!! SUSPICIOUS BEHAVIOUR!!
-Code 12: Database ERROR!!
-code 14: Suspicious Behaviour and Blocked!
-Code 16: Erroneous Entry By USER!!
-Code 11: Session Variables unset!!
-
-*/
-
-// Id Types
-/*
-academics(degree) - d.*
-achievements - a.*
-courses - C.* Its Capital C. Careful!!
-experience - e.*
-projects - p.*
-workshops - w.*
-*/
-//
 if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 {
 	echo 11;
@@ -149,7 +117,8 @@ if ($mode==1) {
 	aboutMeInsert($user,$_POST['_dob'],$_POST['_description'],$_POST['_hobbies'],$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
 
 }
-else if ($mode==2) {
+else if ($mode==2) 
+{
 
 	# Achievements Insert
 	/*$competition=$_POST['_eventName'];
@@ -160,7 +129,8 @@ else if ($mode==2) {
 */
 	achievmentsInsert($user,$_POST['_eventName'],$_POST['_description'],$_POST['_position'],$_POST['_location'],$_POST['_achievedDate']);
 }
-else if ($mode==3) {
+else if ($mode==3) 
+{
 
 	# Academics Insert
 	/*$degreeName=$_POST['_degree'];
@@ -174,10 +144,10 @@ else if ($mode==3) {
 	$scoreType=$_POST['_scoreType'];*/
 
 	academicsInsert($user,$_POST['_degree'],$_POST['_schoolName'],$_POST['location'],$_POST['_duration'],$_POST['_score'],$_POST['_scoreType'],$_POST['location']);
-
 }
 
-else if ($mode==4) {
+else if ($mode==4) 
+{
 
 	# Certifications Insert
 	//$title=$_POST['_courseName'];
@@ -190,19 +160,12 @@ else if ($mode==4) {
 
 	certifiedCoursesInsert($user,$_POST['_courseName'],$_POST['_duration'],$_POST['_institute']);
 }
-else if ($mode==5) {
-
-	# Experience Insert
-	//$organisation=$_POST[''];
-	//$start=$_POST[''];
-	//$duration=$_POST[]
-	//$end=$_POST[''];
-	//$title=$_POST[''];
-	//$description=$_POST[''];
-
-	experienceInsert($user,$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['_isfeaturing']);
+else if ($mode==5)
+{
+	experienceInsert($user,$_POST['_company'],$_POST['_duration'],$_POST['_role'],$_POST['_isFeaturing']);
 }
-else if ($mode==6) {
+else if ($mode==6) 
+{
 
 	# Projects Insert
 	$title=$_POST[''];
@@ -215,7 +178,8 @@ else if ($mode==6) {
 	projectInsert($user,$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_projectDescription'],$_POST['_teamMembers'],$_POST['_projectCompany']);
 }
 
-else if ($mode==7) {
+else if ($mode==7) 
+{
 
 	# WorkshopsInsert
 /*	$title=$_POST[''];
@@ -226,7 +190,8 @@ else if ($mode==7) {
 
 	workshopsInsert($user,$_POST['_workshopName'],$_POST['_duration'],$_POST['_location'],$_POST['_peopleAttended']);
 }
-else if ($mode==8) {
+else if ($mode==8) 
+{
 
 	# SkillSet Insert
 /*	$skill=$_POST[''];
@@ -244,260 +209,173 @@ else if ($mode == 10)
 	#interests Insert
 	interestsInsert($user,$_POST['_interests']);
 }
-else {
+else 
+{
 	# Erroneous Mode Sent
 	echo 16;
 	exit();
 }
 
-//Deprecated!!! No Insert for about me. Only Update
 function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId)
-{
-	$phoneArray=$phone;
-	$showPhoneArray=$showPhone;
-	$phone=implode(',',$phone);
-	$showPhone=implode(',',$showPhone);
-	$date = date_parse($dob);
-	$dobTimestamp = dateStringToTimestamp($dob);
-	
-	$date1 = date_create();
-	$currentTimestamp = date_timestamp_get($date1);
-
-	//$profilePic=getProfilePicLocation($userIdHash);
-
-	if($_FILES["file"]["name"]!='')
 	{
-		$resume=$_FILES['_resume']['name'];
-		$allowedExts = array("pdf", "png","jpg","jpeg","docx","doc");
-		$extension = end(explode(".", $_FILES["_resume"]["name"][$i]));
-		if ((($_FILES["_resume"]["type"] == "application/pdf")	|| ($_FILES["_resume"]["type"] == "image/png")	|| ($_FILES["_resume"]["type"] == "image/jpeg") || ($_FILES["_resume"]["type"] == "image/jpg") || ($_FILES["_resume"]["type"] == "application/docx")) && ($_FILES["_resume"]["size"] < 8192576) && in_array($extension, $allowedExts))
+		$phoneArray=$phone;
+		$showPhoneArray=$showPhone;
+		$phone=implode(',',$phone);
+		$showPhone=implode(',',$showPhone);
+		$date = date_parse($dob);
+		$dobTimestamp = dateStringToTimestamp($dob);
+		
+		$date1 = date_create();
+		$currentTimestamp = date_timestamp_get($date1);
+
+		//$profilePic=getProfilePicLocation($userIdHash);
+
+		if($_FILES["file"]["name"]!='')
 		{
-			if ($_FILES["file"]["error"] > 0)
+			$resume=$_FILES['_resume']['name'];
+			$allowedExts = array("pdf", "png","jpg","jpeg","docx","doc");
+			$extension = end(explode(".", $_FILES["_resume"]["name"][$i]));
+			if ((($_FILES["_resume"]["type"] == "application/pdf")	|| ($_FILES["_resume"]["type"] == "image/png")	|| ($_FILES["_resume"]["type"] == "image/jpeg") || ($_FILES["_resume"]["type"] == "image/jpg") || ($_FILES["_resume"]["type"] == "application/docx")) && ($_FILES["_resume"]["size"] < 8192576) && in_array($extension, $allowedExts))
 			{
-				echo 6;
-				//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
-				notifyAdmin("Resume Upload Error Code: " . $_FILES["_resume"]["error"] ,$userId);
-				exit();
-			}
-			else
-			{
-				/*if(file_exists("../../files/resumes/" . $_FILES["file"]["name"]))
+				if ($_FILES["file"]["error"] > 0)
 				{
-					unlink("../../files/resumes/" . $_FILES["file"]["name"]);
-				}*/
-				if (array_map('file_exists',glob(__DIR__."/../../files/resumes/$userId.*")))
-				{
-					array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
-				}
-				move_uploaded_file($_FILE["_resume"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
-				$resume=$userId.$extension;
-			}
-		}
-	}
-	
-	if(!(($description == "") and ($resume == "") and ($hobbies == "") and ($address == "") and ($phone == "") and ($city == "")) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
-	{
-		$conObj = new QoB();
-		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
-		$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
-		if($conObj->error == "")
-		{
-			if($result0 != "")
-			{
-				*/
-
-
-
-				$userAlias=$user['alias'];
-				$userId = $user['userId'];
-				$values = array();
-				
-				$values[0] = array($userId => 's');
-				$values[1] = array($dob => 's');
-				$values[2] = array($description => 's');
-				$values[3] = array($resume => 's');
-				$values[4] = array($hobbies => 's');
-				$values[5] = array($mailId => 's');
-				$values[6] = array($address => 's');
-				$values[7] = array($phone => 's');
-				$values[8] = array($city => 's');
-				$values[9] = array($showMailId => 's');
-				$values[10]= array($showPhone => 's');
-				$values[11]= array($facebookId => 's');
-				$values[12]= array($twitterId=> 's');
-				$values[13]= array($googleId => 's');
-				$values[14]= array($linkedinId => 's');
-				$values[15]= array($pinterestId => 's');
-
-
-				
-				$result1 = $conObj->insert("INSERT INTO about(userId,dob,description,resume, hobbies,mailid,address,phone,city, showMailId,showPhone,facebookId,twitterId,googleId, linkedinId,pinterestId) VALUES(?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?)",$values);
-				
-				if($conObj->error == "")
-				{
-					//echo 'Succesfull Insert <br />';
-					/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
-						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
-						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
-					$aboutObj = new about($userAlias,$dob,$description,$resume,$highestDegree,
-						$currentProfession,$hobbies,$mailId,$showMailId,$address,$phoneArray,$showPhoneArray,
-						$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
-					print_r(json_encode($aboutObj));
-				}
-				else
-				{
-					/*echo 'Error in Query 1 <br />';
-					echo $conObj->error.'<br />';*/
-					notifyAdmin("Conn.Error".$conObj->error."! While inserting in about Insert",$userId);
-					echo 12;
+					echo 6;
+					//echo "Return Code: " . $_FILES["file"]["error"][$i] . "<br>";
+					notifyAdmin("Resume Upload Error Code: " . $_FILES["_resume"]["error"] ,$userId);
 					exit();
 				}
-			/*}
-			else
-			{
-				echo 'No values found for Query 0<br />';
+				else
+				{
+					/*if(file_exists("../../files/resumes/" . $_FILES["file"]["name"]))
+					{
+						unlink("../../files/resumes/" . $_FILES["file"]["name"]);
+					}*/
+					if (array_map('file_exists',glob(__DIR__."/../../files/resumes/$userId.*")))
+					{
+						array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
+					}
+					move_uploaded_file($_FILE["_resume"]["tmp_name"],"../../files/resumes/".$userId.'.'.$extension);
+					$resume=$userId.$extension;
+				}
 			}
 		}
-		else
-		{
-			echo 'Error in Query 0<br />';
-			echo $conObj->error.'<br />';
-		}*/
-	}
-	else
-	{
-		echo 16;
-		exit();
-	}
 		
-	
-}
-
-function academicsInsert($user,$degree,$schoolName,$location,$durationString,$score,$scoreType,$location)
-{	
-	/*$timeString=explode("-",$durationString);
-	//var_dump($timeString);
-	$start=$timeString[0];
-	$end=$timeString[1];
-
-	//$startDate = date_parse($start);
-	$startDateTimestamp = dateStringToTimestamp($start);
-	
-	//echo $startDateTimestamp." ";
-	
-	//$endDate = date_parse($end);
-	$endDateTimestamp = dateStringToTimestamp($end);
-
-	//echo $endDateTimestamp." ";
-	//
-	echo $scoreType;
-	
-	$date1 = date_create();
-	$currentTimestamp = date_timestamp_get($date1);*/
-	//echo $currentTimestamp;
-	if(!($scoreType!="" and ($scoreType==2 || $scoreType==1))
-	{
-		echo 16;
-		exit();
-	}
-	if(!($degree=="") and (($time=validateAboutMeDateString($durationString))!=false) )
-	{
-		$startDateTimestamp=$time['start'];
-		$endDateTimestamp=$time['end'];
-		$conObj = new QoB();
-		/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
-		$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
-		if($conObj->error == "")
+		if(!(($description == "") and ($resume == "") and ($hobbies == "") and ($address == "") and ($phone == "") and ($city == "")) and (($date["error_count"] == 0) and checkdate($date["month"], $date["day"], $date["year"])) and ($dobTimestamp < $currentTimestamp) and ((filter_var($mailId, FILTER_VALIDATE_EMAIL)) or ($mailId == "")))
 		{
-			if($result0 != "")
-			{*/
-				$userAlias=$user['alias'];
-				$userId = $user['userId'];
-				$degreeId = '';
-				/*$check = 1;
-				if($degreeName == "PHD")
-					{
-						$degreeId = "18118";
-					}
-				
-				else if($degreeName == "MDES")
-					{
-						$degreeId = "157924";
-					}	
-				
-				else if($degreeName == "BTECH")
-					{
-						$degreeId = "4239814";
-					}
-
-				
-				else if($degreeName == "Secondary School")
-					{
-						$degreeId = "2187";
-					}
+			$conObj = new QoB();
+			/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
+			$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+			if($conObj->error == "")
+			{
+				if($result0 != "")
+				{
+					*/
 
 
-				else if($degreeName == "Senior Secondary School" )
-					{
-						$degreeId = "211722241110";
-					}
+
+					$userAlias=$user['alias'];
+					$userId = $user['userId'];
+					$values = array();
 					
-				else
-					{
-						$check = -1;
-					}
-				
-				if($check == 1)
-				{*/
-					$values = array(0 => array($userId => 's'), 1 => array($degree => 's'), 2 => array($schoolName => 's'), 3 => array($startDateTimestamp => 's'), 4 => array($endDateTimestamp => 's'),5 => array($score => 's'),6 => array($scoreType => 'i'),7=>array($location => 's'));
+					$values[0] = array($userId => 's');
+					$values[1] = array($dob => 's');
+					$values[2] = array($description => 's');
+					$values[3] = array($resume => 's');
+					$values[4] = array($hobbies => 's');
+					$values[5] = array($mailId => 's');
+					$values[6] = array($address => 's');
+					$values[7] = array($phone => 's');
+					$values[8] = array($city => 's');
+					$values[9] = array($showMailId => 's');
+					$values[10]= array($showPhone => 's');
+					$values[11]= array($facebookId => 's');
+					$values[12]= array($twitterId=> 's');
+					$values[13]= array($googleId => 's');
+					$values[14]= array($linkedinId => 's');
+					$values[15]= array($pinterestId => 's');
+
+
 					
-					$result1 = $conObj->insert("INSERT INTO academics(userId,degree,schoolName,start,end, score,scoreType,location) VALUES(?,?,?,?,?, ?,?,?)",$values);
+					$result1 = $conObj->insert("INSERT INTO about(userId,dob,description,resume, hobbies,mailid,address,phone,city, showMailId,showPhone,facebookId,twitterId,googleId, linkedinId,pinterestId) VALUES(?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?)",$values);
 					
 					if($conObj->error == "")
 					{
-						/*echo 'Succesfull Insert <br />';*/
-						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
-						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-						$degreeId="d".$conObj->getInsertId();
-						$degreeObj= new academics($degreeId,$degree,$schoolName,$location,$duration,$minDuration,$score,$scoreType,1);
-						print_r(json_encode($degreeObj));
+						//echo 'Succesfull Insert <br />';
+						/*($profilePicture,$name,$dob,$description,$resume,$highestDegree,
+							$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
+							$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)*/
+						$aboutObj = new about($userAlias,$dob,$description,$resume,$highestDegree,
+							$currentProfession,$hobbies,$mailId,$showMailId,$address,$phoneArray,$showPhoneArray,
+							$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
+						print_r(json_encode($aboutObj));
 					}
 					else
 					{
-						notifyAdmin("Conn.Error".$conObj->error."! While creating record in academics",$userId);
+						/*echo 'Error in Query 1 <br />';
+						echo $conObj->error.'<br />';*/
+						notifyAdmin("Conn.Error".$conObj->error."! While inserting in about Insert",$userId);
 						echo 12;
 						exit();
 					}
 				/*}
 				else
 				{
-					echo "The degree entered is wrong please check again <br/>";
+					echo 'No values found for Query 0<br />';
 				}
-
 			}
 			else
-			{
-				echo 'No values found for Query 0<br />';
-			}
-		}
-		else
 			{
 				echo 'Error in Query 0<br />';
 				echo $conObj->error.'<br />';
 			}*/
+		}
+		else
+		{
+			echo 16;
+			exit();
+		}
 	}
-	
-	else
+function academicsInsert($user,$degree,$schoolName,$location,$durationString,$score,$scoreType,$location)
 	{
-		//echo 'No values found <br/>';
-		echo 16;
-		exit();
+		if(!($scoreType!="" and ($scoreType==2 || $scoreType==1)))
+		{
+			echo 16;
+			exit();
+		}
+		if(!($degree=="") and (($time=validateAboutMeDateString($durationString))!=false) )
+		{
+			$startDateTimestamp=$time['start'];
+			$endDateTimestamp=$time['end'];
+			$conObj = new QoB();
+			$userAlias=$user['alias'];
+			$userId = $user['userId'];
+			$degreeId = '';
+			$values = array(0 => array($userId => 's'), 1 => array($degree => 's'), 2 => array($schoolName => 's'), 3 => array($startDateTimestamp => 's'), 4 => array($endDateTimestamp => 's'),5 => array($score => 's'),6 => array($scoreType => 'i'),7=>array($location => 's'));
+			
+			$result1 = $conObj->insert("INSERT INTO academics(userId,degree,schoolName,start,end, score,scoreType,location) VALUES(?,?,?,?,?, ?,?,?)",$values);
+			
+			if($conObj->error == "")
+			{
+				/*echo 'Succesfull Insert <br />';*/
+				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+				$degreeId="d".$conObj->getInsertId();
+				$degreeObj= new academics($degreeId,$degree,$schoolName,$location,$duration,$minDuration,$score,$scoreType,1);
+				print_r(json_encode($degreeObj));
+			}
+			else
+			{
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in academics",$userId);
+				echo 12;
+				exit();
+			}
+		}
+		else
+		{
+			echo 16;
+			exit();
+		}	
 	}
-	
-}
-		
-
-
 function achievmentsInsert($user,$competition,$description,$position,$location,$achievedDate='')
 	{
 		//No achieved Date For now
@@ -557,12 +435,14 @@ function achievmentsInsert($user,$competition,$description,$position,$location,$
 				echo 'No values found <br/>';
 				echo 404;
 			}*/
-		
-		
+		}
+
+		else
+		{
+			echo 16;
+			exit();
+		}
 	}
-
-}
-
 function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 	{
 		/*$timeString=explode("-",$durationString);
@@ -633,103 +513,57 @@ function certifiedCoursesInsert($user,$title,$durationString,$instituteName)
 				echo 16;
 				exit();
 			}
-		
 	}
-
 function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 	{
-		/*$timeString=explode("-",$durationString);
-		$start=$timeString[0];
-		$end=$timeString[1];
-				
-		// $startDate = date_parse($start);
-		$startDateTimestamp = dateStringToTimestamp($start);
-		
-		//echo $startDateTimestamp.'<br/>';
-		
-		// $endDate = date_parse($end);
-		$endDateTimestamp = dateStringToTimestamp($end);
-
-		//echo $endDateTimestamp.'<br/>';
-		
-		//$date1 = date_create();
-		//$currentTimestamp = date_timestamp_get($date1);
-		$currentTimestamp = time();*/
-		
-		//echo $currentTimestamp.'<br/>';
-		
-		if(!($title == '') and (($time=validateAboutMeDateString($durationString))!=false))
+		$conObj=new QoB();
+		if(!($organisation == '') and (($time=validateAboutMeDateString($durationString))!=false))
 			{
-				
 				$startDateTimestamp=$time['start'];
 				$endDateTimestamp=$time['end'];
-				$conObj = new QoB();
-				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
-				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
-		
+
+				if($featuring == 1)
+				{
+					$val[0]=array($userId => 's');
+					$res=$conObj->update("UPDATE experience SET featuring=0 WHERE userId=?",$val);
+					if($conObj->error!="")
+					{
+						notifyAdmin("Conn.Error".$conObj->error."! While editing featuring in experience",$userId);
+						echo 12;
+						exit();
+					}
+				}
+
+				$userId = $user['userId'];
+				$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
+				
+				$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,startDate,endDate,designation,featuring) VALUES(?,?,?,?,?,?)",$values);
+				
 				if($conObj->error == "")
 					{
-						if($result0 != "")
-						{*/
-							//Turn off Featuring for other experiences of user to set it for upcoming experince.
-							if($featuring == 1)
-							{
-								$conn=new QoB();
-								$val[0]=array($userId => 's');
-								$res=$conn->update("UPDATE experience SET featuring=0 WHERE userId=?",$val);
-								if($conn->error!="")
-								{
-									notifyAdmin("Conn.Error".$conObj->error."! While editing featuring in experience",$userId);
-									echo 12;
-									exit();
-								}
-							}
-
-							$userId = $user['userId'];
-							$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
-							
-							$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,startDate,endDate,designation,featuring) VALUES(?,?,?,?,?,?)",$values);
-							
-							if($conObj->error == "")
-								{
-									//echo 'Succesfull Insert <br />';
-									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
-									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-									$experienceId="e".$conObj->getInsertId();
-									$experienceObj=new experience($experienceId,$organisation,$duration,$minDuration,$title,$featuring,1);
-									print_r(json_encode($experienceObj));
-								}
-							else
-								{
-									notifyAdmin("Conn.Error".$conObj->error."! While creating record in experience",$userId);
-									echo 12;
-									exit();
-								}
-					/*	}
-						else
-						{
-							echo 'No values found for Query 0<br />';
-						}
+						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+						$experienceId="e".$conObj->getInsertId();
+						$experienceObj=new experience($experienceId,$organisation,$duration,$minDuration,$title,$featuring,1);
+						print_r(json_encode($experienceObj));
 					}
 				else
 					{
-						echo 'Error in Query 0<br />';
-						echo $conObj->error.'<br />';
-					}*/
+						notifyAdmin("Conn.Error".$conObj->error."! While creating record in experience",$userId);
+						echo 12;
+						exit();
+					}
 			}
 			
 		else
 			{
-				//echo 'details entered are wrong <br/>';
 				echo 16;
 				exit();
 			}
-			
-		
 	}
-
 function projectInsert($user,$title,$role,$durationString,$description,$teamMembers,$organisation)
 	{
+		// var_dump($_POST);
 		/*$timeString=explode("-",$durationString);
 		$start=$timeString[0];
 		$end=$timeString[1];
@@ -809,91 +643,48 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 				echo 16;
 				exit();
 			}
-		
 	}
-
 function workshopsInsert($user,$title,$durationString,$place,$attendCount)
 	{
-		/*$timeString=explode("-",$durationString);
-		$start=$timeString[0];
-		$end=$timeString[1];
-
-		// $startDate = date_parse($start);
-		$startDateTimestamp = dateStringToTimestamp($start);
-		
-		//echo $startDateTimestamp.'<br/>';
-		
-		// $endDate = date_parse($end);
-		$endDateTimestamp = dateStringToTimestamp($end);
-
-		//echo $endDateTimestamp.'<br/>';
-		
-		$date1 = date_create();
-		$currentTimestamp = date_timestamp_get($date1);*/
-		
-		//echo $currentTimestamp.'<br/>';
-		
 		if(!($title == '') and (($time=validateAboutMeDateString($durationString))!=false))
 			{
 				$conObj = new QoB();
 				$startDateTimestamp=$time['start'];
 				$endDateTimestamp=$time['end'];
-				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
-				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
+				$userId = $user['userId'];
+				$values = array();
+				
+				$values[0] = array($userId => 's');
+				$values[1] = array($title => 's');
+				$values[2] = array($startDateTimestamp => 's');
+				$values[3] = array($endDateTimestamp => 's');
+				$values[4] = array($place => 's');
+				$values[5] = array($attendCount => 'i');
+				
+				$result1 = $conObj->insert("INSERT INTO workshops(userId,workshopName,start,end,place,attendersCount) VALUES(?,?,?,?,?,?)",$values);
 				
 				if($conObj->error == "")
 					{
-						if($result0 != "")
-						{*/
-							$userId = $user['userId'];
-							$values = array();
-							
-							$values[0] = array($userId => 's');
-							$values[1] = array($title => 's');
-							$values[2] = array($startDateTimestamp => 's');
-							$values[3] = array($endDateTimestamp => 's');
-							$values[4] = array($place => 's');
-							$values[5] = array($attendCount => 'i');
-							
-							$result1 = $conObj->insert("INSERT INTO workshops(userId,workshopName,start,end,place,attendersCount) VALUES(?,?,?,?,?,?)",$values);
-							
-							if($conObj->error == "")
-								{
-									//echo 'Succesfull Insert <br />';
-									$duration=getDuration($startDateTimestamp,$endDateTimestamp);
-									$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-									$workshopId="w".$conObj->getInsertId();
-									$workshopObj=new workshops($workshopId,$duration,$minDuration,$title,$place,$attendCount,1);
-									print_r(json_encode($workshopObj));
-								}
-							else
-								{
-									notifyAdmin("Conn.Error".$conObj->error."! While creating record in workshops",$userId);
-									echo 12;
-									exit();
-								}
-					/*	}
-						else
-						{
-							echo 'No values found for Query 0<br />';
-						}
+						//echo 'Succesfull Insert <br />';
+						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
+						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
+						$workshopId="w".$conObj->getInsertId();
+						$workshopObj=new workshops($workshopId,$title,$duration,$minDuration,$place,$attendCount,1);
+						print_r(json_encode($workshopObj));
 					}
 				else
 					{
-						echo 'Error in Query 0<br />';
-						echo $conObj->error.'<br />';
-					}*/
+						notifyAdmin("Conn.Error".$conObj->error."! While creating record in workshops",$userId);
+						echo 12;
+						exit();
+					}
 			}
-			
 		else	
 			{
 				echo 16;
 				exit();
 			}
-			
-		
 	}
-
 function skillSetInsert($user,$skillArray,$ratingArray)
 	{
 		/*if(!((count($skillArray)==0) and (count($ratingArray) == 0)))
@@ -925,7 +716,6 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			$skillRecord=getSkillsByUser($userId);
 			
 			$existingSkills=$skillRecord['skills'];
-			var_dump($existingSkills);
 			$existingRating=$skillRecord['rating'];
 			if($existingSkills!="")
 			{
@@ -937,8 +727,6 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				$existingSkillsArray=array();
 				$existingRatingArray=array();
 			}
-			echo "<br>";
-			var_dump($existingSkillsArray);
 			$empty=false;
 			$hasRepeated=false;
 			$repeatedSkills=array();
@@ -967,7 +755,6 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 							$existingSkills.=",".$skill;
 							$existingRating.=",".$ratingArray[$k];
 						}
-						echo "$existingSkills";
 					}
 					else
 					{
@@ -978,9 +765,9 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			}
 			//echo $updatedSkillCount;
 			//Sorting the Skills in decreasing order of rating
-			for($i=0;$i<$updatedSkillCount-1;$i++)
+			for($i=0;$i<count($existingRatingArray)-1;$i++)
 			{
-				for($j=0;$j<$updatedSkillCount-1;$j++)
+				for($j=0;$j<count($existingRatingArray)-1;$j++)
 				{
 					//echo $existingRatingArray[$j];
 					if($existingRatingArray[$j]<$existingRatingArray[$j+1])
@@ -1040,7 +827,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 								{
 									//echo 'Successfull Insert <br />';
 
-									$skillsObj=new skillSet($existingSkillsArray,$existingRatingArray,1,json_encode($outObj),$message,$errorCode);
+									$skillsObj=new skillSet($updatedSkills,$updatedRating,1,json_encode($outObj),$message,$errorCode);
 									print_r(json_encode($skillsObj));
 								}
 								else
@@ -1066,11 +853,8 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 			echo 16;
 			exit();
 		}*/
-			
-		
 	}
-
-	function toolkitInsert($user,$toolsArray)
+function toolkitInsert($user,$toolsArray)
 	{
 		/*if(count($toolsArray)!=0)
 			{*/
@@ -1166,7 +950,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 							if($conObj->error == "")
 								{
 									//echo 'Successfull Insert <br />';
-									$toolsObj=new toolkit($existingToolsArray,1,$message,$errorCode);
+									$toolsObj=new toolkit($updatedTools,1,$message,$errorCode);
 									print_r(json_encode($toolsObj));
 								}
 							else
@@ -1192,157 +976,117 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				echo 16;
 				exit();
 			}*/
-			
-		
 	}
-
-	function interestsInsert($user,$interestsArray)
+function interestsInsert($user,$interestsArray)
 	{
-		/*if(count($interestsArray)!=0)
-			{*/
-				// var_dump($interestsArray);
-				if(!(is_array($interestsArray)))
-				{
-					echo 16;
-					exit();
-				}
-				$interestsArrayCount=count($interestsArray);
-				//var_dump($interestsArray);
-				if($interestsArrayCount==0)
-				{
-					echo 16;
-					exit();
-				}
+		if(!(is_array($interestsArray)))
+		{
+			echo 16;
+			exit();
+		}
+		$interestsArrayCount=count($interestsArray);
+		if($interestsArrayCount==0)
+		{
+			echo 16;
+			exit();
+		}
 
-				$i=0;
-				$userId = $user['userId'];
-				$interestRecord=getInterestsByUser($userId);
-				var_dump($interestRecord);
-				$existingInterests=$interestRecord['interests'];
-				if($existingInterests!="")
+		$i=0;
+		$userId = $user['userId'];
+		$interestRecord=getInterestsByUser($userId);
+		$existingInterests=$interestRecord['interests'];
+		if($existingInterests!="")
+		{
+			$existingInterestsArray=explode(',', $existingInterests);
+		}
+		else
+		{
+			$existingInterestsArray=array();
+		}
+		$hasRepeated=false;
+		$empty=false;
+		$repeatedInterests=array();
+		for ($k=0;$k<$interestsArrayCount;$k++) 
+		{
+			$interest=trim($interestsArray[$k]);
+			//echo $existingInterests." and ".$interest;
+			if($interest=="")
+			{
+				$empty=true;
+			}
+			else
+			{
+				if(isThereInCSV($existingInterests,$interest)==false)
 				{
-					$existingInterestsArray=explode(',', $existingInterests);
-				}
-				else
-				{
-					$existingInterestsArray=array();
-				}
-				
-
-				var_dump($existingInterestsArray);
-				$hasRepeated=false;
-				$empty=false;
-				$repeatedInterests=array();
-				for ($k=0;$k<$interestsArrayCount;$k++) 
-				{
-					$interest=trim($interestsArray[$k]);
-					//echo $existingInterests." and ".$interest;
-					if($interest=="")
+					$existingInterestsArray[]=$interest;
+					if($existingInterests=="")
 					{
-						$empty=true;
+						$existingInterests=$interest;
 					}
 					else
 					{
-						if(isThereInCSV($existingInterests,$interest)==false)
-						{
-							$existingInterestsArray[]=$interest;
-							if($existingInterests=="")
-							{
-								$existingInterests=$interest;
-							}
-							else
-							{
-								$existingInterests.=",".$interest;
-							}
-							echo $existingInterests."<br>";
-						}
-						else
-						{
-							//echo "Found Repitition $interest";
-							$hasRepeated=true;
-							$repeatedInterests[]=$interest;
-						}
+						$existingInterests.=",".$interest;
 					}
 				}
-				//echo "<br> after edit";
-				//var_dump($existingInterestsArray);
-				$message="";
-				$errorCode=3;
-				if($empty)
-				{
-					$message="Some Fields left empty. Please Fill or Remove them. ";
-					$errorCode=19;
-				}
-				
-				if($hasRepeated)
-				{
-					$repeatedInterests=implode(', ',$repeatedInterests);
-					$message.=$repeatedInterests. " already exists.";
-					$errorCode=19; //Code 19 for partial success
-				}
-
-				$conObj = new QoB();
-				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
-				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
-				if($conObj->error == "")
-					{
-						if($result0 != "")
-						{*/
-							$updatedInterests=implode(',',$existingInterestsArray);
-							$userId = $user['userId'];
-							$values = array();
-							
-							$values[0] = array($userId => 's'); 
-							$values[1] = array($updatedInterests => 's');
-							$values[2] = array($updatedInterests => 's');
-							
-							$result1 = $conObj->update("INSERT INTO interests(userId,interests) VALUES(?,?)  ON DUPLICATE KEY UPDATE interests=?",$values);
-							if($conObj->error == "")
-								{
-									//echo 'Successfull Insert <br />';
-									$interestsObj=new interests($existingInterestsArray,1,$message,$errorCode);
-									print_r(json_encode($interestsObj));
-								}
-							else
-								{
-									notifyAdmin("Conn.Error".$conObj->error."! While creating record in interests",$userId);
-									echo 12;
-									exit();
-								}
-						/*}
-						else
-						{
-							echo 'No values found for Query 0<br />';
-						}
-					}
 				else
-					{
-						echo 'Error in Query 0<br />';
-						echo $conObj->error.'<br />';
-					}*/
-			/*}
+				{
+					//echo "Found Repitition $interest";
+					$hasRepeated=true;
+					$repeatedInterests[]=$interest;
+				}
+			}
+		}
+		$message="";
+		$errorCode=3;
+		if($empty)
+		{
+			$message="Some Fields left empty. Please Fill or Remove them. ";
+			$errorCode=19;
+		}
+		
+		if($hasRepeated)
+		{
+			$repeatedInterests=implode(', ',$repeatedInterests);
+			$message.=$repeatedInterests. " already exists.";
+			$errorCode=19; //Code 19 for partial success
+		}
+
+		$conObj = new QoB();
+		$updatedInterests=implode(',',$existingInterestsArray);
+		$userId = $user['userId'];
+		$values = array();
+		
+		$values[0] = array($userId => 's'); 
+		$values[1] = array($updatedInterests => 's');
+		$values[2] = array($updatedInterests => 's');
+		
+		$result1 = $conObj->update("INSERT INTO interests(userId,interests) VALUES(?,?)  ON DUPLICATE KEY UPDATE interests=?",$values);
+		if($conObj->error == "")
+			{
+				$interestsObj=new interests($updatedInterests,1,$message,$errorCode);
+				print_r(json_encode($interestsObj));
+			}
 		else
 			{
-				echo 16;
+				notifyAdmin("Conn.Error".$conObj->error."! While creating record in interests",$userId);
+				echo 12;
 				exit();
-			}*/
-			
-		
+			}
 	}
 
-	/*function leaveMessageInsert($receiverUserId,$senderName,$senderMailId,$message)
+/*function leaveMessageInsert($receiverUserId,$senderName,$senderMailId,$message)
+{
+	$conn=new QoB();
+	$values = array(0 => array($userId => 's'));
+	$result = $conn->fetchAll("INSERT INTO interests() WHERE userId = ?",$values,false);
+	if($conn->error==""&&$result!="")
 	{
-		$conn=new QoB();
-		$values = array(0 => array($userId => 's'));
-		$result = $conn->fetchAll("INSERT INTO interests() WHERE userId = ?",$values,false);
-		if($conn->error==""&&$result!="")
-		{
-			return $result;
-		}
-		else
-		{
-			return false;
-		}
-	}*/
+		return $result;
+	}
+	else
+	{
+		return false;
+	}
+}*/
 
 ?>

@@ -16,13 +16,14 @@
 	class about
 	{
 		public $userIdHash;
-		public $name; //alias of the user
+		public $name; 
+		public $alias;//alias of the user
 		public $dob;
 		public $description;
-		public $resume;
+		//public $resume;
 		public $highestDegree;
 		public $currentProfession;
-		public $hobbies;
+		//public $hobbies;
 		public $mailId;
 		public $showMailId;
 		public $address;	
@@ -35,98 +36,35 @@
 		public $linkedinId;
 		public $pinterestId;
 		public $isOwner;
-		
-		public function __construct($userIdHash,$name,$dob,$description,$resume,$highestDegree,
-			$currentProfession,$hobbies,$mailId,$showMailId,$address,$phone,$showPhone,
-			$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,$isOwner)
+		//$_POST['_alias'],$_POST['_dob'],$_POST['_description'],$_POST['_highestDegree'],$_POST['_currentProfession'],$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']
+		//$userAlias,$dob,$description,$highestDegree,$currentProfession,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,
+		public function __construct($userIdHash,$name,$alias,$dob,$description,$highestDegree,
+			$currentProfession,$mailId,$showMailId,$address,$phone, $showPhone,
+			$city,$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$gender,$profilePicExists,$isOwner)
 			{
 				$this->userIdHash = $userIdHash;
 				$this->name = $name; 
+				$this->alias= $alias;
 				$this->dob = $dob;	
 				$this->description = $description;
-				/*if(=='null')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}*/
-				$this->resume = $resume;
 				$this->highestDegree=$highestDegree;
+
 				$this->currentProfession=$currentProfession;
-				$this->hobbies = $hobbies;
-				/*if(=='null')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}*/
 				$this->mailId = $mailId;
 				$this->showMailId=$showMailId;
 				$this->address = $address;
-			/*	if(=='null')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}*/
 				$this->phone = $phone;
+
 				$this->showPhone=$showPhone;
-				$this->city = $city;
-				/*if(=='#')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}
-
-				if(=='#')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}
-
-				if(=='#')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}
-
-				if(=='#')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}
-
-				if(=='#')
-				{
-					$this->='';
-				}
-				else
-				{
-					$this->=$
-				}*/
+				$this->city = $city;				
 				$this->facebookId=$facebookId;
 				$this->twitterId=$twitterId;
 				$this->googleId=$googleId;
+
 				$this->linkedinId=$linkedinId;
 				$this->pinterestId=$pinterestId;
+				$this->gender=$gender;
+				$this->profilePicExists= $profilePicExists;
 				$this->isOwner=$isOwner;
 
 				return $this;
@@ -134,7 +72,73 @@
 			
 	}
 	
-	
+	class aboutMeTop
+	{
+		public $userIdHash;
+		public $name; 
+		public $alias;//alias of the user
+		public $dob;
+		public $description;
+		//public $resume;
+		public $highestDegree;
+		public $currentProfession;
+		public $isOwner;
+
+		public function __construct($userIdHash,$name,$alias,$dob,$description,$highestDegree,
+			$currentProfession,$isOwner)
+			{
+				$this->userIdHash = $userIdHash;
+				$this->name = $name; 
+				$this->alias = $alias; 
+				$this->dob = $dob;	
+				$this->description = $description;
+				$this->highestDegree=$highestDegree;
+
+				$this->currentProfession=$currentProfession;
+				$this->isOwner=$isOwner;
+
+				return $this;
+			}
+	}
+
+	class aboutMeBottom
+	{
+		public $mailId;
+		public $showMailId;
+		public $address;	
+		public $phone;
+		public $showPhone;
+		public $city;
+		public $facebookId;
+		public $twitterId;
+		public $googleId;
+		public $linkedinId;
+		public $pinterestId;
+		public $isOwner;
+
+		public function __construct($mailId,$showMailId,$address,$phone, $showPhone,
+			$city,$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$isOwner)
+			{
+				
+				$this->mailId = $mailId;
+				$this->showMailId=$showMailId;
+				$this->address = $address;
+				$this->phone = $phone;
+
+				$this->showPhone=$showPhone;
+				$this->city = $city;				
+				$this->facebookId=$facebookId;
+				$this->twitterId=$twitterId;
+				$this->googleId=$googleId;
+
+				$this->linkedinId=$linkedinId;
+				$this->pinterestId=$pinterestId;
+				$this->isOwner=$isOwner;
+
+				return $this;
+			}
+
+	}
 	class academics
 		{
 			public $degreeId;

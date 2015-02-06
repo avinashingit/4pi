@@ -14,7 +14,7 @@
 
 
 
-error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 
 
@@ -43,23 +43,31 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				}
 				else
 				{
-					if (array_map('file_exists',glob(__DIR__."/../../img/proPics/$userIdHash.jpg")))
+					if (array_map('file_exists',glob(__DIR__."/../img/proPics/$userIdHash.jpg")))
 					{
-						array_map('unlink',glob(__DIR__."/../../img/proPics/$userIdHash.jpg"));
+						array_map('unlink',glob(__DIR__."/../img/proPics/$userIdHash.jpg"));
 					}
 					
 					$uploadedfile = $file['tmp_name'];
 					$src = imagecreatefromjpeg($uploadedfile);
 					list($width,$height)=getimagesize($uploadedfile);
 					$newwidth=200;
-					$newheight=($height/$width)*$newwidth;
+					$newheight=(1.15)*$newwidth;
 					$tmp=imagecreatetruecolor($newwidth,$newheight);
 					imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
-					$fileLocation="/../../img/proPics/$userIdHash.jpg";
-					imagejpeg($tmp,$fileLocation,100);
-					imagedestroy($src);
-					imagedestroy($tmp);
-					return true;
+					$fileLocation=__DIR__."/../img/proPics/$userIdHash.jpg";
+					//echo $fileLocation;
+					if(imagejpeg($tmp,$fileLocation,100))
+					{
+						//echo "Uploaded Picture successfully ".$fileLocation;
+						imagedestroy($src);
+						imagedestroy($tmp);
+						return true;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 		}
@@ -715,7 +723,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 	{
 		$time=array();
 		$currentTime=time();
-		if($dateString!="")
+		if($dateString!="-")
 		{
 
 			$timestring=explode('-', $dateString);
@@ -745,9 +753,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				}
 				else 
 				{
-					var_dump($time);
-					echo $currentTime;
-					if($time['start']<$currentTime&&$time['start']<$time['end'])
+					//var_dump($time);
+					//echo $currentTime;
+					if($time['start']<=$currentTime&&$time['start']<=$time['end'])
 					{
 						return $time;
 					}
@@ -957,8 +965,22 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	function getDuration($start,$end)
 	{
-		$startYearMonthDate=date('d/m/Y',$start);
-		$endYearMonthDate=date('d/m/Y',$end);
+		if($start==0)
+		{
+			$startYearMonthDate="";
+		}
+		else
+		{
+			$startYearMonthDate=date('d/m/Y',$start);
+		}
+		if($end==0)
+		{
+			$endYearMonthDate="";
+		}
+		else
+		{
+			$endYearMonthDate=date('d/m/Y',$end);
+		}
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
 		return $duration;
 	}
@@ -967,10 +989,26 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 
 	function getMinDuration($start,$end)
 	{
-		$startYearMonthDate=date('M,Y',$start);
-		$endYearMonthDate=date('M,Y',$end);
+		if($start==0)
+		{
+			$startYearMonthDate="";
+		}
+		else
+		{
+			$startYearMonthDate=date('M,Y',$start);
+		}
+		if($end==0)
+		{
+			$endYearMonthDate="";
+		}
+		else
+		{
+			$endYearMonthDate=date('M,Y',$end);
+		}
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
 		return $duration;
+		
+		
 	}
 
 
@@ -1060,7 +1098,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		{
 			$isOwner=-1;
 		}
-		$proPicLocation='../img/proPics/'.$poll['userIdHash'].'.jpg';
+		$proPicLocation=__DIR__.'/../img/proPics/'.$poll['userIdHash'].'.jpg';
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1108,7 +1146,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		$rawDate=changeToRawDateFormat($eventDate);
 		$eventCreationTime=toTimeAgoFormat($event['timestamp']);
 		$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
-		$proPicLocation='../img/proPics/'.$event['userIdHash'].'.jpg';
+		$proPicLocation=__DIR__.'/../img/proPics/'.$event['userIdHash'].'.jpg';
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1157,7 +1195,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
-		$proPicLocation='../img/proPics/'.$post['userIdHash'].'.jpg';
+		$proPicLocation=__DIR__.'/../img/proPics/'.$post['userIdHash'].'.jpg';
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1204,7 +1242,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
 		}
-		$proPicLocation='../img/proPics/'.$post["userIdHash"].'.jpg';
+		$proPicLocation=__DIR__.'/../img/proPics/'.$post["userIdHash"].'.jpg';
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1231,7 +1269,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
 		{
 			$commentOwner=-1;
 		}
-		$proPicLocation='../img/proPics/'.$comment['userIdHash'].'.jpg';
+		$proPicLocation=__DIR__.'/../img/proPics/'.$comment['userIdHash'].'.jpg';
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;

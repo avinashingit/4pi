@@ -51,6 +51,7 @@ function closeModal(id)
 }
 
 $(document).ready(function(){
+	showValueForSlider();
 	fetchTopPart();
 	fetchSkills();
 	fetchTools();
@@ -128,8 +129,7 @@ function afterAjaxCallDisplay()
 
 function showValueForSlider(el)
 {
-	alert("Hello");
-	$(el).parent().find("#sliderValueAddModal").html($(el).val());
+	$(el).parent().parent().find("#sliderValueAddModal").html($(el).val());
 }
 
 function addSkillAddInput()
@@ -146,9 +146,15 @@ function addSkillAddInput()
 
 		input+='</div>';
 
-		input+='<div class="col-md-5">';
+		input+='<div class="col-md-4">';
 
-			input+='<input type="number" pattern="[0-9]*" min="0" max="100" id="addSkillModalSkillPercentage" class="form-control">';
+			input+='<input type="range" min="0" style="border:none;" max="100" id="addSkillModalSkillPercentage" onchange="$(this).parent().parent().find(\'#sliderValueAddModal\').parent().removeClass(\'hidden\');showValueForSlider(this);" class="form-control">';
+
+		input+='</div>';
+
+		input+='<div class="hidden col-md-1 text-center skillValue" >';
+
+			input+='<span id="sliderValueAddModal" style="padding-top:10px;"></span>';
 
 		input+='</div>';
 
@@ -160,9 +166,9 @@ function addSkillAddInput()
 
 			input+='</span>';
 
-			input+='<span class="btn btn-sm btn-default" id="deleteOption">';
+			input+='<span class="btn btn-sm btn-default" id="deleteOption" onclick="addSkillDeleteInput(this);">';
 
-				input+='<i class="fa fa-minus" onclick="addSkillDeleteInput(this);"></i>';
+				input+='<i class="fa fa-minus" ></i>';
 
 			input+='</span>';
 
@@ -175,7 +181,7 @@ function addSkillAddInput()
 
 function addSkillDeleteInput(el)
 {
-	$(el).parent().parent().parent().remove();
+	$(el).parent().parent().remove();
 }
 
 function editSkillDeleteInput(el)
@@ -545,20 +551,37 @@ function editContactInfoSendData()
 	var address=link.find("#address").val().trim();
 	var phone1=link.find("#contactNumber1").val().trim();
 	var phone2=link.find("#contactNumber2").val().trim();
-	var phone=[phone1,phone2];
-	$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
-		_userId:userId
-	})
-	.error(function(){
-		alert("Server overload. Please try again.");
-	})
-	.success(function(data){
-		if(checkData(data)==1)
-		{
-			insertBottomPart(JSOn.parse(data));
-			link.modal('hide');
-		}
-	});
+	var showMailId=link.find("#showEmailIdValue").val();
+	var showContactsValue=link.find("#showContactsValue").val();
+	alert(showMailId+"--------"+showContactsValue);
+	if(showMailId!=1 && showMailId!=2)
+	{
+		alert("There is a problem with your page. Please reload it.");
+	}
+	else if(showContactsValue!=1 && showContactsValue!=2)
+	{
+		alert("There is a problem with your page. Please reload it.");
+	}
+	else
+	{
+		var phone=[phone1,phone2];
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
+			_userId:userId,
+			_mode:11
+		})
+		.error(function(){
+			alert("Server overload. Please try again.");
+		})
+		.success(function(data){
+			console.log(data);
+			if(checkData(data)==1)
+			{
+				insertBottomPart(JSON.parse(data));
+				link.modal('hide');
+			}
+		});
+	}
+	
 }
 
 function editTopPartSendData()
@@ -567,15 +590,20 @@ function editTopPartSendData()
 
 	var sFileName=link.find("#editPersonInfoModalPersonImage").val();
 
-	alert(sFileName);
-
 	var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
 
-	if(sFileExtension!=".jpg")
+	var error=0;
+
+	if(sFileExtension.length!=0)
 	{
-		alert("Only .jpg files images are allowed");
+		if(sFileExtension!=".jpg")
+		{
+			error=0;
+			alert("Only .jpg files images are allowed");
+		}
 	}
-	else
+	
+	if(error==0)
 	{
 		var new_data=new FormData($("#editPersonInfoModal").find("#topPartEditForm")[0]);
 
@@ -583,13 +611,18 @@ function editTopPartSendData()
 
 		console.log(link.find("#editPersonInfoModalPersonName").val().trim());
 
-		new_data.append("_alias","hello");
+		new_data.append("_alias",link.find("#editPersonInfoModalPersonName").val());
+		new_data.append("_mode",1);
 		new_data.append("_dob",link.find("#editPersonInfoModalPersonDOB").val().trim());
 		new_data.append("_description",link.find("#editPersonInfoModalPersonDescription").val().trim());
 
 		new_data.append("_resume",link.find("#editPersonInfoModalPersonResume")[0].files[0]);
 
 		new_data.append("_profilePic",link.find("#editPersonInfoModalPersonImage")[0].files[0]);
+
+		new_data.append("_highestDegree",$("#topContent").find("#personHighestDegree").html());
+
+		new_data.append("_currentProfession",$("#topContent").find("#personCurrentProfession").html())
 
 		// console.log(new_data);
 		// 
@@ -606,6 +639,8 @@ function editTopPartSendData()
 	    	}
 		});
 	}
+
+	
 	
 }
 
@@ -782,8 +817,6 @@ function editSkillSendData()
 		i++;
 	});
 
-	console.log(skillArray);
-
 	var empty=0;
 	var inputProblem=0;
 
@@ -810,18 +843,22 @@ function editSkillSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/editSkills.php',{
-			_skillArray:skillArray,
-			_percentageArray:percentageArray,
-			_userId:userId
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
+			_skill:skillArray,
+			_rating:percentageArray,
+			_userId:userId,
+			_mode:8
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
-				modifySkill(data.jsonObj);
+				data=JSON.parse(data);
+
+				insertSkills(data.jsonObj);
 				$("#skills").find("#skillNames").html(data.skills);
 				$("#skills").find("#skillPercentages").html(data.rating);
 
@@ -829,7 +866,6 @@ function editSkillSendData()
 				{
 					alert(data.message);
 				}
-
 				$("#editSkillModal").modal('hide');
 			}
 		});
@@ -953,7 +989,7 @@ function addToolsSendData()
 			{
 				$("#tools").find('.tool').remove();
 				data=JSON.parse(data);
-				var x=data.tools;
+				var x=data.tools.split(",");
 				for(i=0;i<x.length;i++)
 				{
 					insertTool(x[i],data.isOwner);
@@ -988,6 +1024,8 @@ function editToolsSendData()
 		i++;
 	});
 
+	console.log(toolArray);
+
 	var empty=0;
 	for(var i=0;i<toolArray.length;i++)
 	{
@@ -1003,25 +1041,25 @@ function editToolsSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/editTools.php',{
-			_toolArray:toolArray,
-			_userId:userId
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
+			_tools:toolArray,
+			_userId:userId,
+			_mode:9
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
-				$("#tools").find("#toolsColumn1").html("");
-				$("#tools").find("#toolsColumn2").html("");
-				$("#tools").find("#toolsColumn3").html("");
-				var x=JSON.parse(data);
-				for(i=0;i<x.length;i++)
+				$("#tools").find('.tool').remove();
+				data=JSON.parse(data);
+				var x=data.tools.split(",");
+				for(var i=0;i<x.length;i++)
 				{
-					insertTool(x[i]);
+					insertTool(x[i],data.isOwner);
 				}
-
 				$("#editToolModal").modal('hide');
 			}
 		});
@@ -1207,6 +1245,9 @@ function editProjectSendData()
 	var company=ln.find('#editProjectModalProjectCompany').val().trim();
 	var description=ln.find('#editProjectModalProjectDescription').val().trim();
 	var projectId=ln.find('editProjectModalProjectId').val();
+	var id=ln.find("#editProjectModalProjectId").val();
+
+	alert(id);
 
 	if(title.length==0)
 	{
@@ -1214,19 +1255,21 @@ function editProjectSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/editProject.php',{
-			_title:title,
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
+			_projectTitle:title,
 			_duration:duration,
-			_role:role,
-			_company:company,
-			_description:description,
-			_id:projectId,
-			_team:team
+			_projectPosition:role,
+			_projectCompany:company,
+			_projectDescription:description,
+			_teamMembers:team,
+			_projectId:id,
+			_mode:6
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1289,7 +1332,7 @@ function insertExperience(data)
 		{
 			experience+='<div class="col-md-3 visibleForUser text-right col-md-offset-2">';
 
-				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="shoOnHover fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="showOnHover fa fa-trash"></i></div>';
+				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="showOnHover fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="showOnHover fa fa-trash"></i></div>';
 
 			experience+='</div>';
 		}
@@ -1316,7 +1359,7 @@ function insertExperience(data)
 
 	experience+='</div><!-- end class experience -->';
 
-	var length=$("#experience").find(".experience").length;
+	var length=$("#experiences").find(".experience").length;
 
 	var position=length%2+1;
 
@@ -1391,7 +1434,7 @@ function addExperienceSendData()
 function modifyExperience(data)
 {
 	var link=$('#experiences').find('#'+data.experienceId);
-	link.find('#company').html(data.companyName);
+	link.find('#company').html(data.organisation);
 	link.find('#role').html(data.role);
 	link.find('#duration').attr("title",data.duration);
 	link.find('#duration').html(data.minDuration);
@@ -1405,7 +1448,7 @@ function editExperienceSendData()
 	var role=link.find('#editExperienceModalRole').val().trim();
 	var duration=link.find('#editExperienceModalDurationFrom').val().trim()+"-"+link.find('#editExperienceModalDurationTo').val().trim();
 	var isFeaturing=link.find("#editExperienceModalFeature").val();
-	var id=link.find('#experienceId').html();
+	var id=link.find('#experienceId').val();
 
 	if(company.length==0)
 	{
@@ -1413,19 +1456,22 @@ function editExperienceSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editExperience.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_experienceId:id,
 			_company:company,
 			_role:role,
 			_duration:duration,
-			_isFeaturing:isFeaturing
+			_isFeaturing:isFeaturing,
+			_mode:5
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
+				data=JSON.parse(data);
 				modifyExperience(data);
 				$("#editExperienceModal").modal('hide');
 			}
@@ -1468,6 +1514,14 @@ function deleteExperience(id)
 function insertAcademics(data)
 {
 	var academics="";
+
+	if(data.scoreType==1)
+	{
+		if(data.score.length!=0)
+		{
+			data.score+='%';
+		}
+	}
 
 	academics+='<div class="row academics" id="'+data.degreeId+'">';
 
@@ -1572,12 +1626,13 @@ function addAcademicsSendData()
 	var school=ln.find('#addAcademicsModalSchoolName').val().trim();
 	var duration=ln.find('#addAcademicsModalDurationFrom').val().trim()+"-"+ln.find('#addAcademicsModalDurationTo').val().trim();
 	var location=ln.find('#addAcademicsModalSchoolLocation').val().trim();
-	var scoreType=ln.find("#addAcademicsModalPercentage").val().trim();
+	var scoreType=ln.find("#addAcademicsModalPercentageType").val().trim();
+	alert(scoreType);
 	if(scoreType==1)
 	{
 		var percentage=ln.find('#addAcademicsModalPercentage').val().trim();
 	}
-	else
+	else if(scoreType==2)
 	{
 		var percentage=ln.find('#addAcademicsModalCGPA').val().trim()+"/"+ln.find('#addAcademicsModalCGPAScale').val().trim();
 	}
@@ -1613,10 +1668,10 @@ function addAcademicsSendData()
 
 function modifyAcademics(data)
 {
-	var link=$('#academics').find('#'+data.academicsId);
+	var link=$('#academics').find('#'+data.degreeId);
 	link.find('#degree').html(data.degree);
-	link.find('#percentage').html(data.percentage);
-	link.find('#school').html(data.school);
+	link.find('#percentage').html(data.score);
+	link.find('#school').html(data.schoolName);
 	link.find('#location').html(data.location);
 	link.find('#duration').attr("title",data.duration);
 	link.find('#duration').html(data.minDuration);
@@ -1632,13 +1687,14 @@ function editAcademicsSendData()
 	var location=link.find('#editAcademicsModalSchoolLocation').val().trim();
 	var duration=link.find('#editAcademicsModalDurationFrom').val().trim()+"-"+link.find('#editAcademicsModalDurationTo').val().trim();
 	var id=link.find('#editAcademicsModalId').html();
+	alert(id);
 	if(scoreType==1)
 	{
-		var percentage=ln.find('#editAcademicsModalPercentage').val().trim();
+		var percentage=link.find('#editAcademicsModalPercentage').val().trim();
 	}
-	else
+	else if(scoreType==2)
 	{
-		var percentage=ln.find('#editAcademicsModalCGPA').val().trim()+"/"+ln.find('#editAcademicsModalCGPAScale').val().trim();
+		var percentage=link.find('#editAcademicsModalCGPA').val().trim()+"/"+link.find('#editAcademicsModalCGPAScale').val().trim();
 	}
 	if(degree.length==0)
 	{
@@ -1646,19 +1702,21 @@ function editAcademicsSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editAcademics.php',{
-			_academicsId:id,
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
+			_degreeId:id,
 			_degree:degree,
-			_percentage:percentage,
-			_school:school,
+			_score:percentage,
+			_schoolName:school,
 			_scoreType:scoreType,
 			_location:location,
-			_duration:duration
+			_duration:duration,
+			_mode:3
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1849,19 +1907,22 @@ function editWorkshopSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editWorkshop.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_workshopId:id,
 			_workshopName:name,
-			_workshopLocation:location,
-			_workshopDuration:duration,
-			_attendeeNumber:attendeeNumber
+			_location:location,
+			_duration:duration,
+			_peopleAttended:attendeeNumber,
+			_mode:7
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
+				data=JSON.parse(data);
 				modifyWorkshop(data);
 				$("#editWorkshopModal").modal('hide');
 			}
@@ -2015,7 +2076,7 @@ function modifyCertification(data)
 	var link=$('#certifications').find('#'+data.courseId);
 	link.find('#courseName').html(data.title);
 	link.find('#institute').html(data.institutename);
-	link.find('#duration').attr("title",data.minDuration).html(data.duration);
+	link.find('#duration').attr("title",data.duration).html(data.minDuration);
 }
 
 function editCertificationSendData()
@@ -2023,7 +2084,7 @@ function editCertificationSendData()
 	var link=$('#editCertificationModal');
 	var courseName=link.find('#editCertificationModalCourseName').val().trim();
 	var institute=link.find('#editCertificationModalInstitute').val().trim();
-	var duration=link.find('#editCertificationModalCertificationDurationFrom').val().trim()+"-"+link.find('#editCertificationModalDurationTo').val().trim();
+	var duration=link.find('#editCertificationModalCertificationDurationFrom').val().trim()+"-"+link.find('#editCertificationModalCertificationDurationTo').val().trim();
 	var id=link.find('#editCertificationModalId').html();
 	if(courseName.length==0)
 	{
@@ -2031,16 +2092,18 @@ function editCertificationSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutMeHandlers/editCertification.php',{
-			_certificationId:id,
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
+			_courseId:id,
 			_courseName:courseName,
 			_institute:institute,
-			_duration:duration
+			_duration:duration,
+			_mode:4
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2236,17 +2299,20 @@ function editAchievementSendData()
 	}
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/editAchievement.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_achievementId:id,
-			_name:name,
+			_eventName:name,
 			_location:location,
 			_position:position,
-			_description:description
+			_description:description,
+			_userId:userId,
+			_mode:2
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2400,11 +2466,12 @@ function addInterestsSendData()
 			console.log(data);
 			if(checkData(data)==1)
 			{
-				var x=JSON.parse(data);
+				data=JSON.parse(data);
+				var x=data.interests.split(",");
 				$("#interests").find('.interest').remove();
-				for(var i=0;i<x.interests.length;i++)
+				for(var i=0;i<x.length;i++)
 				{
-					insertInterest(x.interests[i],x.isOwner);
+					insertInterest(x[i],data.isOwner);
 				}
 
 				$("#addInterestModal").modal('hide');
@@ -2424,7 +2491,7 @@ function modifyInterests(data)
 	}
 }
 
-function editInterestSendData()
+function editInterestsSendData()
 {
 
 	var link=$("#editInterestModal");
@@ -2433,9 +2500,11 @@ function editInterestSendData()
 	var i=0;
 
 	link.find(".editInterestInputClass").each(function(){
-		interestArray[i]=$(this).find("#interestName").html();
+		interestArray[i]=$(this).find("#editInterestModalInterestName").val();
 		i++;
 	});
+
+	console.log(interestArray);
 
 	var empty=0;
 
@@ -2454,23 +2523,30 @@ function editInterestSendData()
 
 	else
 	{
-		$.post('/4pi/handlers/aboutHandlers/editInterests.php',{
+		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_userId:userId,
-			_interestsArray:interestsArray
+			_interests:interestArray,
+			_mode:10
 		})
 		.error(function(){
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
+			console.log(data);
 			if(checkData(data)==1)
 			{
-				$("#interests").find('.interest').remove();
-				for(var i=0;i<data.length;i++)
+				data=JSON.parse(data);
+				var x=data.interests.split(",");
+				if(x!="")
 				{
-					insertInterests(data[i]);
-				}
+					$("#interests").find('.interest').remove();
+					for(var i=0;i<x.length;i++)
+					{
+						insertInterest(x[i],data.isOwner);
+					}
 
-				$("#editInterestModal").modal('hide');
+					$("#editInterestModal").modal('hide');
+				}
 			}
 		});
 	}
@@ -2498,7 +2574,7 @@ function leaveMessage()
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	   	 if(re.test(email))
 	   	 {
-	   	 	$.post('/4pi/handlers/aboutMeHandlers/leaveMessage.php',{
+	   	 	$.post('/4pi/handlers/aboutHandlers/leaveMessage.php',{
 	   	 		_name:name,
 	   	 		_email:email,
 	   	 		_message:message,

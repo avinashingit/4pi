@@ -25,12 +25,12 @@ class miniPoll
 	public $pollCreationTime;
 	public $pollStatus;
 	public $isOwner;
-	public $gender;
-	public $profilePicExists;
+	/*public $gender;
+	public $profilePicExists;*/
 	public $userIdHash;
 
 	function __construct($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptions,$pollOptionsType,
-		$sharedWith,$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner,$gender,$profilePicExists)
+		$sharedWith,$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner)
 	{
 		$this->pollIdHash=$pollIdHash;
 		$this->userName=$userName;
@@ -46,8 +46,8 @@ class miniPoll
 		$this->pollCreationTime=$pollCreationTime;
 		$this->pollStatus=$pollStatus;
 		$this->isOwner=$isOwner;
-		$this->gender = $gender;
-		$this->profilePicExists = $profilePicExists;
+		/*$this->gender = $gender;
+		$this->profilePicExists = $profilePicExists;*/
 		$this->userIdHash = $userIdHash;
 		return $this;
 	}
