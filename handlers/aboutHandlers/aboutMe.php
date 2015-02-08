@@ -16,9 +16,8 @@ require_once('../../QOB/qob.php');
 require_once('aboutMeClass.php');
 require_once('../fetch.php');
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512",'COE12B025'.SALT);
+	$userIdHash=$_SESSION['vj'];
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_mode']=1;
 
 //Testing Content Ends
 	

@@ -164,8 +164,9 @@ else if($mode ==10)
 }
 else if($mode ==11)
 {
+	
 	//bottomPartEdit
-	aboutMeBottomEdit($user,$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
+	aboutMeBottomEdit($user,$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_gplusLink'],$_POST['_inLink'],$_POST['_ptrestLink']);
 }
 else 
 {

@@ -773,10 +773,61 @@ if(userId=="")
 			var toolArray=new Array();
 			var i=0;
 
-			$("#tools").find('.tool').each(function(){
-				toolArray[i]=$(this).find("#toolName").html();
-				i++;
+			var toolsColumn1Length=$("#toolsColumn1").find(".tool").length;
+			var toolsColumn2Length=$("#toolsColumn2").find(".tool").length;
+			var toolsColumn3Length=$("#toolsColumn3").find(".tool").length;
+
+			var c1=0,c2=0,c3=0;
+
+			var toolColumn1Array=new Array();
+			var toolColumn2Array=new Array();
+			var toolColumn3Array=new Array();
+
+			$("#tools").find('#toolsColumn1').find('.tool').each(function(){
+				toolColumn1Array[c1]=$(this).find("#toolName").html();
+				c1++;
 			});
+
+			$("#tools").find('#toolsColumn2').find('.tool').each(function(){
+				toolColumn2Array[c2]=$(this).find("#toolName").html();
+				c2++;
+			});
+
+			$("#tools").find('#toolsColumn3').find('.tool').each(function(){
+				toolColumn3Array[c3]=$(this).find("#toolName").html();
+				c3++;
+			});
+
+			var totalToolCount=c1+c2+c3;
+
+			var count=c1;
+			i=0;
+			while(count!=0)
+			{
+				toolArray[i]=toolColumn1Array[c1-count];
+				i=i+3;
+				count--;
+			}
+
+			count=c2;
+			i=1;
+			while(count!=0)
+			{
+				toolArray[i]=toolColumn2Array[c2-count];
+				i=i+3;
+				count--;
+			}
+
+			var count=c3;
+			i=2;
+			while(count!=0)
+			{
+				toolArray[i]=toolColumn3Array[c3-count];
+				i=i+3;
+				count--;
+			}
+
+			console.log(toolArray);
 
 			for(var i=0;i<toolArray.length;i++)
 			{
@@ -1028,10 +1079,61 @@ if(userId=="")
 			var interestsArray=new Array();
 			var i=0;
 
-			$("#interests").find('.interest').each(function(){
-				interestsArray[i]=$(this).find("#interestName").html();
-				i++;
+			var interestsColumn1Length=$("#interestsContainer1").find(".interest").length;
+			var interestsColumn2Length=$("#interestsContainer2").find(".interest").length;
+			var interestsColumn3Length=$("#interestsContainer3").find(".interest").length;
+
+			var c1=0,c2=0,c3=0;
+
+			var interestsColumn1Array=new Array();
+			var interestsColumn2Array=new Array();
+			var interestsColumn3Array=new Array();
+
+			$("#interests").find('#interestsContainer1').find('.interest').each(function(){
+				interestsColumn1Array[c1]=$(this).find("#interestName").html();
+				c1++;
 			});
+
+			$("#interests").find('#interestsContainer2').find('.interest').each(function(){
+				interestsColumn2Array[c2]=$(this).find("#interestName").html();
+				c2++;
+			});
+
+			$("#interests").find('#interestsContainer3').find('.interest').each(function(){
+				interestsColumn3Array[c3]=$(this).find("#interestName").html();
+				c3++;
+			});
+
+			var totalInterestCount=c1+c2+c3;
+
+			var count=c1;
+			i=0;
+			while(count!=0)
+			{
+				interestsArray[i]=interestsColumn1Array[c1-count];
+				i=i+3;
+				count--;
+			}
+
+			count=c2;
+			i=1;
+			while(count!=0)
+			{
+				interestsArray[i]=interestsColumn2Array[c2-count];
+				i=i+3;
+				count--;
+			}
+
+			var count=c3;
+			i=2;
+			while(count!=0)
+			{
+				interestsArray[i]=interestsColumn3Array[c3-count];
+				i=i+3;
+				count--;
+			}
+
+			console.log(interestsArray);
 
 			for(var i=0;i<interestsArray.length;i++)
 			{
@@ -1079,10 +1181,59 @@ if(userId=="")
 				var interestsArray=new Array();
 				var i=0;
 
-				$("#interests").find('.interest').each(function(){
-					interestsArray[i]=$(this).find("#interestName").html();
-					i++;
+				var interestsColumn1Length=$("#interestsContainer1").find(".interest").length;
+				var interestsColumn2Length=$("#interestsContainer2").find(".interest").length;
+				var interestsColumn3Length=$("#interestsContainer3").find(".interest").length;
+
+				var c1=0,c2=0,c3=0;
+
+				var interestsColumn1Array=new Array();
+				var interestsColumn2Array=new Array();
+				var interestsColumn3Array=new Array();
+
+				$("#interests").find('#interestsContainer1').find('.interest').each(function(){
+					interestsColumn1Array[c1]=$(this).find("#interestName").html();
+					c1++;
 				});
+
+				$("#interests").find('#interestsContainer2').find('.interest').each(function(){
+					interestsColumn2Array[c2]=$(this).find("#interestName").html();
+					c2++;
+				});
+
+				$("#interests").find('#interestsContainer3').find('.interest').each(function(){
+					interestsColumn3Array[c3]=$(this).find("#interestName").html();
+					c3++;
+				});
+
+				var totalInterestCount=c1+c2+c3;
+
+				var count=c1;
+				i=0;
+				while(count!=0)
+				{
+					interestsArray[i]=interestsColumn1Array[c1-count];
+					i=i+3;
+					count--;
+				}
+
+				count=c2;
+				i=1;
+				while(count!=0)
+				{
+					interestsArray[i]=interestsColumn2Array[c2-count];
+					i=i+3;
+					count--;
+				}
+
+				var count=c3;
+				i=2;
+				while(count!=0)
+				{
+					interestsArray[i]=interestsColumn3Array[c3-count];
+					i=i+3;
+					count--;
+				}
 
 				for(var i=0;i<interestsArray.length;i++)
 				{
@@ -1667,7 +1818,7 @@ if(userId=="")
 
 							<label for="projectDuration">Project Duration From</label>
 
-							<input type="text" id="addProjectModalProjectDurationFrom" class="datepicker form-control">
+							<input type="text" id="addProjectModalProjectDurationFrom" class="datepickers form-control">
 
 						</div>
 
@@ -1675,7 +1826,7 @@ if(userId=="")
 
 							<label for="projectDuration">Project Duration To</label>
 
-							<input type="text" id="addProjectModalProjectDurationTo" class="datepicker form-control">
+							<input type="text" id="addProjectModalProjectDurationTo" class="datepickers form-control">
 
 						</div>
 
@@ -2748,7 +2899,7 @@ if(userId=="")
 <script>
 
 	$(document).ready(function(){
-		$( ".datepicker" ).datepicker({
+		$( ".datepickers" ).datepicker({
 			changeMonth: true,
 			changeYear: true,
 			dateFormat:"dd/mm/yy"

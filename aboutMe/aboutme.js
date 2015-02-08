@@ -307,7 +307,7 @@ function insertTopPart(data)
 
 			topPart+='<div class="col-md-11">';
 
-				topPart+='<h3 class="profileName" id="personNameText">'+data.name+'</h3><br/>';
+				topPart+='<h3 class="profileName" id="personNameText">'+data.alias+'</h3><p>('+data.name+')</p><br/>';
 
 			topPart+='</div>';
 
@@ -347,7 +347,6 @@ function insertTopPart(data)
 			topPart+='</div><!-- end class col-md-8 -->';
 
 		topPart+='</div><!-- end person details id -->';
-
 
 	topPart+='</div>';
 
@@ -553,7 +552,6 @@ function editContactInfoSendData()
 	var phone2=link.find("#contactNumber2").val().trim();
 	var showMailId=link.find("#showEmailIdValue").val();
 	var showContactsValue=link.find("#showContactsValue").val();
-	alert(showMailId+"--------"+showContactsValue);
 	if(showMailId!=1 && showMailId!=2)
 	{
 		alert("There is a problem with your page. Please reload it.");
@@ -567,7 +565,16 @@ function editContactInfoSendData()
 		var phone=[phone1,phone2];
 		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_userId:userId,
-			_mode:11
+			_mode:11,
+			_fbLink:fbURL,
+			_gplusLink:gplusURL,
+			_inLink:inURL,
+			_twitterLink:twitterURL,
+			_ptrestLink:pinURL,
+			_phone:phone,
+			_showMailId:showMailId,
+			_showPhone:showContactsValue,
+			_address:address
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
@@ -639,9 +646,6 @@ function editTopPartSendData()
 	    	}
 		});
 	}
-
-	
-	
 }
 
 //////////////////////////////PERSONAL INFO ENDS/////////////////////
@@ -990,6 +994,10 @@ function addToolsSendData()
 				$("#tools").find('.tool').remove();
 				data=JSON.parse(data);
 				var x=data.tools.split(",");
+				if(data.message.length!=0)
+				{
+					alert(data.message);
+				}
 				for(i=0;i<x.length;i++)
 				{
 					insertTool(x[i],data.isOwner);
@@ -1056,6 +1064,10 @@ function editToolsSendData()
 				$("#tools").find('.tool').remove();
 				data=JSON.parse(data);
 				var x=data.tools.split(",");
+				if(data.message.length==0)
+				{
+					alert(data.message);
+				}
 				for(var i=0;i<x.length;i++)
 				{
 					insertTool(x[i],data.isOwner);
@@ -2469,6 +2481,10 @@ function addInterestsSendData()
 				data=JSON.parse(data);
 				var x=data.interests.split(",");
 				$("#interests").find('.interest').remove();
+				if(data.message.length!=0)
+				{
+					alert(data.message);
+				}
 				for(var i=0;i<x.length;i++)
 				{
 					insertInterest(x[i],data.isOwner);
@@ -2537,6 +2553,10 @@ function editInterestsSendData()
 			{
 				data=JSON.parse(data);
 				var x=data.interests.split(",");
+				if(data.message.length!=0)
+				{
+					alert(data.message);
+				}
 				if(x!="")
 				{
 					$("#interests").find('.interest').remove();

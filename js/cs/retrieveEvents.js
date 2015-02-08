@@ -146,7 +146,6 @@ function eventInsert(position,data)
 	}
 
 	// //console.log(event);
-
 }
 
 function editEvent(id)
@@ -207,7 +206,6 @@ function editEvent(id)
 	$('#editEventModal').find('#editEventStatus').val(eventStatus);
 	
 	$('#editEventModal').find('#editEventId').html(id);
-
 }
 
 function modifyEvent(data,id)
@@ -238,7 +236,6 @@ function modifyEvent(data,id)
 }
 
 function editedEventSend()
-
 {
 	
 	var eventId=$('#editEventModal').find('#editEventId').html();
@@ -326,11 +323,9 @@ function editedEventSend()
 
 		});
 	}
-
 }
 
 function createEventSP()
-
 {
 	$('.row .eventMenu').find('#createEventButton').find('i').addClass('fa-spin');
 	
@@ -457,7 +452,6 @@ function createEventSP()
 		});
 
 	}
-
 }
 
 $('.popOver').popover();
@@ -510,7 +504,6 @@ function attendEvent(id)
 
 
 	});
-
 }
 
 function deleteEvent(id)
@@ -519,7 +512,6 @@ function deleteEvent(id)
 	$('#deleteEventModal').modal('show');
 
 	$('#deleteEventModal').find('#deleteEventId').html(id);
-
 }
 
 function deleteEventSend()
@@ -556,7 +548,6 @@ function deleteEventSend()
 		}
 
 	});
-
 }
 
 function latestEventsFetch(value,call)
@@ -616,7 +607,6 @@ function latestEventsFetch(value,call)
 		}
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
 	});
-
 }
 
 function upcomingEventsFetch(value,call)
@@ -675,7 +665,6 @@ function upcomingEventsFetch(value,call)
 		$('.timeago').timeago();
 		$('.row .eventMenu').find('#upcomingEventsButton').find('i').removeClass('fa-spin');
 	});
-
 }
 
 function pastCompetitionsFetch(value,call)
@@ -731,7 +720,6 @@ function pastCompetitionsFetch(value,call)
 		}
 	});
 	$('.row .eventMenu').find('#eventWinnersButton').find('i').removeClass('fa-spin');
-
 }
 
 $(document).ready(function(){
@@ -772,7 +760,4 @@ $(document).ready(function(){
 
 
 	$('.popOver').popover();
-
-
-
 });

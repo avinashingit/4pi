@@ -2,6 +2,39 @@
 
 <script>
 
+	function changePassword()
+	{
+		var p1=$("#changePasswordModal").find("#changePasswordModalP1").val();
+		var p2=$("#changePasswordModal").find("#changePasswordModalP2").val();
+
+		if(p1.length<8)
+		{
+			alert("Your password should be atlease 8 characters.");
+		}
+		else if(p1!=p2)
+		{
+			alert("Passwords are not matching");
+		}
+		else
+		{
+			$.post('/4pi/handlers/changePassword.php',{
+				_p1:p1,
+				_p2:p2
+			})
+			.error(function(){
+				alert("Server overload. Please try again. :(");
+			})
+			.success(function(data){
+				if(checkData(data)==1)
+				{
+					alert("Password successfully changed");
+					$("#changePasswordModal").modal('hide');
+					$("#changePasswordModal").find('input').val("");
+				}
+			});
+		}
+	}
+
 	function sendReadNotifications()
 	{
 		var readNotifications=new Array();
@@ -92,7 +125,7 @@
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log("fjal"+data);
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				if(data==404)
@@ -351,7 +384,7 @@
 					</a>
 					<ul class="dropdown-menu text-left" >
 						<li><a href="/4pi/index.php?logout=yes"><i class="fa fa-reply"></i> Logout</a></li>
-						<li><a href="settings.php"><i class="fa fa-pencil"></i> Settings</a></li>
+						<li><a href="#changePasswordModal" data-toggle="modal"><i class="fa fa-pencil"></i> Change password</a></li>
 					</ul>
 				</div>
 			
@@ -697,3 +730,32 @@
 </style>
 
 <div class="hidden" id="inViewElement"></div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<span><p  style="font-size:15px;" class="modal-title" id="myModalLabel"><i class="fa fa-pencil"></i> &nbsp;Change password&nbsp;&nbsp;</p></span>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					
+					<div class="row">
+
+						<div class="col-md-12">
+
+							<input  class="form-control" type="password" id="changePasswordModalP1" placeholder="Type password."><br/>
+
+							<input class="form-control"  type="password" id="changePasswordModalP2" placeholder="Type password again."><br/>
+
+						</div>
+
+					</div>
+
+				</form>
+				<button onclick="changePassword();" class="btn btn-primary">Change</button>
+			</div>
+		</div>
+	</div>	
+</div>
