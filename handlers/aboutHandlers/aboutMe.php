@@ -122,7 +122,7 @@ function aboutMe($userId,$mode,$isOwner)
 		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,IFNULL(experience.organisation,''),IFNULL(experience.designation,''),IFNULL(about.dob,''),IFNULL(about.description,'good'),IFNULL(about.mailid,''),IFNULL(about.showMailId,''),IFNULL(about.phone,''),IFNULL(about.showPhone,''),IFNULL(about.facebookId,''),IFNULL(about.googleId,100),IFNULL(about.twitterId,''),IFNULL(about.linkedinId,''),IFNULL(about.pinterestId,'') FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
 		// var_dump($result1);
 		if($conObj->error == "")
 		{
@@ -148,7 +148,7 @@ function aboutMe($userId,$mode,$isOwner)
 				if($result1['organisation']!="")
 					$work=$result1['designation']." at ".$result1['organisation'];
 				$obj = new about($result1['userIdHash'],$result1['name'],$result1['alias'],$result1['dob'],$result1['description'], 
-					$highestDegree,$work, $result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),$result1['showPhone'],$result1['city'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$result1['gender'],$proPicExists,$isOwner);
+					$highestDegree,$work, $result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),$result1['showPhone'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$result1['gender'],$proPicExists,$isOwner);
 				print_r(json_encode($obj));
 			}
 			else
@@ -338,7 +338,7 @@ function aboutMe($userId,$mode,$isOwner)
 				$endDateTimestamp=$experience['end'];
 				$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 				$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
-				$obj = new experience("e".$experience['experienceId'],$experience['organisation'],$duration,$minDuration,$experience['designation'],$experience['jobDescription'],$isOwner);
+				$obj = new experience("e".$experience['experienceId'],$experience['organisation'],$duration,$minDuration,$experience['designation'],$experience['featuring'],$isOwner);
 				$outputa[$noOfElementsE] = $obj;
 				$noOfElementsE++;
 			}

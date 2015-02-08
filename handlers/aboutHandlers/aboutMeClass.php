@@ -29,7 +29,7 @@
 		public $address;	
 		public $phone;
 		public $showPhone;
-		public $city;
+		//public $city;
 		public $facebookId;
 		public $twitterId;
 		public $googleId;
@@ -40,13 +40,13 @@
 		//$userAlias,$dob,$description,$highestDegree,$currentProfession,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,
 		public function __construct($userIdHash,$name,$alias,$dob,$description,$highestDegree,
 			$currentProfession,$mailId,$showMailId,$address,$phone, $showPhone,
-			$city,$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$gender,$profilePicExists,$isOwner)
+			$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$gender,$profilePicExists,$isOwner)
 			{
 				$this->userIdHash = $userIdHash;
 				$this->name = $name; 
 				$this->alias= $alias;
 				$this->dob = $dob;
-				if($dob=="null")
+				if($dob==NULL)
 				{
 					$this->dob="";
 				}
@@ -54,32 +54,26 @@
 				{
 					$this->dob=$dob;
 				}
-				if($description=="null")
+				/*if($description==NULL)
 				{
 					$this->description="";
 				}
 				else
 				{
 					$this->description=$description;
-				}
+				}*/
+				$this->description=$description;
 				$this->highestDegree=$highestDegree;
 
 				$this->currentProfession=$currentProfession;
-				if($description=="null")
-				{
-					$this->description="";
-				}
-				else
-				{
-					$this->description=$description;
-				}
+				
 				$this->mailId = $mailId;
 				$this->showMailId=$showMailId;
 				$this->address = $address;
 				$this->phone = $phone;
 
 				$this->showPhone=$showPhone;
-				$this->city = $city;				
+				//$this->city = $city;				
 				$this->facebookId=$facebookId;
 				$this->twitterId=$twitterId;
 				$this->googleId=$googleId;

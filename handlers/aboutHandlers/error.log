@@ -34,3 +34,5 @@
 
 [2015-02-06 13:29:59             ::1                   Asia/Kolkata]        $$$<b>Bind: </b> Bind array supplied must be a two dimensional associative array$$$
 
+[2015-02-09 00:00:35             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*,'') FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experien' at line 1$$$
+

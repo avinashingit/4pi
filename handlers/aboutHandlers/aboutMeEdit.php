@@ -200,7 +200,7 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			{
 				if ($_FILES['_resume']['error'] > 0)
 				{
-					echo 6;
+					echo 16;
 					//echo "Return Code: " . $_FILES['file']['error'][$i] . "<br>";
 					notifyAdmin("Resume Upload Error Code: " . $_FILES['_resume']['error'] ,$userId);
 					exit();
@@ -212,15 +212,16 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 						array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
 					}
 					$resumeFileName=$userId.".".$extension;
-					if(move_uploaded_file($_FILES['_resume']['tmp_name'],__DIR__."/../../files/resumes/".$resumeFileName))
+					if(!(move_uploaded_file($_FILES['_resume']['tmp_name'],__DIR__."/../../files/resumes/".$resumeFileName)))
 					{
-						echo $resumeFileName;
-						echo "Uploaded Resume successfully";
+						//echo $resumeFileName;
+						//echo "Uploaded Resume successfully";
+						echo 12;
 					}
-					else
+					/*else
 					{
-						echo "Uploaded Resume unsuccessfull";
-					}
+						//echo "Uploaded Resume unsuccessfull";
+					}*/
 					//$resume=$userId.$extension;
 					
 				}
@@ -228,9 +229,10 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 		}
 		if($_FILES['_profilePic']['name']!='')
 		{
-			if(uploadPicture($_FILES['_profilePic'],$user))
+			if(!uploadPicture($_FILES['_profilePic'],$user))
 			{
-
+				echo 16;
+				exit();
 			}
 
 			/*$userIdHash=$user['userIdHash'];
