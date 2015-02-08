@@ -18,6 +18,7 @@ require_once('../fetch.php');
 //Testing Content Starts
 	$userIdHash=$_SESSION['vj']=hash("sha512",'COE12B025'.SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+	$_POST['_userId']='COE12B025';
 	$_POST['_mode']=1;
 
 //Testing Content Ends
@@ -123,8 +124,8 @@ function aboutMe($userId,$mode,$isOwner)
 		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
-		// var_dump($result1);
+		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,experience.organisation,experience.designation,about.* FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1);
+		//var_dump($result1);
 		if($conObj->error == "")
 		{
 			

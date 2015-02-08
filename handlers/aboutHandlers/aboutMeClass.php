@@ -45,11 +45,34 @@
 				$this->userIdHash = $userIdHash;
 				$this->name = $name; 
 				$this->alias= $alias;
-				$this->dob = $dob;	
-				$this->description = $description;
+				$this->dob = $dob;
+				if($dob=="null")
+				{
+					$this->dob="";
+				}
+				else
+				{
+					$this->dob=$dob;
+				}
+				if($description=="null")
+				{
+					$this->description="";
+				}
+				else
+				{
+					$this->description=$description;
+				}
 				$this->highestDegree=$highestDegree;
 
 				$this->currentProfession=$currentProfession;
+				if($description=="null")
+				{
+					$this->description="";
+				}
+				else
+				{
+					$this->description=$description;
+				}
 				$this->mailId = $mailId;
 				$this->showMailId=$showMailId;
 				$this->address = $address;

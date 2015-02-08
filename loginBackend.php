@@ -8,12 +8,16 @@ function login()
 		$password = $_POST['_password'];
 		$passwordHash=hash("sha512",$password.PASSSALT);
 		//$userIdHash = hash("sha512",$userId.SALT);
-		$values1 = array(0 => array($userId => 's'),1 => array($password => 's'));
+		$values1 = array(0 => array($userId => 's'),1 => array($passwordHash => 's'));
 		$result1 = $conObj->fetchAll("SELECT userId,isActive FROM users WHERE userId = ? AND password = ?",$values1,false);
 		if($conObj->error == "")
 			{
 				if($result1 != "")
 					{
+						if($result1['password']=="")
+						{
+							echo -3;// Check the mail to set the password.
+						}
 						if($result1['isActive']==1)
 						{
 							session_start();
@@ -38,12 +42,12 @@ function login()
 							}
 							else
 							{
-								echo 22;
+								echo 22;//Problem with noting the login details
 							}
 						}
 						else
 						{
-							echo 9;
+							echo 9;// User is blocked by administrator.
 						}
 						
 
@@ -52,14 +56,14 @@ function login()
 				else
 					{
 						//echo 'No values found for Query 1<br />';
-						echo -1;
+						echo -1;// Error in credentials entered by the user.
 					}
 			}
 		else
 			{
 				//echo 'Error in Query 1<br />';
 				//echo $conObj->error.'<br />';
-				echo -1;
+				echo -2;// Error in Query!!!!
 			}
 	}
 	

@@ -7,7 +7,7 @@
 //---Author : Hari Krishna Majety ,COE12B013.
 //---Email: majetyhk@gmail.com
 //
-//
+//There will be bind errors if there is a problem with the datatypes of the variables being passed. Numbers for strings or strings for numbers is not a problem but array for strings or integers would be a problem.
 //---Credits Ends---//
 
 session_start();
@@ -15,18 +15,21 @@ require_once('../../QOB/qob.php');
 require_once('../fetch.php');
 require_once('aboutMeClass.php');
 //Testing Content Starts
-	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B025".SALT);
+	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B025".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_mode']=10;
-	$_POST['_workshopName']="Name Of The Role";
-	$_POST['_projectDescription']=" Description of the Event I won";
-	$_POST['_duration']="27/01/2015-28/01/2015";
-	$_POST['_location']="The Location of the Event";
+	$_POST['_mode']=11;
+	$_POST['_fbLink']="fb.com/harikrishnamajety";
+	$_POST['_gplusLink']=" plus.google.com/harikrishnamajety";
+	$_POST['_inLink']="in.com/harikrishnamajety";
+	$_POST['_ptrestLink']="harikrishnamajety";
 	$_POST['_teamMembers']="Me,You";
-	$_POST['_interests']=array("matlab","php","php");
-	$_POST['_rating']=array(10);
-	$_POST['_projectCompany']='some school';
-	$_POST['_workshopId']='p2';*/
+	$_POST['_twitterLink']='';
+	$_POST['_phone']=array(10);
+	$_POST['_showPhone']=1;
+	$_POST['_mailId']='p2';
+	$_POST['_showMailId']=1;
+
+//aboutMeBottomEdit($user,$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_gplusLink'],$_POST['_inLink'],$_POST['_ptrestLink']);
 
 //$_POST['_projectTitle'],$_POST['_projectPosition'],$_POST['_duration'],$_POST['_projectDescription'],$_POST['_teamMembers'],$_POST['_projectCompany'],$_POST['_projectId']
 
@@ -165,7 +168,30 @@ else if($mode ==10)
 else if($mode ==11)
 {
 	//bottomPartEdit
-	aboutMeBottomEdit($user,$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']);
+	aboutMeBottomEdit($user,$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_gplusLink'],$_POST['_inLink'],$_POST['_ptrestLink']);
+}
+else if($mode == 12)
+{
+	if(removeProPic($user['userIdHash']))
+	{
+		echo 3;
+	}
+	else
+	{
+		echo 6;
+	}
+}
+else if($mode == 13)
+{
+	if(removeResume($user['userId']))
+	{
+		echo 3;
+	}
+	else
+	{
+		echo 6;
+	}
+
 }
 else 
 {
@@ -199,7 +225,7 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			{
 				if ($_FILES['_resume']['error'] > 0)
 				{
-					echo 6;
+					echo 16;
 					//echo "Return Code: " . $_FILES['file']['error'][$i] . "<br>";
 					notifyAdmin("Resume Upload Error Code: " . $_FILES['_resume']['error'] ,$userId);
 					exit();
@@ -213,23 +239,31 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 					$resumeFileName=$userId.".".$extension;
 					if(move_uploaded_file($_FILES['_resume']['tmp_name'],__DIR__."/../../files/resumes/".$resumeFileName))
 					{
-						echo $resumeFileName;
-						echo "Uploaded Resume successfully";
+						//echo $resumeFileName;
+						//echo "Uploaded Resume successfully";
 					}
 					else
 					{
-						echo "Uploaded Resume unsuccessfull";
+						//echo "Uploaded Resume unsuccessfull";
+						echo 12;
+						exit();
 					}
 					//$resume=$userId.$extension;
 					
 				}
 			}
+			else
+			{
+				echo 16;
+				exit();
+			}
 		}
 		if($_FILES['_profilePic']['name']!='')
 		{
-			if(uploadPicture($_FILES['_profilePic'],$user))
+			if(!uploadPicture($_FILES['_profilePic'],$user))
 			{
-
+				echo 16;
+				exit();
 			}
 
 			/*$userIdHash=$user['userIdHash'];
@@ -313,11 +347,12 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			exit();
 		}
 	}
-function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phone,$showPhone, $city, $facebookId, $twitterId,$googleId, $linkedinId, $pinterestId)
+function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phoneArray,$showPhone, $city, $facebookId, $twitterId,$googleId, $linkedinId, $pinterestId)
 {
-	var_dump($_POST);
-	$userAlias=$user['alias'];
-	$phone=implode(',',$phone);
+	//var_dump($_POST);
+
+	$userId=$user['userId'];
+	$phone=implode(',',$phoneArray);
 	$conObj=new QoB();
 	$values[0] = array($mailId => 's');
 	$values[1] = array($address => 's');
@@ -325,17 +360,18 @@ function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phone,$showPhone,
 	$values[3] = array($city => 's');
 	$values[4] = array($showMailId => 's');
 	$values[5] = array($showPhone => 's');
-	$values[6]= array($facebookId => 's');
-	$values[7]= array($twitterId=> 's');
-	$values[8]= array($googleId => 's');
-	$values[9]= array($linkedinId => 's');
+	$values[6] = array($facebookId => 's');
+	$values[7] = array($twitterId => 's');
+	$values[8] = array($googleId => 's');
+	$values[9] = array($linkedinId => 's');
 	$values[10]= array($pinterestId => 's');
 	$values[11]= array($userId => 's');
 	//var_dump($values);
-	$result=$conObj->update("UPDATE about SET mailid=?,address=?,phone=?,city=?, showMailId=?,showPhone=?,facebookId=?,twitterId=?,googleId=?, linkedinId=?,pinterestId=? WHERE userId= ?",$values);
+	$result=$conObj->update("UPDATE about SET mailId=?, address=?, phone=?, city=?, showMailId=?,  showPhone=?,facebookId=?,twitterId=?, googleId=?, linkedinId=?,  pinterestId=? WHERE userId= ?",$values);
+	var_dump($result);
 	if($conObj->error == "")
 	{
-		$aboutObj = new aboutMeBottom($mailId,$showMailId, $address,$phoneArray,$showPhoneArray,
+		$aboutObj = new aboutMeBottom($mailId,$showMailId, $address,$phoneArray,$showPhone,
 			$city, $facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 		print_r(json_encode($aboutObj));
 	}

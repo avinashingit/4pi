@@ -89,8 +89,83 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+	function removeProPic($userIdHash)
+	{
+		if (array_map('file_exists',glob(__DIR__."/../img/proPics/$userIdHash.jpg")))
+		{
+			array_map('unlink',glob(__DIR__."/../img/proPics/$userIdHash.jpg"));
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
-	
+	function removeResume($userId)
+	{
+		if (array_map('file_exists',glob(__DIR__."/../../files/resumes/$userId.*")))
+		{
+			array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
+			return true;
+		}
+		else
+		{
+			return false; 
+		}
+	}
+	function setPassword($userId,$password)
+	{
+		
+		$hashedPassword=hash("sha512",$password.PASSSALT);
+		$values[0]=array($hashedPassword=>'s');
+		$values[1]=array($userId => 's');
+		$setPasswordSQL="UPDATE users SET password=? WHERE userId=? AND password=''";
+		$conn=new QoB();
+		$result=$conn->update($setPasswordSQL,$values);
+		if($conn->error=="")
+		{
+			return true;
+		}
+		else
+		{
+			notifyAdmin("Conn.Error:".$conn->error."! In setting password for userId:".$userId,$userId);
+			return false;
+		}
+
+		
+	}
+	function changePassword($userId,$oldpassword,$password)
+	{
+		
+		$hashedPassword=hash("sha512",$password.PASSSALT);
+		$oldpasswordHash=hash("sha512",$oldpassword.PASSSALT);
+		$values[0]=array($hashedPassword=>'s');
+		$values[1]=array($userId => 's');
+		$values[2]=array($oldpasswordHash => 's');
+		$setPasswordSQL="UPDATE users SET password=? WHERE userId=? AND password = ?";
+		$conn=new QoB();
+		$result=$conn->update($setPasswordSQL,$values);
+		if($conn->error=="")
+		{
+			$rowsAffected=$conn->getMatchedRowsOnUpdate();
+			echo $rowsAffected;
+			if(($rowsAffected)==1)
+			{
+				return 3;
+			}
+			else
+			{
+				return 17;
+			}
+		}
+		else
+		{
+			notifyAdmin("Conn.Error:".$conn->error."! In changing password for userId:".$userId,$userId);
+			return 12;
+		}
+		
+	}
 	function loginLog($userId)
 	{	
 		$conn=new QoB();
@@ -878,7 +953,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	//cause for malfunction in isThereInCSV() if the needle is an empty string. That Function returns true if empty string is passed as needle.
 	function isThereInCSVRegex($needle)
 	{
-		$finalRegexString="(,".$needle.",?)|(^".$needle.",?)";
+		$finalRegexString="(,".$needle.",)|(^".$needle.",)|(^".$needle."$)|(,".$needle."$)";
 		return $finalRegexString;
 	}
 	
@@ -1429,7 +1504,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$notificationModels[13]=array(" of your poll has been approved.");
 		$notificationModels[14]=array(" of your poll has been rejected.");
 
-		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE userId=? ";
+		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE notifications.userId=? ";
 		$values[0]=array($userId => 's');
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
@@ -1456,7 +1531,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 					$notification=$notif['actionCount'].$notificationModels[(int)$notif['type']][1];
 				}
 				
-				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen']);
+				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen'],$notif['label']);
 				//print_r($notifObject);
 				$notificationObjArray[]=$notifObject;
 				//var_dump($notifObject);
