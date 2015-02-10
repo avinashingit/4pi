@@ -33,7 +33,7 @@ Test fetch, insert, edit , delete
 //alert(userId);
 
 /*var userId="COE12B025";*/
-var commonURLAbout="/4pi/";
+var commonURLAbout="/4pi/aboutMe/index.php?userId=";
 
 window.userOptionsVisibility=0;
 ///////////////////////////GENERIC FUNCTIONS STARTS/////////////////////

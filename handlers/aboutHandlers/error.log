@@ -36,3 +36,13 @@
 
 [2015-02-09 00:00:35             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*,'') FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experien' at line 1$$$
 
+[2015-02-10 19:58:14             ::1                   Asia/Kolkata] 1136   $$$Column count doesn't match value count at row 1$$$
+
+[2015-02-10 20:01:33             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-10 20:04:10             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-10 20:08:47             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-10 20:08:59             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+

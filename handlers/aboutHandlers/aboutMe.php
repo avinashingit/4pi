@@ -122,7 +122,7 @@ function aboutMe($userId,$mode,$isOwner)
 		// echo 'entered mode :'.$mode;
 		//To fetch Details of about.
 		$values1 = array(0 => array($userId => 's'));
-		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,IFNULL(experience.organisation,''),IFNULL(experience.designation,''),IFNULL(about.dob,''),IFNULL(about.description,'good'),IFNULL(about.mailid,''),IFNULL(about.showMailId,''),IFNULL(about.phone,''),IFNULL(about.showPhone,''),IFNULL(about.facebookId,''),IFNULL(about.googleId,100),IFNULL(about.twitterId,''),IFNULL(about.linkedinId,''),IFNULL(about.pinterestId,'') FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
+		$result1 = $conObj->fetchAll("SELECT users.gender,users.name,users.alias,users.userIdHash,IFNULL(experience.organisation,'') as organisation ,IFNULL(experience.designation,'') as designation ,IFNULL(about.dob,'') as dob ,IFNULL(about.description,'good') as description,IFNULL(about.mailid,'') as mailid ,IFNULL(about.showMailId,'') as showMailId,IFNULL(about.address,'') as address,IFNULL(about.phone,'') as phone,IFNULL(about.showPhone,'') as showPhone,IFNULL(about.facebookId,'')as facebookId,IFNULL(about.googleId,'') as googleId,IFNULL(about.twitterId,'') as twitterId,IFNULL(about.linkedinId,'') as linkedinId ,IFNULL(about.pinterestId,'') as pinterestId  FROM users LEFT JOIN about ON users.userId=about.userId LEFT JOIN experience ON experience.userId=about.userId AND experience.experienceId=about.work WHERE users.userId = ?",$values1,false);
 		// var_dump($result1);
 		if($conObj->error == "")
 		{

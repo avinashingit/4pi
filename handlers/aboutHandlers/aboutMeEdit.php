@@ -276,11 +276,11 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			$values = array();
 			$highestDegree=getDegree($userId);
 			
-			$values[0] = array($dob => 's');
+			/*$values[0] = array($dob => 's');
 			$values[1] = array($description => 's');
 			//$values[2] = array($resume => 's');
 			//$values[3] = array($hobbies => 's');
-			/*$values[3] = array($mailId => 's');
+			$values[3] = array($mailId => 's');
 			$values[4] = array($address => 's');
 			$values[5] = array($phone => 's');
 			$values[6] = array($city => 's');
@@ -290,20 +290,42 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			$values[10]= array($twitterId=> 's');
 			$values[11]= array($googleId => 's');
 			$values[12]= array($linkedinId => 's');
-			$values[13]= array($pinterestId => 's');*/
+			$values[13]= array($pinterestId => 's');
 			$values[2]= array($userAlias => 's');
-			$values[3]= array($userId => 's');
+			$values[3]= array($userId => 's');*/
 
-			
-			$result1 = $conObj->update("UPDATE about,users SET about.dob=?, about.description=?, users.alias=? WHERE about.userId= ? AND users.userId=about.userId ",$values);
-			
-			if($conObj->error == "")
+			$conObj->startTransaction();
+			if($userAlias!=$user['alias'])
 			{
+				$values[0]= array($userAlias => 's');
+				$values[1]= array($userId => 's');
+				$result1 = $conObj->update("UPDATE users SET users.alias=? WHERE users.userId= ?  ",$values);
+			
+				if(($cr=$conObj->error )!= "")
+				{
+					$conObj->rollbackTransaction();
+					notifyAdmin("Conn.Error".$cr."! While editing in about 'users' Edit",$userId);
+					echo 12;
+					exit();
+				}
+			}
+
+			$values[0] = array($dob => 's');
+			$values[1] = array($description => 's');
+			$values[2] = array($userId => 's' );
+			$values[3] = array($dob => 's');
+			$values[4] = array($description => 's');
+			$result1 = $conObj->update("INSERT INTO about (dob,description,userId) VALUES(?,?,?) ON DUPLICATE KEY UPDATE dob=?, description=? ",$values);
+			
+			if(($cr=$conObj->error )== "")
+			{
+				$conObj->completeTransaction();
 				$aboutObj = new aboutMeTop($user['userIdHash'],$user['name'],$userAlias,$dob,$description,$highestDegree,$currentProfession, 1);
 				print_r(json_encode($aboutObj));
 			}
 			else
 			{
+				$conObj->rollbackTransaction();
 				notifyAdmin("Conn.Error".$conObj->error."! While editing in about Edit",$userId);
 				echo 12;
 				exit();
@@ -318,24 +340,40 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 	}
 function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phone,$showPhone, $city, $facebookId, $twitterId,$googleId, $linkedinId, $pinterestId)
 {
-	var_dump($_POST);
+	$userId=$user['userId'];
 	$userAlias=$user['alias'];
 	$phone=implode(',',$phone);
 	$conObj=new QoB();
 	$values[0] = array($mailId => 's');
 	$values[1] = array($address => 's');
 	$values[2] = array($phone => 's');
-	$values[3] = array($city => 's');
-	$values[4] = array($showMailId => 's');
-	$values[5] = array($showPhone => 's');
-	$values[6]= array($facebookId => 's');
-	$values[7]= array($twitterId=> 's');
-	$values[8]= array($googleId => 's');
-	$values[9]= array($linkedinId => 's');
-	$values[10]= array($pinterestId => 's');
-	$values[11]= array($userId => 's');
+	//$values[3] = array($city => 's');
+	$values[3] = array($showMailId => 's');
+	$values[4] = array($showPhone => 's');
+	$values[5]= array($facebookId => 's');
+	$values[6]= array($twitterId=> 's');
+	$values[7]= array($googleId => 's');
+
+	$values[8]= array($linkedinId => 's');
+	$values[9]= array($pinterestId => 's');
+	$values[10]= array($userId => 's');
+
+	$values[11] = array($mailId => 's');
+	$values[12] = array($address => 's');
+	$values[13] = array($phone => 's');
+	$values[14] = array($showMailId => 's');
+	$values[15] = array($showPhone => 's');
+	$values[16]= array($facebookId => 's');
+	$values[17]= array($twitterId=> 's');
+	$values[18]= array($googleId => 's');
+	$values[19]= array($linkedinId => 's');
+	$values[20]= array($pinterestId => 's');
+
 	//var_dump($values);
-	$result=$conObj->update("UPDATE about SET mailid=?,address=?,phone=?,city=?, showMailId=?,showPhone=?,facebookId=?,twitterId=?,googleId=?, linkedinId=?,pinterestId=? WHERE userId= ?",$values);
+	//var_dump($values);
+	/*$result=$conObj->update("UPDATE about SET mailid=?,address=?,phone=?,city=?, showMailId=?,showPhone=?,facebookId=?,twitterId=?,googleId=?, linkedinId=?,pinterestId=? WHERE userId= ?",$values);*/
+	$updateAboutMeBottomSQL="INSERT INTO about (mailid,address,phone, showMailId,showPhone,facebookId,twitterId,googleId, linkedinId,pinterestId,userId) VALUES(?,?,?, ?,?,?,?,?, ?,?,?) ON DUPLICATE KEY UPDATE mailid=?, address=?, phone=?, showMailId=?, showPhone=?,facebookId=?, twitterId=?, googleId=?, linkedinId=?, pinterestId=?";
+	$result=$conObj->update($updateAboutMeBottomSQL,$values);
 	if($conObj->error == "")
 	{
 		$aboutObj = new aboutMeBottom($mailId,$showMailId, $address,$phoneArray,$showPhoneArray,

@@ -32,7 +32,7 @@ function userLogin(){
 		
 		.success(function (data){
 		data = data.trim();
-		//alert(data);
+		alert(data);
 		////alert(data);
 		//alert(data.length);
 			if(data=="-1")

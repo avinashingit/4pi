@@ -296,7 +296,7 @@ function aboutMeInsert($user,$dob,$description,$hobbies,$mailId,$showMailId,$add
 
 
 					
-					$result1 = $conObj->insert("INSERT INTO about(userId,dob,description,resume, hobbies,mailid,address,phone,city, showMailId,showPhone,facebookId,twitterId,googleId, linkedinId,pinterestId) VALUES(?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?)",$values);
+					$result1 = $conObj->insert("INSERT INTO about(userId,dob,description,resume, hobbies,mailid,address,phone,city, showMailId,showPhone,facebookId,twitterId,googleId, linkedinId,pinterestId) VALUES(?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?) ON DUPLICATE KEY UPDATE mailid=?,showMailId=?,address=?,phone=?,showPhone=?,facebookId=?,twitterId=?,googleId=?,linkedinId=?,pinterestId=?",$values);
 					
 					if($conObj->error == "")
 					{
@@ -590,6 +590,10 @@ function projectInsert($user,$title,$role,$durationString,$description,$teamMemb
 				$conObj = new QoB();
 				$startDateTimestamp=$time['start'];
 				$endDateTimestamp=$time['end'];
+				if($teamMembers=="")
+				{
+					$teamMembers="Individual";
+				}
 				/*$values0 = array(0 => array($_SESSION['vj'] => 's'));
 				$result0 = $conObj->fetchall("SELECT userId FROM users WHERE userIdHash = ?",$values0);
 
