@@ -15,7 +15,6 @@ Code 16: Erroneous Entry By USER!!
 	
 		$conn=new QoB();
 		$userIdHash=$_SESSION['vj'];
-		$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
 		if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 		{
 				$combination=$userIdHash.",".$_SESSION['tn'];

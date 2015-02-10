@@ -367,9 +367,9 @@ function createIdeaPost() {
 //************************ Fetch More Posts **********************
 function fetchMoreIdeaPosts(e)
 {
-	console.log($('#loadMoreIdeaPostsButton').find('button').html());
+	//console.log($('#loadMoreIdeaPostsButton').find('button').html());
 	$('#loadButton').html("Loading... <i class='fa fa-spinner fa-spin'></i>").attr("onclick","");
-	console.log($('#loadMoreIdeaPostsButton').find('button').html());
+	//console.log($('#loadMoreIdeaPostsButton').find('button').html());
 	e.preventDefault();
     retrieveLatestPosts("noempty",1);
     //$('#loadButton').html("Loading...<i class='fa fa-spinner'></i>").attr("onclick","fetchMorePosts(event)");
@@ -449,7 +449,7 @@ function retrieveLatestPosts(value, call) {
 				//$('#loadMoreIdeaPostsButton').html("That's all folks for today !!!");
 				$('#noIdeas').addClass("spanLoadAfter");
 				$('#noIdeas').html("That's all folks for today !!!");
-				console.log(data);
+				//console.log(data);
                 //$('#postArea').find('#postEmptyMessage').html("Sorry! No more posts to display.");
             }
 			
@@ -605,7 +605,7 @@ function deleteIdea(id){
 	 })
 	
 	 .error(function() {
-			console.log('Error');
+			//console.log('Error');
         })
         .success(function(data) {
 			
@@ -682,7 +682,7 @@ function editedPostSend() {
             .success(
                 function(data) {
 					data = data.trim();
-					console.log(data);
+					//console.log(data);
                     $('#editIdeaModal').modal('hide');
                     if (checkData(data) == 1) {
                         modifyPost(postId, data);
@@ -836,7 +836,7 @@ function stopClick(id) {
 		})
 		.success(function(data){
 			data = data.trim();
-			console.log(data);
+			//console.log(data);
 			data=JSON.parse(data);
 			$('.ideaPeopleSearchResult').each(function(){
 				$(this).remove();
@@ -850,7 +850,7 @@ function stopClick(id) {
 			}
 			else
 			{
-			console.log(data);
+			//console.log(data);
 				$('#ideaPeopleSearchEmptyMessage').html("");
 				for(i=0;i<data[0].length;i++)
 				{

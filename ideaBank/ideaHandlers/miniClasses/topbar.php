@@ -92,7 +92,7 @@
 			alert("Server overload. Please try again");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			data=JSON.parse(data);
 			$('.peopleSearchResult').each(function(){
 				$(this).remove();

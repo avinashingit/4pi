@@ -17,7 +17,7 @@ session_start();
 <script>
 
 function fetchSingleIdea(){
-	console.log(ideaPostIdHash);
+	//console.log(ideaPostIdHash);
 	y = $.post('/4pi/ideaBank/ideaHandlers/retrieveSingleIdea.php', {
                 _ideaPostIdHash: ideaPostIdHash,
                 //_files:files,
@@ -28,7 +28,7 @@ function fetchSingleIdea(){
             })
            .success(function(data) {
                 data = data.trim();
-				console.log(data);
+				//console.log(data);
                 if (data == 12) {
                    alert("Sorry. We encountered an error in creating your post ");
                 } else if (data == 13) {
@@ -352,7 +352,7 @@ function deleteIdea(id){
 	 })
 	
 	 .error(function() {
-			console.log('Error');
+			//console.log('Error');
         })
         .success(function(data) {
 			
@@ -429,7 +429,7 @@ function editedPostSend() {
             .success(
                 function(data) {
 					data = data.trim();
-					console.log(data);
+					//console.log(data);
                     $('#editIdeaModal').modal('hide');
                     if (checkData(data) == 1) {
                         modifyPost(postId, data);
@@ -583,7 +583,7 @@ function stopClick(id) {
 		})
 		.success(function(data){
 			data = data.trim();
-			console.log(data);
+			//console.log(data);
 			data=JSON.parse(data);
 			$('.ideaPeopleSearchResult').each(function(){
 				$(this).remove();
@@ -597,7 +597,7 @@ function stopClick(id) {
 			}
 			else
 			{
-			console.log(data);
+			//console.log(data);
 				$('#ideaPeopleSearchEmptyMessage').html("");
 				for(i=0;i<data[0].length;i++)
 				{
