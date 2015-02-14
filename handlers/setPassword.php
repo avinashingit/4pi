@@ -5,11 +5,6 @@ require_once('./../QOB/qob.php');
 require_once('fetch.php');
 //$_SESSION['jx']="999"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
-	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	//$_POST['_oldPassword']="123";
-	$_POST['_password']="coe12b013";
-	$_POST['_confirmPassword']='coe12b013';
 
 //Testing Content Ends
 /*
@@ -25,47 +20,26 @@ Code 17: Wrong Current Password Entered!
 
 */
 
-
-if($_POST['_password']!=""&&$_POST['_confirmPassword']!="")
+if($_POST['_p1']==""||$_POST['_p2']=="")
 {
-	echo 16;
+	echo 161;
 	exit();
 }
 
-$password=$_POST['_password'];
-$confirmPassword=$_POST['_confirmPassword'];
+$password=$_POST['_p1'];
+$confirmPassword=$_POST['_p2'];
 if($password!=$confirmPassword)
 {
-	echo 16;
+	echo 162;
 	exit();
 }
 //Upcoming Event Offset - vgr
 //Processed Event Hashes - sgk
 //$userIdHash=$_SESSION['vj'];
-$userIdHash=$_POST['userIdHash'];
+$userIdHash=$_POST['_userIdHash'];
 //$refresh=$_POST['_refresh'];
 
 $conn=new QoB();
-if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
-{
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in setPassword")>0)
-	{
-		$_SESSION=array();
-		session_destroy();
-		echo 14;
-		exit();
-	}
-	else
-	{
-		notifyAdmin("Suspicious Session Variable in setPassword",$userIdHash.",sh:".$_SESSION['tn']);
-		$_SESSION=array();
-		session_destroy();
-		echo 13;
-		exit();
-	}
-}
-else
-{
 	if(($user=getUserFromHash($userIdHash))==false)
 	{
 		notifyAdmin("Critical Error In set password",$userIdHash);
@@ -77,17 +51,22 @@ else
 	else
 	{
 		$userId=$user['userId'];
-		
-		if(setPassword($userId,$password))
+		if($user['password']=="")
 		{
-			$_SESSION['vj']=$userIdHash;
-			$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-			echo 3;
+			if(setPassword($userId,$password))
+			{
+				$_SESSION['vj']=$userIdHash;
+				$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
+				echo 3;
+			}
+			else
+			{
+				echo 12;
+			}
 		}
 		else
 		{
-			echo 12;
+			echo 6;
 		}
 	}
-}
 ?>

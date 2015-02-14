@@ -13,7 +13,7 @@
 
 	.poll:hover
 	{
-		box-shadow:0px 5px 0px #33FF4B inset;
+		box-shadow:0px 5px 0px #804A92 inset;
 	}
 
 	.fa-trash
@@ -51,11 +51,11 @@
 			  	
 			  	</div>
 
-			  	<div class="btn-group">
-				
-				    <button type="button" id="completedPollsButton" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-clock-o"></i>&nbsp;Completed Polls</a></button>
+			  	<!-- <div class="btn-group">
+			  					
+			  					    <button type="button" id="completedPollsButton" class="btn btn-primary"><a style="color:white;" ><i class="fa fa-clock-o"></i>&nbsp;Completed Polls</a></button>
 			  	
-			  	</div>
+			  	</div> -->
 				
 			</div>
 
@@ -79,7 +79,7 @@
 
 	        		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
-	        		<h4 class="modal-title" id="createModalLabel"><i class="fa fa-plus"></i> &nbsp;Create Poll&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="The poll will be shown to the users of 4pi only after SAC speaker's approval. You will not allowed to edit the poll once created."></i>]</h4>
+	        		<h4 class="modal-title" id="createModalLabel"><i class="fa fa-plus"></i> &nbsp;Create Poll&nbsp;&nbsp;<small>[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="The poll will be shown to the users of 4pi only after SAC speaker's approval. You will not allowed to edit the poll once created."></i>]</small></h4>
 
 	      		</div>
 
@@ -87,11 +87,11 @@
 
 	      		    <form role="form">
 
-				  		<div class="form-group">
+				  		<div class="form-group has-error">
 
 				   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
-				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollQuestion" placeholder="Poll on"></input>
+				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollQuestion" placeholder="Poll question. Required."></input>
 
 				  		</div>
 
@@ -119,7 +119,7 @@
 
 				  		<div class="form-group">
 
-				   			<label for="pollName">Poll type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollName">Poll type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Self explanatory"></i>]
 
 				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollType" >
 				    			
@@ -134,9 +134,9 @@
 
 				  		</div>
 
-				  		<div class="form-group">
+				  		<div class="form-group has-error">
 
-				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for making it visible to everyone. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number."></i>]
+				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
 				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollSharedWith" value="All" >
 
@@ -146,9 +146,9 @@
 				  		<div class="row">
 
 
-							<div class="form-group col-md-6" id="option1">
+							<div class="form-group col-md-6 has-error" id="option1">
 					   			
-					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
+					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll."></i>]
 
 								<!-- <div class="input-group"> -->
 					    			
@@ -171,9 +171,9 @@
 				    		</div>
 
 
-				    		<div class="form-group col-md-6" id="option2">
+				    		<div class="form-group col-md-6 has-error" id="option2">
 					   			
-					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll. If you want to add one more click '+'. To delete click '-'"></i>]
 
 								<div class="input-group">
 					    			
@@ -256,7 +256,7 @@ $(document).ready(function(){
 
 	        		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
-	        		<h4 class="modal-title" id="editModalLabel"><i class="fa fa-plus"></i> &nbsp;Edit Poll&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="The poll will be shown to the users of 4pi only after SAC speaker's approval. You will not allowed to edit the poll once approved."></i>]</h4>
+	        		<h4 class="modal-title" id="editModalLabel"><i class="fa fa-plus"></i> &nbsp;Edit Poll&nbsp;&nbsp;<small>[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="The poll will be shown to the users of 4pi only after SAC speaker's approval. You will not allowed to edit the poll once approved."></i>]</small></h4>
 
 	      		</div>
 
@@ -264,11 +264,11 @@ $(document).ready(function(){
 
 	      		    <form role="form">
 
-				  		<div class="form-group">
+				  		<div class="form-group has-error">
 
 				   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
-				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="editPollQuestion" placeholder="Poll on"></input>
+				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="editPollQuestion" placeholder="Poll question. Required"></input>
 
 				  		</div>
 
@@ -311,11 +311,11 @@ $(document).ready(function(){
 
 				  		</div>
 
-				  		<div class="form-group">
+				  		<div class="form-group has-error">
 
 				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
-				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollSharedWith" >
+				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollSharedWith" placeholder="Required." >
 
 				  		</div>
 
@@ -323,7 +323,7 @@ $(document).ready(function(){
 				  		<div class="row" id="pollOptionsDiv">
 
 
-							<div class="form-group col-md-6" id="option1">
+							<div class="form-group has-error col-md-6" id="option1">
 					   			
 					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
 
@@ -348,7 +348,7 @@ $(document).ready(function(){
 				    		</div>
 
 
-				    		<div class="form-group col-md-6" id="option2">
+				    		<div class="form-group has-error col-md-6" id="option2">
 					   			
 					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
 

@@ -6,7 +6,10 @@ display:none;
     position:fixed;
     top:20px;
 }*/
-
+textarea.formcontrol
+{
+    height:auto !important;
+}
 .postMenu{
     margin-top:-10px;
 }
@@ -180,6 +183,10 @@ p.commentText
     font-size:14;
 }
 
+#leftBlock
+{
+    height:1vh;
+}
 
 .textBold{
     font-weight: bold;

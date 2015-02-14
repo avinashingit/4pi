@@ -43,14 +43,18 @@
 			if(pollQuestion.length==0)
 			{
 				alert("Please enter the poll question");
+				$("#pollCreateModal").find("#createPollQuestion").focus();
 			}
 			else if(pollOptionType!=1 && pollOptionType!=2)
 			{
 				alert("Please enter the poll option type.");
+				$("#pollCreateModal").find("#createPollOptionType").focus();
 			}
 			else if(pollType!=1 && pollType!=2 && pollType!=3)
 			{
 				alert("Please enter the poll type.");
+				$("#pollCreateModal").find("#createPollType").focus();
+
 			}
 			else
 			{
@@ -59,6 +63,7 @@
 				}
 
 				var unfilled="yes";
+				var limit="no";
 				for(i=0;i<numberOfOptions;i++)
 				{
 					if(options[i].length==0)
@@ -67,9 +72,22 @@
 					}
 				}
 
+				for(i=0;i<numberOfOptions;i++)
+				{
+					if(options[i].length>36)
+					{
+						limit="yes";
+					}
+				}				
+
 				if(unfilled=="no")
 				{
 					alert("Please fill all the options");
+				}
+
+				else if(limit=="yes")
+				{
+					alert("Poll option length should not exceed 40 characters.")
 				}
 
 				else
@@ -196,6 +214,9 @@
 
 	function insertPoll(data,position)
 	{
+
+		var time=iso8601ToReadable(data.pollCreationTime);
+
 		if(data.pollOptionsType==1)
 		{
 			if(data.pollType==1)
@@ -216,9 +237,15 @@
 
 							poll+='<div class="col-md-3 text-right">';
 
-								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 							poll+='</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="row">';
+
+							poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
 						poll+='</div>';
 
@@ -230,7 +257,7 @@
 
 						poll+='<br/>';
 
-						poll+='<div class="text-center">';
+						poll+='<div class="col-md-12 text-center">';
 
 							poll+='<button class="btn btn-md btn-danger" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\',1);">View results</button>';
 
@@ -265,19 +292,25 @@
 
 								poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
 
+								poll+='<div class="row">';
+
+									poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
+
+								poll+='</div>';
+
 							poll+='</div>';
 
 							if(data.isOwner==1)
 							{
 								poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';*/poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
 
 								poll+='</div>';
 
 								poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -286,7 +319,7 @@
 							{
 								poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -311,29 +344,29 @@
 
 							poll+='<div class="row">';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer1">';
 
 										for(var i=0;i<data.pollOptions.length;i+=3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer2">';
 
 										for(var i=1;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer3">';
 
 										for(var i=2;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
@@ -386,9 +419,15 @@
 
 							poll+='<div class="col-md-3 text-right">';
 
-								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 							poll+='</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="row">';
+
+							poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
 						poll+='</div>';
 
@@ -435,19 +474,25 @@
 
 								poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
 
+								poll+='<div class="row">';
+
+									poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
+
+								poll+='</div>';
+
 							poll+='</div>';
 
 							if(data.isOwner==1)
 							{
 								poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';*/poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
 
 								poll+='</div>';
 
 								poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -483,29 +528,29 @@
 
 							poll+='<div class="row">';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer1">';
 
 										for(var i=0;i<data.pollOptions.length;i+=3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer2">';
 
 										for(var i=1;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer3">';
 
 										for(var i=2;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
@@ -559,9 +604,15 @@
 
 							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
 
-								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 							poll+='</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="row">';
+
+							poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
 						poll+='</div>';
 
@@ -600,19 +651,25 @@
 
 								poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
 
+								poll+='<div class="row">';
+
+									poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
+
+								poll+='</div>';
+
 							poll+='</div>';
 
 							if(data.isOwner==1)
 							{
 								poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';*/poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
 
 								poll+='</div>';
 
 								poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -646,29 +703,29 @@
 
 							poll+='<div class="row">';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer1">';
 
 										for(var i=0;i<data.pollOptions.length;i+=3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer2">';
 
 										for(var i=1;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer3">';
 
 										for(var i=2;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
@@ -724,9 +781,15 @@
 
 							poll+='<div class="col-md-3 text-right">';
 
-								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 							poll+='</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="row">';
+
+							poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
 						poll+='</div>';
 
@@ -773,19 +836,25 @@
 
 								poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
 
+								poll+='<div class="row">';
+
+									poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
+
+								poll+='</div>';
+
 							poll+='</div>';
 
 							if(data.isOwner==1)
 							{
 								poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';*/poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
 
 								poll+='</div>';
 
 								poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -819,29 +888,29 @@
 
 							poll+='<div class="row">';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer1">';
 
 										for(var i=0;i<data.pollOptions.length;i+=3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer2">';
 
 										for(var i=1;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer3">';
 
 										for(var i=2;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
@@ -894,9 +963,15 @@
 
 							poll+='<div class="col-md-3 text-right">';
 
-								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 							poll+='</div>';
+
+						poll+='</div>';
+
+						poll+='<div class="row">';
+
+							poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
 						poll+='</div>';
 
@@ -949,13 +1024,13 @@
 							{
 								poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';*/poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
 
 								poll+='</div>';
 
 								poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -991,29 +1066,29 @@
 
 							poll+='<div class="row">';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer1">';
 
 										for(var i=0;i<data.pollOptions.length;i+=3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer2">';
 
 										for(var i=1;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer3">';
 
 										for(var i=2;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
@@ -1063,11 +1138,17 @@
 
 								poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
 
+								poll+='<div class="row">';
+
+									poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
+
+								poll+='</div>';
+
 							poll+='</div>';
 
 							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
 
-								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 							poll+='</div>';
 
@@ -1108,19 +1189,25 @@
 
 								poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
 
+								poll+='<div class="row">';
+
+									poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
+
+								poll+='</div>';
+
 							poll+='</div>';
 
 							if(data.isOwner==1)
 							{
 								poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';*/poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
+									/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
 
 								poll+='</div>';
 
 								poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
 
-									poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
+									poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 								poll+='</div>';
 							}
@@ -1154,29 +1241,29 @@
 
 							poll+='<div class="row">';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer1">';
 
 										for(var i=0;i<data.pollOptions.length;i+=3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer2">';
 
 										for(var i=1;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
 
-									poll+='<div class="col-md-4">';
+									poll+='<div class="col-md-4" id="pollOptionContainer3">';
 
 										for(var i=2;i<optionLength;i=i+3)
 										{
-											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label>';
+											poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 										}
 
 									poll+='</div>';
@@ -1263,6 +1350,7 @@
 						for(i=0;i<datas.length;i++)
 						{
 							insertPoll(datas[i],"last");
+							console.log(datas[i].isOwner);
 						}
 						$('time.timeago').timeago();
 					}
@@ -1302,14 +1390,41 @@
 			if(type=='single')
 			{
 				var checkedOption=new Array();
-				var option=$('#'+pollId).find('input');
-				for (i =0;i<option.length;i++)
+				var optionArray1=$('#'+pollId).find("#pollOptionContainer1").find('input');
+				var optionArray2=$("#"+pollId).find("#pollOptionContainer2").find('input');
+				var optionArray3=$("#"+pollId).find("#pollOptionContainer3").find('input');
+
+				for(i=0;i<optionArray1.length;i++)
+				{
+					if(optionArray1[i].checked)
+					{
+						checkedOption[0]=3*i;
+					}
+				}
+
+				for(i=0;i<optionArray2.length;i++)
+				{
+					if(optionArray2[i].checked)
+					{
+						checkedOption[0]=3*i+1;
+					}
+				}
+
+				for(i=0;i<optionArray3.length;i++)
+				{
+					if(optionArray3[i].checked)
+					{
+						checkedOption[0]=3*i+2;
+					}
+				}
+
+				/*for (i =0;i<option.length;i++)
 				{
 					if(option[i].checked)
 					{
 						checkedOption[0]=i;
 					}
-				}
+				}*/
 				////console.log("Option sent"+checkedOption[0]);
 				$.post('./handlers/pollHandlers/votePoll.php',{
 					_pollId:pollId,
@@ -1341,7 +1456,41 @@
 			else if(type=="multiple")
 			{
 				var checkedOptions=new Array();
-				var option=$('#'+pollId).find('input');
+				var optionArray1=$('#'+pollId).find("#pollOptionContainer1").find('input');
+				var optionArray2=$("#"+pollId).find("#pollOptionContainer2").find('input');
+				var optionArray3=$("#"+pollId).find("#pollOptionContainer3").find('input');
+
+				var count=0;
+
+				for(i=0;i<optionArray1.length;i++)
+				{
+					if(optionArray1[i].checked)
+					{
+						checkedOptions[count]=3*i;
+						count++;
+					}
+				}
+
+				for(i=0;i<optionArray2.length;i++)
+				{
+					if(optionArray2[i].checked)
+					{
+						checkedOptions[count]=3*i+1;
+						count++;
+					}
+				}
+
+				for(i=0;i<optionArray3.length;i++)
+				{
+					if(optionArray3[i].checked)
+					{
+						checkedOptions[count]=3*i+2;
+						count++;
+					}
+				}
+
+
+				/*var option=$('#'+pollId).find('input');
 				var count=0;
 				for (i =0;i<option.length;i++)
 				{
@@ -1350,7 +1499,7 @@
 						checkedOptions[count]=i;
 						count=count+1;
 					}
-				}
+				}*/
 				////console.log(checkedOptions);
 				$.post('/4pi/handlers/pollHandlers/votePoll.php',{
 					_pollId:pollId,

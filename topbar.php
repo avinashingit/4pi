@@ -1,11 +1,11 @@
 <!-- basically the top bar i.e. the header part of the newsfeed, is common to all the users -->
-
 <script>
-
+	var userId="<?php echo $_SESSION['uid'];?>";
 	function changePassword()
 	{
 		var p1=$("#changePasswordModal").find("#changePasswordModalP1").val();
 		var p2=$("#changePasswordModal").find("#changePasswordModalP2").val();
+		var oldP=$("#changePasswordModal").find("#changePasswordModalOldPassword").val();
 
 		if(p1.length<8)
 		{
@@ -18,18 +18,28 @@
 		else
 		{
 			$.post('/4pi/handlers/changePassword.php',{
-				_p1:p1,
-				_p2:p2
+				_password:p1,
+				_confirmPassword:p2,
+				_oldPassword:oldP
 			})
 			.error(function(){
 				alert("Server overload. Please try again. :(");
 			})
 			.success(function(data){
+				alert(data);
 				if(checkData(data)==1)
 				{
-					alert("Password successfully changed");
-					$("#changePasswordModal").modal('hide');
-					$("#changePasswordModal").find('input').val("");
+					if(data.trim()==17)
+					{
+						alert("Old password is wrong");
+					}
+					else if(data.trim()==3)
+					{
+						alert("Password successfully changed");
+						$("#changePasswordModal").modal('hide');
+						$("#changePasswordModal").find('input').val("");
+					}
+					
 				}
 			});
 		}
@@ -84,19 +94,19 @@
 
 			if(data.objectType==500)
 			{
-				notification+='<a href="http://localhost/4pi/posts/fetchSinglePost?ref='+data.objectId+'"><p><img width="25px" height="25px" src="/4pi/img/appImgs/postImg.png"/>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="/4pi/posts/fetchSinglePost?ref='+data.objectId+'"><p><i class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.notification+'</p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==600)
 			{
-				notification+='<a href="http://localhost/4pi/events/fetchSingleEvent?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/eventImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="/4pi/events/fetchSingleEvent?ref='+data.objectId+'"><p><i class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.notification+'</p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==700)
 			{
-				notification+='<a href="http://localhost/4pi/polls/fetchSinglePoll.php?ref='+data.objectId+'"><p><img width="25px" height="25px"src="/4pi/img/appImgs/pollImg.jpg"/>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="/4pi/polls/fetchSinglePoll.php?ref='+data.objectId+'"><p><i class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.notification+'</p>';
 
 				notification+='</a>';
 			}
@@ -287,7 +297,7 @@
 			alert("Server overload. Please try again");
 		})
 		.success(function(data){
-			//console.log(data);
+			console.log(data);
 			data=JSON.parse(data);
 
 			
@@ -396,7 +406,7 @@
 
 	<div id="brand" class="text-center col-md-2 col-md-offset-3"> 
 
-		<a href="index.php"><img id="pilogo" src="/4pi/img/appImgs/fourpi.svg" width="45" height="auto" style="padding-top:3px;"/></a>
+		<a href="/4pi/index.php"><img id="pilogo" src="/4pi/img/appImgs/fourpi.svg" width="45" height="auto" style="padding-top:3px;"/></a>
 
 	</div>
 
@@ -745,9 +755,11 @@
 
 						<div class="col-md-12">
 
-							<input  class="form-control" type="password" id="changePasswordModalP1" placeholder="Type password."><br/>
+							<input  class="form-control" type="password" id="changePasswordModalOldPassword" placeholder="Type current password."><br/>
 
-							<input class="form-control"  type="password" id="changePasswordModalP2" placeholder="Type password again."><br/>
+							<input  class="form-control" type="password" id="changePasswordModalP1" placeholder="Type new password."><br/>
+
+							<input class="form-control"  type="password" id="changePasswordModalP2" placeholder="Confirm new password."><br/>
 
 						</div>
 
