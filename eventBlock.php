@@ -402,7 +402,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		<div class="text-center">
 
-			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>;
+			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>
 
 		</div>
 
@@ -427,7 +427,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 	}
 	
 	#eventNameTime{
-		margin-top:5px;
+		margin-top:10px;
 	}
 	
 	#eventPostedTime, #editEvent{
@@ -442,6 +442,12 @@ var inView="<?php echo $_SESSION['jx'];?>";
 		background-color:#fff;
 	}
 
+	.event:hover
+	{
+		-webkit-box-shadow:0px 5px 0px #AF0021 inset ;
+		box-shadow:0px 5px 0px #AF0021 inset ;	
+	}
+
 </style>
 
 
@@ -454,6 +460,10 @@ var inView="<?php echo $_SESSION['jx'];?>";
 </style>
 
 <script>
+
+$(document).ready(function(){
+	latestEventsFetch('empty',1);
+});
 
 function fetchMoreEvents()
 {

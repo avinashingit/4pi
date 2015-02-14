@@ -1397,7 +1397,7 @@ if(userId=="")
 
 						<div class="col-md-4 text-left">
 
-							<h3 style="color:#176F56;"><i class="fa fa-database"></i>&nbsp;Projects</h3>
+							<h3 style="color:#176F56;"><i class="fa fa-database"></i>&nbsp;Projects (<span id="projectsNumber"></span>)</h3>
 
 						</div>
 
@@ -1428,7 +1428,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3  style="color:rgba(154, 105, 170, 1);" class="text-left"><i class="fa fa-fighter-jet"></i>&nbsp;Experience</h3>
+							<h3  style="color:rgba(154, 105, 170, 1);" class="text-left"><i class="fa fa-fighter-jet"></i>&nbsp;Experience (<span id="experienceNumber"></span>)</h3>
 
 						</div>
 
@@ -1462,7 +1462,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:rgba(222, 123, 26, 1);" class="text-left"><i class="fa fa-mortar-board"></i>&nbsp;Academics</h3>
+							<h3 style="color:rgba(222, 123, 26, 1);" class="text-left"><i class="fa fa-mortar-board"></i>&nbsp;Academics (<span id="academicsNumber"></span>)</h3>
 
 						</div>
 
@@ -1497,7 +1497,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3  style="color:#007887;" class="text-left"><i class="fa fa-gears"></i>&nbsp;Workshops</h3>
+							<h3  style="color:#007887;" class="text-left"><i class="fa fa-gears"></i>&nbsp;Workshops (<span id="workshopsNumber"></span>)</h3>
 
 						</div>
 
@@ -1531,7 +1531,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:rgba(192, 54, 117, 1);" class="text-left"><i class="fa fa-certificate"></i>&nbsp;Certifications</h3>
+							<h3 style="color:rgba(192, 54, 117, 1);" class="text-left"><i class="fa fa-certificate"></i>&nbsp;Certifications (<span id="certificationsNumber"></span>)</h3>
 
 						</div>
 
@@ -1565,7 +1565,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:#008322;" class="text-left"><i class="fa fa-trophy"></i>&nbsp;Achievements</h3>
+							<h3 style="color:#008322;" class="text-left"><i class="fa fa-trophy"></i>&nbsp;Achievements (<span id="achievementsNumber"></span>)</h3>
 
 						</div>
 

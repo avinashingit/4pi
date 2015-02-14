@@ -50,6 +50,64 @@ function closeModal(id)
 	$('#'+id).modal('hide');
 }
 
+function updateNumber(element,position)
+{
+	var numberOfElements=$(element).length;
+	position.html(numberOfElements);
+}
+
+function callWhen404(element,position)
+{
+	var text="";
+
+	if(element=="Skills")
+	{
+		text="No skills to display";
+	}
+
+	else if(element=="Tools")
+	{
+		text="No tools to display";
+	}
+
+	else if(element=="Projects")
+	{
+		text="No projects to display";
+	}
+
+	else if(element=="Experience")
+	{
+		text="No experiences to display";
+	}
+
+	else if(element=="Academics")
+	{
+		text="No degrees to display";
+	}
+
+	else if(element=="Certifications")
+	{
+		text="No certifications to display";
+	}
+
+	else if(element=="Workshops")
+	{
+		text="No workshops to display";
+	}
+
+	else if(element="Achievements")
+	{
+		text="No achievements to display";
+	}
+
+	else if(element=="Interests")
+	{
+		text="No interests to display";
+	}
+
+	position.html(text);
+}
+
 $(document).ready(function(){
 	showValueForSlider();
 	fetchTopPart();
@@ -726,6 +784,11 @@ function fetchSkills()
 				$("#skills").find("#skillPercentages").html(data.rating);
 				insertSkills(data.jsonObj);
 			}
+
+			else if(data==404)
+			{
+				callWhen404('Skills',$("#skills").find('#skillData'));
+			}
 		}
 	});
 }
@@ -947,6 +1010,11 @@ function fetchTools(data)
 				}
 				afterAjaxCallDisplay();
 			}
+
+			else if(data==404)
+			{
+				callWhen404('Tools',$("#tools").find('#toolsColumn2'));
+			}
 			
 		}
 	});
@@ -1073,6 +1141,11 @@ function editToolsSendData()
 					insertTool(x[i],data.isOwner);
 				}
 				$("#editToolModal").modal('hide');
+
+				if($('.tool').length==0)
+				{
+					callWhen404('Tools',$("#tools").find('#toolsColumn2'));
+				}
 			}
 		});
 	}
@@ -1164,6 +1237,8 @@ function insertProjects(data)
 	projects+='</div>';
 	
 	$('#projects').find('#projectContainer').append(projects);
+
+	updateNumber('.project',$("#projects").find('#projectsNumber'));
 }
 
 function fetchProjects()
@@ -1190,6 +1265,11 @@ function fetchProjects()
 				}
 
 				afterAjaxCallDisplay();
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Projects',$("#projects").find('#projectContainer'));
 			}
 			
 		}
@@ -1308,6 +1388,12 @@ function deleteProject(id)
 			if(checkData(data)==1)
 			{
 				$('#projects').find('#'+id).remove();
+				if($('.project').length==0)
+				{
+					callWhen404('Projects',$("#projects").find('#projectContainer'));
+				}
+
+				updateNumber('.project',$("#projects").find('#projectsNumber'));
 			}
 		});
 	}
@@ -1376,6 +1462,8 @@ function insertExperience(data)
 	var position=length%2+1;
 
 	$('#experiences').find('#experienceContainer'+position).append(experience);
+
+	updateNumber('.experience',$("#experiences").find('#experienceNumber'));
 }
 
 function fetchExperience()
@@ -1600,6 +1688,8 @@ function insertAcademics(data)
 	var position=length%2+1;
 
 	$('#academics').find('#academicsContainer'+position).append(academics);
+
+	updateNumber('.academics',$("#academics").find('#academicsNumber'));
 }
 
 function fetchAcademics()
@@ -1829,6 +1919,8 @@ function insertWorkshop(data)
 	var position=length%2+1;
 
 	$('#workshops').find('#workshopContainer'+position).append(workshop);
+
+	updateNumber('.workshop',$("#workshops").find('#workshopsNumber'));
 }
 
 function fetchWorkshops()
@@ -2021,6 +2113,8 @@ function insertCertification(data)
 	var position=length%2+1;
 
 	$('#certifications').find('#certificationContainer'+position).append(certification);
+
+	updateNumber('.certification',$("#certifications").find('#certificationsNumber'));
 }
 
 function fetchCertifications()
@@ -2220,6 +2314,8 @@ function insertAchievements(data)
 	var position=length%2+1;
 
 	$('#achievements').find('#achievementContainer'+position).append(achievements);
+
+	updateNumber('.achievement',$("#achievements").find('#achievementsNumber'));
 }
 
 function fetchAchievements()

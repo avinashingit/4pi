@@ -66,6 +66,35 @@
 		$('#rightBox').removeClass('stick');
 	}
 
+	function putInView()
+	{
+		var inViewElement=$("#inViewElement").html();
+		if(inViewElement==998 || inViewElement==997 || inViewElement==999)
+		{
+			$("#rightBlock1").hide();
+			$("#rightBlock2").show();
+			$("#rightBlock3").show();
+			// $("#rightBlock2").css({'margin-top':'7px !important'});
+		}
+
+		else if(inViewElement==1001 || inViewElement==1002 || inViewElement==1003)
+		{
+			$("#rightBlock1").show();
+			$("#rightBlock2").hide();
+			$("#rightBlock3").show();
+			// $("#rightBlock2").css({'margin-top':'0px !important'});
+		}
+		else
+		{
+			$("#rightBlock1").show();
+			$("#rightBlock2").show();
+			$("#rightBlock3").hide();
+			// $("#rightBlock2").css({'margin-top':'0px'});
+		}
+	}
+
+	setInterval(function(){putInView();},500);
+
 	function insertLittlePost(data)
 	{
 		var littlePost="";
@@ -198,7 +227,7 @@
 
 	</div>
 
-	<div class=" row panel panel-success" id="rightBlock2" >
+	<div class=" row panel panel-success" style="margin-top:5px;" id="rightBlock2" >
 
 		<a href="events.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-calendar"></i>&nbsp;Events</div></a>
 
@@ -208,7 +237,7 @@
 
 	</div>
 
-	<div class="row panel panel-info"  id="rightBlock3">
+	<div class="row panel panel-info" id="rightBlock3">
 
 		<a href="polls.php" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-pie-chart"></i>&nbsp;Polls</div></a>
 

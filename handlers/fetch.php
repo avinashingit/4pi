@@ -149,14 +149,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		if($conn->error=="")
 		{
 			$rowsAffected=$conn->getMatchedRowsOnUpdate();
-			echo $rowsAffected;
 			if(($rowsAffected)==1)
 			{
 				return 3;
 			}
 			else
 			{
-				return 17;
+				return 17;//old password wrong
 			}
 		}
 		else
@@ -452,10 +451,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 
 	}
-
-
-
-	function mailContent($emailId,$content,$subject,$attachments="")
+	function getMailerObject()
 	{
 		$mail = new PHPMailer();
 		$mail->IsSMTP();
@@ -463,13 +459,51 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$mail->SMTPAuth   = true;                  // enable SMTP authentication
 		$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
 		$mail->Host       = "smtp.mail.com";      // sets GMAIL as the SMTP server
-		$mail->Port       = 587;                   // set the SMTP port
+		$mail->Port       = 465;                   // set the SMTP port
 
 		$mail->Username   = "4pi@programmer.net";  // GMAIL username
 		$mail->Password   = "110720@iiitdmK";            // GMAIL password
 
 		$mail->From       = "4pi-IIIT D&M Kancheepuram";
 		$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
+		return $mail;
+	}
+
+
+	function sendEmail($mailerObject,$emailId,$content,$subject,$attachments="")
+	{
+		$mail= $mailerObject;
+		$mail->Subject    = $subject;
+		$mail->WordWrap   = 500; // set word wrap
+		$mail->AddAddress($emailId); //attaches the receiver email address.
+		$mail->Body       = $content;
+		if($attachments!="")
+		{
+			$splitAttachments=explode(",",$attachments);
+			$attachmentCount=count($splitAttachments);
+			for($i=0;$i<$attachmentCount;$i++)
+				{
+					$mail->AddAttachment($splitAttachments[$i]);
+				}
+		}
+		//$mail->isSMTP();
+		
+		if(!$mail->send())
+		{
+			notifyAdmin($mail->ErrorInfo."!!!! MailSubject: ".$subject,$userId);
+			return false;
+		}
+		else
+		{
+			$mail->ClearAddresses();
+			return true;
+		}
+
+	}
+
+	function mailContent($emailId,$content,$subject,$attachments="")
+	{
+		$mail = getMailerObject();
 		$mail->Subject    = $subject;
 		$mail->WordWrap   = 500; // set word wrap
 		$mail->AddAddress($emailId);
