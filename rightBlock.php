@@ -161,7 +161,7 @@
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				console.log(data);
+				// console.log(data);
 				$('#rightBlock2').find('ul').find('.littleEvent').each(function(){
 					$(this).remove();
 				});

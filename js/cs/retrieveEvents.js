@@ -373,40 +373,19 @@ function createEventSP()
 	
 	var eventType=$('#createEventType').val().trim();
 	
-	// var eventFiles=$('#createEventFileInput').val();
+	// var eventFiles=$('#createEventFileInput').val()
 
-	$('#createEventOrganizerName').val("");
-
-	$('#createEventName').val("");
-
-	$('#createEventName').val("");
-
-	$('#createEventContent').val("");
-
-	$('#createEventSharedWith').val("");
-
-	$('#createEventVenue').val("");
-
-	$('#createEventDate').val("");
-
-	$('#createEventTime').val("");
-
-	$('#createEventDurationHours').val("");
-
-	$('#createEventDurationMinutes').val("");
-
-	$('#createEventType').val("");
-
-
-
-
-
-	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>1000 || eventVenue.length==0 || eventDate.length==0 )
+	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 ||  || eventVenue.length==0 || eventDate.length==0 )
 
 	{
 
 		alert("Please fill in the required fields.")
 
+	}
+
+	else if(eventContent.length>1000)
+	{
+		alert("Please limit the event content to 1000 characters.")
 	}
 
 	else
@@ -465,6 +444,28 @@ function createEventSP()
 			$('.timeago').timeago();
 
 			$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
+
+			$('#createEventOrganizerName').val("");
+
+			$('#createEventName').val("");
+
+			$('#createEventName').val("");
+
+			$('#createEventContent').val("");
+
+			$('#createEventSharedWith').val("");
+
+			$('#createEventVenue').val("");
+
+			$('#createEventDate').val("");
+
+			$('#createEventTime').val("");
+
+			$('#createEventDurationHours').val("");
+
+			$('#createEventDurationMinutes').val("");
+
+			$('#createEventType').val("");
 
 		});
 

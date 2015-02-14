@@ -232,7 +232,7 @@ function homeSearch(el)
 							
 							<div class="aClose" >
 								<i class="fa fa-user aClose"></i>&nbsp;&nbsp;
-								<input type="text" class="form-control input-md aClose" onkeypress="checkKeyEnter(event);" name="loginUsername" id="loginUsername" placeholder="Username..." style="" autocomplete="off" required/>
+								<input type="text" class="form-control input-md aClose" onkeypress="checkKeyEnter(event);" name="loginUsername" id="loginUsername" placeholder="Username..." style="" required/>
 							</div>
 							
 							<br />
