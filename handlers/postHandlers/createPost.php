@@ -82,6 +82,11 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				echo 16;
 				exit();
 			}
+			else if(strlen($content)>8000)
+			{
+				echo 16;
+				exit();
+			}
 			$postUserName=$user['name'];
 			$userId=$user['userId'];
 			$rawsharedWith=$_POST['_share'];
@@ -140,6 +145,14 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			//echo $sharedWith;
 			
 			$subject=trim($_POST['_subject']);//3
+			if($subject!='')
+			{
+				if(strlen($subject)>40)
+				{
+					echo 16;
+					exit();
+				}
+			}
 			$lifetime=$_POST['_validity'];
 			$isPermanent=false;//4
 			if($lifetime==9999)

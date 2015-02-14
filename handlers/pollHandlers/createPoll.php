@@ -51,11 +51,23 @@ $pollOptionsArray=$_POST['_pollOptions'];
 $pollOptionsType=$_POST['_pollOptionType'];
 $rawSharedWith=$_POST['_sharedWith'];
 
-if($pollQuestion==""||count($pollOptionsArray)<=1)
+$pollOptionsCount=count($pollOptionsArray);
+
+if($pollQuestion==""||$pollOptionsCount<=1)
 {
 	echo 16;
 	exit();
 }
+
+for($i=0;$i<$pollOptionsCount;$i++)
+{
+	if(strlen($pollOptionsArray[$i])>36)
+	{
+		echo 16;// Longer options cause distortion in result charts in front-end. I know 36 is way too less but cant help.
+		exit();
+	}
+}
+
 if($pollType!=1&&$pollType!=2&&$pollType!=3)
 {
 	echo 16;
@@ -149,7 +161,7 @@ else
 			$sharedWith="All";
 		}
 		$pollOptions=implode(',',$pollOptionsArray);
-		$pollOptionsCount=count($pollOptionsArray);
+		
 
 		$FetchMaxPollIDSQL="SELECT MAX(pollId) as maxPollId FROM poll";
 		$maxPollID=$conn->fetchALL($FetchMaxPollIDSQL,false);

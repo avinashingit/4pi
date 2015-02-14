@@ -84,7 +84,17 @@ Code 11: Session Variables unset!!
 				$followers=$post['followers'];
 				if($userId==$postUserId)
 				{
-					$content=trim($_POST['_postContent']);//1		
+					$content=trim($_POST['_postContent']);//1
+					if($content=='')
+					{
+						echo 16;
+						exit;
+					}
+					elseif (strlen($content)>8000) 
+					{
+						echo 16;
+						exit();
+					}
 					$rawsharedWith=trim($_POST['_share']);
 					$splitSharedWith=explode(",",$rawsharedWith);
 					$n=count($splitSharedWith);
@@ -130,9 +140,18 @@ Code 11: Session Variables unset!!
 						$sharedWith="All";
 					}
 					$subject=trim($_POST['_subject']);//3
+					if($subject!='')
+					{
+						if(strlen($subject)>40)
+						{
+							echo 16;
+							exit();
+						}
+					}
 					$lifetime=$_POST['_validity'];
 					$isPermanent=false;
 					$lastUpdated=time();//7+4=11
+					
 					if($lifetime==9999)
 					{
 						$requestPermanence=true;

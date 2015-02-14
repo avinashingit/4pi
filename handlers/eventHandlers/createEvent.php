@@ -62,6 +62,11 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();
 	}
+	if(strlen($eventContent)>1000)
+	{
+		echo 16;
+		exit();
+	}
 	if(strlen($rawDate)!=10||strlen($rawTime)!=5)
 	{
 		//echo "Date Time Validate";
@@ -70,7 +75,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	}
 	if(preg_match('/^[0-9]{1,}$/', $eventDurationHrs)==0||preg_match('/^[0-9]{1,}$/', $eventDurationMin)==0)
 	{
-		//echo "Hr Validate";
+		//echo "Hr-min Validate";
 		echo 16;
 		exit();		
 	}

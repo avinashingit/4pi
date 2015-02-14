@@ -125,16 +125,23 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					$spamCount++;
 
 					$UpdatePostSQL="UPDATE post  SET reportedBy = ?, spamCount= ?, hiddenTo = ? WHERE postIdHash= ?";
-					$UpdatePostSQL2="UPDATE post  SET displayStatus=0, reportedBy = ?, spamCount= ?, hiddenTo = ? WHERE postIdHash= ?";
+					$UpdatePostSQL2="UPDATE post  SET reportedBy = ?, spamCount= ?, hiddenTo = ?, displayStatus=? WHERE postIdHash= ?";
 					
 					$values[0]=array($reportedBy => 's');
 					$values[1]=array($spamCount => 'i');
 					$values[2]=array($hiddenTo => 's');
 					$values[3]=array($postIdHash => 's');
+
+					$displayStatus=0;
+					$values2[0]=array($reportedBy => 's');
+					$values2[1]=array($spamCount => 'i');
+					$values2[2]=array($hiddenTo => 's');
+					$values2[3]=array($displayStatus => 's');
+					$values2[4]=array($postIdHash => 's');
 					$conn->startTransaction();
 					if($spamCount>=3)
 					{
-						$result=$conn->update($UpdatePostSQL2,$values);
+						$result=$conn->update($UpdatePostSQL2,$values2);
 					}
 					else
 					{

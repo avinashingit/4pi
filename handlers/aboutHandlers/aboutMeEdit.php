@@ -183,6 +183,15 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 		$showPhoneArray=$showPhone;
 		$phone=implode(',',$phone);
 		$showPhone=implode(',',$showPhone);
+
+		if($description!='')
+		{
+			if(strlen($description)>387)
+			{
+				echo 16;
+				exit();
+			}
+		}
 		
 		//$date = date_parse($dob);
 		$dobTimestamp = dateStringToTimestamp($dob);

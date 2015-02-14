@@ -63,6 +63,11 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();
 	}
+	if(strlen($eventContent)>1000)
+	{
+		echo 16;
+		exit();
+	}
 	if(strlen($rawDate)!=10||strlen($rawTime)!=5)
 	{
 		echo 16;
