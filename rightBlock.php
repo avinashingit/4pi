@@ -1,6 +1,6 @@
 <script>
 	$(document).ready(function(){
-		/*var s = $("#rightBox");
+	var s = $("#rightBox");
     
     var pos = s.position(); 
     
@@ -12,7 +12,7 @@
     
         //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
     
-        if (windowpos >= pos.top+300) {
+        if (windowpos >= pos.top+148) {
     
             s.addClass("stick");
     
@@ -35,7 +35,7 @@
             //$('#rightBox').show();
 
         }
-    });*/
+    });
 	});
 
 	$.fn.isOnScreen = function(){
@@ -57,14 +57,14 @@
 	    
 	};
 
-	if($('#rightBox').isOnScreen)
+	/*if($('#rightBox').isOnScreen)
 	{
 		$('#rightBox').addClass('stick');
 	}
 	else
 	{
 		$('#rightBox').removeClass('stick');
-	}
+	}*/
 
 	function putInView()
 	{
@@ -74,6 +74,9 @@
 			$("#rightBlock1").hide();
 			$("#rightBlock2").show();
 			$("#rightBlock3").show();
+			$(".postsGroup").hide();
+			$(".eventsGroup").show();
+			$(".pollsGroup").show();
 			// $("#rightBlock2").css({'margin-top':'7px !important'});
 		}
 
@@ -82,6 +85,9 @@
 			$("#rightBlock1").show();
 			$("#rightBlock2").hide();
 			$("#rightBlock3").show();
+			$(".eventsGroup").hide();
+			$(".postsGroup").show();
+			$(".pollsGroup").show();
 			// $("#rightBlock2").css({'margin-top':'0px !important'});
 		}
 		else if(inViewElement==1004)
@@ -89,6 +95,9 @@
 			$("#rightBlock1").show();
 			$("#rightBlock2").show();
 			$("#rightBlock3").hide();
+			$(".pollsGroup").hide();
+			$(".postsGroup").show();
+			$(".eventsGroup").show();
 			// $("#rightBlock2").css({'margin-top':'0px'});
 		}
 
@@ -97,6 +106,9 @@
 			$("#rightBlock1").show();
 			$("#rightBlock2").show();
 			$("#rightBlock3").show();
+			$(".postsGroup").show();
+			$(".eventsGroup").show();
+			$(".pollsGroup").show();
 		}
 	}
 
@@ -256,19 +268,19 @@
 
 	<div class="btn-group btn-group-justified" id="rightBox">
 
-	  <div class="btn-group">
+	  <div class="btn-group postsGroup">
 
 	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-list-ul" title="Events"></i></button></a>
 
 	  </div>
 
-	  <div class="btn-group">
+	  <div class="btn-group eventsGroup">
 
 	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-calendar" title="Threads"></i></button></a>
 
 	  </div>
 
-	  <div class="btn-group">
+	  <div class="btn-group pollsGroup">
 
 	    <a href="#rightBlock3"><button type="button" class="btn" id="miniRightBlock3"><i style="color:white;" class="fa fa-pie-chart" title="Polls"></i></button></a>
 

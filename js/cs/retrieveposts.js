@@ -307,6 +307,13 @@ function createPost() {
         alert("Post content is to be filled");
         done=0;
     }
+
+    else if(postContent.length>8000)
+    {
+        alert("Content can only have 8000 characters.");
+        done=0;
+    }
+    
     var sharedWith = $('#createPostSharedWith').val().trim();
     if(sharedWith.length==0)
     {
