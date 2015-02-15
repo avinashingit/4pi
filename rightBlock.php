@@ -84,12 +84,19 @@
 			$("#rightBlock3").show();
 			// $("#rightBlock2").css({'margin-top':'0px !important'});
 		}
-		else
+		else if(inViewElement==1004)
 		{
 			$("#rightBlock1").show();
 			$("#rightBlock2").show();
 			$("#rightBlock3").hide();
 			// $("#rightBlock2").css({'margin-top':'0px'});
+		}
+
+		else
+		{
+			$("#rightBlock1").show();
+			$("#rightBlock2").show();
+			$("#rightBlock3").show();
 		}
 	}
 

@@ -43,7 +43,7 @@ function fetchSingleEvent()
 			else
 			{
 				data=JSON.parse(data);
-				eventInsert("first",data);
+				eventInsert("first",data,2);
 
 			}
 

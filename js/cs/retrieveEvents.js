@@ -375,7 +375,7 @@ function createEventSP()
 	
 	// var eventFiles=$('#createEventFileInput').val()
 
-	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 ||  || eventVenue.length==0 || eventDate.length==0 )
+	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0|| eventVenue.length==0 || eventDate.length==0 )
 
 	{
 
