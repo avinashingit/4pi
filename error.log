@@ -136,3 +136,5 @@ $$$
 
 [2015-01-30 10:09:10             ::1                   Asia/Kolkata] 1136   $$$Column count doesn't match value count at row 1$$$
 
+[2015-02-15 22:52:44             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+

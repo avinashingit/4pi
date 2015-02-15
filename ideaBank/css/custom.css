@@ -1,7 +1,7 @@
 /* Landing page index.php */
 @font-face {
     font-family: openSans;
-    src: url(../fonts/OpenSans-Light.ttf);
+    src: url(../../fonts/OpenSans-Light.ttf);
 }
 
 body{
@@ -11,147 +11,11 @@ body{
     font-family: openSans !important;
     min-width: 540px;
 }
-a{
-    color:black;
-}
-a,a:hover{
-    text-decoration:none;
-}
-
-.center{
-    text-align: center;
-}
-
-
-
-
-
-
-.hidden{
-    visibility: hidden;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* --------------------------------------------------------- */
-
-/* NewsFeed */
-#icons{
-    color:white;
-    padding-top:5px;
-}
-
-#userDetails{
-    background-color:black;
-    color:white;
-    overflow-y:auto !important;
-    *max-height:580px !important;
-    margin-top:-1px;
-    z-index:-1;
-}
-
-#userGroups h5{ 
-    text-align:left;
-    font-family:'Roboto';
-}
-
-#userImage img{
-    margin:auto;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-}
-
-#posts{
-    *overflow-y:auto !important;
-    *max-height:580px !important;
-}
-
-#rightBlock{
-    *background-color:black;
-    color:white;
-    *overflow-y:auto !important;
-    *max-height:580px !important;
-    padding-left: 0px;
-
-}
-#events,#threads,#polls{
-    *float:center;
-    background-color:white;
-    color:black;
-    *max-height:190px;
-    *padding:0px;
-}
-#events{
-    margin-top:15px;
-}
-
-.cursorPointer{
-    cursor:pointer;
-}
-
-#posts{
-    margin-top:5px;
-    *overflow-y:auto !important;
-    *max-height:580px;
-}
-.borderBottom{
-    border-bottom:1px solid rgba(0,0,0,0.2);
-}
-#posts p{
-    text-align:justify !important;
-}
-i {
-    cursor:pointer;
-}
-      /* #card, #card2,#card3{
-        height: 280px;
-        border:1px solid rgba(0,0,0,0.2);
-      }*/
-
-.fontSize13{
-    font-size:13px;
-}
-.fontSize9{
-    font-size:9px;
-}
-.paddingTopPostIcons{
-    padding-top:25px;
-}
-.paddingLeftPostIcons{
-    padding-left:10px;
-}
-.paddingBottomPostIcons{
-    padding-bottom:0px;
-}
-#post{
-    background-color:white;
-}
-.postLikesAndCommentIcons{
-    padding-bottom: 10px;
-}
-.stick{
-    position:fixed;
-    top:50px;
-    width:23.5%;
-}
-
-
-
 
 /*-------------------------- IDEA BANK ---------------------*/
-
+a {
+	text-decoration:none !important; 
+}
 .floatRight{
 	float: right;
 }
@@ -192,6 +56,10 @@ i {
 
 #ideaIcons{
 	margin-bottom: -5px !important;
+}
+
+i{
+	cursor: pointer !important;
 }
 
 .cursor{
@@ -439,33 +307,76 @@ div.condense:hover:after {
 }
 
 
+#ideaSearchBefore{
+	position: relative;
+}
 
+#pilogo
+ {
+   transform: rotate(9deg);
+   animation: rot 1s infinite;
+   -webkit-animation: rot 1s infinite;
+   -moz-animation: rot 1s infinite;
+   -o-animation: rot 1s infinite;
+   z-index: 100;
+ }
+@keyframes rot
+  {
+    0% {transform: rotate(-3deg);}
+	50% {transform: rotate(3deg);}
+	100% {transform: rotate(-3deg);}
+  }
+  
+  
+  
+@-moz-keyframes rot
+  {
+    0% {transform: rotate(-3deg);}
+	50% {transform: rotate(3deg);}
+	100% {transform: rotate(-3deg);}
+  }
+  
+  
+  
+@-webkit-keyframes rot
+  {
+    0% {transform: rotate(-3deg);}
+	50% {transform: rotate(3deg);}
+	100% {transform: rotate(-3deg);}
+  }
+  
+  
+  
+@-o-keyframes rot
+  {
+    0% {transform: rotate(-3deg);}
+	50% {transform: rotate(3deg);}
+	100% {transform: rotate(-3deg);}
+  }
 
-
-
-	#ideaSearchResults1{
-		position:absolute;
-		z-index:154897;
-		border:1px solid gray;
-		padding:0px;
-		top: 42px !important;
-		margin-left: 15px !important;
-		width:94.5% !important ;
-	}
-	#ideaSearch{
-		padding-left:0px;
-	}
-	#topBarNew{
-		position:abolsute;
-	}
-	.sticky{
-		position:fixed;
-		top:0px;
-		z-index:99;
-		width:93%;
-	}
-	.scrollactive{
-		width: 50% !important;
-	}
+#ideaSearchResults1{
+	position:absolute;
+	z-index:154897;
+	border:1px solid gray;
+	padding:0px;
+	top: 42px !important;
+	margin-left: 15px !important;
+	width:94.5% !important ;
+}
+#ideaSearch{
+	padding-left:0px;
+}
+#topBarNew{
+	position:abolsute;
+}
+.sticky{
+	position:fixed;
+	top:0px;
+	z-index:99;
+	width:93%;
+}
+.scrollactive{
+	width: 50% !important;
+}
 
 /*-------------------------- End of Idea Bank --------------*/

@@ -111,8 +111,8 @@
 						{
 							$proPicExists=-1;
 						}
-						
-						$obj = new miniIdeaPost($result['userIdHash'], $result['userId'], $result['name'], $result['ideaPostId'], $result['ideaPostIdHash'], $result['appreciaters'], $result['appreciateCount'], $hasAppreciated, $result['depreciaters'], $result['depreciateCount'], $hasDepreciated, $result['ideaPostDate'], $result['ideaDescription'], $result['postOwner'],$proPicExists, $user['gender']);
+						$genderQuery=getUserFromHash($result['userIdHash']);
+						$obj = new miniIdeaPost($result['userIdHash'], $result['userId'], $genderQuery['alias'], $result['ideaPostId'], $result['ideaPostIdHash'], $result['appreciaters'], $result['appreciateCount'], $hasAppreciated, $result['depreciaters'], $result['depreciateCount'], $hasDepreciated, $result['ideaPostDate'], $result['ideaDescription'], $result['postOwner'],$proPicExists, $genderQuery['gender']);
 						
 						$finalArray[] = $obj;
 						$displayCount=$displayCount+1;
