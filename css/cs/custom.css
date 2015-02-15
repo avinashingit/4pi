@@ -55,10 +55,9 @@ a,a:hover{
     background-color:black;
     color:white;
     overflow-y:auto !important;
-    *max-height:580px !important;
     margin-top:-1px;
     z-index:-1;
-    height:98vh;
+    height:96vh !important;
 }
 
 #userGroups h5{ 

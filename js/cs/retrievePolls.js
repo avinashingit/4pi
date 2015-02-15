@@ -1307,6 +1307,7 @@
 	function fetchLatestPolls(call,value)
 	{
 		$('#loadMorePollsButton').html("Loading").attr("onclick","");
+		$('#inViewElement').html('1004');
 		var existingPolls=new Array();
 		var i=0;
 		$('#pollArea').find('.poll').each(function(){

@@ -2191,8 +2191,8 @@ p.commentText
     background-color:black;
     color:white;
     overflow-y:auto !important;
-    min-height:592px !important;
     margin-top:-1px;
+    height:98vh;
     
 }
 

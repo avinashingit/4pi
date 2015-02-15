@@ -214,7 +214,7 @@ function homeSearch(el)
 				
 				
 				<div class="col-md-6">
-					<a id="portalName" title="4&#960; - Students Portal @ IIITD&ampM Kancheepuram" href="index.php" >Student Portal</a>
+					<a id="portalName" title="4&#960; - Students Portal @ IIITD&ampM Kancheepuram" href="javascript:void(0)" onclick="/4pi" >Student Portal</a>
 				</div>
 				
 				<div class="col-md-3 login">
@@ -247,6 +247,10 @@ function homeSearch(el)
 							<a name="login"  onclick="userLogin();"  class="aClose btn btn-success" id="loginButtonIn" >
 								<i class="fa fa-check aClose" ></i> Go
 							</a>
+
+							<br/>
+
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/forgotPassword.php'">Forgot password?</a>
 							
 							<div id="loginError" class="text-error aClose" ></div>
 							
@@ -263,9 +267,9 @@ function homeSearch(el)
 						An informative hub
 					</div>
 					<div class="col-md-4">
-								<a href=""><div class="socialIcons" id="facebook" ></div></a>
-								<a href=""><div class="socialIcons" id="twitter" ></div></a>
-								<a href=""><div class="socialIcons" id="gplus" ></div></a>
+								<a href="javascript:void(0)"><div class="socialIcons" id="facebook" ></div></a>
+								<a href="javascript:void(0)"><div class="socialIcons" id="twitter" ></div></a>
+								<a href="javascript:void(0)"><div class="socialIcons" id="gplus" ></div></a>
 					</div>
 				</div>
 			</div>
@@ -275,32 +279,32 @@ function homeSearch(el)
 				<div class="row text-center" >
 					<div class="col-md-5 "   >
 						<div class="upperRow">
-							<a href="/4pi/index.php"  ><canvas class="hex" width="84" height="72" ></canvas></a></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb"  width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'"  ><canvas class="hex" width="84" height="72" ></canvas></a></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb"  width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 					</div>
 					
@@ -312,32 +316,32 @@ function homeSearch(el)
 					
 					<div class="col-md-5  "   id="rightCanvasContainer" >
 						<div class="upperRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/index.php'" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 					</div>
 				</div>
@@ -347,7 +351,7 @@ function homeSearch(el)
 			<div id="section3"> <!-- links to other pages -->
 			<div class="row">
 				<div class="col-md-3 blocks" >
-					<a href="./people" class="blcs" title="Student Representatives" >
+					<a href="javascript:void(0)" onclick="window.location.href='/4pi/people'" class="blcs" title="Student Representatives" >
 						<div id="ew" >
 							<i class="fa fa-bank "></i>
 							<p>Representatives</p>
@@ -355,7 +359,7 @@ function homeSearch(el)
 					</a>
 					</div><!-- end of class col-md-3 -->
 					<div class="col-md-3 blocks" >
-						<a href="./clubs" class="blcs" title="Clubs" >
+						<a href="javascript:void(0)" onclick="window.location.href='/4pi/clubs'" class="blcs" title="Clubs" >
 							<div id="sig" >
 								<i class="fa fa-share-alt "></i>
 								<p>Clubs</p>
@@ -363,7 +367,7 @@ function homeSearch(el)
 						</a>
 						</div><!-- end of class col-md-3 -->
 						<div class="col-md-3  blocks " >
-							<a onclick="showSearchModal();" role="button" title="Search students" class=" blcs" data-toggle="modal">
+							<a href="javascript:void(0)" onclick="showSearchModal();" role="button" title="Search students" class=" blcs" data-toggle="modal">
 								<div id="fb">
 									<i class="fa fa-search "></i>
 									<p>Search</p>
@@ -371,7 +375,7 @@ function homeSearch(el)
 							</a>
 							</div><!-- end of class col-md-3 -->
 							<div class="col-md-3   blocks" >
-								<a href="./about" title="About 4pi" class=" blcs" >
+								<a href="javascript:void(0)" onclick="window.location.href='/4pi/about'" title="About 4pi" class=" blcs" >
 									<div id="aaq">
 										<i class="fa fa-info-circle" ></i>
 										<p >About</p>
