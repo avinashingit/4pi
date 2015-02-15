@@ -40,7 +40,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Actual editEvent Code Starts
 $eventIdHash=$_POST['_eventId'];
-
+$eventStatus=$_POST['_approvalStatus'];
+if($eventStatus!=1&&$eventStatus!=-1)
+{
+	echo 16;
+	exit();
+}
 $userIdHash=$_SESSION['vj'];
 $conn= new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
@@ -100,11 +105,20 @@ else
 		}
 		$editEventSQL="UPDATE event SET approvalStatus = ? WHERE eventIdHash= ?";
 
-		$values[0]=array(1 => 'i');
+		$values[0]=array($eventStatus => 'i');
 		$values[1]=array($eventIdHash => 's');
 		$result=$conn->insert($editEventSQL,$values);
+		$eventOwner=$event['userId'];
 		if($conn->error==""&&$result==true)
 		{
+			if($eventStatus==1)
+			{
+				sendNotification($userId,$eventOwner,11,$eventId,600);
+			}
+			else
+			{
+				sendNotification($userId,$eventOwner,12,$eventId,600);
+			}
 			echo 3;
 			exit();
 		}

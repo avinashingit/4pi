@@ -28,7 +28,7 @@ if($_POST['_p1']==""||$_POST['_p2']==""||$_POST['_p3']=="")
 
 $password=$_POST['_p1'];
 $confirmPassword=$_POST['_p2'];
-$alias=$_POST['_p3']
+$alias=$_POST['_p3'];
 if($password!=$confirmPassword)
 {
 	echo 16;

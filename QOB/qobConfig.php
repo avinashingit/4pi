@@ -72,7 +72,19 @@ define("HASHNOTIF", "s'fitonsisiht")
 
 
 
+/*********************Secretaries and Admins*************************/
 
+//SAC Speaker
+define("SAC", "COE12B009");
+
+// Co-Curricular Affairs Secretary
+define("COCAS", "COE12B013");
+
+//Student General Secretary
+define("GEN", "COE11B005");
+
+//Admin
+define("ADMIN", "COE12B005");
 
 
 ?>

@@ -204,7 +204,8 @@ else
 		$result=$conn->insert($createPollSQL,$values);
 		if($conn->error==""&&$result==true)
 		{
-			//Success			
+			//Success		
+			sendNotification($userId,COCAS,16,$pollId,700);	
 			$ts = new DateTime();
 			$ts->setTimestamp($timestamp);
 			$pollCreationTime=$ts->format(DateTime::ISO8601);

@@ -146,7 +146,7 @@ function aboutMe($userId,$mode,$isOwner)
 				//$proPicLocation=getProfilePicLocation($result1['userIdHash']);
 
 				$resumeLocation=__DIR__."/../../files/resumes/$userId.pdf";
-				if($file_exists($resumeLocation))
+				if(file_exists($resumeLocation))
 				{
 					$resumeExists=1;
 				}

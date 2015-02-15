@@ -1082,7 +1082,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 	function isCoCAS($userId)
 	{
-		if($userId=="COE12B013"||$userId=="COE12B009")
+		if($userId==COCAS)
 		{
 			return true;
 		}
@@ -1092,7 +1092,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
-
+	function isSAC($userId)
+	{
+		if($userId==SAC)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	function getDegree($userId)
 	{
@@ -1291,6 +1301,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
+
+		if($userId==SAC)
+		{
+			$isSAC=1;
+		}
+		else
+		{
+			$isSAC=-1;
+		}
 		//Code until release of final version
 
 
@@ -1298,7 +1317,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$pollCreationTime=toTimeAgoFormat($poll['timestamp']);
 		$pollStatus=$poll['pollStatus'];
 		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash']);
+							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC);
 		return $pollObj;
 	}
 
@@ -1339,9 +1358,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
+		if($userId==COCAS)
+		{
+			$isCoCAS=1;
+		}
+		else
+		{
+			$isCoCAS=-1;
+		}
 		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name']);
+			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name'],$isCoCAS);
 		return $eventObj;
 	}
 
@@ -1595,26 +1622,51 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		commentedOnYourThreadAnswer
 		alsoCommentedOnThreadAnswer*/
 		$conn = new QoB();
+		
 		$displayedNotifCount=count($displayedNotifArray);
+		
 		$notificationModels[0]=array("You have no notifications yet!",0);
+		
 		$notificationModels[1]=array(" star for your Post"," members starred your Post");
+		
 		$notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
+		
 		$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
+		
 		$notificationModels[3]=array(" new comment on the post "," new comments on the post ");
+		
 		$notificationModels[4]=array(" member mailed your post"," members mailed your post");
+		
 		$notificationModels[5]=array(" new comment on the post you mailed"," new comments on the post you mailed");
+		
 		$notificationModels[6]=array(" The post has been removed as you requested.","The post was not removed due to lack of substantial reason.");
+		
 		$notificationModels[7]=array(" member is attending your event"," members are attending your event");
+		
 		$notificationModels[8]=array(" more person is also attending the event you are attending"," more members are also attending the event you are attending ");
+		
 		$notificationModels[9]=array(" member voted your poll"," members voted your poll");
+		
 		$notificationModels[10]=array(" member also answered the poll you answered"," members also answered the poll you answered");
+		
 		$notificationModels[11]=array(" of your event has been approved .");
+		
 		$notificationModels[12]=array(" of your event has been rejected.");
+		
 		$notificationModels[13]=array(" of your poll has been approved.");
+		
 		$notificationModels[14]=array(" of your poll has been rejected.");
 
+		$notificationModels[15]=array(" New event is awaiting your approval");
+
+		$notificationModels[16]=array(" New poll is awaiting your approval");
+
+
+
 		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE notifications.userId=? ";
+		
 		$values[0]=array($userId => 's');
+		
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
 			$notificationFetchSQL .= "AND notificationIdHash!= ? ";

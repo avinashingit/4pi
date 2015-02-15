@@ -40,6 +40,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Actual editPoll Code Starts
 $pollIdHash=$_POST['_pollId'];
+$pollStatus=$_POST['_approvalStatus'];
+if($pollStatus!=1&&$pollStatus!=-1)
+{
+	echo 16;
+	exit();
+}
 
 $userIdHash=$_SESSION['vj'];
 $conn= new QoB();
@@ -100,11 +106,21 @@ else
 		}
 		$editPollSQL="UPDATE poll SET approvalStatus = ? WHERE pollIdHash= ?";
 
-		$values[0]=array(1 => 'i');
+		$values[0]=array($pollStatus => 'i');
 		$values[1]=array($pollIdHash => 's');
 		$result=$conn->insert($editPollSQL,$values);
+		$pollOwner=$poll['userId'];
 		if($conn->error==""&&$result==true)
 		{
+			if($pollStatus==1)
+			{
+				sendNotification($userId,$pollOwner,13,$pollId,700);
+			}
+			else
+			{
+				sendNotification($userId,$pollOwner,14,$pollId,700);
+			}
+			
 			echo 3;
 			exit();
 		}

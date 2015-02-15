@@ -28,9 +28,10 @@ class miniPoll
 	/*public $gender;
 	public $profilePicExists;*/
 	public $userIdHash;
+	public $isSAC;
 
 	function __construct($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptions,$pollOptionsType,
-		$sharedWith,$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner)
+		$sharedWith,$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner,$isSAC)
 	{
 		$this->pollIdHash=$pollIdHash;
 		$this->userName=$userName;
@@ -49,6 +50,7 @@ class miniPoll
 		/*$this->gender = $gender;
 		$this->profilePicExists = $profilePicExists;*/
 		$this->userIdHash = $userIdHash;
+		$this->isSAC= $isSAC;
 		return $this;
 	}
 

@@ -223,6 +223,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if($conn->error==""&&$result==true)
 			{
 				//Success
+				sendNotification($userId,SAC,15,$eventId,600);
+
 				$attendCount=0;
 				$seenCount=0;
 				$isAttender=1;

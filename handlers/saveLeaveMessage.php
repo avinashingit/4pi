@@ -25,12 +25,24 @@ Code 80: Invalid Email
 Code 81: User hasn't edited aboutMe yet.
 Code 82: user have no primary email.
 */
+//Testing Inputs
+
+/*$fromName=$_POST['_fromName']="Hari Krishna M"
+
+$email=$_POST['_fromEmail']="thehk";
+
+$message=trim($_POST['_message']);
+
+$toUserId=$_POST['_userId'];*/
+
+//Testing Inputs End
+
 session_start();
 require_once('../../QOB/qob.php');
 require_once('aboutMeClass.php');
 require_once('../fetch.php');
 
-$fromName=$_POST['_fromName']
+$fromName=$_POST['_fromName'];
 
 $email=$_POST['_fromEmail'];
 
