@@ -1,9 +1,9 @@
 
-function eventInsert(position,data)
+function eventInsert(position,data,past)
 {
 	var event="";
 
-	event+='<div class="row event" id="'+data.eventIdHash+'" style="border:1px solid gray;margin-bottom:10px;">';
+	event+='<div class="row event" id="'+data.eventIdHash+'" style="border:1px solid #cecece;margin-bottom:10px;">';
 
 	event+='<div id="eventSharedWith" class="hidden" >'+data.sharedWith+'</div>';
 
@@ -19,31 +19,45 @@ function eventInsert(position,data)
 
 	event+='</div>';
 
+	var time=iso8601ToReadable(data.eventTimestamp);
+
 	if(data.eventOwner==1)
 	{
-		event+='<div class="col-md-2 col-md-offset-1"  id="editEvent">';
+		event+='<div class="col-md-5 col-md-offset-1 text-right"  id="editEvent">';
 
-		event+='<p class="text-right"><i class="fa fa-pencil" title="Edit Event" onclick="editEvent(\''+data.eventIdHash+'\');"></i>&nbsp;';
+		event+='<p class="text-right">';
+
+		event+='<span id="eventPostedTime">';
+
+			event+='<small><time class="timeago" id="eventPostedTimeValue" datetime="'+data.eventTimestamp+'" title="'+time+'">'+data.eventTimestamp+'</time></small>';
+
+		event+='</span>&nbsp;&nbsp;<i class="fa fa-pencil" title="Edit Event" onclick="editEvent(\''+data.eventIdHash+'\');"></i>&nbsp;';
 
 		event+='<i class="fa fa-trash" title="Delete Event" onclick="deleteEvent(\''+data.eventIdHash+'\');"></i></p>';
 
 		event+='</div>';
-
-		event+='<div class="col-md-3 text-right" id="eventPostedTime">';
 	}
 
 	else
 	{
-		event+='<div class="col-md-3 col-md-offset-3 text-right" id="eventPostedTime">';
+		event+='<div class="col-md-2 col-md-offset-4 text-right" id="eventPostedTime">';
+
+			event+='<small><time class="timeago" id="eventPostedTimeValue" datetime="'+data.eventTimestamp+'" title="'+time+'">'+data.eventTimestamp+'</time></small>';
+
+		event+='</div>';
 	}
-	
-	event+='<time class="timeago" id="eventPostedTimeValue" datetime="'+data.eventTimestamp+'" title="">'+data.eventTimestamp+'</time>';
-
-	event+='</div>';
-
-	event+='</div>';
 
 	event+='<br/>';
+
+	event+='<div class="row">';
+
+	event+='<div class="col-md-12">';
+
+	event+='<p id="eventCreatedBy" style="white-space:pre-wrap">Event created by <a href="/4pi/aboutMe/index.php?userId='+data.eventUserId+'">'+data.eventOwnerName+'</a></p>';
+
+	event+='</div>';
+
+	event+='</div>';
 
 	event+='<div class="row">';
 
@@ -64,25 +78,25 @@ function eventInsert(position,data)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn" style="background-color:#FFD1A3;"title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="" title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
 				  
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn" style="background-color:#D6FFFF;"title="Event Date"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="" title="Event Date"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
 	
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn" style="background-color:#ADFF85;"title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style=""title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
 				  
 	event+='</div>';
 
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn"style="background-color:#ADFF5C;"title="Event Duration"><p class="venueDateTimeEvent text-center"><i class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="" title="Event Duration"><p class="venueDateTimeEvent text-center"><i class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span>&nbsp;hrs</p></button>';
 				  
 	event+='</div>';
 				
@@ -104,26 +118,29 @@ function eventInsert(position,data)
 
 	event+='<div class="col-md-3 col-md-offset-1">';
 
-	event+='<p><i class="fa fa-eye" title="Seen By"></i>&nbsp;<span id="eventSeenByNumber">'+data.seenCount+'</span></p>';
+	/*event+='<p><i class="fa fa-eye" title="Seen By"></i>&nbsp;<span id="eventSeenByNumber">'+data.seenCount+'</span></p>';*/
 
 	event+='</div>';
 
-	event+='<div class="col-md-3 col-md-offset-1 text-left">';
-
-	if(data.isAttender!=1)
+	if(past!=1)
 	{
-		event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\''+data.eventIdHash+'\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
-		event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';		
+		event+='<div class="col-md-3 col-md-offset-1 text-left">';
+
+		if(data.isAttender!=1)
+		{
+			event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\''+data.eventIdHash+'\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
+			event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';		
+		}
+
+		else
+		{
+			event+='<button class="btn btn-sm btn-success" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
+		}
+
+		event+='</div>';
 	}
 
-	else
-	{
-		event+='<button class="btn btn-sm btn-success" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
-	}
-
-
-
-	event+='</div>';
+	
 
 	event+='</div>';
 
@@ -356,40 +373,19 @@ function createEventSP()
 	
 	var eventType=$('#createEventType').val().trim();
 	
-	// var eventFiles=$('#createEventFileInput').val();
+	// var eventFiles=$('#createEventFileInput').val()
 
-	$('#createEventOrganizerName').val("");
-
-	$('#createEventName').val("");
-
-	$('#createEventName').val("");
-
-	$('#createEventContent').val("");
-
-	$('#createEventSharedWith').val("");
-
-	$('#createEventVenue').val("");
-
-	$('#createEventDate').val("");
-
-	$('#createEventTime').val("");
-
-	$('#createEventDurationHours').val("");
-
-	$('#createEventDurationMinutes').val("");
-
-	$('#createEventType').val("");
-
-
-
-
-
-	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>1000 || eventVenue.length==0 || eventDate.length==0 )
+	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 ||  || eventVenue.length==0 || eventDate.length==0 )
 
 	{
 
 		alert("Please fill in the required fields.")
 
+	}
+
+	else if(eventContent.length>1000)
+	{
+		alert("Please limit the event content to 1000 characters.")
 	}
 
 	else
@@ -432,7 +428,7 @@ function createEventSP()
 
 		.success(function(data){
 
-			//console.log(data);
+			console.log(data);
 
 			// jQuery.parseJSON(data);
 
@@ -443,11 +439,33 @@ function createEventSP()
 
 			//console.log(x);
 
-			eventInsert("first",x);
+			eventInsert("first",x,2);
 
 			$('.timeago').timeago();
 
 			$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
+
+			$('#createEventOrganizerName').val("");
+
+			$('#createEventName').val("");
+
+			$('#createEventName').val("");
+
+			$('#createEventContent').val("");
+
+			$('#createEventSharedWith').val("");
+
+			$('#createEventVenue').val("");
+
+			$('#createEventDate').val("");
+
+			$('#createEventTime').val("");
+
+			$('#createEventDurationHours').val("");
+
+			$('#createEventDurationMinutes').val("");
+
+			$('#createEventType').val("");
 
 		});
 
@@ -587,11 +605,11 @@ function latestEventsFetch(value,call)
 		{
 			if(data!=404)
 			{
-				// var x=JSON.parse(data);
+				var x=JSON.parse(data);
 				// //console.log(x.length);
 				for (i=0;i<x.length;i++)
 				{
-					eventInsert('last',x[i]);
+					eventInsert('last',x[i],2);
 				}
 				$('.timeago').timeago();
 			}
@@ -651,7 +669,7 @@ function upcomingEventsFetch(value,call)
 				// //console.log(x.length);
 				for (i=0;i<x.length;i++)
 				{
-					eventInsert('last',x[i]);
+					eventInsert('last',x[i],2);
 				}
 				$('.timeago').timeago();
 			}
@@ -707,7 +725,7 @@ function pastCompetitionsFetch(value,call)
 				// //console.log(x.length);
 				for (i=0;i<x.length;i++)
 				{
-					eventInsert('last',x[i]);
+					eventInsert('last',x[i],1);
 				}
 				$('.timeago').timeago();
 			}

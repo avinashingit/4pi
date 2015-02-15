@@ -1,7 +1,19 @@
 
 $('.subsec').hide();//to hide all hostel secretary tabs
 $('.ew').hide();//to hide the executive wing tab
-   
+  
+function iso8601ToReadable(str)
+{
+	var parts=str.split("T");
+	var date=parts[0].split("-");
+	var part=parts[1].split("+");
+	var time=part[0];
+	var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+	var result="";
+	result+=date[2]+" "+months[date[1]-1]+" "+date[0]+" at "+ time;
+	return result;
+}
 
 
 function userLogin(){
@@ -372,7 +384,7 @@ function shuffle(array) {
 			images[i] = new Image;
 			j = imageNos[i] + 1;
 
-					images[i].src = 'http://localhost/4pi/img/hpics/'+j.toString()+'.jpg';
+					images[i].src = '/4pi/img/hpics/'+j.toString()+'.jpg';
 			
 		}
 		

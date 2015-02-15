@@ -50,7 +50,132 @@ function closeModal(id)
 	$('#'+id).modal('hide');
 }
 
+function updateNumber(element,position)
+{
+	var numberOfElements=$(element).length;
+	position.html(numberOfElements);
+}
+
+function callWhen404(element,position)
+{
+	var text="";
+
+	if(element=="Skills")
+	{
+		if($('.skill').length==0)
+		{
+			text="<p id='noskills'>No skills to display</p>";
+		}
+
+		else
+		{
+			$('#noskills').remove();
+		}
+		
+	}
+
+	else if(element=="Tools")
+	{
+
+		if($('.tool').length==0)
+		{
+			text="<p id=\"notools\">No tools to display</p>";
+		}
+		else
+		{
+			$("#notools").remove();
+		}
+	}
+
+	else if(element=="Projects")
+	{
+		if($('.project').length==0)
+		{
+			text="<p id=\"noprojects\">No projects to display</p>";
+		}
+		else
+		{
+			$("#noprojects").remove();
+		}
+	}
+
+	else if(element=="Experience")
+	{
+		if($('.experience').length==0)
+		{
+			text="<p id=\"noexperiences\">No experiences to display</p>";
+		}
+		else
+		{
+			$("#noexperiences").remove();
+		}
+	}
+
+	else if(element=="Academics")
+	{
+		if($('.academics').length==0)
+		{
+			text="<p id=\"noacademics\">No degrees to display</p>";
+		}
+		else
+		{
+			$("#noacademics").remove();
+		}
+	}
+
+	else if(element=="Certifications")
+	{
+		if($('.certification').length==0)
+		{
+			text="<p id=\"nocertifications\">No certified courses to display</p>";
+		}
+		else
+		{
+			$("#nocertifications").remove();
+		}
+	}
+
+	else if(element=="Workshops")
+	{
+		if($('.workshop').length==0)
+		{
+			text="<p id=\"noworkshops\">No workshops to display</p>";
+		}
+		else
+		{
+			$("#noworkshops").remove();
+		}
+	}
+
+	else if(element="Achievements")
+	{
+		if($('.achievement').length==0)
+		{
+			text="<p id=\"noachievements\">No achievements to display</p>";
+		}
+		else
+		{
+			$("#noachievements").remove();
+		}
+	}
+
+	else if(element=="Interests")
+	{
+		if($('.interest').length==0)
+		{
+			text="<p id=\"nointerests\">No interests to display</p>";
+		}
+		else
+		{
+			$("#nointerests").remove();
+		}
+	}
+
+	position.html(text);
+}
+
 $(document).ready(function(){
+	// $('textarea').autosize();
 	showValueForSlider();
 	fetchTopPart();
 	fetchSkills();
@@ -62,7 +187,7 @@ $(document).ready(function(){
 	fetchCertifications();
 	fetchAchievements();
 	fetchInterests();
-	// showUserOptions();
+	
 });
 
 function afterAjaxCallDisplay()
@@ -342,7 +467,7 @@ function insertTopPart(data)
 
 			topPart+='<div class="col-md-9" id="personDescription">';
 
-				topPart+='<p style="text-align:justify;line-height:22px;">'+data.description+'</p>';
+				topPart+='<p style="text-align:justify;line-height:22px;word-wrap:break-word;">'+data.description+'</p>';
 
 			topPart+='</div><!-- end class col-md-8 -->';
 
@@ -351,6 +476,8 @@ function insertTopPart(data)
 	topPart+='</div>';
 
 	$('#topContent').html(topPart);
+
+
 }
 
 function insertBottomPart(data)
@@ -509,6 +636,8 @@ function insertBottomPart(data)
 	bottomPart+='</div><!--end id contact -->';
 
 	$('#bottomContent').html(bottomPart);
+
+	showUserOptions();
 }
 
 function fetchTopPart()
@@ -521,16 +650,17 @@ function fetchTopPart()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
 			{
-				if(data.isOwner==1)
+				
+				x=JSON.parse(data);
+				if(x.isOwner==1)
 				{
 					window.userOptionsVisibility=1;
 				}
-				x=JSON.parse(data);
 				insertTopPart(x);
 				insertBottomPart(x);
 			}
@@ -580,7 +710,7 @@ function editContactInfoSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				insertBottomPart(JSON.parse(data));
@@ -605,9 +735,15 @@ function editTopPartSendData()
 	{
 		if(sFileExtension!=".jpg")
 		{
-			error=0;
+			error=1;
 			alert("Only .jpg files images are allowed");
 		}
+	}
+
+	else if(link.find("#editPersonInfoModalPersonDescription").val().trim().length>387)
+	{
+		error=1;
+		alert("Please limit your description to 380 characters.");
 	}
 	
 	if(error==0)
@@ -616,7 +752,7 @@ function editTopPartSendData()
 
 		
 
-		console.log(link.find("#editPersonInfoModalPersonName").val().trim());
+		//console.log(link.find("#editPersonInfoModalPersonName").val().trim());
 
 		new_data.append("_alias",link.find("#editPersonInfoModalPersonName").val());
 		new_data.append("_mode",1);
@@ -631,7 +767,7 @@ function editTopPartSendData()
 
 		new_data.append("_currentProfession",$("#topContent").find("#personCurrentProfession").html())
 
-		// console.log(new_data);
+		// //console.log(new_data);
 		// 
 		$.ajax({
 			url:'/4pi/handlers/aboutHandlers/aboutMeEdit.php',
@@ -640,7 +776,7 @@ function editTopPartSendData()
 			processData: false,
 	    	contentType: false,
 	    	success:function(data){
-	    		console.log(data);
+	    		//console.log(data);
 	    		insertTopPart(JSON.parse(data));
 	    		$('#editPersonInfoModal').modal('hide');
 	    	}
@@ -716,7 +852,7 @@ function fetchSkills()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -725,6 +861,11 @@ function fetchSkills()
 				$("#skills").find("#skillNames").html(data.skills);
 				$("#skills").find("#skillPercentages").html(data.rating);
 				insertSkills(data.jsonObj);
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Skills',$("#skills").find('#skillData'));
 			}
 		}
 	});
@@ -781,7 +922,7 @@ function addSkillSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -857,7 +998,7 @@ function editSkillSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -886,7 +1027,7 @@ function editSkillSendData()
 
 function insertTool(data,isOwner)
 {
-	console.log(data);
+	//console.log(data);
 	var tool="";
 
 	tool+='<div class="row tool">';
@@ -910,7 +1051,7 @@ function insertTool(data,isOwner)
 
 			if(isOwner==1)
 			{
-				tool+='<i class="showOnHover fa fa-close" onclick="editTools(this,\'delete\');"></i>';
+				tool+='<i class="showOnHover fa fa-trash" onclick="editTools(this,\'delete\');"></i>';
 			}
 
 		tool+='</div>';
@@ -921,6 +1062,8 @@ function insertTool(data,isOwner)
 	var position=(length%3)+1;
 
 	$("#tools").find('#toolsColumn'+position).append(tool);
+
+	$("#notools").remove();
 }
 
 function fetchTools(data)
@@ -933,7 +1076,7 @@ function fetchTools(data)
 		alert("Server overload. Please try again.:(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -946,6 +1089,11 @@ function fetchTools(data)
 					insertTool(tools[i], data.isOwner);
 				}
 				afterAjaxCallDisplay();
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Tools',$("#tools").find('#toolsColumn2'));
 			}
 			
 		}
@@ -988,7 +1136,7 @@ function addToolsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$("#tools").find('.tool').remove();
@@ -1032,7 +1180,7 @@ function editToolsSendData()
 		i++;
 	});
 
-	console.log(toolArray);
+	//console.log(toolArray);
 
 	var empty=0;
 	for(var i=0;i<toolArray.length;i++)
@@ -1058,7 +1206,7 @@ function editToolsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$("#tools").find('.tool').remove();
@@ -1073,6 +1221,11 @@ function editToolsSendData()
 					insertTool(x[i],data.isOwner);
 				}
 				$("#editToolModal").modal('hide');
+
+				if($('.tool').length==0)
+				{
+					callWhen404('Tools',$("#tools").find('#toolsColumn2'));
+				}
 			}
 		});
 	}
@@ -1099,7 +1252,7 @@ function insertProjects(data)
 
 			projects+='<div class="col-md-5 text-left">';
 
-				projects+='<h4 class="textPadding" style="font-weight:bold;" id="projectTitle">'+data.projectTitle+'</h4>';
+				projects+='<h4 class="textPadding" style="color:#176F56;font-weight:bold;"><i class="fa fa-database"></i>&nbsp;&nbsp;<span id="projectTitle">'+data.projectTitle+'</span></h4>';
 
 			projects+='</div><!-- end class col-md- 3 -->';
 
@@ -1164,6 +1317,10 @@ function insertProjects(data)
 	projects+='</div>';
 	
 	$('#projects').find('#projectContainer').append(projects);
+
+	$("#noprojects").remove();
+
+	updateNumber('.project',$("#projects").find('#projectsNumber'));
 }
 
 function fetchProjects()
@@ -1176,12 +1333,12 @@ function fetchProjects()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
 			{
-				// console.log(checkData(data)+" this is checkData");
+				// //console.log(checkData(data)+" this is checkData");
 				$(".project").remove();
 				x=JSON.parse(data);
 				for(var i=0;i<x.length;i++)
@@ -1190,6 +1347,11 @@ function fetchProjects()
 				}
 
 				afterAjaxCallDisplay();
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Projects',$("#projects").find('#projectContainer'));
 			}
 			
 		}
@@ -1224,7 +1386,7 @@ function addProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1281,7 +1443,7 @@ function editProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1304,10 +1466,16 @@ function deleteProject(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#projects').find('#'+id).remove();
+				if($('.project').length==0)
+				{
+					callWhen404('Projects',$("#projects").find('#projectContainer'));
+				}
+
+				updateNumber('.project',$("#projects").find('#projectsNumber'));
 			}
 		});
 	}
@@ -1336,7 +1504,7 @@ function insertExperience(data)
 
 		experience+='<div class="text-left col-md-7">';
 
-			experience+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-suitcase"></i>&nbsp;<span id="company">'+data.organisation+'</span></div>';
+			experience+='<div style="font-size:18px;color:#9A69AA;" class="text-left textPadding" ><i class="fa fa-fighter-jet"></i>&nbsp;<span id="company">'+data.organisation+'</span></div>';
 
 		experience+='</div>';
 
@@ -1376,6 +1544,10 @@ function insertExperience(data)
 	var position=length%2+1;
 
 	$('#experiences').find('#experienceContainer'+position).append(experience);
+
+	updateNumber('.experience',$("#experiences").find('#experienceNumber'));
+
+	$("#noexperiences").remove();
 }
 
 function fetchExperience()
@@ -1388,8 +1560,6 @@ function fetchExperience()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
-		alert(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1432,7 +1602,6 @@ function addExperienceSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1480,7 +1649,7 @@ function editExperienceSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1503,10 +1672,16 @@ function deleteExperience(id)
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#experiences').find('#'+id).remove();
+				if($('.experience').length==0)
+				{
+					callWhen404('Experience',$("#experiences").find('#experienceContainer1'));
+				}
+
+				updateNumber('.experience',$("#experiences").find('#experienceNumber'));
 			}
 		});
 	}
@@ -1543,7 +1718,7 @@ function insertAcademics(data)
 
 		academics+='<div class="col-md-4 text-left">';
 
-			academics+='<div style="font-size:18px;" id="degree">'+data.degree+'</div>';
+			academics+='<div style="font-size:18px; color:#DE7B1A;"><i class="fa fa-mortar-board"></i>&nbsp;&nbsp;<span id="degree">'+data.degree+'</span></div>';
 
 		academics+='</div>';
 
@@ -1600,6 +1775,10 @@ function insertAcademics(data)
 	var position=length%2+1;
 
 	$('#academics').find('#academicsContainer'+position).append(academics);
+
+	updateNumber('.academics',$("#academics").find('#academicsNumber'));
+
+	$("#noacademics").remove();
 }
 
 function fetchAcademics()
@@ -1612,7 +1791,7 @@ function fetchAcademics()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1667,7 +1846,7 @@ function addAcademicsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1728,7 +1907,7 @@ function editAcademicsSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1751,10 +1930,16 @@ function deleteAcademics(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#academics').find('#'+id).remove();
+				if($('.academics').length==0)
+				{
+					callWhen404('Academics',$("#academics").find('#academicsContainer1'));
+				}
+
+				updateNumber('.academics',$("#academics").find('#academicsNumber'));
 			}
 		});
 	}
@@ -1778,7 +1963,7 @@ function insertWorkshop(data)
 
 			workshop+='<div class="col-md-6 text-left">';
 
-				workshop+='<div style="font-size:18px;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data.workshopName+'</span></div>';
+				workshop+='<div style="font-size:18px;color:#007887;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data.workshopName+'</span></div>';
 
 			workshop+='</div><!-- end class col-md-6 -->';
 
@@ -1829,6 +2014,10 @@ function insertWorkshop(data)
 	var position=length%2+1;
 
 	$('#workshops').find('#workshopContainer'+position).append(workshop);
+
+	updateNumber('.workshop',$("#workshops").find('#workshopsNumber'));
+
+	$("#noworkshops").remove();
 }
 
 function fetchWorkshops()
@@ -1841,7 +2030,7 @@ function fetchWorkshops()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 
@@ -1885,7 +2074,7 @@ function addWorkshopSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1931,7 +2120,7 @@ function editWorkshopSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1954,10 +2143,16 @@ function deleteWorkshop(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#workshops').find('#'+id).remove();
+				if($('.workshop').length==0)
+				{
+					callWhen404('Workshops',$("#workshops").find('#workshopContainer1'));
+				}
+
+				updateNumber('.workshop',$("#workshops").find('#workshopsNumber'));
 			}
 		});
 	}
@@ -1981,7 +2176,7 @@ function insertCertification(data)
 
 			certification+='<div class="text-left col-md-7">';
 
-				certification+='<div style="font-size:18px;" class="text-left textPadding" ><i class="fa fa-chevron-right"></i>&nbsp;<span id="courseName">'+data.title+'</span></div>';
+				certification+='<div style="font-size:18px;color:#C03675;" class="text-left textPadding" ><i class="fa fa-certificate"></i>&nbsp;<span id="courseName">'+data.title+'</span></div>';
 
 			certification+='</div>';
 
@@ -2021,6 +2216,10 @@ function insertCertification(data)
 	var position=length%2+1;
 
 	$('#certifications').find('#certificationContainer'+position).append(certification);
+
+	updateNumber('.certification',$("#certifications").find('#certificationsNumber'));
+
+	$("#nocertifications").remove();
 }
 
 function fetchCertifications()
@@ -2033,14 +2232,14 @@ function fetchCertifications()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
 			{
 				x=JSON.parse(data);
 				$('.certification').remove();
-				for(i=0;i,x.length;i++)
+				for(i=0;i<x.length;i++)
 				{
 					insertCertification(x[i]);
 				}
@@ -2115,7 +2314,7 @@ function editCertificationSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2138,10 +2337,16 @@ function deleteCertification(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#certifications').find('#'+id).remove();
+				if($('.certification').length==0)
+				{
+					callWhen404('Certifications',$("#certifications").find('#certificationContainer1'));
+				}
+
+				updateNumber('.certification',$("#certifications").find('#certificationsNumber'));
 			}
 		});
 	}
@@ -2166,7 +2371,7 @@ function insertAchievements(data)
 
 			achievements+='<div class="col-md-6 text-left">';
 
-				achievements+='<div style="font-size:18px;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data.competition+'</span></div>';
+				achievements+='<div style="font-size:18px;color:#008322;"><i class="fa fa-trophy"></i>&nbsp;<span id="eventName">'+data.competition+'</span></div>';
 
 			achievements+='</div><!-- end class col-md-6 -->';
 
@@ -2220,6 +2425,10 @@ function insertAchievements(data)
 	var position=length%2+1;
 
 	$('#achievements').find('#achievementContainer'+position).append(achievements);
+
+	updateNumber('.achievement',$("#achievements").find('#achievementsNumber'));
+
+	$("#noachievements").remove();
 }
 
 function fetchAchievements()
@@ -2233,7 +2442,7 @@ function fetchAchievements()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -2277,7 +2486,7 @@ function addAchievementSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2324,7 +2533,7 @@ function editAchievementSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2347,10 +2556,16 @@ function deleteAchievement(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#achievements').find('#'+id).remove();
+				if($('.achievement').length==0)
+				{
+					callWhen404('Achievements',$("#achievements").find('#achievementContainer1'));
+				}
+
+				updateNumber('.achievement',$("#achievements").find('#achievementsNumber'));
 			}
 		});
 	}
@@ -2401,6 +2616,8 @@ function insertInterest(data,isOwner)
 	interest+='</div>';
 
 	$('#interests').find("#interestsContainer"+position).append(interest);
+
+	$("#nointerests").remove();
 }
 
 function fetchInterests(data)
@@ -2413,7 +2630,7 @@ function fetchInterests(data)
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -2424,7 +2641,7 @@ function fetchInterests(data)
 
 				var interests=x.interests.split(",");
 
-				console.log(interests);
+				//console.log(interests);
 
 				for(var i=0;i<interests.length;i++)
 				{
@@ -2475,7 +2692,7 @@ function addInterestsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2520,7 +2737,7 @@ function editInterestsSendData()
 		i++;
 	});
 
-	console.log(interestArray);
+	//console.log(interestArray);
 
 	var empty=0;
 
@@ -2548,7 +2765,7 @@ function editInterestsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2566,6 +2783,11 @@ function editInterestsSendData()
 					}
 
 					$("#editInterestModal").modal('hide');
+
+					if($('.interest').length==0)
+					{
+						callWhen404('Interests',$("#interests").find('#interestsContainer2'));
+					}
 				}
 			}
 		});

@@ -232,7 +232,7 @@ function homeSearch(el)
 							
 							<div class="aClose" >
 								<i class="fa fa-user aClose"></i>&nbsp;&nbsp;
-								<input type="text" class="form-control input-md aClose" onkeypress="checkKeyEnter(event);" name="loginUsername" id="loginUsername" placeholder="Username..." style="" autocomplete="off" required/>
+								<input type="text" class="form-control input-md aClose" onkeypress="checkKeyEnter(event);" name="loginUsername" id="loginUsername" placeholder="Username..." style="" required/>
 							</div>
 							
 							<br />
@@ -275,32 +275,32 @@ function homeSearch(el)
 				<div class="row text-center" >
 					<div class="col-md-5 "   >
 						<div class="upperRow">
-							<a href="index.php"  ><canvas class="hex" width="84" height="72" ></canvas></a></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb"  width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php"  ><canvas class="hex" width="84" height="72" ></canvas></a></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb"  width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 					</div>
 					
@@ -312,32 +312,32 @@ function homeSearch(el)
 					
 					<div class="col-md-5  "   id="rightCanvasContainer" >
 						<div class="upperRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="lowerRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 						<div class="upperRow">
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
-							<a href="index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex" width="84" height="72" ></canvas></a>
+							<a href="/4pi/index.php" ><canvas class="hex lastComb" width="84" height="72" ></canvas></a>
 						</div>
 					</div>
 				</div>

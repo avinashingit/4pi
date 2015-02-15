@@ -6,11 +6,8 @@ require_once('./../QOB/qob.php');
 require_once('fetch.php');
 //$_SESSION['jx']="999"; //1001 for latest Polls 1002 for upcoming polls 1003 for winners 1004 for latestPolls
 //Testing Content Starts
-	$userIdHash=$_SESSION['vj']=hash("sha512","COE12B009".SALT);
+	$userIdHash=$_SESSION['vj'];
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_oldPassword']="123";
-	$_POST['_password']="coe12b009";
-	$_POST['_confirmPassword']='coe12b009';
 
 //Testing Content Ends
 /*

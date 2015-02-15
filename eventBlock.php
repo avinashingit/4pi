@@ -74,9 +74,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		<div class="form-group">
 
-					   			 <label for="eventContent">Event Details</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
+					   			 <label for="eventContent">Event Details (<span id="createEventModalContentLength"></span> characters)</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
 
-					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" class="form-control" id="createEventContent"></textarea>
+					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createEventModalContentLength').html($(this).val().length);" class="form-control" id="createEventContent"></textarea>
 
 					  		</div>
 
@@ -90,7 +90,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					 		 <div class="form-group">
 
-					    			<label for="shareWith">Share With</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it untouched makes the event visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
+					    			<label for="shareWith">Share With</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
 					    			<input value="All" name="createEventSharedWith" class="form-control"type="text" id="createEventSharedWith">
 
@@ -198,27 +198,27 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		      		    <form role="form">
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
 					   			<label for="eventClub">Event Organizer</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. It can either be a club or a special interest group or an individual"></i>]
 
-					    		<input type="text" name="eventClub" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editEventOrganizerName" placeholder="Organizer Name">
+					    		<input type="text" name="eventClub" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editEventOrganizerName" placeholder="Organizer Name. Required">
 
 					  		</div>      		    
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
 					   			<label for="eventName">Event Name</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Give an appropriate event name"></i>]
 
-					    		<input type="text" name="eventName" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editEventName" placeholder="Event Name">
+					    		<input type="text" name="eventName" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editEventName" placeholder="Event Name. Required">
 
 					  		</div>
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
-					   			 <label for="eventContent">Event Details</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
+					   			 <label for="eventContent">Event details (<span id="editEventModalContentLength"></span> characters)</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
 
-					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" class="form-control" id="editEventContent"></textarea>
+					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editEventModalContentLength').html($(this).val().length);" class="form-control" id="editEventContent" plcaeholder="Required"></textarea>
 
 					  		</div>
 
@@ -230,15 +230,15 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div> -->
 
-					 		 <div class="form-group">
+					 		 <div class="form-group has-error">
 
-					    			<label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it untouched makes the event visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
+					    			<label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
 					    			<input name="editEventSharedWith" value="All" class="form-control"type="text" id="editEventSharedWith">
 
 					  		</div>
 
-					  		<div class="form-group col-md-6">
+					  		<div class="form-group col-md-6 has-error">
 
 					  			<label for="eventVenue">Event Venue (*)</label>
 
@@ -246,7 +246,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div>
 					  		
-					  		<div class="form-group col-md-6">
+					  		<div class="form-group col-md-6 has-error">
 
 					  			<label for="eventVenue">Event Date (*)</label>
 
@@ -402,7 +402,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		<div class="text-center">
 
-			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>;
+			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMoreEventsButton" onclick="fetchMoreEvents();">Load more</button>
 
 		</div>
 
@@ -427,7 +427,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 	}
 	
 	#eventNameTime{
-		margin-top:5px;
+		margin-top:10px;
 	}
 	
 	#eventPostedTime, #editEvent{
@@ -442,6 +442,12 @@ var inView="<?php echo $_SESSION['jx'];?>";
 		background-color:#fff;
 	}
 
+	.event:hover
+	{
+		-webkit-box-shadow:0px 5px 0px #AF0021 inset ;
+		box-shadow:0px 5px 0px #AF0021 inset ;	
+	}
+
 </style>
 
 
@@ -454,6 +460,10 @@ var inView="<?php echo $_SESSION['jx'];?>";
 </style>
 
 <script>
+
+$(document).ready(function(){
+	latestEventsFetch('empty',1);
+});
 
 function fetchMoreEvents()
 {

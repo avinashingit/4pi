@@ -58,6 +58,7 @@ a,a:hover{
     *max-height:580px !important;
     margin-top:-1px;
     z-index:-1;
+    height:98vh;
 }
 
 #userGroups h5{ 
