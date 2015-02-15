@@ -19,7 +19,7 @@ session_start();
                 <span class="icon-bar"></span>
               </button>
               	<div id="brand" class="text-center"> 
-					<a href="../index.php"><img src="./images/fourpi.png" width="40px" height="auto" style="padding-top:7px;"/></a>
+					<a href="/4pi/index.php"><img src="/4pi/img/appImgs/fourpi.svg" width="40px" height="auto" style="padding-top:7px;"/></a>
 				</div>
             </div>
         </div>
