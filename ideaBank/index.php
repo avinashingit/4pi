@@ -19,7 +19,7 @@ session_start();
                 <span class="icon-bar"></span>
               </button>
               	<div id="brand" class="text-center"> 
-					<a href="/4pi/index.php"><img src="/4pi/img/appImgs/fourpi.svg" width="40px" height="auto" style="padding-top:7px;"/></a>
+					<a href="/4pi/index.php"><img src="/4pi/img/appImgs/fourpi.svg" width="45px" height="auto" style="padding-top:7px;"/></a>
 				</div>
             </div>
         </div>
@@ -497,8 +497,17 @@ function postInsert(position, data1, num, len) {
 		res = data1.name;
 	}
 
-	post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="../img/people/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
-
+	if(data1.proPicExists == 1){
+		post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
+	}
+	else{
+		if(data1.gender=='M'){
+			post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultMan1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
+		}
+		else{
+			post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultWoman1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
+		}
+	}
 	post+='</div> <!-- end class col-md-8 id ideaProfile Pic --> ';
 						
 	

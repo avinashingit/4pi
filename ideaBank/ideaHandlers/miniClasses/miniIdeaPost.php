@@ -14,9 +14,10 @@ class miniIdeaPost{
 	public $ideaPostDate;
 	public $ideaDescription;
 	public $postOwner;
-	
+	public $gender;
+	public $proPicExists;
 
-	public function __construct($userIdHash, $userId, $name, $ideaPostId, $ideaPostIdHash, $appreciaters, $appreciateCount, $hasAppreciated, $depreciaters, $depreciateCount, $hasDepreciated, $ideaPostDate, $ideaDescription, $postOwner)
+	public function __construct($userIdHash, $userId, $name, $ideaPostId, $ideaPostIdHash, $appreciaters, $appreciateCount, $hasAppreciated, $depreciaters, $depreciateCount, $hasDepreciated, $ideaPostDate, $ideaDescription, $postOwner, $proPicExists, $gender)
 	{
 	
 		$this->userIdHash = $userIdHash;
@@ -33,6 +34,8 @@ class miniIdeaPost{
 		$this->ideaPostDate=$ideaPostDate;
 		$this->ideaDescription=$ideaDescription;
 		$this->postOwner=$postOwner;
+		$this->proPicExists = $proPicExists;
+		$this->gender = $gender;
 
 		return $this;
 	}

@@ -19,7 +19,8 @@
 	
 	$conn=new QoB();
 	$userIdHash=$_SESSION['vj'];
-	
+	$proPicLocation="";
+	$proPicExists = -1;
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 		{
 				$combination=$userIdHash.",".$_SESSION['tn'];
@@ -100,8 +101,18 @@
 								$hasDepreciated = -1;
 							}
 						}
+
+						$proPicLocation=__DIR__.'/../img/proPics/'.$result['userIdHash'].'.jpg';
+						if(file_exists($proPicLocation))
+						{
+							$proPicExists=1;
+						}
+						else
+						{
+							$proPicExists=-1;
+						}
 						
-						$obj = new miniIdeaPost($result['userIdHash'], $result['userId'], $result['name'], $result['ideaPostId'], $result['ideaPostIdHash'], $result['appreciaters'], $result['appreciateCount'], $hasAppreciated, $result['depreciaters'], $result['depreciateCount'], $hasDepreciated, $result['ideaPostDate'], $result['ideaDescription'], $result['postOwner']);
+						$obj = new miniIdeaPost($result['userIdHash'], $result['userId'], $result['name'], $result['ideaPostId'], $result['ideaPostIdHash'], $result['appreciaters'], $result['appreciateCount'], $hasAppreciated, $result['depreciaters'], $result['depreciateCount'], $hasDepreciated, $result['ideaPostDate'], $result['ideaDescription'], $result['postOwner'],$proPicExists, $user['gender']);
 						
 						$finalArray[] = $obj;
 						$displayCount=$displayCount+1;
