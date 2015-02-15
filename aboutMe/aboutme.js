@@ -476,12 +476,11 @@ function insertTopPart(data)
 	topPart+='</div>';
 
 	$('#topContent').html(topPart);
-
-
 }
 
 function insertBottomPart(data)
 {
+	console.log(data);
 	var bottomPart="";
 
 	bottomPart+='<br/>';
@@ -572,7 +571,7 @@ function insertBottomPart(data)
 				if(data.pinterestId!="")
 				{
 					bottomPart+='<div class="col-md-2" id="pinterestURL">';
-						bottomPart+='<a href="'+data.pinterestId+'" class="icon-button pinterest"><i class="fa fa-pinterest" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+						bottomPart+='<a href="'+data.pinterestId+'" class="icon-button pinterest"><i class="fa fa-instagram" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 					bottomPart+='</div>';
 				}
 
@@ -718,18 +717,38 @@ function editContactInfoSendData()
 			}
 		});
 	}
-	
 }
 
 function editTopPartSendData()
 {
 	var link=$("#editPersonInfoModal").find("#topPartEditForm");
 
+	var error=0;
+
+	var image=link.find("#editPersonInfoModalPersonImage")[0].files[0];
+
+	if(image.size>8000000)
+	{
+		alert("Image size cannot be greater than 8 MB.");
+		error=1;
+	}
+
 	var sFileName=link.find("#editPersonInfoModalPersonImage").val();
 
 	var sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
 
-	var error=0;
+	var resumeFile=link.find("#editPersonInfoModalPersonResume").val();
+
+	var resumeFileExtension = resumeFile.split('.')[resumeFile.split('.').length - 1].toLowerCase();
+
+	if(resumeFileExtension.length!=0)
+	{
+		if(resumeFileExtension!="pdf" || resumeFileExtension!="docx")
+		{
+			alert("Only .pdf and .docx are allowed for resume.");
+			error=1;
+		}
+	}
 
 	if(sFileExtension.length!=0)
 	{
@@ -740,7 +759,7 @@ function editTopPartSendData()
 		}
 	}
 
-	else if(link.find("#editPersonInfoModalPersonDescription").val().trim().length>387)
+	if(link.find("#editPersonInfoModalPersonDescription").val().trim().length>387)
 	{
 		error=1;
 		alert("Please limit your description to 380 characters.");

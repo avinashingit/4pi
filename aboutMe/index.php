@@ -331,7 +331,7 @@ if(userId=="")
 
 							<label for="">Show email id [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your email id to others"></i>]</label><br>
 
-							<label>Yes &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="1" name="showEmailIdValue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<label>Yes &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="1" name="showEmailIdValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
 							<label>No &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="2" name="showEmailIdValue"></label>
 
@@ -419,13 +419,13 @@ if(userId=="")
 
 					<br/>
 
-					<label for="personImage">Your image</label>
+					<label for="personImage">Your image (.jpg files only)</label>
 
 					<input type="file" accept="images/jpeg" id="editPersonInfoModalPersonImage">
 
 					<br/>
 
-					<label for="personResume">Your resume</label>
+					<label for="personResume">Your resume (.pdf or .docx only)</label>
 
 					<input type="file" id="editPersonInfoModalPersonResume">
 
@@ -1660,6 +1660,8 @@ if(userId=="")
 
 </body>
 
+<?php include_once("../footer.php"); ?>
+
 
 
 <div class="modal fade" id="addSkillModal">
@@ -1829,7 +1831,7 @@ if(userId=="")
 
 							<label for="projectDuration">Project Duration From</label>
 
-							<input type="text" id="addProjectModalProjectDurationFrom" class="datepickers form-control">
+							<input type="text" id="addProjectModalProjectDurationFrom" class="datepicker form-control">
 
 						</div>
 
@@ -1837,7 +1839,7 @@ if(userId=="")
 
 							<label for="projectDuration">Project Duration To</label>
 
-							<input type="text" id="addProjectModalProjectDurationTo" class="datepickers form-control">
+							<input type="text" id="addProjectModalProjectDurationTo" class="datepicker form-control">
 
 						</div>
 
@@ -2914,7 +2916,7 @@ if(userId=="")
 <script>
 
 	$(document).ready(function(){
-		$( ".datepickers" ).datepicker({
+		$( ".datepicker" ).datepicker({
 			changeMonth: true,
 			changeYear: true,
 			dateFormat:"dd/mm/yy"
