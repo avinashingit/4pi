@@ -43,6 +43,12 @@ function fetchSingleIdea(){
 				}
 			}); 	
 }
+
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 function insertIdea(data1)
 {
 					var res="";
@@ -53,7 +59,7 @@ function insertIdea(data1)
 	
 					res+='<div class="col-md-9" id="ideaProfilePic">';
 					
-					data1.name = data1.name.toLowerCase();
+					data1.name = toTitleCase(data1.name);
 					
 					if( data1.name.length>14 )
 					{
@@ -64,9 +70,17 @@ function insertIdea(data1)
 					else{
 						result = data1.name;
 					}
-
-					res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="../img/people/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
-
+					if(data1.proPicExists == 1){
+						res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
+					}
+					else{
+						if(data1.gender=='M'){
+							res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/defaultMan1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
+						}
+						else{
+							res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/defaultWomen1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
+						}
+					}
 					res+='</div> <!-- end class col-md-8 id ideaProfile Pic --> ';
 										
 					
