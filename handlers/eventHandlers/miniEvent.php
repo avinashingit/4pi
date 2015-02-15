@@ -14,7 +14,7 @@ class miniEvent
 	public $sharedWith;
 
 	public $seenCount;
-	public $eventOwner;
+	public $eventOwner;//whether the user is the event owner or not
 	public $isAttender;
 	public $eventDurationHrs;
 	public $eventDurationMin;
@@ -26,10 +26,11 @@ class miniEvent
 
 	public $eventOwnerName; //Creater's name // only till release of final version with approvals
 	public $eventUserIdHash;//creater's id hash // only till release of final version with approvals
+	public $eventOwnerId;//
 
 	function __construct($eventIdHash,$eventOrgName,$eventName,$eventType,$eventContent,
 		$eventDate,$eventTime,$eventVenue,$attendCount,$sharedWith, 
-		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$gender,$profilePicExists,$eventOwnerName,$eventUserIdHash)
+		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$gender,$profilePicExists,$eventOwnerName,$eventUserIdHash,$eventOwnerId)
 	{
 		$this->eventIdHash=$eventIdHash;
 		$this->eventOrgName=$eventOrgName;
@@ -54,7 +55,9 @@ class miniEvent
 		$this->gender = $gender;
 		$this->profilePicExists = $profilePicExists;
 		$this->eventOwnerName=$eventOwnerName;
+
 		$this->eventUserIdHash=$eventUserIdHash;
+		$this->eventOwnerId=$eventOwnerId;
 		return $this;
 
 	}

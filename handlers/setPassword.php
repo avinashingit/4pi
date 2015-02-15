@@ -20,17 +20,18 @@ Code 17: Wrong Current Password Entered!
 
 */
 
-if($_POST['_p1']==""||$_POST['_p2']=="")
+if($_POST['_p1']==""||$_POST['_p2']==""||$_POST['_p3']=="")
 {
-	echo 161;
+	echo 16;
 	exit();
 }
 
 $password=$_POST['_p1'];
 $confirmPassword=$_POST['_p2'];
+$alias=$_POST['_p3']
 if($password!=$confirmPassword)
 {
-	echo 162;
+	echo 16;
 	exit();
 }
 //Upcoming Event Offset - vgr
@@ -53,11 +54,11 @@ $conn=new QoB();
 		$userId=$user['userId'];
 		if($user['password']=="")
 		{
-			if(setPassword($userId,$password))
+			if(setPassword($userId,$password,$alias))
 			{
-				$_SESSION['vj']=$userIdHash;
-				$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-				echo 3;
+				/*$_SESSION['vj']=$userIdHash;
+				$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);*/
+				echo 1;
 			}
 			else
 			{

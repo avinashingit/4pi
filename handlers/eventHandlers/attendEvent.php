@@ -70,10 +70,17 @@ $conn=new QoB();
 				echo 6;
 				exit();
 			}
+			if(getEventStatus($event,0)=="Completed")
+			{
+				echo 16;//one cant attend a past event.
+				exit();
+			}
 			$eventOwner=$event['userId'];
 			$eventId=$event['eventId'];
+			
 			$attenders=$event['attenders'];
 			$attendCount=$event['attendCount'];
+
 			if(stripos($attenders,$userId)===false)
 			{
 				if($attenders=="")

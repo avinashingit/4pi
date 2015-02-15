@@ -114,27 +114,48 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false; 
 		}
 	}
-	function setPassword($userId,$password)
+	function setPassword($userId,$password,$alias)
 	{
-		
+	
 		$hashedPassword=hash("sha512",$password.PASSSALT);
 		$values[0]=array($hashedPassword=>'s');
-		$values[1]=array($userId => 's');
-		$setPasswordSQL="UPDATE users SET password=? WHERE userId=? AND password=''";
+		$values[1]=array($alias => 's');
+		$values[2]=array($userId => 's');
+		$setPasswordSQL="UPDATE users SET password=?,alias=? WHERE userId=? AND password=''";
 		$conn=new QoB();
 		$result=$conn->update($setPasswordSQL,$values);
 		if($conn->error=="")
 		{
-			return true;
+			return 1;
 		}
 		else
 		{
 			notifyAdmin("Conn.Error:".$conn->error."! In setting password for userId:".$userId,$userId);
-			return false;
+			return 0;
 		}
+	}
 
+
+	function resetPassword($userId,$password)
+	{
+		$hashedPassword=hash("sha512",$password.PASSSALT);
+		$values[0]=array($hashedPassword=>'s');
+		$values[1]=array($userId => 's');
+		$resetPasswordSQL="UPDATE users SET password=? WHERE userId=?";
+		
+		$result=$conn->update($setPasswordSQL,$values);
+		if($conn->error=="")
+		{
+			return 1;
+		}
+		else
+		{
+			notifyAdmin("Conn.Error:".$conn->error."! In resetting password for userId:".$userId,$userId);
+			return 0;
+		}
 		
 	}
+
 	function changePassword($userId,$oldpassword,$password)
 	{
 		
@@ -272,6 +293,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$conn=new QoB();
 		$fetchUserSQL="SELECT * FROM users WHERE userId= ?";
 		$values[0]=array($userId=>'s');
+		$result=$conn->fetchAll($fetchUserSQL,$values);
+		if($conn->error==""&&$result!="")
+		{	
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	function getResetPassRecord($extHash)
+	{
+		$conn=new QoB();
+		$fetchUserSQL="SELECT * FROM resetPassword WHERE extHash= ?";
+		$values[0]=array($extHash=>'s');
 		$result=$conn->fetchAll($fetchUserSQL,$values);
 		if($conn->error==""&&$result!="")
 		{	
@@ -453,18 +491,20 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 	function getMailerObject()
 	{
-		$mail = new PHPMailer();
+		$mail = new PHPMailer(true);
 		$mail->IsSMTP();
 		$mail->IsHTML();
+		$mail->Timeout    = 45;
 		$mail->SMTPAuth   = true;                  // enable SMTP authentication
 		$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-		$mail->Host       = "smtp.mail.com";      // sets GMAIL as the SMTP server
-		$mail->Port       = 465;                   // set the SMTP port
+		$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+		$mail->Port       = 465;                  // set the SMTP port
 
-		$mail->Username   = "4pi@programmer.net";  // GMAIL username
-		$mail->Password   = "110720@iiitdmK";            // GMAIL password
+		$mail->Username   = "root.4pi@gmail.com";  // MAIL username
+		$mail->Password   = "110720@iiitdmK";            // MAIL password
 
-		$mail->From       = "4pi-IIIT D&M Kancheepuram";
+		$mail->Sender     = "4pi@programmer.net";
+		$mail->From       = "4pi IIITDM-Kancheepuram";
 		$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
 		return $mail;
 	}
@@ -487,16 +527,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				}
 		}
 		//$mail->isSMTP();
-		
-		if(!$mail->send())
-		{
-			notifyAdmin($mail->ErrorInfo."!!!! MailSubject: ".$subject,$userId);
-			return false;
-		}
-		else
-		{
+		try{
+			$mail->send();
 			$mail->ClearAddresses();
 			return true;
+		}
+		catch(phpmailerException $e)
+		{
+			notifyAdmin($e->errorMessage()."!!!! MailSubject: ".$subject,$userId);
+			return false;
 		}
 
 	}
@@ -524,15 +563,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 		//$mail->isSMTP();
 		
-		if(!$mail->send())
-		{
-			notifyAdmin($mail->ErrorInfo."!!!! PostSubject: ".$subject,$userId);
-			return false;
-		}
-		else
-		{
+		try{
+			$mail->send();
 			$mail->ClearAddresses();
 			return true;
+		}
+		catch(phpmailerException $e)
+		{
+			notifyAdmin($e->errorMessage()."!!!! MailSubject: ".$subject,$userId);
+			return false;
 		}
 
 	}
@@ -1266,7 +1305,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['name'], $event['userIdHash']);
+			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['name'], $event['userIdHash'],$event['userId']);
 		return $eventObj;
 	}
 
