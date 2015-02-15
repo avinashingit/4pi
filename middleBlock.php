@@ -41,15 +41,15 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 						    <input type="text" name="postSubject" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPostSubject" placeholder="Subject">
 						  </div>
 						  <div class="form-group">
-						    <label for="postContent">Content</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory"></i>]
-						    <textarea type="text" name="postContent" id="createPostContent" style="background-color:white;border-radius:0px;resize:none;" class="form-control" id="createPostContent"></textarea>
+						    <label for="postContent">Content (<span id="createPostModalContentLength"></span> characters)</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory. Limit to 8000 characters."></i>]
+						    <textarea type="text" name="postContent" id="createPostContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createPostModalContentLength').html($(this).val().length);" class="form-control" id="createPostContent"></textarea>
 						  </div>
 						  <!-- <div class="form-group">
 						    <label for="fileInput">Attach Image </label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Allowed Extensions are .jpg, .png."></i>]
 						    <input name="fileInput" type="file"  id="createPostFileInput">
 						  </div> -->
 						  <div class="form-group">
-						    <label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it blank makes the post visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
+						    <label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 						    <input name="createPostSharedWith" value="All" class="form-control"type="text" id="createPostSharedWith">
 						  </div>
 						  <div class="form-group">
@@ -94,15 +94,15 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 						    <input type="email" name="postSubject" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPostSubject" placeholder="Subject">
 						  </div>
 						  <div class="form-group">
-						    <label for="postContent">Content</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory"></i>]
-						    <textarea type="text" name="postContent" id="editPostContent" style="background-color:white;border-radius:0px;resize:none;" class="form-control" id="exampleInputPassword1"></textarea>
+						    <label for="postContent">Content (<span id="editPostModalContentLength"></span> characters)</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory"></i>]
+						    <textarea type="text" name="postContent" id="editPostContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editPostModalContentLength').html($(this).val().length);" class="form-control" id="exampleInputPassword1"></textarea>
 						  </div>
 						  <!-- <div class="form-group">
 						    <label for="fileInput">Attach Image </label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Allowed Extensions are .jpg, .png."></i>]
 						    <input name="fileInput" type="file"  id="fileInput">
 						  </div>  -->
 						  <div class="form-group">
-						    <label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Leaving it blank makes the post visible to everyone. Examples would be like COE12, B.Tech12, etc. You can share the post with multiple groups by separating the groups with commas."></i>]
+						    <label for="shareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 						    <input name="editPostSharedWith" class="form-control"type="text" id="editPostSharedWith">
 						  </div>
 						  <div class="form-group">

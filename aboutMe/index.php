@@ -59,7 +59,7 @@ if(userId=="")
 	.modal-body
 	{
 		overflow-y: auto;
-		max-height:450px;
+		max-height:400px;
 	}
 
 	.editSkillInputClass, .addSkillInputClass, .addToolInputClass, .editToolInputClass, .addInterestInputClass, .editInterestInputClass
@@ -235,7 +235,7 @@ if(userId=="")
 
 							<label for=""><i title="Facebook" class="fa fa-facebook"></i></label>
 
-							<input type="text" id="fbURL" class="form-control" placeholder="Facebook">
+							<input type="url" id="fbURL" class="form-control" placeholder="Facebook">
 
 						</div>
 
@@ -243,7 +243,7 @@ if(userId=="")
 
 							<label for=""><i title="Twitter" class="fa fa-twitter"></i></label>
 
-							<input type="text" id="twitterURL" class="form-control" placeholder="Twitter">
+							<input type="url" id="twitterURL" class="form-control" placeholder="Twitter">
 
 						</div>
 
@@ -257,7 +257,7 @@ if(userId=="")
 
 							<label for=""><i title="Google plus" class="fa fa-google-plus"></i></label>
 
-							<input type="text" id="gplusURL" class="form-control" placeholder="Google plus">
+							<input type="url" id="gplusURL" class="form-control" placeholder="Google plus">
 
 						</div>
 
@@ -265,7 +265,7 @@ if(userId=="")
 
 							<label for=""><i title="Linkedin" class="fa fa-linkedin"></i></label>
 
-							<input type="text" id="inURL" class="form-control" placeholder="Linkedin">
+							<input type="url" id="inURL" class="form-control" placeholder="Linkedin">
 
 						</div>
 						
@@ -279,7 +279,7 @@ if(userId=="")
 
 							<label for=""><i title="Instagram" class="fa fa-instagram"></i></label>
 
-							<input type="text" id="pinURL" class="form-control" placeholder="Instagram">
+							<input type="url" id="pinURL" class="form-control" placeholder="Instagram">
 
 						</div>
 
@@ -413,9 +413,9 @@ if(userId=="")
 					
 					<br/> -->
 
-					<label for="personDescription">About you</label>
+					<label for="personDescription">About you  ( <span id="descriptionLetterCount"></span> characters )</label> 
 
-					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" class="form-control"></textarea>
+					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html($(this).val().length);" class="autosize form-control"></textarea>
 
 					<br/>
 
@@ -676,6 +676,7 @@ if(userId=="")
 		var ob2=$('#entireContent').find('#personInfo');
 		x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
 		x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
+		x.find('#descriptionLetterCount').html(ob2.find('#personDescription').find('p').html().length);
 		/*x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
 		x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());*/
 		x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
@@ -1279,7 +1280,17 @@ if(userId=="")
 <body style="padding-top:0px;">
 
 	<?php
-		include('../topBarForAboutMe.php');
+		echo $_SESSION['vj'];
+		if(isset($_SESSION['vj']))
+		{
+
+			include_once('../topbar.php');
+		}
+
+		else
+		{
+			include_once('../topBarForAboutMe.php');
+		}
 	?>
 
 	<div class="container">
@@ -1363,9 +1374,9 @@ if(userId=="")
 				
 						</div>
 				
-						<div class="col-md-1 visibleForUser col-md-offset-9">
+						<div class="col-md-1 text-right visibleForUser col-md-offset-9">
 				
-							<a class="cursorPointer" onclick="addTool();"><h5 class="text-center"><i class="fa fa-plus" ></i>&nbsp; Add </h5></a>
+							<a class="btn btn-sm btn-success cursorPointer" onclick="addTool();"><i class="fa fa-plus" ></i></a>
 				
 						</div>
 
@@ -1403,7 +1414,7 @@ if(userId=="")
 
 						<div class="col-md-2 visibleForUser text-right col-md-offset-6">
 		
-							<button  onclick="addProject();" class="btn btn-success"> <span class="cursorPointer"><i class="fa fa-plus"></i>&nbsp;Add</span></button>
+							<button  onclick="addProject();" class="cursorPointer btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
 
 						</div>
 
@@ -1434,7 +1445,7 @@ if(userId=="")
 
 						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
 		
-							<button class="btn btn-success" onclick="addExperience();"> <h5><i class="fa fa-plus"></i>Add</h5></button>
+							<button class="btn btn-sm btn-success" onclick="addExperience();"><i class="fa fa-plus"></i></button>
 
 						</div>
 
@@ -1468,7 +1479,7 @@ if(userId=="")
 
 						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
 		
-							<button class="btn btn-success"  onclick="addAcademics();"><h5><i class="fa fa-plus"></i>Add</h5>
+							<button class="btn btn-sm btn-success"  onclick="addAcademics();"><i class="fa fa-plus"></i></button>
 
 						</div>
 
@@ -1503,7 +1514,7 @@ if(userId=="")
 
 						<div class="col-md-3  visibleForUser text-right col-md-offset-4">
 		
-							<button  onclick="addWorkshop();" class="btn btn-success"><h5><i class="fa fa-plus"></i>&nbsp;Add</h5></button>
+							<button  onclick="addWorkshop();" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
 
 						</div>
 
@@ -1531,13 +1542,13 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:rgba(192, 54, 117, 1);" class="text-left"><i class="fa fa-certificate"></i>&nbsp;Certifications (<span id="certificationsNumber"></span>)</h3>
+							<h3 style="color:rgba(192, 54, 117, 1);" class="text-left"><i class="fa fa-certificate"></i>&nbsp;Certified courses (<span id="certificationsNumber"></span>)</h3>
 
 						</div>
 
 						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
 		
-							<button class="btn btn-success"  onclick="addCertification();"> <h5><i class="fa fa-plus"></i>Add</h5></button>
+							<button class="btn btn-sm btn-success"  onclick="addCertification();"><i class="fa fa-plus"></i></button>
 
 						</div>
 
@@ -1571,7 +1582,7 @@ if(userId=="")
 
 						<div class="col-md-3 visibleForUser text-right col-md-offset-4">
 		
-							<button class="btn btn-success"  onclick="addAchievement();"> <h5><i class="fa fa-plus"></i>&nbsp;Add</h5></button>
+							<button class="btn btn-sm btn-success"  onclick="addAchievement();"><i class="fa fa-plus"></i></button>
 
 						</div>
 
@@ -1607,7 +1618,7 @@ if(userId=="")
 
 							<div class="col-md-2 visibleForUser col-md-offset-8 text-right">
 
-								<button class="btn btn-md btn-success" onclick="addInterest();"><i class="fa fa-plus"></i>&nbsp;Add</button>
+								<button class="btn btn-sm btn-success" onclick="addInterest();"><i class="fa fa-plus"></i></button>
 
 							</div>
 
@@ -1674,7 +1685,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<input type="text" id="addSkillModalSkillName" class="form-control">
+							<input type="text" placeholder="Skill name. Ex: Photoshop. Rating next." id="addSkillModalSkillName" class="form-control">
 
 						</div>
 
@@ -1802,13 +1813,13 @@ if(userId=="")
 
 					<label for="projectTitle">Project title</label>
 
-					<input type="text" id="addProjectModalProjectTitle" class="form-control">
+					<input type="text" placeholder="Ex: Doors 2018" id="addProjectModalProjectTitle" class="form-control">
 
 					<br/>
 
 					<label for="projectTitle">Project team</label>
 
-					<input type="text" id="addProjectModalProjectTeam" class="form-control">
+					<input type="text" placeholder="Ex: Avinash, Hari. Leave it blank if it is an individual project" id="addProjectModalProjectTeam" class="form-control">
 
 					<br/>
 
@@ -1836,13 +1847,13 @@ if(userId=="")
 
 					<label for="projectRole">Position</label>
 
-					<input type="text" id="addProjectModalProjectRole" class="form-control">
+					<input type="text" placeholder="Web developer" id="addProjectModalProjectRole" class="form-control">
 
 					<br/>
 
-					<label for="projectCompany">Company</label>
+					<label for="projectCompany">Company/Organisation</label>
 
-					<input type="text" id="addProjectModalProjectCompany" class="form-control">
+					<input type="text" placeholder="Megasoft" id="addProjectModalProjectCompany" class="form-control">
 
 					<br/>
 
@@ -1982,17 +1993,17 @@ if(userId=="")
 
 					<label for="companyName">Company/organisation</label>
 
-					<input type="text" id="addExperienceModalCompanyName" class="form-control">
+					<input type="text" placeholder="Megasoft" id="addExperienceModalCompanyName" class="form-control">
 
 					<br/>
 
 					<label for="experienceRole">Role/position</label>
 
-					<input type="text" id="addExperienceModalRole" class="form-control">
+					<input type="text" placeholder="Developer" id="addExperienceModalRole" class="form-control">
 
 					<br/>
 
-					<label for="experienceFeaturing">Feature in the personal info?</label>
+					<label for="experienceFeaturing">Feature in the personal info? [<i class="fa fa-question popOver" data-toggle="popover" data-trigger="hover click" data-content="Check YES if this is your current profession." ></i>]</label>
 
 					<div class="row">
 
@@ -2000,7 +2011,7 @@ if(userId=="")
 
 							<label>
 
-								No&nbsp;&nbsp;<input type="radio" id="addExperienceModalFeature" value="0" class="form-control">
+								No&nbsp;&nbsp;<input name="featureInPersonalInfo" type="radio" id="addExperienceModalFeature" value="0" class="form-control">
 
 							</label>
 
@@ -2010,7 +2021,7 @@ if(userId=="")
 
 							<label>
 
-								Yes&nbsp;&nbsp;<input type="radio" id="addExperienceModalFeature" value="1" class="form-control">
+								Yes&nbsp;&nbsp;<input name="featureInPersonalInfo" type="radio" id="addExperienceModalFeature" value="1" class="form-control">
 
 							</label>
 
@@ -2216,13 +2227,13 @@ if(userId=="")
 
 							<div class="col-md-6">
 
-								<input plcaeholder="CGPA" type="text" id="addAcademicsModalCGPA" class="form-control">
+								<input plcaeholder="CGPA" type="text" id="addAcademicsModalCGPA" class="form-control" placeholder="Your CGPA. And the one next to this is 'on which scale'."> &nbsp;
 
 							</div>
 
 							<div class="col-md-6">
 
-								<input plcaseholder="Scale. Eg. 10" type="number" id="addAcademicsModalCGPAScale" class="form-control">
+								<input placeholder="Scale. Eg. 10" type="number" id="addAcademicsModalCGPAScale" min="4" max="10" class="form-control">
 
 							</div>
 
@@ -2441,19 +2452,23 @@ if(userId=="")
 
 					<br/>
 
-					<div class="col-md-6">
+					<div class="row">
 
-						<label for="duration">From</label>
+						<div class="col-md-6">
 
-						<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control datepicker">
+							<label for="duration">From</label>
 
-					</div>
-					
-					<div class="col-md-6">
+							<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control datepicker">
 
-						<label for="duration">To</label>
+						</div>
+						
+						<div class="col-md-6">
 
-						<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control datepicker">
+							<label for="duration">To</label>
+
+							<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control datepicker">
+
+						</div>
 
 					</div>
 
@@ -2743,7 +2758,7 @@ if(userId=="")
 
 					<br/>
 
-					<label for="duration">Position</label>
+					<label for="duration">Position/Rank [<i class="fa fa-question popOver" data-toggle="popover" data-trigger="hover click" data-content="For example, FIRST POSITION."></i>]</label>
 
 					<input type="text" id="addAchievementModalPosition" class="form-control">
 

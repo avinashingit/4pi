@@ -108,7 +108,7 @@ echo '
 
 	echo '<p style="padding:10px;border-top:1px solid #fff;border-bottom:1px solid #fff;"><br/>This is a beta version. Please try to deploy and report bugs to the admin via <a style="cursor:pointer" onclick="$(\'#feedbackModal\').modal(\'show\');">feedback</a>.<br/>';
 	echo '<br/>
-	<table style="text-align:center;position:absolute;bottom:0px;" >
+	<table style="text-align:center;position:absolute;bottom:15px;" >
 		<tr>
 			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  target="_blank" class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip(\'show\');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
 			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>

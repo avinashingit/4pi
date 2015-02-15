@@ -427,6 +427,7 @@ function retrieveLatestPosts(value, call) {
 				});
 			});
         }
+        $('#final1').addClass("hidden");
 		if (data != 404) {
                 $('#loadMoreIdeaPostsButton').remove();
                 ob = JSON.parse(data);
