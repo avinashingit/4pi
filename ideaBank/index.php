@@ -19,7 +19,7 @@ session_start();
                 <span class="icon-bar"></span>
               </button>
               	<div id="brand" class="text-center"> 
-					<a href="/4pi/index.php"><img src="/4pi/img/appImgs/fourpi.svg" width="45px" height="auto" style="padding-top:7px;"/></a>
+					<a href="/4pi/index.php"><img id="pilogo" src="/4pi/img/appImgs/fourpi.svg" width="45px" height="auto" style="padding-top:7px;"/></a>
 				</div>
             </div>
         </div>
@@ -175,20 +175,15 @@ session_start();
 
 <script>
 	var ob;
-	
-	//$('.form-control').css({'border-radius':'0px !important'}); 
-	$('#icons div i').css({'cursor':'pointer'});
-	//$("#brainimg").threesixty({images:["side.png","front.png","front1.png","side1.png"], method:'click', direction:'forward', sensibility: 1}); 
-	 $('#topBarNew').hide();
-$('.searchExpand').focusin(function(){
-//	$(this).css({'background-color':'#fff','color':'#000'});
-	$(this).animate({'width':'160%'},500);
-
-
-}); 
-$('.searchExpand').focusout(function(){
-//	$(this).css({'background-color':'#484848','color':'white','border':'1px solid #484848'});
-	$(this).animate({'width':'100%'},500);
+	$(document).ready(function()
+	{
+		$('#icons div i').css({'cursor':'pointer'});
+		$('.searchExpand').focusin(function(){
+			$(this).animate({'width':'160%'},500);
+		}); 
+		$('.searchExpand').focusout(function(){
+			$(this).animate({'width':'100%'},500);
+		});
 	}); 
 
 function callAfterAjax(){
@@ -261,7 +256,7 @@ $('.condense').each(function(){
 
 }
 
-	$('textarea').autosize();
+$('textarea').autosize();
 
 
 function editIdea(ele){
@@ -487,16 +482,16 @@ function postInsert(position, data1, num, len) {
 	
 	data1.name = toTitleCase(data1.name);
 	
-	if( data1.name.length>14 )
+	if( data1.name.length>12 )
 	{
-		res = data1.name.slice(0,13);
+		res = data1.name.slice(0,11);
 		var redundant = "...";
 		res = res.concat(redundant);
 	}
 	else{
 		res = data1.name;
 	}
-
+	//console.log(data1.gender);
 	if(data1.proPicExists == 1){
 		post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
 	}
@@ -828,7 +823,7 @@ function stopClick(id) {
 		res+='<div class="row ideaPostSearchResult" style="border-bottom:1px solid #e6e6e6;padding-bottom:5px;padding-top:5px;">';
 		res+='<div class="col-md-11" id="search'+data.ideaPostId+'">';
 		
-		res+='<span><a href="/4pi/ideaBank/singleIdea.php?ref='+data.ideaPostIdHash+'" title="'+data.ideaDescription+'" ><img src="/4pi/img/logo2.PNG" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.ideaContent+'</span></a></span>';
+		res+='<span><a href="/4pi/ideaBank/singleIdea.php?ref='+data.ideaPostIdHash+'" title="'+data.ideaDescription+'" ><img src="/4pi/img/idea.PNG" alt="post" width="30" height="30"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:18px;" class="text-left">'+data.ideaContent+'</span></a></span>';
 		
 		res+='</div>';
 		res+='</div>';
