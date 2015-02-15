@@ -6,6 +6,12 @@ display:none;
     position:fixed;
     top:20px;
 }*/
+
+.profilePicPostsFront
+{
+    padding-left:12px !important;
+}
+
 textarea.formcontrol
 {
     height:auto !important;

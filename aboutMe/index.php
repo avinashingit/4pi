@@ -4,6 +4,7 @@
 <script>
 
 var userId="<?php echo $_GET['userId'];?>";
+var userIdFromURL=userId;
 if(userId=="")
 {
 	alert("The url does not exist");

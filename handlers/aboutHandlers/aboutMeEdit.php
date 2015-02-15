@@ -330,7 +330,7 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			{
 				$conObj->completeTransaction();
 				$resumeLocation=__DIR__."/../../files/resumes/$userId.pdf";
-				if($file_exists($resumeLocation))
+				if(file_exists($resumeLocation))
 				{
 					$resumeExists=1;
 				}
@@ -356,11 +356,11 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			exit();
 		}
 	}
-function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phone,$showPhone, $city, $facebookId, $twitterId,$googleId, $linkedinId, $pinterestId)
+function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phoneArray,$showPhone, $city, $facebookId, $twitterId,$googleId, $linkedinId, $pinterestId)
 {
 	$userId=$user['userId'];
 	$userAlias=$user['alias'];
-	$phone=implode(',',$phone);
+	$phone=implode(',',$phoneArray);
 	$conObj=new QoB();
 	$values[0] = array($mailId => 's');
 	$values[1] = array($address => 's');
@@ -387,15 +387,14 @@ function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phone,$showPhone,
 	$values[19]= array($linkedinId => 's');
 	$values[20]= array($pinterestId => 's');
 
-	//var_dump($values);
+	// var_dump($values);
 	//var_dump($values);
 	/*$result=$conObj->update("UPDATE about SET mailid=?,address=?,phone=?,city=?, showMailId=?,showPhone=?,facebookId=?,twitterId=?,googleId=?, linkedinId=?,pinterestId=? WHERE userId= ?",$values);*/
 	$updateAboutMeBottomSQL="INSERT INTO about (mailid,address,phone, showMailId,showPhone,facebookId,twitterId,googleId, linkedinId,pinterestId,userId) VALUES(?,?,?, ?,?,?,?,?, ?,?,?) ON DUPLICATE KEY UPDATE mailid=?, address=?, phone=?, showMailId=?, showPhone=?,facebookId=?, twitterId=?, googleId=?, linkedinId=?, pinterestId=?";
 	$result=$conObj->update($updateAboutMeBottomSQL,$values);
 	if($conObj->error == "")
 	{
-		$aboutObj = new aboutMeBottom($mailId,$showMailId, $address,$phoneArray,$showPhoneArray,
-			$city, $facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
+		$aboutObj = new aboutMeBottom($mailId,$showMailId, $address,$phoneArray,$showPhone, $facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,1);
 		print_r(json_encode($aboutObj));
 	}
 	else

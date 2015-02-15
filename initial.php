@@ -91,7 +91,7 @@ function setPassword(e)
 		$.post('/4pi/handlers/setPassword.php',{
 			_p1:p1,
 			_p2:p2,
-			_alias:alias,
+			_p3:alias,
 			_userIdHash:userIdHash
 		})
 		.error(function(){

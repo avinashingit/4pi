@@ -13,7 +13,38 @@
 			
 			
 			// $postIdHash = '1e2bb9cac49e1c326d8bff7d110f334ca013f1073a352735f1b8afc21e1f2334935bc8ebac9e4eaadbaab193d32226ba35538db1c5e9a015658e842d49322731';
-			commentFetch($_POST['_postId']);
+			//commentFetch($_POST['_postId']);
+			//echo $_POST['_postId'];
+			$userIdHash=$_SESSION['vj'];
+			if(($user=getUserFromHash($userIdHash))==false)
+			{
+				notifyAdmin("Critical Error In loadAllComments",$userIdHash);
+				$_SESSION=array();
+				session_destroy();
+				echo 13;
+				exit();
+			}
+			$postIdHash=$_POST['_postId'];
+			$post=getPostFromHash($postIdHash);
+			$userId=$user['userId'];
+			//echo $post['postId']; 
+			$commentsArray=getAllCommentsArrayByPostId($post['postId']);
+			$commentCount=count($commentsArray);
+			$i=0;
+			while($i<$commentCount)
+			{
+				$output[]=getCommentObject($commentsArray[$i],$userId,$postIdHash);
+				$i++;
+			}
+
+			if($commentCount==0)
+			{
+				echo 404;
+			}
+			else
+			{
+				print_r(json_encode($output));
+			}
 			
 		}
 
@@ -23,7 +54,7 @@
 			echo 11;
 		}
 	
-	function commentFetch($postIdHash)
+	/*function commentFetch($postIdHash)
 		{
 			$conObj = new QoB();
 			$outputa = array();
@@ -161,7 +192,7 @@
 					echo 404;
 				}		
 			// return $outputa;	
-		}
+		}*/
 		
 	
 	

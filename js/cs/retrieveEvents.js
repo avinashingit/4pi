@@ -286,15 +286,15 @@ function editedEventSend()
 		alert("Please fill in the required fields.")
 	}
 
-	else if(eventDurationHours<0)
+	/*else if(eventDurationHours<0)
 	{
 		alert("Event duration hours cannot be less than 0");
 	}
 
-	/*else if(eventDurationMinutes!=00 ||eventDurationMinutes!=15 || eventDurationMinutes!=30 ||eventDurationMinutes!=45)
+	else if(eventDurationMinutes!=00 ||eventDurationMinutes!=15 || eventDurationMinutes!=30 ||eventDurationMinutes!=45)
 	{
 		alert("Event duration minutes can be either 00 or 15 or 30 or 45 only.");
-	}*/
+	}
 
 	else if(validateDate(eventDate)!=1)
 	{
@@ -304,7 +304,7 @@ function editedEventSend()
 	else if(validateTime(eventTimeHours)!=1)
 	{
 		alert("Event time is not acceptable");
-	}
+	}*/
 
 	else
 
@@ -395,7 +395,7 @@ function createEventSP()
 	{
 		alert("Please fill in the required fields.")
 	}
-	else if(eventContent.length>1000)
+	/*else if(eventContent.length>1000)
 	{
 		alert("Please limit the event content to 1000 characters.")
 	}
@@ -410,7 +410,7 @@ function createEventSP()
 	else if(validateTime(eventTimeHours)!=1)
 	{
 		alert("Event time is not acceptable");
-	}
+	}*/
 	else
 	{
 		$('#eventCreateModal').modal('hide');

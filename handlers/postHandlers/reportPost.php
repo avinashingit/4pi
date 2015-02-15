@@ -152,7 +152,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					{
 						//$timestamp=time();
 						//$timestamp="".$timestamp;
-						$ReportSpamSQL="INSERT INTO reportspams(userId,reason,objectId,ObjectType) VALUES(?,?,?,?)";
+						$ReportSpamSQL="INSERT INTO reportspams(userId,reason,objectId,objectType) VALUES(?,?,?,?)";
 						$values1[0]=array($userId =>'s');
 						$values1[1]=array($reason => 's');
 						$values1[2]=array($postId => 's');

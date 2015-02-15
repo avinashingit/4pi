@@ -414,13 +414,22 @@ function editInterestDeleteInput(el)
 
 //function to insert top part. It accepts data as a JSON object and inserts the object in to the web page
 
-function insertTopPart(data)
+function insertTopPart(data,locateProPic)
 {
 	var topPart="";
 
 	topPart+='<div class="col-md-2" id="personPicture">';
 
+	if(locateProPic==1)
+	{
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPicsTemp/'+data.userIdHash+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+	}
+	else
+	{
 		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+	}
+
+		
 
 		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
@@ -483,7 +492,6 @@ function insertTopPart(data)
 
 function insertBottomPart(data)
 {
-	console.log(data);
 	var bottomPart="";
 
 	bottomPart+='<br/>';
@@ -502,7 +510,7 @@ function insertBottomPart(data)
 
 				bottomPart+='<br/>';
 
-				bottomPart+='<form>';
+				bottomPart+='<form id="leaveMessageForm">';
 
 					bottomPart+='<input type="text" id="leaveMessageName" class="form-control" placeholder="Your name"><br/>';
 
@@ -510,7 +518,7 @@ function insertBottomPart(data)
 
 					bottomPart+='<textarea type="text" id="leaveMessageTextMessage" class="form-control" placeholder="Your message"></textarea><br/>';
 
-					bottomPart+='<button class="btn btn-primary">Send</button>';
+					bottomPart+='<button class="btn btn-primary" onclick="leaveMessage(event);">Send</button>';
 
 
 				bottomPart+='</form>';
@@ -619,7 +627,7 @@ function insertBottomPart(data)
 
 						for(var i=0;i<data.phone.length;i++)
 						{
-							if(data.showPhone[i]==1)
+							if(data.showPhone==1)
 							{
 								var x=i+1;
 								bottomPart+='<p id="userPhone'+x+'">'+data.phone[i]+'</p>';
@@ -663,7 +671,7 @@ function fetchTopPart()
 				{
 					window.userOptionsVisibility=1;
 				}
-				insertTopPart(x);
+				insertTopPart(x,0);
 				insertBottomPart(x);
 			}
 		}
@@ -706,13 +714,14 @@ function editContactInfoSendData()
 			_phone:phone,
 			_showMailId:showMailId,
 			_showPhone:showContactsValue,
-			_address:address
+			_address:address,
+			_mailId:emailId
 		})
 		.error(function(){
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			console.log("HI      "+data);
 			if(checkData(data)==1)
 			{
 				insertBottomPart(JSON.parse(data));
@@ -752,13 +761,13 @@ function editTopPartSendData()
 			error=1;
 		}
 	}
-
+	// alert(sFileExtension);
 	if(sFileExtension.length!=0)
 	{
-		if(sFileExtension!=".jpg")
+		if(sFileExtension!="jpg")
 		{
 			error=1;
-			alert("Only .jpg files images are allowed");
+			alert("Only .jpg images are allowed");
 		}
 	}
 
@@ -798,8 +807,8 @@ function editTopPartSendData()
 			processData: false,
 	    	contentType: false,
 	    	success:function(data){
-	    		//console.log(data);
-	    		insertTopPart(JSON.parse(data));
+	    		console.log(data);
+	    		insertTopPart(JSON.parse(data),1);
 	    		$('#editPersonInfoModal').modal('hide');
 	    	}
 		});
@@ -2823,8 +2832,9 @@ function editInterestsSendData()
 ///
 /////////////////////////////////LEAVE MESSAGE/////////////////////////////////////
 
-function leaveMessage()
-{
+function leaveMessage(e)
+{	
+	e.preventDefault();
 	var link=$('#leaveMessageForm');
 	var name=link.find('#leaveMessageName').val();
 	var email=link.find('#leaveMessageEmail').val();
@@ -2838,7 +2848,7 @@ function leaveMessage()
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	   	 if(re.test(email))
 	   	 {
-	   	 	$.post('/4pi/handlers/aboutHandlers/leaveMessage.php',{
+	   	 	$.post('/4pi/handlers/saveLeaveMessage.php',{
 	   	 		_name:name,
 	   	 		_email:email,
 	   	 		_message:message,
@@ -2848,6 +2858,7 @@ function leaveMessage()
 	   	 		alert("Server overload. Please try again.");
 	   	 	})
 	   	 	.success(function(data){
+	   	 		console.log(data);
 	   	 		if(checkData(data)==1)
 	   	 		{
 	   	 			alert("Thank you. The message is delivered.")

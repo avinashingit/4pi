@@ -98,7 +98,7 @@ else
 	}
 	else
 	{
-		if(strlen($newPassword)<9)
+		if(strlen($newPassword)<8)
 		{
 			echo "<h3><strong>Password length should be atleast 8 characters.</strong></h3><br/>";
 		}
@@ -127,7 +127,7 @@ else
 					
 					if($conn->error=="")
 					{
-						$newPasswordHash=hash("sha512", $newPassword);
+						$newPasswordHash=hash("sha512", $newPassword.PASSSALT);
 						
 						$values[0]=array($newPasswordHash => 's');
 						

@@ -1,6 +1,6 @@
 <!-- basically the top bar i.e. the header part of the newsfeed, is common to all the users -->
 <script>
-	var userId="<?php echo $_SESSION['uid'];?>";
+	var userId="<?php echo $_SESSION['userId'];?>";
 	function changePassword()
 	{
 		var p1=$("#changePasswordModal").find("#changePasswordModalP1").val();
@@ -174,20 +174,19 @@
 
 			res+='<div class="col-md-11" id="userName">';
 
-			if(data.gender="M")
+			if(data.gender=="M")
 			{
 			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 			else
 			{
-			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 
-
-
 			res+='</div>';
 
 			res+='</div>';
+
 			$('#peopleSearch').append(res);
 		}
 		else if(val==1)
@@ -210,14 +209,16 @@
 
 	function checkIfPeopleImageExists(data)
 	{
-		var url="/4pi/img/proPics/"+data.userIdHash+".jpg";
+		/*var url="/4pi/img/proPics/"+data.userIdHash+".jpg";
 		$.post(url,{})
 		.error(function(){
 			insertPeopleSearch(data,0);
 		})
 		.success(function(){
 			insertPeopleSearch(data,1);
-		});
+		});*/
+
+		insertPeopleSearch(data,0);
 	}
 
 	function globalSearchInsertPeople(data)

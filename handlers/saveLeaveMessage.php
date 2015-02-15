@@ -38,13 +38,14 @@ $toUserId=$_POST['_userId'];*/
 //Testing Inputs End
 
 session_start();
-require_once('../../QOB/qob.php');
-require_once('aboutMeClass.php');
-require_once('../fetch.php');
+require_once('/../QOB/qob.php');
+require_once('./aboutHandlers/aboutMeClass.php');
+require_once('../PHPMailer_v5.1/class.phpmailer.php');
+require_once('fetch.php');
 
-$fromName=$_POST['_fromName'];
+$fromName=$_POST['_name'];
 
-$email=$_POST['_fromEmail'];
+$email=$_POST['_email'];
 
 $message=trim($_POST['_message']);
 
@@ -55,7 +56,7 @@ if($message=="")
 	echo 16;
 }
 
-if(filter_var($toUserId,FILTER_VALIDATE_EMAIL)===false)
+if(filter_var($email,FILTER_VALIDATE_EMAIL)==false)
 {
 	echo 80;
 	exit();
@@ -98,7 +99,7 @@ else
 		
 		$conn=new QoB();
 		
-		$result=$conn-.insert($insertIntoLeaveMessageSQL,$values);
+		$result=$conn->insert($insertIntoLeaveMessageSQL,$values);
 		
 		if($conn->error=="")
 		{

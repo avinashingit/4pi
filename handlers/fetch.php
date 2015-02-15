@@ -634,7 +634,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
-
+	//careful!! it returns record not array.
 	function getAllCommentsByPostId($postId)
 	{
 		$conn = new QoB();
@@ -655,16 +655,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
-
+	//careful! returns result set not array
 	function getFewCommentsByPostId($postId,$commentCount=3)
 	{
 		$conn = new QoB();
 		$commentTable="p".$postId."c";
-		$GetCommentSQL="SELECT ".$commentTable.".*,,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp LIMIT 0,".$commentCount;
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp DESC LIMIT 0,".$commentCount;
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
 		$result=$conn->select($GetCommentSQL);
+		//var_dump($result);
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -675,7 +676,31 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
-
+	function getAllCommentsArrayByPostId($postId)
+	{
+		$conn = new QoB();
+		$commentTable="p".$postId."c";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+		// $values[]=array("commentTable" => 's');
+		// $values[]=array($commentTable => 's');
+		//$values[0]=array($commentIdHash => 's');
+		$result=$conn->select($GetCommentSQL);
+		$out=array();
+		if($conn->error==""&&$result!="")
+		{
+			
+			while($record=$conn->fetch($result))
+			{
+				$out[]=$record;
+			}
+			//var_dump($out);
+			return $out;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	function updatePostIndexesOnComment($postArray,$userId,$conn)
 	{
@@ -1405,6 +1430,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				//var_dump($record);
 				$comments[]=getCommentObject($record,$userId,$post['postIdHash']);
 			}
+			//var_dump($comments);
 		}
 		$proPicLocation=__DIR__.'/../img/proPics/'.$post['userIdHash'].'.jpg';
 		if(file_exists($proPicLocation))

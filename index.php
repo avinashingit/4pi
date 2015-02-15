@@ -250,7 +250,7 @@ function homeSearch(el)
 
 							<br/>
 
-							<a href="javascript:void(0)" onclick="window.location.href='/4pi/forgotPassword.php'">Forgot password?</a>
+							<a href="javascript:void(0)" onclick="window.location.href='/4pi/handlers/forgotPassword.php'">Forgot password?</a>
 							
 							<div id="loginError" class="text-error aClose" ></div>
 							

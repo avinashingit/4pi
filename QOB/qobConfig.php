@@ -81,10 +81,10 @@ define("SAC", "COE12B009");
 define("COCAS", "COE12B013");
 
 //Student General Secretary
-define("GEN", "COE11B005");
+/*define("GEN", "COE11B005");*/
 
 //Admin
-define("ADMIN", "COE12B005");
+/*define("ADMIN", "COE12B005");*/
 
 
 ?>

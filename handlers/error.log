@@ -522,3 +522,7 @@
 
 [2015-02-15 19:37:27             ::1                   Asia/Kolkata] 1062   $$$Duplicate entry '0' for key 'PRIMARY'$$$
 
+[2015-02-16 00:07:31             ::1                   Asia/Kolkata] 1062   $$$Duplicate entry '0' for key 'PRIMARY'$$$
+
+[2015-02-16 01:53:22             ::1                   Asia/Kolkata] 1062   $$$Duplicate entry 'COE12B009' for key 'PRIMARY'$$$
+
