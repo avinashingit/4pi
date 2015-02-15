@@ -128,7 +128,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  				<div class="col-md-6">
 
-						  					<input type="number" name="eventDurationHours" id="createEventDurationHours" class="form-control"/>
+						  					<input type="number" name="eventDurationHours" id="createEventDurationHours" placeholder="hours"  min="0" class="form-control"/>
 
 				  						</div>
 
@@ -136,13 +136,13 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  					<select type="text" name="eventDurationMinutes" id="createEventDurationMinutes" class="form-control">
 
-						  						<option val="00">00</option>
+						  						<option val="00">00 minutes</option>
 
-						  						<option val="15">15</option>
+						  						<option val="15">15 minutes</option>
 
-						  						<option val="30">30</option>
+						  						<option val="30">30 minutes</option>
 
-						  						<option val="45">45</option>
+						  						<option val="45">45 minutes</option>
 
 					  						</select>
 
@@ -270,7 +270,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  				<div class="col-md-6">
 
-						  					<input type="number" name="eventDurationHours" id="editEventDurationHours" class="form-control"/>
+						  					<input type="number" name="eventDurationHours" id="editEventDurationHours" min="0" placeholder="hours" class="form-control"/>
 
 				  						</div>
 
@@ -278,13 +278,13 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  					<select type="text" name="eventDurationMinutes" id="editEventDurationMinutes" class="form-control">
 
-						  						<option val="00">00</option>
+						  						<option val="00">00 minutes</option>
 
-						  						<option val="15">15</option>
+						  						<option val="15">15 minutes</option>
 
-						  						<option val="30">30</option>
+						  						<option val="30">30 minutes</option>
 
-						  						<option val="45">45</option>
+						  						<option val="45">45 minutes</option>
 
 					  						</select>
 

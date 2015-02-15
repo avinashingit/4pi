@@ -457,11 +457,14 @@ function insertTopPart(data)
 
 				topPart+='<div class="text-left" id="personCurrentProfession">'+data.currentProfession+'</div><br/>';
 
-				topPart+='<div class="text-left" id="personResumeLink">';
+				if(data.resumeExists==1)
+				{
+					topPart+='<div class="text-left" id="personResumeLink">';
 
-					topPart+='<a href="/4pi/files/resumes/'+data.resume+'"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+						topPart+='<a href="/4pi/files/resumes/'+data.userIdHash+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
 
-				topPart+='</div><!-- end person resume link id -->';
+					topPart+='</div><!-- end person resume link id -->';
+				}
 
 			topPart+='</div>';
 
@@ -649,7 +652,7 @@ function fetchTopPart()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)

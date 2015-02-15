@@ -1,7 +1,45 @@
 
 $('.subsec').hide();//to hide all hostel secretary tabs
 $('.ew').hide();//to hide the executive wing tab
-  
+ 
+function validateTime(str)
+{
+	var parts=str.split(":");
+	if(parts[0]<0 || parts[0]>23)
+	{
+		return -1;
+	}
+
+	else if(parts[1]<0 ||parts[1]>59)
+	{
+		return -1;
+	}
+
+	else 
+	{
+		return 1;
+	}
+}
+
+
+function validateDate(str)
+{
+	var parts=str.split("/");
+	var arrayOfDates=[31,28,31,30,31,30,31,31,30,31,30,31];
+	var arrayOfLDates=[31,29,31,30,31,30,31,31,30,31,30,31];
+	if(parts[1]<1 || parts[1]>12)
+	{
+		return -1;
+	}
+	else
+	{
+		return 1;
+	}
+
+	//not completed yet
+}
+
+
 function iso8601ToReadable(str)
 {
 	var parts=str.split("T");

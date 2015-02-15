@@ -282,11 +282,28 @@ function editedEventSend()
 	var eventType=$('#editEventModal').find('#editEventType').val();
 
 	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>1000 || eventVenue.length==0 || eventDate.length==0 )
-
 	{
-
 		alert("Please fill in the required fields.")
+	}
 
+	else if(eventDurationHours<0)
+	{
+		alert("Event duration hours cannot be less than 0");
+	}
+
+	else if(eventDurationMinutes!=00 ||eventDurationMinutes!=15 || eventDurationMinutes!=30 ||eventDurationMinutes!=45)
+	{
+		alert("Event duration minutes can be either 00 or 15 or 30 or 45 only.");
+	}
+
+	else if(validateDate(eventDate)!=1)
+	{
+		alert("Event date should be of dd/mm/yyyy format only");
+	}
+
+	else if(validateTime(eventTimeHours)!=1)
+	{
+		alert("Event time is not acceptable");
 	}
 
 	else

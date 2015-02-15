@@ -1198,7 +1198,7 @@ function followPost(id) {
 function reportPost(id) {
     // alert("called");
     var reportContent = $('#' + id).find('#inputReport').val().trim();
-    // alert(reportContent);
+    alert(reportContent);
     var done = 1;
     if(reportContent.length==0)
     {
@@ -1216,7 +1216,7 @@ function reportPost(id) {
         })
         .success(function(data) {
 
-            ////console.log(data);
+            console.log(data);
             // alert(data);
             
             var check=checkData(data);
