@@ -639,7 +639,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		$conn = new QoB();
 		$commentTable="p".$postId."c";
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
@@ -660,7 +660,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		$conn = new QoB();
 		$commentTable="p".$postId."c";
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp LIMIT 0,".$commentCount;
+		$GetCommentSQL="SELECT ".$commentTable.".*,,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp LIMIT 0,".$commentCount;
 		// $values[]=array("commentTable" => 's');
 		// $values[]=array($commentTable => 's');
 		//$values[0]=array($commentIdHash => 's');
@@ -1462,8 +1462,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
-		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
-		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists);
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], 
+		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
 		return $postObj;
 	}
 
@@ -1490,7 +1490,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$proPicExists=-1;
 		}
 		$commentObj=new miniComment($commentPostIdHash,$comment['userIdHash'],$comment['content'],$commentTime,
-								$comment['commentIdHash'],$comment['userId'],$comment['name'], $commentOwner, $comment['gender'], $proPicExists);
+								$comment['commentIdHash'],$comment['userId'],$comment['alias'], $commentOwner, $comment['gender'], $proPicExists,$comment['name']);
 		return $commentObj;
 	}
 

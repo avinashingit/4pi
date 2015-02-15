@@ -13,10 +13,11 @@ class miniComment{
 	public $commentOwner;//// to display edit and delete.
 	public $gender;
 	public $profilePicExists;
+	public $commentOwnerFullName;
 
 
 	public function __construct($commentPostIdHash,$commentUserIdHash,$commentContent,$commentTime,
-								$commentIdHash,$commentUserId,$commentUserName,$commentOwner,$gender,$profilePicExists)
+								$commentIdHash,$commentUserId,$commentUserName,$commentOwner,$gender,$profilePicExists,$commentOwnerFullName)
 	{
 		$this->commentIdHash=$commentIdHash;
 		$this->commentPostIdHash=$commentPostIdHash;
@@ -30,6 +31,7 @@ class miniComment{
 		$this->commentOwner=$commentOwner;
 		$this->gender = $gender;
 		$this->profilePicExists = $profilePicExists;
+		$this->commentOwnerFullName=$commentOwnerFullName;
 		return $this;
 	}
 }

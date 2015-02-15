@@ -284,7 +284,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					{
 						//echo "finished Comment";
 						
-						$postUserName=$user['name'];
+						$postUserName=$user['alias'];
 						$postValidity=$_POST['_validity'];
 						$postSubject=$subject;
 						$postContent=$content;
@@ -314,7 +314,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 							$proPicExists=-1;
 						}
 						$postObj=new miniPost($postIdHash,$rawsharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-						$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,$isOwner,$user['gender'],$proPicExists);
+						$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,$isOwner,$user['gender'],$proPicExists,$user['name']);
 							
 							
 						

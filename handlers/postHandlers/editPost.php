@@ -198,7 +198,7 @@ Code 11: Session Variables unset!!
 					$SQLResponse=$conn->update($updatePostSQL,$values);
 					if($conn->error==""&&$SQLResponse==true)
 					{
-							$postUserName=$user['name'];
+							$postUserName=$user['alias'];
 							$postValidity=$lifetime;
 							$postSubject=$subject;
 							$postContent=$content;
@@ -229,7 +229,7 @@ Code 11: Session Variables unset!!
 							}
 
 							$postObj=new miniPost($postIdHash,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,1,$user['gender'],$proPicExists);
+							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,1,$user['gender'],$proPicExists,$user['name']);
 							print_r(json_encode($postObj));
 					}
 					else{

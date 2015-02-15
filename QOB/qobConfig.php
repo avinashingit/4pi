@@ -66,7 +66,7 @@ define("POEVHASH", "sloppnstneve21");
 define("POLLHASH", "hsah12tlassllop");
 
 //salt for notifications
-define("HASHNOTIF", "s'fitonsisiht")
+define("HASHNOTIF", "s'fitonsisiht");
 
 /***************************COMMON PARAMETERS**************************/
 
