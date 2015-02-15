@@ -56,7 +56,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 					$tmp=imagecreatetruecolor($newwidth,$newheight);
 					imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
 					$fileLocation=__DIR__."/../img/proPics/$userIdHash.jpg";
+					$fileLocation2=__DIR__."/../img/proPicsTemp/$userIdHash.jpg";
 					//echo $fileLocation;
+					imagejpeg($tmp,$fileLocation2,100);
 					if(imagejpeg($tmp,$fileLocation,100))
 					{
 						//echo "Uploaded Picture successfully ".$fileLocation;
@@ -305,10 +307,44 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+	function getAboutUserFromId($userId)
+	{
+		$conn=new QoB();
+		$fetchUserSQL="SELECT * FROM about WHERE userId= ?";
+		$values[0]=array($userId=>'s');
+		$result=$conn->fetchAll($fetchUserSQL,$values);
+		if($conn->error=="")
+		{	
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
 	function getResetPassRecord($extHash)
 	{
 		$conn=new QoB();
 		$fetchUserSQL="SELECT * FROM resetPassword WHERE extHash= ?";
+		$values[0]=array($extHash=>'s');
+		$result=$conn->fetchAll($fetchUserSQL,$values);
+		if($conn->error==""&&$result!="")
+		{	
+			return $result;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+	function getLeaveMessageRecord($extHash)
+	{
+		$conn=new QoB();
+		$fetchUserSQL="SELECT * FROM leaveMessage WHERE extHash= ?";
 		$values[0]=array($extHash=>'s');
 		$result=$conn->fetchAll($fetchUserSQL,$values);
 		if($conn->error==""&&$result!="")
@@ -1305,7 +1341,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['name'], $event['userIdHash'],$event['userId']);
+			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name']);
 		return $eventObj;
 	}
 
@@ -1352,8 +1388,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
-		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['name'],$post['subject'],$post['content'], 
-		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists);
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], 
+		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
 		return $postObj;
 	}
 

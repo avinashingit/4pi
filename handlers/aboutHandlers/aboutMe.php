@@ -144,11 +144,21 @@ function aboutMe($userId,$mode,$isOwner)
 				}
 				$highestDegree=getDegree($userId);
 				//$proPicLocation=getProfilePicLocation($result1['userIdHash']);
+
+				$resumeLocation=__DIR__."/../../files/resumes/$userId.pdf";
+				if($file_exists($resumeLocation))
+				{
+					$resumeExists=1;
+				}
+				else
+				{
+					$resumeExists=-1;
+				}
 				$work="Student";
 				if($result1['organisation']!="")
 					$work=$result1['designation']." at ".$result1['organisation'];
 				$obj = new about($result1['userIdHash'],$result1['name'],$result1['alias'],$result1['dob'],$result1['description'], 
-					$highestDegree,$work, $result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),$result1['showPhone'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$result1['gender'],$proPicExists,$isOwner);
+					$highestDegree,$work, $result1['mailid'],$result1['showMailId'],$result1['address'],explode(',',$result1['phone']),$result1['showPhone'],$result1['facebookId'],$result1['twitterId'],$result1['googleId'],$result1['linkedinId'],$result1['pinterestId'],$result1['gender'],$proPicExists,$isOwner$resumeExists);
 				print_r(json_encode($obj));
 			}
 			else

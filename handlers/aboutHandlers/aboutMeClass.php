@@ -36,11 +36,13 @@
 		public $linkedinId;
 		public $pinterestId;
 		public $isOwner;
+
+		public $resumeExists;
 		//$_POST['_alias'],$_POST['_dob'],$_POST['_description'],$_POST['_highestDegree'],$_POST['_currentProfession'],$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']
 		//$userAlias,$dob,$description,$highestDegree,$currentProfession,$mailId,$showMailId,$address,$phone,$showPhone,$city,$facebookId,$twitterId,$googleId,$linkedinId,$pinterestId,
 		public function __construct($userIdHash,$name,$alias,$dob,$description,$highestDegree,
 			$currentProfession,$mailId,$showMailId,$address,$phone, $showPhone,
-			$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$gender,$profilePicExists,$isOwner)
+			$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$gender,$profilePicExists,$isOwner,$resumeExists)
 			{
 				$this->userIdHash = $userIdHash;
 				$this->name = $name; 
@@ -78,6 +80,7 @@
 				$this->profilePicExists= $profilePicExists;
 				$this->isOwner=$isOwner;
 
+				$this->resumeExists=$resumeExists;
 				return $this;
 			}
 			
@@ -94,9 +97,10 @@
 		public $highestDegree;
 		public $currentProfession;
 		public $isOwner;
+		public $resumeExists;
 
 		public function __construct($userIdHash,$name,$alias,$dob,$description,$highestDegree,
-			$currentProfession,$isOwner)
+			$currentProfession,$isOwner,$resumeExists=-1)
 			{
 				if($userIdHash==NULL)
 				{
@@ -157,6 +161,7 @@
 					$this->currentProfession=$currentProfession;
 				}
 				$this->isOwner=$isOwner;
+				$this->resumeExists=$resumeExists;
 
 				return $this;
 			}

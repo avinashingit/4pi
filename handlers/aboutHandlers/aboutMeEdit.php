@@ -329,7 +329,16 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 			if(($cr=$conObj->error )== "")
 			{
 				$conObj->completeTransaction();
-				$aboutObj = new aboutMeTop($user['userIdHash'],$user['name'],$userAlias,$dob,$description,$highestDegree,$currentProfession, 1);
+				$resumeLocation=__DIR__."/../../files/resumes/$userId.pdf";
+				if($file_exists($resumeLocation))
+				{
+					$resumeExists=1;
+				}
+				else
+				{
+					$resumeExists=-1;
+				}
+				$aboutObj = new aboutMeTop($user['userIdHash'],$user['name'],$userAlias,$dob,$description,$highestDegree,$currentProfession, 1,$resumeExists);
 				print_r(json_encode($aboutObj));
 			}
 			else

@@ -11,12 +11,12 @@
 
 session_start();	
 require_once('../../QOB/qob.php');
-require_once('./miniPoll.php');
+require_once('./miniEvent.php');
 require_once('../fetch.php');
 //Testing Content Starts
 	/*$userIdHash=$_SESSION['vj']=hash("sha512","COE12B013".SALT);
 	$_SESSION['tn']=hash("sha512",$userIdHash.SALT2);
-	$_POST['_pollId']="6c3b5a62fa26c9e18e026fdc3feae29b824103141efe1da6d93e2427511c72003b6cb3cd9a735d3719da8a3b4460e1b7e86778633efe878136467ce91d22c427";*/
+	$_POST['_eventId']="6c3b5a62fa26c9e18e026fdc3feae29b824103141efe1da6d93e2427511c72003b6cb3cd9a735d3719da8a3b4460e1b7e86778633efe878136467ce91d22c427";*/
 //Testing Content Ends
 
 
@@ -38,14 +38,14 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	exit();
 }
 
-//Actual editPoll Code Starts
-$pollIdHash=$_POST['_pollId'];
+//Actual editEvent Code Starts
+$eventIdHash=$_POST['_eventId'];
 
 $userIdHash=$_SESSION['vj'];
 $conn= new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in approve Poll")>0)//Happy Birthday to Myself!! Its October 21st!! 00:00 hrs
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in approve Event")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -54,7 +54,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in approve Poll",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in approve Event",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -65,7 +65,7 @@ else
 {
 	if(($user=getUserFromHash($userIdHash))==false)
 	{
-		notifyAdmin("Critical Error In approve Poll",$userIdHash);
+		notifyAdmin("Critical Error In approve event",$userIdHash);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -76,7 +76,7 @@ else
 		$userId=$user['userId'];
 		if(isCoCAS($userId)==false)
 		{
-			if(blockUserByHash($userIdHash,"Unauthorized Attempt to approve poll",$userId.",sh:".$pollIdHash)>0)
+			if(blockUserByHash($userIdHash,"Unauthorized Attempt to approve event",$userId.",sh:".$eventIdHash)>0)
 			{
 				$_SESSION=array();
 				session_destroy();
@@ -85,24 +85,24 @@ else
 			}
 			else
 			{
-				notifyAdmin("Unauthorized attempt to approve poll",$userId.",sh:".$pollIdHash);
+				notifyAdmin("Unauthorized attempt to approve event",$userId.",sh:".$eventIdHash);
 				$_SESSION=array();
 				session_destroy();
 				echo 13;
 				exit();
 			}
 		}
-		if(($poll=getPollFromHash($pollIdHash))==false)
+		if(($event=getEventFromHash($eventIdHash))==false)
 		{
-			notifyAdmin("Suspicious pollIdHash in approve poll",$userId.",sh:".$pollIdHash);
+			notifyAdmin("Suspicious eventIdHash in approve eventl",$userId.",sh:".$eventIdHash);
 			echo 6;
 			exit();
 		}
-		$editPollSQL="UPDATE poll SET approvalStatus = ? WHERE pollIdHash= ?";
+		$editEventSQL="UPDATE event SET approvalStatus = ? WHERE eventIdHash= ?";
 
 		$values[0]=array(1 => 'i');
-		$values[1]=array($pollIdHash => 's');
-		$result=$conn->insert($editPollSQL,$values);
+		$values[1]=array($eventIdHash => 's');
+		$result=$conn->insert($editEventSQL,$values);
 		if($conn->error==""&&$result==true)
 		{
 			echo 3;
@@ -110,7 +110,7 @@ else
 		}
 		else
 		{
-			notifyAdmin("Conn.Error".$conn->error."! While approving Poll",$userId);
+			notifyAdmin("Conn.Error".$conn->error."! While approving Event",$userId);
 			echo 12;
 			exit();
 		}

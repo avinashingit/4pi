@@ -6,16 +6,21 @@ require_once('./../QOB/qob.php');
 require_once("../PHPMailer_v5.1/class.phpmailer.php");
 require_once('fetch.php');
 ?>
+
 <html>
+	
 	<body>
+		
 		<div align=center class="div1">
 
 <?php
+
 if(!isset($_POST['password']))
 {
 	if(isset($_GET['token']))
 	{
 		$extHash=$_GET['token'];
+		
 		if(($resetRecord=getResetPassRecord($extHash))==false)
 		{
 			//var_dump($user);
@@ -29,33 +34,52 @@ if(!isset($_POST['password']))
 
 				echo '
 						<br/>
+						
 						<br/>
+						
 						<p> Enter new password for your account: '.$userId.'. Atleast 8 Characters</p>
 						
 						<form action="resetPassword.php" method="POST">
 
 							<p class=formtext>New Password : <input type="password" name="password"/></p>
+							
 							<p class=formtext>Confirm New Password : <input type="password" name="confirmPassword"/></p>
+							
 							<input type="hidden" name= "confirmationCode" value="'.$extHash.'" /> 
+			    			
 			    			<input type="submit" class = "btn btn-large btn-success" value="Change Password"/>	
+						
 						</form>
+					
 					</div>
+				
 				</body>
+			
 			</html>';
 			}
 			else
 			{
 				echo "<h3><strong>Invalid Password Reset Link. Request new Reset Password Link <a href='forgotPassword.php'>here.</a></strong></h3><br/>";
+				
 				exit();
 			}
 		}
 	}
 	else
 	{
+	
 	?>
+		
 		<br/><br/>	
+		
 		<h2><strong>Enough Of Mischief!! Go to <a href="../index.php">homepage</a></strong></h2><br/>
+		
+		</div>
+	
+	</body>
 
+</html>
+	
 	<?php
 		exit();	
 	}
@@ -63,13 +87,14 @@ if(!isset($_POST['password']))
 else
 {
 	$newPassword=$_POST['password'];
+	
 	$confirmPassword=$_POST['confirmPassword'];
+	
 	$extHash=$_POST['confirmationCode'];
 	//var_dump($_POST);
 	if($newPassword!=$confirmPassword)
 	{
 		echo "<h3><strong>Passwords Doesn't match. Retry.</strong></h3><br/>";
-
 	}
 	else
 	{
@@ -83,6 +108,7 @@ else
 			{
 				//var_dump($user);
 				echo "<h3><strong>Some Error Occurred. Request new Reset Password Link <a href='forgotPassword.php'>here.</a></strong></h3><br/>";
+				
 				exit();
 			}
 			else
@@ -90,38 +116,51 @@ else
 				if($resetRecord['isValid']==1)
 				{
 					$conn=new QoB();
+					
 					$userId=$resetRecord['userId'];
+					
 					$invalidateExtHashSQL="UPDATE resetPassword SET isValid=0 WHERE extHash=?";
+					
 					$values2[0]=array($extHash => 's');
+					
 					$conn->update($invalidateExtHashSQL,$values2);
+					
 					if($conn->error=="")
 					{
 						$newPasswordHash=hash("sha512", $newPassword);
+						
 						$values[0]=array($newPasswordHash => 's');
+						
 						$values[1]=array($userId => 's');
+						
 						$resetPasswordSQL="UPDATE users SET password=? WHERE userId=?";
 						
 						$result=$conn->update($resetPasswordSQL,$values);
+						
 						if($conn->error=="")
 						{
 							echo "<h3><strong>Password changed successfully. Go back to <a href='../index.php'>homepage.</a></strong></h3><br/>";
+							
 							exit();
 						}
 						else
 						{
 							notifyAdmin("Conn Error:".$conn->error." in resetting Password",$userId);
+							
 							echo "<h3><strong>Some error occurred in resetting password. May be due to Server Overload. Please Try after sometime. Admin has been intimated.</strong></h3><br/><br/>";
 						}
 					}
 					else
 					{
 						notifyAdmin("Conn Error:".$conn->error." while invalidating extHash in reset Password",$userId);
+						
 						echo "<h3><strong>Some error occurred in resetting password. May be due to Server Overload. Please Try after sometime. Admin has been intimated.</strong></h3><br/><br/>"; 
 					}
 				}
 				else
 				{
 					echo "<h3><strong>Invalid Password Reset Link. Request new Reset Password Link <a href='forgotPassword.php'>here.</a></strong></h3><br/>";
+					
 					exit();
 				}
 			}
@@ -132,18 +171,27 @@ else
 
 	echo '
 			<br/>
+			
 			<br/>
+			
 			<p> Enter new password for your account: '.$userId.'. Atleast 8 characters.</p>
 			
 			<form action="resetPassword.php" method="POST">
 
 				<p class=formtext>New Password : <input type="password" name="password"/></p>
+				
 				<p class=formtext>Confirm New Password : <input type="password" name="confirmPassword"/></p>
+				
 				<input type="hidden" name="confirmationCode" value="'.$extHash.'"/> 
+    			
     			<input type="submit" class = "btn btn-large btn-success" value="Change Password"/>	
+			
 			</form>
+		
 		</div>
+	
 	</body>
+
 </html>';
 
 

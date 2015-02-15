@@ -25,9 +25,10 @@ class miniPost{
 	public $postOwner;
 	public $gender;
 	public $profilePicExists;
+	public $postUserFullName;
 
 	public function __construct($postId,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-		$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$postUserId,$hasStarred, $comments,$postOwner,$gender,$profilePicExists)
+		$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$postUserId,$hasStarred, $comments,$postOwner,$gender,$profilePicExists,$postUserFullName)
 	{
 		$this->postId=$postId;//Actually postIdHash but used(names) as postId to conform with already existing use.
 		$this->sharedWith=$sharedWith;
@@ -54,6 +55,7 @@ class miniPost{
 		$this->postOwner = $postOwner;
 		$this->gender = $gender;
 		$this->profilePicExists = $profilePicExists;
+		$this->postUserFullName = $postUserFullName;
 
 		//$this->postUserId=$postUserId;
 		return $this;

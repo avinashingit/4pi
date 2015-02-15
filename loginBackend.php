@@ -35,6 +35,8 @@ function login()
 									$_SESSION['tn'] = $secondUserIdHash;
 									// echo '<script>console.log($secondUserIdHash)<script>';
 									//echo $secondUserIdHash;
+
+									$_SESSION['userId'] = $userId;
 									
 									$_SESSION['logId']=$logId;
 									$_SESSION['jq'] = 0;
