@@ -162,6 +162,18 @@ h4#ideaCreatedBy{
 	background-color: #999;
 }
 
+.ideaDateBoxsi{
+	border-top: 1px solid rgba(0,0,0,0.4);
+	border-left: 1px solid rgba(0,0,0,0.4);
+	position: absolute;
+	/*right: 0px;*/
+	bottom: 0px;
+	left: 613px;
+	height:25px;
+	width: 12%;
+	background-color: #999;
+}
+
 .timeago{
 	padding-left: -15px;
 }

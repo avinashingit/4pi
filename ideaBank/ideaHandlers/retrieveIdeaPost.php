@@ -102,7 +102,7 @@
 							}
 						}
 
-						$proPicLocation=__DIR__.'/../img/proPics/'.$result['userIdHash'].'.jpg';
+						$proPicLocation=__DIR__.'/../../img/proPics/'.$result['userIdHash'].'.jpg';
 						if(file_exists($proPicLocation))
 						{
 							$proPicExists=1;

@@ -12,7 +12,7 @@ Code 10: MailError!!
 	$conn= new QoB();
 	$userIdHash=$_SESSION['vj'];
 	//Checking the session varianles. Second Level Protection
-	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['sh'])
+	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
 		notifyAdmin("Suspicious session variable in DeletePost",$userIdHash);
 		$_SESSION=array();

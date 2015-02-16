@@ -53,7 +53,9 @@ Code 16: Erroneous Entry By USER!!
 				//$files=$_POST['_files'];
 				
 				$date=date('y-m-d');
-				
+				$dateArray = explode("-",$date);
+				$date = $dateArray[2]."-".$dateArray[1]."-".$dateArray[0];
+
 				$createPostSQL="INSERT INTO ideaposttable (userIdHash, userId, name, ideaPostId, ideaPostIdHash, appreciaters, appreciateCount, depreciaters, depreciateCount, ideaPostDate, ideaDescription) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 				
 				$values[0] = array($userIdHash=>'s');
@@ -112,5 +114,4 @@ Code 16: Erroneous Entry By USER!!
 			}	//------------------------------------------------------------------------!!!!!-----
 		
 		}
-
 ?>

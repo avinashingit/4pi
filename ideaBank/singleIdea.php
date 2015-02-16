@@ -52,7 +52,7 @@ function toTitleCase(str)
 function insertIdea(data1)
 {
 					var res="";
-					res+='<div class="row ideaPostSearchResult" style="border:1px solid #e6e6e6;padding:3%;">';
+					res+='<div class="row ideaPostSearchResult" style="width: 90%; border:1px solid #e6e6e6;padding:5%;">';
 					res+='<div class="col-md-11" id=idea'+data1.ideaPostId+'>';
 					
 					res+='<div class="row  ideaHeadGrad" >';
@@ -75,10 +75,10 @@ function insertIdea(data1)
 					}
 					else{
 						if(data1.gender=='M'){
-							res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/defaultMan1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
+							res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultMan1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
 						}
 						else{
-							res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/defaultWomen1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
+							res+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title='+data1.name+'><h4 id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultWomen1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;&nbsp;'+ result +'</h4></a>';
 						}
 					}
 					res+='</div> <!-- end class col-md-8 id ideaProfile Pic --> ';
@@ -89,7 +89,7 @@ function insertIdea(data1)
 					{
 						res+='<div class="col-md-1 ">';
 						res+='<h5 id="ideaOptions" ><i class="fa fa-pencil faColor"  data-toggle="modal"  onclick="editIdea(this);" title="Edit Idea"> </i>&nbsp;&nbsp;</h5>';
-						res+='</div><!-- End of col-md-2 -->';
+						res+='</div><!-- End of col-md-1 -->';
 					}
 					
 					if(data1.postOwner == 1)
@@ -103,9 +103,9 @@ function insertIdea(data1)
 
 					
 					
-					res+='<div id="postSubjectText" style="font-size:18px; padding: 3%;">'+data1.ideaDescription+'</div>';
+					res+='<div id="postSubjectText" style="background-color: white; font-size:18px; padding: 3%;">'+data1.ideaDescription+'</div>';
 					
-					res+='<div class="row" id="ideaIcons" >';
+					res+='<div class="row" style="background-color: white" id="ideaIcons" >';
 				
 					res+='<div class="col-md-1 col-md-offset-8 ideaStarBox" >';
 					
@@ -136,10 +136,10 @@ function insertIdea(data1)
 						}
 					}
 					
-					res+='<div class="col-md-2 ideaDateBox text-center" style="padding-top: 3px;" >';
+					res+='<div class="col-md-2 ideaDateBoxsi text-center" style="padding-top: 3px;" >';
 					
 					res+='<em><time class="timeago" style="font-size:12px;" >'+data1.ideaPostDate+'</time></em></div>';
-										
+					//res+='<div class="col-md-1 col-md-offset-11">clear</div>';										
 					res+='</div><!-- End of ROW tag id-ideaIcons -->';
 					
 					res+='</div>';

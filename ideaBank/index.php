@@ -454,7 +454,7 @@ function retrieveLatestPosts(value, call) {
 }
 
 
-var genUrl = "/4pi/";
+var genUrl = "/4pi/aboutMe/index.php?userId=";
 function postInsert(position, data1, num, len) {
 	var res;
 	var idCol;
@@ -482,25 +482,28 @@ function postInsert(position, data1, num, len) {
 	
 	data1.name = toTitleCase(data1.name);
 	
-	if( data1.name.length>12 )
+	if( data1.name.length>14 )
 	{
-		res = data1.name.slice(0,11);
+		res = data1.name.slice(0,13);
 		var redundant = "...";
 		res = res.concat(redundant);
 	}
 	else{
 		res = data1.name;
 	}
-	//console.log(data1.gender);
+	console.log(data1.proPicExists);
 	if(data1.proPicExists == 1){
-		post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
+		post+='<a href="'+ genUrl+ data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
 	}
 	else{
 		if(data1.gender=='M'){
 			post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultMan1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
 		}
-		else{
+		else if(data1.gender=='F'){
 			post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultWoman1.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
+		}
+		else{
+			post+='<a href="'+ genUrl + data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/defaultMan.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
 		}
 	}
 	post+='</div> <!-- end class col-md-8 id ideaProfile Pic --> ';
