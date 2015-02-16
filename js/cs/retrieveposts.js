@@ -128,7 +128,7 @@ function exchange2(el, el2, key) {
         commentDiv.find('.commentText').css({
             "display": "block"
         });
-        $('#' + el).find('.fa-close').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");
+        $('#' + el).find('.fa-question').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");
     } 
     else {
         commentDiv = $('#' + el);
@@ -150,7 +150,7 @@ function exchange2(el, el2, key) {
         commentDiv.find('.commentText').css({
             "display": "block"
         });
-        $('#' + el).find('.fa-close').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");
+        $('#' + el).find('.fa-question').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");
     }
 
 
@@ -373,10 +373,11 @@ function createPost()
     }
 }
 
-function retrieveLatestPosts(value, call) {
+function retrieveLatestPosts(value, call)
+ {
     $('.row .postMenu').find('#latestPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
-    $('#loadMorePostsButton').html("Loading");
+    $('#loadMorePostsButton').find('button').html("Loading");
 
     var posts=[];
     if(call==1)
@@ -439,6 +440,8 @@ function retrieveLatestPosts(value, call) {
                     }
                 }
 
+                $('#loadMorePostsButton').find('button').html("Load more posts");
+
                 callAfterAjax();
             } 
             else if(data==11)
@@ -460,7 +463,7 @@ function retrieveImportantPosts(value, call) {
 
     $('.row .postMenu').find('#importantPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
-    $('#loadMorePostsButton').html("Loading");
+    $$('#loadMorePostsButton').find('button').html("Loading");
     var posts=[];
     var i=0;
     $('.post').each(function(){
@@ -512,6 +515,8 @@ function retrieveImportantPosts(value, call) {
                     }
                 }
 
+                $('#loadMorePostsButton').find('button').html("Load more posts");
+
                 callAfterAjax();
             } 
             else if(data==11)
@@ -531,7 +536,7 @@ function retrieveImportantPosts(value, call) {
 function retrievePopularPosts(value, call) {
     $('.row .postMenu').find('#popularPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
-    $('#loadMorePostsButton').html("Loading");
+   $('#loadMorePostsButton').find('button').html("Loading");
     var posts=[];
     
     var i=0;
@@ -585,6 +590,7 @@ function retrievePopularPosts(value, call) {
                     }
                 }
 
+                $('#loadMorePostsButton').find('button').html("Load more posts");
                 callAfterAjax();
             } 
             else if(data==11)

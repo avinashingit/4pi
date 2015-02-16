@@ -88,7 +88,7 @@ $conn=new QoB();
 			//$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate>= ?)";
 			
 			//Code till final release with approvals
-			$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?)";
+			$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
 			$values[0]=array($finalStudentRegex => 's');
 			$values[1]=array($userId => 's');
 			$values[2]=array($currentDate => 'i');

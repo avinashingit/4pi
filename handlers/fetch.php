@@ -1335,6 +1335,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$isSAC=-1;
 		}
+
+		if($poll['approvalStatus']==0)
+		{
+			$isApproved=-1;
+		}
+		else
+		{
+			$isApproved=1;
+		}
 		//Code until release of final version
 
 
@@ -1342,7 +1351,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$pollCreationTime=toTimeAgoFormat($poll['timestamp']);
 		$pollStatus=$poll['pollStatus'];
 		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC);
+							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC,$isApproved);
 		return $pollObj;
 	}
 
@@ -1391,9 +1400,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$isCoCAS=-1;
 		}
+		if($event['approvalStatus']==0)
+		{
+			$isApproved=-1;
+		}
+		else
+		{
+			$isApproved=1;
+		}
 		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
 			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name'],$isCoCAS);
+			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name'],$isCoCAS,$isApproved);
 		return $eventObj;
 	}
 
@@ -1554,6 +1571,73 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				$notificationIdHash=hash("sha512",$notificationId.HASHNOTIF);
 				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) 
 				ON DUPLICATE KEY UPDATE actionCount= CASE WHEN seen=0 THEN actionCount+1 WHEN seen=1 THEN 1 END, seen=0";
+		    	$values[0]=array($objectId => 's');
+		    	$values[1]=array($notifType => 'i');
+		    	$values[2]=array($objectType => 's');
+		    	$values[3]=array($userId => 's');
+		    	$values[4]=array($timestamp => 's');
+		    	$values[5]=array($notificationId => 's');
+		    	$values[6]=array($notificationIdHash => 's');
+		    	
+		    	/*$values[7]=array($objectId => 's');
+		    	$values[8]=array($notifType => 'i');
+		    	$values[9]=array($objectType => 's');
+		    	$values[10]=array($userId => 's');*/
+		    	
+		    	
+		    	$result=$conn->update($sendNotificationSQL,$values);
+		    	if($conn->error!=""&&$result!=true)
+		    	{
+		    		//return true;
+					//affected rows = 2 if an update occurs, 1 if an insert occurs
+					if(($rows=$conn->getAffectedRows())==1)
+					{
+						$notificationId++;
+					}
+		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
+					return false;
+
+		    	}
+		    	//$notificationId++;
+		    	//echo "notifid:".$notificationId;
+			}
+			
+		}
+		
+	}
+
+
+function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectType)
+	{
+		$conn=new QoB();
+		$FetchMaxNotifIDSQL="SELECT MAX(notificationId) as maxNotificationId FROM notifications";
+		$maxNotificationID=$conn->fetchALL($FetchMaxNotifIDSQL,false);
+		if($conn->error!=""||$maxNotificationID=="")
+		{
+			notifyAdmin("Conn.Error.:".$conn->error."!In create notification!!",$userId);
+			echo 12;
+			exit();
+		}
+		$eId=$maxNotificationID['maxNotificationId'];
+		
+		if($eId==NULL)
+		{
+			$notificationId=1;
+		}
+		else
+		{
+			$notificationId=$eId+1;
+		}
+		$timestamp=time();
+		$toUserIds=explode(',',$toUserIds);
+		foreach ($toUserIds as $userId) 
+		{
+			if($fromUserId!=$userId)
+			{
+				
+				$notificationIdHash=hash("sha512",$notificationId.HASHNOTIF);
+				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) 
+				ON DUPLICATE KEY UPDATE seen=0";
 		    	$values[0]=array($objectId => 's');
 		    	$values[1]=array($notifType => 'i');
 		    	$values[2]=array($objectType => 's');

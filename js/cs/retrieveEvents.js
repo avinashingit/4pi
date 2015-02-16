@@ -1,9 +1,48 @@
+function approveEvent(id,val)
+{
+	$.post('/4pi/handlers/eventHandlers/approveEvent.php',{
+		_eventId:id,
+		_status:val
+	})
+	.error(function(){
+		alert("Server overload. Please try again.:(");
+	})
+	.success(function(data){
+		console.log(data);
+		if(checkData(data)==1)
+		{
+			$("#"+id).find('.approve').remove();
+		}
+	});
+}
+
 
 function eventInsert(position,data,past)
 {
 	var event="";
 
 	event+='<div class="row event" id="'+data.eventIdHash+'" style="border:1px solid #cecece;margin-bottom:10px;">';
+
+	if(data.isCOCAS==1 && data.isApproved!=1)
+	{
+		event+='<div class="row approve">';
+
+		event+='<br/>';
+
+		event+='<div class="col-md-6 text-center">';
+
+			event+='<button class="btn btn-success btn-md" onclick="approveEvent(\''+data.eventIdHash+'\',1)">Approve</button>';
+
+		event+='</div>';
+
+		event+='<div class="col-md-6 text-center">';
+
+			event+='<button class="btn btn-danger btn-md" onclick="approveEvent(\''+data.eventIdHash+'\',-1)">Reject</button>';
+
+		event+='</div>';
+
+		event+='</div>';
+	}
 
 	event+='<div id="eventSharedWith" class="hidden" >'+data.sharedWith+'</div>';
 
@@ -633,15 +672,15 @@ function latestEventsFetch(value,call)
 					eventInsert('last',x[i],2);
 				}
 				$('.timeago').timeago();
+				$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 			}
 
 			else
 			{
 				$('#eventEmptyMessage').find('#messageEmpty').html("No events to display.");
+				$('#loadMoreEventsButton').hide();
 			}
-
-			$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
-			$('#loadMoreEventsButton').hide();
+			
 			
 		}
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
@@ -693,6 +732,7 @@ function upcomingEventsFetch(value,call)
 					eventInsert('last',x[i],2);
 				}
 				$('.timeago').timeago();
+				$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 			}
 
 			else
@@ -749,6 +789,7 @@ function pastCompetitionsFetch(value,call)
 					eventInsert('last',x[i],1);
 				}
 				$('.timeago').timeago();
+				$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 			}
 
 			else

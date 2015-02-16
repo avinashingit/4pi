@@ -40,7 +40,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Actual editEvent Code Starts
 $eventIdHash=$_POST['_eventId'];
-$eventStatus=$_POST['_approvalStatus'];
+$eventStatus=$_POST['_status'];
 if($eventStatus!=1&&$eventStatus!=-1)
 {
 	echo 16;
@@ -103,7 +103,15 @@ else
 			echo 6;
 			exit();
 		}
-		$editEventSQL="UPDATE event SET approvalStatus = ? WHERE eventIdHash= ?";
+		if($eventStatus==1)
+		{
+			$editEventSQL="UPDATE event SET displayStatus=1, approvalStatus = ? WHERE eventIdHash= ?";
+		}
+		else
+		{
+			$editEventSQL="UPDATE event SET displayStatus=0, approvalStatus = ? WHERE eventIdHash= ?";
+		}
+		
 
 		$values[0]=array($eventStatus => 'i');
 		$values[1]=array($eventIdHash => 's');

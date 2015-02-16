@@ -227,6 +227,25 @@
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
+
 						poll+='<div class="row">';
 
 							poll+='<div class="col-md-9 text-left">';
@@ -283,6 +302,25 @@
 					var optionLength=data.pollOptions.length;
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
 
 						poll+='<br/>';
 
@@ -409,6 +447,25 @@
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
+
 						poll+='<div class="row">';
 
 							poll+='<div class="col-md-9 text-left">';
@@ -465,6 +522,25 @@
 					var optionLength=data.pollOptions.length;
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
 
 						poll+='<br/>';
 
@@ -594,6 +670,25 @@
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
+
 						poll+='<div class="row">';
 
 							poll+='<div class="col-md-7" id="pollQuestion">';
@@ -642,6 +737,25 @@
 					var optionLength=data.pollOptions.length;
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
 
 						poll+='<br/>';
 
@@ -771,6 +885,25 @@
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
+
 						poll+='<div class="row">';
 
 							poll+='<div class="col-md-9 text-left">';
@@ -827,6 +960,25 @@
 					var optionLength=data.pollOptions.length;
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
 
 						poll+='<br/>';
 
@@ -953,6 +1105,25 @@
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
+
 						poll+='<div class="row">';
 
 							poll+='<div class="col-md-9 text-left">';
@@ -1009,6 +1180,25 @@
 					var optionLength=data.pollOptions.length;
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
 
 						poll+='<br/>';
 
@@ -1132,6 +1322,25 @@
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center"'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center"'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
+
 						poll+='<div class="row">';
 
 							poll+='<div class="col-md-7" id="pollQuestion">';
@@ -1180,6 +1389,25 @@
 					var optionLength=data.pollOptions.length;
 
 					poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+
+					if(data.isSAC==1)
+					{
+						poll+='<div class="row">';
+
+						poll+='<div class="col-md-6 text-center"'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='<div class="col-md-6 text-center"'>;
+
+							poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+
+						poll+='</div>';
+
+						poll+='</div>';
+					}
 
 						poll+='<br/>';
 
@@ -1354,6 +1582,8 @@
 							console.log(datas[i].isOwner);
 						}
 						$('time.timeago').timeago();
+
+						$('#loadMorePollsButton').html("Load more").attr("onclick","fetchLatestPolls(1,'noempty');");
 					}
 					else
 					{
@@ -1362,7 +1592,7 @@
 					}
 					
 				}
-				$('#loadMorePollsButton').html("Load more").attr("onclick","fetchLatestPolls(1,'noempty');");
+				// $('#loadMorePollsButton').html("Load more").attr("onclick","fetchLatestPolls(1,'noempty');");
 			}
 		});
 	}

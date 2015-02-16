@@ -29,10 +29,11 @@ class miniEvent
 	public $eventOwnerId;//
 	public $eventOwnerFullName;//Creater's Full name
 	public $isCOCAS;
+	public $isApproved;
 
 	function __construct($eventIdHash,$eventOrgName,$eventName,$eventType,$eventContent,
 		$eventDate,$eventTime,$eventVenue,$attendCount,$sharedWith, 
-		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$gender,$profilePicExists,$eventOwnerName,$eventUserIdHash,$eventOwnerId,$eventOwnerFullName,$isCOCAS)
+		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$gender,$profilePicExists,$eventOwnerName,$eventUserIdHash,$eventOwnerId,$eventOwnerFullName,$isCOCAS,$isApproved)
 	{
 		$this->eventIdHash=$eventIdHash;
 		$this->eventOrgName=$eventOrgName;
@@ -62,6 +63,7 @@ class miniEvent
 		$this->eventOwnerId=$eventOwnerId;
 		$this->eventOwnerFullName=$eventOwnerFullName;
 		$this->isCOCAS=$isCOCAS;
+		$this->isApproved=$isApproved;
 		return $this;
 
 	}

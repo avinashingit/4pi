@@ -173,23 +173,20 @@ function fetchMorePosts(e)
 	var inViewElement=$('#inViewElement').html();
     if(inViewElement==999)
     {
-    	console.log(window.inView);
         retrieveLatestPosts("noempty",1);
-        $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
+        $('#loadMorePostsButton').find('button').html("Load more posts").attr("onclick","fetchMorePosts(event)");
     }
 
     else if(inViewElement==998)
     {
-    	console.log(window.inView);
         retrievePopularPosts("noempty",1);
-        $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
+        $('#loadMorePostsButton').find('button').html("Load more posts").attr("onclick","fetchMorePosts(event)");
     }
 
     else if(inViewElement==997)
     {
-    	console.log(inView);
         retrieveImportantPosts("noempty",1);
-        $('#loadMorePostsButton').find('button').html("Load more").attr("onclick","fetchMorePosts(event)");
+        $('#loadMorePostsButton').find('button').html("Load more posts").attr("onclick","fetchMorePosts(event)");
     }
 }
 

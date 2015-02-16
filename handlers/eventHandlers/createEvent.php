@@ -249,9 +249,15 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				{
 					$proPicExists=-1;
 				}
+				$isCoCAS=-1;
+				if($userId==COCAS)
+				{
+					$isCoCAS=1;
+				}
+
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
-				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId']);
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCoCAS,0);
 				print_r(json_encode($eventObj));
 			}
 			else
