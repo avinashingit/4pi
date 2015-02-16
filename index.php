@@ -54,15 +54,13 @@ function imageInsertSearch(data,val)
 
 				result+='<div class="col-md-1" id="userImage">';
 
-
-				console.log("WENT");
 				result+='<img src="/4pi/img/defaultMan1.jpg" alt="'+data.name+'" width="30" height="30"/>';
 
 				result+='</div>';
 
 				result+='<div class="col-md-11" id="userName">';
 
-				result+='<a href="http://localhost/4pi/'+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+				result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
 
 				result+='</div>';
 
@@ -86,7 +84,7 @@ function imageInsertSearch(data,val)
 
 				result+='<div class="col-md-11" id="userName">';
 
-				result+='<a href="http://localhost/4pi/'+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+				result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
 
 				result+='</div>';
 
@@ -111,7 +109,7 @@ function imageInsertSearch(data,val)
 
 		result+='<div class="col-md-11" id="userName">';
 
-		result+='<a href="http://localhost/4pi/'+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+		result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
 
 		result+='</div>';
 
@@ -138,16 +136,13 @@ function checkIfImageExists(url,data,res)
 }
 
 
-
-
-
 function insertSearchResult(data)
 {
 	
 		// alert(url);
 		// 
 		// $('#searchResults').append(result);
-		var url="http://localhost/4pi/img/proPics/"+data.userIdHash+".jpg";
+		var url="/4pi/img/proPics/"+data.userIdHash+".jpg";
 		checkIfImageExists(url,data);
 			
 		// result="";

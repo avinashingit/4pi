@@ -13,7 +13,7 @@ if(userId=="")
 
 </script>
 
-<script src="aboutMe.js"></script>
+<script src="aboutMe.js?v=1.1"></script>
 
 <style>
 

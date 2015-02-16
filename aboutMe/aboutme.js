@@ -420,16 +420,30 @@ function insertTopPart(data,locateProPic)
 
 	topPart+='<div class="col-md-2" id="personPicture">';
 
-	if(locateProPic==1)
+	var num=Math.random();
+
+	if(data.profilePicExists==1)
 	{
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPicsTemp/'+data.userIdHash+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
-	}
-	else
-	{
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
 	}
 
-		
+	else if(data.profilePicExists==-1)
+	{
+		if(data.gender=="M")
+		{
+			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan1.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		}
+
+		else if(data.gender=="F")
+		{
+			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultWoman1.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		}
+
+		else
+		{
+			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan.png?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		}
+	}
 
 		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
 
@@ -470,7 +484,7 @@ function insertTopPart(data,locateProPic)
 				{
 					topPart+='<div class="text-left" id="personResumeLink">';
 
-						topPart+='<a href="/4pi/files/resumes/'+data.userIdHash+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+						topPart+='<a href="/4pi/files/resumes/'+userId+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
 
 					topPart+='</div><!-- end person resume link id -->';
 				}

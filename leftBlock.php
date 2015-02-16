@@ -27,7 +27,7 @@
 	$groups=explode(",",$row->clubsInvolved);
 
 	$exists=0;
-	if(file_exists("img/proPics/".$row->userIdHash."jpg"))
+	if(file_exists(__DIR__."/img/proPics/".$row->userIdHash.".jpg"))
 	{
 		$exists=1;
 	}
