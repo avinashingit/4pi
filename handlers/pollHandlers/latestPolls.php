@@ -92,7 +92,15 @@ else
 		
 
 		$finalStudentRegex=getRollNoRegex($userId);
-		$getLatestPollsSQL="SELECT poll.*, users.name,users.userIdHash,users.gender FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR poll.userId=?) ";
+		if($userId==SAC)
+		{
+			$getLatestPollsSQL="SELECT poll.*, users.name,users.userIdHash,users.gender FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR poll.userId=?)";
+		}
+		else
+		{
+			$getLatestPollsSQL="SELECT poll.*, users.name,users.userIdHash,users.gender FROM poll INNER JOIN users ON poll.userId=users.userId WHERE ((sharedWith REGEXP ?) OR poll.userId=?) AND approvalStatus=1";
+		}
+		
 		
 		$values[0]=array($finalStudentRegex => 's');
 		$values[1]=array($userId => 's');

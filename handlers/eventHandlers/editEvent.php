@@ -257,7 +257,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				resetNotification($userId,SAC,15,$eventId,600);
+				resetNotification($userId,COCAS,15,$eventId,600);
 				$attendCount=$event['attendCount'];
 				$seenCount=$event['seenCount'];
 				$isAttender=1;

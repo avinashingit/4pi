@@ -13,11 +13,7 @@
 //---Credits Ends---//
 
 
-
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
-
-
-
 
 	require_once("miniNotification.php");
 	require_once("postHandlers/miniClasses/miniPost.php");
@@ -25,14 +21,24 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	require_once("eventHandlers/miniEvent.php");
 	require_once("pollHandlers/miniPoll.php");
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function uploadPicture($file,$user)
 	{
 		if($file["name"]!='')
 		{
 			$userIdHash=$user['userIdHash'];
+
 			$resume=$file['name'];
+
 			$allowedExts = array("jpg","jpeg");
+
 			$extension = end(explode(".", $file["name"]));
+
 			if (( ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") ) && ($file["size"] <= 4194304) && in_array($extension, $allowedExts))
 			{
 				if ($file["error"] > 0)
@@ -49,21 +55,34 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 					}
 					
 					$uploadedfile = $file['tmp_name'];
+
 					$src = imagecreatefromjpeg($uploadedfile);
+
 					list($width,$height)=getimagesize($uploadedfile);
+
 					$newwidth=200;
+
 					$newheight=(1.15)*$newwidth;
+
 					$tmp=imagecreatetruecolor($newwidth,$newheight);
+
 					imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight,$width,$height);
+
 					$fileLocation=__DIR__."/../img/proPics/$userIdHash.jpg";
+
 					$fileLocation2=__DIR__."/../img/proPicsTemp/$userIdHash.jpg";
+
 					//echo $fileLocation;
+
 					imagejpeg($tmp,$fileLocation2,100);
+
 					if(imagejpeg($tmp,$fileLocation,100))
 					{
 						//echo "Uploaded Picture successfully ".$fileLocation;
 						imagedestroy($src);
+
 						imagedestroy($tmp);
+
 						return true;
 					}
 					else
@@ -75,12 +94,22 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}	
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function getUserFromHash($userHash)
 	{
 		$conn=new QoB();
+
 		$fetchUserSQL="SELECT * FROM users WHERE userIdHash= ?";
+
 		$values[0]=array($userHash=>'s');
+
 		$result=$conn->fetchAll($fetchUserSQL,$values);
+
 		if($conn->error==""&&$result!="")
 		{	
 			return $result;
@@ -91,11 +120,18 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function removeProPic($userIdHash)
 	{
 		if (array_map('file_exists',glob(__DIR__."/../img/proPics/$userIdHash.jpg")))
 		{
 			array_map('unlink',glob(__DIR__."/../img/proPics/$userIdHash.jpg"));
+
 			return true;
 		}
 		else
@@ -104,11 +140,18 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function removeResume($userId)
 	{
 		if (array_map('file_exists',glob(__DIR__."/../../files/resumes/$userId.*")))
 		{
 			array_map('unlink',glob(__DIR__."/../../files/resumes/$userId.*"));
+
 			return true;
 		}
 		else
@@ -116,16 +159,29 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false; 
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function setPassword($userId,$password,$alias)
 	{
-	
 		$hashedPassword=hash("sha512",$password.PASSSALT);
+
 		$values[0]=array($hashedPassword=>'s');
+
 		$values[1]=array($alias => 's');
+
 		$values[2]=array($userId => 's');
+
 		$setPasswordSQL="UPDATE users SET password=?,alias=? WHERE userId=? AND password=''";
+
 		$conn=new QoB();
+
 		$result=$conn->update($setPasswordSQL,$values);
+
 		if($conn->error=="")
 		{
 			return 1;
@@ -138,14 +194,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function resetPassword($userId,$password)
 	{
 		$hashedPassword=hash("sha512",$password.PASSSALT);
+
 		$values[0]=array($hashedPassword=>'s');
+
 		$values[1]=array($userId => 's');
+
 		$resetPasswordSQL="UPDATE users SET password=? WHERE userId=?";
 		
 		$result=$conn->update($setPasswordSQL,$values);
+
 		if($conn->error=="")
 		{
 			return 1;
@@ -158,20 +223,34 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function changePassword($userId,$oldpassword,$password)
 	{
-		
 		$hashedPassword=hash("sha512",$password.PASSSALT);
+
 		$oldpasswordHash=hash("sha512",$oldpassword.PASSSALT);
+
 		$values[0]=array($hashedPassword=>'s');
+
 		$values[1]=array($userId => 's');
+
 		$values[2]=array($oldpasswordHash => 's');
+
 		$setPasswordSQL="UPDATE users SET password=? WHERE userId=? AND password = ?";
+
 		$conn=new QoB();
+
 		$result=$conn->update($setPasswordSQL,$values);
+
 		if($conn->error=="")
 		{
 			$rowsAffected=$conn->getMatchedRowsOnUpdate();
+
 			if(($rowsAffected)==1)
 			{
 				return 3;
@@ -188,10 +267,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 		
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function loginLog($userId)
 	{	
 		$conn=new QoB();
+
 		$user_agent=$_SERVER['HTTP_USER_AGENT'];
+
 		$os_platform    =   "Unknown OS Platform";
 
     	$os_array=  array(
@@ -249,15 +337,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	        }
 	    }
 	    $ipAddress=$_SERVER['REMOTE_ADDR'];
+
 	    $OsAndBrowser=$browser." On ".$os_platform;
+
 		$LogDetailsSQL="INSERT INTO loginlog (userId,osbrowser,ipaddress) VALUES(?,?,?)";
+
 		$values[0]=array($userId => 's');
+
 		$values[1]=array($OsAndBrowser => 's');
+
 		$values[2]=array($ipAddress => 's');
+
 		$result=$conn->insert($LogDetailsSQL,$values);
+
 		if($conn->error==""&&$result==true)
 		{
 			$logId=$conn->getInsertId();
+
 			return $logId;
 		}
 		else
@@ -268,15 +364,26 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	function logoutLog($logId)
 	{
 		$conn=new QoB();
+
 		$timestamp=time();
+
 		$logoutTime=toTimeAgoFormat($timestamp);
+
 		$logoutLogSQL="UPDATE loginlog SET logoutTime= ? WHERE logId=?";
+
 		$values[0]=array($logoutTime => 's');
+
 		$values[1]=array($logId => 'i');
+
 		$result=$conn->update($logoutLogSQL,$values);
+
 		if($conn->error==""&&$result==true)
 		{
 			return true;
@@ -289,12 +396,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 
 	function getUserFromId($userId)
 	{
 		$conn=new QoB();
+
 		$fetchUserSQL="SELECT * FROM users WHERE userId= ?";
+
 		$values[0]=array($userId=>'s');
+
 		$result=$conn->fetchAll($fetchUserSQL,$values);
 		if($conn->error==""&&$result!="")
 		{	
@@ -307,12 +421,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function getAboutUserFromId($userId)
 	{
 		$conn=new QoB();
+
 		$fetchUserSQL="SELECT * FROM about WHERE userId= ?";
+
 		$values[0]=array($userId=>'s');
+
 		$result=$conn->fetchAll($fetchUserSQL,$values);
+
 		if($conn->error=="")
 		{	
 			return $result;
@@ -324,12 +447,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function getResetPassRecord($extHash)
 	{
 		$conn=new QoB();
+
 		$fetchUserSQL="SELECT * FROM resetPassword WHERE extHash= ?";
+
 		$values[0]=array($extHash=>'s');
+
 		$result=$conn->fetchAll($fetchUserSQL,$values);
+
 		if($conn->error==""&&$result!="")
 		{	
 			return $result;
@@ -339,14 +471,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function getLeaveMessageRecord($extHash)
 	{
 		$conn=new QoB();
+
 		$fetchUserSQL="SELECT * FROM leaveMessage WHERE extHash= ?";
+
 		$values[0]=array($extHash=>'s');
+
 		$result=$conn->fetchAll($fetchUserSQL,$values);
+
 		if($conn->error==""&&$result!="")
 		{	
 			return $result;
@@ -356,13 +497,20 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
-	
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//	
 
 	function getPostFromHash($postIdHash)
 	{
 		$conn=new QoB();
+
 		$values = array(0 => array($postIdHash => 's'));
+
 		$result = $conn->fetchAll("SELECT * FROM post WHERE postIdHash = ?",$values,false);
+
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -372,13 +520,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function getEventFromHash($eventIdHash)
 	{
 		$conn=new QoB();
+
 		$values = array(0 => array($eventIdHash => 's'));
+
 		$result = $conn->fetchAll("SELECT * FROM event WHERE eventIdHash = ?",$values,false);
+
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -388,13 +544,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function getPollFromHash($pollIdHash)
 	{
 		$conn=new QoB();
+
 		$values = array(0 => array($pollIdHash => 's'));
+
 		$result = $conn->fetchAll("SELECT * FROM poll WHERE pollIdHash = ?",$values,false);
+
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -404,12 +568,20 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 
 	function getSkillsByUser($userId)
 	{
 		$conn=new QoB();
+
 		$values = array(0 => array($userId => 's'));
+
 		$result = $conn->fetchAll("SELECT * FROM skillset WHERE userId = ?",$values,false);
+
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -419,12 +591,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 
 	function getToolsByUser($userId)
 	{
 		$conn=new QoB();
+
 		$values = array(0 => array($userId => 's'));
+
 		$result = $conn->fetchAll("SELECT * FROM toolkit WHERE userId = ?",$values,false);
+
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -434,12 +615,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 
 	function getInterestsByUser($userId)
 	{
 		$conn=new QoB();
+
 		$values = array(0 => array($userId => 's'));
+
 		$result = $conn->fetchAll("SELECT * FROM interests WHERE userId = ?",$values,false);
+
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -450,12 +640,20 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function hasReported($userId,$hiddenTo)
 	{
 		$hiddenToarray = explode(',',$hiddenTo);
+
 		$noofhidden = count($hiddenToarray);
 		
 		$output = 0;
+
 		for($i = 0;$i<$noofhidden;$i++)
 			{
 				if(strcmp($userId,$hiddenToarray[$i]) == 0)
@@ -476,23 +674,41 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function blockUserByHash($userIdHash,$crime,$privateData="")
 	{
 		$conn=new QoB();
+
 		$isActive=0;
+
 		$noteCrimeSQL="INSERT INTO suspicious (userId, suspicion) VALUES(?,?)";
+
 		$UpdateUserSQL="UPDATE users SET isActive=? WHERE userIdHash= ?";
+
 		$values[0]=array($isActive=>'i');
+
 		$values[1]=array($userIdHash=>'s');
+
 		$result=$conn->update($UpdateUserSQL,$values);
+
 		if($conn->error==""&&$result==true)
 		{
 			$adminNotif="Blocked: ".$crime.",".$privateData;
+
 			//$user=getUserFromHash($userIdHash);
+
 			//$userId=$user['userId'];
+
 			$values1[0]=array($userIdHash =>'s');
+
 			$values1[1]=array($adminNotif => 's');
+
 			$result2=$conn->insert($noteCrimeSQL,$values1);
+
 			if($conn->error==""&&$result2==true){
 				return 3;
 			}
@@ -507,14 +723,25 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function notifyAdmin($notification,$userIdentity)
 	{
 		$conn=new QoB();
+
 		$notification="Notify: ".$notification;
+
 		$noteCrimeSQL="INSERT INTO suspicious (userId, suspicion) VALUES(?,?)";
+
 		$values1[0]=array($userIdentity =>'s');
+
 		$values1[1]=array($notification => 's');
+
 		$result=$conn->insert($noteCrimeSQL,$values1);
+
 		if($conn->error==""&&$result==true)
 		{
 			return true;
@@ -525,47 +752,89 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function getMailerObject()
 	{
-		$mail = new PHPMailer(true);
-		$mail->IsSMTP();
-		$mail->IsHTML();
-		$mail->Timeout    = 45;
-		$mail->SMTPAuth   = true;                  // enable SMTP authentication
-		$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-		$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-		$mail->Port       = 465;                  // set the SMTP port
+		try
+		{
+			$mail = new PHPMailer(true);
 
-		$mail->Username   = "root.4pi@gmail.com";  // MAIL username
-		$mail->Password   = "110720@iiitdmK";            // MAIL password
+			$mail->IsSMTP();
 
-		$mail->Sender     = "4pi@programmer.net";
-		$mail->From       = "4pi IIITDM-Kancheepuram";
-		$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
+			$mail->IsHTML();
+
+			$mail->Timeout    = 45;
+
+			$mail->SMTPAuth   = true;                  // enable SMTP authentication
+
+			$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
+
+			$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+
+			$mail->Port       = 465;                  // set the SMTP port
+
+			$mail->Username   = "root.4pi@gmail.com";  // MAIL username
+
+			$mail->Password   = "110720@iiitdmK";            // MAIL password
+
+			$mail->Sender     = "4pi@programmer.net";
+
+			$mail->From       = "4pi IIITDM-Kancheepuram";
+
+			$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
+
+		}
+		catch(phpmailerException $e)
+		{
+			notifyAdmin($e->errorMessage()."!!!! MailSubject: ".$subject,$userId);
+			return false;
+		}
 		return $mail;
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function sendEmail($mailerObject,$emailId,$content,$subject,$attachments="")
 	{
-		$mail= $mailerObject;
-		$mail->Subject    = $subject;
-		$mail->WordWrap   = 500; // set word wrap
-		$mail->AddAddress($emailId); //attaches the receiver email address.
-		$mail->Body       = $content;
-		if($attachments!="")
+		try
 		{
-			$splitAttachments=explode(",",$attachments);
-			$attachmentCount=count($splitAttachments);
-			for($i=0;$i<$attachmentCount;$i++)
-				{
-					$mail->AddAttachment($splitAttachments[$i]);
-				}
-		}
-		//$mail->isSMTP();
-		try{
+			$mail= $mailerObject;
+
+			$mail->Subject    = $subject;
+
+			$mail->WordWrap   = 500; // set word wrap
+
+			$mail->AddAddress($emailId); //attaches the receiver email address.
+
+			$mail->Body       = $content;
+
+			if($attachments!="")
+			{
+				$splitAttachments=explode(",",$attachments);
+
+				$attachmentCount=count($splitAttachments);
+
+				for($i=0;$i<$attachmentCount;$i++)
+					{
+						$mail->AddAttachment($splitAttachments[$i]);
+					}
+			}
+			//$mail->isSMTP();
+		
 			$mail->send();
+
 			$mail->ClearAddresses();
+
 			return true;
 		}
 		catch(phpmailerException $e)
@@ -575,33 +844,52 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 
 	function mailContent($emailId,$content,$subject,$attachments="")
 	{
-		$mail = getMailerObject();
-		$mail->Subject    = $subject;
-		$mail->WordWrap   = 500; // set word wrap
-		$mail->AddAddress($emailId);
-		$mailBody="<center><strong>--This is an Automated Email. Don't Waste Your TIME Replying to this email address!!--</strong></center><br/>";
-		$mailBody=$mailBody."<strong>Subject:</strong>".$subject."<br/>";
-		$mailBody=$mailBody."<strong>Content:</strong><br/>".$content."<br/><br/>";
-		$mailBody=$mailBody."Have A Nice Time<br/>Regards,<br/><strong>4pi-Admin</strong><br/>";
-
-		$mail->Body       = $mailBody;
-		if($attachments!="")
+		try
 		{
-			$splitAttachments=explode(",",$attachments);
-			$attachmentCount=count($splitAttachments);
-			for($i=0;$i<$attachmentCount;$i++)
-				{
-					$mail->AddAttachment($splitAttachments[$i]);
-				}
-		}
-		//$mail->isSMTP();
+			$mail = getMailerObject();
+
+			$mail->Subject    = $subject;
+
+			$mail->WordWrap   = 500; // set word wrap
+
+			$mail->AddAddress($emailId);
+
+			$mailBody="<center><strong>--This is an Automated Email. Don't Waste Your TIME Replying to this email address!!--</strong></center><br/>";
+
+			$mailBody=$mailBody."<strong>Subject:</strong>".$subject."<br/>";
+
+			$mailBody=$mailBody."<strong>Content:</strong><br/>".$content."<br/><br/>";
+
+			$mailBody=$mailBody."Have A Nice Time<br/>Regards,<br/><strong>4pi-Admin</strong><br/>";
+
+			$mail->Body       = $mailBody;
+
+			if($attachments!="")
+			{
+				$splitAttachments=explode(",",$attachments);
+
+				$attachmentCount=count($splitAttachments);
+
+				for($i=0;$i<$attachmentCount;$i++)
+					{
+						$mail->AddAttachment($splitAttachments[$i]);
+					}
+			}
+			//$mail->isSMTP();
 		
-		try{
 			$mail->send();
+		
 			$mail->ClearAddresses();
+		
 			return true;
 		}
 		catch(phpmailerException $e)
@@ -612,17 +900,28 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function getCommentByPostIdAndHash($postId,$commentIdHash)
 	{
 		$conn = new QoB();
+	
 		$commentTable="p".$postId."c";
+	
 		$GetCommentSQL="SELECT * FROM ".$commentTable." WHERE commentIdHash= ?";
+	
 		// $values[]=array("commentTable" => 's');
+	
 		// $values[]=array($commentTable => 's');
+	
 		$values[0]=array($commentIdHash => 's');
+	
 		$result=$conn->fetchAll($GetCommentSQL,$values,false);
+	
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -632,18 +931,30 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	//careful!! it returns record not array.
 	function getAllCommentsByPostId($postId)
 	{
 		$conn = new QoB();
+	
 		$commentTable="p".$postId."c";
+	
 		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+	
 		// $values[]=array("commentTable" => 's');
+	
 		// $values[]=array($commentTable => 's');
+	
 		//$values[0]=array($commentIdHash => 's');
+	
 		$result=$conn->select($GetCommentSQL);
+	
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -653,19 +964,32 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	//careful! returns result set not array
 	function getFewCommentsByPostId($postId,$commentCount=3)
 	{
 		$conn = new QoB();
+	
 		$commentTable="p".$postId."c";
+	
 		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp DESC LIMIT 0,".$commentCount;
+	
 		// $values[]=array("commentTable" => 's');
+	
 		// $values[]=array($commentTable => 's');
+	
 		//$values[0]=array($commentIdHash => 's');
+	
 		$result=$conn->select($GetCommentSQL);
+	
 		//var_dump($result);
+	
 		if($conn->error==""&&$result!="")
 		{
 			return $result;
@@ -676,19 +1000,32 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	function getAllCommentsArrayByPostId($postId)
 	{
 		$conn = new QoB();
+	
 		$commentTable="p".$postId."c";
+	
 		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+	
 		// $values[]=array("commentTable" => 's');
+	
 		// $values[]=array($commentTable => 's');
+	
 		//$values[0]=array($commentIdHash => 's');
+	
 		$result=$conn->select($GetCommentSQL);
+	
 		$out=array();
+	
 		if($conn->error==""&&$result!="")
 		{
-			
 			while($record=$conn->fetch($result))
 			{
 				$out[]=$record;
@@ -702,11 +1039,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
+
 	function updatePostIndexesOnComment($postArray,$userId,$conn)
 	{
 		$postIdHash=$postArray['postIdHash'];
+	
 		$date = date_create();
+	
 		$followers=$postArray['followers'];
+	
 		if(stripos($followers,$userId)===false)
 		{
 			if($followers=="")
@@ -720,6 +1067,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 
 		$commentCount=$postArray['commentCount'];
+	
 		$commentCount=$commentCount+1;
 						
 		$commentIndexUpdated = ($postArray['commentIndex'] + date_timestamp_get($date))/2;
@@ -729,6 +1077,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$values = array(0 => array($commentIndexUpdated => 'i'), 1 => array($popularityIndexUpdated => 'i'), 2 => array($commentCount => 'i'), 3 => array($followers => 's'),4 => array($postIdHash => 's'));
 						
 		$result = $conn->update("UPDATE post SET commentIndex = ?, popularityIndex = ?,commentCount = ?,followers = ? WHERE postIdHash = ? ",$values);
+	
 		if($conn->error == ""&&$result==true)
 		{
 			//echo 'Updated successfully<br />';
@@ -743,11 +1092,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 
 	function changeToRawSharedWith($sharedWith)
 	{
 		$sharedWithRegex="([\.]+)";
+	
 		$rawSharedWith=preg_replace($sharedWithRegex, '', $sharedWith);
+	
 		if($rawSharedWith=="")
 		{
 			return "EVERYONE";
@@ -756,56 +1111,95 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
+
 	//Anything 'Raw' is what is fetched from front-end or something which needs to be sent to front-end
 	function changeToEventDateFormat($date)
 	{
 		$nDate=explode("/", $date);
+	
 		$eventDate=$nDate[2].$nDate[1].$nDate[0];
+	
 		/*$dateRegex="([/]+)";
+	
 		$eventDate=preg_replace($dateRegex, '', $date);*/
+	
 		return $eventDate;
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function changeToEventTimeFormat($time)
 	{
 		$timeRegex="([:]+)";
+	
 		$eventTime=preg_replace($timeRegex, '', $time);
+	
 		return $eventTime;
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function changeToRawDateFormat($eventDate)
 	{
 		//echo $eventDate;
 		$nndate[0]=substr($eventDate, 6,2);//day
+	
 		$nndate[1]=substr($eventDate, 4,2);//month
+	
 		$nndate[2]=substr($eventDate, 0,4);//year
+	
 		//var_dump($nndate);
+	
 		/*$nDate=str_split($eventDate,4);
+	
 		$nndate=str_split($nDate[0],2);
+	
 		$nndate[2]=$nDate[1];*/
+	
 		$rawDate=implode("/",$nndate);
+	
 		return $rawDate;
+	
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function changeToRawTimeFormat($eventTime)
 	{
+	
 		$nTime=str_split($eventTime,2);
+	
 		$rawTime=implode(":",$nTime);
+	
 		return $rawTime;
+	
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function isSharedTo($userId,$sharedWith)
 	{
 		//$nSharedWith=explode(",",$sharedWith);
+	
 		$finalRegex=getRollNoRegex($userId);
+	
 		if(preg_match('/'.$finalRegex.'/',$sharedWith))
 		{
 			return true;
@@ -816,6 +1210,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	//Try to avaoid. Use Carefully. Prefer isThereInCSV() than this.
 	function isThere($haystack,$needle)
@@ -830,12 +1227,16 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function validateDate($rawDate,$seperator='/')
 	{
 		$ndate=explode($seperator,$rawDate);
+	
 		//var_dump($ndate);
+	
 		if($ndate[2]<1947||$ndate[2]>2050)
 		{
 			return false;
@@ -843,6 +1244,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		if($ndate[2]%4==0)
 		{
 			$daysArray=[31,29,31,30,31, 30,31,31,30,31, 30,31];
+	
 			if($ndate[1]>=1&&$ndate[1]<=12)
 			{
 				if($ndate[0]>=0&&$ndate[0]<=$daysArray[$ndate[1]-1])
@@ -862,6 +1264,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		else
 		{
 			$daysArray=[31,28,31,30,31, 30,31,31,30,31, 30,31];
+	
 			if($ndate[1]>=1&&$ndate[1]<=12)
 			{
 				if($ndate[0]>=0&&$ndate[0]<=$daysArray[$ndate[1]-1])
@@ -880,11 +1283,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function validateTime($rawTime)
 	{
 		$nTime=explode(":",$rawTime);
+	
 		if($nTime[0]<0||$nTime[0]>23||$nTime[1]<0||$nTime[1]>59)
 		{
 			return false;
@@ -892,17 +1298,24 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		return true;
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 	
 	function dateStringToTimestamp($dateString,$seperator='/')
 	{
 		if(validateDate($dateString,$seperator))
 		{
 			$splitDate=explode($seperator,$dateString);
+	
 			$year=$splitDate[2];
+	
 			$month=$splitDate[1];
+	
 			$day=$splitDate[0];
+	
 			$timestamp = mktime(0, 0, 0, $month, $day, $year);
+	
 			return $timestamp;
 		}
 		else
@@ -911,34 +1324,48 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function validateEventDateAndTime($eventDate,$eventTime)
 	{
 		date_default_timezone_set("Asia/Kolkata");
+	
 		$currentDate=date("Ymd",time());
+	
 		$currentTime=date("Hi",time());
+	
 		$currentDate=(int)$currentDate;
+	
 		$currentTime=(int)$currentTime;
+	
 		if($eventDate<$currentDate||($eventDate==$currentDate&&$eventTime<$currentTime))
 			return false;
 		return true;
 
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function validateAboutMeDateString($dateString)
 	{
 		$time=array();
+	
 		$currentTime=time();
+	
 		if($dateString!="-")
 		{
-
 			$timestring=explode('-', $dateString);
+
 			//var_dump($timestring);
+
 			$start=$timestring[0];
+
 			$end=$timestring[1];
+
 			if($start!="")
 			{
 				if(($time['start']=dateStringToTimestamp($start))==false)
@@ -985,31 +1412,51 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			//echo "String Empty";
 			$time['start']="";
+
 			$time['end']="";
+
 			return $time;
 		}
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	function getEventStatus($event,$isAttending)
 	{
 		date_default_timezone_set("Asia/Kolkata");
+
 		$currentDate=date("Ymd",time());
+
 		$currentDate=(int)$currentDate;
+
 		$actualStatus="";
+
 		if($event['eventDate']==$currentDate)
 		{
 			$eventTimeHr=(int)(substr($event['eventTime'],0,2));
+
 			$eventTimeMin=(int)(substr($event['eventTime'], 2,2));
+
 			$eventEndHr=$eventTimeHr+$event['eventDurationHrs'];
+
 			$eventEndMin=$eventTimeMin+$event['eventDurationMin'];
+
 			if($eventEndMin>=60)
 			{
 				$eventEndMin=$eventEndMin%60;
+
 				$eventEndHr++;
+
 				$eventEndHr=$eventEndHr%24;
+
 			}
+
 			$currentHr=(int)(date("H",time()));
+
 			$currentMin=(int)date("i",time());
+
 			if($currentHr<$eventEndHr&&$currentHr>=$eventTimeHr)
 			{
 				$actualStatus="Ongoing";
@@ -1068,33 +1515,55 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	//used to get the regular expression to match against sharedwith. Can't be used for other purposes
 	function getRollNoRegex($rollno)
 	{
 		$stud['year']=substr($rollno, 3,2);
+
 		$stud['branch']=substr($rollno,0,3);
+
 		$stud['degree']=substr($rollno, 5,1);
+
 		$stud['branchYear']=substr($rollno,0,5);
+
 		$stud['branchDegree']=$stud['branch'].$stud['degree'];
+
 		$stud['yearDegree']=$stud['year'].$stud['degree'];
+
 		$stud['branchYearDegree']=$stud['branch'].$stud['yearDegree'];
+
 		$regexString="(".$stud['year']."|".$stud['branch']."|".$stud['degree']."|".$stud['branchYear']."|".$stud['branchDegree']."|".$stud['yearDegree']."|".$stud['branchYearDegree'].")";
+
 		$finalRegexString="(,".$regexString.",?)|(^".$regexString.",?)|(^All$)";
+
 		return $finalRegexString;
 	}
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	//cause for malfunction in isThereInCSV() if the needle is an empty string. That Function returns true if empty string is passed as needle.
 	function isThereInCSVRegex($needle)
 	{
 		$finalRegexString="(,".$needle.",)|(^".$needle.",)|(^".$needle."$)|(,".$needle."$)";
+
 		return $finalRegexString;
 	}
-	
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	//Remember that function returns true if the needle is empty.
 	function isThereInCSV($haystack,$needle)
 	{
 		$finalRegexString=isThereInCSVRegex($needle);
+
 		if(preg_match('/'.$finalRegexString.'/',$haystack))
 		{
 			return true;
@@ -1104,6 +1573,10 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			return false;
 		}
 	}
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function isCoCAS($userId)
 	{
@@ -1117,6 +1590,10 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	function isSAC($userId)
 	{
 		if($userId==SAC)
@@ -1129,16 +1606,26 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	function getDegree($userId)
 	{
 		$currentYear=date('Y',time());
+
 		$currentMonth=date('m',time());
+
 		$startYear=(int)(substr($userId,3,2));
+
 		$currentYearSliced=(int)(substr($currentYear, 2));
+
 		$isAlumni=0;
 		
 		$degree="B.Tech";
+
 		$rollNoArray=explode('',$userId);
+
 		if($rollNoArray[5]=='D')
 		{
 			$degree="Ph.D";
@@ -1146,6 +1633,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		else if($rollNoArray[5]=='M')
 		{
 			$degree="M.Des";
+
 			if($startYear+2==$currentYearSliced)
 			{
 				if((int)currentMonth>6)
@@ -1157,6 +1645,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		else if($rollNoArray[5]=='I')
 		{
 			$degree="B.Tech Dual Degree";
+
 			if($startYear+5==$currentYearSliced)
 			{
 				if((int)currentMonth>6)
@@ -1168,6 +1657,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		else if($rollNoArray[5]=='B')
 		{
 			$degree="B.Tech";
+
 			if($startYear+4==$currentYearSliced)
 			{
 				if((int)currentMonth>6)
@@ -1180,7 +1670,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		return $degree;
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function getDuration($start,$end)
 	{
@@ -1201,10 +1693,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$endYearMonthDate=date('d/m/Y',$end);
 		}
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
+
 		return $duration;
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function getMinDuration($start,$end)
 	{
@@ -1225,37 +1720,54 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$endYearMonthDate=date('M,Y',$end);
 		}
 		$duration=$startYearMonthDate."-".$endYearMonthDate;
+
 		return $duration;
-		
 		
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function toTimestamp($dateString)
 	{
 		return strtotime($dateString);
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function toTimeAgoFormat($timestamp)
 	{
 		$ts= new DateTime();
+
 		$ts->setTimestamp($timestamp);
+
 		$timeAgoFormat=$ts->format(DateTime::ISO8601);
+
 		return $timeAgoFormat;
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function getProfilePicLocation($userIdHash)
 	{
 		$proPicLocation='../img/proPics/'.$userIdHash.'.jpg';
+
 		return $proPicLocation;
 	}
 	
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	function getQuatlity($size)
 	{
 		$RequiredSize=32768;
+
 		if($size<=$RequiredSize)
 		{
 			$quality=100;
@@ -1296,15 +1808,24 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function getPollObject($poll,$userId)
 	{
 		$options=$poll['options'];
+
 		$optionsArray=explode(',', $options);
+
 		$optionCount=count($optionsArray);
+
 		$hasVoted=isThere($poll['votedBy'],$userId);
+
 		$optionVotes=$poll['optionVotes'];
+
 		$optionVotesArray=explode(',', $optionVotes);
+
 		for($i=0;$i<$optionCount;$i++)
 		{
 			$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionVotesArray[$i]);
@@ -1318,6 +1839,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$isOwner=-1;
 		}
 		$proPicLocation=__DIR__.'/../img/proPics/'.$poll['userIdHash'].'.jpg';
+
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1349,12 +1871,18 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		//code until release of final version
 		$pollCreationTime=toTimeAgoFormat($poll['timestamp']);
+
 		$pollStatus=$poll['pollStatus'];
+
 		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
 							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC,$isApproved);
 		return $pollObj;
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function getEventObject($event,$userId)
@@ -1367,8 +1895,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$isAttender=1;
 		}
+
 		$eventStatus=getEventStatus($event,$isAttender);
+
 		$eventUserId=$event['userId'];
+
 		if($eventUserId==$userId)
 		{
 			$eventOwner=1;
@@ -1377,13 +1908,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$eventOwner=-1;
 		}
+
 		$eventTime=$event['eventTime'];
+
 		$rawTime=changeToRawTimeFormat($eventTime);
+
 		$eventDate=$event['eventDate'];
+
 		$rawDate=changeToRawDateFormat($eventDate);
+
 		$eventCreationTime=toTimeAgoFormat($event['timestamp']);
+
 		$rawSharedWith=changeToRawSharedWith($event['sharedWith']);
+
 		$proPicLocation=__DIR__.'/../img/proPics/'.$event['userIdHash'].'.jpg';
+
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1408,19 +1947,26 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$isApproved=1;
 		}
-		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],
-			$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
-			$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name'],$isCoCAS,$isApproved);
+	
+		$eventObj=new miniEvent($event['eventIdHash'],$event['organisedBy'],$event['eventName'],$event['type'],$event['content'],$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime,$event['gender'],$proPicExists,$event['alias'], $event['userIdHash'],$event['userId'],$event['name'],$isCoCAS,$isApproved);
+		
 		return $eventObj;
 	}
 
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	function getPostObjectWithFewComments($post,$userId,$commentCount=3)
 	{
 		$conn=new QoB();
+
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
+
 		$postCreationTime=toTimeAgoFormat($post['timestamp']);
+
 		if(stripos($post['followers'],$userId)===false)
 		{
 			$followPost=1;
@@ -1429,6 +1975,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$followPost=-1;
 		}
+
 		if($post['userId']==$userId)
 		{
 			$postOwner=1;
@@ -1437,9 +1984,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$postOwner=-1;
 		}
+
 		$hasStarred=isThere($post['starredBy'],$userId);
+
 		$postComments=getFewCommentsByPostId($post['postId'],$commentCount);
+
 		$comments=array();
+
 		if($postComments!=false)
 		{
 			while ($record=$conn->fetch($postComments))
@@ -1449,7 +2000,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			}
 			//var_dump($comments);
 		}
+
 		$proPicLocation=__DIR__.'/../img/proPics/'.$post['userIdHash'].'.jpg';
+
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1458,17 +2011,24 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
-		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], 
-		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
+
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], $post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
+
 		return $postObj;
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function getPostObjectWithAllComments($post,$userId)
 	{
 		$conn=new QoB();
+
 		$postValidity=($post['lifetime']-$post['timestamp'])/86400;
+
 		$postCreationTime=toTimeAgoFormat($post['timestamp']);
+
 		if(stripos($post['followers'],$userId)===false)
 		{
 			$followPost=1;
@@ -1486,8 +2046,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$postOwner=-1;
 		}
 		$hasStarred=isThere($post['starredBy'],$userId);
+
 		$postComments=getAllCommentsByPostId($post['postId']);
+
 		$comments=array();
+
 		if($postComments!=false)
 		{
 			while ($record=$conn->fetch($postComments))
@@ -1497,6 +2060,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			}
 		}
 		$proPicLocation=__DIR__.'/../img/proPics/'.$post["userIdHash"].'.jpg';
+
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1505,16 +2069,22 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
-		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], 
-		$post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
+
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], $post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
+		
 		return $postObj;
 	}
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	//Requires comment object with details of the user as well( i.e. result of a join on users and comment tables)
 	function getCommentObject($comment,$receiverUserId,$commentPostIdHash)
 	{
 		$commentTime=toTimeAgoFormat($comment['timestamp']);
+		
 		if($receiverUserId==$comment['userId'])
 		{
 			$commentOwner=1;
@@ -1523,7 +2093,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$commentOwner=-1;
 		}
+		
 		$proPicLocation=__DIR__.'/../img/proPics/'.$comment['userIdHash'].'.jpg';
+		
 		if(file_exists($proPicLocation))
 		{
 			$proPicExists=1;
@@ -1532,25 +2104,33 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
+		
 		$commentObj=new miniComment($commentPostIdHash,$comment['userIdHash'],$comment['content'],$commentTime,
 								$comment['commentIdHash'],$comment['userId'],$comment['alias'], $commentOwner, $comment['gender'], $proPicExists,$comment['name']);
+		
 		return $commentObj;
 	}
 
-
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	//Object Type 500-Post,600-Event, 700-Poll,0-Miscellaneous
 	function sendNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectType)
 	{
 		$conn=new QoB();
+		
 		$FetchMaxNotifIDSQL="SELECT MAX(notificationId) as maxNotificationId FROM notifications";
+		
 		$maxNotificationID=$conn->fetchALL($FetchMaxNotifIDSQL,false);
+		
 		if($conn->error!=""||$maxNotificationID=="")
 		{
 			notifyAdmin("Conn.Error.:".$conn->error."!In create notification!!",$userId);
 			echo 12;
 			exit();
 		}
+		
 		$eId=$maxNotificationID['maxNotificationId'];
 		
 		if($eId==NULL)
@@ -1562,39 +2142,55 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$notificationId=$eId+1;
 		}
 		$timestamp=time();
+		
 		$toUserIds=explode(',',$toUserIds);
+		
 		foreach ($toUserIds as $userId) 
 		{
 			if($fromUserId!=$userId)
 			{
 				
 				$notificationIdHash=hash("sha512",$notificationId.HASHNOTIF);
-				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) 
-				ON DUPLICATE KEY UPDATE actionCount= CASE WHEN seen=0 THEN actionCount+1 WHEN seen=1 THEN 1 END, seen=0";
+		
+				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE actionCount= CASE WHEN seen=0 THEN actionCount+1 WHEN seen=1 THEN 1 END, seen=0";
+		    	
 		    	$values[0]=array($objectId => 's');
+		    	
 		    	$values[1]=array($notifType => 'i');
+		    	
 		    	$values[2]=array($objectType => 's');
+		    	
 		    	$values[3]=array($userId => 's');
+		    	
 		    	$values[4]=array($timestamp => 's');
+		    	
 		    	$values[5]=array($notificationId => 's');
+		    	
 		    	$values[6]=array($notificationIdHash => 's');
 		    	
 		    	/*$values[7]=array($objectId => 's');
+		    	
 		    	$values[8]=array($notifType => 'i');
+		    	
 		    	$values[9]=array($objectType => 's');
+		    	
 		    	$values[10]=array($userId => 's');*/
 		    	
-		    	
 		    	$result=$conn->update($sendNotificationSQL,$values);
+		    	
 		    	if($conn->error!=""&&$result!=true)
 		    	{
 		    		//return true;
+				
 					//affected rows = 2 if an update occurs, 1 if an insert occurs
+				
 					if(($rows=$conn->getAffectedRows())==1)
 					{
 						$notificationId++;
 					}
+		    	
 		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
+					
 					return false;
 
 		    	}
@@ -1606,18 +2202,27 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectType)
 	{
 		$conn=new QoB();
+		
 		$FetchMaxNotifIDSQL="SELECT MAX(notificationId) as maxNotificationId FROM notifications";
+		
 		$maxNotificationID=$conn->fetchALL($FetchMaxNotifIDSQL,false);
+		
 		if($conn->error!=""||$maxNotificationID=="")
 		{
 			notifyAdmin("Conn.Error.:".$conn->error."!In create notification!!",$userId);
+		
 			echo 12;
+		
 			exit();
 		}
+		
 		$eId=$maxNotificationID['maxNotificationId'];
 		
 		if($eId==NULL)
@@ -1629,30 +2234,41 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 			$notificationId=$eId+1;
 		}
 		$timestamp=time();
+		
 		$toUserIds=explode(',',$toUserIds);
+		
 		foreach ($toUserIds as $userId) 
 		{
 			if($fromUserId!=$userId)
-			{
-				
+			{		
 				$notificationIdHash=hash("sha512",$notificationId.HASHNOTIF);
-				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) 
-				ON DUPLICATE KEY UPDATE seen=0";
+			
+				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE seen=0";
+
 		    	$values[0]=array($objectId => 's');
+
 		    	$values[1]=array($notifType => 'i');
+
 		    	$values[2]=array($objectType => 's');
+
 		    	$values[3]=array($userId => 's');
+
 		    	$values[4]=array($timestamp => 's');
+
 		    	$values[5]=array($notificationId => 's');
+
 		    	$values[6]=array($notificationIdHash => 's');
 		    	
 		    	/*$values[7]=array($objectId => 's');
+
 		    	$values[8]=array($notifType => 'i');
+
 		    	$values[9]=array($objectType => 's');
+
 		    	$values[10]=array($userId => 's');*/
-		    	
-		    	
+		    			    	
 		    	$result=$conn->update($sendNotificationSQL,$values);
+		    	
 		    	if($conn->error!=""&&$result!=true)
 		    	{
 		    		//return true;
@@ -1661,7 +2277,9 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 					{
 						$notificationId++;
 					}
+		    	
 		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
+				
 					return false;
 
 		    	}
@@ -1673,25 +2291,39 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 	
 	function readNotifications($userId,$displayedNotifArray)
 	{
 		$notifCount=count($displayedNotifArray);
+		
 		if($notifCount!=0)
 		{
 			$conn=new QoB();
+		
 			$i=0;
+		
 			$notificationReadSQL="UPDATE notifications SET seen=1 WHERE userId= ? AND ( notificationIdHash = ?";
+		
 			$values[0]=array($userId =>'s');
+		
 			$values[1]=array($displayedNotifArray[$i] => 's');
+		
 			for($i=0;$i<$notifCount-1;$i++)
 			{
 				$notificationReadSQL.=" OR notificationIdHash= ?";
+		
 				$values[$i+2]=array($displayedNotifArray[$i+1]=>'s');
 			}
+		
 			$notificationReadSQL.=" )";
-			echo $notificationReadSQL;
+		
+			//echo $notificationReadSQL;
+		
 			$result=$conn->update($notificationReadSQL,$values);
+			
 			if($conn->error==""&&$result==true)
 			{
 				return true;
@@ -1700,11 +2332,13 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 			{
 				notifyAdmin("Conn.Error:".$conn->error."! In updating Notifications for userId:".$userId,$userId);
 				return false;
-			}
-			
-		}
-		
+			}	
+		}		
 	}
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 	function getNotifications($userId,$displayedNotifArray)
 	{
@@ -1767,9 +2401,9 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		
 		$notificationModels[14]=array(" of your poll has been rejected.");
 
-		$notificationModels[15]=array(" New event is awaiting your approval");
+		$notificationModels[15]=array(" new event is awaiting your approval");
 
-		$notificationModels[16]=array(" New poll is awaiting your approval");
+		$notificationModels[16]=array(" new poll is awaiting your approval");
 
 
 
@@ -1780,6 +2414,7 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
 			$notificationFetchSQL .= "AND notificationIdHash!= ? ";
+			
 			$values[$i+1]=array($displayedNotifArray[$i] => 's');
 		}
 		$notificationFetchSQL .= "ORDER BY timestamp DESC LIMIT 0,7";
@@ -1790,7 +2425,9 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		if($conn->error=="")
 		{
 			$displayCount=0;
+			
 			$notificationObjArray=array();
+			
 			while(($notif=$conn->fetch($result))&&$displayCount<7)
 			{
 				if($notif['actionCount']==1)
@@ -1804,6 +2441,7 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 				
 				$notifObject=new miniNotification($notif['notificationIdHash'],$notification,$notif['type'],$notif['objectId'],$notif['objectType'],$notif['timestamp'],$notif['seen'],$notif['label']);
 				//print_r($notifObject);
+			
 				$notificationObjArray[]=$notifObject;
 				//var_dump($notifObject);
 				$displayCount++;
@@ -1825,6 +2463,10 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 
 	}
 
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+
 	function newValidateSharedWith($str)
 	{
 		$conn=new QoB();
@@ -1832,8 +2474,11 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		if(strlen($str)==1)
 		{
 			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			
 			$values[0]=array('_____'.$str.'___'=>'s');
+			
 			$result=$conn->fetchALL($sql,$values,true);
+			
 			if($conn->error!=''){
 				return "Invalid";
 			}
@@ -1850,8 +2495,11 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		}
 		else if(strlen($str)==2){
 			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			
 			$values[0]=array('___'.$str.'____'=>'s');
+			
 			$result=$conn->fetchALL($sql,$values,true);
+			
 			if($conn->error!=''){
 				return "Invalid";
 			}
@@ -1868,17 +2516,23 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		}
 		else if(strlen($str)==3){
 			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			
 			$values[0]=array('___'.$str.'___'=>'s');
+			
 			$values1[0]=array($str.'______'=>'s');
+			
 			$storeString2='^'.$str.'......$';
+			
 			$result=$conn->fetchALL($sql,$values,true);
 			//
 			if($conn->error!=''){
+			
 				notifyAdmin("Conn.Error".$conn->error."In validate Shared With1",$userId);
 				//echo $conn->error;
 				return "Invalid";
 			}
 			else{
+			
 				if($result>=1){
 					//echo "Accepted";
 					return $str;
@@ -1886,6 +2540,7 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 				else
 				{
 					$result2=$conn->fetchALL($sql,$values1,true);
+			
 					if($conn->error!=""){
 						notifyAdmin("Conn.Error".$conn->error."In validate Shared With2",$userId);
 						//echo $conn->error;
@@ -1907,10 +2562,15 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		}
 		else if(strlen($str)==4){
 			$divide=str_split($str);
+			
 			$searchString=$divide[0].$divide[1].$divide[2]."__".$divide[3];
+			
 			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			
 			$values[0]=array($searchString.'___'=>'s');
+			
 			$result=$conn->fetchALL($sql,$values,true);
+			
 			if($conn->error!=''){
 				return "Invalid";
 			}
@@ -1927,8 +2587,11 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		}
 		else if(strlen($str)==5){
 			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			
 			$values[0]=array($str.'____'=>'s');
+			
 			$result=$conn->fetchALL($sql,$values,true);
+			
 			if($conn->error!=''){
 				return "Invalid";
 			}
@@ -1945,8 +2608,11 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		}
 		else if(strlen($str)==6){
 			$sql="SELECT * FROM users WHERE userId LIKE ?";
+			
 			$values[0]=array($str.'___'=>'s');
+			
 			$result=$conn->fetchALL($sql,$values,true);
+			
 			if($conn->error!=''){
 				return "Invalid";
 			}
@@ -1965,6 +2631,10 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 			return "Invalid";
 		}
 	}
+
+//****************************************************************************************************************//
+//****************************************************************************************************************//
+//****************************************************************************************************************//
 
 
 	/*function notifyPeople($toBeNotified,$objectId,$from,$type)

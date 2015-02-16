@@ -250,6 +250,7 @@ else
 		if($conn->error==""&&$result==true)
 		{
 			//Success
+			resetNotification($userId,SAC,16,$pollId,700);
 			$timestamp=$poll['timestamp'];			
 			$ts = new DateTime();
 			$ts->setTimestamp($timestamp);
@@ -270,8 +271,7 @@ else
 				$proPicExists=-1;
 			}
 
-			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$user['gender'],$proPicExists,$user['userIdHash']);
+			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$user['gender'],$proPicExists,$user['userIdHash']);
 			print_r(json_encode($pollObj));
 		}
 		else
