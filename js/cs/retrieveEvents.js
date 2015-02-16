@@ -88,7 +88,7 @@ function eventInsert(position,data,past)
 
 	event+='<br/>';
 
-	event+='<div class="row">';
+	/*event+='<div class="row">';
 
 	event+='<div class="col-md-12">';
 
@@ -96,7 +96,7 @@ function eventInsert(position,data,past)
 
 	event+='</div>';
 
-	event+='</div>';
+	event+='</div>';*/
 
 	event+='<div class="row">';
 

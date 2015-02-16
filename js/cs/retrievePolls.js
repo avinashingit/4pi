@@ -1801,6 +1801,7 @@ function editPollAddInput()
 	var current=$('#pollEditModal').find('#option2').clone();
 	var optionVal=numberOfOptionsCurrent+1;
 	current.attr('id',optionVal);
+	current.addClass('extraOption');
 	current.find('.inputOption').attr("id",optionVal);
 	placeHolder="Option ";
 	current.find('.inputOption').attr("placeholder",placeHolder);
@@ -1818,6 +1819,8 @@ function editPollDeleteInput(el){
 
 function editPoll(pollId)
 {
+	$('#pollEditModal').find('.extraOption').remove();
+	$('#pollEditModal').find('input').val("");
 	$('#pollEditModal').find('.pollOptions').find('div').each(function(){
 		if($(this).attr('id')=='#option1' || $(this).attr('id')=='#option2')
 		{
@@ -1836,7 +1839,7 @@ function editPoll(pollId)
 	link.find('#editPollSharedWith').val(olink.find('#pollShareWith').html());
 	link.find('#editPollType').val(olink.find('#pollResultType').html());
 	var options=olink.find('input').length;
-	if(link.find('.pollOptions').find('input').length!=options)
+	/*if(link.find('.pollOptions').find('input').length!=options)
 	{
 		link.find('#option1').find('input').val(olink.find('#pollOption0').next().html());
 		link.find('#option2').find('input').val(olink.find('#pollOption1').next().html());
@@ -1849,7 +1852,15 @@ function editPoll(pollId)
 				link.find('#'+i).find('input').val(olink.find('#pollOption'+i-2).next().html());
 			}
 		}
-		
-		
+	}*/
+	link.find('#option1').find('input').val(olink.find('#pollOption0').next().html());
+	link.find('#option2').find('input').val(olink.find('#pollOption1').next().html());
+	if(options>=3)
+	{
+		for(i=3;i<=options;i++)
+		{
+			editPollAddInput();
+			link.find('#'+i).find('input').val(olink.find('#pollOption'+i-2).next().html());
+		}
 	}
 }
