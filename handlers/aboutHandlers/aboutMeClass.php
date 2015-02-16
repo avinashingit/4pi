@@ -36,6 +36,9 @@
 		public $linkedinId;
 		public $pinterestId;
 		public $isOwner;
+		
+		public $gender;
+		public $profilePicExists;
 
 		public $resumeExists;
 		//$_POST['_alias'],$_POST['_dob'],$_POST['_description'],$_POST['_highestDegree'],$_POST['_currentProfession'],$_POST['_mailId'],$_POST['_showMailId'],$_POST['_address'],$_POST['_phone'],$_POST['_showPhone'],$_POST['_city'],$_POST['_fbLink'],$_POST['_twitterLink'],$_POST['_g+Link'],$_POST['_inLink'],$_POST['_ptrestLink']

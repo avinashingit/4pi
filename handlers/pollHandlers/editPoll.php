@@ -158,7 +158,7 @@ else
 				echo 13;
 				exit();
 			}*/
-			notifyAdmin("Suspicious postIdHash in editPost",$userId.",sh:".$postIdHash);
+			notifyAdmin("Attempt to edit an approved poll ",$userId.",sh:".$postIdHash);
 			echo 5;
 			exit();
 

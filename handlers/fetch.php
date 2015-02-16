@@ -70,11 +70,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 					$fileLocation=__DIR__."/../img/proPics/$userIdHash.jpg";
 
-					$fileLocation2=__DIR__."/../img/proPicsTemp/$userIdHash.jpg";
+					//$fileLocation2=__DIR__."/../img/proPicsTemp/$userIdHash.jpg";
 
 					//echo $fileLocation;
 
-					imagejpeg($tmp,$fileLocation2,100);
+					//imagejpeg($tmp,$fileLocation2,100);
 
 					if(imagejpeg($tmp,$fileLocation,100))
 					{
@@ -1858,14 +1858,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$isSAC=-1;
 		}
 
-		if($poll['approvalStatus']==0)
+		/*if($poll['approvalStatus']==0)
 		{
 			$isApproved=-1;
 		}
 		else
 		{
 			$isApproved=1;
-		}
+		}*/
 		//Code until release of final version
 
 
@@ -1875,7 +1875,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$pollStatus=$poll['pollStatus'];
 
 		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC,$isApproved);
+							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC,$poll['approvalStatus']);
 		return $pollObj;
 	}
 
