@@ -526,3 +526,5 @@
 
 [2015-02-16 01:53:22             ::1                   Asia/Kolkata] 1062   $$$Duplicate entry 'COE12B009' for key 'PRIMARY'$$$
 
+[2015-02-18 21:35:23     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+

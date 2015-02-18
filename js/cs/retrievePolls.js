@@ -435,7 +435,7 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						alert(data.isOwner+"   "+data.approvalStatus);
+						// alert(data.isOwner+"   "+data.approvalStatus);
 
 						if(data.approvalStatus==1)
 						{

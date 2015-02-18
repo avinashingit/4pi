@@ -24,3 +24,15 @@
 
 [2015-01-19 18:14:31             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND pollIdHash!=? ORDER BY timestamp DESC' at line 1$$$
 
+[2015-02-18 21:34:58     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:02             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:08     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:12             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:18     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:22             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+

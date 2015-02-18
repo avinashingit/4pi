@@ -16,10 +16,19 @@
 		$userId="";
 		while($row=mysql_fetch_array($result))
 		{
-			global $userName;
-			$userName=$row['name'];
-			global $userId;
-			$userId=$row['userId'];
+			if($row['isActive']==1)
+			{
+				echo "<script>alert('You have already registered.');window.location.href='/4pi/index.php';</script>";
+				exit();
+			}
+			else
+			{
+				global $userName;
+				$userName=$row['name'];
+				global $userId;
+				$userId=$row['userId'];
+			}
+			
 		}
 
 	}
@@ -28,7 +37,7 @@
 <script>
 var userIdHash="<?php echo $_GET['ref'];?>";
 var userName='<?php
-	$con=mysql_connect("localhost","root","root");
+	$con=mysql_connect("localhost","root","isquarer");
 	mysql_select_db("iiitdmstudentsportal");
 	$sql="SELECT name FROM users WHERE userIdHash='".$_GET['ref']."'";
 	$res=mysql_query($sql);
@@ -39,7 +48,7 @@ var userName='<?php
 	?>';
 
 var userRollNumber='<?php
-$con=mysql_connect("localhost","root","root");
+$con=mysql_connect("localhost","root","isquarer");
 mysql_select_db("iiitdmstudentsportal");
 $sql="SELECT userId FROM users WHERE userIdHash='".$_GET['ref']."'";
 $res=mysql_query($sql);

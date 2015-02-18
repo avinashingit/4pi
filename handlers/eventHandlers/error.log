@@ -246,3 +246,15 @@
 
 [2015-01-30 03:17:45             ::1                   Asia/Kolkata] 1146   $$$Table 'iiitdmstudentsportal.event' doesn't exist$$$
 
+[2015-02-18 21:34:58     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:02             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:08     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:12             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:18     172.17.3.72                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+
+[2015-02-18 21:35:22             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
+

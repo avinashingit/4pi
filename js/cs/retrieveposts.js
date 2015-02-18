@@ -634,7 +634,7 @@ function retrievePopularPosts(value, call) {
 function commentInsert(position, data, postId)
 {
 
-    console.log(data);
+    // console.log(data);
 
     var comment = "";
 
@@ -708,7 +708,6 @@ function commentInsert(position, data, postId)
     comment += '</div> <!--end class comment -->';
 
     if (position == "first") {
-        console.log(postId);
         $('#' + postId).find('.postComments').prepend(comment);
         //$(comment).insertAfter(
     } else if (position == "last") {
@@ -1059,7 +1058,7 @@ function postInsert(position, data1)
 
 function retrieveComments(id)
 {
-    alert("called");
+    // alert("called");
 
     $.post('./handlers/postHandlers/loadAllComments.php',{
         _postId:id
@@ -1100,7 +1099,7 @@ function mailPost(id, event) {
             alert("Unable to mail post with id " + id);
         })
         .success(function(data) {
-            alert(data);
+            // alert(data);
             if(checkData(data)==1)
             {
                 alert("Mailed successfully");
@@ -1200,7 +1199,7 @@ function followPost(id) {
 function reportPost(id) {
     // alert("called");
     var reportContent = $('#' + id).find('#inputReport').val().trim();
-    alert(reportContent);
+    // alert(reportContent);
     var done = 1;
     if(reportContent.length==0)
     {
