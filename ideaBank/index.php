@@ -104,7 +104,7 @@ session_start();
 	<div class="fading hidden" id="oneplus">
         <div class="text-animated-one">+1</div>    
     </div>
-	<i class="fa fa-university " style="font-size: 180px; padding-bottom: 5px; " ></i>
+	<i class="fa fa-university " id="bank" style="font-size: 180px; padding-bottom: 5px; " ></i>
 	<div class="odometer" id="odometer" style="font-size: 20px;">0</div>
 	</div>
 
@@ -302,6 +302,7 @@ function createIdeaPost() {
 	
 	$('#oneplus').removeClass("hidden");
 	$('#plusId').addClass("fa-spin");
+	$('#bank').addClass("faa-burst animated");
 	$('#postingIdea').html("Posting New Idea....");
     var ideaContent = $('#createIdeaContent').val();
         if (ideaContent.length == 0) {
@@ -353,6 +354,7 @@ function createIdeaPost() {
                     callAfterAjax(); 
 					$('#oneplus').addClass("hidden");
 					$('#plusId').removeClass("fa-spin");
+					$('#bank').removeClass("faa-burst animated");
 					$('#postingIdea').html("Post New Idea");
                 }
             }); 
@@ -541,29 +543,29 @@ function postInsert(position, data1, num, len) {
     post+='<div class="col-md-3 col-md-offset-2 ideaStarBox" >';
 	
 	if (data1.hasAppreciated == 1) {
-		post+='<a><img src="http://localhost/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+		post+='<a><img src="/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 	}else{
 		if(data1.hasDepreciated ==1)
 		{
-					post+='<a class="deactive" ><img src="http://localhost/4pi/ideaBank/images/app1.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+					post+='<a class="deactive" ><img src="/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 		}
 		else{
-		post+='<a class="" id="deactiveapp'+data1.ideaPostId+'"><img src="http://localhost/4pi/ideaBank/images/app1.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+		post+='<a class="" id="deactiveapp'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 		}
 	}
 	
 	 post+='<div class="col-md-3 col-md-offset-5 ideaStarBox" >';
 	
 	if (data1.hasDepreciated == 1) {
-		post+='<a><img src="http://localhost/4pi/ideaBank/images/dep.SVG" height="26" class="ideaDepreciateIcon" id="depreciate'+data1.ideaPostId+'" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
+		post+='<a><img src="/4pi/ideaBank/images/dep.SVG" height="26" class="ideaDepreciateIcon" id="depreciate'+data1.ideaPostId+'" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
 	}
 	else{
 		if(data1.hasAppreciated == 1)
 		{
-			post+='<a class="deactive" ><img src="http://localhost/4pi/ideaBank/images/dep.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
+			post+='<a class="deactive" ><img src="/4pi/ideaBank/images/dep.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
 		}
 		else{
-		post+='<a class="" id="deactivedep'+data1.ideaPostId+'"><img src="http://localhost/4pi/ideaBank/images/dep.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
+		post+='<a class="" id="deactivedep'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/dep.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
 		}
 	}
 	
@@ -710,8 +712,9 @@ function modifyPost(id, data) {
 function starClick(id) {
 	var imagePath = $('#appreciate'+id+'').attr("src");
 	$('#deactivedep'+id).addClass("deactive");
-	if(imagePath == "http://localhost/4pi/ideaBank/images/app.SVG"){
-		$('#appreciate'+id+'').attr("src", "http://localhost/4pi/ideaBank/images/app1.SVG");
+	alert(imagePath);
+	if(imagePath == "/4pi/ideaBank/images/app.SVG"){
+		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/clicked.JPG");
 	}
     $('#' + id).find('#appreciate'+id+'').attr("onclick", "");
 	var count = $('#' + id).find('.ideaStarCount').html();
@@ -742,8 +745,8 @@ function starClick(id) {
 function stopClick(id) {
 	var imagePath = $('#depreciate'+id+'').attr("src");
 	$('#deactiveapp'+id).addClass('deactive');
-	if(imagePath == "http://localhost/4pi/ideaBank/images/dep.SVG"){
-		$('#appreciate'+id+'').attr("src", "http://localhost/4pi/ideaBank/images/dep1.SVG");
+	if(imagePath == "/4pi/ideaBank/images/dep.SVG"){
+		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/dep1.SVG");
 	}
     $('#' + id).find('#depreciate'+id+'').attr("onclick", "");
 	var count = $('#' + id).find('#ideaUnStarCount').html();

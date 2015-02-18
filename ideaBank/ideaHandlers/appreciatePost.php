@@ -8,7 +8,7 @@ $conn=new QoB();
 $ideaPostId = $_POST['_ideaPostId'];
 $userIdHash=$_SESSION['vj'];
 //Checking the session varianles. Second Level Protection
-	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['sh'])
+	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
 		notifyAdmin("Suspicious session variable in InsertComment");
 		
