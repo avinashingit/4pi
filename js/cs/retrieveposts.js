@@ -7,7 +7,7 @@ function showAlertToContinueModal()
 
 function redirectPageToLogin()
 {
-    window.location.href="/4pi"
+    window.location.href="/4pi";
 }
 
 function checkData(data) {
