@@ -543,29 +543,29 @@ function postInsert(position, data1, num, len) {
     post+='<div class="col-md-3 col-md-offset-2 ideaStarBox" >';
 	
 	if (data1.hasAppreciated == 1) {
-		post+='<a><img src="/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+		post+='<a><img src="/4pi/ideaBank/images/appreciated.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 	}else{
 		if(data1.hasDepreciated ==1)
 		{
-					post+='<a class="deactive" ><img src="/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+					post+='<a class="deactive" ><img src="/4pi/ideaBank/images/appreciate.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 		}
 		else{
-		post+='<a class="" id="deactiveapp'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/app.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+		post+='<a class="" id="deactiveapp'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/appreciate.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 		}
 	}
 	
 	 post+='<div class="col-md-3 col-md-offset-5 ideaStarBox" >';
 	
 	if (data1.hasDepreciated == 1) {
-		post+='<a><img src="/4pi/ideaBank/images/dep.SVG" height="26" class="ideaDepreciateIcon" id="depreciate'+data1.ideaPostId+'" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
+		post+='<a><img src="/4pi/ideaBank/images/depreciated.SVG" height="26" class="ideaDepreciateIcon" id="depreciate'+data1.ideaPostId+'" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
 	}
 	else{
 		if(data1.hasAppreciated == 1)
 		{
-			post+='<a class="deactive" ><img src="/4pi/ideaBank/images/dep.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
+			post+='<a class="deactive" ><img src="/4pi/ideaBank/images/depreciate.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
 		}
 		else{
-		post+='<a class="" id="deactivedep'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/dep.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
+		post+='<a class="" id="deactivedep'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/depreciate.SVG" class="ideaDepreciateIcon" height="26" id="depreciate'+data1.ideaPostId+'" onClick="stopClick('+data1.ideaPostId+');" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
 		}
 	}
 	
