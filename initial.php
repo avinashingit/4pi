@@ -157,11 +157,7 @@ function setPassword(e)
 
 	<div class="col-md-6 col-md-offset-3 third text-center" id="logArea"  >
 		
-		<a href="/4pi/team/" >
-		
 			<img id="pilogo" title="The 4&#960; Team - WebOps" class="img-responsive" src="img/appImgs/fourpi.svg" />
-		
-		</a>
 	
 	</div>
 

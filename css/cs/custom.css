@@ -15,7 +15,7 @@ a{
     color:black;
 }
 a,a:hover{
-    text-decoration:none;
+    text-decoration:none !important;
 }
 
 .center{

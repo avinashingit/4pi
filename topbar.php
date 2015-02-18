@@ -424,7 +424,7 @@
 
 		  <div class="form-group">
 
-		    <input id="searchBefore" type="text" onchange="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
+		    <input id="searchBefore" type="text" onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
 
 		  </div>
 

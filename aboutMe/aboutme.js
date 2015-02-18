@@ -1880,7 +1880,7 @@ function addAcademicsSendData()
 	var duration=ln.find('#addAcademicsModalDurationFrom').val().trim()+"-"+ln.find('#addAcademicsModalDurationTo').val().trim();
 	var location=ln.find('#addAcademicsModalSchoolLocation').val().trim();
 	var scoreType=ln.find("#addAcademicsModalPercentageType").val().trim();
-	alert(scoreType);
+	// alert(scoreType);
 	if(scoreType==1)
 	{
 		var percentage=ln.find('#addAcademicsModalPercentage').val().trim();
@@ -1940,7 +1940,7 @@ function editAcademicsSendData()
 	var location=link.find('#editAcademicsModalSchoolLocation').val().trim();
 	var duration=link.find('#editAcademicsModalDurationFrom').val().trim()+"-"+link.find('#editAcademicsModalDurationTo').val().trim();
 	var id=link.find('#editAcademicsModalId').html();
-	alert(id);
+	// alert(id);
 	if(scoreType==1)
 	{
 		var percentage=link.find('#editAcademicsModalPercentage').val().trim();

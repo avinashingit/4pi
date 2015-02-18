@@ -47,7 +47,7 @@ define("C_TIME", time());
 define("PASSSALT", "PSaSaSwL0RtD");
 
 //Salt for SESSION and USER Hashing
-define("SALT",211019931500);
+define("SALT",211019931503);
 
 
 //Salt for SESSION 2 Hashing

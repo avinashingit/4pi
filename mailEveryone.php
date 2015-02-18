@@ -29,7 +29,8 @@ while($row=mysql_fetch_array($results))
 		$mailerObj=getMailerObject();
 	}
 		$email=$row['userId']."@iiitdm.ac.in";
-		$subject="Registration starts for Beta Testing of 4Pi (Students portal), IIITDM-K";
+		$subject="Apologies from 4pi";
+		$content="Apoligies...Some random links have been generated. This is your link.";
 		$content.="Hey guys,<br/> This is just Beta Testing. Bugs if found will be fixed and final version will be released. <br/>. Please click the following link to register.<br/>";
 		$content.="http://172.17.3.20/4pi/initial.php?ref=".$row['userIdHash']."<br/>";
 		$content.="Please note that the above link will be valid for only 17 hours, 2 minutes and 15 seconds.";
@@ -41,8 +42,5 @@ while($row=mysql_fetch_array($results))
 		$count++;
 	//}
 }
-
-
-
 
 ?>
