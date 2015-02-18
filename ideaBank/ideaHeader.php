@@ -7,7 +7,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html" />
 	<meta name="author" content="Hemanth" />
-
+    <link rel="icon" href="images/ilogo.png" type="image/png" >
 	<title>Idea Bank</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="../css/BS/bootstrap.min.css" />
