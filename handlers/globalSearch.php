@@ -97,7 +97,15 @@ if(isset($_SESSION['vj']))
                                         $count=0;
                                         while($record = $qob->fetch($result))
                                             {
-                                                $resultObj = new studentSearchResult($record['userId'], $record['name'], $record['userIdHash'],$record['gender']);
+                                                if(file_exists(__DIR__.'/../img/proPics/'.$record['userIdHash'].".jpg"))
+                                                {
+                                                    $proPicExists=1;
+                                                }
+                                                else
+                                                {
+                                                    $proPicExists=-1;
+                                                }
+                                                $resultObj = new studentSearchResult($record['userId'], $record['name'], $record['userIdHash'],$record['gender'],$proPicExists);
                                                 $studentSearchResults[] = $resultObj;
                                                 $count++;
                                             }

@@ -24,7 +24,7 @@ Code 17: Mailing Error!!
 Code 161: Invalid Email
 */
 session_start();
-require_once('..//QOB/qob.php');
+require_once('../QOB/qob.php');
 require_once('./aboutHandlers/aboutMeClass.php');
 require_once('fetch.php');
 require_once('../PHPMailer_v5.1/class.phpmailer.php');
@@ -51,10 +51,8 @@ require_once('../PHPMailer_v5.1/class.phpmailer.php');
 			{
 				if($leaveMessageRecord['isValid']==1)
 				{
-					$userId=$resetRecord['userId'];
-					
+					$userId=$leaveMessageRecord['userId'];
 					$user=getAboutUserFromId($userId);
-					
 					$toMailId=$user['mailid'];
 					
 					$fromMailId=$leaveMessageRecord['email'];

@@ -398,7 +398,7 @@ if(userId=="")
 
 					<label for="personDOB">Date of birth</label>
 
-					<input id="editPersonInfoModalPersonDOB" class="form-control datepicker">
+					<input id="editPersonInfoModalPersonDOB" value="14/05/1995" class="form-control datepicker">
 
 					<br/>
 
@@ -706,6 +706,8 @@ if(userId=="")
 		$("#addSkillModal").modal('show');
 
 		$("#addSkillModal").find('.extraInputs').remove();
+
+		clearInputs($("#addSkillModal"));
 	}
 
 	function editSkills()
@@ -733,17 +735,45 @@ if(userId=="")
 
 				input+='</div>';
 
-				input+='<div class="col-md-5">';
+				/*input+='<div class="col-md-5">';
 
 					input+='<input type="number" pattern="[0-9]*" min="0" max="100" id="editSkillModalSkillPercentage" class="form-control" value="'+percentagesArray[i]+'">';
+
+				input+='</div>';*/
+
+				input+='<div class="col-md-4">';
+
+					input+='<input type="range" min="0" value="'+percentagesArray[i]+'" style="border:none;" max="100" id="editSkillModalSkillPercentage" onchange="$(this).parent().parent().find(\'#sliderValueEditModal\').parent().removeClass(\'hidden\');showValueForSliderEdit(this);" class="form-control">';
+
+				input+='</div>';
+
+				/*input+='<div class="col-md-2">';
+
+					input+='<span class="input-group-addon" id="deleteOption">';
+
+						input+='<i class="fa fa-close" title="Delete skill" onclick="editSkillDeleteInput(this);"></i>';
+
+					input+='</span>';
+
+				input+='</div>';*/
+
+				input+='<div class="hidden col-md-1 text-center skillValue" >';
+
+					input+='<span id="sliderValueEditModal" style="padding-top:10px;"></span>';
 
 				input+='</div>';
 
 				input+='<div class="col-md-2">';
 
-					input+='<span class="input-group-addon" id="deleteOption">';
+					/*input+='<span style="cursor:pointer;" class="hidden input-group-addon" onclick="editSkillAddInput();" id="addOption">';
 
-						input+='<i class="fa fa-close" title="Delete skill" onclick="editSkillDeleteInput(this);"></i>';
+						input+='<i class="fa fa-plus" ></i>';
+
+					input+='</span>';*/
+
+					input+='<span class="btn btn-sm btn-default" id="deleteOption" onclick="editSkillDeleteInput(this);">';
+
+						input+='<i class="fa fa-minus" ></i>';
 
 					input+='</span>';
 
@@ -760,6 +790,8 @@ if(userId=="")
 		$("#addToolModal").modal('show');
 		
 		$("#addToolModal").find('.extraInput').remove();
+
+		clearInputs($("#addToolModal"));
 	}
 
 	function editTools(el,type)
@@ -926,6 +958,8 @@ if(userId=="")
 	function addProject()
 	{
 		$('#addProjectModal').modal('show');
+
+		clearInputs($("#addProjectModal"));
 	}
 
 	function editProject(n)
@@ -949,6 +983,8 @@ if(userId=="")
 	function addExperience()
 	{
 		$('#addExperienceModal').modal('show');
+
+		clearInputs($("#addExperienceModal"));
 	}
 
 	function editExperience(n)
@@ -970,6 +1006,8 @@ if(userId=="")
 	function addCertification()
 	{
 		$('#addCertificationModal').modal('show');
+
+		clearInputs($("#addCertificationModal"));
 	}
 
 	function editCertification(n)
@@ -991,6 +1029,8 @@ if(userId=="")
 	{
 		$('#addAcademicsModal').modal('show');
 		$('#addAcademicsModal').find("#CGPAElements").hide();
+
+		clearInputs($("#addAcademicsModal"));
 	}
 
 	function editAcademics(n)
@@ -1025,6 +1065,8 @@ if(userId=="")
 	function addWorkshop()
 	{
 		$('#addWorkshopModal').modal('show');
+
+		clearInputs($("#addWorkshopModal"));
 	}
 
 	function editWorkshop(n)
@@ -1045,6 +1087,8 @@ if(userId=="")
 	function addAchievement()
 	{
 		$('#addAchievementModal').modal('show');
+
+		clearInputs($("#addAchievementModal"));
 	}
 
 	function editAchievement(n)
@@ -1065,6 +1109,8 @@ if(userId=="")
 		$("#addInterestModal").modal('show');
 
 		$("#addInterestModal").find(".extraInput").remove();
+
+		clearInputs($("#addInterestModal"));
 	}
 
 	function editInterests(el,type)

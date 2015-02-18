@@ -176,7 +176,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		$values[2]=array($userId => 's');
 
-		$setPasswordSQL="UPDATE users SET password=?,alias=? WHERE userId=? AND password=''";
+		$setPasswordSQL="UPDATE users SET password=?,alias=?,isActive=1 WHERE userId=? AND password=''";
 
 		$conn=new QoB();
 
@@ -1578,15 +1578,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 //****************************************************************************************************************//
 //****************************************************************************************************************//
 
-	function isCoCAS($userId)
+	function isCOCAS($userId)
 	{
 		if($userId==COCAS)
 		{
-			return true;
+			return 1;
 		}
 		else
 		{
-			return false;
+			return -1;
 		}
 	}
 
@@ -1598,11 +1598,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		if($userId==SAC)
 		{
-			return true;
+			return 1;
 		}
 		else
 		{
-			return false;
+			return -1;
 		}
 	}
 
@@ -1755,9 +1755,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 	function getProfilePicLocation($userIdHash)
 	{
-		$proPicLocation='../img/proPics/'.$userIdHash.'.jpg';
+		$proPicLocation=__DIR__.'/../img/proPics/'.$userIdHash.'.jpg';
 
 		return $proPicLocation;
+	}
+
+
+	function hasProfilePic($userIdHash)
+	{
+		$proPicLocation=getProfilePicLocation($userIdHash);
+		if(file_exists($proPicLocation))
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
 	}
 	
 //****************************************************************************************************************//
@@ -1849,14 +1863,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$proPicExists=-1;
 		}
 
-		if($userId==SAC)
-		{
-			$isSAC=1;
-		}
-		else
-		{
-			$isSAC=-1;
-		}
+		$isSAC=isSAC($userId);
 
 		/*if($poll['approvalStatus']==0)
 		{
@@ -1875,7 +1882,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$pollStatus=$poll['pollStatus'];
 
 		$pollObj=new miniPoll($poll['pollIdHash'],$poll['name'],$poll['question'],$poll['pollType'],$optionsArray, 
-							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['gender'],$proPicExists,$poll['userIdHash'],$isSAC,$poll['approvalStatus']);
+							$poll['optionsType'],$poll['sharedWith'],$hasVoted,$optionsAndVotes,$pollCreationTime,$pollStatus,$isOwner,$poll['userIdHash'],$isSAC,$poll['approvalStatus']);
 		return $pollObj;
 	}
 
@@ -1931,14 +1938,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
-		if($userId==COCAS)
-		{
-			$isCoCAS=1;
-		}
-		else
-		{
-			$isCoCAS=-1;
-		}
+		$isCoCAS=isCOCAS($userId);
+		
 		if($event['approvalStatus']==0)
 		{
 			$isApproved=-1;
@@ -2375,9 +2376,9 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		
 		$notificationModels[2]=array(" new comment on your Post", " new comments on your Post");
 		
-		$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
+		//$notificationModels[3]=array(" new comment on the post you have commented "," new comments on the post you have commented");
 		
-		$notificationModels[3]=array(" new comment on the post "," new comments on the post ");
+		$notificationModels[3]=array(" member also commented on the post  "," members also commented on the post ");
 		
 		$notificationModels[4]=array(" member mailed your post"," members mailed your post");
 		
@@ -2393,17 +2394,17 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		
 		$notificationModels[10]=array(" member also answered the poll you answered"," members also answered the poll you answered");
 		
-		$notificationModels[11]=array(" of your event has been approved .");
+		$notificationModels[11]=array(" of your event has been approved .", " Error in Notif. Code 11. Kindly intimate Admin if seen.");
 		
-		$notificationModels[12]=array(" of your event has been rejected.");
+		$notificationModels[12]=array(" of your event has been rejected.", " Error in Notif. Code 12 .Kindly intimate Admin if seen. ");
 		
-		$notificationModels[13]=array(" of your poll has been approved.");
+		$notificationModels[13]=array(" of your poll has been approved.", " Error in Notif. Code 13 .Kindly intimate Admin if seen.");
 		
-		$notificationModels[14]=array(" of your poll has been rejected.");
+		$notificationModels[14]=array(" of your poll has been rejected.", " Error in Notif. Code 14. Kindly intimate Admin if seen.");
 
-		$notificationModels[15]=array(" new event is awaiting your approval");
+		$notificationModels[15]=array(" new event is awaiting your approval", " Error in Notif. Code 15.  Kindly intimate Admin if seen.");
 
-		$notificationModels[16]=array(" new poll is awaiting your approval");
+		$notificationModels[16]=array(" new poll is awaiting your approval", " Error in Notif. Code 16. Kindly intimate Admin if seen.");
 
 
 

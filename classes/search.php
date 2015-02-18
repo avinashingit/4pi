@@ -6,13 +6,15 @@
                 public $uname;
                 public $userIdHash;
                 public $gender;
+                public $proPicExists;
             
-                public function __construct($userId, $name, $userIdHash, $gender)
+                public function __construct($userId, $name, $userIdHash, $gender,$proPicExists)
                     {
                         $this->userId = $userId;
                         $this->uname = $name;
                         $this->userIdHash = $userIdHash;
                         $this->gender=$gender;
+                        $this->proPicExists=$proPicExists;
                     }
 
             } // end of class

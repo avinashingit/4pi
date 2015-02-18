@@ -46,7 +46,7 @@ function login()
 								}
 								else
 								{
-									echo 22;//Problem with noting the login details
+									echo 22;//Problem with noting the noting details
 								}
 							}
 							else

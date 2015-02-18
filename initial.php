@@ -69,7 +69,7 @@ $(document).ready(function(){
 function setPassword(e)
 {
 	e.preventDefault();
-	alert("Called");
+	// alert("Called");
 	var p1=$("#password1").val();
 	var p2=$("#password2").val();
 	var alias=$("#aliasName").val().trim();
@@ -87,7 +87,7 @@ function setPassword(e)
 	}
 	else
 	{
-		alert(p1+"       "+p2);
+		// alert(p1+"       "+p2);
 		$.post('/4pi/handlers/setPassword.php',{
 			_p1:p1,
 			_p2:p2,
@@ -98,9 +98,10 @@ function setPassword(e)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			alert(data);
+			// alert(data);
 			if(checkData(data)==1)
 			{
+				alert("Registration successfull. Congrats, "+userName+". YAAY!!!!");
 				window.location.href="/4pi/index.php";
 			}
 		});

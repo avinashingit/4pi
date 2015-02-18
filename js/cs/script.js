@@ -1,7 +1,16 @@
 
 $('.subsec').hide();//to hide all hostel secretary tabs
 $('.ew').hide();//to hide the executive wing tab
- 
+
+
+
+function clearInputs(element)
+{
+	element.find('input').each(function(){
+		$(this).val("");
+	});
+}
+
 function validateTime(str)
 {
 	var parts=str.split(":");
@@ -114,7 +123,6 @@ function userLogin(){
 		
 		.success(function (data){
 		data = data.trim();
-		alert(data);
 		////alert(data);
 		//alert(data.length);
 			if(data=="-1")
@@ -123,7 +131,7 @@ function userLogin(){
 			}
 			else if(data=="9")
 			{
-				alert("Hey, don't you know that you are blocked??Contact administrator");
+				alert("Hey, don't you know that you are blocked?? Contact administrator");
 			}
 			else if(data=="22")
 			{
@@ -131,8 +139,11 @@ function userLogin(){
 			}
 			else if(data=="1")
 			{
-				//alert("asdf");
-				window.location.href="newsfeed.php";
+				window.location.href="/4pi/";
+			}
+			else if(data=="-3")
+			{
+				alert("You haven't registered yet. Check your insti mail to register.");
 			}
 		});
 	}

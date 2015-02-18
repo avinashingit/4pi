@@ -186,8 +186,18 @@ else
 		$optionVotes=implode(',',$optionVotesArray);
 		$timestamp=time();
 		$pollIdHash=hash("sha512", $pollId.POLLHASH);
-		$createPollSQL="INSERT INTO poll (pollId,pollIdHash,pollType,question,options, optionsType,optionCount,sharedWith,userId,optionVotes,timestamp) 
+		
+		$isSAC=isSAC($userId);
+		if($isSAC==1)
+		{
+			$createPollSQL="INSERT INTO poll (pollId,pollIdHash,pollType,question,options, optionsType,optionCount,sharedWith,userId,optionVotes,timestamp,approvalStatus) 
+			VALUES(?,?,?,?,?,  ?,?,?,?,?, ?,1)";
+		}
+		else
+		{
+			$createPollSQL="INSERT INTO poll (pollId,pollIdHash,pollType,question,options, optionsType,optionCount,sharedWith,userId,optionVotes,timestamp) 
 			VALUES(?,?,?,?,?,  ?,?,?,?,?, ?)";
+		}
 		//$createPollSQL="INSERT INTO poll set pollId=?,pollIdHash=?,pollType=?,question,options, optionsType,optionCount,sharedWith,$userId,optionVotes"
 		$values[0]=array($pollId => 'i');
 		$values[1]=array($pollIdHash => 's');
@@ -200,12 +210,21 @@ else
 		$values[8]=array($userId => 's');
 		$values[9]=array($optionVotes => 's');
 		$values[10]=array($timestamp => 's');
-
+		//$values[11]=array($approvalStatus => 'i');
 		$result=$conn->insert($createPollSQL,$values);
 		if($conn->error==""&&$result==true)
 		{
-			//Success		
-			sendNotification($userId,COCAS,16,$pollId,700);	
+			//Success
+			// $approvalStatus=1;
+			if($isSAC!=1)
+			{	
+				$approvalStatus=0;
+				sendNotification($userId,SAC,16,$pollId,700);
+			}
+			else
+			{
+				$approvalStatus=1;
+			}	
 			$ts = new DateTime();
 			$ts->setTimestamp($timestamp);
 			$pollCreationTime=$ts->format(DateTime::ISO8601);
@@ -215,7 +234,7 @@ else
 			{
 				$optionsAndVotes[$i]=array($pollOptionsArray[$i] , (int)$optionVotesArray[$i]);
 			}
-			$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+			/*$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
 			if(file_exists($proPicLocation))
 			{
 				$proPicExists=1;
@@ -223,9 +242,10 @@ else
 			else
 			{
 				$proPicExists=-1;
-			}
+			}*/
+			$isSAC=isSAC($userId);
 			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$sharedWith,$hasVoted,json_encode($optionsAndVotes),$pollCreationTime,$pollStatus,1,$user['gender'],$proPicExists,$user['userIdHash']);
+					$sharedWith,$hasVoted,json_encode($optionsAndVotes),$pollCreationTime,$pollStatus,1,$user['userIdHash'],$isSAC,$approvalStatus);
 			print_r(json_encode($pollObj));
 		}
 		else

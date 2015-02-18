@@ -1,5 +1,15 @@
 var genUrl = "";
 var contentLoadedPosts=0;
+function showAlertToContinueModal()
+{
+    $("#showContinueModal").modal('show');
+}
+
+function redirectPageToLogin()
+{
+    window.location.href="/4pi"
+}
+
 function checkData(data) {
     data = data.trim();
     if (data == 12) {
@@ -26,8 +36,8 @@ function checkData(data) {
     }
     else if(data==11)
     {
-        alert("Please login to continue");
-        window.location.href = "/4pi/index.php";
+        showAlertToContinueModal();
+        // window.location.href = "/4pi/index.php";
         return -1;
     }
     else if(data==5)
@@ -48,11 +58,11 @@ function callAfterAjax() {
     $('.postCommentIcon').click(function() {
 
         //////console.log($(this).parent().parent().parent().parent().next().find('.postComments'));
-        $(this).parent().parent().parent().parent().next().find('.postComments').toggleClass('hidden');
-        $(this).parent().parent().parent().parent().next().find('.postComments').show(500);
+        $(this).parent().parent().parent().parent().parent().find('.postComments').toggleClass('hidden');
+        $(this).parent().parent().parent().parent().parent().find('.postComments').show(500);
 
         // $(this).parent().parent().parent().find('.loadmoreComments').toggleClass('hidden');
-             $(this).parent().parent().parent().parent().next().find('.loadmoreComments').toggleClass('hidden');
+             $(this).parent().parent().parent().parent().parent().find('.loadmoreComments').toggleClass('hidden');
             // $(this).parent().parent().parent().parent().next().find('.loadmoreComments').show(500);
     });
     $(".post").each(function() {
@@ -183,7 +193,7 @@ function replaceIt(y, z, x, event, val) {
 function modifyPost(id, data) {
 
     ////console.log(data);
-    alert("Called");
+    // alert("Called");
     data = JSON.parse(data);
     var e = $('#' + id);
     e.find('#postSharedWith').html(data.sharedWith);
@@ -271,12 +281,8 @@ function editedPostSend()
         })
         .success(
             function(data) {
-
                 ////console.log(data);
                 data.trim();
-
-                
-                
                 $('#editPostModal').modal('hide');
 
                 if(checkData(data)==1)
@@ -335,7 +341,7 @@ function createPost()
     $('.row .postMenu').find('#createPostButton').find('.fa-plus').addClass('fa-spin');
     $('#createPostModal').modal('hide');
 
-    var y = $.post('http://localhost/4pi/handlers/postHandlers/createPost.php', {
+    var y = $.post('/4pi/handlers/postHandlers/createPost.php', {
         _subject: postSubject,
         _postContent: postContent,
         //_files:files,
@@ -374,10 +380,15 @@ function createPost()
 }
 
 function retrieveLatestPosts(value, call)
- {
+{
     $('.row .postMenu').find('#latestPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
     $('#loadMorePostsButton').find('button').html("Loading");
+
+    if(call==-1)
+    {
+        $('.post').remove();
+    }
 
     var posts=[];
     if(call==1)
@@ -410,7 +421,7 @@ function retrieveLatestPosts(value, call)
     
 
             data = data.trim();
-            console.log(data);
+            // console.log(data);
             if (value == "empty") {
                 // alert(value);
                 $('.post').each(function() {
@@ -430,12 +441,14 @@ function retrieveLatestPosts(value, call)
                     postInsert('last', ob[i]);
                     if (ob[i].comments == null) {
                         var cLength = 0;
-                    } else {
+                    } 
+                    else {
                         var cLength = ob[i].comments.length;
                     }
-                    // var cLength = ob[i].comments.length;
+                    var cLength = ob[i].comments.length;
 
                     for (j = 0; j<cLength; j++) {
+                        console.log(ob[i].comments[j]);
                         commentInsert('first', ob[i].comments[j], ob[i].postId);
                     }
                 }
@@ -461,9 +474,14 @@ function retrieveLatestPosts(value, call)
 
 function retrieveImportantPosts(value, call) {
 
+    if(call==-1)
+    {
+        $('.post').remove();
+    }
+
     $('.row .postMenu').find('#importantPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
-    $$('#loadMorePostsButton').find('button').html("Loading");
+    $('#loadMorePostsButton').find('button').html("Loading");
     var posts=[];
     var i=0;
     $('.post').each(function(){
@@ -479,6 +497,7 @@ function retrieveImportantPosts(value, call) {
 
         })
         .success(function(data) {
+            console.log(data);
             $('#inViewElement').html("997");
             $('.row .postMenu').find('#importantPostsButton').find('i').removeClass('fa-spin');
             $('.row .postMenu').find('#latestPostsButton').css({'box-shadow':'inset #428BCA 0px 3px 0 0','border-top':'1px solid #428BCA'});
@@ -534,6 +553,11 @@ function retrieveImportantPosts(value, call) {
 }
 
 function retrievePopularPosts(value, call) {
+
+    if(call==-1)
+    {
+        $('.post').remove();
+    }
     $('.row .postMenu').find('#popularPostsButton').find('i').addClass('fa-spin');
     $('#loadMorePostsButton').show();
    $('#loadMorePostsButton').find('button').html("Loading");
@@ -610,7 +634,7 @@ function retrievePopularPosts(value, call) {
 function commentInsert(position, data, postId)
 {
 
-    //console.log(data);
+    console.log(data);
 
     var comment = "";
 
@@ -684,18 +708,16 @@ function commentInsert(position, data, postId)
     comment += '</div> <!--end class comment -->';
 
     if (position == "first") {
+        console.log(postId);
         $('#' + postId).find('.postComments').prepend(comment);
         //$(comment).insertAfter(
     } else if (position == "last") {
         $('#' + postId).find('.postComments').append(comment);
     }
-
 }
 
 function postInsert(position, data1)
 {
-    //alert(position+" "+data);
-
     var post = "";
 
     post += '<div class="row post" style="margin-bottom:10px;" id="' + data1.postId + '">';
@@ -807,69 +829,46 @@ function postInsert(position, data1)
 
     post += '<div class="row" id="commentsSection">';
 
-    post += '<div class="postComments text-center hidden">';
+        post += '<div class="postComments text-center hidden">';
 
-    post += '</div><br/> <!-- end id postComments -->';
+        post += '</div><br/> <!-- end id postComments -->';
 
-    if(data1.noOfComments>3)
-    {
-        post+='<div class="row" style="margin-bottom:5px;margin-top:-15px;">';
-
-        post+='<div class="col-md-12 text-center">';
-
-            post += '<button class="text-center hidden loadmoreComments btn btn-default text-center" style="cursor:pointer;" onclick="retrieveComments(\'' + data1.postId + '\');$(this).hide();">Load All Comments</button>';
-
-        post+='</div>';
-
-        post+='</div>';
-    }
-
-    post += '<div class="row">';
-
-    post += '<div class="col-md-1 profilePicPostsFront">';
-
-    /*if(data1.profilePicExists==1)
-    {
-        post += '<a href="/4pi/aboutMe/index.php?userId='+userId+'"><img style="float:left;"src="/4pi/img/proPics/' + userIdHash + '.jpg" class="commentProfilePicture"/></a>';
-    }
-    else
-    {
-        if(data1.gender=="M")
+        if(data1.noOfComments>3)
         {
-            post += '<a href="/4pi/aboutMe/index.php?userId='+data1.postUserId+'"><img style="float:left;"src="/4pi/img/defaultMan1.jpg" class="commentProfilePicture"/></a>';
+            post+='<div class="row" style="margin-bottom:5px;margin-top:-15px;">';
+
+                post+='<div class="col-md-12 text-center">';
+
+                    post += '<button class="text-center hidden loadmoreComments btn btn-default text-center" style="cursor:pointer;" onclick="retrieveComments(\'' + data1.postId + '\');$(this).hide();">Load All Comments</button>';
+
+                post+='</div>';
+
+            post+='</div>';
         }
 
-        else if(data1.gender="F")
-        {
-            post += '<a href="/4pi/aboutMe/index.php?userId='+data1.postUserId+'"><img style="float:left;"src="/4pi/img/defaultWoman1.jpg" class="commentProfilePicture"/></a>';
-        }
+        post += '<div class="row">';
 
-        else
-        {
-            post += '<a href="/4pi/aboutMe/index.php?userId='+data1.postUserId+'"><img style="float:left;"src="/4pi/img/defaultMan.png" class="commentProfilePicture"/></a>';
-        }
-    }*/
+            post += '<div class="col-md-1 profilePicPostsFront">';
 
-    var imageName=$("#userDetails").find("#userImage").find('img').attr("src");
+            var imageName=$("#userDetails").find("#userImage").find('img').attr("src");
 
-    post += '<a href="/4pi/aboutMe/index.php?userId='+data1.postUserId+'"><img style="float:left;"src="'+imageName+'" class="commentProfilePicture"/></a>';
-    
+            post += '<a href="/4pi/aboutMe/index.php?userId='+data1.postUserId+'"><img style="float:left;"src="'+imageName+'" class="commentProfilePicture"/></a>';
 
-    post += '</div>';
+            post += '</div>';
 
-    post += '<div class="col-md-11">';
+            post += '<div class="col-md-11">';
 
-    post += '<form id="commentInsertForm">';
+                post += '<form id="commentInsertForm">';
 
-    post += '<textarea  rows="1" name="commentedText" id="commentInsertArea" onkeypress="insertCommentToPost(\'' + data1.postId + '\',event);" class="commentInsertArea form-control" style="float:left;resize:none;height:30px !important;"></textarea>';
+                    post += '<textarea  rows="1" name="commentedText" id="commentInsertArea" onkeypress="insertCommentToPost(\'' + data1.postId + '\',event);" class="commentInsertArea form-control" style="float:left;resize:none;height:30px !important;"></textarea>';
 
-    post += '</form>';
+                 post += '</form>';
 
-    post += '</div>';
+            post += '</div>';
 
-    post += '</div><!-- end class row -->';
+        post += '</div><!-- end class row -->';
 
-    post+='<br/>';
+        post+='<br/>';
 
     post += '</div><!-- end id commentsSection -->';
 
@@ -1077,9 +1076,8 @@ function retrieveComments(id)
         {
             commentInsert("last",x[i],id);
         }
-        callAfterAjax();
+        $('timeago').timeago();
     });
-
 }
 
 function mailPost(id, event) {
@@ -1238,6 +1236,7 @@ function reportPost(id) {
 function insertCommentToPost(id, event) {
     if (event.keyCode == 13 && !event.shiftKey) {
         var done=1;
+        console.log($('#postArea').find('#'+id).find('.commentInsertArea'));
         var commentContent = $('#postArea').find('#' + id).find('.commentInsertArea').val().trim();
         if(commentContent.length==0)
         {
@@ -1254,6 +1253,7 @@ function insertCommentToPost(id, event) {
             $('#postArea').find('#' + id).find('#commentCount').html(y);
             $('#postArea').find('#' + id).find('.loadmoreComments').html("Commenting...").attr("onclick", "");
             $('#postArea').find('#' + id).find('.postComments').removeClass('hidden');
+            $('#postArea').find('#' + id).find('.loadmoreComments').removeClass('hidden');
             $.post('./handlers/postHandlers/insertComment.php', {
                 _postId: id,
                 _commentContent: commentContent
@@ -1268,7 +1268,7 @@ function insertCommentToPost(id, event) {
 
                         ////console.log(data);
                         var x = JSON.parse(data);
-                        commentInsert("first", x, id);
+                        commentInsert("last", x, id);
                         $('.comment').each(function() {
                             $('time.timeago').timeago();
                         });

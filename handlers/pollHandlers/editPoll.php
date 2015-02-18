@@ -233,8 +233,18 @@ else
 		for($i=0;$i<count($pollOptionsArray);$i++)
 			$optionVotesArray[]=0;
 		$optionVotes=implode(',',$optionVotesArray);
-		$editPollSQL="UPDATE poll SET pollType = ?,question = ? ,options = ?,optionsType =? ,optionCount = ?, sharedWith = ?,optionVotes= ? 
+		$isSAC=isSAC($pollUserId);
+		
+		if($isSAC==1)
+		{
+			$editPollSQL="UPDATE poll SET pollType = ?,question = ? ,options = ?,optionsType =? ,optionCount = ?, sharedWith = ?,optionVotes= ?, approvalStatus=1 
 						WHERE pollIdHash= ?";
+		}
+		else
+		{
+			$editPollSQL="UPDATE poll SET pollType = ?,question = ? ,options = ?,optionsType =? ,optionCount = ?, sharedWith = ?,optionVotes= ?, approvalStatus=0 
+						WHERE pollIdHash= ?";
+		}
 
 		$values[0]=array($pollType => 's');
 		$values[1]=array($pollQuestion => 's');
@@ -250,18 +260,27 @@ else
 		if($conn->error==""&&$result==true)
 		{
 			//Success
-			resetNotification($userId,SAC,16,$pollId,700);
+			if($isSAC!=1)
+			{	
+				$approvalStatus=0;
+				resetNotification($userId,SAC,16,$pollId,700);
+			}	
+			else
+			{
+				$approvalStatus=1;
+			}
+			
 			$timestamp=$poll['timestamp'];			
 			$ts = new DateTime();
 			$ts->setTimestamp($timestamp);
 			$pollCreationTime=$ts->format(DateTime::ISO8601);
 			$pollStatus=0;
-			$hasVoted=1;
+			$hasVoted=-1;
 			for($i=0;$i<$pollOptionsCount;$i++)
 			{
 				$optionsAndVotes[$i]=array($pollOptionsArray[$i] , (int)$optionVotesArray[$i]);
 			}
-			$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+			/*$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
 			if(file_exists($proPicLocation))
 			{
 				$proPicExists=1;
@@ -269,9 +288,10 @@ else
 			else
 			{
 				$proPicExists=-1;
-			}
-
-			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$user['gender'],$proPicExists,$user['userIdHash']);
+			}*/
+			$isSAC=isSAC($pollUserId);
+			
+			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$user['userIdHash'],$isSAC,$approvalStatus);
 			print_r(json_encode($pollObj));
 		}
 		else

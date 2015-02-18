@@ -74,7 +74,7 @@ else
 		
 
 		$finalStudentRegex=getRollNoRegex($userId);
-		$getRequestedEventsSQL="SELECT event.*, users.name FROM event INNER JOIN users ON event.userId=users.userId WHERE sharedWith REGEXP ? AND eventIdHash=? ";
+		$getRequestedEventsSQL="SELECT event.*, users.name FROM event INNER JOIN users ON event.userId=users.userId WHERE sharedWith REGEXP ? AND eventId=? ";
 
 		$values[0]=array($finalStudentRegex => 's');
 		$values[1]=array($requestedEvent => 's');	

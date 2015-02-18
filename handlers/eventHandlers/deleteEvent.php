@@ -69,7 +69,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
 				//Assuming the user tried to delete an already deleted event
-				notifyAdmin("Suspicious pollIdHash in delete",$userId.",sh:".$eventIdHash);
+				notifyAdmin("Suspicious eventIdHash in delete",$userId.",sh:".$eventIdHash);
 				echo 5;
 				exit();
 			}
@@ -92,17 +92,36 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					exit();
 				}
 			}
+			$conn->startTransaction();
 			$DeleteEventSQL="DELETE FROM event WHERE eventIdHash=?";
 			$values[0]=array($eventIdHash => 's');
 			$result=$conn->delete($DeleteEventSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				echo 3;
+				$eventId=$event['eventId'];
+				$deleteEventNotifSQL="DELETE FROM notifications WHERE objectId= ? AND objectType=600";
+				$values1[0]=array($eventId => 's');
+				$result=$conn->delete($deleteEventNotifSQL,$values1);
+				if($conn->error=="")
+				{
+					echo 3;
+					$conn->completeTransaction();
+				}
+				else
+				{
+					$cr=$conn->error;
+					$conn->rollbackTransaction();
+					notifyAdmin("Conn. Error :".$cr." while deleting notifications in delete event.", $eventUserId);
+					echo 12;
+					exit();
+				}
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! In Delete Event",$userId);
+				$cr=$conn->error;
+				$conn->rollbackTransaction();
+				notifyAdmin("Conn.Error".$cr."! In Delete Event",$userId);
 				echo 12;
 				exit();
 			}

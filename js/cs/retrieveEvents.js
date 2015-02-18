@@ -413,6 +413,12 @@ function createEventSP()
 	var eventVenue=$('#createEventVenue').val().trim();
 	
 	var eventDate=$('#createEventDate').val().trim();
+
+	var parts=eventDate.split("/");
+
+	console.log(parts);
+
+	eventDate=parts[1]+"/"+parts[0]+"/"+parts[2];
 	
 	var eventTime=$('#createEventTime').val().trim();
 
@@ -490,42 +496,39 @@ function createEventSP()
 
 			console.log(data);
 
-			// jQuery.parseJSON(data);
+			if(checkData(data)==1)
+			{
+				x=JSON.parse(data);
 
-			// alert("HELLO event");
-			// 
+				eventInsert("first",x,2);
+
+				$('.timeago').timeago();
+
+				$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
+
+				$('#createEventOrganizerName').val("");
+
+				$('#createEventName').val("");
+
+				$('#createEventName').val("");
+
+				$('#createEventContent').val("");
+
+				$('#createEventSharedWith').val("All");
+
+				$('#createEventVenue').val("");
+
+				$('#createEventDate').val("");
+
+				$('#createEventTime').val("");
+
+				$('#createEventDurationHours').val("2");
+
+				$('#createEventDurationMinutes').val("00");
+
+				$('#createEventType').val("competition");
+			}
 			
-			x=JSON.parse(data);
-
-			//console.log(x);
-
-			eventInsert("first",x,2);
-
-			$('.timeago').timeago();
-
-			$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
-
-			$('#createEventOrganizerName').val("");
-
-			$('#createEventName').val("");
-
-			$('#createEventName').val("");
-
-			$('#createEventContent').val("");
-
-			$('#createEventSharedWith').val("");
-
-			$('#createEventVenue').val("");
-
-			$('#createEventDate').val("");
-
-			$('#createEventTime').val("");
-
-			$('#createEventDurationHours').val("");
-
-			$('#createEventDurationMinutes').val("");
-
-			$('#createEventType').val("");
 
 		});
 
@@ -631,6 +634,10 @@ function deleteEventSend()
 function latestEventsFetch(value,call)
 {
 	$('.row .eventMenu').find('#latestEventsButton').find('i').addClass('fa-spin');
+	if(call==-1)
+	{
+		$('.event').remove();
+	}
 	var eventsCurrent=[];
 	var i=0;
 	$('.event').each(function(){
@@ -691,6 +698,10 @@ function upcomingEventsFetch(value,call)
 {
 
 	$('.row .eventMenu').find('#upcomingEventsButton').find('i').addClass('fa-spin');
+	if(call==-1)
+	{
+		$('.event').remove();
+	}
 	var eventsCurrent=[];
 	var i=0;
 	$('.event').each(function(){
@@ -750,6 +761,10 @@ function pastCompetitionsFetch(value,call)
 {
 	
 	$('.row .eventMenu').find('#eventWinnersButton').find('i').addClass('fa-spin');
+	if(call==-1)
+	{
+		$('.event').remove();
+	}
 	var eventsCurrent=[];
 	var i=0;
 	$('.event').each(function(){

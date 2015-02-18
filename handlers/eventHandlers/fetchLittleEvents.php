@@ -49,7 +49,7 @@ else
 		$userId=$user['userId'];
 		$finalStudentRegex=getRollNoRegex($userId);
 		$values[0]=array($finalStudentRegex => 's');
-		$getLatestEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?) ORDER BY timestamp DESC";
+		$getLatestEventsSQL="SELECT * FROM event WHERE (sharedWith REGEXP ?) AND approvalStatus=1 ORDER BY timestamp DESC";
 		$result=$conn->select($getLatestEventsSQL,$values);
 		$displayCount=0;
 		if($conn->error=="")
@@ -66,7 +66,7 @@ else
 				{
 					$content=substr($event['eventName'],0,35);
 				}
-				$eventObject=new miniLittleEvent($event['eventIdHash'],$content);
+				$eventObject=new miniLittleEvent($event['eventId'],$content);
 				$littleEventsObjectArray[]=$eventObject;
 				$displayCount++;
 			}

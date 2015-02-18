@@ -101,9 +101,11 @@
 		public $currentProfession;
 		public $isOwner;
 		public $resumeExists;
+		public $gender;
+		public $profilePicExists;
 
 		public function __construct($userIdHash,$name,$alias,$dob,$description,$highestDegree,
-			$currentProfession,$isOwner,$resumeExists=-1)
+			$currentProfession,$isOwner,$resumeExists=-1,$gender,$profilePicExists)
 			{
 				if($userIdHash==NULL)
 				{
@@ -165,6 +167,8 @@
 				}
 				$this->isOwner=$isOwner;
 				$this->resumeExists=$resumeExists;
+				$this->gender=$gender;
+				$this->profilePicExists=$profilePicExists;
 
 				return $this;
 			}

@@ -108,7 +108,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  			<label for="eventVenue">Event Date (*)</label>
 
-					    		<input name="createEventDate" data-date-format="dd/mm/yyyy"  class="datepicker form-control" type="text" id="createEventDate">
+					    		<input name="createEventDate" data-date-format="dd/mm/yyyy"  class="datepicker form-control" placeholder="dd/mm/yyyy" type="text" id="createEventDate">
 
 					  		</div>
 
@@ -136,13 +136,13 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  					<select type="text" name="eventDurationMinutes" id="createEventDurationMinutes" class="form-control">
 
-						  						<option val="00">00 minutes</option>
+						  						<option value="00">00 minutes</option>
 
-						  						<option val="15">15 minutes</option>
+						  						<option value="15">15 minutes</option>
 
-						  						<option val="30">30 minutes</option>
+						  						<option value="30">30 minutes</option>
 
-						  						<option val="45">45 minutes</option>
+						  						<option value="45">45 minutes</option>
 
 					  						</select>
 
@@ -250,7 +250,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  			<label for="eventVenue">Event Date (*)</label>
 
-					    		<input name="editEventDate" data-date-format="dd/mm/yyyy"  class="datepicker form-control" type="text" id="editEventDate">
+					    		<input name="editEventDate" data-date-format="dd/mm/yyyy"  class="datepicker form-control" placeholder="dd/mm/yyyy" type="text" id="editEventDate">
 
 					  		</div>
 
@@ -278,13 +278,13 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  					<select type="text" name="eventDurationMinutes" id="editEventDurationMinutes" class="form-control">
 
-						  						<option val="00">00 minutes</option>
+						  						<option value="00">00 minutes</option>
 
-						  						<option val="15">15 minutes</option>
+						  						<option value="15">15 minutes</option>
 
-						  						<option val="30">30 minutes</option>
+						  						<option value="30">30 minutes</option>
 
-						  						<option val="45">45 minutes</option>
+						  						<option value="45">45 minutes</option>
 
 					  						</select>
 

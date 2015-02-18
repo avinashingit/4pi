@@ -94,19 +94,19 @@
 
 			if(data.objectType==500)
 			{
-				notification+='<a href="/4pi/posts/fetchSinglePost?ref='+data.objectId+'"><p><i class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><p><i class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==600)
 			{
-				notification+='<a href="/4pi/events/fetchSingleEvent?ref='+data.objectId+'"><p><i class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="/4pi/fetchSingleEvent.php?ref='+data.objectId+'"><p><i class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==700)
 			{
-				notification+='<a href="/4pi/polls/fetchSinglePoll.php?ref='+data.objectId+'"><p><i class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.notification+'</p>';
+				notification+='<a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><p><i class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
@@ -176,11 +176,11 @@
 
 			if(data.gender=="M")
 			{
-			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 			else
 			{
-			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/defaultWoman1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/defaultWoman1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 
 			res+='</div>';
@@ -197,13 +197,13 @@
 
 			res+='<div class="col-md-11" id="userName">';
 
-			res+='<span><a title="'+data.uname+'" href="/4pi/'+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			
 			res+='</div>';
 
 			res+='</div>';
 
-			$('#peopleSearchResult').append(res);
+			$('#peopleSearch').append(res);
 		}
 	}
 
@@ -217,8 +217,15 @@
 		.success(function(){
 			insertPeopleSearch(data,1);
 		});*/
-
-		insertPeopleSearch(data,0);
+		if(data.proPicExists==1)
+		{
+			insertPeopleSearch(data,1);
+		}
+		else
+		{
+			insertPeopleSearch(data,0);
+		}
+		
 	}
 
 	function globalSearchInsertPeople(data)
@@ -417,7 +424,7 @@
 
 		  <div class="form-group">
 
-		    <input id="searchBefore" type="text" onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
+		    <input id="searchBefore" type="text" onchange="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
 
 		  </div>
 
@@ -768,6 +775,27 @@
 
 				</form>
 				<button onclick="changePassword();" class="btn btn-primary">Change</button>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div class="modal fade" id="showContinueModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+					
+					<div class="row">
+
+						<div class="col-md-12 text-center">
+
+							<h4 class="text-center">Please login to continue.</h4>
+
+							<button class="btn btn-md btn-primary text-center" onclick="redirectPageToLogin();">Ok</button>
+
+						</div>
+
+					</div>
 			</div>
 		</div>
 	</div>	

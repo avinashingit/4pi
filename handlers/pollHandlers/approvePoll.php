@@ -40,7 +40,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 //Actual editPoll Code Starts
 $pollIdHash=$_POST['_pollId'];
-$pollStatus=$_POST['_approvalStatus'];
+$pollStatus=$_POST['_status'];
 if($pollStatus!=1&&$pollStatus!=-1)
 {
 	echo 16;

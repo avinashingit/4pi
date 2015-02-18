@@ -90,8 +90,23 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 							$res=$conn->runSimpleQuery($DropCommentTableSQL);
 							if($conn->error==""&&$res==true)
 							{
-								$conn->completeTransaction();
-								echo 3;
+								$postId=$post['postId'];
+								$deletePostNotifSQL="DELETE FROM notifications WHERE objectId= ? AND objectType=500";
+								$values1[0]=array($postId => 's');
+								$result=$conn->delete($deletePostNotifSQL,$values1);
+								if($conn->error=="")
+								{
+									echo 3;
+									$conn->completeTransaction();
+								}
+								else
+								{
+									$cr=$conn->error;
+									$conn->rollbackTransaction();
+									notifyAdmin("Conn. Error :".$cr." while deleting notifications in delete post.", $postUserId);
+									echo 12;
+									exit();
+								}
 							}
 							else
 							{

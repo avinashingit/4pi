@@ -84,6 +84,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				exit();
 			}
 			$pollUserId=$poll['userId'];
+			$pollId=$poll['pollId'];
 			if($pollUserId!=$userId)
 			{
 				if(blockUserByHash($userIdHash,"Illegal Attempt to Delete poll",$userId.",sh:".$pollIdHash)>0)
@@ -102,17 +103,36 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					exit();
 				}
 			}
+			$conn->startTransaction();
 			$DeletePollSQL="DELETE FROM poll WHERE pollIdHash=?";
 			$values[0]=array($pollIdHash => 's');
 			$result=$conn->delete($DeletePollSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				echo 3;
+				$pollId=$poll['pollId'];
+				$deletePollNotifSQL="DELETE FROM notifications WHERE objectId= ? AND objectType=700";
+				$values1[0]=array($pollId => 's');
+				$result=$conn->delete($deletePollNotifSQL,$values1);
+				if($conn->error=="")
+				{
+					echo 3;
+					$conn->completeTransaction();
+				}
+				else
+				{
+					$cr=$conn->error;
+					$conn->rollbackTransaction();
+					notifyAdmin("Conn. Error :".$cr." while deleting notifications in delete poll.", $pollUserId);
+					echo 12;
+					exit();
+				}
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! In Delete poll",$userId);
+				$cr=$conn->error;
+				$conn->rollbackTransaction();
+				notifyAdmin("Conn.Error".$cr."! In Delete poll",$pollUserId);
 				echo 12;
 				exit();
 			}

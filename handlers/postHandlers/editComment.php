@@ -105,8 +105,9 @@ if($commentContent!=""&&$postIdHash!=""&&$commentIdHash!="")
 							$commentUserName=$user['alias'];
 							$commentTime=$comment['timestamp'];
 							$commentUserIdHash=$userIdHash;
+							$profilePicExists=hasProfilePic($user['userIdHash']);
 							$commentObj= new miniComment($commentPostIdHash,$commentUserIdHash,$commentContent,$commentTime,
-								$commentIdHash,$commentUserId,$commentUserName,1);
+								$commentIdHash,$commentUserId,$commentUserName,1,$user['gender'],$profilePicExists,$user['name']);
 							 print_r(json_encode($commentObj));
 							//echo "commented";
 

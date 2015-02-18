@@ -104,11 +104,12 @@ function createPollSP()
 				})
 				.success(function(data){
 
-					////console.log(data);
+					console.log(data);
 					if(checkData(data)==1)
 					{
 						data=JSON.parse(data);
 						$('#pollCreateModal').modal('hide');
+						alert("Your poll is sent for approval. Please wait until it is approved.");
 						insertPoll(data,"first");
 						$('#pollCreateModal').find('input').each(function(){
 							$(this).val("");
@@ -232,7 +233,6 @@ function approvePoll(id,val)
 
 function insertPoll(data,position)
 {
-
 	var time=iso8601ToReadable(data.pollCreationTime);
 
 	if(data.pollOptionsType==1)
@@ -245,19 +245,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -268,7 +270,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -280,11 +282,11 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 
-					poll+='<div class="row">';
+					/*poll+='<div class="row">';
 
 						poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-					poll+='</div>';
+					poll+='</div>';*/
 
 					poll+='<div class="row" >';
 
@@ -321,19 +323,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -346,21 +350,21 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-							poll+='<div class="row">';
+							/*poll+='<div class="row">';
 
 								poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-							poll+='</div>';
+							poll+='</div>';*/
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-								/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
@@ -394,7 +398,7 @@ function insertPoll(data,position)
 
 					poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
 
-					poll+='<div id="pollShareWith" class="hidden">'+data.sharedwith+'</div>';
+					poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
 
 					poll+='<div class="row pollIdContent">';
 
@@ -431,15 +435,22 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						poll+='<div class="row">';
+						alert(data.isOwner+"   "+data.approvalStatus);
 
-							poll+='<div class="text-center">';
+						if(data.approvalStatus==1)
+						{
+							poll+='<div class="row">';
 
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+								poll+='<div class="text-center">';
+
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+
+								poll+='</div>';
 
 							poll+='</div>';
+						}
 
-						poll+='</div>';
+						
 
 					poll+='</div>';
 
@@ -456,7 +467,6 @@ function insertPoll(data,position)
 				}
 			}
 		}
-
 		else if(data.pollType==2)
 		{
 			if(data.hasVoted==1)
@@ -465,19 +475,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -488,7 +500,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -500,11 +512,11 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 
-					poll+='<div class="row">';
+					/*poll+='<div class="row">';
 
 						poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-					poll+='</div>';
+					poll+='</div>';*/
 
 					poll+='<div class="row" >';
 
@@ -541,19 +553,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -566,21 +580,21 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-							poll+='<div class="row">';
+							/*poll+='<div class="row">';
 
 								poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-							poll+='</div>';
+							poll+='</div>';*/
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-								/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
@@ -614,7 +628,7 @@ function insertPoll(data,position)
 
 					poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
 
-					poll+='<div id="pollShareWith" class="hidden">'+data.sharedwith+'</div>';
+					poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
 
 					poll+='<div class="row pollIdContent">';
 
@@ -653,15 +667,21 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						poll+='<div class="row">';
+						if(data.approvalStatus==1)
 
-							poll+='<div class="text-center">';
+						{
+							poll+='<div class="row">';
 
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+								poll+='<div class="text-center">';
+
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+
+								poll+='</div>';
 
 							poll+='</div>';
+						}
 
-						poll+='</div>';
+						
 
 					poll+='</div>';
 
@@ -688,19 +708,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -711,7 +733,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -723,11 +745,11 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 
-					poll+='<div class="row">';
+					/*poll+='<div class="row">';
 
 						poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-					poll+='</div>';
+					poll+='</div>';*/
 
 					poll+='<div class="row">';
 
@@ -756,19 +778,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -779,23 +803,17 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/*poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-							poll+='<div class="row">';
+						poll+='</div>';*/
 
-								poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
-
-							poll+='</div>';
-
-						poll+='</div>';
-
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-								/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
@@ -829,7 +847,7 @@ function insertPoll(data,position)
 
 					poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
 
-					poll+='<div id="pollShareWith" class="hidden">'+data.sharedwith+'</div>';
+					poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
 
 					poll+='<div class="row pollIdContent">';
 
@@ -866,15 +884,20 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						poll+='<div class="row">';
+						if(data.approvalStatus==1)
+						{
+							poll+='<div class="row">';
 
-							poll+='<div class="text-center">';
+								poll+='<div class="text-center">';
 
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+
+								poll+='</div>';
 
 							poll+='</div>';
+						}
 
-						poll+='</div>';
+						
 
 					poll+='</div>';
 
@@ -903,19 +926,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -926,7 +951,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -938,11 +963,11 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 
-					poll+='<div class="row">';
+					/*poll+='<div class="row">';
 
 						poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-					poll+='</div>';
+					poll+='</div>';*/
 
 					poll+='<div class="row" >';
 
@@ -979,19 +1004,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -1004,21 +1031,21 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-							poll+='<div class="row">';
+							/*poll+='<div class="row">';
 
 								poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-							poll+='</div>';
+							poll+='</div>';*/
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-								/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
@@ -1052,7 +1079,7 @@ function insertPoll(data,position)
 
 					poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
 
-					poll+='<div id="pollShareWith" class="hidden">'+data.sharedwith+'</div>';
+					poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
 
 					poll+='<div class="row pollIdContent">';
 
@@ -1089,15 +1116,20 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						poll+='<div class="row">';
+						if(data.approvalStatus==1)
+						{
+							poll+='<div class="row">';
 
-							poll+='<div class="text-center">';
+								poll+='<div class="text-center">';
 
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+
+								poll+='</div>';
 
 							poll+='</div>';
+						}
 
-						poll+='</div>';
+						
 
 					poll+='</div>';
 
@@ -1123,19 +1155,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -1146,7 +1180,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -1158,11 +1192,11 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 
-					poll+='<div class="row">';
+					/*poll+='<div class="row">';
 
 						poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-					poll+='</div>';
+					poll+='</div>';*/
 
 					poll+='<div class="row" >';
 
@@ -1199,19 +1233,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -1224,15 +1260,15 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-								/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
@@ -1266,7 +1302,7 @@ function insertPoll(data,position)
 
 					poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
 
-					poll+='<div id="pollShareWith" class="hidden">'+data.sharedwith+'</div>';
+					poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
 
 					poll+='<div class="row pollIdContent">';
 
@@ -1305,15 +1341,20 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						poll+='<div class="row">';
+						if(data.approvalStatus==1)
+						{
+							poll+='<div class="row">';
 
-							poll+='<div class="text-center">';
+								poll+='<div class="text-center">';
 
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+
+								poll+='</div>';
 
 							poll+='</div>';
+						}
 
-						poll+='</div>';
+						
 
 					poll+='</div>';
 
@@ -1340,19 +1381,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center"'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center"'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -1363,13 +1406,13 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-							poll+='<div class="row">';
+							/*poll+='<div class="row">';
 
 								poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-							poll+='</div>';
+							poll+='</div>';*/
 
 						poll+='</div>';
 
@@ -1408,19 +1451,21 @@ function insertPoll(data,position)
 
 				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
-				if(data.isSAC==1)
+				if(data.isSAC==1 && data.approvalStatus==0)
 				{
-					poll+='<div class="row">';
+					poll+='<div class="approve row">';
 
-					poll+='<div class="col-md-6 text-center"'>;
+					poll+='<br/>';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=1">Approve</button>';
+					poll+='<div class="col-md-6 text-center">';
+
+						poll+='<button class="btn btn-success btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',1)">Approve</button>';
 
 					poll+='</div>';
 
-					poll+='<div class="col-md-6 text-center"'>;
+					poll+='<div class="col-md-6 text-center">';
 
-						poll+='<button class="btn btn-danger btn-md" onclick="/4pi/handlers/pollHandlers/approvePoll.php?ref='+data.pollIdHash+'&status=-1">Approve</button>';
+						poll+='<button class="btn btn-danger btn-md" onclick="approvePoll(\''+data.pollIdHash+'\',-1)">Reject</button>';
 
 					poll+='</div>';
 
@@ -1433,21 +1478,21 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;'+data.pollQuestion+'</p>';
+							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-							poll+='<div class="row">';
+							/*poll+='<div class="row">';
 
 								poll+='<p>Poll created by <a href="/4pi/aboutMe/index.php?userId='+data.userId+'">'+data.userName+'</a></p>';
 
-							poll+='</div>';
+							poll+='</div>';*/
 
 						poll+='</div>';
 
-						if(data.isOwner==1)
+						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
 							poll+='<div class="col-md-2" id="pollCreatorOptions">';
 
-								/*poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';*/
+								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
@@ -1481,7 +1526,7 @@ function insertPoll(data,position)
 
 					poll+='<div id="pollResultType" class="hidden">'+data.pollType+'</div>';
 
-					poll+='<div id="pollShareWith" class="hidden">'+data.sharedwith+'</div>';
+					poll+='<div id="pollShareWith" class="hidden">'+data.sharedWith+'</div>';
 
 					poll+='<div class="row pollIdContent">';
 
@@ -1518,7 +1563,9 @@ function insertPoll(data,position)
 
 						poll+='<br/>';
 
-						poll+='<div class="row">';
+						if(data.approvalStatus==1)
+						{
+							poll+='<div class="row">';
 
 							poll+='<div class="text-center">';
 
@@ -1527,6 +1574,9 @@ function insertPoll(data,position)
 							poll+='</div>';
 
 						poll+='</div>';
+						}
+
+						
 
 					poll+='</div>';
 
@@ -1543,8 +1593,7 @@ function insertPoll(data,position)
 				}
 			}
 		}
-
-	}
+	}	
 }
 
 //-------------------------------------------------------------------------------//
@@ -1567,7 +1616,7 @@ function fetchLatestPolls(call,value)
 		});
 	}
 
-	////console.log(existingPolls);
+	// console.log(existingPolls);
 
 	$.post('./handlers/pollHandlers/latestPolls.php',{
 		_call:call,
@@ -1579,7 +1628,7 @@ function fetchLatestPolls(call,value)
 	})
 	.success(function(data){
 		$('#inViewElement').html("1004");
-		//////console.log(data);
+		console.log(data);
 		data=data.trim();
 		if(data==404)
 		{
@@ -1795,6 +1844,91 @@ function deletePoll(pollId)
 	}
 }
 
+function modifyPoll(data)
+{
+	$("#"+data.pollIdHash).remove();
+	insertPoll(data,"first");
+}
+
+function editedPollSend()
+{
+	var link=$("#pollEditModal");
+	var pollId=link.find("#editPollModalPollId").html();
+	var pollQuestion=link.find("#editPollQuestion").val().trim();
+	var pollOptionType=link.find("#editPollOptionType").val();
+	var pollType=link.find("#editPollType").val();
+	var pollSharedWith=link.find('#editPollSharedWith').val().trim();
+	var pollOptions=new Array();
+	var numberOfOptions=link.find('.inputOption').length;
+	for(i=0;i<numberOfOptions;i++){
+		pollOptions[i]=link.find('.inputOption').eq(i).val().trim();
+	}
+
+	var error=0;
+	if(pollQuestion.length==0)
+	{
+		alert("Please enter the poll question");
+		link.find("#editPollQuestion").focus();
+		error=1;
+	}
+	else if(pollOptionType!=1 && pollOptionType!=2)
+	{
+		alert("Please enter the poll option type.");
+		link.find("#editPollOptionType").focus();
+		error=1;
+	}
+	else if(pollType!=1 && pollType!=2 && pollType!=3)
+	{
+		alert("Please enter the poll type.");
+		link.find("#editPollType").focus();
+		error=1;
+	}
+	else
+	{
+		var unfilled=0;
+		for(var i=0;i<numberOfOptions;i++)
+		{
+			if(pollOptions[i].length==0 || pollOptions[i].length>36)
+			{
+				unfilled=1;
+			}
+		}
+
+		if(unfilled==1)
+		{
+			alert("Some options are either empty or characters are more than 36");
+		}
+
+		else
+		{
+			if(error==0)
+			{
+				$.post('/4pi/handlers/pollHandlers/editPoll.php',{
+					_pollId:pollId,
+					_pollQuestion:pollQuestion,
+					_pollType:pollType,
+					_sharedWith:pollSharedWith,
+					_pollOptionType:pollOptionType,
+					_pollOptions:pollOptions
+				})
+				.error(function(){
+					alert("Server overload. Please try again.:(");
+				})
+				.success(function(data){
+					console.log(data);
+					if(checkData(data)==1)
+					{
+						data=JSON.parse(data);
+						modifyPoll(data);
+						$("#pollEditModal").modal('hide');
+						$('.timeago').timeago();
+					}
+				});
+			}
+		}
+	}
+}
+
 function editPollAddInput()
 {
 	var numberOfOptionsCurrent=$('#pollEditModal').find('.inputOption').length;
@@ -1820,6 +1954,7 @@ function editPollDeleteInput(el){
 function editPoll(pollId)
 {
 	$('#pollEditModal').find('.extraOption').remove();
+	$('#pollEditModal').find('#editPollModalPollId').html(pollId);
 	$('#pollEditModal').find('input').val("");
 	$('#pollEditModal').find('.pollOptions').find('div').each(function(){
 		if($(this).attr('id')=='#option1' || $(this).attr('id')=='#option2')
@@ -1834,7 +1969,7 @@ function editPoll(pollId)
 	$('#pollEditModal').modal('show');
 	var olink=$('#'+pollId);
 	var link=$('#pollEditModal');
-	link.find('#editPollQuestion').val(olink.find('#pollQuestion').find('div').html());
+	link.find('#editPollQuestion').val(olink.find('#pollQuestion').find('p').find('span').html());
 	link.find('#editPollOptionType').val(olink.find('#pollOptionType').html());
 	link.find('#editPollSharedWith').val(olink.find('#pollShareWith').html());
 	link.find('#editPollType').val(olink.find('#pollResultType').html());
@@ -1860,7 +1995,8 @@ function editPoll(pollId)
 		for(i=3;i<=options;i++)
 		{
 			editPollAddInput();
-			link.find('#'+i).find('input').val(olink.find('#pollOption'+i-2).next().html());
+			var x=i-1;
+			link.find('#'+i).find('input').val(olink.find('#pollOption'+x).parent().find('span').html());
 		}
 	}
 }

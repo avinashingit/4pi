@@ -338,7 +338,8 @@ function aboutMeEdit($user,$userAlias,$dob,$description,$highestDegree,
 				{
 					$resumeExists=-1;
 				}
-				$aboutObj = new aboutMeTop($user['userIdHash'],$user['name'],$userAlias,$dob,$description,$highestDegree,$currentProfession, 1,$resumeExists);
+				$profilePicExists=hasProfilePic($user['userIdHash']);
+				$aboutObj = new aboutMeTop($user['userIdHash'],$user['name'],$userAlias,$dob,$description,$highestDegree,$currentProfession, 1,$resumeExists,$user['gender'],$profilePicExists);
 				print_r(json_encode($aboutObj));
 			}
 			else

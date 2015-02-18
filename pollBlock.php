@@ -260,6 +260,8 @@ $(document).ready(function(){
 
 	      		</div>
 
+	      		<div class="hidden" id="editPollModalPollId"></div>
+
 		      	<div class="modal-body">
 
 	      		    <form role="form">
@@ -379,7 +381,9 @@ $(document).ready(function(){
 
 					<br/>
 
-					<button onclick="editedPollSend();" class="btn btn-primary">Create Poll</button>
+					<button onclick="editedPollSend();" class="btn btn-primary">Edit Poll</button>
+
+					<br/>
 
 				</div>
 				

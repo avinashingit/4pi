@@ -229,10 +229,21 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			
 			$lastUpdated=time();
+			$isCOCAS=isCOCAS($userId);
 			//$eventIdHash=hash("sha512", $eventId.POEVHASH);
-			$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
+			if($isCOCAS==1)
+			{
+				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
+				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
+				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?,displayStatus=1,approvalStatus=1 WHERE eventIdHash=?";
+			}
+			else
+			{
+				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
 				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
 				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?,displayStatus=0,approvalStatus=0 WHERE eventIdHash=?";
+			}
+			
 			//$values[0]=array($eventId => 'i');
 			//$values[1]=array($eventIdHash => 's');
 			//$values[2]=array($timestamp => 'i');
@@ -257,7 +268,16 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				resetNotification($userId,COCAS,15,$eventId,600);
+				if($isCOCAS!=1)
+				{
+					$approvalStatus=0;
+					resetNotification($userId,COCAS,15,$eventId,600);
+				}
+				else
+				{
+					$approvalStatus=1;
+				}
+				
 				$attendCount=$event['attendCount'];
 				$seenCount=$event['seenCount'];
 				$isAttender=1;
@@ -275,18 +295,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					$proPicExists=-1;
 				}
 
-				if($userId=COCAS)
-				{
-					$isCoCAS=1;
-				}
-				else
-				{
-					$isCoCAS=-1;
-				}
+				
+				
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
 				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, 
-				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCoCAS,0);
+				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCOCAS,$approvalStatus);
 				print_r(json_encode($eventObj));
 			}
 			else

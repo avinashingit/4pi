@@ -76,7 +76,7 @@ else
 		
 
 		$finalStudentRegex=getRollNoRegex($userId);
-		$getRequestedPostsSQL="SELECT post.*, users.name,users.userIdHash FROM post INNER JOIN users ON post.userId=users.userId WHERE sharedWith REGEXP ? AND postIdHash=? ";
+		$getRequestedPostsSQL="SELECT post.*, users.name,users.userIdHash,users.gender,users.alias FROM post INNER JOIN users ON post.userId=users.userId WHERE sharedWith REGEXP ? AND postId=? ";
 
 		$values[0]=array($finalStudentRegex => 's');
 		$values[1]=array($requestedPost => 's');	

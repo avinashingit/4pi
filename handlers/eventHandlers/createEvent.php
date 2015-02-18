@@ -41,6 +41,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 
 	//Actual CreateEvent Code Starts
+	// var_dump($_POST);
 	$eventContent=$_POST['_content'];
 	$eventName=$_POST['_eventName'];
 	$eventVenue=$_POST['_venue'];
@@ -198,9 +199,20 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			$timestamp=$lastUpdated=time();
 			$eventIdHash=hash("sha512", $eventId.POEVHASH);
-			$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
+			$isCOCAS=isCOCAS($userId);
+			if($isCOCAS==1)
+			{
+				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
+				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,displayStatus,approvalStatus) 
+				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,1,1)";
+			}
+			else
+			{
+				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
 				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin) 
 				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?)";
+			}
+			
 			$values[0]=array($eventId => 'i');
 			$values[1]=array($eventIdHash => 's');
 			$values[2]=array($timestamp => 'i');
@@ -223,7 +235,16 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				sendNotification($userId,SAC,15,$eventId,600);
+				if($isCOCAS!=1)
+				{
+					$approvalStatus=0;
+					sendNotification($userId,COCAS,15,$eventId,600);
+				}
+				else
+				{
+					$approvalStatus=1;
+				}
+				
 
 				$attendCount=0;
 				$seenCount=0;
@@ -249,15 +270,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				{
 					$proPicExists=-1;
 				}
-				$isCoCAS=-1;
-				if($userId==COCAS)
-				{
-					$isCoCAS=1;
-				}
+				
+				
 
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
-				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCoCAS,0);
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$user['name'],$isCOCAS,$approvalStatus);
 				print_r(json_encode($eventObj));
 			}
 			else

@@ -12,7 +12,7 @@
     
         //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
     
-        if (windowpos >= pos.top+148) {
+        if (windowpos >= pos.top+50) {
     
             s.addClass("stick");
     
@@ -118,7 +118,17 @@
 	{
 		var littlePost="";
 
-		littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>'
+		if(data!="empty")
+		{
+			littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
+
+			$("#rightBlock1").find(".emptyPostsRight").addClass('hidden');
+		}
+
+		else
+		{
+			$("#rightBlock1").find(".emptyPostsRight").removeClass('hidden');
+		}
 	
 		$('#rightBlock1').find('ul').append(littlePost);
 
@@ -128,8 +138,17 @@
 	{
 		var littleEvent="";
 
-		littleEvent+='<a target="_blank" href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>'
-	
+		if(data!="empty")
+		{
+			littleEvent+='<a target="_blank" href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';
+
+			$("#rightBlock2").find(".emptyEventsRight").addClass('hidden');
+		}
+		else
+		{
+			$("#rightBlock2").find(".emptyEventsRight").removeClass('hidden');
+		}
+
 		$('#rightBlock2').find('ul').append(littleEvent);
 
 	}
@@ -138,8 +157,18 @@
 	{
 		var littlePoll="";
 
-		littlePoll+='<a target="_blank"  href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>'
-	
+		if(data!="empty")
+		{
+			littlePoll+='<a target="_blank"  href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
+
+			$("#rightBlock3").find(".emptyPollsRight").addClass('hidden');
+		}
+
+		else
+		{
+			$("#rightBlock3").find(".emptyPollsRight").removeClass('hidden');
+		}
+
 		$('#rightBlock3').find('ul').append(littlePoll);
 
 	}
@@ -160,11 +189,21 @@
 				$('#rightBlock1').find('ul').find('.littlePost').each(function(){
 					$(this).remove();
 				});
-				data=JSON.parse(data);
-				for(i=0;i<data.length;i++)
+				
+
+				if(data==404)
 				{
-					insertLittlePost(data[i]);
+					insertLittlePost("empty");
 				}
+				else
+				{
+					data=JSON.parse(data);
+					for(i=0;i<data.length;i++)
+					{
+						insertLittlePost(data[i]);
+					}
+				}
+				
 			}
 		});
 	}
@@ -184,11 +223,20 @@
 				$('#rightBlock2').find('ul').find('.littleEvent').each(function(){
 					$(this).remove();
 				});
-				data=JSON.parse(data);
-				for(i=0;i<data.length;i++)
+				
+				if(data==404)
 				{
-					insertLittleEvent(data[i]);
+					insertLittleEvent("empty");
 				}
+				else
+				{
+					data=JSON.parse(data);
+					for(i=0;i<data.length;i++)
+					{
+						insertLittleEvent(data[i]);
+					}
+				}
+				
 			}
 		});
 	}
@@ -208,11 +256,20 @@
 				$('#rightBlock3').find('ul').find('.littlePoll').each(function(){
 					$(this).remove();
 				});
-				data=JSON.parse(data);
-				for(i=0;i<data.length;i++)
+				
+				if(data==404)
 				{
-					insertLittlePoll(data[i]);
+					insertLittlePoll("empty");
 				}
+				else
+				{
+					data=JSON.parse(data);
+					for(i=0;i<data.length;i++)
+					{
+						insertLittlePoll(data[i]);
+					}
+				}
+				
 			}
 		});
 	}
@@ -244,6 +301,8 @@
 
 			</ul>
 
+			<h4 style="color:black;padding:10px;" class="text-center emptyPostsRight hidden">No posts to display</h4>
+
 	</div>
 
 	<div class=" row panel panel-success" style="margin-top:5px;" id="rightBlock2" >
@@ -253,6 +312,8 @@
 			<ul class="list-group">
 
 		  	</ul>
+
+		  	<h4 style="color:black;padding:10px;" class="text-center emptyEventsRight hidden">No events to display</h4>
 
 	</div>
 
@@ -264,19 +325,21 @@
 
 		  	</ul>
 
+		  	<h4 style="color:black;padding:10px;" class="text-center emptyPollsRight hidden">No polls to display</h4>
+
 	</div>
 
 	<div class="btn-group btn-group-justified" id="rightBox">
 
 	  <div class="btn-group postsGroup">
 
-	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-list-ul" title="Events"></i></button></a>
+	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-list-ul" title="Posts"></i></button></a>
 
 	  </div>
 
 	  <div class="btn-group eventsGroup">
 
-	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-calendar" title="Threads"></i></button></a>
+	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-calendar" title="Events"></i></button></a>
 
 	  </div>
 

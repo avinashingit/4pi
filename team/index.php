@@ -32,31 +32,31 @@ include("../header.php");
 				
 				<div class="col-md-4"  >
 					<div class="devLeft" >
-						<a href="#" title="View Profile" ><img src="/4pi/img/hpics/1.jpg" class="devImg img-responsive"   /></a>
+						<a href="/4pi/aboutMe/index.php?userId=COE12B009" title="View Profile" ><img src="/4pi/img/hpics/1.jpg" class="devImg img-responsive"   /></a>
 
 						<div class="devDetails"  >
-							<a href="#" title="View Profile" class="devName" >Avinash Kadimisetty</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE12B009" title="View Profile" class="devName" >Avinash Kadimisetty</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
-							<span><a href="mailto:coe12b009@iiitdm.ac.in" title="Mail me" >coe12b009@iiitdm.ac.in</a><br /><a href="#" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
+							<span><a href="mailto:coe12b009@iiitdm.ac.in" title="Mail me" >coe12b009@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B009" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
 					</div>
 					
 					<div class="devLeft" >
-						<a href="#" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/16.jpg" />
+						<a href="/4pi/aboutMe/index.php?userId=COE12B013" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/16.jpg" />
 						<div class="devDetails" ></a>
-							<a href="#" title="View Profile" class="devName" >Hari Krishna Majety</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE12B013" title="View Profile" class="devName" >Hari Krishna Majety</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
-							<span><a href="mailto:coe12b013@iiitdm.ac.in" title="Mail me"  >coe12b013@iiitdm.ac.in</a><br /><a href="#" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
+							<span><a href="mailto:coe12b013@iiitdm.ac.in" title="Mail me"  >coe12b013@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B013" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
 					</div>
 					
 					<div class="devLeft" >
-						<a href="#" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/30.jpg"  /></a>
+						<a href="/4pi/aboutMe/index.php?userId=COE12B025" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/30.jpg"  /></a>
 
 						<div class="devDetails" >
-							<a href="#" title="View Profile"  class="devName" >Roopesh Reddy</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE12B025" title="View Profile"  class="devName" >Roopesh Reddy</a>
 							<p  class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
-							<span><a href="mailto:coe12b025@iiitdm.ac.in" title="Mail me"  >coe12b025@iiitdm.ac.in</a><br /><a href="#" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
+							<span><a href="mailto:coe12b025@iiitdm.ac.in" title="Mail me"  >coe12b025@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B025" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
 					</div>
 				</div>
@@ -96,34 +96,34 @@ include("../header.php");
 					
 					<div class="devRight right" >
 						<div class="devDetails" >
-							<a href="#" title="View Profile" class="devName"  >P. Praneeth&nbsp;</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE12B022" title="View Profile" class="devName"  >P. Praneeth&nbsp;</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
-							<span><a href="mailto:coe12b022@iiitdm.ac.in" title="Mail me"  >coe12b022@iiitdm.ac.in</a><br /><a href="#" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
+							<span><a href="mailto:coe12b022@iiitdm.ac.in" title="Mail me"  >coe12b022@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B022" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
 						
-						<a href="#" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/2.jpg"  /></a>
+						<a href="/4pi/aboutMe/index.php?userId=COE12B022" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/2.jpg"  /></a>
 					</div>
 					
 					
 					<div class="devRight right" >
 						<div class="devDetails" >
-							<a href="#" title="View Profile" class="devName"  >G. Hemanth&nbsp;&nbsp;&nbsp;</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE12B005" title="View Profile" class="devName"  >G. Hemanth&nbsp;&nbsp;&nbsp;</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
-							<span><a href="mailto:coe12b005@iiitdm.ac.in" title="Mail me"  >coe12b005@iiitdm.ac.in</a><br /><a href="#" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
+							<span><a href="mailto:coe12b005@iiitdm.ac.in" title="Mail me"  >coe12b005@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B005" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
 						
-						<a href="#" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/15.jpg"   /></a>
+						<a href="/4pi/aboutMe/index.php?userId=COE12B005" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/15.jpg"   /></a>
 					</div>
 					
 					<div class="devRight right" >
 					
 						<div class="devDetails" >
-							<a href="#" title="View Profile" class="devName"  >B. Sai Kumar&nbsp;&nbsp;&nbsp;</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE11B005" title="View Profile" class="devName"  >B. Sai Kumar&nbsp;&nbsp;&nbsp;</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer, Graphic Art</p>
-							<span><a href="#" title="Mail me"  >coe11b005@iiitdm.ac.in</a><br /><a href="#" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
+							<span><a href="#" title="Mail me"  >coe11b005@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE11B005" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
 						
-						<a href="#" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/3.jpg"   /></a>
+						<a href="/4pi/aboutMe/index.php?userId=COE11B005" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/3.jpg"   /></a>
 
 						
 					</div>

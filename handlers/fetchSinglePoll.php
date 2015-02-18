@@ -74,7 +74,7 @@ else
 		
 
 		$finalStudentRegex=getRollNoRegex($userId);
-		$getRequestedPollsSQL="SELECT poll.*, users.name FROM poll INNER JOIN users ON poll.userId=users.userId WHERE sharedWith REGEXP ? AND pollIdHash=? ";
+		$getRequestedPollsSQL="SELECT poll.*, users.name FROM poll INNER JOIN users ON poll.userId=users.userId WHERE sharedWith REGEXP ? AND pollId=? ";
 
 		$values[0]=array($finalStudentRegex => 's');
 		$values[1]=array($requestedPoll => 's');	

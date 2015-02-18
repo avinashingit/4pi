@@ -64,7 +64,7 @@ function callWhen404(element,position)
 	{
 		if($('.skill').length==0)
 		{
-			text="<p id='noskills'>No skills to display</p>";
+			text="<p class='text-center' id='noskills'>No skills to display</p>";
 		}
 
 		else
@@ -91,7 +91,7 @@ function callWhen404(element,position)
 	{
 		if($('.project').length==0)
 		{
-			text="<p id=\"noprojects\">No projects to display</p>";
+			text="<p class='text-center' id=\"noprojects\">No projects to display</p>";
 		}
 		else
 		{
@@ -103,7 +103,7 @@ function callWhen404(element,position)
 	{
 		if($('.experience').length==0)
 		{
-			text="<p id=\"noexperiences\">No experiences to display</p>";
+			text="<p class='text-right' id=\"noexperiences\">No experiences to display</p>";
 		}
 		else
 		{
@@ -115,7 +115,7 @@ function callWhen404(element,position)
 	{
 		if($('.academics').length==0)
 		{
-			text="<p id=\"noacademics\">No degrees to display</p>";
+			text="<p class='text-right' id=\"noacademics\">No degrees to display</p>";
 		}
 		else
 		{
@@ -127,7 +127,7 @@ function callWhen404(element,position)
 	{
 		if($('.certification').length==0)
 		{
-			text="<p id=\"nocertifications\">No certified courses to display</p>";
+			text="<p class='text-right' id=\"nocertifications\">No certified courses to display</p>";
 		}
 		else
 		{
@@ -139,7 +139,7 @@ function callWhen404(element,position)
 	{
 		if($('.workshop').length==0)
 		{
-			text="<p id=\"noworkshops\">No workshops to display</p>";
+			text="<p class='text-right' id=\"noworkshops\">No workshops to display</p>";
 		}
 		else
 		{
@@ -147,11 +147,11 @@ function callWhen404(element,position)
 		}
 	}
 
-	else if(element="Achievements")
+	else if(element=="Achievements")
 	{
 		if($('.achievement').length==0)
 		{
-			text="<p id=\"noachievements\">No achievements to display</p>";
+			text="<p class='text-right' id=\"noachievements\">No achievements to display</p>";
 		}
 		else
 		{
@@ -163,7 +163,7 @@ function callWhen404(element,position)
 	{
 		if($('.interest').length==0)
 		{
-			text="<p id=\"nointerests\">No interests to display</p>";
+			text="<p class='text-center' id=\"nointerests\">No interests to display</p>";
 		}
 		else
 		{
@@ -255,6 +255,11 @@ function afterAjaxCallDisplay()
 function showValueForSlider(el)
 {
 	$(el).parent().parent().find("#sliderValueAddModal").html($(el).val());
+}
+
+function showValueForSliderEdit(el)
+{
+	$(el).parent().parent().find("#sliderValueEditModal").html($(el).val());
 }
 
 function addSkillAddInput()
@@ -751,13 +756,13 @@ function editTopPartSendData()
 
 	var error=0;
 
-	var image=link.find("#editPersonInfoModalPersonImage")[0].files[0];
+	/*var image=link.find("#editPersonInfoModalPersonImage")[0].files[0];
 
 	if(image.size>8000000)
 	{
 		alert("Image size cannot be greater than 8 MB.");
 		error=1;
-	}
+	}*/
 
 	var sFileName=link.find("#editPersonInfoModalPersonImage").val();
 
@@ -769,7 +774,7 @@ function editTopPartSendData()
 
 	if(resumeFileExtension.length!=0)
 	{
-		if(resumeFileExtension!="pdf" || resumeFileExtension!="docx")
+		if(resumeFileExtension!="pdf" && resumeFileExtension!="docx")
 		{
 			alert("Only .pdf and .docx are allowed for resume.");
 			error=1;
@@ -821,9 +826,11 @@ function editTopPartSendData()
 			processData: false,
 	    	contentType: false,
 	    	success:function(data){
-	    		console.log(data);
-	    		insertTopPart(JSON.parse(data),1);
-	    		$('#editPersonInfoModal').modal('hide');
+	    		if(checkData(data)==1)
+	    		{
+	    			insertTopPart(JSON.parse(data),1);
+	    			$('#editPersonInfoModal').modal('hide');
+	    		}
 	    	}
 		});
 	}
@@ -1618,6 +1625,11 @@ function fetchExperience()
 				}
 				afterAjaxCallDisplay();
 			}
+
+			else if(data==404)
+			{
+				callWhen404('Experience',$("#experiences").find('#experienceContainer1'));
+			}
 		}
 	});
 }
@@ -1849,6 +1861,11 @@ function fetchAcademics()
 					insertAcademics(x[i]);
 				}
 				afterAjaxCallDisplay();
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Academics',$("#academics").find('#academicsContainer1'));
 			}
 		}
 	});
@@ -2091,6 +2108,11 @@ function fetchWorkshops()
 				}
 				afterAjaxCallDisplay();
 			}
+
+			else if(data==404)
+			{
+				callWhen404('Workshops',$("#workshops").find('#workshopContainer1'));
+			}
 		}
 	});
 }
@@ -2289,6 +2311,11 @@ function fetchCertifications()
 					insertCertification(x[i]);
 				}
 				afterAjaxCallDisplay();
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Certifications',$("#certifications").find('#certificationContainer1'));
 			}
 		}
 	});
@@ -2502,6 +2529,11 @@ function fetchAchievements()
 				}
 				afterAjaxCallDisplay();
 			}
+
+			else if(data==404)
+			{
+				callWhen404('Achievements',$("#achievements").find('#achievementContainer1'));
+			}
 		}
 	});
 }
@@ -2693,6 +2725,11 @@ function fetchInterests(data)
 					insertInterest(interests[i],x.isOwner);
 				}
 				afterAjaxCallDisplay();
+			}
+
+			else if(data==404)
+			{
+				callWhen404('Interests',$("#interests").find('#interestsContainer2'));
 			}
 			
 		}

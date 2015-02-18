@@ -66,7 +66,7 @@ else
 				{
 					$content=substr($post['subject'],0,35);
 				}
-				$postObject=new miniLittlePost($post['postIdHash'],$content);
+				$postObject=new miniLittlePost($post['postId'],$content);
 				$littlePostObjectArray[]=$postObject;
 				$displayCount++;
 			}

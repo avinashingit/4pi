@@ -105,7 +105,7 @@ if($content!=""&&$postIdHash!="")
 							$commentId=$cId+1;
 						}						
 						$commentIdHash=hash("sha512", $commentId.POCHASH);
-						$commentUserName=$user['name'];
+						$commentUserName=$user['alias'];
 						//$commentUserName=$user['alias'];
 						$postCommentCount=$post['commentCount'];
 						$insertCommentSQL="INSERT INTO ".$tablename." (commentIdHash,content,userId,timestamp,personTags,commentId) VALUES(?,?,?,?,?,?)";
@@ -123,8 +123,9 @@ if($content!=""&&$postIdHash!="")
 							$ts = new DateTime();
 							$ts->setTimestamp($timestamp);
 							$CommentCreationTime=$ts->format(DateTime::ISO8601);
+							$profilePicExists=hasProfilePic($user['userIdHash']);
 							$commentObj= new miniComment($postIdHash,$userIdHash,$content,$CommentCreationTime,
-													$commentIdHash,$commentUserId,$commentUserName,$commentOwner);
+													$commentIdHash,$commentUserId,$commentUserName,$commentOwner,$user['gender'],$profilePicExists,$user['name']);
 							
 							if(updatePostIndexesOnComment($post,$userId,$conn))
 							{
