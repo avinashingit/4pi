@@ -13,7 +13,7 @@
         //s.html('<h5 class="text-center"><a href="#events"><i class="fa fa-gears"></i></a>&nbsp;<a href="#threads"><i class="fa fa-database"></i></a>&nbsp;<a href="#polls"><i class="fa fa-cubes"></i></a></h5>');
     
         if (windowpos >= pos.top+50) {
-    
+    		s.removeClass('hidden');
             s.addClass("stick");
     
             //$('#topBarNew').show();
@@ -25,7 +25,7 @@
         } 
 
         else {
-
+        	s.addClass('hidden');
             s.removeClass("stick");
 
             //$('#topBarNew').hide();
@@ -329,7 +329,7 @@
 
 	</div>
 
-	<div class="btn-group btn-group-justified" id="rightBox">
+	<div class="btn-group btn-group-justified hidden" id="rightBox">
 
 	  <div class="btn-group postsGroup">
 

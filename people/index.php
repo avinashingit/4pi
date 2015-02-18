@@ -717,7 +717,7 @@ shall be treated as approved.</li>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="COE Branch Councillor" class="secName"  >P.Krishna Mohan Reddy</a><br /><span>B.Tech, Computer Engineering <span></p>
+								<p ><a href="#" title="COE Branch Councillor" class="secName"  >K.Krishna Mohan Reddy</a><br /><span>B.Tech, Computer Engineering <span></p>
 								<div>
 								<div>#420, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9094381911
