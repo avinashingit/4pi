@@ -93,19 +93,19 @@
 
 			if(data.objectType==500)
 			{
-				notification+='<a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><p><i class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
+				notification+='<a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><p><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==600)
 			{
-				notification+='<a href="/4pi/fetchSingleEvent.php?ref='+data.objectId+'"><p><i class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
+				notification+='<a href="/4pi/fetchSingleEvent.php?ref='+data.objectId+'"><p><i class="fa fa-calendar" style="color:#98001D"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==700)
 			{
-				notification+='<a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><p><i class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
+				notification+='<a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><p><i class="fa fa-pie-chart" style="color:#580075"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
@@ -246,11 +246,11 @@
 
 		if(data.postSubject.length==0)
 		{
-			res+='<span><a title="'+data.postContent+'" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'"><img src="/4pi/img/post.jpg" alt="post" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:15px;" class="text-left">'+data.postContent.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.postContent+'" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'"><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:15px;" class="text-left">'+data.postContent.substring(0,20);+'</span></a></span>';
 		}
 		else
 		{
-			res+='<span><a title="'+data.postSubject+'" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'"><img src="/4pi/img/post.jpg" alt="post" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:15px;" class="text-left">'+data.postSubject.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.postSubject+'" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'"><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;&nbsp;<span id="postSubjectText" style="font-size:15px;" class="text-left">'+data.postSubject.substring(0,20);+'</span></a></span>';
 		}
 
 		res+='</div>';
@@ -268,7 +268,7 @@
 
 		res+='<div class="col-md-11" id="eventName">';
 
-		res+='<span><a title="'+data.eventName+'"href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'"><img src="/4pi/img/event.png" alt="event" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:15px;" class="text-left">'+data.eventName.substring(0,20);+'</span></a></span>';
+		res+='<span><a title="'+data.eventName+'"href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'"><i class="fa fa-calendar" style="color:#98001D"></i>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:15px;" class="text-left">'+data.eventName.substring(0,20);+'</span></a></span>';
 
 		res+='</div>';
 
@@ -285,7 +285,7 @@
 
 		res+='<div class="col-md-11" id="pollName">';
 
-		res+='<span><a title="'+data.pollDescription+'"href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'"><img src="/4pi/img/poll.jpg" alt="poll" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:15px;" class="text-left">'+data.pollDescription.substring(0,20);+'</span></a></span>';
+		res+='<span><a title="'+data.pollDescription+'"href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'"><i class="fa fa-pie-chart" style="color:#580075"></i>&nbsp;&nbsp;&nbsp;<span id="eventSubjectText" style="font-size:15px;" class="text-left">'+data.pollDescription.substring(0,20);+'</span></a></span>';
 
 		res+='</div>';
 
@@ -404,8 +404,8 @@
 					<span class="caret" style="color:white;" ></span>
 					</a>
 					<ul class="dropdown-menu text-left" >
-						<li><a href="/4pi/index.php?logout=yes"><i class="fa fa-reply"></i> Logout</a></li>
-						<li><a href="#changePasswordModal" data-toggle="modal"><i class="fa fa-pencil"></i> Change password</a></li>
+						<li><a href="/4pi/index.php?logout=yes"><i class="fa fa-reply" style="color:black !important;"></i> Logout</a></li>
+						<li><a href="#changePasswordModal" data-toggle="modal"><i class="fa fa-pencil" style="color:black !important;"></i> Change password</a></li>
 					</ul>
 				</div>
 			
@@ -688,7 +688,7 @@
 
 	.notification.showed
 	{
-		background-color:#f1f1f1;
+		background-color:#fff;
 		/*background-color:#fff;*/
 	}
 
@@ -710,7 +710,7 @@
 
 	.notification:hover
 	{
-		background-color:#fefefe;
+		background-color:#f1f1f1;
 	}
 
 	#searchResults1{

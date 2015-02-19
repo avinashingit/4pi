@@ -117,25 +117,25 @@ function eventInsert(position,data,past)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="" title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default;" title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
 				  
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="" title="Event Date"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default" title="Event Date"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
 	
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style=""title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default"title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
 				  
 	event+='</div>';
 
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="" title="Event Duration"><p class="venueDateTimeEvent text-center"><i class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span>&nbsp;hrs</p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default" title="Event Duration"><p class="venueDateTimeEvent text-center"><i class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span>&nbsp;hrs</p></button>';
 				  
 	event+='</div>';
 				

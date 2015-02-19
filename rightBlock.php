@@ -291,7 +291,7 @@
 
 </script>
 
-<div class="col-md-3" id="rightBlock" style="color:white;">
+<div class="col-md-3" id="rightBlock" style="position:fixed;top:50px;right:0px;color:white;">
 
 	<div class="row panel" id="rightBlock1" >
 
@@ -329,27 +329,39 @@
 
 	</div>
 
-	<div class="btn-group btn-group-justified hidden" id="rightBox">
+	<div class="row panel panel-info" id="rightBlock4">
 
-	  <div class="btn-group postsGroup">
-
-	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-list-ul" title="Posts"></i></button></a>
-
-	  </div>
-
-	  <div class="btn-group eventsGroup">
-
-	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-calendar" title="Events"></i></button></a>
-
-	  </div>
-
-	  <div class="btn-group pollsGroup">
-
-	    <a href="#rightBlock3"><button type="button" class="btn" id="miniRightBlock3"><i style="color:white;" class="fa fa-pie-chart" title="Polls"></i></button></a>
-
-	  </div>
+		<a href="/4pi/ideaBank" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-exclamation"></i>&nbsp;Idea Bank</div></a>
 
 	</div>
+
+	<!-- <div class="btn-group btn-group-justified hidden" id="rightBox">
+	
+	  <div class="btn-group postsGroup">
+	
+	    <a href="#rightBlock1"><button type="button" class="btn"  id="miniRightBlock1"><i style="color:white;" class="fa fa-list-ul" title="Posts"></i></button></a>
+	
+	  </div>
+	
+	  <div class="btn-group eventsGroup">
+	
+	    <a href="#rightBlock2"><button type="button" class="btn" id="miniRightBlock2"><i style="color:white;" class="fa fa-calendar" title="Events"></i></button></a>
+	
+	  </div>
+	
+	  <div class="btn-group pollsGroup">
+	
+	    <a href="#rightBlock3"><button type="button" class="btn" id="miniRightBlock3"><i style="color:white;" class="fa fa-pie-chart" title="Polls"></i></button></a>
+	
+	  </div>
+	
+	</div> -->
+
+	<!-- <div id="ideaBox" class="text-center" style="height:50px;width:100%;position:fixed !important;bottom:15px !important;background-color:black;">
+	
+		<h1 style="color:white;">Idea Bank</h1>
+	
+	</div> -->
 
 </div>
 

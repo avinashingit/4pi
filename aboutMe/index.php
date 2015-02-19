@@ -330,7 +330,7 @@ if(userId=="")
 
 						<div class="col-md-6">
 
-							<label for="">Show email id [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your email id to others"></i>]</label><br>
+							<label for="">Show email id &nbsp;<span style="color:red;">*</span>[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your email id to others"></i>]</label><br>
 
 							<label>Yes &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="1" name="showEmailIdValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
@@ -340,7 +340,7 @@ if(userId=="")
 
 						<div class="col-md-6">
 
-							<label for="">Show contacts [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your contacts id to others"></i>]</label><br/>
+							<label for="">Show contacts&nbsp;<span style="color:red;">*</span> [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your contacts id to others"></i>]</label><br/>
 
 							<label>Yes &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="1" name="showContactsValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
@@ -390,7 +390,7 @@ if(userId=="")
 
 				<form id="topPartEditForm" method="post">
 
-					<label for="personName">Name</label>
+					<label for="personName">Name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editPersonInfoModalPersonName" class="form-control">
 
@@ -1732,9 +1732,9 @@ if(userId=="")
 
 					<div class="row addSkillInputClass">
 
-						<div class="col-md-5">
+						<div class="col-md-6">
 
-							<input type="text" placeholder="Skill name. Ex: Photoshop. Rating next." id="addSkillModalSkillName" class="form-control">
+							<input type="text" placeholder="Skill name. Ex:Matlab. Rating next." id="addSkillModalSkillName" class="form-control">
 
 						</div>
 
@@ -1750,7 +1750,7 @@ if(userId=="")
 
 						</div>
 
-						<div class="col-md-2 hidden">
+						<div class="col-md-1 hidden">
 
 			    			<span style="cursor:pointer;" class="input-group-addon" onclick="addSkillAddInput();" id="addOption">
 
@@ -1860,7 +1860,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="projectTitle">Project title</label>
+					<label for="projectTitle">Project title&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" placeholder="Ex: Doors 2018" id="addProjectModalProjectTitle" class="form-control">
 
@@ -1951,7 +1951,7 @@ if(userId=="")
 
 					<input type="text" id="editProjectModalProjectId" class="hidden">
 
-					<label for="projectTitle">Project title</label>
+					<label for="projectTitle">Project title&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editProjectModalProjectTitle" class="form-control">
 
@@ -2040,7 +2040,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="companyName">Company/organisation</label>
+					<label for="companyName">Company/organisation&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" placeholder="Megasoft" id="addExperienceModalCompanyName" class="form-control">
 
@@ -2070,7 +2070,7 @@ if(userId=="")
 
 							<label>
 
-								Yes&nbsp;&nbsp;<input name="featureInPersonalInfo" type="radio" id="addExperienceModalFeature" value="1" class="form-control">
+								Yes&nbsp;&nbsp;<input name="featureInPersonalInfo" type="radio" id="addExperienceModalFeature" value="1" class="form-control" checked>
 
 							</label>
 
@@ -2139,7 +2139,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="companyName">Company/organisation</label>
+					<label for="companyName">Company/organisation&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editExperienceModalCompanyName" class="form-control">
 
@@ -2240,7 +2240,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="degree">Degree</label>
+					<label for="degree">Degree&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="addAcademicsModalDegree" class="form-control">
 
@@ -2364,7 +2364,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="degree">Degree</label>
+					<label for="degree">Degree&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editAcademicsModalDegree" class="form-control">
 
@@ -2489,7 +2489,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="workshopName">Workshop name</label>
+					<label for="workshopName">Workshop name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="addWorkshopModalWorkshopName" class="form-control">
 
@@ -2568,7 +2568,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="workshopName">Workshop name</label>
+					<label for="workshopName">Workshop name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editWorkshopModalWorkshopName" class="form-control">
 
@@ -2649,7 +2649,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="courseName">Course name</label>
+					<label for="courseName">Course name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="addCertificationModalCourseName" class="form-control">
 
@@ -2720,7 +2720,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="courseName">Course name</label>
+					<label for="courseName">Course name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editCertificationModalCourseName" class="form-control">
 
@@ -2795,7 +2795,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="workshopName">Event name</label>
+					<label for="workshopName">Event name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="addAchievementModalEventName" class="form-control">
 
@@ -2858,7 +2858,7 @@ if(userId=="")
 
 				<form>
 
-					<label for="workshopName">Event name</label>
+					<label for="workshopName">Event name&nbsp;<span style="color:red;">*</span></label>
 
 					<input type="text" id="editAchievementModalEventName" class="form-control">
 

@@ -270,7 +270,7 @@ function addSkillAddInput()
 
 	input+='<div class="row addSkillInputClass extraInputs">';
 
-		input+='<div class="col-md-5">';
+		input+='<div class="col-md-6">';
 
 			input+='<input type="text" id="addSkillModalSkillName" class="form-control">';
 
@@ -288,7 +288,7 @@ function addSkillAddInput()
 
 		input+='</div>';
 
-		input+='<div class="col-md-2">';
+		input+='<div class="col-md-1">';
 
 			input+='<span style="cursor:pointer;" class="hidden input-group-addon" onclick="addSkillAddInput();" id="addOption">';
 
@@ -479,7 +479,16 @@ function insertTopPart(data,locateProPic)
 
 			topPart+='<div class="col-md-3">';
 
+			if(data.dob.length==0)
+			{
+				topPart+='<div class="text-left" id="personDOB">14/05/1980</div><br/>';
+			}
+			else
+			{
 				topPart+='<div class="text-left" id="personDOB">'+data.dob+'</div><br/>';
+			}
+
+				
 
 				topPart+='<div class="text-left" id="personHighestDegree">'+data.highestDegree+'</div><br/>';
 

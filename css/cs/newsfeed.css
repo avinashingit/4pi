@@ -45,6 +45,13 @@ textarea.formcontrol
     border:1px solid #185978;
     margin-top:5px;
 }
+
+#rightBlock4 .panel-heading
+{
+    background:linear-gradient(#B61B88, #540733);
+    color:#fff;
+}
+
 #rightBlock2 .panel-heading{
     background:linear-gradient(#af0021,#98001d);
     color:#fff;

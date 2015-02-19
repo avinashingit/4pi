@@ -526,9 +526,13 @@ function insertPoll(data,position)
 
 					poll+='<br/>';
 
-					poll+='<div class="text-center">';
+					poll+='<div class="row">';
 
-						poll+='<button class="btn btn-md btn-danger" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\',1);">View results</button>';
+						poll+='<div class="col-md-12 text-center">';
+
+							poll+='<button class="text-centert btn btn-md btn-danger" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\',1);">View results</button>';
+
+						poll+='</div>';
 
 					poll+='</div>';
 
@@ -632,7 +636,13 @@ function insertPoll(data,position)
 
 					poll+='<div class="row pollIdContent">';
 
-						poll+='<button id="pollsResultViewbutton" class="btn btn-default btn-md" onclick="displayPollResults(\''+data.pollIdHash+'\',0);">View results</button>';
+						poll+='<div class="col-md-12 text-center">';
+
+							poll+='<button id="pollsResultViewbutton" class="btn btn-default btn-md" onclick="displayPollResults(\''+data.pollIdHash+'\',0);">View current votes</button>';
+
+						poll+='</div><br/>';
+
+						poll+='<br/>';
 
 						poll+='<div class="row">';
 
@@ -1206,9 +1216,13 @@ function insertPoll(data,position)
 
 					poll+='<br/>';
 
-					poll+='<div class="text-center">';
+					poll+='<div class="row">';
 
-						poll+='<button class="btn btn-md btn-danger" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\',1);">View results</button>';
+						poll+='<div class="col-md-12 text-center">';
+
+							poll+='<button class="btn btn-md btn-danger" id="pollsResultViewbutton" onclick="displayPollResults(\''+data.pollIdHash+'\',1);">View results</button>';
+
+						poll+='</div>';
 
 					poll+='</div>';
 
@@ -1306,7 +1320,11 @@ function insertPoll(data,position)
 
 					poll+='<div class="row pollIdContent">';
 
-						poll+='<button id="pollsResultViewbutton" class="btn btn-default btn-md" onclick="displayPollResults(\''+data.pollIdHash+'\',0);">View results</button>';
+						poll+='<div class="col-md-12 text-center">';
+
+							poll+='<button id="pollsResultViewbutton" class="btn btn-default btn-md" onclick="displayPollResults(\''+data.pollIdHash+'\',0);">View results</button>';
+
+						poll+='</div>';
 
 						poll+='<div class="row">';
 

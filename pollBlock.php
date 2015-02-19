@@ -89,7 +89,7 @@
 
 				  		<div class="form-group has-error">
 
-				   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollName">Poll on&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
 				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="createPollQuestion" placeholder="Poll question. Required."></input>
 
@@ -105,7 +105,7 @@
 
 				  		<div class="form-group">
 
-				   			<label for="pollName">Poll option type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Single option selection or multiple option types."></i>]
+				   			<label for="pollName">Poll option type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Single option selection or multiple option types."></i>]
 
 				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollOptionType" >
 				    			
@@ -119,7 +119,7 @@
 
 				  		<div class="form-group">
 
-				   			<label for="pollName">Poll type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Self explanatory"></i>]
+				   			<label for="pollName">Poll type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Self explanatory"></i>]
 
 				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollType" >
 				    			
@@ -136,7 +136,7 @@
 
 				  		<div class="form-group has-error">
 
-				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
+				   			<label for="pollShareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
 				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollSharedWith" value="All" >
 
@@ -148,7 +148,7 @@
 
 							<div class="form-group col-md-6 has-error" id="option1">
 					   			
-					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll."></i>]
+					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll."></i>]
 
 								<!-- <div class="input-group"> -->
 					    			
@@ -173,7 +173,7 @@
 
 				    		<div class="form-group col-md-6 has-error" id="option2">
 					   			
-					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll. If you want to add one more click '+'. To delete click '-'"></i>]
 
 								<div class="input-group">
 					    			
@@ -237,7 +237,7 @@
 </div><!-- end polls -->
 
 
-<script src="/4pi/js/cs/retrievePolls.js">
+<script src="/4pi/js/cs/retrievePolls.js?v=randomNumber">
 </script>
 
 <script>
@@ -268,7 +268,7 @@ $(document).ready(function(){
 
 				  		<div class="form-group has-error">
 
-				   			<label for="pollName">Poll on</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollName">Poll on&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
 				    		<input type="text" name="pollQuestion" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="editPollQuestion" placeholder="Poll question. Required"></input>
 
@@ -284,7 +284,7 @@ $(document).ready(function(){
 
 				  		<div class="form-group">
 
-				   			<label for="pollName">Poll option type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Single option selection or multiple option types."></i>]
+				   			<label for="pollName">Poll option type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Single option selection or multiple option types."></i>]
 
 				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollOptionType" >
 				    			
@@ -298,7 +298,7 @@ $(document).ready(function(){
 
 				  		<div class="form-group">
 
-				   			<label for="pollName">Poll type</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollName">Poll type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
 				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollType" >
 				    			
@@ -315,7 +315,7 @@ $(document).ready(function(){
 
 				  		<div class="form-group has-error">
 
-				   			<label for="pollShareWith">Share with</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollShareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
 
 				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollSharedWith" placeholder="Required." >
 
@@ -327,7 +327,7 @@ $(document).ready(function(){
 
 							<div class="form-group has-error col-md-6" id="option1">
 					   			
-					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
+					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
 
 								<!-- <div class="input-group"> -->
 					    			
@@ -352,7 +352,7 @@ $(document).ready(function(){
 
 				    		<div class="form-group has-error col-md-6" id="option2">
 					   			
-					   			<label for="pollOptions">Option</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
 
 								<div class="input-group">
 					    			

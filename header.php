@@ -96,7 +96,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 	<!--CSS-->
 
 
-		
+		<script>var randomNumber=Math.random();</script>
 	
 		<script src="/4pi/js/Jquery/jquery.min.js"></script>
 		
@@ -106,17 +106,17 @@ error_reporting(E_ALL ^ E_NOTICE);
 		
 		<script src="/4pi/js/TP/timeago.js"></script>
 
-		<script src="/4pi/js/cs/script.js"></script>
+		<script src="/4pi/js/cs/script.js?v=randomNumber"></script>
 
 		<script src="/4pi/js/TP/jquery.shorten.js"></script>
 
-		<script src="/4pi/js/cs/retrievePosts.js"></script>
+		<script src="/4pi/js/cs/retrievePosts.js?v=randomNumber"></script>
 
-		<script src="/4pi/js/cs/retrieveEvents.js"></script>
+		<script src="/4pi/js/cs/retrieveEvents.js?v=randomNumber"></script>
 
 		<!-- <script src="/4pi/js/cs/retrievePolls.js"></script> -->
 		
-		<script src="/4pi/js/cs/newsfeed.js"></script>
+		<script src="/4pi/js/cs/newsfeed.js?v=randomNumber"></script>
 
 		<script src="/4pi/js/TP/jquery-ui.js"></script>
 
