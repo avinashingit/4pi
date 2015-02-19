@@ -42,7 +42,7 @@ a {
 .spanLoadAfter{
 	font-weight: bold;
 	font-size: 22px;
-	padding-left: 35%;
+	padding-left: 40%;
 }
 
 #ideaOptions{
@@ -149,7 +149,7 @@ h4#ideaCreatedBy{
 	position:absolute;
 	bottom: 0px;
 	height:25px;
-	background-color: #999;
+	background-color: #9D9AA1;
 }
 
 .ideaDateBox{
@@ -159,7 +159,7 @@ h4#ideaCreatedBy{
 	right: 0px;
 	bottom: 0px;
 	height:25px;
-	background-color: #999;
+	background-color: #9D9AA1;
 }
 
 .ideaDateBoxsi{
@@ -171,7 +171,7 @@ h4#ideaCreatedBy{
 	left: 613px;
 	height:25px;
 	width: 12%;
-	background-color: #999;
+	background-color: #9D9AA1;
 }
 
 .timeago{
