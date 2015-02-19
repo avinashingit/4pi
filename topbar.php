@@ -74,7 +74,6 @@
 		sendReadNotifications();
 	}
 
-
 	function insertNotifications(data,position)
 	{
 		// alert("hello");
@@ -163,6 +162,10 @@
 	}
 
 	fetchNotifications();
+
+	setInterval(function(){
+		fetchNotifications();
+	},300000);
 
 	function insertPeopleSearch(data,val)
 	{
