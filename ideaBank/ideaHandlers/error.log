@@ -26,3 +26,7 @@
 
 [2015-02-18 22:22:41             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
 
+[2015-02-19 22:27:13             ::1                   Asia/Kolkata] 1054   $$$Unknown column 'timestamp' in 'order clause'$$$
+
+[2015-02-19 22:27:13             ::1                   Asia/Kolkata] 1054   $$$Unknown column 'timestamp' in 'order clause'$$$
+

@@ -16,6 +16,8 @@ Code 16: Erroneous Entry By USER!!
 		$conn=new QoB();
 		$content=$_POST['_ideaContent'];//1
 		$userIdHash=$_SESSION['vj'];
+		$proPicLocation="";
+		$proPicExists = -1;
 		if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 		{
 				$combination=$userIdHash.",".$_SESSION['tn'];
@@ -98,8 +100,17 @@ Code 16: Erroneous Entry By USER!!
 					$ideaPostDate = $date;
 					$postContent = $content;
 					$postOwner = 1;
-					
-					$postObj=new miniIdeaPost($postUserIdHash, $ideaUserId, $postUserName, $postId, $postIdHash, $appreciaters, $appreciateCount, $hasAppreciated, $depreciaters, $depreciateCount, $hasDepreciated, $ideaPostDate, $postContent, $postOwner);
+					$proPicLocation=__DIR__.'/../../img/proPics/'.$user['userIdHash'].'.jpg';
+						if(file_exists($proPicLocation))
+						{
+							$proPicExists=1;
+						}
+						else
+						{
+							$proPicExists=-1;
+						}
+						//$genderQuery=getUserFromHash($result['userIdHash']);
+					$postObj=new miniIdeaPost($postUserIdHash, $ideaUserId, $postUserName, $postId, $postIdHash, $appreciaters, $appreciateCount, $hasAppreciated, $depreciaters, $depreciateCount, $hasDepreciated, $ideaPostDate, $postContent, $postOwner, $proPicExists, $user['gender']);
 						
 					print_r(json_encode($postObj));
 						

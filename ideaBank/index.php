@@ -501,7 +501,7 @@ function postInsert(position, data1, num, len) {
 	else{
 		res = data1.name;
 	}
-	console.log(data1.proPicExists);
+	//console.log(data1.proPicExists);
 	if(data1.proPicExists == 1){
 		post+='<a href="'+ genUrl+ data1.userId +'" id="postOwnerURL" title="'+data1.name+'"><h4 style="font-size: 16px;" id="ideaCreatedBy"><img title="' + data1.name + '"  src="/4pi/img/proPics/'+ data1.userIdHash +'.jpg" class="img-circle" width="40" height="40"  />'+'&nbsp;&nbsp;'+ res +'</h4></a>';
 	}
