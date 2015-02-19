@@ -104,7 +104,7 @@ if($content!=""&&$postIdHash!="")
 						{
 							$commentId=$cId+1;
 						}						
-						$commentIdHash=hash("sha512", $commentId.$postId.POCHASH);
+						$commentIdHash=hash("sha384", $commentId.COMHASH);
 						$commentUserName=$user['alias'];
 						//$commentUserName=$user['alias'];
 						$postCommentCount=$post['commentCount'];

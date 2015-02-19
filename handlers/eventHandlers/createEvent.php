@@ -198,7 +198,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$eventId=$eId+1;
 			}
 			$timestamp=$lastUpdated=time();
-			$eventIdHash=hash("sha512", $eventId.POEVHASH);
+			$eventIdHash=hash("sha224", $eventId.POEVHASH);
 			$isCOCAS=isCOCAS($userId);
 			if($isCOCAS==1)
 			{

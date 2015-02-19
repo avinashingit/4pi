@@ -87,8 +87,7 @@ $conn= new QoB();
 $userIdHash=$_SESSION['vj'];
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in createPoll")>0)//Happy Birthday to Myself!! Its October 21st!! 00:00 hrs
-	{
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in createPoll")>0)
 		$_SESSION=array();
 		session_destroy();
 		echo 14;
@@ -185,7 +184,7 @@ else
 			$optionVotesArray[]=0;
 		$optionVotes=implode(',',$optionVotesArray);
 		$timestamp=time();
-		$pollIdHash=hash("sha512", $pollId.POLLHASH);
+		$pollIdHash=hash("sha224", $pollId.POLLHASH);
 		
 		$isSAC=isSAC($userId);
 		if($isSAC==1)

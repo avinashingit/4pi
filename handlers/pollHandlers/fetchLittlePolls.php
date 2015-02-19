@@ -49,7 +49,7 @@ else
 		$userId=$user['userId'];
 		$finalStudentRegex=getRollNoRegex($userId);
 		$values[0]=array($finalStudentRegex => 's');
-		$getLatestPollsSQL="SELECT poll.* FROM poll WHERE (sharedWith REGEXP ?) AND approvalStatus=1 ORDER BY timestamp DESC";
+		$getLatestPollsSQL="SELECT poll.* FROM poll WHERE (sharedWith REGEXP ?) AND approvalStatus=1 AND pollStatus = 1 ORDER BY timestamp DESC";
 		$result=$conn->select($getLatestPollsSQL,$values);
 		$displayCount=0;
 		if($conn->error=="")

@@ -1550,8 +1550,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	//cause for malfunction in isThereInCSV() if the needle is an empty string. That Function returns true if empty string is passed as needle.
 	function isThereInCSVRegex($needle)
 	{
-		$finalRegexString="(,".$needle.",)|(^".$needle.",)|(^".$needle."$)|(,".$needle."$)";
-
+		//$finalRegexString="(,".$needle.",)|(^".$needle.",)|(^".$needle."$)|(,".$needle."$)";
+		$finalRegexString="(^$needle$)|(^$needle,)|(,$needle,)|(,$needle$)";
 		return $finalRegexString;
 	}
 
@@ -1572,6 +1572,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			return false;
 		}
+	}
+
+
+	function isThereInCSVNonRegex($haystack,$needle,$seperator=",")
+	{
+		$haystackArray=explode($seperator,$haystack);
+		return in_array($needle, $haystackArray);
+
+
 	}
 
 //****************************************************************************************************************//
@@ -1840,10 +1849,17 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		$optionVotesArray=explode(',', $optionVotes);
 
-		for($i=0;$i<$optionCount;$i++)
+		$optionsAndVotes[]=array();
+
+		if($poll['pollType']!=3&&$poll['pollStatus']!=1)
 		{
-			$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionVotesArray[$i]);
+			for($i=0;$i<$optionCount;$i++)
+			{
+				$optionsAndVotes[$i]=array($optionsArray[$i] ,(int)$optionVotesArray[$i]);
+			}
 		}
+
+		
 		if($poll['userId']==$userId)
 		{
 			$isOwner=1;
@@ -2408,7 +2424,7 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 
 
 
-		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postId) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventId) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollId) WHERE notifications.userId=? ";
+		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postIdHash) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventIdHash) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollIdHash) WHERE notifications.userId=? ";
 		
 		$values[0]=array($userId => 's');
 		

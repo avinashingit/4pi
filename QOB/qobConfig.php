@@ -47,13 +47,13 @@ define("C_TIME", time());
 define("PASSSALT", "PSaSaSwL0RtD");
 
 //Salt for SESSION and USER Hashing
-define("SALT",211019931500);
+define("SALT",211019931503);
 
 
 //Salt for SESSION 2 Hashing
 define("SALT2",9876501234);
 
-//Salt for POST&COMMENTS HASHING
+//Salt for POST HASHING
 define("POCHASH", "tlastsop21");
 
 //Salt for Comments
@@ -71,6 +71,11 @@ define("HASHNOTIF", "s'fitonsisiht");
 /***************************COMMON PARAMETERS**************************/
 
 
+// Hashing Algorithms used for different sections
+//Polls and events - sha224
+//Posts            - sha256
+//comments         - sha384
+//users            - sha512
 
 /*********************Secretaries and Admins*************************/
 

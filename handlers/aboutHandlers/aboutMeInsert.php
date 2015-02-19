@@ -744,7 +744,7 @@ function skillSetInsert($user,$skillArray,$ratingArray)
 				}
 				else
 				{
-					if(isThereInCSV($existingSkills,$skill)==false)
+					if(isThereInCSVNonRegex($existingSkills,$skill)==false)
 					{
 						$existingSkillsArray[]=$skill;
 						$existingRatingArray[]=$ratingArray[$k];
@@ -902,7 +902,7 @@ function toolkitInsert($user,$toolsArray)
 					}
 					else
 					{
-						if(isThereInCSV($existingTools,$tool)==false)
+						if(isThereInCSVNonRegex($existingTools,$tool)==false)
 						{
 							$existingToolsArray[]=$tool;
 							if($existingTools=="")
@@ -1020,7 +1020,7 @@ function interestsInsert($user,$interestsArray)
 			}
 			else
 			{
-				if(isThereInCSV($existingInterests,$interest)==false)
+				if(isThereInCSVNonRegex($existingInterests,$interest)==false)
 				{
 					$existingInterestsArray[]=$interest;
 					if($existingInterests=="")

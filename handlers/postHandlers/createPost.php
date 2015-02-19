@@ -236,7 +236,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				}
 			}
 			
-			$postIdHash = hash("sha512", $postId.POCHASH);
+			$postIdHash = hash("sha256", $postId.POCHASH);
 			
 			$filesAttached="";
 			

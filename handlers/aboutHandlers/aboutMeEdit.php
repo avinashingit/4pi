@@ -901,7 +901,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 				}
 				else
 				{
-					if(isThereInCSV($existingSkills,$skill)==false)
+					if(isThereInCSVNonRegex($existingSkills,$skill)==false)
 					{
 						/*echo "is not there in csv";
 						echo "<br>";*/
@@ -1040,7 +1040,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			}
 			else
 			{
-				if(isThereInCSV($existingTools,$tool)==false)
+				if(isThereInCSVNonRegex($existingTools,$tool)==false)
 				{
 					$existingToolsArray[]=$tool;
 					if($existingTools=="")
@@ -1135,7 +1135,7 @@ function workshopsEdit($user,$title,$durationString,$place,$attendCount,$worksho
 			}
 			else
 			{
-				if(isThereInCSV($existingInterests,$interest)==false)
+				if(isThereInCSVNonRegex($existingInterests,$interest)==false)
 				{
 					//echo "is not there in csv";
 					$existingInterestsArray[]=$interest;

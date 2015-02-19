@@ -49,7 +49,7 @@ else
 		$userId=$user['userId'];
 		$finalStudentRegex=getRollNoRegex($userId);
 		$values[0]=array($finalStudentRegex => 's');
-		$getLatestPostsSQL="SELECT post.* FROM post WHERE (sharedWith REGEXP ?) ORDER BY timestamp DESC";
+		$getLatestPostsSQL="SELECT post.* FROM post WHERE sharedWith REGEXP ? AND displayStatus = 1 ORDER BY timestamp DESC";
 		$result=$conn->select($getLatestPostsSQL,$values);
 		$displayCount=0;
 		if($conn->error=="")
