@@ -329,9 +329,11 @@
 
 	</div>
 
-	<div class="row panel panel-info" id="rightBlock4">
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-		<a href="/4pi/ideaBank" style="color:white;"><div class="panel-heading text-center cursorPointer" style="font-size:18px;"><i class="fa fa-exclamation"></i>&nbsp;Idea Bank</div></a>
+	<div class="row panel panel-info " id="rightBlock4">
+
+		<a href="/4pi/ideaBank" style="color:white;"><div class="ideaBankHeading text-center cursorPointer" style="font-size:18px;height:80px;background:linear-gradient(#B61B88, #540733);"><i class="fa fa-exclamation"></i>&nbsp;<span style="padding:10px !important;">Idea Bank</span></div></a>
 
 	</div>
 

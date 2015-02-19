@@ -404,3 +404,11 @@
 
 [2015-02-18 22:22:50             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
 
+[2015-02-20 00:29:50             ::1                   Asia/Kolkata]        $$$<b>Bind: </b> Bind array supplied must be a two dimensional associative array$$$
+
+[2015-02-20 00:40:04             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'eventDate >= ?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-02-20 00:40:04             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'eventDate >= ?  ORDER BY timestamp DESC' at line 1$$$
+
+[2015-02-20 00:40:08             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'eventDate >= ?  ORDER BY timestamp DESC' at line 1$$$
+

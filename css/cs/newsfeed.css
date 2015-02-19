@@ -10,8 +10,14 @@ display:none;
 .modal-body
 {
     overflow-y: auto;
-    max-height:450px;
+    height:450px;
 }
+
+/* .modal
+{
+    overflow-y:hidden !important;
+    overflow-x:hidden !important;
+} */
 
 .profilePicPostsFront
 {
@@ -46,7 +52,7 @@ textarea.formcontrol
     margin-top:5px;
 }
 
-#rightBlock4 .panel-heading
+#rightBlock4 .ideaBankHeading
 {
     background:linear-gradient(#B61B88, #540733);
     color:#fff;

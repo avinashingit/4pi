@@ -53,6 +53,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$eventDurationMin="".$_POST['_eventDurationMin'];
 	$rawSharedWith=$_POST['_sharedWith'];
 	$organisedBy=$_POST['_eventOrgName'];
+	$eventCategory=$_POST['-eventCategory'];
 
 	$rawSharedWith=trim($rawSharedWith);
 
@@ -199,18 +200,18 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			$timestamp=$lastUpdated=time();
 			$eventIdHash=hash("sha224", $eventId.POEVHASH);
-			$isCOCAS=isCOCAS($userId);
-			if($isCOCAS==1)
+			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
+			if($isCOCASorCULSEC)
 			{
 				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
-				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,displayStatus,approvalStatus) 
-				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,1,1)";
+				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,eventCategory,displayStatus,approvalStatus) 
+				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,1,1)";
 			}
 			else
 			{
 				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
-				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin) 
-				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?)";
+				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,eventCategory) 
+				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?)";
 			}
 			
 			$values[0]=array($eventId => 'i');
@@ -230,15 +231,24 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$values[12]=array($userId => 's');
 			$values[13]=array($eventDurationHrs => 's');
 			$values[14]=array($eventDurationMin => 's');
+			$values[15]=array($eventCategory => 's');
 			//$values[15]=array($eventStatus => 's');
 			$result=$conn->insert($CreateEventSQL,$values);
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				if($isCOCAS!=1)
+				if($isCOCASorCULSEC!=1)
 				{
 					$approvalStatus=0;
-					sendNotification($userId,COCAS,15,$eventId,600);
+					if($eventCategory=="technical")
+					{
+						sendNotification($userId,COCAS,15,$eventId,600);
+					}
+					else
+					{
+						sendNotification($userId,CULSEC,15,$eventId,600);
+					}
+					
 				}
 				else
 				{
@@ -275,7 +285,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
-				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$user['name'],$isCOCAS,$approvalStatus);
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$user['name'],$isCOCASorCULSEC,$approvalStatus);
 				print_r(json_encode($eventObj));
 			}
 			else

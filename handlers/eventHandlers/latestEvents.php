@@ -91,27 +91,42 @@ $conn=new QoB();
 			//Code till final release with approvals
 			
 			
-			if($userId==COCAS)
+			if($userId==COCAS || $userId == CULSEC)
 			{
-				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND eventDate>= ? ";
+				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE eventDate >= ? ";
+
+				//$values[0]=array($finalStudentRegex => 's');
+				//$values[0]=array($userId => 's');
+				$values[0]=array($currentDate => 'i');
+				for($i=0;$i<$ProcessedHashesCount;$i++)
+				{
+					$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash!=?";
+					$values[$i+1]=array($ProcessedHashes[$i] => 's');
+				}
+				$SQLEndPart=" ORDER BY timestamp DESC";
+				
+				//var_dump($values);
+				$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
 			}
+			
 			else
 			{
 				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND eventDate>= ? AND displayStatus=1";
+				$values[0]=array($finalStudentRegex => 's');
+				$values[1]=array($userId => 's');
+				$values[2]=array($currentDate => 'i');
+				for($i=0;$i<$ProcessedHashesCount;$i++)
+				{
+					$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash!=?";
+					$values[$i+3]=array($ProcessedHashes[$i] => 's');
+				}
+				$SQLEndPart=" ORDER BY timestamp DESC";
+				
+				//var_dump($values);
+				$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
 			}
 			
-			$values[0]=array($finalStudentRegex => 's');
-			$values[1]=array($userId => 's');
-			$values[2]=array($currentDate => 'i');
-			for($i=0;$i<$ProcessedHashesCount;$i++)
-			{
-				$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash!=?";
-				$values[$i+3]=array($ProcessedHashes[$i] => 's');
-			}
-			$SQLEndPart=" ORDER BY timestamp DESC";
 			
-			//var_dump($values);
-			$getLatestEventsSQL=$getLatestEventsSQL.$SQLEndPart;
 			//echo $getLatestEventsSQL;
 			$displayCount=0;
 			$result=$conn->select($getLatestEventsSQL,$values);
@@ -155,9 +170,32 @@ $conn=new QoB();
 						$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
 						$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);*/
 					//print_r(json_encode($eventObj));
-					$eventObj=getEventObject($event,$userId);
-					$eventObjArray[]=$eventObj;
-					$displayCount++;
+					if($userId==COCAS)
+					{
+						if($event['eventCategory']=='technical')
+						{
+							$eventObj=getEventObject($event,$userId);
+							$eventObjArray[]=$eventObj;
+							$displayCount++;
+						}
+					}
+					else if($userId == CULSEC)
+					{
+						if($event['eventCategory']=='NonTechnical')
+						{
+							$eventObj=getEventObject($event,$userId);
+							$eventObjArray[]=$eventObj;
+							$displayCount++;
+						}
+					}
+					else
+					{
+						$eventObj=getEventObject($event,$userId);
+						$eventObjArray[]=$eventObj;
+						$displayCount++;
+					}
+
+					
 				}
 
 				if($displayCount==0)

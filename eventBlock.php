@@ -56,7 +56,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		      		    <form role="form">
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
 					   			<label for="eventClub">Event Organizer&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. It can either be a club or a special interest group or an individual"></i>]
 
@@ -64,7 +64,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div>      		    
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
 					   			<label for="eventName">Event Name&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Give an appropriate event name"></i>]
 
@@ -72,7 +72,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div>
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
 					   			 <label for="eventContent">Event Details (<span id="createEventModalContentLength">1000</span> characters left)&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
 
@@ -88,7 +88,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div> -->
 
-					 		 <div class="form-group">
+					 		 <div class="form-group has-error">
 
 					    			<label for="shareWith">Share With&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
@@ -96,7 +96,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div>
 
-					  		<div class="form-group col-md-6">
+					  		<div class="form-group col-md-6 has-error">
 
 					  			<label for="eventVenue">Event Venue &nbsp;<span style="color:red;">*</span></label>
 
@@ -104,7 +104,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div>
 					  		
-					  		<div class="form-group col-md-6">
+					  		<div class="form-group col-md-6 has-error">
 
 					  			<label for="eventVenue">Event Date &nbsp;<span style="color:red;">*</span></label>
 
@@ -151,9 +151,23 @@ var inView="<?php echo $_SESSION['jx'];?>";
 			  						</div>
 					  		</div>
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
 
-						  		<label for="eventType">Event Type<&nbsp;<span style="color:red;">*</span>/label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Event Type. If it is a competition you will be given an option of posting winners on this page."></i>]
+						  		<label for="eventType">Event Category&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Event category."></i>]
+
+						  		<select type="select" class="form-control" id="createEventCategory" name="createEventCategory">
+
+						  			<option val="technical">Technical</option>
+
+						  			<option val="nonTechnical">Non technical</option>
+
+					  			</select>
+
+					  		</div>
+
+					  		<div class="form-group has-error">
+
+						  		<label for="eventType">Event Type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Event Type. If it is a competition you will be given an option of posting winners on this page."></i>]
 
 						  		<select type="select" class="form-control" id="createEventType" name="createEventType">
 
@@ -165,11 +179,17 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		</div>
 
+					  		
+
 						</form>
+
+				</div>
+
+				<div class='modal-footer'>
 
 					<button onclick="createEventSP();" class="btn btn-primary">Create Event</button>
 
-		      	</div>
+				</div>
 
 	    	</div>
 
@@ -293,7 +313,21 @@ var inView="<?php echo $_SESSION['jx'];?>";
 			  						</div>
 					  		</div>
 
-					  		<div class="form-group">
+					  		<div class="form-group has-error">
+
+						  		<label for="eventType">Event Category&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Event Category."></i>]
+
+						  		<select type="select" class="form-control" id="editEventCategory" name="editEventType">
+
+						  			<option val="technical">Technical</option>
+
+						  			<option val="nonTechnical">Non-Technical</option>
+
+					  			</select>
+
+					  		</div>
+
+					  		<div class="form-group has-error">
 
 						  		<label for="eventType">Event Type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Event Type. If it is a competition you will be given an option of posting winners on this page."></i>]
 
@@ -306,6 +340,8 @@ var inView="<?php echo $_SESSION['jx'];?>";
 					  			</select>
 
 					  		</div>
+
+					  		
 
 					  		<div class="form-group">
 
@@ -326,6 +362,10 @@ var inView="<?php echo $_SESSION['jx'];?>";
 					  		</div>
 
 						</form>
+
+		      	</div>
+
+		      	<div class="modal-footer">
 
 					<button onclick="editedEventSend();" class="btn btn-primary">Edit Event</button>
 

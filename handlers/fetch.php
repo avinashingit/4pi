@@ -1601,6 +1601,20 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 	}
 
+
+
+	function isCOCASorCULSEC($userId)
+	{
+		if($userId==COCAS || $userId ==CULSEC)
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
 //****************************************************************************************************************//
 //****************************************************************************************************************//
 //****************************************************************************************************************//
@@ -1956,7 +1970,12 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		{
 			$proPicExists=-1;
 		}
-		$isCoCAS=isCOCAS($userId);
+		if($userId==COCAS && $event['eventCategory']=="technical")
+			$isCOCAS=1;
+		else if($userId==CULSEC && $event['eventCategory']=="NonTechnical")
+			$isCOCAS=1;
+		else
+			$isCOCAS=-1;
 		
 		if($event['approvalStatus']==0)
 		{

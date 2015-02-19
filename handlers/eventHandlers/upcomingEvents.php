@@ -88,28 +88,40 @@ $conn=new QoB();
 			//$getUpcomingEventsSQL="SELECT * FROM event WHERE ((sharedWith REGEXP ?) OR userId=?)  AND (eventDate>= ?)";
 			
 			//Code till final release with approvals
-			$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
-			if($userId==COCAS)
+			//$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
+			if($userId==COCAS || $userId == CULSEC)
 			{
-				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?)";
+				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ( eventDate>= ?)";
+				//$values[0]=array($finalStudentRegex => 's');
+				//$values[0]=array($userId => 's');
+				$values[0]=array($currentDate => 'i');
+				for($i=0;$i<$ProcessedHashesCount;$i++)
+				{
+					$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash!=?";
+					$values[$i+1]=array($ProcessedHashes[$i] => 's');
+				}
+				$SQLEndPart=" ORDER BY eventDate,eventTime";
+				//var_dump($values);
+				$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
 			}
 			else
 			{
-				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
-			}
-			$values[0]=array($finalStudentRegex => 's');
-			$values[1]=array($userId => 's');
-			$values[2]=array($currentDate => 'i');
-			for($i=0;$i<$ProcessedHashesCount;$i++)
-			{
-				$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash!=?";
-				$values[$i+3]=array($ProcessedHashes[$i] => 's');
-			}
-			$SQLEndPart=" ORDER BY eventDate,eventTime";
-			
+				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE (event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
+				$values[0]=array($finalStudentRegex => 's');
+				$values[1]=array($userId => 's');
+				$values[2]=array($currentDate => 'i');
+				for($i=0;$i<$ProcessedHashesCount;$i++)
+				{
+					$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash!=?";
+					$values[$i+3]=array($ProcessedHashes[$i] => 's');
+				}
+				$SQLEndPart=" ORDER BY eventDate,eventTime";
+				
 
-			//var_dump($values);
-			$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
+				//var_dump($values);
+				$getUpcomingEventsSQL=$getUpcomingEventsSQL.$SQLEndPart;
+			}
+			
 			// echo $getUpcomingEventsSQL;
 			$displayCount=0;
 			$result=$conn->select($getUpcomingEventsSQL,$values);
@@ -153,9 +165,31 @@ $conn=new QoB();
 						$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
 						$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);*/
 				
-					$eventObj=getEventObject($event,$userId);
-					$eventObjArray[]=$eventObj;
-					$displayCount++;
+					if($userId==COCAS)
+					{
+						if($event['eventCategory']=='technical')
+						{
+							$eventObj=getEventObject($event,$userId);
+							$eventObjArray[]=$eventObj;
+							$displayCount++;
+						}
+					}
+					else if($userId == CULSEC)
+					{
+						if($event['eventCategory']=='NonTechnical')
+						{
+							$eventObj=getEventObject($event,$userId);
+							$eventObjArray[]=$eventObj;
+							$displayCount++;
+						}
+					}
+					else
+					{
+						$eventObj=getEventObject($event,$userId);
+						$eventObjArray[]=$eventObj;
+						$displayCount++;
+					}
+
 				}
 				if($displayCount==0)
 				{

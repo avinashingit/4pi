@@ -202,6 +202,10 @@
 
 					<br/>
 
+				</div>
+
+				<div class="modal-footer">
+
 					<button onclick="createPollSP();" class="btn btn-primary">Create Poll</button>
 
 				</div>

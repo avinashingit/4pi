@@ -85,6 +85,9 @@ define("SAC", "COE12B009");
 // Co-Curricular Affairs Secretary
 define("COCAS", "COE12B013");
 
+//Cultural Secretary
+define("CULSEC", "COE12B005");
+
 //Student General Secretary
 /*define("GEN", "COE11B005");*/
 

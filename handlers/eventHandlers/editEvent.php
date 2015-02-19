@@ -229,9 +229,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			
 			$lastUpdated=time();
-			$isCOCAS=isCOCAS($userId);
+			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
 			//$eventIdHash=hash("sha512", $eventId.POEVHASH);
-			if($isCOCAS==1)
+			if($isCOCASorCULSEC==1)
 			{
 				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
 				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
@@ -268,10 +268,17 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			if($conn->error==""&&$result==true)
 			{
 				//Success
-				if($isCOCAS!=1)
+				if($isCOCASorCULSEC!=1)
 				{
 					$approvalStatus=0;
-					resetNotification($userId,COCAS,15,$eventId,600);
+					if($eventCategory=="technical")
+					{
+						resetNotification($userId,COCAS,15,$eventId,600);
+					}
+					else
+					{
+						resetNotification($userId,CULSEC,15,$eventId,600);
+					}
 				}
 				else
 				{
@@ -300,7 +307,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
 				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, 
-				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCOCAS,$approvalStatus);
+				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCOCASorCULSEC,$approvalStatus);
 				print_r(json_encode($eventObj));
 			}
 			else

@@ -44,11 +44,18 @@ function eventInsert(position,data,past)
 		event+='</div>';
 	}
 
+	else if(data.isCOCAS!=1 && data.isApproved!=1)
+	{
+		event+="<br/><div class='row'><div class='col-md-12 text-center'><p class='text-center' style='color:red'>Your events is sent for approval</p></div></div>";
+	}
+
 	event+='<div id="eventSharedWith" class="hidden" >'+data.sharedWith+'</div>';
 
 	event+='<div id="eventStatus" class="hidden" >'+data.eventStatus+'</div>';
 
 	event+='<div id="eventType" class="hidden">'+data.eventType+'</div>';
+
+	event+='<div id="eventCategory" class="hidden">'+data.eventCategory+'</div>';
 
 	event+='<div class="row" id="eventNameTime">';
 
@@ -129,7 +136,7 @@ function eventInsert(position,data,past)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="cursor:default"title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default" title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
 				  
 	event+='</div>';
 
@@ -236,6 +243,8 @@ function editEvent(id)
 	var eventType=$('#'+id).find('#eventType').html();
 
 	var eventStatus=$('#'+id).find('#eventStatus').html();
+
+	var eventCategory=$('#'+id).find("#eventCategory").html();
 	
 	$('#editEventModal').find('#editEventOrganizerName').val(eventOrganizerName);
 	
@@ -260,6 +269,8 @@ function editEvent(id)
 	$('#editEventModal').find('#editEventType').val(eventType);
 
 	$('#editEventModal').find('#editEventStatus').val(eventStatus);
+
+	$('#editEventModal').find('#editEventCategory').val(eventCategory);
 	
 	$('#editEventModal').find('#editEventId').html(id);
 }
@@ -289,6 +300,8 @@ function modifyEvent(data,id)
 	$('#'+id).find('#eventType').html(data.eventType);
 
 	$('#'+id).find('#eventStatus').html(data.eventStatus);
+
+	$('#'+id).find('#eventCategory').html(data.eventCategory);
 }
 
 function editedEventSend()
@@ -320,6 +333,8 @@ function editedEventSend()
 
 	var eventType=$('#editEventModal').find('#editEventType').val();
 
+	var eventCategory=$('#editEventModal').fidn('#editEventCategory').val();
+
 	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>1000 || eventVenue.length==0 || eventDate.length==0 )
 	{
 		alert("Please fill in the required fields.")
@@ -349,7 +364,7 @@ function editedEventSend()
 
 	{
 
-		$('#editEventModal').modal('hide');
+		
 		
 		$.post("./handlers/eventHandlers/editEvent.php",{
 		
@@ -375,7 +390,9 @@ function editedEventSend()
 
 			_status:eventStatus,
 
-			_eventType:eventType
+			_eventType:eventType,
+
+			_eventCategory:eventCategory
 		
 		})
 		
@@ -390,6 +407,7 @@ function editedEventSend()
 			//console.log(data);
 			if(checkData(data)==1)
 			{
+				$('#editEventModal').modal('hide');
 				data=JSON.parse(data);
 				modifyEvent(data,eventId);
 			}
@@ -434,6 +452,8 @@ function createEventSP()
 	
 	
 	var eventType=$('#createEventType').val().trim();
+
+	var eventCategory=$('#createEventCategory').val().trim();
 	
 
 	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0|| eventVenue.length==0 || eventDate.length==0 )
@@ -458,7 +478,7 @@ function createEventSP()
 	}*/
 	else
 	{
-		$('#eventCreateModal').modal('hide');
+		
 
 		$.post('./handlers/eventHandlers/createEvent.php',{
 
@@ -480,7 +500,9 @@ function createEventSP()
 
 			_eventDurationMin:eventDurationMinutes,
 
-			_eventType:eventType
+			_eventType:eventType,
+
+			_eventCategory:eventCategory
 
 			// _eventFile:eventFiles
 
@@ -506,6 +528,8 @@ function createEventSP()
 
 				$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
 
+				$('#eventCreateModal').modal('hide');
+
 				$('#createEventOrganizerName').val("");
 
 				$('#createEventName').val("");
@@ -527,6 +551,8 @@ function createEventSP()
 				$('#createEventDurationMinutes').val("00");
 
 				$('#createEventType').val("competition");
+
+				$('#createEventCategory').val('technical');
 			}
 			
 
@@ -654,6 +680,7 @@ function latestEventsFetch(value,call)
 		$('#loadMoreEventsButton').html("Load more").attr("onclick","fetchMoreEvents();");
 	})
 	.success(function(data){
+		console.log(data);
 		$('#inViewElement').html("1001");
 		$('.row .eventMenu').find('#latestEventsButton').find('i').removeClass('fa-spin');
 		$('.row .eventMenu').find('#latestEventsButton').css({'box-shadow':'inset #000 0px 3px 0 0','border-top':'1px solid black'});

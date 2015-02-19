@@ -79,7 +79,7 @@ else
 	else
 	{
 		$userId=$user['userId'];
-		if(isCoCAS($userId)==false)
+		if($isCOCASorCULSEC($userId)==false)
 		{
 			if(blockUserByHash($userIdHash,"Unauthorized Attempt to approve event",$userId.",sh:".$eventIdHash)>0)
 			{

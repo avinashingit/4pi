@@ -3,7 +3,6 @@ $('.subsec').hide();//to hide all hostel secretary tabs
 $('.ew').hide();//to hide the executive wing tab
 
 
-
 function clearInputs(element)
 {
 	element.find('input').each(function(){
@@ -154,7 +153,10 @@ function userLogin(){
 $(document).ready(function()
   {
   
-  
+  	$('*[data-toggle="modal"]').click(function(){
+  		alert("called");
+  		$('body').css({'position':'fixed'});
+  	});
 
   
   
