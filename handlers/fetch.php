@@ -789,6 +789,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
 
+			$mail->AddEmbeddedImage('img/fourpi.png','logo_2u');
+
 		}
 		catch(phpmailerException $e)
 		{
@@ -2168,10 +2170,23 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			{
 				
 				$notificationIdHash=hash("sha512",$notificationId.HASHNOTIF);
+
+				if($objectType==500)
+				{
+					$objectIdHash=hash("sha256",$objectId.POCHASH);
+				}
+				else if($objectType==600)
+				{
+					$objectIdHash=hash("sha224",$objectId.POEVHASH);
+				}
+				else if($objectType==500)
+				{
+					$objectIdHash=hash("sha224",$objectId.POLLHASH);
+				}
 		
 				$sendNotificationSQL="INSERT INTO notifications(objectId,type,objectType,userId,timestamp,notificationId,notificationIdHash) VALUES (?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE actionCount= CASE WHEN seen=0 THEN actionCount+1 WHEN seen=1 THEN 1 END, seen=0";
 		    	
-		    	$values[0]=array($objectId => 's');
+		    	$values[0]=array($objectIdHash => 's');
 		    	
 		    	$values[1]=array($notifType => 'i');
 		    	

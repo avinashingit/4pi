@@ -174,7 +174,7 @@ session_start();
 </html>
 
 <script>
-	var ob;
+	var ob=new Array();
 	$(document).ready(function()
 	{
 		$('#icons div i').css({'cursor':'pointer'});
@@ -339,8 +339,15 @@ function createIdeaPost() {
                    var x = JSON.parse(data);
                     //console.log(data);
                     //postInsert("first", x,0);
-					ob.unshift(x);
-					//console.log(ob);
+					// console.log(ob);
+					if(ob==null)
+					{
+						ob[0]=x;
+					}
+					else
+					{
+						ob.unshift(x);
+					}
 					$('.condense').each(function() {
 						$(this).remove();
 						$(this).css({
@@ -458,6 +465,7 @@ function retrieveLatestPosts(value, call) {
 
 var genUrl = "/4pi/aboutMe/index.php?userId=";
 function postInsert(position, data1, num, len) {
+	// console.log(data1);
 	var res;
 	var idCol;
 	var post="";
@@ -481,7 +489,7 @@ function postInsert(position, data1, num, len) {
 	post+='<div class="row  ideaHeadGrad" >';
 	
 	post+='<div class="col-md-8" id="ideaProfilePic">';
-	
+	// alert(data1.name);
 	data1.name = toTitleCase(data1.name);
 	
 	if( data1.name.length>14 )
@@ -599,6 +607,7 @@ function postInsert(position, data1, num, len) {
 
 function toTitleCase(str)
 {
+	// alert(str);
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 

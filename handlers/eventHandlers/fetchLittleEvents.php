@@ -66,7 +66,7 @@ else
 				{
 					$content=substr($event['eventName'],0,35);
 				}
-				$eventObject=new miniLittleEvent($event['eventId'],$content);
+				$eventObject=new miniLittleEvent($event['eventIdHash'],$content);
 				$littleEventsObjectArray[]=$eventObject;
 				$displayCount++;
 			}

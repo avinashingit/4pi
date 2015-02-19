@@ -30,14 +30,13 @@ while($row=mysql_fetch_array($results))
 		$mailerObj=getMailerObject();
 	}
 		$email=$row['userId']."@iiitdm.ac.in";
-		$subject="Apologfadsfies from 4pi";
-		$content="<img src='cid:logo_2u'></img>";
-		$content.="Apoligies...Some random links have been generated. This is your link.";
-		$content.="Hey guys,<br/> This is just Beta Testing. Bugs if found will be fixed and final version will be released. <br/>. Please click the following link to register.<br/>";
+		$subject="Beta testing phase-2 of 4pi Portal";
+		$content="<h2 style='background-color:black;color:white;border:1px solid black;height='80px'><center><img src='cid:logo_2u' width='50px' height='50px'>&nbsp;&nbsp;&nbsp;&nbsp;<br/>Registration for 4pi beta version</center></h2><br/>";
+		$content.="<center>HI! This is just Beta Testing. Bugs if found will be fixed and final version will be released. <br/>. Please click the following link to register.<br/>";
 		$content.="http://172.17.3.20/4pi/initial.php?ref=".$row['userIdHash']."<br/>";
-		$content.="Please note that the above link will be valid for only 17 hours, 2 minutes and 15 seconds.";
-		$content.="<br/><br/>The Site will be up till midnight only.<br/><br/>";
-		$content.="Just kidding, Web master, IIITD&M";
+		// $content.="Please note that the above link will be valid for only 17 hours, 2 minutes and 15 seconds.";
+		// $content.="<br/><br/>The Site will be up till midnight only.<br/><br/>";
+		// $content.="Just kidding, Web master, IIITD&M</center>";
 		sendEmail($mailerObj,$email,$content,$subject,"");
 		echo $row['userId'].'<br/>';
 

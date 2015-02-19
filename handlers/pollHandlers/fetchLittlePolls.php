@@ -59,7 +59,7 @@ else
 			while(($poll=$conn->fetch($result))&&($displayCount<=3))
 			{
 				$content=substr($poll['question'],0,20).'...';
-				$pollObject=new miniLittlePoll($poll['pollId'],$content);
+				$pollObject=new miniLittlePoll($poll['pollIdHash'],$content);
 				$littlePollObjectArray[]=$pollObject;
 				$displayCount++;
 			}
