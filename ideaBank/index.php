@@ -555,10 +555,10 @@ function postInsert(position, data1, num, len) {
 	}else{
 		if(data1.hasDepreciated ==1)
 		{
-					post+='<a class="deactive" ><img src="/4pi/ideaBank/images/appreciated.SVG" style="cursor:default" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+			post+='<a class="deactive" ><img src="/4pi/ideaBank/images/appreciated.SVG" style="cursor:default" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 		}
 		else{
-		post+='<a class="" id="deactiveapp'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/appreciate.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
+			post+='<a class="" id="deactiveapp'+data1.ideaPostId+'"><img src="/4pi/ideaBank/images/appreciate.SVG" height="25" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" onClick="starClick('+data1.ideaPostId+');" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
 		}
 	}
 	
@@ -579,7 +579,7 @@ function postInsert(position, data1, num, len) {
 	
 	post+='<div class="col-md-4 ideaDateBox" >';
 	
-    post+='<em><time class="timeago" style="font-size:12px;" >'+data1.ideaPostDate+'</time></em></div>';
+    post+='<em><a href="#" title='+data1.reqDateTime+'><time class="timeago" style="font-size:12px;" >'+data1.ideaPostDate+'</time></a></em></div>';
                         
     post+='</div><!-- End of ROW tag id-ideaIcons -->';
 	
