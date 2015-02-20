@@ -11,7 +11,7 @@ while($ro=mysql_fetch_array($r))
 	$userIdHash=hash("sha512",$ro['userId'].SALT);
 	// echo $ro['userId']."                ".$userIdHash."<br/>";
 	$sql="UPDATE users SET userIdHash='".$userIdHash."' WHERE userId='".$ro['userId']."'";
-	echo $sql;
+	// echo $sql;
 	mysql_query($sql);
 }
 

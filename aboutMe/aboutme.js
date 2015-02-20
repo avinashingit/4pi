@@ -481,7 +481,7 @@ function insertTopPart(data,locateProPic)
 
 			if(data.dob.length==0)
 			{
-				topPart+='<div class="text-left" id="personDOB">14/05/1980</div><br/>';
+				topPart+='<div class="text-left" id="personDOB">14/05/1990</div><br/>';
 			}
 			else
 			{

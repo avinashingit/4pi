@@ -299,8 +299,7 @@ function editedPostSend()
 
 function createPost() 
 {
-
-
+    // alert("H");
     var postSubject = $('#createPostSubject').val().trim();
     var done=1;
     if (postSubject.length > 40) {
@@ -354,7 +353,7 @@ function createPost()
     })
         .success(
             function(data) {
-                console.log(data);
+                // console.log(data);
                 ////console.log(data);
                 data = data.trim();
                 $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
@@ -717,6 +716,7 @@ function commentInsert(position, data, postId)
 
 function postInsert(position, data1)
 {
+    console.log(data1);
     var post = "";
 
     post += '<div class="row post" style="margin-bottom:10px;" id="' + data1.postId + '">';
@@ -729,7 +729,7 @@ function postInsert(position, data1)
 
     post += '<div class="row" id="postFrontTop">';
 
-    post += '<div class="col-md-5 profilePicPostsFront" id="postProfilePic">';
+    post += '<div class="col-md-4 profilePicPostsFront" id="postProfilePic">';
 
     ////console.log(data1.profilePicExists);
 
@@ -760,7 +760,7 @@ function postInsert(position, data1)
 
     post += '</div> <!-- end class col-md-2 id postProfile Pic -->';
 
-    post += '<div class="col-md-4 text-center">';
+    post += '<div class="col-md-5 text-left">';
 
     post += '<div class="fontSize14 text-left paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
 
@@ -1075,7 +1075,7 @@ function retrieveComments(id)
         {
             commentInsert("last",x[i],id);
         }
-        $('timeago').timeago();
+        $('.timeago').timeago();
     });
 }
 

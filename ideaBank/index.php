@@ -304,7 +304,7 @@ function createIdeaPost() {
 	$('#plusId').addClass("fa-spin");
 	$('#bank').addClass("faa-burst animated");
 	$('#postingIdea').html("Posting New Idea....");
-    var ideaContent = $('#createIdeaContent').val();
+    var ideaContent = $('#createIdeaContent').val().trim();
         if (ideaContent.length == 0) {
             alert("Post content is to be filled");
         } 
@@ -721,9 +721,9 @@ function modifyPost(id, data) {
 function starClick(id) {
 	var imagePath = $('#appreciate'+id+'').attr("src");
 	$('#deactivedep'+id).addClass("deactive");
-	alert(imagePath);
-	if(imagePath == "/4pi/ideaBank/images/app.SVG"){
-		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/clicked.JPG");
+	// alert(imagePath);
+	if(imagePath == "/4pi/ideaBank/images/appreciate.SVG"){
+		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/appreciated.SVG");
 	}
     $('#' + id).find('#appreciate'+id+'').attr("onclick", "");
 	var count = $('#' + id).find('.ideaStarCount').html();
@@ -754,8 +754,8 @@ function starClick(id) {
 function stopClick(id) {
 	var imagePath = $('#depreciate'+id+'').attr("src");
 	$('#deactiveapp'+id).addClass('deactive');
-	if(imagePath == "/4pi/ideaBank/images/dep.SVG"){
-		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/dep1.SVG");
+	if(imagePath == "/4pi/ideaBank/images/depreciate.SVG"){
+		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/depreciated.SVG");
 	}
     $('#' + id).find('#depreciate'+id+'').attr("onclick", "");
 	var count = $('#' + id).find('#ideaUnStarCount').html();

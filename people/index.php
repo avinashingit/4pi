@@ -97,7 +97,7 @@
 	    		</div>
 				
 				
-				<a href="files/studentConstitution.pdf" id="extra" ><i class="fa fa-download"></i> Student Constitution - IIITD&ampM K</a>
+				<a href="/4pi/files/sc.pdf" id="extra" ><i class="fa fa-download"></i> Student Constitution - IIITD&ampM K</a>
 				
 	    	</div>
 			

@@ -151,14 +151,14 @@ function userLogin(){
 }
    
    
-$(document).ready(function()
+/*$(document).ready(function()
   {
   
   	$('*[data-toggle="modal"]').click(function(){
-  		alert("called");
+  		// alert("called");
   		$('body').css({'position':'fixed'});
   	});
-
+*/
   
   
   
@@ -628,8 +628,8 @@ function shuffle(array) {
 	
 	
 	
-	
-  });	
+/*	
+  });	*/
 
 
   

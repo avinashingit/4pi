@@ -10,7 +10,7 @@
 	else
 	{
 		$userIdHash=$_GET['ref'];
-		$sql="SELECT * FROM users WHERE userIdHash=".$_GET['ref'];
+		$sql="SELECT * FROM users WHERE userIdHash=".$_GET['ref']."" ;
 		$result=mysql_query($sql);
 		$username="";
 		$userId="";

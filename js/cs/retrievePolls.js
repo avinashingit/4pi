@@ -87,7 +87,7 @@ function createPollSP()
 
 			else if(limit=="yes")
 			{
-				alert("Poll option length should not exceed 40 characters.")
+				alert("Poll option length should not exceed 40 characters.");
 			}
 
 			else

@@ -88,6 +88,7 @@ $userIdHash=$_SESSION['vj'];
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
 	if(blockUserByHash($userIdHash,"Suspicious Session Variable in createPoll")>0)
+	{
 		$_SESSION=array();
 		session_destroy();
 		echo 14;

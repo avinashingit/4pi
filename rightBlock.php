@@ -1,5 +1,5 @@
 <script>
-	$(document).ready(function(){
+	/*$(document).ready(function(){
 	var s = $("#rightBox");
     
     var pos = s.position(); 
@@ -36,9 +36,9 @@
 
         }
     });
-	});
+	});*/
 
-	$.fn.isOnScreen = function(){
+	/*$.fn.isOnScreen = function(){
     
 	    var win = $(window);
 	    
@@ -55,7 +55,7 @@
 	    
 	    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 	    
-	};
+	};*/
 
 	/*if($('#rightBox').isOnScreen)
 	{

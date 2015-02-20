@@ -39,7 +39,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			$extension = end(explode(".", $file["name"]));
 
-			if (( ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") ) && ($file["size"] <= 4194304) && in_array($extension, $allowedExts))
+			if (( ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") ) && ($file["size"] <= 8388608) && in_array($extension, $allowedExts))
 			{
 				if ($file["error"] > 0)
 				{
