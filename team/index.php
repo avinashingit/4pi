@@ -31,15 +31,15 @@ include("../header.php");
 			<div class="row nextRow"  >
 				
 				<div class="col-md-4"  >
-					<div class="devLeft" >
+					<!-- <div class="devLeft" >
 						<a href="/4pi/aboutMe/index.php?userId=COE12B009" title="View Profile" ><img src="/4pi/img/hpics/1.jpg" class="devImg img-responsive"   /></a>
-
+					
 						<div class="devDetails"  >
 							<a href="/4pi/aboutMe/index.php?userId=COE12B009" title="View Profile" class="devName" >Avinash Kadimisetty</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
 							<span><a href="mailto:coe12b009@iiitdm.ac.in" title="Mail me" >coe12b009@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B009" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
-					</div>
+					</div> -->
 					
 					<div class="devLeft" >
 						<a href="/4pi/aboutMe/index.php?userId=COE12B013" title="View Profile" ><img  class="devImg img-responsive" src="/4pi/img/hpics/16.jpg" />

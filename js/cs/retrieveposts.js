@@ -354,7 +354,7 @@ function createPost()
     })
         .success(
             function(data) {
-                //console.log(data);
+                console.log(data);
                 ////console.log(data);
                 data = data.trim();
                 $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");

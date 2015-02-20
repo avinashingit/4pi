@@ -95,6 +95,7 @@ function iso8601ToReadable(str)
 
 
 function userLogin(){
+	// alert("Called");
 	var username=$('#loginUsername').val();
 	var password=$('#loginPassword').val();
 
@@ -122,7 +123,7 @@ function userLogin(){
 		
 		.success(function (data){
 		data = data.trim();
-		////alert(data);
+		// alert(data);
 		//alert(data.length);
 			if(data=="-1")
 			{
