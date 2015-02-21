@@ -548,7 +548,7 @@ function postInsert(position, data1, num, len) {
     
     post+='<div class="row" id="ideaIcons" >';
 	
-    post+='<div class="col-md-3 col-md-offset-2 ideaStarBox" >';
+    post+='<div class="col-md-3 ideaStarBox" >';
 	
 	if (data1.hasAppreciated == 1) {
 		post+='<a><img src="/4pi/ideaBank/images/appreciated.SVG" height="25" style="cursor:default" class = "ideaAppreciateIcon" id="appreciate'+data1.ideaPostId+'" title="Appreciate" /></a><span class="ideaStarCount">'+'  '+data1.appreciateCount+'</span></div>';
@@ -562,7 +562,7 @@ function postInsert(position, data1, num, len) {
 		}
 	}
 	
-	 post+='<div class="col-md-3 col-md-offset-5 ideaStarBox" >';
+	 post+='<div class="col-md-3 col-md-offset-3 ideaStarBox" >';
 	
 	if (data1.hasDepreciated == 1) {
 		post+='<a><img src="/4pi/ideaBank/images/depreciated.SVG" style="cursor:default" height="26" class="ideaDepreciateIcon" id="depreciate'+data1.ideaPostId+'" title="Depreciate" /></a><span id="ideaUnStarCount">'+'  '+data1.depreciateCount+'</span></div>';
@@ -577,9 +577,11 @@ function postInsert(position, data1, num, len) {
 		}
 	}
 	
-	post+='<div class="col-md-4 ideaDateBox" >';
+	post+='<div class="col-md-6 ideaDateBox" >';
+
+	data1.reqDateTime = data1.reqDateTime.substr(1,29);
 	
-    post+='<em><a href="#" title='+data1.reqDateTime+'><time class="timeago" style="font-size:12px;" >'+data1.ideaPostDate+'</time></a></em></div>';
+    post+='<a href="#" title='+data1.reqDateTime+'><time class="timeago" style="font-size:8px;" >'+data1.reqDateTime+'</time></a></div>';
                         
     post+='</div><!-- End of ROW tag id-ideaIcons -->';
 	
