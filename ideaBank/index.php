@@ -755,7 +755,7 @@ function stopClick(id) {
 	var imagePath = $('#depreciate'+id+'').attr("src");
 	$('#deactiveapp'+id).addClass('deactive');
 	if(imagePath == "/4pi/ideaBank/images/depreciate.SVG"){
-		$('#appreciate'+id+'').attr("src", "/4pi/ideaBank/images/depreciated.SVG");
+		$('#depreciate'+id+'').attr("src", "/4pi/ideaBank/images/depreciated.SVG");
 	}
     $('#' + id).find('#depreciate'+id+'').attr("onclick", "");
 	var count = $('#' + id).find('#ideaUnStarCount').html();
