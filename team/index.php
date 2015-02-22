@@ -85,7 +85,7 @@ include("../header.php");
 						<br />4&#960
 						<a href="/4pi/"  title="; - Students Portal @ IIITD&amp;M Kancheepuram" ><img id="pilogo"  class="img-responsive"  src="/4pi/img/appImgs/fourpi.svg" /></a>
 					
-					<br />110 <i class="fa fa-bars"></i> 720
+					<br />110 <i style="cursor:default;" class="fa fa-bars"></i> 720
 				</div>
 				
 				
