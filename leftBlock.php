@@ -48,7 +48,7 @@ echo '
 
 	if($exists==1)
 	{
-		echo '<a href="/4pi/aboutMe/index.php?userId='.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/proPics/'.$row->userIdHash.'.jpg" width="120" height="120" class="img-responsive img-circle"/></h4></a>';
+		echo '<a href="/4pi/aboutMe/index.php?userId='.$row->userId.'" ><h4 class="text-center" style="margin-bottom:10px;" ><img src="/4pi/img/proPics/'.$row->userIdHash.'.jpg" width="120" height="120" class="img-circle"/></h4></a>';
 	}
 
 	else

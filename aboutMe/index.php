@@ -1394,7 +1394,7 @@ if(userId=="")
 
 						<div class="col-md-2 visibleForUser col-md-offset-8 text-right">
 
-							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="fa fa-pencil"></i></button>
+							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="editSkillsButton fa fa-pencil"></i></button>
 
 						</div>
 

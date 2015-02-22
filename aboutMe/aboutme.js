@@ -316,7 +316,7 @@ function addSkillDeleteInput(el)
 
 function editSkillDeleteInput(el)
 {
-	$(el).parent().parent().parent().remove();
+	$(el).parent().parent().remove();
 }
 
 function addToolAddInput()
@@ -429,7 +429,7 @@ function insertTopPart(data,locateProPic)
 
 	if(data.profilePicExists==1)
 	{
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-circle"/></a><br/>';
 	}
 
 	else if(data.profilePicExists==-1)
@@ -934,6 +934,7 @@ function fetchSkills()
 
 			else if(data==404)
 			{
+				$(document).find(".editSkillsButton").hide();
 				callWhen404('Skills',$("#skills").find('#skillData'));
 			}
 		}
