@@ -53,7 +53,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$eventDurationMin="".$_POST['_eventDurationMin'];
 	$rawSharedWith=$_POST['_sharedWith'];
 	$organisedBy=$_POST['_eventOrgName'];
-	$eventCategory=$_POST['-eventCategory'];
+	$eventCategory=$_POST['_eventCategory'];
 
 	$rawSharedWith=trim($rawSharedWith);
 
@@ -99,6 +99,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$eventTime=changeToEventTimeFormat($rawTime);
 
 	if(validateEventDateAndTime($eventDate,$eventTime)==false)
+	{
+		echo 16;
+		exit();
+	}
+
+	if($eventCategory!='NonTechnical'&&$eventCategory!='technical')
 	{
 		echo 16;
 		exit();
@@ -200,8 +206,15 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			$timestamp=$lastUpdated=time();
 			$eventIdHash=hash("sha224", $eventId.POEVHASH);
-			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
-			if($isCOCASorCULSEC)
+			$isCOCAS=isCOCAS($userId);
+			$isCULSEC=isCULSEC($userId);
+			if($isCOCAS==1&&$eventCategory=="technical")
+			{
+				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
+				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,eventCategory,displayStatus,approvalStatus) 
+				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,1,1)";
+			}
+			else if($isCULSEC==1&&$eventCategory=="NonTechnical")
 			{
 				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
 				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,eventCategory,displayStatus,approvalStatus) 

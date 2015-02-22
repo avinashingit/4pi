@@ -63,7 +63,7 @@ echo '
 		}
 	}
 
-	echo '	<h4 class="text-center" ><a title="'.ucwords(strtolower($row->name)).'"href="/4pi/aboutMe/index.php?userId='.$row->userId.'" style="color:white;" >'.ucwords(strtolower(substr($row->name,0,18))).'...</a></h4>
+	echo '	<h4 class="text-center" ><a title="'.ucwords(strtolower($row->name)).'"href="/4pi/aboutMe/index.php?userId='.$row->userId.'" style="color:white;" >'.ucwords(strtolower(substr($row->alias,0,18))).'</a></h4>
 
 	</div>
 

@@ -58,11 +58,11 @@ class miniPost{
 
 		//$this->$postProfilePic=$postProfilePic;
 
-		$this->postUserName=$postUserName;
+		$this->postUserName=addslashes($postUserName);
 
-		$this->postSubject=$postSubject;
+		$this->postSubject=addslashes($postSubject);
 
-		$this->postContent=$postContent;
+		$this->postContent=addslashes($postContent);
 
 		$this->noOfStars=$noOfStars;
 
@@ -82,15 +82,15 @@ class miniPost{
 		
 		$this->hasStarred=$hasStarred;
 		
-		$this->comments = $comments;
+		$this->comments = ($comments);
 		
-		$this->postOwner = $postOwner;
+		$this->postOwner = addslashes($postOwner);
 		
 		$this->gender = $gender;
 		
 		$this->profilePicExists = $profilePicExists;
 		
-		$this->postUserFullName = $postUserFullName;
+		$this->postUserFullName = addslashes($postUserFullName);
 
 		//$this->postUserId=$postUserId;
 		

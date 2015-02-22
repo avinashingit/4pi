@@ -412,3 +412,7 @@
 
 [2015-02-20 00:40:08             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'eventDate >= ?  ORDER BY timestamp DESC' at line 1$$$
 
+[2015-02-22 16:58:03             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-22 16:58:18             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+

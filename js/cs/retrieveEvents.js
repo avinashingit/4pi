@@ -781,8 +781,8 @@ function upcomingEventsFetch(value,call)
 				$(this).remove();
 			});
 		}
-		//console.log(data);
-		// //console.log(checkData(data));
+		console.log(data);
+		// console.log(checkData(data));
 		if(checkData(data)==1)
 		{
 			if(data!=404)

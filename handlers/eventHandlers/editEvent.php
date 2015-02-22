@@ -54,7 +54,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$eventDurationMin="".$_POST['_eventDurationMin'];
 	$rawSharedWith=$_POST['_sharedWith'];
 	$organisedBy=$_POST['_eventOrgName'];
-
+	$eventCategory=$_POST['_eventCategory'];
 	$rawSharedWith=trim($rawSharedWith);
 
 	$conn= new QoB();
@@ -97,6 +97,12 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$eventDate=changeToEventDateFormat($rawDate);
 	$eventTime=changeToEventTimeFormat($rawTime);
 	if(validateEventDateAndTime($eventDate,$eventTime)==false)
+	{
+		echo 16;
+		exit();
+	}
+
+	if($eventCategory!='NonTechnical'&&$eventCategory!='technical')
 	{
 		echo 16;
 		exit();
@@ -229,19 +235,26 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			
 			$lastUpdated=time();
-			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
+			$isCOCAS=isCOCAS($userId);
+			$isCULSEC=isCULSEC($userId);
 			//$eventIdHash=hash("sha512", $eventId.POEVHASH);
-			if($isCOCASorCULSEC==1)
+			if($isCOCAS==1&&$eventCategory=="technical")
 			{
 				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
 				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
-				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?,displayStatus=1,approvalStatus=1 WHERE eventIdHash=?";
+				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?, eventCategory= ?,displayStatus=1,approvalStatus=1 WHERE eventIdHash=?";
+			}
+			else if($isCULSEC==1&&$eventCategory=="NonTechnical")
+			{
+				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
+				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
+				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?, eventCategory= ?,displayStatus=1,approvalStatus=1 WHERE eventIdHash=?";
 			}
 			else
 			{
 				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
 				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
-				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?,displayStatus=0,approvalStatus=0 WHERE eventIdHash=?";
+				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?, eventCategory= ?,displayStatus=0,approvalStatus=0 WHERE eventIdHash=?";
 			}
 			
 			//$values[0]=array($eventId => 'i');
@@ -262,6 +275,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$values[10]=array($eventDurationMin => 's' );
 			$values[11]=array($eventStatus => 's');
 			$values[12]=array($eventIdHash => 's');
+			$values[13]=array($eventCategory => 's');
 			
 			//$values[12]=array($userId => 's');
 			$result=$conn->update($UpdateEventSQL,$values);
