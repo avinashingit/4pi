@@ -182,3 +182,5 @@
 
 [2015-02-18 22:22:50             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
 
+[2015-02-22 19:41:29             ::1                   Asia/Kolkata] 1022   $$$Can't write; duplicate key in table 'poll'$$$
+

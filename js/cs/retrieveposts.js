@@ -689,7 +689,7 @@ function commentInsert(position, data, postId)
 
     comment += '<div class="col-md-10">';
 
-    comment += '<div class="commentText fontSize13" style="float:left;white-space:pre-wrap;">' + data.commentContent + '</div>';
+    comment += '<div class="commentText break-word fontSize13" style="float:left;white-space:pre-wrap;">' + data.commentContent + '</div>';
 
     comment += '<form><textarea id="' + data.commentIdHash + '-" name="commentedText" onkeypress="replaceIt(\'' + postId + '\',\'' + data.commentIdHash + '\',this,event,\'comment\');" class="form-control replace" style="float:left;margin-left:-24px;resize:none;"></textarea></form>';
 
@@ -776,7 +776,7 @@ function postInsert(position, data1)
 
     post += '<div class="col-md-7 text-left">';
 
-    post += '<div class="fontSize14 text-left paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
+    post += '<div class="fontSize14 text-left break-word paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
 
     post += '</div><!-- end class col-md-6 id postSubject -->';
 
@@ -796,7 +796,7 @@ function postInsert(position, data1)
 
     post += '<div class="row" >';
 
-    post += '<div class="postContent text-center" style="white-space:pre-wrap" id="postContent">' + data1.postContent + '</div>';
+    post += '<div class="postContent text-center break-word" style="white-space:pre-wrap" id="postContent">' + data1.postContent + '</div>';
 
     post += '</div><!-- end class row id postContent -->';
 

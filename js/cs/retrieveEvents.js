@@ -109,7 +109,7 @@ function eventInsert(position,data,past)
 
 	event+='<div class="col-md-12">';
 
-	event+='<p id="eventContent" style="white-space:pre-wrap">'+data.eventContent+'</p>';
+	event+='<p id="eventContent " class="break-word" style="white-space:pre-wrap">'+data.eventContent+'</p>';
 
 	event+='</div>';
 

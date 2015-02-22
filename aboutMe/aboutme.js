@@ -53,7 +53,7 @@ function closeModal(id)
 function updateNumber(element,position)
 {
 	var numberOfElements=$(element).length;
-	position.html(numberOfElements);
+	position.html('('+numberOfElements+')');
 }
 
 function callWhen404(element,position)
@@ -499,6 +499,14 @@ function insertTopPart(data,locateProPic)
 					topPart+='<div class="text-left" id="personResumeLink">';
 
 						topPart+='<a href="/4pi/files/resumes/'+userId+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+
+					topPart+='</div><!-- end person resume link id -->';
+				}
+				else
+				{
+					topPart+='<div class="text-left" id="personResumeLink">';
+
+						topPart+='<p>Resume is not available.';
 
 					topPart+='</div><!-- end person resume link id -->';
 				}
