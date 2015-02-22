@@ -177,6 +177,7 @@ Code 11: Session Variables unset!!
 							echo 13;
 						}
 					}
+					$lifetime=($lifetime*86400)+time();
 					$time=time();
 					$filesAttached="";
 					$updatePostSQL="UPDATE post SET content = ?,
