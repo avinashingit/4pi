@@ -120,7 +120,14 @@
 
 		if(data!="empty")
 		{
-			littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
+			if(window.location.href.indexOf('fetchSingle')>-1)
+			{
+				littlePost+='<a href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
+			}
+			else
+			{
+				littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
+			}
 
 			$("#rightBlock1").find(".emptyPostsRight").addClass('hidden');
 		}
@@ -140,7 +147,14 @@
 
 		if(data!="empty")
 		{
-			littleEvent+='<a target="_blank" href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';
+			if(window.location.href.indexOf('fetchSingle')>-1)
+			{
+				littleEvent+='<a href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';	
+			}
+			else
+			{
+				littleEvent+='<a target="_blank" href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';
+			}
 
 			$("#rightBlock2").find(".emptyEventsRight").addClass('hidden');
 		}
@@ -159,7 +173,14 @@
 
 		if(data!="empty")
 		{
-			littlePoll+='<a target="_blank"  href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
+			if(window.location.href.indexOf('fetchSingle')>-1)
+			{
+				littlePoll+='<a href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
+			}
+			else
+			{
+				littlePoll+='<a target="_blank"  href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
+			}
 
 			$("#rightBlock3").find(".emptyPollsRight").addClass('hidden');
 		}
@@ -279,19 +300,22 @@
 		fetchLittlePosts();
 		fetchLittleEvents();
 		fetchLittlePolls();
+		$("#rightBlock1").hide();
+		$("#rightBlock2").hide();
+		$("#rightBlock3").hide();
 	});
 
 	setInterval(function(){
 		fetchLittlePosts();
 		fetchLittleEvents();
 		fetchLittlePolls();
-	},10000);
+	},30000);
 
 
 
 </script>
 
-<div class="col-md-3" id="rightBlock" style="position:fixed;top:50px;right:0px;color:white;">
+<div class="col-md-3" id="rightBlock" style="height:95vh;position:fixed;top:50px;right:0px;color:white;">
 
 	<div class="row panel" id="rightBlock1" >
 
@@ -331,9 +355,9 @@
 
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-	<div class="row panel panel-info " id="rightBlock4">
+	<div class="row" id="rightBlock4">
 
-		<a href="/4pi/ideaBank" style="color:white;"><div class="panel-heading ideaBankHeading text-center cursorPointer" style="font-size:18px;background:linear-gradient(#B61B88, #540733);"><i class="fa fa-exclamation"></i>&nbsp;<span style="padding:10px !important;">Idea Bank</span></div></a>
+		<a href="/4pi/ideaBank" class="ideaBankHeading" style="color:white;position:absolute;bottom:20px;width:96%;height:80px;padding-top:22px;"><div class="text-center cursorPointer" style="font-size:25px;"><i class="fa fa-exclamation"></i>dea Bank</div></a>
 
 	</div>
 

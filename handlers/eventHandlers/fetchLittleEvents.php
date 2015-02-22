@@ -60,11 +60,11 @@ else
 			{
 				if($event['eventName']=="")
 				{
-					$content=substr($event['content'],0,35).'...';
+					$content=substr($event['content'],0,70).'...';
 				}
 				else
 				{
-					$content=substr($event['eventName'],0,35);
+					$content=substr($event['eventName'],0,70);
 				}
 				$eventObject=new miniLittleEvent($event['eventIdHash'],$content);
 				$littleEventsObjectArray[]=$eventObject;

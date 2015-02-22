@@ -60,11 +60,11 @@ else
 			{
 				if($post['subject']=="")
 				{
-					$content=substr($post['content'],0,35).'...';
+					$content=substr($post['content'],0,70).'...';
 				}
 				else
 				{
-					$content=substr($post['subject'],0,35);
+					$content=substr($post['subject'],0,70);
 				}
 				$postObject=new miniLittlePost($post['postIdHash'],$content);
 				$littlePostObjectArray[]=$postObject;

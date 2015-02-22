@@ -27,7 +27,8 @@ function createPollDeleteInput(el)
 // Create Poll Function
 function createPollSP()
 {
-	// alert("called");
+	$("#pollCreateModal").find("#loadingImage").removeClass('hidden');
+	$("#pollCreateModal").find("#createPollButton").hide();
 	var pollQuestion=$('#pollCreateModal').find('#createPollQuestion').val();
 	var pollType=$('#pollCreateModal').find('#createPollType').val();
 	var pollOptionType=$('#pollCreateModal').find('#createPollOptionType').val();
@@ -109,6 +110,8 @@ function createPollSP()
 					{
 						data=JSON.parse(data);
 						$('#pollCreateModal').modal('hide');
+						$("#pollCreateModal").find("#loadingImage").addClass('hidden');
+						$("#pollCreateModal").find("#createPollButton").show();
 						alert("Your poll is sent for approval. Please wait until it is approved.");
 						insertPoll(data,"first");
 						$('#pollCreateModal').find('input').each(function(){
@@ -120,10 +123,15 @@ function createPollSP()
 						});
 
 						$('#pollCreateModal').find('select').each(function(){
-							$(this).val("");
+							$(this).val("1");
 						});
 
 						$('#pollCreateModal').find('#createPollSharedWith').val("All");
+					}
+					else
+					{
+						$("#pollCreateModal").find("#loadingImage").addClass('hidden');
+						$("#pollCreateModal").find("#createPollButton").show();
 					}
 
 					$('time.timeago').timeago();
@@ -1619,6 +1627,10 @@ function insertPoll(data,position)
 
 function fetchLatestPolls(call,value)
 {
+	if(value=="empty")
+	{
+		$(".poll").remove();
+	}
 	$('#loadMorePollsButton').html("Loading").attr("onclick","");
 	$('#inViewElement').html('1004');
 	var existingPolls=new Array();
@@ -1650,7 +1662,7 @@ function fetchLatestPolls(call,value)
 		data=data.trim();
 		if(data==404)
 		{
-			$('#pollArea').find('#pollEmptyMessage').find('p').html("No more polls to display");
+			$('#messageEmpty').html("No more polls to display");
 			$('#loadMorePollsButton').hide();
 		}
 
@@ -1871,6 +1883,8 @@ function modifyPoll(data)
 function editedPollSend()
 {
 	var link=$("#pollEditModal");
+	link.find("#loadingImage").removeClass('hidden');
+	link.find("#editPollButton").hide();
 	var pollId=link.find("#editPollModalPollId").html();
 	var pollQuestion=link.find("#editPollQuestion").val().trim();
 	var pollOptionType=link.find("#editPollOptionType").val();
@@ -1939,7 +1953,14 @@ function editedPollSend()
 						data=JSON.parse(data);
 						modifyPoll(data);
 						$("#pollEditModal").modal('hide');
+						link.find("#loadingImage").addClass('hidden');
+						link.find("#editPollButton").show();
 						$('.timeago').timeago();
+					}
+					else
+					{
+						link.find("#loadingImage").addClass('hidden');
+						link.find("#editPollButton").show();
 					}
 				});
 			}

@@ -58,7 +58,7 @@ else
 			$littlePollObjectArray=array();
 			while(($poll=$conn->fetch($result))&&($displayCount<=3))
 			{
-				$content=substr($poll['question'],0,20).'...';
+				$content=substr($poll['question'],0,70).'...';
 				$pollObject=new miniLittlePoll($poll['pollIdHash'],$content);
 				$littlePollObjectArray[]=$pollObject;
 				$displayCount++;

@@ -74,9 +74,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		<div class="form-group has-error">
 
-					   			 <label for="eventContent">Event Details (<span id="createEventModalContentLength">1000</span> characters left)&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
+					   			 <label for="eventContent">Event Details <small>(<span id="createEventModalContentLength">1000</span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
 
-					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createEventModalContentLength').html(1000-$(this).val().length);" class="form-control" id="createEventContent"></textarea>
+					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createEventModalContentLength').html(1000-$(this).val().length);" onkeydown="$('#createEventModalContentLength').html(1000-$(this).val().length);" class="form-control" id="createEventContent"></textarea>
 
 					  		</div>
 
@@ -187,8 +187,22 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 				<div class='modal-footer'>
 
-					<button onclick="createEventSP();" class="btn btn-primary">Create Event</button>
+					<div class="row">
 
+						<div class="col-md-1 col-md-offset-5">
+
+							<img src="/4pi/img/728.gif" id="loadingImage" class="hidden">
+
+						</div>
+
+						<div class="col-md-2 col-md-offset-4">
+
+							<button onclick="createEventSP();" id="createEventButton" class="btn btn-primary">Create Event</button>
+
+						</div>
+
+					</div>
+					
 				</div>
 
 	    	</div>
@@ -236,9 +250,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		<div class="form-group has-error">
 
-					   			 <label for="eventContent">Event details (<span id="editEventModalContentLength"></span> characters left)&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
+					   			 <label for="eventContent">Event details <small>(<span id="editEventModalContentLength"></span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
 
-					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editEventModalContentLength').html(1000-$(this).val().length);" class="form-control" id="editEventContent" plcaeholder="Required"></textarea>
+					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editEventModalContentLength').html(1000-$(this).val().length);" onkeydown="$('#editEventModalContentLength').html(1000-$(this).val().length);" class="form-control" id="editEventContent" plcaeholder="Required"></textarea>
 
 					  		</div>
 
@@ -367,7 +381,23 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 		      	<div class="modal-footer">
 
-					<button onclick="editedEventSend();" class="btn btn-primary">Edit Event</button>
+		      		<div class="row">
+
+						<div class="col-md-1 col-md-offset-5">
+
+							<img src="/4pi/img/728.gif" id="loadinImage" class="hidden">
+
+						</div>
+
+						<div class="col-md-2 col-md-offset-4">
+
+							<button onclick="editedEventSend();" id="editEventButton" class="btn btn-primary">Edit Event</button>
+
+						</div>
+
+					</div>
+
+					
 
 		      	</div>
 

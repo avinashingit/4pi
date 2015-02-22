@@ -220,9 +220,9 @@ $(document).ready(function(){
 
 	      		    <form role="form">
 
-				  		<div class="form-group">
+				  		<div class="form-group has-error">
 
-				   			<label for="feedbackInput">Message</label>
+				   			<label for="feedbackInput">Message &nbsp;<small><span style="color:red;">*</span></small></label>
 
 				    		<textarea type="text" name="feedbackInput" class="form-control input-sm" style="background-color:white !important;border-radius:0px;resize:none;" id="feedbackInput"></textarea>
 
@@ -231,6 +231,10 @@ $(document).ready(function(){
 					</form>
 
 					<br/>
+
+				</div>
+
+				<div class="modal-footer">
 
 					<button  id="feedbackSendButton" onclick="sendFeedback();" class="btn btn-primary">Send</button>
 

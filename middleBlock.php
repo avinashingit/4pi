@@ -40,19 +40,19 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 						    <label for="postSubject">Subject</label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Subject is useful when you search for posts. It is not mandatory."></i>]
 						    <input type="text" name="postSubject" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPostSubject" placeholder="Subject">
 						  </div>
-						  <div class="form-group">
-						    <label for="postContent">Content (<span id="createPostModalContentLength">8000</span> characters left)&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory. Limit to 8000 characters."></i>]
-						    <textarea type="text" name="postContent" id="createPostContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createPostModalContentLength').html(8000-$(this).val().length);" class="form-control" id="createPostContent"></textarea>
+						  <div class="form-group has-error">
+						    <label for="postContent">Content <small>(<span id="createPostModalContentLength">8000</span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory. Limit to 8000 characters."></i>]
+						    <textarea type="text" name="postContent" id="createPostContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createPostModalContentLength').html(8000-$(this).val().length);" onkeydown="$('#createPostModalContentLength').html(8000-$(this).val().length);" class="form-control" id="createPostContent"></textarea>
 						  </div>
 						  <!-- <div class="form-group">
 						    <label for="fileInput">Attach Image </label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Allowed Extensions are .jpg, .png."></i>]
 						    <input name="fileInput" type="file"  id="createPostFileInput">
 						  </div> -->
-						  <div class="form-group">
+						  <div class="form-group has-error">
 						    <label for="shareWith">Share with &nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
-						    <input name="createPostSharedWith" value="All" class="form-control"type="text" id="createPostSharedWith">
+						    <input name="createPostSharedWith" value="All" class="popOver form-control"type="text" id="createPostSharedWith" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)">
 						  </div>
-						  <div class="form-group">
+						  <div class="form-group has-error">
 						    <label for="porstValidity">Post Validity&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="A post lives only for a fixed time. You can also REQUEST for a lifetime validity. "></i>]
 						    <!-- <input name="postLivingTime" class="form-control" type="text" id="postLivingTime"> -->
 						    <select class="form-control"  id="createPostLivingTime" name="createPostLivingTime" >
@@ -67,7 +67,26 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 							</select>
 						  </div>
 						</form>
-						<button onclick="createPost();" class="btn btn-primary">Post</button>
+
+					</div>
+					<div class="modal-footer">
+
+						<div class="row">
+
+							<div class="col-md-1 col-md-offset-5 text-center">
+
+								<img id="loadingImage" src="/4pi/img/728.gif" class="hidden" width="25px" height="25px">
+	
+							</div>
+
+							<div class="col-md-2 col-md-offset-4">
+
+								<button onclick="createPost();" id="createPostButton" class="btn btn-primary">Post</button>
+
+							</div>
+
+						</div>
+						
 				      </div>
 				    </div>
 				  </div>
@@ -94,8 +113,8 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 						    <input type="email" name="postSubject" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPostSubject" placeholder="Subject">
 						  </div>
 						  <div class="form-group">
-						    <label for="postContent">Content (<span id="editPostModalContentLength"></span> characters left)&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory"></i>]
-						    <textarea type="text" name="postContent" id="editPostContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editPostModalContentLength').html(8000-$(this).val().length);" class="form-control" id="exampleInputPassword1"></textarea>
+						    <label for="postContent">Content <small>(<span id="editPostModalContentLength"></span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Post Content is compulsory"></i>]
+						    <textarea type="text" name="postContent" id="editPostContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editPostModalContentLength').html(8000-$(this).val().length);" onkeydown="$('#editPostModalContentLength').html(8000-$(this).val().length);"class="form-control" id="exampleInputPassword1"></textarea>
 						  </div>
 						  <!-- <div class="form-group">
 						    <label for="fileInput">Attach Image </label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Allowed Extensions are .jpg, .png."></i>]
@@ -103,7 +122,7 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 						  </div>  -->
 						  <div class="form-group">
 						    <label for="shareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
-						    <input name="editPostSharedWith" class="form-control"type="text" id="editPostSharedWith">
+						    <input name="editPostSharedWith" class="popOver form-control" type="text" id="editPostSharedWith" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)">
 						  </div>
 						  <div class="form-group">
 						    <label for="editPostValidity">Post Validity&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="A post lives only for a fixed time. You can also REQUEST for a lifetime validity. "></i>]
@@ -123,8 +142,27 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 
 						  <input class="hidden" id="postId" name="postId">
 						</form>
-						<button onclick="editedPostSend();" class="btn btn-primary">Post</button>
-				      </div>
+					</div>
+					<div class="modal-footer">
+
+						<div class="row">
+
+							<div class="col-md-1 col-md-offset-5 text-center">
+
+								<img id="loadingImage" src="/4pi/img/728.gif" class="hidden" width="25px" height="25px">
+	
+							</div>
+
+							<div class="col-md-2 col-md-offset-4">
+
+								<button onclick="editedPostSend();" id="editPostButton" class="btn btn-primary">Save</button>
+
+							</div>
+
+						</div>
+						
+					</div>
+						
 				    </div>
 				  </div>
 				</div>
@@ -144,7 +182,7 @@ var userIdHash="<?php echo $_SESSION['vj']; ?>";
 
 			<div class="col-md-12 text-center">
 
-				<p class="text-center" id="messageEmpty"></p>
+				<span class="text-center messageEmpty" id="messageEmpty"></span>
 
 			</div>
 

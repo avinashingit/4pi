@@ -92,16 +92,14 @@ $(function() {
 });
 
 function exchange(el, el2) {
-
-    // ////console.log(el);
-
-    $(el2).removeClass('fa-pencil').addClass('fa-question').attr("title", "Press Esc to cancel");
+    /*$(el2).removeClass('fa-pencil').addClass('fa-question').attr("title", "Press Esc to cancel");*/
+    $(el2).addClass('hidden').parent().find(".commentClose").removeClass('hidden');
     commentDiv = $('#' + el);
     commentText = commentDiv.find('.commentText').html();
     var ie = document.all && !document.getElementById ? document.all : 0;
-    var toObjId = /b$/.test(el) ? el.replace(/b$/, '') : el + 'b';
+    var toObjId = /-$/.test(el) ? el.replace(/-$/, '') : el + '-';
     var toObj = ie ? ie[toObjId] : document.getElementById(toObjId);
-    if (/b$/.test(el))
+    if (/-$/.test(el))
         toObj.innerHTML = commentText;
     else {
         toObj.style.width = commentDiv.find('textarea').offsetWidth + 7 + 'px';
@@ -117,16 +115,18 @@ function exchange(el, el2) {
 }
 
 function exchange2(el, el2, key) {
-
+    console.log(el);
+    console.log(el2);
     if (key == "enter") {
         commentDiv = $('#' + el);
         commentText = $(el2).val();
         commentTextAreaDivId = $('#' + el).find('textarea').attr("id");
+        console.log(commentTextAreaDivId);
         var ie = document.all && !document.getElementById ? document.all : 0;
-        var toObjId = /b$/.test(commentTextAreaDivId) ? commentTextAreaDivId.replace(/b$/, '') : commentTextAreaDivId + 'b';
+        var toObjId = /-$/.test(commentTextAreaDivId) ? commentTextAreaDivId.replace(/-$/, '') : commentTextAreaDivId + '-';
         var toObj = ie ? ie[toObjId] : document.getElementById(toObjId);
         // ////console.log($(toObj).find('.commentText').html());
-        if (/b$/.test(commentTextAreaDivId))
+        if (/-$/.test(commentTextAreaDivId))
             $(toObj).find('.commentText').html(commentText);
         else {
             //toObj.style.width=commentDiv.find('#commentText').offsetWidth+7+'px';
@@ -138,17 +138,18 @@ function exchange2(el, el2, key) {
         commentDiv.find('.commentText').css({
             "display": "block"
         });
-        $('#' + el).find('.fa-question').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");
+        /*$('#' + el).find('.fa-question').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");*/
+        $('#'+el).find('.commentClose').addClass('hidden').parent().find('.commentEdit').removeClass('hidden');
     } 
     else {
         commentDiv = $('#' + el);
         commentText = $(el2).val();
         commentTextAreaDivId = $('#' + el).find('textarea').attr("id");
         var ie = document.all && !document.getElementById ? document.all : 0;
-        var toObjId = /b$/.test(commentTextAreaDivId) ? commentTextAreaDivId.replace(/b$/, '') : commentTextAreaDivId + 'b';
+        var toObjId = /-$/.test(commentTextAreaDivId) ? commentTextAreaDivId.replace(/-$/, '') : commentTextAreaDivId + '-';
         var toObj = ie ? ie[toObjId] : document.getElementById(toObjId);
         x = $(toObj).find('.commentText').html();
-        if (/b$/.test(commentTextAreaDivId))
+        if (/-$/.test(commentTextAreaDivId))
             $(toObj).find('.commentText').html(x);
         else {
             //toObj.style.width=commentDiv.find('#commentText').offsetWidth+7+'px';
@@ -160,7 +161,8 @@ function exchange2(el, el2, key) {
         commentDiv.find('.commentText').css({
             "display": "block"
         });
-        $('#' + el).find('.fa-question').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");
+        /*$('#' + el).find('.fa-question').removeClass('fa-question').addClass('fa-pencil').attr("title", "Edit");*/
+        $('#'+el).find('.commentClose').addClass('hidden').parent().find('.commentEdit').removeClass('hidden');
     }
 
 
@@ -169,8 +171,7 @@ function exchange2(el, el2, key) {
 
 
 function replaceIt(y, z, x, event, val) {
-    //alert("hello"+event.keyCode
-
+    console.log(z);
     if (event.keyCode == 13 && !event.shiftKey) {
         event.preventDefault();
 
@@ -243,6 +244,8 @@ function editedPostSend()
 {
 
     //alert("HEll");    
+    $("#editPostModal").find("#editPostButton").attr("onclick","").html("Saving");
+    $("#editPostModal").find("loadingImage").removeClass('hidden');
     var postId = $('#editPostModal').find('#editPostId').html().trim();
     // ////console.log(postId);
     var postSubject = $('#editPostSubject').val().trim();
@@ -287,6 +290,8 @@ function editedPostSend()
 
                 if(checkData(data)==1)
                 {
+                    $("#editPostModal").find("#editPostButton").attr("onclick","editedPostSend()").html("Save");
+                    $("#editPostModal").find("loadingImage").addClass('hidden');
                     // data=JSON.parse(data);
                     modifyPost(postId, data);
                 }
@@ -300,6 +305,8 @@ function editedPostSend()
 function createPost() 
 {
     // alert("H");
+    $("#createPostModal").find("#createPostButton").attr("onclick","").html("Posting");
+    $("#createPostModal").find("loadingImage").removeClass('hidden');
     var postSubject = $('#createPostSubject').val().trim();
     var done=1;
     if (postSubject.length > 40) {
@@ -333,12 +340,11 @@ function createPost()
     if(done==1)
     {
         $('#createPostModal').find('#createPostSubject').val("");
-    $('#createPostModal').find('#createPostContent').val("");
-    $('#createPostModal').find('#createPostSharedWith').val("All");
-    $('#createPostModal').find('#createPostLivingTime').val("1");
-    $('.row .postMenu').find('#createPostButton').attr("data-target", "").find('a span').html("Creating post...");
-    $('.row .postMenu').find('#createPostButton').find('.fa-plus').addClass('fa-spin');
-    $('#createPostModal').modal('hide');
+        $('#createPostModal').find('#createPostContent').val("");
+        $('#createPostModal').find('#createPostSharedWith').val("All");
+        $('#createPostModal').find('#createPostLivingTime').val("1");
+        $('.row .postMenu').find('#createPostButton').attr("data-target", "").find('a span').html("Creating post...");
+        $('.row .postMenu').find('#createPostButton').find('.fa-plus').addClass('fa-spin');
 
     var y = $.post('/4pi/handlers/postHandlers/createPost.php', {
         _subject: postSubject,
@@ -353,25 +359,25 @@ function createPost()
     })
         .success(
             function(data) {
-                // console.log(data);
-                ////console.log(data);
-                data = data.trim();
-                $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
-                $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
-
-                if (data == "12") {
-                    alert("Sorry. We encountered an error in creating your post ");
-                } else if (data == 13) {
-                    alert("Do not fiddle with 4pi");
-                } else if (data == 16) {
-                    alert("Please check the post details you have entered");
-                } else {
+                if(checkData(data)==1)
+                {
+                    data = data.trim();
+                    $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
+                    $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
+                    $("#createPostModal").find("#createPostButton").attr("onclick","createPost()").html("Post");
+                    $("#createPostModal").find("loadingImage").addClass('hidden');
                     $('#createPostModal').modal('hide');
-                    //////console.log(data);
                     var x = JSON.parse(data);
-                    //////console.log(data);
                     postInsert("first", x);
                     callAfterAjax();
+                }
+
+                else
+                {
+                    $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
+                    $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
+                    $("#createPostModal").find("#createPostButton").attr("onclick","createPost()").html("Post");
+                    $("#createPostModal").find("loadingImage").addClass('hidden');
                 }
             }
     );
@@ -676,7 +682,7 @@ function commentInsert(position, data, postId)
 
     comment += '<div class="commentText fontSize13" style="float:left;white-space:pre-wrap;">' + data.commentContent + '</div>';
 
-    comment += '<form><textarea id="' + data.commentIdHash + 'b" name="commentedText" onkeypress="replaceIt(\'' + postId + '\',\'' + data.commentIdHash + '\',this,event,\'comment\');" class="form-control replace" style="float:left;margin-left:-24px;resize:none;"></textarea></form>';
+    comment += '<form><textarea id="' + data.commentIdHash + '-" name="commentedText" onkeypress="replaceIt(\'' + postId + '\',\'' + data.commentIdHash + '\',this,event,\'comment\');" class="form-control replace" style="float:left;margin-left:-24px;resize:none;"></textarea></form>';
 
     comment += '</div>';
 
@@ -684,7 +690,7 @@ function commentInsert(position, data, postId)
 
         comment += '<div class="col-md-1">';
 
-        comment += '<p class="text-center"><span class="fontSize13"><i class="fa fa-pencil commentEdit" onclick="exchange(\'' + data.commentIdHash + '\',this);" title="Edit"></i></span>&nbsp;&nbsp;<span class="fontSize13"><i class="fa fa-trash commentDelete" title="Delete" onclick="deleteComment(\'' + data.commentIdHash + '\',\'' + postId + '\');"></i></span></p>';
+        comment += '<p class="text-center"><span class="fontSize13"><i class="fa fa-pencil commentEdit" onclick="exchange(\'' + data.commentIdHash + '\',this);" title="Edit"></i><i class="hidden fa fa-close commentClose" onclick="exchange2(\'' + data.commentIdHash + '\',this,\'escape\');" title="Cancel"></i></span>&nbsp;&nbsp;<span class="fontSize13"><i class="fa fa-trash commentDelete" title="Delete" onclick="deleteComment(\'' + data.commentIdHash + '\',\'' + postId + '\');"></i></span></p>';
 
         comment += '</div>';
 
@@ -716,7 +722,6 @@ function commentInsert(position, data, postId)
 
 function postInsert(position, data1)
 {
-    console.log(data1);
     var post = "";
 
     post += '<div class="row post" style="margin-bottom:10px;" id="' + data1.postId + '">';
@@ -735,24 +740,24 @@ function postInsert(position, data1)
 
     if(data1.profilePicExists==1)
     {
-        post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span id="postCreatedBy"><img title="' + data1.postUserFullName + '('+data1.postUserId+')" src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+        post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
     }
 
     else
     {
         if(data1.gender=="M")
         {
-            post += '<h5><a href="/4pi/aboutMe/index.php?userId='+ data1.postUserId + '" id="postOwnerURL"><span id="postCreatedBy"><img title="' + data1.postUserFullName + '('+data1.postUserId+')" src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+            post += '<h5><a href="/4pi/aboutMe/index.php?userId='+ data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
         }
 
        else if(data1.gender=="F")
         {
-            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span id="postCreatedBy"><img title="' + data1.postUserFullName + '('+data1.postUserId+')" src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
         }
 
         else
         {
-            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span id="postCreatedBy"><img title="' + data1.postUserFullName + '('+data1.postUserId+')" src="/4pi/img/defaultMan.png" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultMan.png" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
         }
     }
 
@@ -760,20 +765,20 @@ function postInsert(position, data1)
 
     post += '</div> <!-- end class col-md-2 id postProfile Pic -->';
 
-    post += '<div class="col-md-5 text-left">';
+    post += '<div class="col-md-7 text-left">';
 
     post += '<div class="fontSize14 text-left paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
 
     post += '</div><!-- end class col-md-6 id postSubject -->';
 
-    post += '<div class="col-md-1 col-md-offset-2" id="linkToPostBack">';
+    post += '<div class="col-md-1" id="linkToPostBack">';
 
-    post += '<div class="text-center paddingTopRowPost"><i class="fa fa-bars" title="More Options"></i>&nbsp;&nbsp;';
+    post += '<div class="text-center paddingTopRowPost"><i class="fa fa-bars linkToPostBack" title="More Options"></i>&nbsp;&nbsp;';
 
     if (data1.postOwner == 1) {
         /*          post+=data.postOwner;
             post+=data.postUserId;*/
-        post += '<i class="fa fa-pencil"  data-toggle="modal"  onclick="editPost(this);" title="Edit Post"></i>';
+        post += '<i class="fa fa-pencil editDelete"  data-toggle="modal"  onclick="editPost(this);" title="Edit Post"></i>';
     }
 
     post += '</div></div> <!-- end class col-md-1 id linkToPostBack -->';
@@ -1283,8 +1288,10 @@ function insertCommentToPost(id, event) {
 
 }
 
-function editComment(postId, commentId,calslback) {
-    var commentContent = $('#' + commentId).find('#' + commentId + 'b').val().trim();
+function editComment(postId, commentId,calslback)
+{
+    console.log(commentId);
+    var commentContent = $('#' + commentId).find('#' + commentId + '-').val().trim();
     var done=1;
     if(commentContent.length==0)
     {

@@ -7,10 +7,12 @@ display:none;
     top:20px;
 }*/
 
+
+
 .modal-body
 {
     overflow-y: auto;
-    height:450px;
+    max-height:450px;
 }
 
 /* .modal
@@ -22,6 +24,22 @@ display:none;
 .profilePicPostsFront
 {
     padding-left:12px !important;
+    color:#cecece !important;
+}
+
+.linkToPostBack
+{
+    color:red;
+}
+
+.editDelete
+{
+    color:gray;
+}
+
+time
+{
+    font-size:12px;
 }
 
 textarea.formcontrol
@@ -54,7 +72,8 @@ textarea.formcontrol
 
 #rightBlock4 .ideaBankHeading
 {
-    background:linear-gradient(#B61B88, #540733);
+    /*background:linear-gradient(#B61B88, #540733);*/
+    background-color:#1C8096;
     color:#fff;
 }
 
@@ -310,4 +329,9 @@ text-area{
 }
 .attrCountPost{
     font-size:12px;
+}
+
+.messageEmpty
+{
+    text-align:center !important;
 }

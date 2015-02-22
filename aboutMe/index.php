@@ -414,13 +414,13 @@ if(userId=="")
 					
 					<br/> -->
 
-					<label for="personDescription">About you  ( <span id="descriptionLetterCount"></span> characters )</label> 
+					<label for="personDescription">About you  <small>( <span id="descriptionLetterCount"></span> characters )</small></label> 
 
-					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html($(this).val().length);" class="autosize form-control"></textarea>
+					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html($(this).val().length);" onkeydown="$('#descriptionLetterCount').html($(this).val().length);" class="autosize form-control"></textarea>
 
 					<br/>
 
-					<label for="personImage">Your image (.jpg files only)</label>
+					<label for="personImage">Your image (.jpg files only) <small>Maximum file size is 8MB</small></label>
 
 					<input type="file" accept="images/jpeg" id="editPersonInfoModalPersonImage">
 
@@ -582,7 +582,7 @@ if(userId=="")
 
 <script>
 
-	$(function () {
+	/*$(function () {
     	$('#skills').find('#skillData').highcharts({
         chart: {
             type: 'column'
@@ -636,7 +636,7 @@ if(userId=="")
             }
         }]
 	    });
-	});
+	});*/
 	
 	// $('textarea').autosize({'append':'false'});
 
