@@ -35,9 +35,9 @@ class miniComment{
 		
 		$this->commentUserIdHash=$commentUserIdHash;
 		
-		$this->commentUserName=$commentUserName;
+		$this->commentUserName=addslashes($commentUserName);
 		
-		$this->commentContent=$commentContent;
+		$this->commentContent=addslashes($commentContent);
 
 		$this->commentTime=$commentTime;
 
@@ -51,7 +51,7 @@ class miniComment{
 
 		$this->profilePicExists = $profilePicExists;
 
-		$this->commentOwnerFullName=$commentOwnerFullName;
+		$this->commentOwnerFullName=addslashes($commentOwnerFullName);
 
 		return $this;
 	}

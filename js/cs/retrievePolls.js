@@ -27,7 +27,8 @@ function createPollDeleteInput(el)
 // Create Poll Function
 function createPollSP()
 {
-	// alert("called");
+	$("#pollCreateModal").find("#loadingImage").removeClass('hidden');
+	$("#pollCreateModal").find("#createPollButton").hide();
 	var pollQuestion=$('#pollCreateModal').find('#createPollQuestion').val();
 	var pollType=$('#pollCreateModal').find('#createPollType').val();
 	var pollOptionType=$('#pollCreateModal').find('#createPollOptionType').val();
@@ -109,6 +110,8 @@ function createPollSP()
 					{
 						data=JSON.parse(data);
 						$('#pollCreateModal').modal('hide');
+						$("#pollCreateModal").find("#loadingImage").addClass('hidden');
+						$("#pollCreateModal").find("#createPollButton").show();
 						alert("Your poll is sent for approval. Please wait until it is approved.");
 						insertPoll(data,"first");
 						$('#pollCreateModal').find('input').each(function(){
@@ -120,10 +123,15 @@ function createPollSP()
 						});
 
 						$('#pollCreateModal').find('select').each(function(){
-							$(this).val("");
+							$(this).val("1");
 						});
 
 						$('#pollCreateModal').find('#createPollSharedWith').val("All");
+					}
+					else
+					{
+						$("#pollCreateModal").find("#loadingImage").addClass('hidden');
+						$("#pollCreateModal").find("#createPollButton").show();
 					}
 
 					$('time.timeago').timeago();
@@ -150,7 +158,7 @@ $(function () {
     });
 });
 //--------------------------------------------------------------------------------------------//
-function displayChart(json,idC,id,hUh,PollQuestion)
+function displayChart(json,idC,id,hUh)
 {
 	// ////console.log("called "+json+" "+idC+" "+id);
 	////console.log(json);
@@ -270,7 +278,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p style="font-size:16px" class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion.replace(/'/g, "&#39;");+'</span></p>';
 
 						poll+='</div>';
 
@@ -350,7 +358,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p style="font-size:16px" class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion.replace(/'/g, "&#39;");+'</span></p>';
 
 							/*poll+='<div class="row">';
 
@@ -408,7 +416,7 @@ function insertPoll(data,position)
 
 									for(var i=0;i<data.pollOptions.length;i+=3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -417,7 +425,7 @@ function insertPoll(data,position)
 
 									for(var i=1;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -426,7 +434,7 @@ function insertPoll(data,position)
 
 									for(var i=2;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -500,7 +508,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p style="font-size:16px" class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -584,7 +592,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p style="font-size:16px"class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 							/*poll+='<div class="row">';
 
@@ -650,7 +658,7 @@ function insertPoll(data,position)
 
 									for(var i=0;i<data.pollOptions.length;i+=3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -659,7 +667,7 @@ function insertPoll(data,position)
 
 									for(var i=1;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -668,7 +676,7 @@ function insertPoll(data,position)
 
 									for(var i=2;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -743,7 +751,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -813,11 +821,11 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						/*poll+='<div class="col-md-7" id="pollQuestion">';
+						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
-						poll+='</div>';*/
+						poll+='</div>';
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
@@ -867,7 +875,7 @@ function insertPoll(data,position)
 
 									for(var i=0;i<data.pollOptions.length;i+=3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -876,7 +884,7 @@ function insertPoll(data,position)
 
 									for(var i=1;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -885,7 +893,7 @@ function insertPoll(data,position)
 
 									for(var i=2;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="radio" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -961,7 +969,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -1041,7 +1049,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 							/*poll+='<div class="row">';
 
@@ -1099,7 +1107,7 @@ function insertPoll(data,position)
 
 									for(var i=0;i<data.pollOptions.length;i+=3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1108,7 +1116,7 @@ function insertPoll(data,position)
 
 									for(var i=1;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1117,7 +1125,7 @@ function insertPoll(data,position)
 
 									for(var i=2;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1190,7 +1198,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-9 text-left">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -1274,7 +1282,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
@@ -1332,7 +1340,7 @@ function insertPoll(data,position)
 
 									for(var i=0;i<data.pollOptions.length;i+=3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1341,7 +1349,7 @@ function insertPoll(data,position)
 
 									for(var i=1;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1350,7 +1358,7 @@ function insertPoll(data,position)
 
 									for(var i=2;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1424,7 +1432,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 							/*poll+='<div class="row">';
 
@@ -1496,7 +1504,7 @@ function insertPoll(data,position)
 
 						poll+='<div class="col-md-7" id="pollQuestion">';
 
-							poll+='<p style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
+							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 							/*poll+='<div class="row">';
 
@@ -1554,7 +1562,7 @@ function insertPoll(data,position)
 
 									for(var i=0;i<data.pollOptions.length;i+=3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1563,7 +1571,7 @@ function insertPoll(data,position)
 
 									for(var i=1;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1572,7 +1580,7 @@ function insertPoll(data,position)
 
 									for(var i=2;i<optionLength;i=i+3)
 									{
-										poll+='<label style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
+										poll+='<label class="break-word" style="margin-bottom:5px;"><input type="checkbox" id="pollOption'+i+'" name="'+data.pollIdHash+'" value="'+i+'">&nbsp;<span>'+data.pollOptions[i]+'</span></label><br/>';
 									}
 
 								poll+='</div>';
@@ -1619,6 +1627,10 @@ function insertPoll(data,position)
 
 function fetchLatestPolls(call,value)
 {
+	if(value=="empty")
+	{
+		$(".poll").remove();
+	}
 	$('#loadMorePollsButton').html("Loading").attr("onclick","");
 	$('#inViewElement').html('1004');
 	var existingPolls=new Array();
@@ -1650,7 +1662,7 @@ function fetchLatestPolls(call,value)
 		data=data.trim();
 		if(data==404)
 		{
-			$('#pollArea').find('#pollEmptyMessage').find('p').html("No more polls to display");
+			$('#messageEmpty').html("No more polls to display");
 			$('#loadMorePollsButton').hide();
 		}
 
@@ -1682,7 +1694,7 @@ function fetchLatestPolls(call,value)
 	});
 }
 
-function submitVote(pollId,type,result, pollType,question)
+function submitVote(pollId,type,result,pollType)
 {
 	var option=$('#'+pollId).find('input');
 	var good=0; //turns 1 if option is checked
@@ -1749,19 +1761,30 @@ function submitVote(pollId,type,result, pollType,question)
 			})
 			.success(function(data){
 				////console.log(data);
-				datas=JSON.parse(data);
-				////console.log(datas);
+				
+				console.log(data);
 				if(checkData(data)==1)
 				{
-					if(pollType!=3)
+					if(data==3)
 					{
-						displayChart(datas,pollId+'b',pollId,1,question);
+						$('#'+pollId).find('.pollIdContent').html("<p class='text-center'>Thanks for voting. Results soon. </p>");
+					}
+					else
+					{
+						datas=JSON.parse(data);
+						alert(datas.pollType);
+						displayChart(datas,pollId+'b',pollId,1);
+					}
+					
+					/*if(datas.pollType!=3)
+					{
+						
 					}
 
 					else
 					{
-						$('#'+pollId).html("<h3 class='text-center'>Thanks for voting. Results soon. </h3>")
-					}
+						
+					}*/
 					
 				}
 			});
@@ -1826,16 +1849,25 @@ function submitVote(pollId,type,result, pollType,question)
 				////console.log(data);
 				if(checkData(data)==1)
 				{
-					datas=JSON.parse(data);
-					if(pollType!=3)
+					if(data!=3)
 					{
-						displayChart(datas,pollId+'b',pollId,1,question);
+						$('#'+pollId).find('.pollIdContent').html("<p class='text-center'>Thanks for voting. Results soon. </p>");
+					}
+					else
+					{
+						datas=JSON.parse(data);
+						displayChart(datas,pollId+'b',pollId,1);
+					}
+					
+					/*if(pollType!=3)
+					{
+						
 					}
 
 					else
 					{
-						$('#'+pollId).html("<h3 class='text-center'>Thanks for voting. Results soon. </h3>")
-					}
+						
+					}*/
 				}
 			});
 		}
@@ -1871,6 +1903,8 @@ function modifyPoll(data)
 function editedPollSend()
 {
 	var link=$("#pollEditModal");
+	link.find("#loadingImage").removeClass('hidden');
+	link.find("#editPollButton").hide();
 	var pollId=link.find("#editPollModalPollId").html();
 	var pollQuestion=link.find("#editPollQuestion").val().trim();
 	var pollOptionType=link.find("#editPollOptionType").val();
@@ -1939,7 +1973,14 @@ function editedPollSend()
 						data=JSON.parse(data);
 						modifyPoll(data);
 						$("#pollEditModal").modal('hide');
+						link.find("#loadingImage").addClass('hidden');
+						link.find("#editPollButton").show();
 						$('.timeago').timeago();
+					}
+					else
+					{
+						link.find("#loadingImage").addClass('hidden');
+						link.find("#editPollButton").show();
 					}
 				});
 			}

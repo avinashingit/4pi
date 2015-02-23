@@ -200,7 +200,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				}
 			}
 
-			$lifetime=$lifetime*86400+time();
+			$lifetime=($lifetime*86400)+time();
 			
 			$mailToIndex=$commentIndex=$likeIndex=$lastUpdated=$timestamp="".time();//7+4=11
 			

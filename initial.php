@@ -1,4 +1,8 @@
-<?php include_once("header.php");include_once("QOB/qob.php");?>
+<?php 
+include_once("header.php");
+include_once("QOB/qob.php");
+include_once("handlers/fetch.php")
+?>
 
 <?php
 	error_reporting(E_WARNING ^ E_ALL ^ E_DEPRECATED);
@@ -10,11 +14,11 @@
 	else
 	{
 		$userIdHash=$_GET['ref'];
-		$sql="SELECT * FROM users WHERE userIdHash=".$_GET['ref']."" ;
+		/*$sql="SELECT * FROM users WHERE userIdHash=".$_GET['ref']."" ;
 		$result=mysql_query($sql);
 		$username="";
-		$userId="";
-		while($row=mysql_fetch_array($result))
+		$userId="";*/
+		if(($row=getUserFromHash($userIdHash))!=false)
 		{
 			if($row['isActive']==1)
 			{
@@ -37,25 +41,26 @@
 <script>
 var userIdHash="<?php echo $_GET['ref'];?>";
 var userName='<?php
-	$con=mysql_connect("localhost","root","isquarer");
-	mysql_select_db("iiitdmstudentsportal");
+	/*$con=mysql_connect("localhost","root","isquarer");
+	mysql_select_db("iiitdmstudentsportal"); echo "Im still being executed";
 	$sql="SELECT name FROM users WHERE userIdHash='".$_GET['ref']."'";
 	$res=mysql_query($sql);
-	while($row=mysql_fetch_array($res))
-	{
-		echo $row[0];
-	}
+
+	if(($row=getUserFromHash($_GET["ref"])!=false)
+	{*/
+		echo $row["name"];
+	//}
 	?>';
 
 var userRollNumber='<?php
-$con=mysql_connect("localhost","root","isquarer");
+/*$con=mysql_connect("localhost","root","isquarer");
 mysql_select_db("iiitdmstudentsportal");
 $sql="SELECT userId FROM users WHERE userIdHash='".$_GET['ref']."'";
 $res=mysql_query($sql);
 while($row=mysql_fetch_array($res))
-{
-	echo $row[0];
-}
+{*/
+	echo $row["userId"];
+//}
 ?>';
 $(document).ready(function(){
 	$('.second').hide();

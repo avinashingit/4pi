@@ -53,7 +53,7 @@ function closeModal(id)
 function updateNumber(element,position)
 {
 	var numberOfElements=$(element).length;
-	position.html(numberOfElements);
+	position.html('('+numberOfElements+')');
 }
 
 function callWhen404(element,position)
@@ -316,7 +316,7 @@ function addSkillDeleteInput(el)
 
 function editSkillDeleteInput(el)
 {
-	$(el).parent().parent().parent().remove();
+	$(el).parent().parent().remove();
 }
 
 function addToolAddInput()
@@ -429,24 +429,24 @@ function insertTopPart(data,locateProPic)
 
 	if(data.profilePicExists==1)
 	{
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 	}
 
 	else if(data.profilePicExists==-1)
 	{
 		if(data.gender=="M")
 		{
-			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan1.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan1.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 		}
 
 		else if(data.gender=="F")
 		{
-			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultWoman1.jpg?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultWoman1.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 		}
 
 		else
 		{
-			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan.png?v='+num+'"  alt="'+data.name+'" class="img-responsive"/></a><br/>';
+			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan.png?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 		}
 	}
 
@@ -499,6 +499,14 @@ function insertTopPart(data,locateProPic)
 					topPart+='<div class="text-left" id="personResumeLink">';
 
 						topPart+='<a href="/4pi/files/resumes/'+userId+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+
+					topPart+='</div><!-- end person resume link id -->';
+				}
+				else
+				{
+					topPart+='<div class="text-left" id="personResumeLink">';
+
+						topPart+='<p>Resume is not available.';
 
 					topPart+='</div><!-- end person resume link id -->';
 				}
@@ -644,6 +652,8 @@ function insertBottomPart(data)
 
 					bottomPart+='</div>';
 				}
+
+				// alert(data.phone.length);
 
 				if(data.phone.length!=0)
 				{
@@ -926,6 +936,7 @@ function fetchSkills()
 
 			else if(data==404)
 			{
+				$(document).find(".editSkillsButton").parent().hide();
 				callWhen404('Skills',$("#skills").find('#skillData'));
 			}
 		}
@@ -994,6 +1005,10 @@ function addSkillSendData()
 				if(data.message.length!=0)
 				{
 					alert(data.message);
+				}
+				if(data.skills.length!=0)
+				{
+					$(document).find(".editSkillsButton").parent().show();
 				}
 				$('#addSkillModal').modal('hide');
 			}

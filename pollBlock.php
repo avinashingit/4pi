@@ -6,9 +6,9 @@
 	{
 		border:1px solid #CCCCCC;
 		margin-bottom:10px;
-		padding:5px;
 		padding-bottom:10px;
 		background-color:#fff;
+		padding-top:10px;
 	}
 
 	.poll:hover
@@ -47,7 +47,7 @@
 
 			  	<div class="btn-group">
 				
-				    <button type="button" id="latestPollsButton" class="btn btn-danger"><a style="color:white;" onclick="fetchLatestPolls(1);" ><i class="fa fa-calendar"></i>&nbsp;Latest Polls</a></button>
+				    <button type="button" id="latestPollsButton" onclick="fetchLatestPolls(1,'empty');" class="btn btn-danger"><a style="color:white;" ><i class="fa fa-calendar"></i>&nbsp;Latest Polls</a></button>
 			  	
 			  	</div>
 
@@ -206,7 +206,23 @@
 
 				<div class="modal-footer">
 
-					<button onclick="createPollSP();" class="btn btn-primary">Create Poll</button>
+					<div class="row">
+
+						<div class="col-md-1 col-md-offset-5">
+
+							<img src="/4pi/img/728.gif" id="loadingImage" class="hidden">
+
+						</div>
+
+						<div class="col-md-2 col-md-offset-4">
+
+							<button onclick="createPollSP();" id="createPollButton" class="btn btn-primary">Create Poll</button>
+
+						</div>
+	
+					</div>
+
+					
 
 				</div>
 				
@@ -224,7 +240,7 @@
 	</div>
 	<div id="pollEmptyMessage" class="text-center">
 
-			<p class="text-center"></p>
+			<p class="text-center" id="messageEmpty"></p>
 
 	</div>
 
@@ -232,7 +248,7 @@
 
 		<div class="text-center">
 
-			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMorePollsButton" onclick="fetchLatestPolls(1,'noempty');">Load more</button>;
+			<button style="display:block;width:100%;"  class="btn btn-lg btn-success" id="loadMorePollsButton" onclick="fetchLatestPolls(1,'noempty');">Load more</button>
 
 		</div>
 
@@ -241,8 +257,7 @@
 </div><!-- end polls -->
 
 
-<script src="/4pi/js/cs/retrievePolls.js?v=randomNumber">
-</script>
+<script src="/4pi/js/cs/retrievePolls.js?v=randomNumber"></script>
 
 <script>
 $(document).ready(function(){
@@ -385,11 +400,29 @@ $(document).ready(function(){
 
 					<br/>
 
-					<button onclick="editedPollSend();" class="btn btn-primary">Edit Poll</button>
+					</div>
 
-					<br/>
+					<div class="modal-footer">
 
-				</div>
+						<div class="row">
+
+							<div class="col-md-1 col-md-offset-5">
+
+								<img src="/4pi/img/728.gif" id="loadingImage" class="hidden">
+
+							</div>
+
+							<div class="col-md-2 col-md-offset-4">
+
+								<button onclick="editedPollSend();" id="editPollButton"  class="btn btn-primary">Edit Poll</button>
+
+							</div>
+		
+						</div>
+
+					
+
+					</div>
 				
 			</div>
 

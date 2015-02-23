@@ -1075,8 +1075,12 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$commentIndexUpdated = ($postArray['commentIndex'] + date_timestamp_get($date))/2;
 						
 		$popularityIndexUpdated = $postArray['likeIndex']+ 1.4 * $commentIndexUpdated;
+
+		$commentIndexUpdated="".$commentIndexUpdated;
+
+		$popularityIndexUpdated = "".$popularityIndexUpdated;
 						
-		$values = array(0 => array($commentIndexUpdated => 'i'), 1 => array($popularityIndexUpdated => 'i'), 2 => array($commentCount => 'i'), 3 => array($followers => 's'),4 => array($postIdHash => 's'));
+		$values = array(0 => array($commentIndexUpdated => 's'), 1 => array($popularityIndexUpdated => 's'), 2 => array($commentCount => 'i'), 3 => array($followers => 's'),4 => array($postIdHash => 's'));
 						
 		$result = $conn->update("UPDATE post SET commentIndex = ?, popularityIndex = ?,commentCount = ?,followers = ? WHERE postIdHash = ? ",$values);
 	
@@ -1606,6 +1610,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	function isCOCASorCULSEC($userId)
 	{
 		if($userId==COCAS || $userId ==CULSEC)
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+
+	function isCULSEC($userId)
+	{
+		if($userId==CULSEC)
 		{
 			return 1;
 		}
@@ -2199,7 +2216,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				{
 					$objectIdHash=hash("sha224",$objectId.POEVHASH);
 				}
-				else if($objectType==500)
+				else if($objectType==700)
 				{
 					$objectIdHash=hash("sha224",$objectId.POLLHASH);
 				}

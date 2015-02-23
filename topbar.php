@@ -58,7 +58,7 @@
 			_readNotifications:readNotifications
 		})
 		.error(function(){
-			alert("Server overload. Please try again. :(")
+			alert("Unable to contact server to send read notifications.")
 		})
 		.success(function(data){
 			//console.log(data);
@@ -69,7 +69,15 @@
 	function showNotifications()
 	{
 		$('#notificationNumber').html("0");
-		$('#notifications').toggleClass('hidden').fadeIn(500);
+		if($('#notifications').hasClass('hidden'))
+		{
+			$('#notifications').removeClass('hidden');
+		}
+		else
+		{
+			$('#notifications').addClass('hidden');
+		}
+		// $('#notifications').toggleClass('hidden').fadeIn(500);
 		$('#notifications').css({'z-index':'1052'});
 		sendReadNotifications();
 	}
@@ -389,7 +397,7 @@
 
 			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
 
-				<a style="color:white !important;" href="/4pi"><i class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
+				<a style="color:white !important;" href="/4pi"><i id="notificationButton" class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
 
 				<div id="notifications" class="hidden">
 
@@ -427,7 +435,8 @@
 
 		  <div class="form-group">
 
-		    <input id="searchBefore" type="text" onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
+		    <input id="searchBefore" type="text" 
+		    onkeyup="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" onkeydown="if($(this).val().length!=0){fetchGlobalSearchResults();$('#searchResults1').removeClass('hidden');}" class="form-control input-md" style="border-radius:0px;width:100%;margin-left:-15px;" placeholder="Search">
 
 		  </div>
 
@@ -569,7 +578,7 @@
 	    {
 	        var subject = $("#notifications"); 
 
-	        if(e.target.id != subject.attr('id') && !subject.has(e.target).length)
+	        if((e.target.id != subject.attr('id') && !subject.has(e.target).length) || (e.target.id="notificationButton"))
 	        {
 	            if(subject.hasClass('hidden'))
             	{
@@ -582,7 +591,7 @@
 	        }
 	    });
 
-	    $(document).mouseup(function(e)
+	    /*$(document).mouseup(function(e)
 	    {
 	        var subject = $("#searchResults1"); 
 
@@ -597,7 +606,7 @@
             		subject.addClass('hidden').fadeOut(500);
             	}
 	        }
-	    });
+	    });*/
 	});
 
 	$('#icons div i').css({'cursor':'pointer'});
@@ -631,20 +640,30 @@
 	});
 
 	//$('#topBarNew').hide();
+	//
+	$('#searchBefore').focusin(function(){
+		console.log('h');
+		if($(this).val().length!=0)
+			{
+				$('#searchResults1').removeClass('hidden');
+			}
+		}); 
 
 	$('#searchBefore').focusin(function(){
 
-	$(this).css({'background-color':'#fff !important','color':'#000'});
+		$(this).css({'background-color':'#fff !important','color':'#000'});
 
-	$(this).animate({'width':'178%'},500);
+		$(this).animate({'width':'178%'},500);
 
 	});
 
 	$('#searchBefore').focusout(function(){
 
-	$(this).css({'background-color':'#484848 !important','color':'white','border':'1px solid #484848'});
+		$(this).css({'background-color':'#484848 !important','color':'white','border':'1px solid #484848'});
 
-	$(this).animate({'width':'100%'},500);
+		$(this).animate({'width':'100%'},500);
+
+		$("#searchResults1").addClass('hidden');
 
 	});
 

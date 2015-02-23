@@ -7,7 +7,7 @@ class miniLittlePost{
 	public function __construct($postId,$content)
 	{
 		$this->postIdHash=$postId;
-		$this->postDetails=$content;
+		$this->postDetails=addslashes($content);
 		return $this;
 	}
 }

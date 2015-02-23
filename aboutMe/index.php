@@ -1,4 +1,5 @@
 <?php 
+session_start();
 	include('../header_adv.php');
 ?>
 <script>
@@ -25,12 +26,12 @@ if(userId=="")
 		color:#000;
 	}
 
-	#personPicture img
+	/* #personPicture img
 	{
 		border-radius:78px;
 		border:1px solid #cecece;
 		padding:5px;
-	}
+	} */
 
 	.profileName
 	{
@@ -414,13 +415,13 @@ if(userId=="")
 					
 					<br/> -->
 
-					<label for="personDescription">About you  ( <span id="descriptionLetterCount"></span> characters )</label> 
+					<label for="personDescription">About you  <small>( <span id="descriptionLetterCount"></span> characters )</small></label> 
 
-					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html($(this).val().length);" class="autosize form-control"></textarea>
+					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html($(this).val().length);" onkeydown="$('#descriptionLetterCount').html($(this).val().length);" class="autosize form-control"></textarea>
 
 					<br/>
 
-					<label for="personImage">Your image (.jpg files only)</label>
+					<label for="personImage">Your image (.jpg files only) <small>Maximum file size is 8MB</small></label>
 
 					<input type="file" accept="images/jpeg" id="editPersonInfoModalPersonImage">
 
@@ -582,7 +583,7 @@ if(userId=="")
 
 <script>
 
-	$(function () {
+	/*$(function () {
     	$('#skills').find('#skillData').highcharts({
         chart: {
             type: 'column'
@@ -636,7 +637,7 @@ if(userId=="")
             }
         }]
 	    });
-	});
+	});*/
 	
 	// $('textarea').autosize({'append':'false'});
 
@@ -1327,7 +1328,7 @@ if(userId=="")
 <body style="padding-top:0px;">
 
 	<?php
-		echo $_SESSION['vj'];
+		// echo $_SESSION['vj'];
 		if(isset($_SESSION['vj']))
 		{
 
@@ -1394,7 +1395,7 @@ if(userId=="")
 
 						<div class="col-md-2 visibleForUser col-md-offset-8 text-right">
 
-							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="fa fa-pencil"></i></button>
+							<button class="btn btn-sm btn-success" onclick="addSkill();"><i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button class="btn btn-sm btn-primary" onclick="editSkills();"><i class="editSkillsButton fa fa-pencil"></i></button>
 
 						</div>
 
@@ -1455,7 +1456,7 @@ if(userId=="")
 
 						<div class="col-md-4 text-left">
 
-							<h3 style="color:#176F56;"><i class="fa fa-database"></i>&nbsp;Projects (<span id="projectsNumber"></span>)</h3>
+							<h3 style="color:#176F56;"><i class="fa fa-database"></i>&nbsp;Projects <span id="projectsNumber"></span></h3>
 
 						</div>
 
@@ -1486,7 +1487,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3  style="color:rgba(154, 105, 170, 1);" class="text-left"><i class="fa fa-fighter-jet"></i>&nbsp;Experience (<span id="experienceNumber"></span>)</h3>
+							<h3  style="color:rgba(154, 105, 170, 1);" class="text-left"><i class="fa fa-fighter-jet"></i>&nbsp;Experience <span id="experienceNumber"></span></h3>
 
 						</div>
 
@@ -1520,7 +1521,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:rgba(222, 123, 26, 1);" class="text-left"><i class="fa fa-mortar-board"></i>&nbsp;Academics (<span id="academicsNumber"></span>)</h3>
+							<h3 style="color:rgba(222, 123, 26, 1);" class="text-left"><i class="fa fa-mortar-board"></i>&nbsp;Academics <span id="academicsNumber"></span></h3>
 
 						</div>
 
@@ -1555,7 +1556,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3  style="color:#007887;" class="text-left"><i class="fa fa-gears"></i>&nbsp;Workshops (<span id="workshopsNumber"></span>)</h3>
+							<h3  style="color:#007887;" class="text-left"><i class="fa fa-gears"></i>&nbsp;Workshops <span id="workshopsNumber"></span></h3>
 
 						</div>
 
@@ -1589,7 +1590,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:rgba(192, 54, 117, 1);" class="text-left"><i class="fa fa-certificate"></i>&nbsp;Certified courses (<span id="certificationsNumber"></span>)</h3>
+							<h3 style="color:rgba(192, 54, 117, 1);" class="text-left"><i class="fa fa-certificate"></i>&nbsp;Certified courses <span id="certificationsNumber"></span></h3>
 
 						</div>
 
@@ -1623,7 +1624,7 @@ if(userId=="")
 
 						<div class="col-md-5">
 
-							<h3 style="color:#008322;" class="text-left"><i class="fa fa-trophy"></i>&nbsp;Achievements (<span id="achievementsNumber"></span>)</h3>
+							<h3 style="color:#008322;" class="text-left"><i class="fa fa-trophy"></i>&nbsp;Achievements <span id="achievementsNumber"></span></h3>
 
 						</div>
 

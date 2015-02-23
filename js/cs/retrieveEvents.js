@@ -109,7 +109,7 @@ function eventInsert(position,data,past)
 
 	event+='<div class="col-md-12">';
 
-	event+='<p id="eventContent" style="white-space:pre-wrap">'+data.eventContent+'</p>';
+	event+='<p id="eventContent " class="break-word" style="white-space:pre-wrap">'+data.eventContent+'</p>';
 
 	event+='</div>';
 
@@ -124,25 +124,25 @@ function eventInsert(position,data,past)
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="cursor:default;" title="Event Venue"><p class="venueDateTimeEvent text-center" ><i class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default"  style="cursor:default !important"  title="Event Venue"><p  style="cursor:default !important" class="venueDateTimeEvent text-center" ><i style="cursor:default !important"  class="fa fa-map-marker" title="Venue"></i>&nbsp;&nbsp;<span id="eventVenue">'+data.eventVenue+'</span></p></button>';
 				  
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="cursor:default" title="Event Date"><p class="venueDateTimeEvent text-center"><i class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default !important"  title="Event Date"><p style="cursor:default !important"  class="venueDateTimeEvent text-center"><i  style="cursor:default !important"  class="fa fa-calendar" title="Date"></i>&nbsp;&nbsp;<span id="eventDate">'+data.eventDate+'</span></p></button>';
 	
 	event+='</div>';
 				  
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="cursor:default" title="Event Time" ><p class="venueDateTimeEvent text-center"><i class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default !important"  title="Event Time" ><p  style="cursor:default !important"  class="venueDateTimeEvent text-center"><i  style="cursor:default !important"  class="fa fa-clock-o" title="Time"></i>&nbsp;<span id="eventTime">'+data.eventTime+'</span></p></button>';
 				  
 	event+='</div>';
 
 	event+='<div class="btn-group">';
 				  
-	event+='<button type="button" class="btn btn-default" style="cursor:default" title="Event Duration"><p class="venueDateTimeEvent text-center"><i class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span>&nbsp;hrs</p></button>';
+	event+='<button type="button" class="btn btn-default" style="cursor:default !important" title="Event Duration"><p  style="cursor:default !important"  class="venueDateTimeEvent text-center"><i style="cursor:default !important"  class="fa fa-arrows-h" title="Duration"></i>&nbsp;<span id="eventDurationHours">'+data.eventDurationHrs+'</span>:<span id="eventDurationMinutes">'+data.eventDurationMin+'</span>&nbsp;hrs</p></button>';
 				  
 	event+='</div>';
 				
@@ -175,12 +175,12 @@ function eventInsert(position,data,past)
 		if(data.isAttender!=1)
 		{
 			event+='<button class="btn btn-sm btn-success" id="attend" onclick="attendEvent(\''+data.eventIdHash+'\');"><i class="fa fa-check"></i>&nbsp; Attend</button>';
-			event+='<button class="btn btn-sm btn-success visibleHidden" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';		
+			event+='<button class="btn btn-sm btn-danger visibleHidden" style="cursor:not-allowed !important"  id="attending"> Attending</button>';		
 		}
 
 		else
 		{
-			event+='<button class="btn btn-sm btn-success" id="attending"><i class="fa fa-check"></i>&nbsp; Attending</button>';
+			event+='<button class="btn btn-sm btn-danger"  style="cursor:not-allowed !important"  id="attending">Attending</button>';
 		}
 
 		event+='</div>';
@@ -306,6 +306,9 @@ function modifyEvent(data,id)
 
 function editedEventSend()
 {
+	$("#editEventModal").find("#loadingImage").removeClass('hidden');
+
+	$("#editEventModal").find("#editEventButton").hide();
 	
 	var eventId=$('#editEventModal').find('#editEventId').html();
 	
@@ -408,8 +411,17 @@ function editedEventSend()
 			if(checkData(data)==1)
 			{
 				$('#editEventModal').modal('hide');
+				$("#editEventModal").find("#loadingImage").addClass('hidden');
+
+				$("#editEventModal").find("#editEventButton").show();
 				data=JSON.parse(data);
 				modifyEvent(data,eventId);
+			}
+			else
+			{
+				$("#editEventModal").find("#loadingImage").addClass('hidden');
+
+				$("#editEventModal").find("#editEventButton").show();
 			}
 
 		});
@@ -418,6 +430,10 @@ function editedEventSend()
 
 function createEventSP()
 {
+	$("#eventCreateModal").find("#loadingImage").removeClass('hidden');
+
+	$("#eventCreateModal").find("#createEventButton").hide();
+
 	$('.row .eventMenu').find('#createEventButton').find('i').addClass('fa-spin');
 	
 	var eventClubName=$('#createEventOrganizerName').val().trim();
@@ -520,6 +536,8 @@ function createEventSP()
 
 			if(checkData(data)==1)
 			{
+
+
 				x=JSON.parse(data);
 
 				eventInsert("first",x,2);
@@ -529,6 +547,10 @@ function createEventSP()
 				$('.row .eventMenu').find('#createEventButton').find('i').removeClass('fa-spin');
 
 				$('#eventCreateModal').modal('hide');
+
+				$("#eventCreateModal").find("#loadingImage").addClass('hidden');
+
+				$("#eventCreateModal").find("#createEventButton").show();
 
 				$('#createEventOrganizerName').val("");
 
@@ -554,16 +576,18 @@ function createEventSP()
 
 				$('#createEventCategory').val('technical');
 			}
-			
+			else
+			{
+				$("#eventCreateModal").find("#loadingImage").addClass('hidden');
+
+				$("#eventCreateModal").find("#createEventButton").show();
+			}
 
 		});
 
 	}
 }
 
-$('.popOver').popover();
-
-$('time.timeago').timeago();
 
 function attendEvent(id)
 {
@@ -757,8 +781,8 @@ function upcomingEventsFetch(value,call)
 				$(this).remove();
 			});
 		}
-		//console.log(data);
-		// //console.log(checkData(data));
+		console.log(data);
+		// console.log(checkData(data));
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -883,3 +907,7 @@ $(document).ready(function(){
 
 	$('.popOver').popover();
 });
+
+$('.popOver').popover();
+
+$('time.timeago').timeago();

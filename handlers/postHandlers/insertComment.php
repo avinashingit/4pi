@@ -112,7 +112,7 @@ if($content!=""&&$postIdHash!="")
 						$values[0]=array($commentIdHash => 's');
 						$values[1]=array($content => 's');
 						$values[2]=array($userId => 's');
-						$values[3]=array($timestamp => 'i');
+						$values[3]=array($timestamp => 's');
 						$values[4]=array($personTags => 's');
 						$values[5]=array($commentId => 'i');
 						$conn->startTransaction();
