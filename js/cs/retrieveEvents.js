@@ -25,9 +25,7 @@ function eventInsert(position,data,past)
 
 	if(data.isCOCAS==1 && data.isApproved!=1)
 	{
-		event+='<div class="row approve">';
-
-		event+='<br/>';
+		event+='<div class="row approve" style="padding-top:0px;">';
 
 		event+='<div class="col-md-6 text-center">';
 
@@ -46,7 +44,7 @@ function eventInsert(position,data,past)
 
 	else if(data.isCOCAS!=1 && data.isApproved!=1)
 	{
-		event+="<br/><div class='row'><div class='col-md-12 text-center'><p class='text-center' style='color:red'>Your events is sent for approval</p></div></div>";
+		event+="<br/><p class='text-center' style='color:red'>Your events is sent for approval</p>";
 	}
 
 	event+='<div id="eventSharedWith" class="hidden" >'+data.sharedWith+'</div>';
@@ -156,21 +154,21 @@ function eventInsert(position,data,past)
 
 	event+='<div class="row" id="eventIcons">';
 
-	event+='<div class="col-md-3 col-md-offset-1">';
+	event+='<div class="col-md-2 col-md-offset-1">';
 
-	event+='<span id="eventAttendeeNumber"><i class="fa fa-check" title="No of Attenders"></i>&nbsp;<span id="eventAttendersValue">'+data.attendCount+'</span></span>';
+	event+='<span id="eventAttendeeNumber" ><i class="fa fa-check" style="padding-top:7px;" title="No of Attenders"></i>&nbsp;<span id="eventAttendersValue">'+data.attendCount+'</span></span>';
 
 	event+='</div>';
 
-	event+='<div class="col-md-3 col-md-offset-1">';
+	event+='<div class="col-md-4 col-md-offset-1">';
 
-	/*event+='<p><i class="fa fa-eye" title="Seen By"></i>&nbsp;<span id="eventSeenByNumber">'+data.seenCount+'</span></p>';*/
+	event+='<p style="padding-top:7px;"><b>Event status:</b>'+data.eventStatus+'</p>';
 
 	event+='</div>';
 
 	if(past!=1)
 	{
-		event+='<div class="col-md-3 col-md-offset-1 text-left">';
+		event+='<div class="col-md-2 col-md-offset-1 text-left">';
 
 		if(data.isAttender!=1)
 		{
@@ -683,6 +681,7 @@ function deleteEventSend()
 
 function latestEventsFetch(value,call)
 {
+	$('#loadMoreEventsButton').html("Loading").attr("onclick","");
 	$('.row .eventMenu').find('#latestEventsButton').find('i').addClass('fa-spin');
 	if(call==-1)
 	{
@@ -747,7 +746,7 @@ function latestEventsFetch(value,call)
 
 function upcomingEventsFetch(value,call)
 {
-
+	$('#loadMoreEventsButton').html("Loading").attr("onclick","");
 	$('.row .eventMenu').find('#upcomingEventsButton').find('i').addClass('fa-spin');
 	if(call==-1)
 	{
@@ -810,7 +809,7 @@ function upcomingEventsFetch(value,call)
 
 function pastCompetitionsFetch(value,call)
 {
-	
+	$('#loadMoreEventsButton').html("Loading").attr("onclick","");
 	$('.row .eventMenu').find('#eventWinnersButton').find('i').addClass('fa-spin');
 	if(call==-1)
 	{

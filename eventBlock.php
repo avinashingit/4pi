@@ -157,9 +157,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  		<select type="select" class="form-control" id="createEventCategory" name="createEventCategory">
 
-						  			<option val="technical">Technical</option>
+						  			<option value="technical">Technical</option>
 
-						  			<option val="nonTechnical">Non technical</option>
+						  			<option value="nonTechnical">Non technical</option>
 
 					  			</select>
 
@@ -171,9 +171,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  		<select type="select" class="form-control" id="createEventType" name="createEventType">
 
-						  			<option val="competition">Competition</option>
+						  			<option value="competition">Competition</option>
 
-						  			<option val="others">Others</option>
+						  			<option value="others">Others</option>
 
 					  			</select>
 
@@ -195,7 +195,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						</div>
 
-						<div class="col-md-2 col-md-offset-4">
+						<div class="col-md-2 col-md-offset-3">
 
 							<button onclick="createEventSP();" id="createEventButton" class="btn btn-primary">Create Event</button>
 
@@ -333,9 +333,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  		<select type="select" class="form-control" id="editEventCategory" name="editEventType">
 
-						  			<option val="technical">Technical</option>
+						  			<option value="technical">Technical</option>
 
-						  			<option val="nonTechnical">Non-Technical</option>
+						  			<option value="nonTechnical">Non-Technical</option>
 
 					  			</select>
 
@@ -347,9 +347,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  		<select type="select" class="form-control" id="editEventType" name="editEventType">
 
-						  			<option val="competition">Competition</option>
+						  			<option value="competition">Competition</option>
 
-						  			<option val="others">Others</option>
+						  			<option value="others">Others</option>
 
 					  			</select>
 
@@ -389,7 +389,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						</div>
 
-						<div class="col-md-2 col-md-offset-4">
+						<div class="col-md-2 col-md-offset-3">
 
 							<button onclick="editedEventSend();" id="editEventButton" class="btn btn-primary">Edit Event</button>
 

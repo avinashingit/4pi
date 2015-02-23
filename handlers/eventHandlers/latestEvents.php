@@ -111,7 +111,7 @@ $conn=new QoB();
 			
 			else
 			{
-				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND eventDate>= ? AND displayStatus=1";
+				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ? AND displayStatus=1) OR event.userId=? ) AND eventDate>= ? ";
 				$values[0]=array($finalStudentRegex => 's');
 				$values[1]=array($userId => 's');
 				$values[2]=array($currentDate => 'i');
