@@ -162,7 +162,7 @@ function displayChart(json,idC,id,hUh)
 {
 	// ////console.log("called "+json+" "+idC+" "+id);
 	////console.log(json);
-	var pollQuestion =PollQuestion;
+	// var pollQuestion =PollQuestion;
 	// var pollQuestion="Avinash";
 	if(hUh==1)
 	{
