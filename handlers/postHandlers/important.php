@@ -80,7 +80,7 @@ else
 		$currentTimestamp=time();
 		$finalStudentRegex=getRollNoRegex($userId);
 		$hiddenToRegex=isThereInCSVRegex($userId);
-		$getLatestPostsSQL="SELECT post.*,users.alias, users.name,users.userIdHash,users.gender FROM post INNER JOIN users ON post.userId=users.userId WHERE ((sharedWith REGEXP ? AND hiddenTo NOT REGEXP ? AND post.lifetime > ? ) OR post.userId = ?) AND displayStatus = 1";
+		$getLatestPostsSQL="SELECT post.*,users.alias, users.name,users.userIdHash,users.gender FROM post INNER JOIN users ON post.userId=users.userId WHERE ((sharedWith REGEXP ? AND hiddenTo NOT REGEXP ? AND (post.lifetime > ? OR isPermanent = 1 )) OR post.userId = ?) AND displayStatus = 1";
 		
 		$values[0]=array($finalStudentRegex => 's');
 		$values[1]=array($hiddenToRegex => 's');
