@@ -54,44 +54,44 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$rawSharedWith=$_POST['_sharedWith'];
 	$organisedBy=$_POST['_eventOrgName'];
 	$eventCategory=$_POST['_eventCategory'];
-
+	//echo $eventCategory;
 	$rawSharedWith=trim($rawSharedWith);
 
 	$conn= new QoB();
 	if($rawTime==""||$rawDate==""||$type==""||$eventName==""||$eventContent==""||$eventVenue==""||$organisedBy==""||$rawSharedWith==""||$eventDurationHrs==""||$eventDurationMin=="")
 	{
 		//echo "something empty";
-		echo 16;
+		echo 161;
 		exit();
 	}
 	if(strlen($eventContent)>1000)
 	{
-		echo 16;
+		echo 162;
 		exit();
 	}
 	if(strlen($rawDate)!=10||strlen($rawTime)!=5)
 	{
 		//echo "Date Time Validate";
-		echo 16;
+		echo 163;
 		exit();
 	}
 	if(preg_match('/^[0-9]{1,}$/', $eventDurationHrs)==0||preg_match('/^[0-9]{1,}$/', $eventDurationMin)==0)
 	{
 		//echo "Hr-min Validate";
-		echo 16;
+		echo 164;
 		exit();		
 	}
 	if($eventDurationMin!=15&&$eventDurationMin!=30&&$eventDurationMin!=45&&$eventDurationMin!=0)
 	{
 		//echo "Min validate";
-		echo 16;
+		echo 165;
 		exit();
 	}
 	$eventDuration=$eventDurationHrs.":".$eventDurationMin;
 	if(validateDate($rawDate)==false||validateTime($rawTime)==false)
 	{
 		//echo "validate";
-		echo 16;
+		echo 166;
 		exit();
 	}
 
@@ -100,13 +100,13 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 	if(validateEventDateAndTime($eventDate,$eventTime)==false)
 	{
-		echo 16;
+		echo 167;
 		exit();
 	}
 
-	if($eventCategory!='NonTechnical'&&$eventCategory!='technical')
+	if($eventCategory!='nonTechnical'&&$eventCategory!='technical')
 	{
-		echo 16;
+		echo 168;
 		exit();
 	}
 	$userIdHash=$_SESSION['vj'];
@@ -214,7 +214,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,eventCategory,displayStatus,approvalStatus) 
 				VALUES(?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,1,1)";
 			}
-			else if($isCULSEC==1&&$eventCategory=="NonTechnical")
+			else if($isCULSEC==1&&$eventCategory=="nonTechnical")
 			{
 				$CreateEventSQL="INSERT INTO event (eventId,eventIdHash,timestamp ,eventName,content,eventVenue,
 				organisedBy,eventTime,eventDate,type,sharedWith,lastUpdated, userId,eventDurationHrs,eventDurationMin,eventCategory,displayStatus,approvalStatus) 

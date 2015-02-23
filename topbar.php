@@ -131,7 +131,7 @@
 	{
 		var presentNotifications=new Array();
 		var i=0;
-		$('#notifications').find('.notificaion').each(function(){
+		$('#notifications').find('.notification').each(function(){
 			presentNotifications[i]=$(this).attr("id");
 			i++;
 		});

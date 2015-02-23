@@ -79,7 +79,15 @@ else
 	else
 	{
 		$userId=$user['userId'];
-		if($isCOCASorCULSEC($userId)==false)
+		
+		if(($event=getEventFromHash($eventIdHash))==false)
+		{
+			notifyAdmin("Suspicious eventIdHash in approve eventl",$userId.",sh:".$eventIdHash);
+			echo 6;
+			exit();
+		}
+		if(!( ($isCOCAS($userId)==1&&$event['eventCategory']=="technical")||
+			  ($isCULSEC($userId)==1)&&$event['eventCategory']=='nonTechnical') )
 		{
 			if(blockUserByHash($userIdHash,"Unauthorized Attempt to approve event",$userId.",sh:".$eventIdHash)>0)
 			{
@@ -96,12 +104,6 @@ else
 				echo 13;
 				exit();
 			}
-		}
-		if(($event=getEventFromHash($eventIdHash))==false)
-		{
-			notifyAdmin("Suspicious eventIdHash in approve eventl",$userId.",sh:".$eventIdHash);
-			echo 6;
-			exit();
 		}
 		if($eventStatus==1)
 		{

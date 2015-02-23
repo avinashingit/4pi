@@ -80,7 +80,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				//echo "Hi".$hiddenTo;
 				$postId=$post['postId'];
 				$reason=$_POST['_reason'];
-				$ObjectType="Post";
+				$ObjectType="500";
 				// echo $userId;
 				// echo $post['sharedWith'];
 				if(isSharedTo($userId,$post['sharedWith'])==false)
