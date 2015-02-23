@@ -36,7 +36,8 @@ $userIdHash=$_SESSION['vj'];
 $refresh=$_POST['_refresh'];
 $ProcessedHashes=array();
 $ProcessedHashes=$_POST['_sgk'];
-if(count($inputHashes)!=0)
+//var_dump($ProcessedHashes);
+if(count($ProcessedHashes)!=0)
 {
 	$ProcessedHashesCount=count($ProcessedHashes);
 }
@@ -89,15 +90,15 @@ $conn=new QoB();
 			
 			//Code till final release with approvals
 			//$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
-			if($userId==COCAS || $userId == CULSEC)
+			if($userId== COCAS || $userId == CULSEC)
 			{
-				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ( eventDate>= ?)";
+				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ( eventDate>= ?) ";
 				//$values[0]=array($finalStudentRegex => 's');
 				//$values[0]=array($userId => 's');
 				$values[0]=array($currentDate => 'i');
 				for($i=0;$i<$ProcessedHashesCount;$i++)
 				{
-					$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash!=?";
+					$getUpcomingEventsSQL=$getUpcomingEventsSQL." AND event.eventIdHash != ?";
 					$values[$i+1]=array($ProcessedHashes[$i] => 's');
 				}
 				$SQLEndPart=" ORDER BY eventDate,eventTime";
@@ -106,7 +107,7 @@ $conn=new QoB();
 			}
 			else
 			{
-				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ?) OR event.userId=?) AND ( eventDate>= ?) AND displayStatus=1";
+				$getUpcomingEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ( (sharedWith REGEXP ? AND displayStatus = 1) OR event.userId=?) AND ( eventDate >= ? ) ";
 				$values[0]=array($finalStudentRegex => 's');
 				$values[1]=array($userId => 's');
 				$values[2]=array($currentDate => 'i');
@@ -167,7 +168,7 @@ $conn=new QoB();
 				
 					if($userId==COCAS)
 					{
-						if($event['eventCategory']=='technical')
+						if($event['eventCategory']=='technical' || $event['approvalStatus']==1)
 						{
 							$eventObj=getEventObject($event,$userId);
 							$eventObjArray[]=$eventObj;
@@ -176,7 +177,7 @@ $conn=new QoB();
 					}
 					else if($userId == CULSEC)
 					{
-						if($event['eventCategory']=='nonTechnical')
+						if($event['eventCategory']=='nonTechnical' || $event['approvalStatus']==1)
 						{
 							$eventObj=getEventObject($event,$userId);
 							$eventObjArray[]=$eventObj;

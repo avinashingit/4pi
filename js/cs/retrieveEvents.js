@@ -25,7 +25,7 @@ function eventInsert(position,data,past)
 
 	if(data.isCOCAS==1 && data.isApproved!=1)
 	{
-		event+='<div class="row approve" style="padding-top:0px;">';
+		event+='<div class="row approve" style="padding-top:10px;">';
 
 		event+='<div class="col-md-6 text-center">';
 
@@ -57,7 +57,7 @@ function eventInsert(position,data,past)
 
 	event+='<div class="row" id="eventNameTime">';
 
-	event+='<div class="col-md-6 text-left" id="eventNameAndClub">';
+	event+='<div class="col-md-8 text-left" id="eventNameAndClub">';
 
 	event+='<div style="font-size:18px;"><a href="#"><span id="eventOrganizer" class="text-bold">'+data.eventOrgName+'</span></a> - <span id="eventName" class="text-bold">'+data.eventName+'</span></div>';
 
@@ -67,7 +67,7 @@ function eventInsert(position,data,past)
 
 	if(data.eventOwner==1)
 	{
-		event+='<div class="col-md-5 col-md-offset-1 text-right"  id="editEvent">';
+		event+='<div class="col-md-3 col-md-offset-1 text-right"  id="editEvent">';
 
 		event+='<p class="text-right">';
 
@@ -84,7 +84,7 @@ function eventInsert(position,data,past)
 
 	else
 	{
-		event+='<div class="col-md-2 col-md-offset-4 text-right" id="eventPostedTime">';
+		event+='<div class="col-md-3 col-md-offset-1 text-right" id="eventPostedTime">';
 
 			event+='<small><time class="timeago" id="eventPostedTimeValue" datetime="'+data.eventTimestamp+'" title="'+time+'">'+data.eventTimestamp+'</time></small>';
 
@@ -103,11 +103,11 @@ function eventInsert(position,data,past)
 
 	event+='</div>';*/
 
-	event+='<div class="row">';
+	event+='<div class="row" style="padding-top:20px;">';
 
 	event+='<div class="col-md-12">';
 
-	event+='<p id="eventContent " class="break-word" style="white-space:pre-wrap">'+data.eventContent+'</p>';
+	event+='<p id="eventContent" class="break-word" style="white-space:pre-wrap">'+data.eventContent+'</p>';
 
 	event+='</div>';
 
@@ -221,6 +221,8 @@ function editEvent(id)
 	var eventName=$('#'+id).find('#eventName').html();
 	
 	var eventContent=$('#'+id).find('#eventContent').html();
+
+	// alert(eventContent);
 	
 	// var eventFiles=$('#'+id).find('#eventFiles').html();
 	
@@ -336,7 +338,7 @@ function editedEventSend()
 
 	var eventCategory=$('#editEventModal').fidn('#editEventCategory').val();
 
-	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>1000 || eventVenue.length==0 || eventDate.length==0 )
+	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>10000 || eventVenue.length==0 || eventDate.length==0 )
 	{
 		alert("Please fill in the required fields.")
 	}
@@ -474,11 +476,11 @@ function createEventSP()
 	{
 		alert("Please fill in the required fields.")
 	}
-	/*else if(eventContent.length>1000)
+	else if(eventContent.length>10000)
 	{
 		alert("Please limit the event content to 1000 characters.")
 	}
-	else if(eventDurationHours<0)
+	/*else if(eventDurationHours<0)
 	{
 		alert("Event duration hours cannot be less than 0");
 	}
@@ -715,7 +717,7 @@ function latestEventsFetch(value,call)
 				$(this).remove();
 			});
 		}
-		// console.log(data);
+		console.log(data);
 		data=data.trim();
 
 		if(checkData(data)==1)
@@ -758,7 +760,7 @@ function upcomingEventsFetch(value,call)
 		eventsCurrent[i]=$(this).attr("id");
 		i++;
 	});
-
+	console.log(eventsCurrent);
 	$.post('/4pi/handlers/eventHandlers/upcomingEvents.php',{
 		_refresh:call,
 		_sgk:eventsCurrent

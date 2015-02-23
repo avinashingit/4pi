@@ -74,9 +74,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		<div class="form-group has-error">
 
-					   			 <label for="eventContent">Event Details <small>(<span id="createEventModalContentLength">1000</span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
+					   			 <label for="eventContent">Event Details <small>(<span id="createEventModalContentLength">10000</span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 10000 characters."></i>]
 
-					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createEventModalContentLength').html(1000-$(this).val().length);" onkeydown="$('#createEventModalContentLength').html(1000-$(this).val().length);" class="form-control" id="createEventContent"></textarea>
+					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#createEventModalContentLength').html(10000-$(this).val().length);" onkeydown="$('#createEventModalContentLength').html(10000-$(this).val().length);" class="form-control" id="createEventContent"></textarea>
 
 					  		</div>
 
@@ -250,9 +250,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  		<div class="form-group has-error">
 
-					   			 <label for="eventContent">Event details <small>(<span id="editEventModalContentLength"></span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 1000 characters."></i>]
+					   			 <label for="eventContent">Event details <small>(<span id="editEventModalContentLength"></span> characters left)</small>&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Required. Event Details maximum length 10000 characters."></i>]
 
-					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editEventModalContentLength').html(1000-$(this).val().length);" onkeydown="$('#editEventModalContentLength').html(1000-$(this).val().length);" class="form-control" id="editEventContent" plcaeholder="Required"></textarea>
+					   			 <textarea type="text" name="eventContent" style="background-color:white;border-radius:0px;resize:none;" onkeyup="$('#editEventModalContentLength').html(10000-$(this).val().length);" onkeydown="$('#editEventModalContentLength').html(10000-$(this).val().length);" class="form-control" id="editEventContent" placeholder="Required"></textarea>
 
 					  		</div>
 

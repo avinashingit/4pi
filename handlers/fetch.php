@@ -1990,7 +1990,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		$isCOCAS=-1;
 		if($userId==COCAS && $event['eventCategory']=="technical")
 			$isCOCAS=1;
-		else if($userId==CULSEC && $event['eventCategory']=="NonTechnical")
+		else if($userId==CULSEC && $event['eventCategory']=="nonTechnical")
 			$isCOCAS=1;
 		else
 			$isCOCAS=-1;

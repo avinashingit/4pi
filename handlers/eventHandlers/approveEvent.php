@@ -86,8 +86,8 @@ else
 			echo 6;
 			exit();
 		}
-		if(!( ($isCOCAS($userId)==1&&$event['eventCategory']=="technical")||
-			  ($isCULSEC($userId)==1)&&$event['eventCategory']=='nonTechnical') )
+		if(!( (isCOCAS($userId)==1&&$event['eventCategory']=="technical")||
+			  (isCULSEC($userId)==1)&&$event['eventCategory']=='nonTechnical') )
 		{
 			if(blockUserByHash($userIdHash,"Unauthorized Attempt to approve event",$userId.",sh:".$eventIdHash)>0)
 			{

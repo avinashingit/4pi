@@ -100,7 +100,7 @@ $conn=new QoB();
 				$values[0]=array($currentDate => 'i');
 				for($i=0;$i<$ProcessedHashesCount;$i++)
 				{
-					$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash!=?";
+					$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash != ?";
 					$values[$i+1]=array($ProcessedHashes[$i] => 's');
 				}
 				$SQLEndPart=" ORDER BY timestamp DESC";
@@ -181,7 +181,7 @@ $conn=new QoB();
 					}
 					else if($userId == CULSEC)
 					{
-						if($event['eventCategory']=='NonTechnical' || $event['approvalStatus']==1)
+						if($event['eventCategory']=='nonTechnical' || $event['approvalStatus']==1)
 						{
 							$eventObj=getEventObject($event,$userId);
 							$eventObjArray[]=$eventObj;
