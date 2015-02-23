@@ -37,7 +37,7 @@ Code 16: Erroneous Entry By USER!!
 			}
 			else
 			{
-				$ideaPostUserName=$user['name'];
+				$ideaPostUserName=$user['alias'];
 				$userId=$user['userId'];
 				
 				//$postId ia genrated Automatically so !!27!!
@@ -88,7 +88,7 @@ Code 16: Erroneous Entry By USER!!
 				{
 					$postUserIdHash=$userIdHash;
 					$ideaUserId = $userId;
-					$postUserName=$user['name'];
+					$postUserName=$user['alias'];
 					$postId = $ideaPostId;
 					$postIdHash = $ideaPostIdHash;
 					$appreciaters = '';
