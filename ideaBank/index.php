@@ -178,13 +178,15 @@ session_start();
 	$(document).ready(function()
 	{
 		$('#icons div i').css({'cursor':'pointer'});
+		$('.popOver').popover();
 		$('.searchExpand').focusin(function(){
 			$(this).animate({'width':'160%'},500);
 		}); 
 		$('.searchExpand').focusout(function(){
 			$(this).animate({'width':'100%'},500);
 		});
-	}); 
+	});
+
 
 function callAfterAjax(){
 

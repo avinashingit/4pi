@@ -107,7 +107,7 @@ include("../header.php");
 					
 					<div class="devRight right" >
 						<div class="devDetails" >
-							<a href="/4pi/aboutMe/index.php?userId=COE12B005" title="View Profile" class="devName"  >G. Hemanth&nbsp;&nbsp;&nbsp;</a>
+							<a href="/4pi/aboutMe/index.php?userId=COE12B005" title="View Profile" class="devName"  >G. Sai Hemanth&nbsp;&nbsp;&nbsp;</a>
 							<p class="devStream" >B.Tech, Computer Engineering<br />Web Designer</p>
 							<span><a href="mailto:coe12b005@iiitdm.ac.in" title="Mail me"  >coe12b005@iiitdm.ac.in</a><br /><a href="/4pi/aboutMe/index.php?userId=COE12B005" title="View Profile" ><i class="fa fa-suitcase" ></i> View Profile</a></span>
 						</div>
