@@ -176,7 +176,7 @@ $conn=new QoB();
 					}
 					else if($userId == CULSEC)
 					{
-						if($event['eventCategory']=='NonTechnical')
+						if($event['eventCategory']=='nonTechnical')
 						{
 							$eventObj=getEventObject($event,$userId);
 							$eventObjArray[]=$eventObj;

@@ -102,7 +102,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		exit();
 	}
 
-	if($eventCategory!='NonTechnical'&&$eventCategory!='technical')
+	if($eventCategory!='nonTechnical'&&$eventCategory!='technical')
 	{
 		echo 16;
 		exit();
@@ -244,7 +244,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,
 				lastUpdated=?,eventDurationHrs=?, eventDurationMin=?, eventStatus=?, eventCategory= ?,displayStatus=1,approvalStatus=1 WHERE eventIdHash=?";
 			}
-			else if($isCULSEC==1&&$eventCategory=="NonTechnical")
+			else if($isCULSEC==1&&$eventCategory=="nonTechnical")
 			{
 				$UpdateEventSQL="UPDATE event SET eventName=?,content=?,eventVenue=?,
 				organisedBy=?,eventTime=?,eventDate=?,type=?,sharedWith=?,

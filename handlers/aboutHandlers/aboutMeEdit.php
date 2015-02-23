@@ -361,7 +361,15 @@ function aboutMeBottomEdit($user,$mailId,$showMailId,$address,$phoneArray,$showP
 {
 	$userId=$user['userId'];
 	$userAlias=$user['alias'];
-	$phone=implode(',',$phoneArray);
+	if($phoneArray[0]==""&&$phoneArray[1]=="")
+	{
+		$phone=NULL;
+	}
+	else
+	{
+		$phone=implode(',',$phoneArray);
+	}
+	
 	$conObj=new QoB();
 	$values[0] = array($mailId => 's');
 	$values[1] = array($address => 's');

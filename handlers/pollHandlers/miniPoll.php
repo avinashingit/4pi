@@ -37,7 +37,7 @@ class miniPoll
 		$this->pollIdHash=$pollIdHash;
 		$this->userName=addslashes($userName);
 		
-		$this->pollQuestion=addslashes($pollQuestion);
+		$this->pollQuestion=($pollQuestion);
 		$this->pollType=$pollType;
 		$this->pollOptions=$pollOptions;
 		$this->pollOptionsType=$pollOptionsType;
