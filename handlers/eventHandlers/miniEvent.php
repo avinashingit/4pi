@@ -36,13 +36,13 @@ class miniEvent
 		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$gender,$profilePicExists,$eventOwnerName,$eventUserIdHash,$eventOwnerId,$eventOwnerFullName,$isCOCAS,$isApproved)
 	{
 		$this->eventIdHash=$eventIdHash;
-		$this->eventOrgName=addslashes($eventOrgName);
-		$this->eventName=addslashes($eventName);
-		$this->eventType=addslashes($eventType);
-		$this->eventContent=addslashes($eventContent);
+		$this->eventOrgName=($eventOrgName);
+		$this->eventName=($eventName);
+		$this->eventType=($eventType);
+		$this->eventContent=($eventContent);
 
 		$this->eventDate=$eventDate;
-		$this->eventTime=addslashes($eventTime);
+		$this->eventTime=($eventTime);
 		$this->eventVenue=$eventVenue;
 		$this->attendCount=$attendCount;
 		$this->sharedWith=$sharedWith;
@@ -57,11 +57,11 @@ class miniEvent
 		$this->eventTimestamp=$eventTimestamp;
 		$this->gender = $gender;
 		$this->profilePicExists = $profilePicExists;
-		$this->eventOwnerName=addslashes($eventOwnerName);
+		$this->eventOwnerName=($eventOwnerName);
 
 		$this->eventUserIdHash=$eventUserIdHash;
 		$this->eventOwnerId=$eventOwnerId;
-		$this->eventOwnerFullName=addslashes($eventOwnerFullName);
+		$this->eventOwnerFullName=$eventOwnerFullName;
 		$this->isCOCAS=$isCOCAS;
 		$this->isApproved=$isApproved;
 		return $this;

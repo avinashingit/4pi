@@ -48,8 +48,8 @@
 			$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$gender,$profilePicExists,$isOwner,$resumeExists)
 			{
 				$this->userIdHash = $userIdHash;
-				$this->name = addslashes($name); 
-				$this->alias= addslashes($alias);
+				$this->name = ($name); 
+				$this->alias= ($alias);
 				$this->dob = $dob;
 				
 				/*if($description==NULL)
@@ -60,14 +60,14 @@
 				{
 					$this->description=$description;
 				}*/
-				$this->description=addslashes($description);
-				$this->highestDegree=addslashes($highestDegree);
+				$this->description=($description);
+				$this->highestDegree=($highestDegree);
 
-				$this->currentProfession=addslashes($currentProfession);
+				$this->currentProfession=($currentProfession);
 				
-				$this->mailId = addslashes($mailId);
+				$this->mailId = ($mailId);
 				$this->showMailId=$showMailId;
-				$this->address = addslashes($address);
+				$this->address = ($address);
 				$this->phone = $phone;
 
 				$this->showPhone=$showPhone;
@@ -120,7 +120,7 @@
 				}
 				else
 				{
-					$this->name =addslashes( $name);
+					$this->name =( $name);
 				}
 				if($alias==NULL)
 				{
@@ -128,7 +128,7 @@
 				}
 				else
 				{
-					$this->alias=addslashes($alias);
+					$this->alias=($alias);
 				}
 				
 				if($dob==NULL)
@@ -145,7 +145,7 @@
 				}
 				else
 				{
-					$this->description=addslashes($description);
+					$this->description=($description);
 				}
 				if($highestDegree==NULL)
 				{
@@ -153,7 +153,7 @@
 				}
 				else
 				{
-					$this->highestDegree=addslashes($highestDegree);
+					$this->highestDegree=($highestDegree);
 				}
 
 				if($currentProfession==NULL)
@@ -162,7 +162,7 @@
 				}
 				else
 				{
-					$this->currentProfession=addslashes($currentProfession);
+					$this->currentProfession=($currentProfession);
 				}
 				$this->isOwner=$isOwner;
 				$this->resumeExists=$resumeExists;
@@ -180,7 +180,7 @@
 		public $address;	
 		public $phone;
 		public $showPhone;
-		public $city;
+		//public $city;
 		public $facebookId;
 		public $twitterId;
 		public $googleId;
@@ -189,7 +189,7 @@
 		public $isOwner;
 
 		public function __construct($mailId,$showMailId,$address,$phone, $showPhone,
-			$city,$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$isOwner)
+		$facebookId,$twitterId,$googleId, $linkedinId,$pinterestId,$isOwner)
 			{
 				if($mailId==NULL)
 				{
@@ -213,7 +213,7 @@
 				}
 				else
 				{
-					$this->address=addslashes($address);
+					$this->address=($address);
 				}
 				
 				if($phone==NULL)
@@ -232,14 +232,14 @@
 				{
 					$this->showPhone=$showPhone;
 				}
-				if($city==NULL)
+				/*if($city==NULL)
 				{
 					$this->city="";
 				}
 				else
 				{
-					$this->city=addslashes($city);
-				}
+					$this->city=($city);
+				}*/
 				if($facebookId==NULL)
 				{
 					$this->facebookId="";
@@ -305,14 +305,14 @@
 				{
 
 					$this->degreeId=$degreeId;
-					$this->degree = addslashes($degree) ;
+					$this->degree = ($degree) ;
 					if($schoolName==NULL)
 					{
 						$this->schoolName="";
 					}
 					else
 					{
-						$this->schoolName=addslashes($schoolName);
+						$this->schoolName=($schoolName);
 					}
 					if($location==NULL)
 					{
@@ -320,7 +320,7 @@
 					}
 					else
 					{
-						$this->location=addslashes($location);
+						$this->location=($location);
 					}
 					if($duration==NULL)
 					{
@@ -328,7 +328,7 @@
 					}
 					else
 					{
-						$this->duration=addslashes($duration);
+						$this->duration=($duration);
 					}
 					if($minDuration==NULL)
 					{
@@ -336,7 +336,7 @@
 					}
 					else
 					{
-						$this->minDuration=addslashes($minDuration);
+						$this->minDuration=($minDuration);
 					}
 					if($score==NULL)
 					{
@@ -344,7 +344,7 @@
 					}
 					else
 					{
-						$this->score=addslashes($score);
+						$this->score=($score);
 					}
 					if($scoreType==NULL)
 					{
@@ -352,7 +352,7 @@
 					}
 					else
 					{
-						$this->scoreType=addslashes($scoreType);
+						$this->scoreType=($scoreType);
 					}
 					
 					$this->isOwner=$isOwner;
@@ -371,14 +371,14 @@
 			public function __construct($achievementId,$competition,$location,$description,$position,$isOwner)
 				{
 					$this->achievementId = $achievementId;
-					$this->competition = addslashes($competition);
+					$this->competition = ($competition);
 					if($location==NULL)
 					{
 						$this->location="";
 					}
 					else
 					{
-						$this->location=addslashes($location);
+						$this->location=($location);
 					}
 					if($description==NULL)
 					{
@@ -386,7 +386,7 @@
 					}
 					else
 					{
-						$this->description=addslashes($description);
+						$this->description=($description);
 					}
 					
 					if($position==NULL)
@@ -395,7 +395,7 @@
 					}
 					else
 					{
-						$this->position=addslashes($position);
+						$this->position=($position);
 					}
 					
 					//$this->achieveddate = $achieveddate;
@@ -415,7 +415,7 @@
 			public function __construct($courseId,$title,$duration,$minDuration,$institutename,$isOwner)
 				{
 					$this->courseId = $courseId;
-					$this->title = addslashes($title);
+					$this->title = ($title);
 
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
@@ -425,7 +425,7 @@
 					}
 					else
 					{
-						$this->institutename=addslashes($institutename);
+						$this->institutename=($institutename);
 					}
 					
 					$this->isOwner=$isOwner;
@@ -465,7 +465,7 @@
 			public function __construct($experienceId,$organisation,$duration,$minDuration,$designation,$isFeaturing,$isOwner)
 				{
 					$this->experienceId=$experienceId;
-					$this->organisation = addslashes($organisation);
+					$this->organisation = ($organisation);
 					$this->duration = $duration;
 					$this->minDuration = $minDuration;
 					if($designation==NULL)
@@ -474,7 +474,7 @@
 					}
 					else
 					{
-						$this->designation=addslashes($designation);
+						$this->designation=($designation);
 					}
 					
 					//$this->description = $description;
@@ -495,9 +495,9 @@
 			public function __construct($leaveMessageId,$name,$mailId,$message,$isOwner)
 				{
 					$this->leaveMessageId=$leaveMessageId;
-					$this->name = addslashes($name);
+					$this->name = ($name);
 					$this->mailId = $mailId;
-					$this->message = addslashes($message);
+					$this->message = ($message);
 					$this->isOwner=$isOwner;
 					return $this;
 				}
@@ -529,7 +529,7 @@
 			public function __construct($projectId,$title,$role,$duration,$minDuration,$description,$teamMembers,$organisation,$isOwner)
 				{
 					$this->projectId=$projectId;
-					$this->projectTitle = addslashes($title);
+					$this->projectTitle = ($title);
 					$this->duration = $duration;
 					if($role==NULL)
 					{
@@ -537,7 +537,7 @@
 					}
 					else
 					{
-						$this->role=addslashes($role);
+						$this->role=($role);
 					}
 					
 					$this->minDuration = $minDuration;
@@ -547,18 +547,18 @@
 					}
 					else
 					{
-						$this->description=addslashes($description);
+						$this->description=($description);
 					}
 					
 					
-					$this->teamMembers = addslashes($teamMembers);
+					$this->teamMembers = ($teamMembers);
 					if($organisation==NULL)
 					{
 						$this->organisation="";
 					}
 					else
 					{
-						$this->organisation=addslashes($organisation);
+						$this->organisation=($organisation);
 					}
 					
 					$this->isOwner=$isOwner;
@@ -582,7 +582,7 @@
 					}
 					else
 					{
-						$this->skills=addslashes($skills);
+						$this->skills=($skills);
 					}
 					if($rating==NULL)
 					{
@@ -590,12 +590,12 @@
 					}
 					else
 					{
-						$this->rating=addslashes($rating);
+						$this->rating=($rating);
 					}
 					
 					$this->isOwner=$isOwner;
 					$this->jsonObj=$jsonObj;
-					$this->message=addslashes($message);
+					$this->message=($message);
 					$this->errorCode=$errorCode;
 					return $this;
 				}
@@ -634,12 +634,12 @@
 					}
 					else
 					{
-						$this->tools=addslashes($tools);
+						$this->tools=($tools);
 					}
 					
 					
 					$this->isOwner=$isOwner;
-					$this->message=addslashes($message);
+					$this->message=($message);
 					$this->errorCode=$errorCode;
 					return $this;
 				}
@@ -659,11 +659,11 @@
 					}
 					else
 					{
-						$this->interests=addslashes($interests);
+						$this->interests=($interests);
 					}
 					
 					$this->isOwner=$isOwner;
-					$this->message=addslashes($message);
+					$this->message=($message);
 					$this->errorCode=$errorCode;
 					return $this;
 				}
@@ -690,7 +690,7 @@
 					}
 					else
 					{
-						$this->place=addslashes($place);
+						$this->place=($place);
 					}
 					if($attendees==NULL)
 					{

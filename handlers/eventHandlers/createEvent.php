@@ -61,37 +61,37 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	if($rawTime==""||$rawDate==""||$type==""||$eventName==""||$eventContent==""||$eventVenue==""||$organisedBy==""||$rawSharedWith==""||$eventDurationHrs==""||$eventDurationMin=="")
 	{
 		//echo "something empty";
-		echo 161;
+		echo 16;
 		exit();
 	}
 	if(strlen($eventContent)>1000)
 	{
-		echo 162;
+		echo 16;
 		exit();
 	}
 	if(strlen($rawDate)!=10||strlen($rawTime)!=5)
 	{
 		//echo "Date Time Validate";
-		echo 163;
+		echo 16;
 		exit();
 	}
 	if(preg_match('/^[0-9]{1,}$/', $eventDurationHrs)==0||preg_match('/^[0-9]{1,}$/', $eventDurationMin)==0)
 	{
 		//echo "Hr-min Validate";
-		echo 164;
+		echo 16;
 		exit();		
 	}
 	if($eventDurationMin!=15&&$eventDurationMin!=30&&$eventDurationMin!=45&&$eventDurationMin!=0)
 	{
 		//echo "Min validate";
-		echo 165;
+		echo 16;
 		exit();
 	}
 	$eventDuration=$eventDurationHrs.":".$eventDurationMin;
 	if(validateDate($rawDate)==false||validateTime($rawTime)==false)
 	{
 		//echo "validate";
-		echo 166;
+		echo 16;
 		exit();
 	}
 
@@ -100,13 +100,13 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 	if(validateEventDateAndTime($eventDate,$eventTime)==false)
 	{
-		echo 167;
+		echo 16;
 		exit();
 	}
 
 	if($eventCategory!='nonTechnical'&&$eventCategory!='technical')
 	{
-		echo 168;
+		echo 16;
 		exit();
 	}
 	$userIdHash=$_SESSION['vj'];

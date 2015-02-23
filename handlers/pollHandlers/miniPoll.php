@@ -35,7 +35,7 @@ class miniPoll
 		$sharedWith,$hasVoted,$optionVotes,$pollCreationTime,$pollStatus,$isOwner,$userIdHash,$isSAC,$approvalStatus)
 	{
 		$this->pollIdHash=$pollIdHash;
-		$this->userName=addslashes($userName);
+		$this->userName=($userName);
 		
 		$this->pollQuestion=($pollQuestion);
 		$this->pollType=$pollType;
