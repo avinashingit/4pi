@@ -1,4 +1,5 @@
 <?php 
+session_start();
 	include('../header_adv.php');
 ?>
 <script>
@@ -25,12 +26,12 @@ if(userId=="")
 		color:#000;
 	}
 
-	#personPicture img
+	/* #personPicture img
 	{
 		border-radius:78px;
 		border:1px solid #cecece;
 		padding:5px;
-	}
+	} */
 
 	.profileName
 	{
@@ -1327,7 +1328,7 @@ if(userId=="")
 <body style="padding-top:0px;">
 
 	<?php
-		echo $_SESSION['vj'];
+		// echo $_SESSION['vj'];
 		if(isset($_SESSION['vj']))
 		{
 

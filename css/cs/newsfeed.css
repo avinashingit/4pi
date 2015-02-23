@@ -10,6 +10,7 @@ display:none;
 .break-word
 {
     word-break:break-all;
+    word-wrap:break-word;
 }
 
 .modal-body
@@ -49,7 +50,8 @@ textarea.formcontrol
 {
     height:auto !important;
 }
-.postMenu{
+.postMenu
+{
     margin-top:-10px;
 }
 .eventMenu{

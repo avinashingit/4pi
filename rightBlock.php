@@ -122,11 +122,11 @@
 		{
 			if(window.location.href.indexOf('fetchSingle')>-1)
 			{
-				littlePost+='<a href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
+				littlePost+='<a href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item break-word littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
 			}
 			else
 			{
-				littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
+				littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item break-word littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
 			}
 
 			$("#rightBlock1").find(".emptyPostsRight").addClass('hidden');
@@ -149,11 +149,11 @@
 		{
 			if(window.location.href.indexOf('fetchSingle')>-1)
 			{
-				littleEvent+='<a href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';	
+				littleEvent+='<a href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item break-word littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';	
 			}
 			else
 			{
-				littleEvent+='<a target="_blank" href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';
+				littleEvent+='<a target="_blank" href="/4pi/fetchSingleEvent.php?ref='+data.eventIdHash+'" class="list-group-item break-word littleEvent"><i style="color:#98001D;" class="fa fa-calendar"></i>&nbsp;&nbsp;'+data.eventDetails+'</li></a>';
 			}
 
 			$("#rightBlock2").find(".emptyEventsRight").addClass('hidden');
@@ -175,11 +175,11 @@
 		{
 			if(window.location.href.indexOf('fetchSingle')>-1)
 			{
-				littlePoll+='<a href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
+				littlePoll+='<a href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item break-word littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
 			}
 			else
 			{
-				littlePoll+='<a target="_blank"  href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
+				littlePoll+='<a target="_blank"  href="/4pi/fetchSinglePoll.php?ref='+data.pollIdHash+'" class="list-group-item break-word littlePoll"><i style="color:#78009F;" class="fa fa-pie-chart"></i>&nbsp;&nbsp;'+data.pollQuestion+'</li></a>';
 			}
 
 			$("#rightBlock3").find(".emptyPollsRight").addClass('hidden');
