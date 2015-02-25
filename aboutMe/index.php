@@ -415,9 +415,9 @@ if(userId=="")
 					
 					<br/> -->
 
-					<label for="personDescription">About you  <small>( <span id="descriptionLetterCount"></span> characters )</small></label> 
+					<label for="personDescription">About you <small>( <span id="descriptionLetterCount">380</span> characters left)</small></label> 
 
-					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html($(this).val().length);" onkeydown="$('#descriptionLetterCount').html($(this).val().length);" class="autosize form-control"></textarea>
+					<textarea type="text" style="resize:none;" id="editPersonInfoModalPersonDescription" onkeyup="$('#descriptionLetterCount').html(380-$(this).val().length);" onkeydown="$('#descriptionLetterCount').html(380-$(this).val().length);" class="autosize form-control"></textarea>
 
 					<br/>
 
@@ -678,7 +678,7 @@ if(userId=="")
 		var ob2=$('#entireContent').find('#personInfo');
 		x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
 		x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
-		x.find('#descriptionLetterCount').html(ob2.find('#personDescription').find('p').html().length);
+		x.find('#descriptionLetterCount').html(380-ob2.find('#personDescription').find('p').html().length);
 		/*x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
 		x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());*/
 		x.find('#editPersonInfoModalPersonDescription').val(ob2.find('#personDescription').find('p').html());
@@ -707,6 +707,8 @@ if(userId=="")
 		$("#addSkillModal").modal('show');
 
 		$("#addSkillModal").find('.extraInputs').remove();
+
+		$("#addSkillModal").find('input').focus();
 
 		clearInputs($("#addSkillModal"));
 	}

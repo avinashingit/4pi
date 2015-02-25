@@ -451,7 +451,7 @@ function insertPoll(data,position)
 
 								poll+='<div class="text-center">';
 
-									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 
 								poll+='</div>';
 
@@ -692,7 +692,7 @@ function insertPoll(data,position)
 
 								poll+='<div class="text-center">';
 
-									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 
 								poll+='</div>';
 
@@ -908,7 +908,7 @@ function insertPoll(data,position)
 
 								poll+='<div class="text-center">';
 
-									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'single\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 
 								poll+='</div>';
 
@@ -1140,7 +1140,7 @@ function insertPoll(data,position)
 
 								poll+='<div class="text-center">';
 
-									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 
 								poll+='</div>';
 
@@ -1373,7 +1373,7 @@ function insertPoll(data,position)
 
 								poll+='<div class="text-center">';
 
-									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+									poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 
 								poll+='</div>';
 
@@ -1595,7 +1595,7 @@ function insertPoll(data,position)
 
 							poll+='<div class="text-center">';
 
-								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1,\''+data.pollQuestion+'\');" class="btn btn-md btn-success">Vote</button>';
+								poll+='<button onclick="submitVote(\''+data.pollIdHash+'\',\'multiple\',\'yes\',1);" class="btn btn-md btn-success">Vote</button>';
 
 							poll+='</div>';
 

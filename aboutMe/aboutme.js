@@ -490,7 +490,7 @@ function insertTopPart(data,locateProPic)
 
 				
 
-				topPart+='<div class="text-left" id="personHighestDegree">'+data.highestDegree+'</div><br/>';
+				topPart+='<div class="text-left break-word" id="personHighestDegree">'+data.highestDegree+'</div><br/>';
 
 				topPart+='<div class="text-left" id="personCurrentProfession">'+data.currentProfession+'</div><br/>';
 
@@ -634,9 +634,9 @@ function insertBottomPart(data)
 
 						bottomPart+='<br/>';
 							
-						bottomPart+='<p id="userEmail2">'+data.mailId+'</p>';
+						bottomPart+='<p id="userEmail2" class="break-word">'+data.mailId+'</p>';
 
-						bottomPart+='<p id="userEmail1">'+userId+'@iiitdm.ac.in</p>';
+						bottomPart+='<p id="userEmail1" class="break-word">'+userId.toLowerCase()+'@iiitdm.ac.in</p>';
 
 					bottomPart+='</div>';
 
@@ -648,7 +648,7 @@ function insertBottomPart(data)
 
 						bottomPart+='<br/>';
 
-						bottomPart+='<p id="address">'+data.address+'</p>';
+						bottomPart+='<p id="address" class="break-word">'+data.address+'</p>';
 
 					bottomPart+='</div>';
 				}
@@ -668,7 +668,7 @@ function insertBottomPart(data)
 							if(data.showPhone==1)
 							{
 								var x=i+1;
-								bottomPart+='<p id="userPhone'+x+'">'+data.phone[i]+'</p>';
+								bottomPart+='<p id="userPhone'+x+'" class="break-word">'+data.phone[i]+'</p>';
 							}
 						}
 
@@ -730,6 +730,7 @@ function editContactInfoSendData()
 	var phone2=link.find("#contactNumber2").val().trim();
 	var showMailId=link.find("#showEmailIdValue").val();
 	var showContactsValue=link.find("#showContactsValue").val();
+	alert(showContactsValue);
 	if(showMailId!=1 && showMailId!=2)
 	{
 		alert("There is a problem with your page. Please reload it.");

@@ -774,9 +774,9 @@ function postInsert(position, data1)
 
     post += '</div> <!-- end class col-md-2 id postProfile Pic -->';
 
-    post += '<div class="col-md-7 text-left">';
+    post += '<div class="col-md-7 text-center">';
 
-    post += '<div class="fontSize14 text-left break-word paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
+    post += '<div class="fontSize14 text-center break-word paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
 
     post += '</div><!-- end class col-md-6 id postSubject -->';
 

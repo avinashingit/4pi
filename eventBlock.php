@@ -90,9 +90,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					 		 <div class="form-group has-error">
 
-					    			<label for="shareWith">Share With&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
+					    			<label for="shareWith">Share With&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
-					    			<input value="All" name="createEventSharedWith" class="form-control"type="text" id="createEventSharedWith">
+					    			<input value="All" name="createEventSharedWith" class="popOver form-control"type="text" id="createEventSharedWith" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)">
 
 					  		</div>
 
@@ -266,9 +266,9 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					 		 <div class="form-group has-error">
 
-					    			<label for="shareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
+					    			<label for="shareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
-					    			<input name="editEventSharedWith" value="All" class="form-control"type="text" id="editEventSharedWith">
+					    			<input name="editEventSharedWith" value="All" class="popOver form-control"type="text" id="editEventSharedWith" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)">
 
 					  		</div>
 

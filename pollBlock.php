@@ -136,9 +136,9 @@
 
 				  		<div class="form-group has-error">
 
-				   			<label for="pollShareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter Bi, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
+				   			<label for="pollShareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
-				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollSharedWith" value="All" >
+				    		<input name="pollShareWith" class="popOver form-control input-sm" style="background-color:white !important;border-radius:0px;" id="createPollSharedWith" value="All" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)">
 
 				  		</div>
 
@@ -317,7 +317,7 @@ $(document).ready(function(){
 
 				  		<div class="form-group">
 
-				   			<label for="pollName">Poll type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollName">Poll type&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Self explanatory"></i>]
 
 				    		<select name="pollType" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollType" >
 				    			
@@ -334,9 +334,9 @@ $(document).ready(function(){
 
 				  		<div class="form-group has-error">
 
-				   			<label for="pollShareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="In short, the poll question."></i>]
+				   			<label for="pollShareWith">Share with&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)"></i>]
 
-				    		<input name="pollShareWith" class="form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollSharedWith" placeholder="Required." >
+				    		<input name="pollShareWith" class="popOver form-control input-sm" style="background-color:white !important;border-radius:0px;" id="editPollSharedWith" placeholder="Required." data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Enter 'All' for to provide universal visibility. Otherwise enter 'COE12' for 2012 COE batch or just 'COE' for complete COE stream. For just B.Tech enter B, or for a  particular batch you can enter iB, i can be the batch number. If you want this post to be visible for B.Tech and M.Des enter 'B,M'. (without quotes)">
 
 				  		</div>
 
@@ -346,7 +346,7 @@ $(document).ready(function(){
 
 							<div class="form-group has-error col-md-6" id="option1">
 					   			
-					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll."></i>]
+					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll."></i>]
 
 								<!-- <div class="input-group"> -->
 					    			
@@ -371,7 +371,7 @@ $(document).ready(function(){
 
 				    		<div class="form-group has-error col-md-6" id="option2">
 					   			
-					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Options for poll. If you want to add one more click '+'. To delete click '-'"></i>]
+					   			<label for="pollOptions">Option&nbsp;<span style="color:red;">*</span></label>&nbsp;&nbsp;[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Option for poll. If you want to add one more click '+'. To delete click '-'"></i>]
 
 								<div class="input-group">
 					    			
