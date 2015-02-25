@@ -2068,7 +2068,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$proPicExists=-1;
 		}
 
-		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], $post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
+		if($post['isPermanent']==0)
+		{
+			if($post['requestPermanence']==1)
+			{
+				$postValidity=9999;
+			}
+		}
+
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], $post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name'],$post['isPermanent']);
 
 		return $postObj;
 	}
@@ -2126,7 +2134,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$proPicExists=-1;
 		}
 
-		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], $post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name']);
+		if($post['isPermanent']==0)
+		{
+			if($post['requestPermanence']==1)
+			{
+				$postValidity=9999;
+			}
+		}
+
+		$postObj=new miniPost($post['postIdHash'],$post['sharedWith'],$postValidity,$post['alias'],$post['subject'],$post['content'], $post['starCount'],$post['commentCount'], $post['mailCount'],$post['seenCount'],$postCreationTime,$followPost,$post['userIdHash'],$post['userId'],$hasStarred, $comments,$postOwner,$post['gender'],$proPicExists,$post['name'],$post['isPermanent']);
 		
 		return $postObj;
 	}

@@ -44,9 +44,10 @@ class miniPost{
 
 	public $postUserFullName;
 
+	public $isPermanent;
 
-	public function __construct($postId,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-		$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$postUserId,$hasStarred, $comments,$postOwner,$gender,$profilePicExists,$postUserFullName)
+
+	public function __construct($postId,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, $noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$postUserId,$hasStarred, $comments,$postOwner,$gender,$profilePicExists,$postUserFullName,$isPermanent)
 	{
 		$this->postId=$postId;//Actually postIdHash but used(names) as postId to conform with already existing use.
 
@@ -91,6 +92,8 @@ class miniPost{
 		$this->profilePicExists = $profilePicExists;
 		
 		$this->postUserFullName = ($postUserFullName);
+
+		$this->isPermanent = $isPermanent;
 
 		//$this->postUserId=$postUserId;
 		
