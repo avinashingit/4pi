@@ -2,7 +2,7 @@
 class miniEvent
 {
 	public $eventIdHash;
-	public $eventOrgName;// What the creater of the event enters the organiser name to be
+	public $eventOrgName;// What the creater of the event enters the organiser name to be.Given so that any member of a club can post the event on behalf of the club.
 	public $eventName;
 	public $eventType;
 	public $eventContent;
@@ -21,20 +21,20 @@ class miniEvent
 
 	public $eventStatus;
 	public $eventTimestamp;
-	public $gender;
-	public $profilePicExists;
+	//public $gender;
+	//public $profilePicExists;
 
-	public $eventOwnerName; //Creater's alias // only till release of final version with approvals
-	public $eventUserIdHash;//creater's id hash // only till release of final version with approvals
-	public $eventOwnerId;//
-	public $eventOwnerFullName;//Creater's Full name
+	//public $eventOwnerName; //Creater's alias // only till release of final version with approvals
+	//public $eventUserIdHash;//creater's id hash // only till release of final version with approvals
+	//public $eventOwnerId;//
+	//public $eventOwnerFullName;//Creater's Full name
 	public $isCOCAS;
 	public $isApproved;
 	public $eventCategory;
 
 	function __construct($eventIdHash,$eventOrgName,$eventName,$eventType,$eventContent,
 		$eventDate,$eventTime,$eventVenue,$attendCount,$sharedWith, 
-		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$gender,$profilePicExists,$eventOwnerName,$eventUserIdHash,$eventOwnerId,$eventOwnerFullName,$isCOCAS,$isApproved,$eventCategory)
+		$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, $eventStatus,$eventTimestamp,$isCOCAS,$isApproved,$eventCategory)
 	{
 		$this->eventIdHash=$eventIdHash;
 		$this->eventOrgName=($eventOrgName);
@@ -56,13 +56,13 @@ class miniEvent
 
 		$this->eventStatus=$eventStatus;
 		$this->eventTimestamp=$eventTimestamp;
-		$this->gender = $gender;
-		$this->profilePicExists = $profilePicExists;
-		$this->eventOwnerName=($eventOwnerName);
+		//$this->gender = $gender;
+		//$this->profilePicExists = $profilePicExists;
+		//$this->eventOwnerName=($eventOwnerName);
 
-		$this->eventUserIdHash=$eventUserIdHash;
-		$this->eventOwnerId=$eventOwnerId;
-		$this->eventOwnerFullName=$eventOwnerFullName;
+		//$this->eventUserIdHash=$eventUserIdHash;
+		//$this->eventOwnerId=$eventOwnerId;
+		//$this->eventOwnerFullName=$eventOwnerFullName;
 		$this->isCOCAS=$isCOCAS;
 		$this->isApproved=$isApproved;
 		$this->eventCategory=$eventCategory;

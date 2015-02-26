@@ -244,8 +244,8 @@ else
 				$proPicExists=-1;
 			}*/
 			$isSAC=isSAC($userId);
-			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
-					$sharedWith,$hasVoted,json_encode($optionsAndVotes),$pollCreationTime,$pollStatus,1,$user['userIdHash'],$isSAC,$approvalStatus);
+			$pollObj=new miniPoll($pollIdHash,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,
+					$sharedWith,$hasVoted,json_encode($optionsAndVotes),$pollCreationTime,$pollStatus,1,$isSAC,$approvalStatus);
 			print_r(json_encode($pollObj));
 		}
 		else

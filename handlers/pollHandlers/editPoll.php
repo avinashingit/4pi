@@ -291,7 +291,7 @@ else
 			}*/
 			$isSAC=isSAC($pollUserId);
 			
-			$pollObj=new miniPoll($pollIdHash,$userName,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$user['userIdHash'],$isSAC,$approvalStatus);
+			$pollObj=new miniPoll($pollIdHash,$pollQuestion,$pollType,$pollOptionsArray,$pollOptionsType,$sharedWith,$hasVoted,$optionAndVotes,$pollCreationTime,$pollStatus,1,$isSAC,$approvalStatus);
 			print_r(json_encode($pollObj));
 		}
 		else

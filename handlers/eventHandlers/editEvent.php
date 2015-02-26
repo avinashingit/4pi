@@ -83,6 +83,13 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();
 	}
+	else
+	{
+		if($eventDurationMin==0)
+		{
+			$eventDurationMin='00';
+		}
+	}
 	$eventDuration=$eventDurationHrs.":".$eventDurationMin;
 	if(validateDate($rawDate)==false||validateTime($rawTime)==false)
 	{
@@ -163,7 +170,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			if(getEventStatus($event,1)=="Completed")
 			{
-				notifyAdmin("attempt to edit a completed event".",sh:".$event['eventId']],$userIdHash);
+				notifyAdmin("attempt to edit a completed event".",sh:".$event['eventId'],$userIdHash);
 				$_SESSION=array();
 				session_destroy();
 				echo 16;
@@ -274,8 +281,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$values[9]=array($eventDurationHrs => 's');
 			$values[10]=array($eventDurationMin => 's' );
 			$values[11]=array($eventStatus => 's');
-			$values[12]=array($eventIdHash => 's');
-			$values[13]=array($eventCategory => 's');
+			$values[12]=array($eventCategory => 's');
+			$values[13]=array($eventIdHash => 's');
+			
 			
 			//$values[12]=array($userId => 's');
 			$result=$conn->update($UpdateEventSQL,$values);
@@ -321,7 +329,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
 				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, 
-				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCOCASorCULSEC,$approvalStatus,$eventCategory);
+				$eventStatus,$eventCreationTime,$isCOCASorCULSEC,$approvalStatus,$eventCategory);
 				print_r(json_encode($eventObj));
 			}
 			else

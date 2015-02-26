@@ -81,11 +81,18 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();		
 	}
-	if($eventDurationMin!=15&&$eventDurationMin!=30&&$eventDurationMin!=45&&$eventDurationMin!=0)
+	if($eventDurationMin!=15&&$eventDurationMin!=30&&$eventDurationMin!=45&&$eventDurationMin!=00)
 	{
 		//echo "Min validate";
 		echo 16;
 		exit();
+	}
+	else
+	{
+		if($eventDurationMin==0)
+		{
+			$eventDurationMin='00';
+		}
 	}
 	$eventDuration=$eventDurationHrs.":".$eventDurationMin;
 	if(validateDate($rawDate)==false||validateTime($rawTime)==false)
@@ -298,7 +305,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
-				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$user['name'],$isCOCASorCULSEC,$approvalStatus,$eventCategory);
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$isCOCASorCULSEC,$approvalStatus,$eventCategory);
 				print_r(json_encode($eventObj));
 			}
 			else
