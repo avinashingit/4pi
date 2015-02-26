@@ -262,7 +262,7 @@ function homeSearch(el)
 						An informative hub
 					</div>
 					<div class="col-md-4">
-								<a href="javascript:void(0)"><div class="socialIcons" id="facebook" ></div></a>
+								<a href="https://www.facebook.com/dm4pi"><div class="socialIcons" id="facebook" ></div></a>
 								<a href="javascript:void(0)"><div class="socialIcons" id="twitter" ></div></a>
 								<a href="javascript:void(0)"><div class="socialIcons" id="gplus" ></div></a>
 					</div>
@@ -346,7 +346,7 @@ function homeSearch(el)
 			<div id="section3"> <!-- links to other pages -->
 			<div class="row">
 				<div class="col-md-3 blocks" >
-					<a href="javascript:void(0)" onclick="window.location.href='/4pi/people'" class="blcs" title="Student Representatives" >
+					<a href="/4pi/people" class="blcs" title="Student Representatives" >
 						<div id="ew" >
 							<i class="fa fa-bank "></i>
 							<p>Representatives</p>
@@ -354,7 +354,7 @@ function homeSearch(el)
 					</a>
 					</div><!-- end of class col-md-3 -->
 					<div class="col-md-3 blocks" >
-						<a href="javascript:void(0)" onclick="window.location.href='/4pi/clubs'" class="blcs" title="Clubs" >
+						<a href="/4pi/clubs" class="blcs" title="Clubs" >
 							<div id="sig" >
 								<i class="fa fa-share-alt "></i>
 								<p>Clubs</p>
@@ -370,7 +370,7 @@ function homeSearch(el)
 							</a>
 							</div><!-- end of class col-md-3 -->
 							<div class="col-md-3   blocks" >
-								<a href="javascript:void(0)" onclick="window.location.href='/4pi/about'" title="About 4pi" class=" blcs" >
+								<a href="/4pi/about" title="About 4pi" class=" blcs" >
 									<div id="aaq">
 										<i class="fa fa-info-circle" ></i>
 										<p >About</p>

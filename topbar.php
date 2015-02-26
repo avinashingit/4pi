@@ -8,7 +8,7 @@
 		var notification="";
 		if(data.objectType==500)
 		{
-			notification+='<div class=\"ns-thumb\"><img src=\"/4pi/img/post.jpg\" width="64" height="64"/></div><div class=\"ns-content\"><p><a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></a></p></div>';
+			notification+='<div class=\"ns-thumb\"><img src=\"/4pi/img/post.jpg?v=1\" width="64" height="64"/></div><div class=\"ns-content\"><p><a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></a></p></div>';
 			// alert(notification);
 		}
 		else if(data.objectType==600)
@@ -22,7 +22,7 @@
 		// alert(notification);
 		/*var finalMessage="<div class=\"ns-thumb\"><img src=\"img/user1.jpg\"/></div><div class=\"ns-content\"><p><a href=\"#\">Zoe Moulder</a> accepted your invitation.</p></div>"*/
 		var notifications = new NotificationFx({
-				wrapper : document.getElementById('notificationDisplayDiv'),
+				wrapper : document.getElementById('topBar'),
 				message : notification,
 				layout : 'other',
 				ttl : 6000,
@@ -225,20 +225,30 @@
 				}
 				else
 				{
-					data=JSON.parse(data);
+					datas=JSON.parse(data);
 					var unreadNotificationNumber=0;
-					for(i=0;i<data.length;i++)
+					for(i=0;i<datas.length;i++)
 					{
-						if(data[i].isRead==0)
+						if(datas[i].isRead==0)
 						{
 							unreadNotificationNumber++;
 						}
-						insertNotifications(data[i],"first");
+						insertNotifications(datas[i],"first");
 						if(value=="yes")
 						{
-							displayNotification(data[i]);
+							displayNotification(datas[i]);
 						}
 					}
+					/*if(value=="yes")
+					{
+						for(var i=0;i<datas.length;i++)
+						{
+							alert(datas[i]);
+							setInterval(function(){
+								displayNotification(datas[i]);
+							},500);
+						}
+					}*/
 					//console.log(unreadNotificationNumber);
 					$('#notificationNumber').html(unreadNotificationNumber);
 
@@ -249,7 +259,7 @@
 		});
 	}
 
-	fetchNotifications();
+	fetchNotifications("no");
 
 	setInterval(function(){
 		fetchNotifications('yes');

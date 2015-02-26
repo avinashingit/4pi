@@ -75,6 +75,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 			
 			<!-- for homepage tiles animation-->
 			<link rel="stylesheet" href="/4pi/css/TP/animate.css" type="text/css" >
+
+			<link rel="stylesheet" href="/4pi/css/Toottips/tooltip-line.css" type="text/css" >
 			
 			<link rel="stylesheet" href="/4pi/css/cs/newsfeed.css" type="text/css" >
 			

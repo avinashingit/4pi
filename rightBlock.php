@@ -122,10 +122,12 @@
 		{
 			if(window.location.href.indexOf('fetchSingle')>-1)
 			{
+				/*littlePost+='<a class="tooltip list-group-item break-word littlePost" style="color:black" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'">'+data.postDetails+'<span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner">'+data.postDetails+'</span></span></span></a>';*/
 				littlePost+='<a href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item break-word littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
 			}
 			else
 			{
+				/*littlePost+='<a class="tooltip list-group-item break-word littlePost" style="color:black" target="_blank" href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'">'+data.postDetails+'<span class="tooltip-content"><span class="tooltip-text"><span class="tooltip-inner">'+data.postDetails+'</span></span></span></a>';*/
 				littlePost+='<a target="_blank"  href="/4pi/fetchSinglePost.php?ref='+data.postIdHash+'" class="list-group-item break-word littlePost"><i style="color:#004160;" class="fa fa-list-ul"></i>&nbsp;&nbsp;'+data.postDetails+'</li></a>';
 			}
 
