@@ -665,6 +665,21 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 								exit();
 							}
 						}
+						else
+						{
+							//$val[0]=array($experienceId=> 'i');
+							$val[0]=array($userId => 's');
+							$val[1]=array($experienceId=> 'i');
+							
+							$res=$conObj->update("UPDATE about SET work = 0 WHERE userId=? and work = ?",$val);
+							if(($cr=$conObj->error)!="")
+							{
+								$conObj->rollbackTransaction();
+								notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
+								echo 12;
+								exit();
+							}
+						}
 						$conObj->completeTransaction();
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);

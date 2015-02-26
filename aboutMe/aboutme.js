@@ -1744,7 +1744,7 @@ function editExperienceSendData()
 			_company:company,
 			_role:role,
 			_duration:duration,
-			_isFeaturing:isFeaturing,
+			_isFeaturing:featuring,
 			_mode:5
 		})
 		.error(function(){
