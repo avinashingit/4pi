@@ -534,6 +534,9 @@ function insertBottomPart(data)
 
 	bottomPart+='<div id="contact">';
 
+	bottomPart+='<div class="hidden" id="phoneValue">'+data.showPhone+'</div>';
+	bottomPart+='<div class="hidden" id="emailValue">'+data.showMailId+'</div>';
+
 		bottomPart+='<div class="row">';
 
 			bottomPart+='<div class="col-md-5" style="border-right:1px solid #E6E6E6;">';
@@ -638,9 +641,10 @@ function insertBottomPart(data)
 						{
 							
 							bottomPart+='<p id="userEmail2" class="break-word">'+data.mailId+'</p>';
-
-							bottomPart+='<p id="userEmail1" class="break-word">'+userId.toLowerCase()+'@iiitdm.ac.in</p>';
+							
 						}
+							bottomPart+='<p id="userEmail1" class="break-word">'+userId.toLowerCase()+'@iiitdm.ac.in</p>';
+						
 
 					bottomPart+='</div>';
 

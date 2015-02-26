@@ -714,6 +714,8 @@ if(userId=="")
 		link.find("#address").val(link2.find("#address").html());
 		link.find("#contactNumber1").val(link2.find("#userPhone1").html());
 		link.find("#contactNumber2").val(link2.find("#userPhone2").html());
+		link.find("#showEmailIdValue").val($("#emailValue").html());
+		link.find("#showContactsValue").val($("#phoneValue").html());
 	}
 
 	function autoFocus(el)
@@ -2252,6 +2254,8 @@ if(userId=="")
 						</div> -->
 
 					</div>
+
+					<br/>
 
 					<div class="row">
 
