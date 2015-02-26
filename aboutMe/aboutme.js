@@ -1637,6 +1637,7 @@ function fetchExperience()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
+		console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1666,7 +1667,16 @@ function addExperienceSendData()
 	var companyName=ln.find('#addExperienceModalCompanyName').val().trim();
 	var role=ln.find('#addExperienceModalRole').val().trim();
 	var duration=ln.find('#addExperienceModalDurationFrom').val().trim()+"-"+ln.find('#addExperienceModalDurationTo').val().trim();
-	var featuring=ln.find("#addExperienceModalFeature").val();
+	var featuring;
+	var featureElement=document.getElementById("addExperienceModal").getElementsByName("featureInPersonalInfo");
+	for(var i=0;i<featureElement.length;i++)
+	{
+		if(featureElement[i].checked)
+		{
+			featuring=featureElement[i].value;
+		}
+	}
+
 	if(companyName.length==0)
 	{
 		alert("Please enter the name of the company");
@@ -1710,9 +1720,16 @@ function editExperienceSendData()
 	var company=link.find('#editExperienceModalCompanyName').val().trim();
 	var role=link.find('#editExperienceModalRole').val().trim();
 	var duration=link.find('#editExperienceModalDurationFrom').val().trim()+"-"+link.find('#editExperienceModalDurationTo').val().trim();
-	var isFeaturing=link.find("#editExperienceModalFeature").val();
 	var id=link.find('#experienceId').val();
-
+	var featuring;
+	var featureElement=document.getElementById("editExperienceModal").getElementsByName("featureInPersonalInfo");
+	for(var i=0;i<featureElement.length;i++)
+	{
+		if(featureElement[i].checked)
+		{
+			featuring=featureElement[i].value;
+		}
+	}
 	if(company.length==0)
 	{
 		alert("Please enter the company name.");

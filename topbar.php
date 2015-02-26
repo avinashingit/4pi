@@ -187,11 +187,11 @@
 
 			if(data.gender=="M")
 			{
-			res+='<span><a title="'+data.uname+'" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" target="_blank" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/defaultMan1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 			else
 			{
-			res+='<span><a title="'+data.uname+'" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/defaultWoman1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" target="_blank" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/defaultWoman1.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			}
 
 			res+='</div>';
@@ -208,7 +208,7 @@
 
 			res+='<div class="col-md-11" id="userName">';
 
-			res+='<span><a title="'+data.uname+'" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
+			res+='<span><a title="'+data.uname+'" target="_blank" href="/4pi/aboutMe/index.php?userId='+data.userId+'"><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg" alt="'+data.uname+'" width="20" height="20"/>&nbsp;&nbsp;&nbsp;<span id="userNameText" style="font-size:15px;" class="text-left">'+data.uname.substring(0,20);+'</span></a></span>';
 			
 			res+='</div>';
 

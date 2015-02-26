@@ -60,7 +60,7 @@ function imageInsertSearch(data,val)
 
 				result+='<div class="col-md-11" id="userName">';
 
-				result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+				result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'" target="_blank"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
 
 				result+='</div>';
 
@@ -84,7 +84,7 @@ function imageInsertSearch(data,val)
 
 				result+='<div class="col-md-11" id="userName">';
 
-				result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+				result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'" target="_blank"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
 
 				result+='</div>';
 
@@ -109,7 +109,7 @@ function imageInsertSearch(data,val)
 
 		result+='<div class="col-md-11" id="userName">';
 
-		result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
+		result+='<a href="/4pi/aboutMe/index.php?userId='+data.userId+'" target="_blank"><h4 style="padding-top:2px;" id="userNameText" class="text-left">'+data.name+'</h4></a>';
 
 		result+='</div>';
 

@@ -146,8 +146,6 @@ if(userId=="")
 		box-shadow: 5px 0px 0px 0px #00004D inset;
 	}
 
-	
-
 	.project
 	{
 		border-bottom:1px solid #E6E6E6;
@@ -702,13 +700,20 @@ if(userId=="")
 		link.find("#contactNumber2").val(link2.find("#userPhone2").html());
 	}
 
+	function autoFocus(el)
+	{
+		$(el).find('input:first').focus();
+	}
+
 	function addSkill()
 	{
 		$("#addSkillModal").modal('show');
 
 		$("#addSkillModal").find('.extraInputs').remove();
 
-		$("#addSkillModal").find('input').focus();
+		// $("#addSkillModal").find('#addSkillModalSkillName').focusin();
+		
+		autoFocus('#addSkillModal');
 
 		clearInputs($("#addSkillModal"));
 	}
@@ -793,6 +798,8 @@ if(userId=="")
 		$("#addToolModal").modal('show');
 		
 		$("#addToolModal").find('.extraInput').remove();
+
+		autoFocus($('#addToolModal'));
 
 		clearInputs($("#addToolModal"));
 	}
@@ -987,7 +994,13 @@ if(userId=="")
 	{
 		$('#addExperienceModal').modal('show');
 
-		clearInputs($("#addExperienceModal"));
+		// clearInputs($("#addExperienceModal"));
+		// 
+		var link=$("#addExperienceModal");
+		ln.find("#addExperienceModalRole").val("");
+		ln.find("#addExperienceModalCompanyName").val("");
+		ln.find("#addExperienceModalDurationFrom").val("");
+		ln.find("#addExperienceModalDurationTo").val("");
 	}
 
 	function editExperience(n)
@@ -1737,7 +1750,7 @@ if(userId=="")
 
 						<div class="col-md-6">
 
-							<input type="text" placeholder="Skill name. Ex:Matlab. Rating next." id="addSkillModalSkillName" class="form-control">
+							<input type="text" placeholder="Skill name. Ex:Matlab. Rating next." id="addSkillModalSkillName" class="form-control" autofocus>
 
 						</div>
 
@@ -2162,7 +2175,7 @@ if(userId=="")
 
 							<label>
 
-								No&nbsp;&nbsp;<input type="radio" id="editExperienceModalFeature" value="0" class="form-control">
+								No&nbsp;&nbsp;<input type="radio" name="editFeatureInPersonalInfo" id="editExperienceModalFeature" value="0" class="form-control">
 
 							</label>
 
@@ -2172,7 +2185,7 @@ if(userId=="")
 
 							<label>
 
-								Yes&nbsp;&nbsp;<input type="radio" id="editExperienceModalFeature" value="1" class="form-control">
+								Yes&nbsp;&nbsp;<input type="radio" name="editFeatureInPersonalInfo" id="editExperienceModalFeature" value="1" class="form-control">
 
 							</label>
 

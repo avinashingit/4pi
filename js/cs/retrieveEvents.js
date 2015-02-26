@@ -336,7 +336,7 @@ function editedEventSend()
 
 	var eventType=$('#editEventModal').find('#editEventType').val();
 
-	var eventCategory=$('#editEventModal').fidn('#editEventCategory').val();
+	var eventCategory=$('#editEventModal').find('#editEventCategory').val();
 
 	if(eventClubName.length==0 || eventName.length==0 || eventContent.length==0 || eventContent.length>10000 || eventVenue.length==0 || eventDate.length==0 )
 	{
@@ -407,7 +407,7 @@ function editedEventSend()
 
 		.success(function (data){
 
-			//console.log(data);
+			console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#editEventModal').modal('hide');

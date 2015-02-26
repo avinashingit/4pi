@@ -22,8 +22,8 @@
 						</a>
 					</div>
 					
-					<div class="col-md-4 text-right" style="padding-top:10px;">
-						<a href="http://www.iiitdm.ac.in" ><div style="color:white;font-size:15px;" >IIITD&ampM Kancheepuram</div></a>
+					<div class="col-md-4 text-right" style="padding-top:15px;">
+						<a href="http://www.iiitdm.ac.in" target="_blank" ><div style="color:white;font-size:15px;" >IIITD&ampM Kancheepuram</div></a>
 					</div>
 					
 				</div>

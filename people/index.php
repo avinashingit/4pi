@@ -28,34 +28,34 @@
 		
 			<!--  START OF LEFT SIDE MENU -->
 	    	<div class="col-md-3" style="padding:0px;"  id="menuExecutiveWing">
-	    		<a href="#sgs" class="sec isec"  ><i class="fa fa-bank"></i> Student General Secretary</a>
-				<a href="#aas" class="sec isec"  ><i class="fa fa-mortar-board"></i> Academic Affairs Secretary</a>
-	    		<a href="#cocas" class="sec isec"  ><i class="fa fa-gears"></i> Co - Curricular Affairs Secretary</a>
-				<a href="#cas" class="sec isec"  ><i class="fa fa-gift"></i> Cultural Affairs Secretary</a>
-				<a href="#has" class="sec isec"  ><i class="fa fa-home"></i> Hostel Affairs Secretary</a>
-				<a href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Research Affairs Secretary</a>
-				<a href="#ss" class="sec isec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
+	    		<a target="_blank" href="#sgs" class="sec isec"  ><i class="fa fa-bank"></i> Student General Secretary</a>
+				<a target="_blank" href="#aas" class="sec isec"  ><i class="fa fa-mortar-board"></i> Academic Affairs Secretary</a>
+	    		<a target="_blank" href="#cocas" class="sec isec"  ><i class="fa fa-gears"></i> Co - Curricular Affairs Secretary</a>
+				<a target="_blank" href="#cas" class="sec isec"  ><i class="fa fa-gift"></i> Cultural Affairs Secretary</a>
+				<a target="_blank" href="#has" class="sec isec"  ><i class="fa fa-home"></i> Hostel Affairs Secretary</a>
+				<a target="_blank" href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Research Affairs Secretary</a>
+				<a target="_blank" href="#ss" class="sec isec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
 				
 				
-				<a href="#sgs" class="sec ew"  ><i class="fa fa-long-arrow-left"></i> Secretaries</a>
+				<a target="_blank" href="#sgs" class="sec ew"  ><i class="fa fa-long-arrow-left"></i> Secretaries</a>
 				
 				
 				
-				<a href="#sacs" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker</a>
-				<a href="#sacds" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker - Deputy</a>
+				<a target="_blank" href="#sacs" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker</a>
+				<a target="_blank" href="#sacds" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker - Deputy</a>
 
 				
 				
 				<div>
-	    		<a href="#cs" class="sec hos"  ><i class="fa fa-crosshairs"></i> Councillors<i class="fa fa-plus-square" style="float:right;"></i></a>
-				<a href="#cbc" class="subsec"  ><i class="fa fa-crosshairs"></i> COE Branch Councillor</a>
-				<a href="#ebc" class="subsec"  ><i class="fa fa-crosshairs"></i> EDM Branch Councillor</a>
-				<a href="#mbc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDM Branch Councillor</a>
+	    		<a target="_blank" href="#cs" class="sec hos"  ><i class="fa fa-crosshairs"></i> Councillors<i class="fa fa-plus-square" style="float:right;"></i></a>
+				<a target="_blank" href="#cbc" class="subsec"  ><i class="fa fa-crosshairs"></i> COE Branch Councillor</a>
+				<a target="_blank" href="#ebc" class="subsec"  ><i class="fa fa-crosshairs"></i> EDM Branch Councillor</a>
+				<a target="_blank" href="#mbc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDM Branch Councillor</a>
 				
-				<a href="#mcc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDes Class Councillor</a>
-				<a href="#pcc" class="subsec"  ><i class="fa fa-crosshairs"></i> PhD Class Councillor</a>
+				<a target="_blank" href="#mcc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDes Class Councillor</a>
+				<a target="_blank" href="#pcc" class="subsec"  ><i class="fa fa-crosshairs"></i> PhD Class Councillor</a>
 				
-				<a href="#dsc" class="subsec"  ><i class="fa fa-crosshairs"></i> Day Scholars Councillor</a>
+				<a target="_blank" href="#dsc" class="subsec"  ><i class="fa fa-crosshairs"></i> Day Scholars Councillor</a>
 				</div>
 				
 				
@@ -64,40 +64,40 @@
 				
 				
 				<div>
-	    		<a href="#bh" class="sec hos"  ><i class="fa fa-male"></i> Boys Hostel<i class="fa fa-plus-square" style="float:right;"></i></a>
-				<a href="#bw" class="subsec"  ><i class="fa fa-won"></i> Wardens</a>
-				<!--<a href="#baw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a>  -->
+	    		<a target="_blank" href="#bh" class="sec hos"  ><i class="fa fa-male"></i> Boys Hostel<i class="fa fa-plus-square" style="float:right;"></i></a>
+				<a target="_blank" href="#bw" class="subsec"  ><i class="fa fa-won"></i> Wardens</a>
+				<!--<a target="_blank" href="#baw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a>  -->
 				
 				
-	    		<a href="#bgs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
-				<a href="#bms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
-				<a href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
-				<a href="#bss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<a href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
-				<a href="#bls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
-				<a href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
+	    		<a target="_blank" href="#bgs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
+				<a target="_blank" href="#bms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
+				<a target="_blank" href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
+				<a target="_blank" href="#bss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
+				<a target="_blank" href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
+				<a target="_blank" href="#bls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
+				<a target="_blank" href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
+				<a target="_blank" href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
 				
 				</div>
 				
 				
 				<div>
-				<a href="#gh" class="sec hos"  ><i class="fa fa-female"></i> Girls Hostel<i class="fa fa-plus-square"  style="float:right;"></i></a>
-				<a href="#gw" class="subsec"  ><i class="fa fa-won"></i> Warden</a>
-				<!--<a href="#gaw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a> -->
+				<a target="_blank" href="#gh" class="sec hos"  ><i class="fa fa-female"></i> Girls Hostel<i class="fa fa-plus-square"  style="float:right;"></i></a>
+				<a target="_blank" href="#gw" class="subsec"  ><i class="fa fa-won"></i> Warden</a>
+				<!--<a target="_blank" href="#gaw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a> -->
 				
-	    		<a href="#ggs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
-				<a href="#gms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
-				<a href="#gts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
-				<a href="#gss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<a href="#gas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
-				<a href="#gls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
-				<a href="#gsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<a href="#ggns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
+	    		<a target="_blank" href="#ggs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
+				<a target="_blank" href="#gms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
+				<a target="_blank" href="#gts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
+				<a target="_blank" href="#gss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
+				<a target="_blank" href="#gas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
+				<a target="_blank" href="#gls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
+				<a target="_blank" href="#gsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
+				<a target="_blank" href="#ggns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
 	    		</div>
 				
 				
-				<a href="/4pi/files/sc.pdf" id="extra" ><i class="fa fa-download"></i> Student Constitution - IIITD&ampM K</a>
+				<a target="_blank" href="/4pi/files/sc.pdf" id="extra" ><i class="fa fa-download"></i> Student Constitution - IIITD&ampM K</a>
 				
 	    	</div>
 			
@@ -130,17 +130,17 @@
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Student General Secretary" ><img class="img-responsive"  src="/4pi/img/people/sgs.png" alt="Student General Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="Student General Secretary" ><img class="img-responsive"  src="/4pi/img/people/sgs.png" alt="Student General Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Student General Secretary" class="secName" >S. Mahesh Varma</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="Student General Secretary" class="secName" >S. Mahesh Varma</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
 								<div>
 								<div>#332, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7418276308
 								<br />
 								
-								<div><a href="mailto:edm11b021@iiitdm.ac.in" title="Student General Secretary" ><i class="fa fa-envelope"></i> edm11b021@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b021@iiitdm.ac.in" title="Student General Secretary" ><i class="fa fa-envelope"></i> edm11b021@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -163,7 +163,7 @@
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -190,17 +190,17 @@
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Academic Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/aas.png" alt="Academic Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B005" title="Academic Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/aas.png" alt="Academic Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Academic Affairs Secretary" class="secName"  >Battinoju Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B005" title="Academic Affairs Secretary" class="secName"  >Battinoju Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#415, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551913187
 								<br />
 								
-								<div><a href="mailto:coe11b005@iiitdm.ac.in" title="Academic Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b005@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b005@iiitdm.ac.in" title="Academic Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b005@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -226,7 +226,7 @@ also with the RAS in a manner that addresses the needs of the Student Body.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -254,17 +254,17 @@ also with the RAS in a manner that addresses the needs of the Student Body.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Co-Curricular Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cocas.png" alt="Co-Curricular Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B011" title="Co-Curricular Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cocas.png" alt="Co-Curricular Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Co-Curricular Affairs Secretary" class="secName"  >M.Abhishravan</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B011" title="Co-Curricular Affairs Secretary" class="secName"  >M.Abhishravan</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#324, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551913070
 								<br />
 								
-								<div><a href="mailto:edm11b011@iiitdm.ac.in" title="Co-Curricular Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b011@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b011@iiitdm.ac.in" title="Co-Curricular Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b011@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -291,7 +291,7 @@ issues.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -319,17 +319,17 @@ issues.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Cultural Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cas.png" alt="Cultural Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B20" title="Cultural Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cas.png" alt="Cultural Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Cultural Affairs Secretary" class="secName"  >N. Vamsi Krishna</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B20" title="Cultural Affairs Secretary" class="secName"  >N. Vamsi Krishna</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#229, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551381661
 								<br />
 								
-								<div><a href="mailto:mdm11b020@iiitdm.ac.in" title="Cultural Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b020@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b020@iiitdm.ac.in" title="Cultural Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b020@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -355,7 +355,7 @@ cultural events.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -383,17 +383,17 @@ cultural events.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Hostel Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/has.png" alt="Hostel Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B003" title="Hostel Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/has.png" alt="Hostel Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Hostel Affairs Secretary" class="secName"  >Ashish Kumar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B003" title="Hostel Affairs Secretary" class="secName"  >Ashish Kumar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#224, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9790701732
 								<br />
 								
-								<div><a href="mailto:mdm11b003@iiitdm.ac.in" title="Hostel Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b003@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b003@iiitdm.ac.in" title="Hostel Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b003@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -416,7 +416,7 @@ the employees of the hostel management and other persons employed by the hostels
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -445,16 +445,16 @@ the employees of the hostel management and other persons employed by the hostels
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Research Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/ras.png" alt="Research Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12D001" title="Research Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/ras.png" alt="Research Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Research Affairs Secretary" class="secName"  >Mohammed Asan Basiri</a><br /><span> Research Scholar , Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12D001" title="Research Affairs Secretary" class="secName"  >Mohammed Asan Basiri</a><br /><span> Research Scholar , Computer Engineering<span></p>
 								<div>
 								<div>#1127, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9442753405
 								<br />								
-								<div><a href="mailto:coe12d001@iiitdm.ac.in" title="Research Affairs Secretary" ><i class="fa fa-envelope"></i> coe12d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12d001@iiitdm.ac.in" title="Research Affairs Secretary" ><i class="fa fa-envelope"></i> coe12d001@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -480,7 +480,7 @@ also with the AAS in a manner that addresses the needs of the Student Body.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -508,16 +508,16 @@ also with the AAS in a manner that addresses the needs of the Student Body.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/ss.png" alt="Sports Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B025" title="Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/ss.png" alt="Sports Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Sports Secretary"  class="secName" >Swaresh Sankpal</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B025" title="Sports Secretary"  class="secName" >Swaresh Sankpal</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#231, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7845491055
 								<br />								
-								<div><a href="mailto:coe11b025@iiitdm.ac.in" title="Sports Secretary" ><i class="fa fa-envelope"></i> coe11b025@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b025@iiitdm.ac.in" title="Sports Secretary" ><i class="fa fa-envelope"></i> coe11b025@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -541,7 +541,7 @@ GFKR) to the respective CSAs and the SAC.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -571,17 +571,17 @@ GFKR) to the respective CSAs and the SAC.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="SAC Speaker" ><img class="img-responsive"  src="/4pi/img/people/sacs.png" alt="SAC Speaker" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B014" title="SAC Speaker" ><img class="img-responsive"  src="/4pi/img/people/sacs.png" alt="SAC Speaker" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="SAC Speaker" class="secName"  >M. Rajasekhar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B014" title="SAC Speaker" class="secName"  >M. Rajasekhar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#225, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9710300379
 								<br />
 								
-								<div><a href="mailto:mdm11b014@iiitdm.ac.in" title="SAC Speaker" ><i class="fa fa-envelope"></i> mdm11b014@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b014@iiitdm.ac.in" title="SAC Speaker" ><i class="fa fa-envelope"></i> mdm11b014@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -607,7 +607,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -636,17 +636,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="SAC Speaker - Deputy" ><img class="img-responsive"  src="/4pi/img/people/sacds.png" alt="SAC Speaker - Deputy" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B022" title="SAC Speaker - Deputy" ><img class="img-responsive"  src="/4pi/img/people/sacds.png" alt="SAC Speaker - Deputy" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="SAC Speaker - Deputy" class="secName" >S. Lokesh Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B022" title="SAC Speaker - Deputy" class="secName" >S. Lokesh Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
 								<div>
 								<div>#333, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9445419253
 								<br />
 								
-								<div><a href="mailto:edm11b022@iiitdm.ac.in" title="SAC Speaker - Deputy" ><i class="fa fa-envelope"></i> edm11b022@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b022@iiitdm.ac.in" title="SAC Speaker - Deputy" ><i class="fa fa-envelope"></i> edm11b022@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -678,7 +678,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -713,17 +713,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="COE Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/cbc.png" alt="COE Branch Councillor"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B014" title="COE Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/cbc.png" alt="COE Branch Councillor"/></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="COE Branch Councillor" class="secName"  >K.Krishna Mohan Reddy</a><br /><span>B.Tech, Computer Engineering <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B014" title="COE Branch Councillor" class="secName"  >K.Krishna Mohan Reddy</a><br /><span>B.Tech, Computer Engineering <span></p>
 								<div>
 								<div>#420, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9094381911
 								<br />
 								
-								<div><a href="mailto:coe11b014@iiitdm.ac.in" title="COE Branch Councillor" ><i class="fa fa-envelope"></i> coe11b014@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b014@iiitdm.ac.in" title="COE Branch Councillor" ><i class="fa fa-envelope"></i> coe11b014@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -744,7 +744,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -774,17 +774,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="EDM Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/ebc.png" alt="EDM Branch Councillor" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B026" title="EDM Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/ebc.png" alt="EDM Branch Councillor" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="EDM Branch Councillor" class="secName"  >T.Nikhila  </a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B026" title="EDM Branch Councillor" class="secName"  >T.Nikhila  </a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#501, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9445419188
 								<br />
 								
-								<div><a href="mailto:edm11b026@iiitdm.ac.in" title="EDM Branch Councillor" ><i class="fa fa-envelope"></i> edm11b026@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b026@iiitdm.ac.in" title="EDM Branch Councillor" ><i class="fa fa-envelope"></i> edm11b026@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -805,7 +805,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -833,17 +833,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="MDM Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/mbc.png" alt="MDM Branch Councillor" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B021" title="MDM Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/mbc.png" alt="MDM Branch Councillor" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="MDM Branch Councillor" class="secName"  >P. Sai Sankeerth Rao</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B021" title="MDM Branch Councillor" class="secName"  >P. Sai Sankeerth Rao</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#429, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7667808942
 								<br />
 								
-								<div><a href="mailto:mdm11b021@iiitdm.ac.in" title="MDM Branch Councillor" ><i class="fa fa-envelope"></i> mdm11b021@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b021@iiitdm.ac.in" title="MDM Branch Councillor" ><i class="fa fa-envelope"></i> mdm11b021@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -865,7 +865,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -893,18 +893,18 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="MDes Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/mcc.png" alt="MDes Branch Councillor"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="MDes Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/mcc.png" alt="MDes Branch Councillor"/></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="MDes Branch Councillor" class="secName"  >Gourav Pandey</a><br /><span>M.Des, Mechanical Systems<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="MDes Branch Councillor" class="secName"  >Gourav Pandey</a><br /><span>M.Des, Mechanical Systems<span></p>
 								<div>
 								<div>#736, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9941313415
 							</br>
 								
 								
-								<div><a href="mailto:mds13m006@iiitdm.ac.in" title="MDes Branch Councillor" ><i class="fa fa-envelope"></i> mds13m006@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mds13m006@iiitdm.ac.in" title="MDes Branch Councillor" ><i class="fa fa-envelope"></i> mds13m006@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -926,7 +926,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>			
 				</section>
 
@@ -954,17 +954,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="PhD Class Councillor" ><img class="img-responsive"  src="/4pi/img/people/pcc.png" alt="PhD Class Councillor"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MAT11D001" title="PhD Class Councillor" ><img class="img-responsive"  src="/4pi/img/people/pcc.png" alt="PhD Class Councillor"/></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="PhD Class Councillor" class="secName"  >T.Sandhya</a><br /><span> Research Scholar , Dept. Mathematics  <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MAT11D001" title="PhD Class Councillor" class="secName"  >T.Sandhya</a><br /><span> Research Scholar , Dept. Mathematics  <span></p>
 								<div>
 								<div>#909, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9444950990
 								<br />
 								
-								<div><a href="mailto:mat11d001@iiitdm.ac.in" title="PhD Class Councillor" ><i class="fa fa-envelope"></i> mat11d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mat11d001@iiitdm.ac.in" title="PhD Class Councillor" ><i class="fa fa-envelope"></i> mat11d001@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -986,7 +986,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1014,16 +1014,16 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Day Scholars Councillor" ><img class="img-responsive"  src="/4pi/img/people/dsc.png" alt="Day Scholars Councillor" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE13D001" title="Day Scholars Councillor" ><img class="img-responsive"  src="/4pi/img/people/dsc.png" alt="Day Scholars Councillor" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Day Scholars Councillor" class="secName"  >Veeramani</a><br /><span>Research scholar, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE13D001" title="Day Scholars Councillor" class="secName"  >Veeramani</a><br /><span>Research scholar, Computer Engineering<span></p>
 								<div>
 								<i class="fa fa-mobile"></i> +91 - 7299655275
 								<br />
 								
-								<div><a href="mailto:coe13d001@iiitdm.ac.in" title="Day Scholars Councillor" ><i class="fa fa-envelope"></i> coe13d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe13d001@iiitdm.ac.in" title="Day Scholars Councillor" ><i class="fa fa-envelope"></i> coe13d001@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1044,7 +1044,7 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1107,19 +1107,19 @@ shall be treated as approved.</li>
 								
 								
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/bhw1.png" alt="Boys Hostel Warden" /></a>
+									<a target="_blank" href="#" title="Boys Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/bhw1.png" alt="Boys Hostel Warden" /></a>
 								</div>
 							
 							<div class="secInfo">
 								<h4 class="text-center" > Warden 1</h4>
 								<br />
-								<p ><a href="#" title="Boys Hostel Warden" class="secName"  >Dr. Noor Mahammad</a><br /><span>Asst. Professor, Dept. Computer Engineering <span></p>
+								<p ><a target="_blank" href="#" title="Boys Hostel Warden" class="secName"  >Dr. Noor Mahammad</a><br /><span>Asst. Professor, Dept. Computer Engineering <span></p>
 								<div>
 								<div></div>
 								<i class="fa fa-mobile"></i> +91 - 9176010587
 								<br />
 								
-								<div><a href="mailto:noor@iiitdm.ac.in" title="Boys Hostel Warden" ><i class="fa fa-envelope"></i> noor@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=noor@iiitdm.ac.in" title="Boys Hostel Warden" ><i class="fa fa-envelope"></i> noor@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1131,17 +1131,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/bw.png" alt="Boys Hostel Warden" /></a>
+									<a target="_blank" href="#" title="Boys Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/bw.png" alt="Boys Hostel Warden" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Warden" class="secName"  >Dr. N. Sadagopan</a><br /><span>Asst. Professor, Dept. Computer Engineering <span></p>
+								<p ><a target="_blank" href="#" title="Boys Hostel Warden" class="secName"  >Dr. N. Sadagopan</a><br /><span>Asst. Professor, Dept. Computer Engineering <span></p>
 								<div>
 								<div></div>
 								<i class="fa fa-mobile"></i> +91 - *******
 								<br />
 								
-								<div><a href="#" title="Boys Hostel Warden" ><i class="fa fa-envelope"></i> sadagopan@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="#" title="Boys Hostel Warden" ><i class="fa fa-envelope"></i> sadagopan@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1152,20 +1152,20 @@ shall be treated as approved.</li>
 							<div>
 								
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/bhw2.png" alt="Boys Hostel Warden" /></a>
+									<a target="_blank" href="#" title="Boys Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/bhw2.png" alt="Boys Hostel Warden" /></a>
 								</div>
 							
 							<div class="secInfo">
 								<h4 class="text-center" > Warden 2</h4>
 								<br />
 								
-								<p ><a href="#" title="Boys Hostel Warden" class="secName"  >Dr. N. Sadagopan</a><br /><span>Asst. Professor, Dept. Computer Engineering <span></p>
+								<p ><a target="_blank" href="#" title="Boys Hostel Warden" class="secName"  >Dr. N. Sadagopan</a><br /><span>Asst. Professor, Dept. Computer Engineering <span></p>
 								<div>
 								<div></div>
 								<i class="fa fa-mobile"></i> +91 - 9445280351
 								<br />
 								
-								<div><a href="mailto:sadagopan@iiitdm.ac.in" title="Boys Hostel Warden" ><i class="fa fa-envelope"></i> sadagopan@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=sadagopan@iiitdm.ac.in" title="Boys Hostel Warden" ><i class="fa fa-envelope"></i> sadagopan@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							
@@ -1176,7 +1176,7 @@ shall be treated as approved.</li>
 					</div>
 					<!--<div class="row text-center" >
 						<div class="col-md-12"> 
-							<br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div>
+							<br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div>
 						</div>
 					</div> -->
 				</div>
@@ -1202,17 +1202,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/baw.png" /></a>
+									<a target="_blank" href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/baw.png" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#234, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9841191663
 								<br />
 								
-								<div><a href="#" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="#" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1235,7 +1235,7 @@ hostel, the minutes of every HC meeting.</li>
 							
 						</div>
 					</div>
-					<div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>
+					<div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>
 				</div>
 				</section> -->
 				
@@ -1267,17 +1267,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgs.png" alt="Boys Hostel General Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B016" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgs.png" alt="Boys Hostel General Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B016" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#234, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9841191663
 								<br />
 								
-								<div><a href="mailto:mdm11b016@iiitdm.ac.in" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b016@iiitdm.ac.in" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1300,7 +1300,7 @@ hostel, the minutes of every HC meeting.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -1330,17 +1330,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/bms.png" alt="Boys Hostel Mess Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B023" title="Boys Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/bms.png" alt="Boys Hostel Mess Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Mess Secretary" class="secName"  >Siddhartha Agarwal</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B023" title="Boys Hostel Mess Secretary" class="secName"  >Siddhartha Agarwal</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#427, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9710331521
 								<br />
 								
-								<div><a href="mailto:coe11b023@iiitdm.ac.in" title="Boys Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b023@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b023@iiitdm.ac.in" title="Boys Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b023@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1365,7 +1365,7 @@ organization of social events in the hostel.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -1393,17 +1393,17 @@ organization of social events in the hostel.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bts.png" alt="Boys Hostel Technical Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B026" title="Boys Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bts.png" alt="Boys Hostel Technical Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Technical Affairs Secretary" class="secName"  >Saurav Verma</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B026" title="Boys Hostel Technical Affairs Secretary" class="secName"  >Saurav Verma</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#221, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7845223392
 								<br />
 								
-								<div><a href="mailto:mdm11b026@iiitdm.ac.in" title="Boys Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b026@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b026@iiitdm.ac.in" title="Boys Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b026@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1430,7 +1430,7 @@ his hostel is one of the polling venues.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1458,18 +1458,18 @@ his hostel is one of the polling venues.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bss.png" alt="Boys Hostel Social Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B024" title="Boys Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bss.png" alt="Boys Hostel Social Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Social Affairs Secretary" class="secName"  >R.Sri Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B024" title="Boys Hostel Social Affairs Secretary" class="secName"  >R.Sri Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#431, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7845669426
 							</br>
 								
 								
-								<div><a href="mailto:coe11b024@iiitdm.ac.in" title="Boys Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b024@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b024@iiitdm.ac.in" title="Boys Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b024@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1494,7 +1494,7 @@ hostel common room.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>			
 				</section>
 
@@ -1522,17 +1522,17 @@ hostel common room.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bas.png" alt="Boys Hostel Alumni Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B016" title="Boys Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bas.png" alt="Boys Hostel Alumni Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Alumni Affairs Secretary" class="secName"  >P.L.Thanooj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B016" title="Boys Hostel Alumni Affairs Secretary" class="secName"  >P.L.Thanooj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#322, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7401698057
 								<br />
 								
-								<div><a href="mailto:edm11b016@iiitdm.ac.in" title="Boys Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b016@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b016@iiitdm.ac.in" title="Boys Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b016@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1559,7 +1559,7 @@ competitions on it.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1587,17 +1587,17 @@ competitions on it.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/bls.png" alt="Boys Hostel Literary Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B026" title="Boys Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/bls.png" alt="Boys Hostel Literary Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Literary Secretary" class="secName"  >T. Naga Kuladeep</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B026" title="Boys Hostel Literary Secretary" class="secName"  >T. Naga Kuladeep</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#423, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9445419216
 								<br />
 								
-								<div><a href="mailto:coe11b026@iiitdm.ac.in" title="Boys Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b026@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b026@iiitdm.ac.in" title="Boys Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b026@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1623,7 +1623,7 @@ hostel library.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1648,17 +1648,17 @@ hostel library.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/bsps.png" alt="Boys Hostel Sports Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B005" title="Boys Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/bsps.png" alt="Boys Hostel Sports Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Sports Secretary" class="secName"  >Ch. Sudhakar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B005" title="Boys Hostel Sports Secretary" class="secName"  >Ch. Sudhakar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#217, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7299417901
 								<br />
 								
-								<div><a href="mailto:mdm11b005@iiitdm.ac.in" title="Boys Hostel Sports Secretary" ><i class="fa fa-envelope"></i> mdm11b005@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b005@iiitdm.ac.in" title="Boys Hostel Sports Secretary" ><i class="fa fa-envelope"></i> mdm11b005@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1683,7 +1683,7 @@ tournaments.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1710,17 +1710,17 @@ tournaments.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgns.png" alt="Boys Hostel Garden Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B004" title="Boys Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgns.png" alt="Boys Hostel Garden Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel Garden Secretary" class="secName"  >C.V.Dheeraj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B004" title="Boys Hostel Garden Secretary" class="secName"  >C.V.Dheeraj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#319, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 84384148475
 								<br />
 								
-								<div><a href="mailto:edm11b004@iiitdm.ac.in" title="Boys Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm11b004@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b004@iiitdm.ac.in" title="Boys Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm11b004@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1740,7 +1740,7 @@ tournaments.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1779,17 +1779,17 @@ tournaments.</li>
 						<div class="col-md-6 col-md-offset-3">
 						<div >
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/gw.png" alt="Girls Hostel Warden" /></a>
+									<a target="_blank" href="#" title="Girls Hostel Warden" ><img class="img-responsive"  src="/4pi/img/people/gw.png" alt="Girls Hostel Warden" /></a>
 								</div>
 						
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Warden" class="secName"  >Dr. Priyanka Kokil</a><br /><span>Asst. Professor, Dept. Electronics Engineering <span></p>
+								<p ><a target="_blank" href="#" title="Girls Hostel Warden" class="secName"  >Dr. Priyanka Kokil</a><br /><span>Asst. Professor, Dept. Electronics Engineering <span></p>
 								<div>
 								<div></div>
 								<i class="fa fa-mobile"></i> +91 - 9444092281
 								<br />
 								
-								<div><a href="priyanka@iiitdm.ac.in" title="Girls Hostel Warden" ><i class="fa fa-envelope"></i> priyanka@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=priyanka@iiitdm.ac.in" title="Girls Hostel Warden" ><i class="fa fa-envelope"></i> priyanka@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 						</div>
@@ -1812,7 +1812,7 @@ hostel, the minutes of every HC meeting.</li>
 							
 						</div>
 					</div>
-					<div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>-->
+					<div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>-->
 				</div>
 				</section>
 				
@@ -1836,17 +1836,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/gaw.png" /></a>
+									<a target="_blank" href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/gaw.png" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#234, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9841191663
 								<br />
 								
-								<div><a href="#" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="#" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1869,7 +1869,7 @@ hostel, the minutes of every HC meeting.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>
 				</div>
 				</section> -->
 				
@@ -1895,17 +1895,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/ggs.png" alt="Girls Hostel General Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B012" title="Girls Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/ggs.png" alt="Girls Hostel General Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel General Secretary" class="secName"  >M. Ashwini</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B012" title="Girls Hostel General Secretary" class="secName"  >M. Ashwini</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#505, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551913079
 								
 								
-								<div><a href="mailto:edm11b012@iiitdm.ac.in" title="Girls Hostel General Secretary" ><i class="fa fa-envelope"></i> edm11b012@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b012@iiitdm.ac.in" title="Girls Hostel General Secretary" ><i class="fa fa-envelope"></i> edm11b012@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1929,7 +1929,7 @@ hostel, the minutes of every HC meeting.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1957,17 +1957,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/gms.png" alt="Girls Hostel Mess Secretary"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B027" title="Girls Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/gms.png" alt="Girls Hostel Mess Secretary"/></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Mess Secretary" class="secName"  >V.Manogna</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B027" title="Girls Hostel Mess Secretary" class="secName"  >V.Manogna</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#501, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7299417911
 								
 								
-								<div><a href="mailto:coe11b027@iiitdm.ac.in" title="Girls Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b027@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b027@iiitdm.ac.in" title="Girls Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b027@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1993,7 +1993,7 @@ organization of social events in the hostel.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -2024,17 +2024,17 @@ organization of social events in the hostel.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gts.png" alt="Girls Hostel Technical Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B014" title="Girls Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gts.png" alt="Girls Hostel Technical Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Technical Affairs Secretary" class="secName"  >N.Sowmika</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B014" title="Girls Hostel Technical Affairs Secretary" class="secName"  >N.Sowmika</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#509, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9941319065
 								
 								
-								<div><a href="mailto:edm11b014@iiitdm.ac.in" title="Girls Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b014@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b014@iiitdm.ac.in" title="Girls Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b014@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -2061,7 +2061,7 @@ her hostel is one of the polling venues.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -2093,17 +2093,17 @@ her hostel is one of the polling venues.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gss.png" alt="Girls Hostel Social Affairs Secretary"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B012" title="Girls Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gss.png" alt="Girls Hostel Social Affairs Secretary"/></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Social Affairs Secretary" class="secName"  >I. Madhu Lahari</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B012" title="Girls Hostel Social Affairs Secretary" class="secName"  >I. Madhu Lahari</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#503, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7401336509
 								
 								
-								<div><a href="mailto:coe11b012@iiitdm.ac.in" title="Girls Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b012@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b012@iiitdm.ac.in" title="Girls Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b012@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -2128,7 +2128,7 @@ hostel common room.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -2158,17 +2158,17 @@ hostel common room.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gas.png" alt="Girls Hostel Alumni Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B025" title="Girls Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gas.png" alt="Girls Hostel Alumni Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Alumni Affairs Secretary" class="secName"  >Swetha M Manur</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B025" title="Girls Hostel Alumni Affairs Secretary" class="secName"  >Swetha M Manur</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#508, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7299205032
 								<br />
 								
-								<div><a href="mailto:edm11b025@iiitdm.ac.in" title="Girls Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b025@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b025@iiitdm.ac.in" title="Girls Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b025@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -2195,7 +2195,7 @@ competitions on it.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -2226,17 +2226,17 @@ competitions on it.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/gls.png" alt="Girls Hostel Literary Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B001" title="Girls Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/gls.png" alt="Girls Hostel Literary Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Literary Secretary" class="secName"  >A.Mounika</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B001" title="Girls Hostel Literary Secretary" class="secName"  >A.Mounika</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#504, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9445419520
 								<br />
 								
-								<div><a href="mailto:coe11b001@iiitdm.ac.in" title="Girls Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b001@iiitdm.ac.in" title="Girls Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b001@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -2262,7 +2262,7 @@ hostel library.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -2291,17 +2291,17 @@ hostel library.</li>
 							<div class="col-md-6" style="border-right:1px solid #333;" >
 								<div>
 									<div class="secPic" >
-										<a href="#" title="Girls Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/gsps.png" alt="Girls Hostel Sports Secretary"/></a>
+										<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B001" title="Girls Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/gsps.png" alt="Girls Hostel Sports Secretary"/></a>
 									</div>
 								
 								<div class="secInfo">
-									<p ><a href="#" title="Girls Hostel Sports Secretary" class="secName"  >Anita Seervi</a><br /><span>B.Tech, Computer Engineering <span></p>
+									<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B001" title="Girls Hostel Sports Secretary" class="secName"  >Anita Seervi</a><br /><span>B.Tech, Computer Engineering <span></p>
 									<div>
 									<div>#810, Ashwatha Hostel</div>
 									<i class="fa fa-mobile"></i> +91 - 9941723064
 									<br /> 
 									
-									<div><a href="mailto:coe12b001@iiitdm.ac.in" title="Girls Hostel Sports Secretary" ><i class="fa fa-envelope"></i> coe12b001@iiitdm.ac.in</a></div>
+									<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12b001@iiitdm.ac.in" title="Girls Hostel Sports Secretary" ><i class="fa fa-envelope"></i> coe12b001@iiitdm.ac.in</a></div>
 									</div>
 								</div>
 								</div>
@@ -2326,7 +2326,7 @@ hostel library.</li>
 						</div>
 						<!--<div class="row text-center" >
 							<div class="col-md-12">
-								<br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div>
+								<br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div>
 							</div>
 						</div>-->
 					</div>
@@ -2354,17 +2354,17 @@ hostel library.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a href="#" title="Girls Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/ggns.png" alt="Girls Hostel Garden Secretary"  /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B003" title="Girls Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/ggns.png" alt="Girls Hostel Garden Secretary"  /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a href="#" title="Girls Hostel Garden Secretary" class="secName"  >A. Asha Kumari</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B003" title="Girls Hostel Garden Secretary" class="secName"  >A. Asha Kumari</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#811, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9941439496
 								<br />
 								
-								<div><a href="mailto:edm12b003@iiitdm.ac.in" title="Girls Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm12b003@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm12b003@iiitdm.ac.in" title="Girls Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm12b003@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -2384,7 +2384,7 @@ hostel library.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
