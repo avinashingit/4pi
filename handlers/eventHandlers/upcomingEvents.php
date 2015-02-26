@@ -168,7 +168,7 @@ $conn=new QoB();
 				
 					if($userId==COCAS)
 					{
-						if($event['eventCategory']=='technical' || $event['approvalStatus']==1)
+						if(($event['eventCategory']=='technical' || $event['userId']==$userId ) && $event['approvalStatus']!=-1  )
 						{
 							$eventObj=getEventObject($event,$userId);
 							$eventObjArray[]=$eventObj;
@@ -177,7 +177,7 @@ $conn=new QoB();
 					}
 					else if($userId == CULSEC)
 					{
-						if($event['eventCategory']=='nonTechnical' || $event['approvalStatus']==1)
+						if(($event['eventCategory']=='nonTechnical' || $event['userId']==$userId ) && $event['approvalStatus']!=-1 )
 						{
 							$eventObj=getEventObject($event,$userId);
 							$eventObjArray[]=$eventObj;

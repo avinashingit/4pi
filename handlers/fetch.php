@@ -1144,11 +1144,21 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 	function changeToEventTimeFormat($time)
 	{
-		$timeRegex="([:]+)";
+		$timeArr=explode(':',$time);
+		$timeHr=(int)$timeArr[0];
+		$timeMin=$timeArr[1];
+
+		if($timeHr<10)
+		{
+			$timeArr[0]='0'.$timeArr[0];
+		}
+		$eventTime=$timeArr[0].$timeArr[1];
+		return $eventTime;
+		/*$timeRegex="([:]+)";
 	
 		$eventTime=preg_replace($timeRegex, '', $time);
 	
-		return $eventTime;
+		return $eventTime;*/
 	}
 
 
