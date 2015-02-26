@@ -68,6 +68,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 		
 		<!--CUSTOM-->
 			<link rel="stylesheet" href="/4pi/css/cs/style.css" type="text/css" >
+
+			<!-- for notification Display-->
+			<link rel="stylesheet" href="/4pi/css/TP/ns-default.css" type="text/css" >
+			<link rel="stylesheet" href="/4pi/css/TP/ns-style-other.css" type="text/css" >
 			
 			<!-- for homepage tiles animation-->
 			<link rel="stylesheet" href="/4pi/css/TP/animate.css" type="text/css" >
@@ -109,6 +113,11 @@ error_reporting(E_ALL ^ E_NOTICE);
 		<script src="/4pi/js/cs/script.js?v=randomNumber"></script>
 
 		<script src="/4pi/js/TP/jquery.shorten.js"></script>
+
+		<!-- for notifications -->
+		<script src="/4pi/js/TP/classie.js"></script>
+		<script src="/4pi/js/TP/modernizr.custom.js"></script>
+		<script src="/4pi/js/TP/notificationFx.js"></script>
 
 		<script src="/4pi/js/cs/retrievePosts.js?v=randomNumber"></script>
 

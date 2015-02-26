@@ -1,4 +1,78 @@
 <!-- basically the top bar i.e. the header part of the newsfeed, is common to all the users -->
+
+<script>
+
+	function displayNotification(data)
+	{
+		// console.log(data);
+		var notification="";
+		if(data.objectType==500)
+		{
+			notification+='<div class=\"ns-thumb\"><img src=\"/4pi/img/post.jpg\" width="64" height="64"/></div><div class=\"ns-content\"><p><a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></a></p></div>';
+			// alert(notification);
+		}
+		else if(data.objectType==600)
+		{
+			notification+='<div class=\"ns-thumb\"><img src=\"/4pi/img/event.jpg\" width="64" height="64"/></div><div class=\"ns-content\"><p><a href="/4pi/fetchSingleEvent.php?ref='+data.objectId+'"><i class="fa fa-calendar" style="color:#98001D"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></a></p></div>';
+		}
+		else if(data.objectType==700)
+		{
+			notification+='<div class=\"ns-thumb\"><img src=\"/4pi/img/poll.jpg\" width="64" height="64"/></div><div class=\"ns-content\"><p><a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><i class="fa fa-pie-chart" style="color:#580075"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></a></p></div>';
+		}
+		// alert(notification);
+		/*var finalMessage="<div class=\"ns-thumb\"><img src=\"img/user1.jpg\"/></div><div class=\"ns-content\"><p><a href=\"#\">Zoe Moulder</a> accepted your invitation.</p></div>"*/
+		var notifications = new NotificationFx({
+				wrapper : document.getElementById('notificationDisplayDiv'),
+				message : notification,
+				layout : 'other',
+				ttl : 6000,
+				effect : 'thumbslider',
+				type : 'notice',
+				onClose : function() { return false; },
+				onOpen : function() { return false; }
+			});
+
+			// show the notification
+			notifications.show();
+	}
+	/*(function() {
+		var bttn = document.getElementById( 'notification-trigger' );
+
+		// make sure..
+		// 
+		var message="<div class=\"ns-thumb\"><img src=\"img/user1.jpg\"/></div><div class=\"ns-content\"><p><a href=\"#\">Zoe Moulder</a> accepted your invitation.</p></div>";
+		bttn.disabled = false;
+		
+		bttn.addEventListener( 'click', function() {
+			// simulate loading (for demo purposes only)
+			classie.add( bttn, 'active' );
+			setTimeout( function() {
+
+				classie.remove( bttn, 'active' );
+				
+				// create the notification
+				var notification = new NotificationFx({
+					message : message,
+					layout : 'other',
+					ttl : 6000,
+					effect : 'thumbslider',
+					type : 'notice', // notice, warning, error or success
+					onClose : function() {
+						bttn.disabled = false;
+					}
+				});
+
+				// show the notification
+				notification.show();
+
+			}, 1200 );
+			
+			// disable the button (for demo purposes only)
+			this.disabled = true;
+		} );
+	})();*/
+</script>
+
 <script>
 	var userId="<?php echo $_SESSION['userId'];?>";
 	function changePassword()
@@ -127,7 +201,7 @@
 		$('#notifications').prepend(notification);
 	}
 
-	function fetchNotifications()
+	function fetchNotifications(value)
 	{
 		var presentNotifications=new Array();
 		var i=0;
@@ -160,9 +234,15 @@
 							unreadNotificationNumber++;
 						}
 						insertNotifications(data[i],"first");
+						if(value=="yes")
+						{
+							displayNotification(data[i]);
+						}
 					}
 					//console.log(unreadNotificationNumber);
 					$('#notificationNumber').html(unreadNotificationNumber);
+
+					
 				}
 				
 			}
@@ -172,7 +252,7 @@
 	fetchNotifications();
 
 	setInterval(function(){
-		fetchNotifications();
+		fetchNotifications('yes');
 	},3000);
 
 	function insertPeopleSearch(data,val)
