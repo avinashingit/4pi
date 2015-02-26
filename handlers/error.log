@@ -548,3 +548,31 @@
 
 [2015-02-23 14:49:16             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
 
+[2015-02-26 23:02:12             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?ORDER BY timestamp DESC LIMIT 0,7' at line 5$$$
+
+[2015-02-26 23:02:20             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?ORDER BY timestamp DESC LIMIT 0,7' at line 5$$$
+
+[2015-02-26 23:02:23             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?ORDER BY timestamp DESC LIMIT 0,7' at line 5$$$
+
+[2015-02-26 23:02:41             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?ORDER BY timestamp DESC LIMIT 0,7' at line 5$$$
+
+[2015-02-26 23:02:44             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?ORDER BY timestamp DESC LIMIT 0,7' at line 5$$$
+
+[2015-02-26 23:02:47             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?ORDER BY timestamp DESC LIMIT 0,7' at line 5$$$
+
+[2015-02-26 23:04:45             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-26 23:05:09             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-26 23:05:12             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-26 23:07:34             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND notificationIdHash!= ? AND notificationIdHash!= ? AND notificationIdHash!= ?' at line 1$$$
+
+[2015-02-26 23:07:39             ::1                   Asia/Kolkata] 1064   $$$You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND notificationIdHash!= ? AND notificationIdHash!= ? AND notificationIdHash!= ?' at line 1$$$
+
+[2015-02-26 23:10:04             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-26 23:10:07             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-02-26 23:10:10             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+

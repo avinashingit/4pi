@@ -521,14 +521,16 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 			{
 				$startDateTimestamp=$time['start'];
 				$endDateTimestamp=$time['end'];
-
+				$conObj->startTransaction();
 				if($featuring == 1)
 				{
 					$val[0]=array($userId => 's');
 					$res=$conObj->update("UPDATE experience SET featuring=0 WHERE userId=?",$val);
 					if($conObj->error!="")
 					{
-						notifyAdmin("Conn.Error".$conObj->error."! While editing featuring in experience",$userId);
+						$cr=$conObj->error;
+						$conObj->rollbackTransaction();
+						notifyAdmin("Conn.Error".$cr."! While editing featuring in experience",$userId);
 						echo 12;
 						exit();
 					}
@@ -537,10 +539,27 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 				$userId = $user['userId'];
 				$values = array(0 => array($userId => 's'),1 => array($organisation => 's'),2 => array($startDateTimestamp => 's'),3 => array($endDateTimestamp => 's'), 4 => array($title => 's') , 5=> array($featuring => 'i'));
 				
-				$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,startDate,endDate,designation,featuring) VALUES(?,?,?,?,?,?)",$values);
+				$result1 = $conObj->insert("INSERT INTO experience(userId,organisation,start,end,designation,featuring) VALUES(?,?,?,?,?,?)",$values);
 				
 				if($conObj->error == "")
 					{
+						if($featuring==1)
+						{
+							$experienceId=$conObj->getInsertId();
+							$val[0]=array($experienceId=> 'i');
+							$val[1]=array($userId => 's');
+							
+							$res=$conObj->update("UPDATE about SET work = ? WHERE userId=?",$val);
+							if(($cr=$conObj->error)!="")
+							{
+								//$cr=$conObj->error;
+								$conObj->rollbackTransaction();
+								notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
+								echo 12;
+								exit();
+							}
+						}
+						$conObj->completeTransaction();
 						$duration=getDuration($startDateTimestamp,$endDateTimestamp);
 						$minDuration=getMinDuration($startDateTimestamp,$endDateTimestamp);
 						$experienceId="e".$conObj->getInsertId();
@@ -549,7 +568,9 @@ function experienceInsert($user,$organisation,$durationString,$title,$featuring)
 					}
 				else
 					{
-						notifyAdmin("Conn.Error".$conObj->error."! While creating record in experience",$userId);
+						$cr=$conObj->error;
+						$conObj->rollbackTransaction();
+						notifyAdmin("Conn.Error".$cr."! While creating record in experience",$userId);
 						echo 12;
 						exit();
 					}

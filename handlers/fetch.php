@@ -2503,12 +2503,15 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 
 
 		$notificationFetchSQL="SELECT `notifications`.*, CASE objectType WHEN 500 THEN post.subject WHEN 600 THEN `event`.eventName WHEN 700 THEN `poll`.question END AS label FROM `notifications`  LEFT JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postIdHash) LEFT JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventIdHash) LEFT JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollIdHash) WHERE notifications.userId=? ";
+		//$notificationFetchSQL="SELECT `notifications`.*, `post`.subject AS label FROM `notifications`  INNER JOIN `post` ON (`notifications`.objectType=500 AND `notifications`.objectId=`post`.postIdHash) WHERE notifications.userId = ? UNION SELECT `notifications`.*,  `event`.eventName AS label FROM `notifications`  INNER JOIN `event` ON (`notifications`.objectType=600 AND `notifications`.objectId=`event`.eventIdHash) WHERE notifications.userId = ? UNION (SELECT `notifications`.*,  `poll`.question AS label FROM `notifications`  INNER JOIN `poll` ON (`notifications`.objectType=700 AND `notifications`.objectId=`poll`.pollIdHash) WHERE notifications.userId=? )";
 		
 		$values[0]=array($userId => 's');
+		/*$values[1]=array($userId => 's');
+		$values[2]=array($userId => 's');*/
 		
 		for($i=0;$i<$displayedNotifCount;$i++)
 		{
-			$notificationFetchSQL .= "AND notificationIdHash!= ? ";
+			$notificationFetchSQL .= "AND notificationIdHash != ? ";
 			
 			$values[$i+1]=array($displayedNotifArray[$i] => 's');
 		}

@@ -632,7 +632,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 						{
 							$conObj->rollbackTransaction();
 							notifyAdmin("Conn Error: ".$cr."in experience Edit 1".$experienceId,$userId);
-							echo 112;
+							echo 12;
 							exit();
 						}
 				}
@@ -641,7 +641,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 				$values = array(0 => array($organisation => 's'),1 => array($startDateTimestamp => 's'),2 => array($endDateTimestamp => 's'), 3 => array($title => 's') , 4 => array($featuring => 'i'), 5 => array($userId => 's'),6 => array($experienceId => 'i'));
 				//echo 'before Query';
 				//var_dump($values);
-				$result1 = $conObj->update("UPDATE experience SET organisation=?,startDate=?,endDate=?,designation=?,featuring= ? WHERE userId=? AND experienceId = ?",$values);
+				$result1 = $conObj->update("UPDATE experience SET organisation=?,start=?,end=?,designation=?,featuring= ? WHERE userId=? AND experienceId = ?",$values);
 				//var_dump($result1);
 				if($conObj->error == "")
 				{
@@ -653,7 +653,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 						if($featuring==1)
 						{
 							
-							$val[0]=array($$experienceId=> 'i');
+							$val[0]=array($experienceId=> 'i');
 							$val[1]=array($userId => 's');
 							
 							$res=$conObj->update("UPDATE about SET work = ? WHERE userId=?",$val);
@@ -661,7 +661,7 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 							{
 								$conObj->rollbackTransaction();
 								notifyAdmin("Conn Error: ".$cr."in experience Edit 2".$experienceId,$userId);
-								echo 122;
+								echo 12;
 								exit();
 							}
 						}
@@ -684,10 +684,10 @@ function experienceEdit($user,$organisation,$durationString,$title,$experienceId
 				else
 				{
 					$cr=$conObj->error;
-					echo $cr;
+					//echo $cr;
 					$conObj->rollbackTransaction();
 					notifyAdmin("Conn.Error".$cr."! While Editing record in experience",$userId);
-					echo 123;
+					echo 12;
 					exit();
 				}			
 			}
