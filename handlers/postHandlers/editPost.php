@@ -185,7 +185,7 @@ Code 11: Session Variables unset!!
 						subject = ?,
 						lifetime = ?,
 						lastUpdated = ?,
-						requestPermanence = ?, filesAttached = ? WHERE postIdHash = ?";
+						requestPermanence = ?, filesAttached = ?, isPermanent=0 WHERE postIdHash = ?";
 					$values[0]=array($content=>'s');
 
 					$values[1]=array($sharedWith=>'s');
@@ -229,8 +229,15 @@ Code 11: Session Variables unset!!
 								$proPicExists=-1;
 							}
 
+							
+								if($requestPermanence==1)
+								{
+									$postValidity=9999;
+								}
+							
+
 							$postObj=new miniPost($postIdHash,$sharedWith,$postValidity,$postUserName,$postSubject,$postContent, 
-							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,1,$user['gender'],$proPicExists,$user['name']);
+							$noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,1,$user['gender'],$proPicExists,$user['name'],0);
 							print_r(json_encode($postObj));
 					}
 					else{

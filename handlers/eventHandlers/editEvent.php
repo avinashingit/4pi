@@ -321,7 +321,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
 				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin, 
-				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCOCASorCULSEC,$approvalStatus);
+				$eventStatus,$eventCreationTime,$user['gender'],$proPicExists,$user['name'],$user['userIdHash'],$user['userId'],$isCOCASorCULSEC,$approvalStatus,$eventCategory);
 				print_r(json_encode($eventObj));
 			}
 			else
