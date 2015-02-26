@@ -293,7 +293,7 @@ function editedPostSend()
         })
         .success(
             function(data) {
-                ////console.log(data);
+                console.log(data);
                 data.trim();
                 $('#editPostModal').modal('hide');
 
@@ -315,7 +315,7 @@ function createPost()
 {
     // alert("H");
     $("#createPostModal").find("#createPostButton").attr("onclick","").html("Posting");
-    $("#createPostModal").find("loadingImage").removeClass('hidden');
+    $("#createPostModal").find("#loadingImage").removeClass('hidden');
     var postSubject = $('#createPostSubject').val().trim();
     var done=1;
     if (postSubject.length > 40) {
@@ -348,10 +348,7 @@ function createPost()
     }
     if(done==1)
     {
-        $('#createPostModal').find('#createPostSubject').val("");
-        $('#createPostModal').find('#createPostContent').val("");
-        $('#createPostModal').find('#createPostSharedWith').val("All");
-        $('#createPostModal').find('#createPostLivingTime').val("1");
+        
         $('.row .postMenu').find('#createPostButton').attr("data-target", "").find('a span').html("Creating post...");
         $('.row .postMenu').find('#createPostButton').find('.fa-plus').addClass('fa-spin');
 
@@ -371,10 +368,15 @@ function createPost()
                 if(checkData(data)==1)
                 {
                     data = data.trim();
+                    $('#createPostModal').find('#createPostSubject').val("");
+                    $('#createPostModal').find('#createPostContent').val("");
+                    $('#createPostModal').find('#createPostSharedWith').val("All");
+                    $('#createPostModal').find('#createPostLivingTime').val("1");
+                    $('#createPostModal').find('#createPostModalContentLength').html("8000");
                     $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
                     $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
                     $("#createPostModal").find("#createPostButton").attr("onclick","createPost()").html("Post");
-                    $("#createPostModal").find("loadingImage").addClass('hidden');
+                    $("#createPostModal").find("#loadingImage").addClass('hidden');
                     $('#createPostModal').modal('hide');
                     var x = JSON.parse(data);
                     postInsert("first", x);
@@ -386,7 +388,7 @@ function createPost()
                     $('.row .postMenu').find('#createPostButton').attr("data-target", "#createPostModal").find('a span').html("Create Post");
                     $('.row .postMenu').find('#createPostButton').find('.fa-plus').removeClass('fa-spin');
                     $("#createPostModal").find("#createPostButton").attr("onclick","createPost()").html("Post");
-                    $("#createPostModal").find("loadingImage").addClass('hidden');
+                    $("#createPostModal").find("#loadingImage").addClass('hidden');
                 }
             }
     );
@@ -731,6 +733,9 @@ function commentInsert(position, data, postId)
 
 function postInsert(position, data1)
 {
+
+    console.log(data1);
+
     var post = "";
 
     post += '<div class="row post" style="margin-bottom:10px;" id="' + data1.postId + '">';
@@ -739,7 +744,17 @@ function postInsert(position, data1)
 
     post += '<div id="postSharedWith" class="hidden">' + data1.sharedWith + '</div>';
 
-    post += '<div id="postValidity" class="hidden">' + data1.postValidity + '</div>';
+    if(data1.isPermanent==1)
+    {
+        post += '<div id="postValidity" class="hidden">9999</div>';
+    }
+
+    else
+    {
+        post += '<div id="postValidity" class="hidden">' + data1.postValidity + '</div>';
+    }
+
+    
 
     post += '<div class="row" id="postFrontTop">';
 
@@ -749,24 +764,24 @@ function postInsert(position, data1)
 
     if(data1.profilePicExists==1)
     {
-        post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+        post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span class="break-word" title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/proPics/' + data1.postUserIdHash + '.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
     }
 
     else
     {
         if(data1.gender=="M")
         {
-            post += '<h5><a href="/4pi/aboutMe/index.php?userId='+ data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+            post += '<h5><a href="/4pi/aboutMe/index.php?userId='+ data1.postUserId + '" id="postOwnerURL"><span class="break-word" title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultMan1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
         }
 
        else if(data1.gender=="F")
         {
-            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span class="break-word" title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultWoman1.jpg" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
         }
 
         else
         {
-            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultMan.png" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
+            post += '<h5><a href="/4pi/aboutMe/index.php?userId=' + data1.postUserId + '" id="postOwnerURL"><span class="break-word" title="' + data1.postUserFullName + '('+data1.postUserId+')" id="postCreatedBy"><img  src="/4pi/img/defaultMan.png" class="postPPic"/>' + data1.postUserName + '</span></a></h5>';
         }
     }
 
@@ -774,9 +789,9 @@ function postInsert(position, data1)
 
     post += '</div> <!-- end class col-md-2 id postProfile Pic -->';
 
-    post += '<div class="col-md-7 text-center">';
+    post += '<div class="col-md-6 col-md-offset-1 text-left">';
 
-    post += '<div class="fontSize14 text-center break-word paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
+    post += '<div class="fontSize14 text-left break-word paddingTopRowPost textBold" title="Subject" id="postSubject">' + data1.postSubject + '</div>';
 
     post += '</div><!-- end class col-md-6 id postSubject -->';
 

@@ -331,9 +331,17 @@ if(userId=="")
 
 							<label for="">Show email id &nbsp;<span style="color:red;">*</span>[<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your email id to others"></i>]</label><br>
 
-							<label>Yes &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="1" name="showEmailIdValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<select id="showEmailIdValue" class="form-control">
 
-							<label>No &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="2" name="showEmailIdValue"></label>
+								<option value="1">Yes</option>
+
+								<option value="2">No</option>
+
+							</select>
+
+							<!-- <label>Yes &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="1" name="showEmailIdValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							
+							<label>No &nbsp;&nbsp;<input type="radio" id="showEmailIdValue" value="2" name="showEmailIdValue"></label> -->
 
 						</div>
 
@@ -341,9 +349,17 @@ if(userId=="")
 
 							<label for="">Show contacts&nbsp;<span style="color:red;">*</span> [<i class="fa fa-question popOver" data-trigger="hover click" data-toggle="popover" data-content="Show your contacts id to others"></i>]</label><br/>
 
-							<label>Yes &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="1" name="showContactsValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<select id="showContactsValue" class="form-control">
 
-							<label>No &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="2" name="showContactsValue"></label>
+								<option value="1">Yes</option>
+
+								<option value="2">No</option>
+
+							</select>
+
+							<!-- <label>Yes &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="1" name="showContactsValue" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							
+							<label>No &nbsp;&nbsp;<input type="radio" id="showContactsValue" value="2" name="showContactsValue"></label> -->
 
 						</div>
 
@@ -703,7 +719,32 @@ if(userId=="")
 	function autoFocus(el)
 	{
 		$(el).find('input:first').focus();
+		setTimeout(function(){
+		    $(el).find("input:first").focus();
+		}, 0);
 	}
+	$(document).ready(function(){
+		/*$('#addSkillModal').on('shown.bs.modal', function () {
+		    $('#addSkillModalSkillName').focus();
+		});
+		$('#addToolModal').on('shown.bs.modal', function () {
+		    $('#addToolModalToolText').focus();
+		});
+		$('#addProjectModal').on('shown.bs.modal', function () {
+		    $('#addProjectModalProjectTitle').focus();
+		});
+		$('#addAcademicsModal').on('shown.bs.modal', function () {
+		    $('#addAcademicsModalDegree').focus();
+		});
+		$('#addExperienceModal').on('shown.bs.modal', function () {
+		    $('#addEx').focus();
+		});*/
+
+		$('.modal').on('shown.bs.modal',function(){
+			$(this).find('input:first').focus();
+		});
+	});
+	
 
 	function addSkill()
 	{
@@ -714,6 +755,10 @@ if(userId=="")
 		// $("#addSkillModal").find('#addSkillModalSkillName').focusin();
 		
 		autoFocus('#addSkillModal');
+
+		setTimeout(function(){
+		    $("#addSkillModalSkillName").focus();
+		}, 0);
 
 		clearInputs($("#addSkillModal"));
 	}
@@ -962,7 +1007,6 @@ if(userId=="")
 			}
 			
 		}
-	
 	}
 
 	function addProject()
@@ -2072,25 +2116,33 @@ if(userId=="")
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<select id="addExperienceModalFeature" class="form-control">
 
+							<option value="1">I want this to be shown in my profile section</option>
+
+							<option value="0">I don't want this to be shown in my profile</option>
+
+						</select>
+
+						<!-- <div class="col-md-6">
+						
 							<label>
-
+						
 								No&nbsp;&nbsp;<input name="featureInPersonalInfo" type="radio" id="addExperienceModalFeature" value="0" class="form-control">
-
+						
 							</label>
-
+						
 						</div>
-
+						
 						<div class="col-md-6">
-
+						
 							<label>
-
+						
 								Yes&nbsp;&nbsp;<input name="featureInPersonalInfo" type="radio" id="addExperienceModalFeature" value="1" class="form-control" checked>
-
+						
 							</label>
-
-						</div>
+						
+						</div> -->
 
 					</div>
 
@@ -2171,25 +2223,33 @@ if(userId=="")
 
 					<div class="row">
 
-						<div class="col-md-6">
+						<select id="editExperienceModalFeature" class="form-control">
 
+							<option value="1">I want this to be shown in my profile section</option>
+
+							<option value="0">I don't want this to be shown in my profile</option>
+
+						</select>
+
+						<!-- <div class="col-md-6">
+						
 							<label>
-
+						
 								No&nbsp;&nbsp;<input type="radio" name="editFeatureInPersonalInfo" id="editExperienceModalFeature" value="0" class="form-control">
-
+						
 							</label>
-
+						
 						</div>
-
+						
 						<div class="col-md-6">
-
+						
 							<label>
-
+						
 								Yes&nbsp;&nbsp;<input type="radio" name="editFeatureInPersonalInfo" id="editExperienceModalFeature" value="1" class="form-control">
-
+						
 							</label>
-
-						</div>
+						
+						</div> -->
 
 					</div>
 

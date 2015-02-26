@@ -104,15 +104,17 @@ function createPollSP()
 					alert("Server overload. Please try again.");
 				})
 				.success(function(data){
-
-					console.log(data);
 					if(checkData(data)==1)
 					{
 						data=JSON.parse(data);
 						$('#pollCreateModal').modal('hide');
 						$("#pollCreateModal").find("#loadingImage").addClass('hidden');
 						$("#pollCreateModal").find("#createPollButton").show();
-						alert("Your poll is sent for approval. Please wait until it is approved.");
+						if(data.isSAC!=1)
+						{
+							alert("Your poll is sent for approval. Voting cannot be done until it is approved.");
+						}
+						
 						insertPoll(data,"first");
 						$('#pollCreateModal').find('input').each(function(){
 							$(this).val("");
@@ -251,7 +253,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
+				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -351,8 +353,6 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 				}
-
-					poll+='<br/>';
 
 					poll+='<div class="row">';
 
@@ -481,7 +481,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
+				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -585,8 +585,6 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 				}
-
-					poll+='<br/>';
 
 					poll+='<div class="row">';
 
@@ -724,7 +722,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
+				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -816,8 +814,6 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 				}
-
-					poll+='<br/>';
 
 					poll+='<div class="row">';
 
@@ -942,7 +938,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
+				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -1042,8 +1038,6 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 				}
-
-					poll+='<br/>';
 
 					poll+='<div class="row">';
 
@@ -1171,7 +1165,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
+				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -1275,8 +1269,6 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 				}
-
-					poll+='<br/>';
 
 					poll+='<div class="row">';
 
@@ -1405,7 +1397,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'"><br/>';
+				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -1497,8 +1489,6 @@ function insertPoll(data,position)
 
 					poll+='</div>';
 				}
-
-					poll+='<br/>';
 
 					poll+='<div class="row">';
 

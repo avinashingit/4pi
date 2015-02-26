@@ -173,7 +173,7 @@
 
 	setInterval(function(){
 		fetchNotifications();
-	},300000);
+	},3000);
 
 	function insertPeopleSearch(data,val)
 	{
@@ -687,6 +687,7 @@
 		width:150%;
 		overflow-y:auto;
 		overflow-x:hidden;
+		max-height:200px;
 	}
 
 	.notification

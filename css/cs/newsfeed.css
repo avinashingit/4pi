@@ -11,6 +11,11 @@ display:none;
 {
     word-break:break-all;
     word-wrap:break-word;
+    white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;
+    white-space: normal;
 }
 
 .modal-body

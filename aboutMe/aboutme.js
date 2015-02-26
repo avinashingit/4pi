@@ -633,10 +633,14 @@ function insertBottomPart(data)
 						bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-envelope"></i>&nbsp;Email(s)</h4>';
 
 						bottomPart+='<br/>';
-							
-						bottomPart+='<p id="userEmail2" class="break-word">'+data.mailId+'</p>';
 
-						bottomPart+='<p id="userEmail1" class="break-word">'+userId.toLowerCase()+'@iiitdm.ac.in</p>';
+						if(data.showMailId!=2 || data.isOwner==1)
+						{
+							
+							bottomPart+='<p id="userEmail2" class="break-word">'+data.mailId+'</p>';
+
+							bottomPart+='<p id="userEmail1" class="break-word">'+userId.toLowerCase()+'@iiitdm.ac.in</p>';
+						}
 
 					bottomPart+='</div>';
 
@@ -655,24 +659,25 @@ function insertBottomPart(data)
 
 				// alert(data.phone.length);
 
-				if(data.phone.length!=0)
+				if(data.showPhone!=2 || data.isOwner==1)
 				{
-					bottomPart+='<div class="text-left col-md-4">';
+					if(data.phone!=null)
+					{
+						bottomPart+='<div class="text-left col-md-4">';
 
-						bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-mobile-phone"></i>&nbsp;Contact</h4>';
+							bottomPart+='<h4 style="color:rgba(192, 54, 117, 1);"><i class="fa fa-mobile-phone"></i>&nbsp;Contact</h4>';
 
-						bottomPart+='<br/>';
+							bottomPart+='<br/>';
 
-						for(var i=0;i<data.phone.length;i++)
-						{
-							if(data.showPhone==1)
+							for(var i=0;i<data.phone.length;i++)
 							{
-								var x=i+1;
-								bottomPart+='<p id="userPhone'+x+'" class="break-word">'+data.phone[i]+'</p>';
+									var x=i+1;
+									bottomPart+='<p id="userPhone'+x+'" class="break-word">'+data.phone[i]+'</p>';
 							}
-						}
 
-					bottomPart+='</div>';
+						bottomPart+='</div>';
+					}
+					
 				}
 
 				bottomPart+='</div>';
@@ -731,6 +736,7 @@ function editContactInfoSendData()
 	var showMailId=link.find("#showEmailIdValue").val();
 	var showContactsValue=link.find("#showContactsValue").val();
 	alert(showContactsValue);
+	alert(showMailId);
 	if(showMailId!=1 && showMailId!=2)
 	{
 		alert("There is a problem with your page. Please reload it.");
@@ -1667,15 +1673,16 @@ function addExperienceSendData()
 	var companyName=ln.find('#addExperienceModalCompanyName').val().trim();
 	var role=ln.find('#addExperienceModalRole').val().trim();
 	var duration=ln.find('#addExperienceModalDurationFrom').val().trim()+"-"+ln.find('#addExperienceModalDurationTo').val().trim();
-	var featuring;
-	var featureElement=document.getElementById("addExperienceModal").getElementsByName("featureInPersonalInfo");
+	var featuring=ln.find("#addExperienceModalFeature").val();
+	alert(featuring);
+	/*var featureElement=document.getElementsByName("featureInPersonalInfo");
 	for(var i=0;i<featureElement.length;i++)
 	{
 		if(featureElement[i].checked)
 		{
 			featuring=featureElement[i].value;
 		}
-	}
+	}*/
 
 	if(companyName.length==0)
 	{
@@ -1721,15 +1728,7 @@ function editExperienceSendData()
 	var role=link.find('#editExperienceModalRole').val().trim();
 	var duration=link.find('#editExperienceModalDurationFrom').val().trim()+"-"+link.find('#editExperienceModalDurationTo').val().trim();
 	var id=link.find('#experienceId').val();
-	var featuring;
-	var featureElement=document.getElementById("editExperienceModal").getElementsByName("featureInPersonalInfo");
-	for(var i=0;i<featureElement.length;i++)
-	{
-		if(featureElement[i].checked)
-		{
-			featuring=featureElement[i].value;
-		}
-	}
+	var featuring=link.find("#editExperienceModalFeature").val();
 	if(company.length==0)
 	{
 		alert("Please enter the company name.");

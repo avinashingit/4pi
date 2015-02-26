@@ -110,16 +110,16 @@ echo '
 	echo '<br/>
 	<table style="text-align:center;position:absolute;bottom:15px;" >
 		<tr>
-			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  target="_blank" class=" blcs" data-toggle="tooltip"  title="People"  onmouseover="$(this).tooltip(\'show\');"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
-			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Clubs"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
+			<td style="cursor:pointer;width:70px;height:70px;color:white;"    ><a  target="_blank" class=" blcs" data-toggle="tooltip"  title="People"  href="/4pi/people/" style="color:white;" ><i class="  fa fa-building fa-2x"></i></a></td>
+			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Clubs" class=" blcs"title="Clubs"  href="/4pi/clubs/" style="display:block;color:white;"  ><i class="fa fa-share-alt fa-2x"></i></td>
 			<td style="width:70px;height:70px;color:white;" onclick="$(\'#feedbackModal\').find(\'textarea\').val(\'\');$(\'#feedbackModal\').modal(\'show\');"><a  target="_blank"   data-toggle="tooltip"  title="Feedback"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"title="Feedback" style="display:block;color:white;"  ><i class="fa fa-envelope fa-2x"></i></td>
 			
 		</tr>
 		
 		<tr>
-			<td style="width:70px;height:70px;color:white;" ><a  target="_blank"   data-toggle="tooltip"  title="About"  onmouseover="$(this).tooltip(\'show\');" class="blcs" title="About"  href="/4pi/about/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-info-circle fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="WebOps"  onmouseover="$(this).tooltip(\'show\');" class=" blcs"  href="/4pi/team/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-users fa-2x"></i></td>
-			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Idea Bank"  onmouseover="$(this).tooltip(\'show\');" class=" blcs" title="Idea Bank" href="/4pi/ideaBank/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-exclamation fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a  target="_blank"   data-toggle="tooltip"  title="About" class="blcs" title="About"  href="/4pi/about/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-info-circle fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="WebOps" class=" blcs"  href="/4pi/team/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-users fa-2x"></i></td>
+			<td style="width:70px;height:70px;color:white;" ><a   target="_blank"  data-toggle="tooltip"  title="Idea Bank" class=" blcs" title="Idea Bank" href="/4pi/ideaBank/" style="display:block;color:white;margin-top:-15px !important;"  ><i class="fa fa-exclamation fa-2x"></i></td>
 			
 		</tr>
 		
