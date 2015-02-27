@@ -41,7 +41,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 
 	//Actual CreateEvent Code Starts
-	// var_dump($_POST);
+	 var_dump($_POST);
 	$eventContent=$_POST['_content'];
 	$eventName=$_POST['_eventName'];
 	$eventVenue=$_POST['_venue'];
@@ -254,6 +254,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$values[15]=array($eventCategory => 's');
 			//$values[15]=array($eventStatus => 's');
 			$result=$conn->insert($CreateEventSQL,$values);
+			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
 			if($conn->error==""&&$result==true)
 			{
 				//Success

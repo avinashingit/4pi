@@ -56,7 +56,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 	$organisedBy=$_POST['_eventOrgName'];
 	$eventCategory=$_POST['_eventCategory'];
 	$rawSharedWith=trim($rawSharedWith);
-
+	//var_dump($_POST);
 	$conn= new QoB();
 	if($rawTime==""||$rawDate==""||$type==""||$eventName==""||$eventContent==""||$eventVenue==""||$organisedBy==""||$rawSharedWith=="")
 	{
@@ -287,6 +287,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			
 			//$values[12]=array($userId => 's');
 			$result=$conn->update($UpdateEventSQL,$values);
+			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
 			if($conn->error==""&&$result==true)
 			{
 				//Success

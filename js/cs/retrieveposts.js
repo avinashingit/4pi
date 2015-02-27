@@ -888,7 +888,7 @@ function postInsert(position, data1)
 
                 post += '<form id="commentInsertForm">';
 
-                    post += '<textarea  rows="1" name="commentedText" id="commentInsertArea" onkeypress="insertCommentToPost(\'' + data1.postId + '\',event);" class="commentInsertArea form-control" style="float:left;resize:none;height:30px !important;"></textarea>';
+                    post += '<textarea  rows="1" name="commentedText" id="commentInsertArea" onkeypress="insertCommentToPost(\'' + data1.postId + '\',event);" class="commentInsertArea form-control" style="float:left;resize:none;"></textarea>';
 
                  post += '</form>';
 

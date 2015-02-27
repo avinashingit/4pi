@@ -87,7 +87,7 @@
 							
 							<h3 class="text-center" ><b>Welcome!</b></h3>
 			
-							<span title="The guy who wrote this!" ><u><strong>Credits:</strong></u> Ananth Balasubramaniam</span>
+							<span title="The guy who wrote this!" ><u><strong>Credits:</strong></u><a href="/4pi/aboutMe/index.php?userId=MDM12B003"> Ananth Balasubramaniam </a></span>
 							
 							
 						</div>

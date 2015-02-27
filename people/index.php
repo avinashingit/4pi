@@ -28,34 +28,34 @@
 		
 			<!--  START OF LEFT SIDE MENU -->
 	    	<div class="col-md-3" style="padding:0px;"  id="menuExecutiveWing">
-	    		<a target="_blank" href="#sgs" class="sec isec"  ><i class="fa fa-bank"></i> Student General Secretary</a>
-				<a target="_blank" href="#aas" class="sec isec"  ><i class="fa fa-mortar-board"></i> Academic Affairs Secretary</a>
-	    		<a target="_blank" href="#cocas" class="sec isec"  ><i class="fa fa-gears"></i> Co - Curricular Affairs Secretary</a>
-				<a target="_blank" href="#cas" class="sec isec"  ><i class="fa fa-gift"></i> Cultural Affairs Secretary</a>
-				<a target="_blank" href="#has" class="sec isec"  ><i class="fa fa-home"></i> Hostel Affairs Secretary</a>
-				<a target="_blank" href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Research Affairs Secretary</a>
-				<a target="_blank" href="#ss" class="sec isec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
+	    		<a href="#sgs" class="sec isec"  ><i class="fa fa-bank"></i> Student General Secretary</a>
+				<a href="#aas" class="sec isec"  ><i class="fa fa-mortar-board"></i> Academic Affairs Secretary</a>
+	    		<a href="#cocas" class="sec isec"  ><i class="fa fa-gears"></i> Co - Curricular Affairs Secretary</a>
+				<a href="#cas" class="sec isec"  ><i class="fa fa-gift"></i> Cultural Affairs Secretary</a>
+				<a href="#has" class="sec isec"  ><i class="fa fa-home"></i> Hostel Affairs Secretary</a>
+				<a href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Research Affairs Secretary</a>
+				<a href="#ss" class="sec isec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
 				
 				
-				<a target="_blank" href="#sgs" class="sec ew"  ><i class="fa fa-long-arrow-left"></i> Secretaries</a>
+				<a href="#sgs" class="sec ew"  ><i class="fa fa-long-arrow-left"></i> Secretaries</a>
 				
 				
 				
-				<a target="_blank" href="#sacs" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker</a>
-				<a target="_blank" href="#sacds" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker - Deputy</a>
+				<a href="#sacs" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker</a>
+				<a href="#sacds" class="sec isec"  ><i class="fa fa-microphone"></i> SAC Speaker - Deputy</a>
 
 				
 				
 				<div>
-	    		<a target="_blank" href="#cs" class="sec hos"  ><i class="fa fa-crosshairs"></i> Councillors<i class="fa fa-plus-square" style="float:right;"></i></a>
-				<a target="_blank" href="#cbc" class="subsec"  ><i class="fa fa-crosshairs"></i> COE Branch Councillor</a>
-				<a target="_blank" href="#ebc" class="subsec"  ><i class="fa fa-crosshairs"></i> EDM Branch Councillor</a>
-				<a target="_blank" href="#mbc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDM Branch Councillor</a>
+	    		<a href="#cs" class="sec hos"  ><i class="fa fa-crosshairs"></i> Councillors<i class="fa fa-plus-square" style="float:right;"></i></a>
+				<a href="#cbc" class="subsec"  ><i class="fa fa-crosshairs"></i> COE Branch Councillor</a>
+				<a href="#ebc" class="subsec"  ><i class="fa fa-crosshairs"></i> EDM Branch Councillor</a>
+				<a href="#mbc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDM Branch Councillor</a>
 				
-				<a target="_blank" href="#mcc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDes Class Councillor</a>
-				<a target="_blank" href="#pcc" class="subsec"  ><i class="fa fa-crosshairs"></i> PhD Class Councillor</a>
+				<a href="#mcc" class="subsec"  ><i class="fa fa-crosshairs"></i> MDes Class Councillor</a>
+				<a href="#pcc" class="subsec"  ><i class="fa fa-crosshairs"></i> PhD Class Councillor</a>
 				
-				<a target="_blank" href="#dsc" class="subsec"  ><i class="fa fa-crosshairs"></i> Day Scholars Councillor</a>
+				<a href="#dsc" class="subsec"  ><i class="fa fa-crosshairs"></i> Day Scholars Councillor</a>
 				</div>
 				
 				
@@ -64,40 +64,40 @@
 				
 				
 				<div>
-	    		<a target="_blank" href="#bh" class="sec hos"  ><i class="fa fa-male"></i> Boys Hostel<i class="fa fa-plus-square" style="float:right;"></i></a>
-				<a target="_blank" href="#bw" class="subsec"  ><i class="fa fa-won"></i> Wardens</a>
+	    		<a href="#bh" class="sec hos"  ><i class="fa fa-male"></i> Boys Hostel<i class="fa fa-plus-square" style="float:right;"></i></a>
+				<a href="#bw" class="subsec"  ><i class="fa fa-won"></i> Wardens</a>
 				<!--<a target="_blank" href="#baw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a>  -->
 				
 				
-	    		<a target="_blank" href="#bgs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
-				<a target="_blank" href="#bms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
-				<a target="_blank" href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
-				<a target="_blank" href="#bss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<a target="_blank" href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
-				<a target="_blank" href="#bls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
-				<a target="_blank" href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<a target="_blank" href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
+	    		<a href="#bgs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
+				<a href="#bms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
+				<a href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
+				<a href="#bss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
+				<a href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
+				<a href="#bls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
+				<a href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
+				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
 				
 				</div>
 				
 				
 				<div>
-				<a target="_blank" href="#gh" class="sec hos"  ><i class="fa fa-female"></i> Girls Hostel<i class="fa fa-plus-square"  style="float:right;"></i></a>
-				<a target="_blank" href="#gw" class="subsec"  ><i class="fa fa-won"></i> Warden</a>
+				<a href="#gh" class="sec hos"  ><i class="fa fa-female"></i> Girls Hostel<i class="fa fa-plus-square"  style="float:right;"></i></a>
+				<a href="#gw" class="subsec"  ><i class="fa fa-won"></i> Warden</a>
 				<!--<a target="_blank" href="#gaw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a> -->
 				
-	    		<a target="_blank" href="#ggs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
-				<a target="_blank" href="#gms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
-				<a target="_blank" href="#gts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
-				<a target="_blank" href="#gss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<a target="_blank" href="#gas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
-				<a target="_blank" href="#gls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
-				<a target="_blank" href="#gsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<a target="_blank" href="#ggns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
+	    		<a href="#ggs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
+				<a href="#gms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
+				<a href="#gts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
+				<a href="#gss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
+				<a href="#gas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
+				<a href="#gls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
+				<a href="#gsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
+				<a href="#ggns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
 	    		</div>
 				
 				
-				<a target="_blank" href="/4pi/files/sc.pdf" id="extra" ><i class="fa fa-download"></i> Student Constitution - IIITD&ampM K</a>
+				<a href="/4pi/files/sc.pdf" id="extra" ><i class="fa fa-download"></i> Student Constitution - IIITD&ampM K</a>
 				
 	    	</div>
 			
@@ -697,7 +697,7 @@ shall be treated as approved.</li>
 				
 				<span id="cs"></span>
 				<section  class="sac" >
-					<div class="btn btn-block btn-success " ><big style="font-size:30px;" ><i class="fa fa-crosshairs"></i> Councillors</big></div>
+					<div class="btn btn-block btn-success" style="cursor:default" ><big style="font-size:30px;" ><i class="fa fa-crosshairs"></i> Councillors</big></div>
 				</section>
 				<span id="cbc"></span>
 				<section  class="sac" >
@@ -1084,7 +1084,7 @@ shall be treated as approved.</li>
 				
 				<span id="bh"></span>
 				<section  class="sac" >
-					<div class="btn btn-block btn-success " ><big style="font-size:30px;" ><i class="fa fa-male"></i> Boys Hostel</big></div>
+					<div class="btn btn-block btn-success " style="cursor:default;"><big style="font-size:30px;" ><i class="fa fa-male"></i> Boys Hostel</big></div>
 				</section>
 				
 				
@@ -1758,7 +1758,7 @@ tournaments.</li>
 				
 				
 				<section class="sac"  >
-					<div class="btn btn-block btn-success " ><big style="font-size:30px;" ><i class="fa fa-female"></i> Girls Hostel</big></div>
+					<div class="btn btn-block btn-success "  style="cursor:default;" ><big style="font-size:30px;" ><i class="fa fa-female"></i> Girls Hostel</big></div>
 				</section>
 				
 				

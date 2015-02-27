@@ -27,12 +27,12 @@ Test fetch, insert, edit , delete
 *********************************************************************/
 
 
-//var userIdFromURL=window.location.href.lastIndexOf('/');
-//var userId = window.location.href.substring(userIdFromURL+1,userIdFromURL+10);
-//var userId=userIdFromURL;
-//alert(userId);
+//var userIdFromURLFromURL=window.location.href.lastIndexOf('/');
+//var userIdFromURL = window.location.href.substring(userIdFromURLFromURL+1,userIdFromURLFromURL+10);
+//var userIdFromURL=userIdFromURLFromURL;
+//alert(userIdFromURL);
 
-/*var userId="COE12B025";*/
+/*var userIdFromURL="COE12B025";*/
 var commonURLAbout="/4pi/aboutMe/index.php?userId=";
 
 window.userOptionsVisibility=0;
@@ -429,28 +429,28 @@ function insertTopPart(data,locateProPic)
 
 	if(data.profilePicExists==1)
 	{
-		topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
+		topPart+='<a href="'+commonURLAbout+userIdFromURL+'" title="'+data.name+'" class=""><img src="/4pi/img/proPics/'+data.userIdHash+'.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 	}
 
 	else if(data.profilePicExists==-1)
 	{
 		if(data.gender=="M")
 		{
-			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan1.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
+			topPart+='<a href="'+commonURLAbout+userIdFromURL+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan1.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 		}
 
 		else if(data.gender=="F")
 		{
-			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultWoman1.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
+			topPart+='<a href="'+commonURLAbout+userIdFromURL+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultWoman1.jpg?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 		}
 
 		else
 		{
-			topPart+='<a href="'+commonURLAbout+userId+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan.png?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
+			topPart+='<a href="'+commonURLAbout+userIdFromURL+'" title="'+data.name+'" class=""><img src="/4pi/img/defaultMan.png?v='+num+'"  alt="'+data.name+'" class="img-thumbnail img-responsive"/></a><br/>';
 		}
 	}
 
-		topPart+='<h4 class="text-center" id="personRollNumber">'+userId+'</h4>';
+		topPart+='<br/><h4 class="text-center" id="personRollNumber">'+userIdFromURL+'</h4>';
 
 	topPart+='</div><!-- end id personPicture -->';
 
@@ -479,13 +479,15 @@ function insertTopPart(data,locateProPic)
 
 			topPart+='<div class="col-md-3">';
 
+			var convertedDateOfBirth=changeDateFormat(data.dob);
+
 			if(data.dob.length==0)
 			{
 				topPart+='<div class="text-left" id="personDOB">14/05/1990</div><br/>';
 			}
 			else
 			{
-				topPart+='<div class="text-left" id="personDOB">'+data.dob+'</div><br/>';
+				topPart+='<div class="text-left" id="personDOB" title="'+data.dob+'">'+convertedDateOfBirth+'</div><br/>';
 			}
 
 				
@@ -498,7 +500,7 @@ function insertTopPart(data,locateProPic)
 				{
 					topPart+='<div class="text-left" id="personResumeLink">';
 
-						topPart+='<a href="/4pi/files/resumes/'+userId+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+						topPart+='<a href="/4pi/files/resumes/'+userIdFromURL+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
 
 					topPart+='</div><!-- end person resume link id -->';
 				}
@@ -643,7 +645,7 @@ function insertBottomPart(data)
 							bottomPart+='<p id="userEmail2" class="break-word">'+data.mailId+'</p>';
 							
 						}
-							bottomPart+='<p id="userEmail1" class="break-word">'+userId.toLowerCase()+'@iiitdm.ac.in</p>';
+							bottomPart+='<p id="userEmail1" class="break-word">'+userIdFromURL.toLowerCase()+'@iiitdm.ac.in</p>';
 						
 
 					bottomPart+='</div>';
@@ -700,7 +702,7 @@ function insertBottomPart(data)
 function fetchTopPart()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:1
 	})
 	.error(function(){
@@ -753,7 +755,7 @@ function editContactInfoSendData()
 	{
 		var phone=[phone1,phone2];
 		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:11,
 			_fbLink:fbURL,
 			_gplusLink:gplusURL,
@@ -927,7 +929,7 @@ function fetchSkills()
 {
 	// alert("Called");
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:8
 	})
 	.error(function(){
@@ -998,7 +1000,7 @@ function addSkillSendData()
 		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_skill:skillArray,
 			_rating:percentageArray,
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:8
 		})
 		.error(function(){
@@ -1078,7 +1080,7 @@ function editSkillSendData()
 		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_skill:skillArray,
 			_rating:percentageArray,
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:8
 		})
 		.error(function(){
@@ -1156,7 +1158,7 @@ function insertTool(data,isOwner)
 function fetchTools(data)
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:9
 	})
 	.error(function(){
@@ -1216,7 +1218,7 @@ function addToolsSendData()
 	{
 		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
 			_tools:toolArray,
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:9
 		})
 		.error(function(){
@@ -1286,7 +1288,7 @@ function editToolsSendData()
 	{
 		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
 			_tools:toolArray,
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:9
 		})
 		.error(function(){
@@ -1413,7 +1415,7 @@ function insertProjects(data)
 function fetchProjects()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:6
 	})
 	.error(function(){
@@ -1640,7 +1642,7 @@ function insertExperience(data)
 function fetchExperience()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:5
 	})
 	.error(function(){
@@ -1886,7 +1888,7 @@ function insertAcademics(data)
 function fetchAcademics()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:3
 	})
 	.error(function(){
@@ -2130,7 +2132,7 @@ function insertWorkshop(data)
 function fetchWorkshops()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:7
 	})
 	.error(function(){
@@ -2337,7 +2339,7 @@ function insertCertification(data)
 function fetchCertifications()
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:4
 	})
 	.error(function(){
@@ -2552,7 +2554,7 @@ function fetchAchievements()
 {
 
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:2
 	})
 	.error(function(){
@@ -2601,7 +2603,7 @@ function addAchievementSendData()
 			_location:location,
 			_description:description,
 			_position:position,
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:2
 		})
 		.error(function(){
@@ -2648,7 +2650,7 @@ function editAchievementSendData()
 			_location:location,
 			_position:position,
 			_description:description,
-			_userId:userId,
+			_userId:userIdFromURL,
 			_mode:2
 		})
 		.error(function(){
@@ -2745,7 +2747,7 @@ function insertInterest(data,isOwner)
 function fetchInterests(data)
 {
 	$.post('/4pi/handlers/aboutHandlers/aboutMe.php',{
-		_userId:userId,
+		_userId:userIdFromURL,
 		_mode:10
 	})
 	.error(function(){
@@ -2811,7 +2813,7 @@ function addInterestsSendData()
 	else
 	{
 		$.post('/4pi/handlers/aboutHandlers/aboutMeInsert.php',{
-			_userId:userId,
+			_userId:userIdFromURL,
 			_interests:interestArray,
 			_mode:10
 		})
@@ -2884,7 +2886,7 @@ function editInterestsSendData()
 	else
 	{
 		$.post('/4pi/handlers/aboutHandlers/aboutMeEdit.php',{
-			_userId:userId,
+			_userId:userIdFromURL,
 			_interests:interestArray,
 			_mode:10
 		})

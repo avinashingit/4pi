@@ -95,6 +95,7 @@ if(isset($_SESSION['vj'])&&isset($_SESSION['tn']))
 
 aboutMe($userId,$mode,$isOwner);
 
+// echo $userId;
 
 
 

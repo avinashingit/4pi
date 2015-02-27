@@ -2,6 +2,15 @@
 $('.subsec').hide();//to hide all hostel secretary tabs
 $('.ew').hide();//to hide the executive wing tab
 
+function changeDateFormat(str)
+{
+	var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+	var dateArray=str.split("/");
+	var prefixesForDates=['st','nd','rd','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','th','st','nd','rd','th','th','th','th','th','th','th','st'];
+	var newDate=dateArray[0]+prefixesForDates[dateArray[0]-1]+" "+months[dateArray[1]-1]+", "+dateArray[2];
+	return newDate;
+}
+
 
 function clearInputs(element)
 {

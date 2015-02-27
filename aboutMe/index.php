@@ -413,7 +413,7 @@ if(userId=="")
 
 					<label for="personDOB">Date of birth</label>
 
-					<input id="editPersonInfoModalPersonDOB" value="14/05/1995" class="form-control datepicker">
+					<input id="editPersonInfoModalPersonDOB" value="14/05/1995" class="form-control datepickers">
 
 					<br/>
 
@@ -691,7 +691,7 @@ if(userId=="")
 		var x=$('#editPersonInfoModal');
 		var ob2=$('#entireContent').find('#personInfo');
 		x.find('#editPersonInfoModalPersonName').val(ob2.find('#personNameText').html());
-		x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').html());
+		x.find('#editPersonInfoModalPersonDOB').val(ob2.find('#personDOB').attr("title"));
 		x.find('#descriptionLetterCount').html(380-ob2.find('#personDescription').find('p').html().length);
 		/*x.find('#editPersonInfoModalPersonHighestDegree').val(ob2.find('#personHighestDegree').html());
 		x.find('#editPersonInfoModalPersonCurrentProfession').val(ob2.find('#personCurrentProfession').html());*/
@@ -1940,7 +1940,7 @@ if(userId=="")
 
 							<label for="projectDuration">Project Duration From</label>
 
-							<input type="text" id="addProjectModalProjectDurationFrom" class="datepicker form-control">
+							<input type="text" id="addProjectModalProjectDurationFrom" class="datepickers form-control">
 
 						</div>
 
@@ -1948,7 +1948,7 @@ if(userId=="")
 
 							<label for="projectDuration">Project Duration To</label>
 
-							<input type="text" id="addProjectModalProjectDurationTo" class="datepicker form-control">
+							<input type="text" id="addProjectModalProjectDurationTo" class="datepickers form-control">
 
 						</div>
 
@@ -2031,7 +2031,7 @@ if(userId=="")
 
 							<label for="projectDuration">From</label>
 
-							<input type="text" id="editProjectModalProjectDurationFrom" class="datepicker form-control">
+							<input type="text" id="editProjectModalProjectDurationFrom" class="datepickers form-control">
 
 						</div>
 
@@ -2039,7 +2039,7 @@ if(userId=="")
 
 							<label for="projectDuration">To</label>
 
-							<input type="text" id="editProjectModalProjectDurationTo" class="datepicker form-control">
+							<input type="text" id="editProjectModalProjectDurationTo" class="datepickers form-control">
 
 						</div>
 
@@ -2154,7 +2154,7 @@ if(userId=="")
 
 						<label for="experienceDuration">From</label>
 
-						<input type="text" id="addExperienceModalDurationFrom" class="datepicker form-control">
+						<input type="text" id="addExperienceModalDurationFrom" class="datepickers form-control">
 
 					</div>
 
@@ -2162,7 +2162,7 @@ if(userId=="")
 
 						<label for="experienceDuration">To</label>
 
-						<input type="text" id="addExperienceModalDurationTo" class="datepicker form-control">
+						<input type="text" id="addExperienceModalDurationTo" class="datepickers form-control">
 
 					</div>
 
@@ -2263,7 +2263,7 @@ if(userId=="")
 
 							<label for="experienceDurationHours">From</label>
 
-							<input type="text" id="editExperienceModalDurationFrom" class="form-control datepicker">
+							<input type="text" id="editExperienceModalDurationFrom" class="form-control datepickers">
 
 						</div>
 
@@ -2271,7 +2271,7 @@ if(userId=="")
 
 							<label for="experienceDurationMin">To</label>
 
-							<input type="text" id="editExperienceModalDurationTo" class="form-control datepicker">
+							<input type="text" id="editExperienceModalDurationTo" class="form-control datepickers">
 
 						</div>
 
@@ -2388,7 +2388,7 @@ if(userId=="")
 
 						<label for="duration">From</label>
 
-						<input type="text" id="addAcademicsModalDurationFrom" class="datepicker form-control datepicker">
+						<input type="text" id="addAcademicsModalDurationFrom" class="datepickers form-control datepickers">
 
 					</div>
 
@@ -2396,7 +2396,7 @@ if(userId=="")
 
 						<label for="duration">To</label>
 
-						<input type="text" id="addAcademicsModalDurationTo" class="datepicker form-control datepicker">
+						<input type="text" id="addAcademicsModalDurationTo" class="datepickers form-control datepickers">
 
 					</div>
 
@@ -2508,7 +2508,7 @@ if(userId=="")
 
 							<label for="duration">From</label>
 
-							<input type="text" id="editAcademicsModalDurationFrom" class="form-control datepicker">
+							<input type="text" id="editAcademicsModalDurationFrom" class="form-control datepickers">
 
 							<br/>
 
@@ -2518,7 +2518,7 @@ if(userId=="")
 
 							<label for="duration">To</label>
 
-							<input type="text" id="editAcademicsModalDurationTo" class="form-control datepicker">
+							<input type="text" id="editAcademicsModalDurationTo" class="form-control datepickers">
 
 							<br/>
 
@@ -2587,7 +2587,7 @@ if(userId=="")
 
 							<label for="duration">From</label>
 
-							<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control datepicker">
+							<input type="text" id="addWorkshopModalWorkshopDurationFrom" class="form-control datepickers">
 
 						</div>
 						
@@ -2595,7 +2595,7 @@ if(userId=="")
 
 							<label for="duration">To</label>
 
-							<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control datepicker">
+							<input type="text" id="addWorkshopModalWorkshopDurationTo" class="form-control datepickers">
 
 						</div>
 
@@ -2666,7 +2666,7 @@ if(userId=="")
 
 							<label for="duration">From</label>
 
-							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control datepicker">
+							<input type="text" id="editWorkshopModalWorkshopDurationFrom" class="form-control datepickers">
 
 							<br/>
 
@@ -2676,7 +2676,7 @@ if(userId=="")
 
 							<label for="duration">To</label>
 
-							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control datepicker">
+							<input type="text" id="editWorkshopModalWorkshopDurationTo" class="form-control datepickers">
 
 							<br/>
 
@@ -2745,7 +2745,7 @@ if(userId=="")
 
 						<label for="experienceDuration">From</label>
 
-						<input type="text" id="addCertificationModalDurationFrom" class="form-control datepicker">
+						<input type="text" id="addCertificationModalDurationFrom" class="form-control datepickers">
 
 					</div>
 
@@ -2753,7 +2753,7 @@ if(userId=="")
 
 						<label for="experienceDuration">To</label>
 
-						<input type="text" id="addCertificationModalDurationTo" class="form-control datepicker">
+						<input type="text" id="addCertificationModalDurationTo" class="form-control datepickers">
 
 					</div>
 
@@ -2818,7 +2818,7 @@ if(userId=="")
 
 							<label for="duration">From</label>
 
-							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control datepicker">
+							<input type="text" id="editCertificationModalCertificationDurationFrom" class="form-control datepickers">
 
 							<br/>
 
@@ -2828,7 +2828,7 @@ if(userId=="")
 
 							<label for="duration">To</label>
 
-							<input type="text" id="editCertificationModalCertificationDurationTo" class="form-control datepicker">
+							<input type="text" id="editCertificationModalCertificationDurationTo" class="form-control datepickers">
 
 							<br/>
 
@@ -3043,7 +3043,7 @@ if(userId=="")
 <script>
 
 	$(document).ready(function(){
-		$( ".datepicker" ).datepicker({
+		$( ".datepickers" ).datepicker({
 			changeMonth: true,
 			changeYear: true,
 			dateFormat:"dd/mm/yy"
@@ -3052,6 +3052,6 @@ if(userId=="")
 
 	
 
-	// $('.datepicker').css({'z-index':'1052'});
+	// $('.datepickers').css({'z-index':'1052'});
 
 </script>
