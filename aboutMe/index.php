@@ -1,6 +1,6 @@
 <?php 
 session_start();
-	include('../header_adv.php');
+	include('../header.php');
 ?>
 <script>
 

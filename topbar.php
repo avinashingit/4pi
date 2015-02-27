@@ -263,7 +263,7 @@
 
 	setInterval(function(){
 		fetchNotifications('yes');
-	},3000);
+	},3000000);
 
 	function insertPeopleSearch(data,val)
 	{
@@ -654,13 +654,13 @@
 
 <script>
 
-		 (function($){
+		 /*(function($){
 	        $(window).load(function(){
 	            $("#notifications").mCustomScrollbar({
 	            	theme:"rounded-dots-dark"
 	            });
 	        });
-	    })(jQuery);
+	    })(jQuery);*/
 
 	$(document).ready(function()
 	{
