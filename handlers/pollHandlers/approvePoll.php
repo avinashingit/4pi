@@ -110,6 +110,7 @@ else
 		$values[1]=array($pollIdHash => 's');
 		$result=$conn->insert($editPollSQL,$values);
 		$pollOwner=$poll['userId'];
+		$pollId=$poll['pollId'];
 		if($conn->error==""&&$result==true)
 		{
 			if($pollStatus==1)

@@ -13,7 +13,7 @@ $_SESSION['jq']=0;
 ?>
 
 <script>
-
+console.log("H");
 var userId = "<?php  echo $_SESSION['vj']; ?>";
 var inView= "<?php echo $_SESSION['jx']; ?>";
 

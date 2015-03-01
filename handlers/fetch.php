@@ -2279,8 +2279,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		
 		$toUserIds=explode(',',$toUserIds);
 		
+		$conn->startTransaction();
+
 		foreach ($toUserIds as $userId) 
 		{
+			notifyAdmin("Just Testing notif.:".$fromUserId."!In create notification2!!",$userId);
 			if($fromUserId!=$userId)
 			{
 				
@@ -2327,25 +2330,34 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		    	
 		    	if($conn->error!=""&&$result!=true)
 		    	{
-		    		//return true;
-				
-					//affected rows = 2 if an update occurs, 1 if an insert occurs
-				
-					if(($rows=$conn->getAffectedRows())==1)
-					{
-						$notificationId++;
-					}
-		    	
-		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
+		    		
+					$cr=$conn->error;
+
+					$conn->rollbackTransaction();
+
+					notifyAdmin("Conn.Error:".$cr."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
 					
 					return false;
 
+		    	}
+		    	else
+		    	{
+		    		//return true;
+				
+					//affected rows = 2 if an update occurs, 1 if an insert occurs
+		    		if(($rows=$conn->getAffectedRows())==1)
+					{
+						$notificationId++;
+					}
 		    	}
 		    	//$notificationId++;
 		    	//echo "notifid:".$notificationId;
 			}
 			
 		}
+
+		$conn->completeTransaction();
+		return true;
 		
 	}
 
@@ -2418,17 +2430,20 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 		    	
 		    	if($conn->error!=""&&$result!=true)
 		    	{
-		    		//return true;
-					//affected rows = 2 if an update occurs, 1 if an insert occurs
-					if(($rows=$conn->getAffectedRows())==1)
-					{
-						$notificationId++;
-					}
 		    	
 		    		notifyAdmin("Conn.Error:".$conn->error."! In sending notifications for object id:".$objectId." , notif type: ".$notifType.", to userId:".$userId.", FromUserId:".$fromUserId,$userId);
 				
 					return false;
 
+		    	}
+		    	else
+		    	{
+		    		//return true;
+					//affected rows = 2 if an update occurs, 1 if an insert occurs
+		    		if(($rows=$conn->getAffectedRows())==1)
+					{
+						$notificationId++;
+					}
 		    	}
 		    	//$notificationId++;
 		    	//echo "notifid:".$notificationId;

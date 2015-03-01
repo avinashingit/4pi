@@ -119,6 +119,7 @@ else
 		$values[1]=array($eventIdHash => 's');
 		$result=$conn->insert($editEventSQL,$values);
 		$eventOwner=$event['userId'];
+		$eventId=$event['eventId'];
 		if($conn->error==""&&$result==true)
 		{
 			if($eventStatus==1)

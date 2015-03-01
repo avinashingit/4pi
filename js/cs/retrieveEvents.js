@@ -59,7 +59,7 @@ function eventInsert(position,data,past)
 
 	event+='<div class="col-md-8 text-left" id="eventNameAndClub">';
 
-	event+='<div style="font-size:18px;"><a href="#"><span id="eventOrganizer" class="text-bold">'+data.eventOrgName+'</span></a> - <span id="eventName" class="text-bold">'+data.eventName+'</span></div>';
+	event+='<div style="font-size:18px;"><b><span id="eventName" class="text-bold">'+data.eventName+'</span></b> by <span id="eventOrganizer" class="text-bold">'+data.eventOrgName+'</span></div>';
 
 	event+='</div>';
 

@@ -41,7 +41,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 
 	//Actual CreateEvent Code Starts
-	 var_dump($_POST);
+	 // var_dump($_POST);
 	$eventContent=$_POST['_content'];
 	$eventName=$_POST['_eventName'];
 	$eventVenue=$_POST['_venue'];
@@ -273,7 +273,31 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				}
 				else
 				{
-					$approvalStatus=1;
+					//$approvalStatus=1;
+					if($userId==COCAS)
+					{
+						if($eventCategory=="technical")
+						{
+							$approvalStatus=1;
+						}
+						else
+						{
+							$approvalStatus=0;
+							sendNotification($userId,CULSEC,15,$eventId,600);
+						}
+					}
+					if($userId==CULSEC)
+					{
+						if($eventCategory=="nonTechnical")
+						{
+							$approvalStatus=1;
+						}
+						else
+						{
+							$approvalStatus=0;
+							sendNotification($userId,COCAS,15,$eventId,600);
+						}
+					}
 				}
 				
 

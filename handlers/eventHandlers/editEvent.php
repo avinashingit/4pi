@@ -302,10 +302,35 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					{
 						resetNotification($userId,CULSEC,15,$eventId,600);
 					}
+					
 				}
 				else
 				{
-					$approvalStatus=1;
+					//$approvalStatus=1;
+					if($userId==COCAS)
+					{
+						if($eventCategory=="technical")
+						{
+							$approvalStatus=1;
+						}
+						else
+						{
+							$approvalStatus=0;
+							resetNotification($userId,CULSEC,15,$eventId,600);
+						}
+					}
+					if($userId==CULSEC)
+					{
+						if($eventCategory=="nonTechnical")
+						{
+							$approvalStatus=1;
+						}
+						else
+						{
+							$approvalStatus=0;
+							resetNotification($userId,COCAS,15,$eventId,600);
+						}
+					}
 				}
 				
 				$attendCount=$event['attendCount'];
