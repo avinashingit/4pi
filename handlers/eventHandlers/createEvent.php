@@ -255,6 +255,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			//$values[15]=array($eventStatus => 's');
 			$result=$conn->insert($CreateEventSQL,$values);
 			$isCOCASorCULSEC=isCOCASorCULSEC($userId);
+			$showApproveButton=0;
 			if($conn->error==""&&$result==true)
 			{
 				//Success
@@ -330,7 +331,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 				$eventObj=new miniEvent($eventIdHash,$organisedBy,$eventName,$type,$eventContent,
 				$rawDate,$rawTime,$eventVenue,$attendCount,$rawSharedWith, 
-				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$isCOCASorCULSEC,$approvalStatus,$eventCategory);
+				$seenCount,$eventOwner,$isAttender,$eventDurationHrs,$eventDurationMin,"As Scheduled",$eventCreationTime,$showApproveButton,$approvalStatus,$eventCategory);
 				print_r(json_encode($eventObj));
 			}
 			else

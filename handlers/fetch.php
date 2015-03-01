@@ -2582,7 +2582,7 @@ function resetNotification($fromUserId,$toUserIds,$notifType,$objectId,$objectTy
 			
 			$values[$i+1]=array($displayedNotifArray[$i] => 's');
 		}
-		$notificationFetchSQL .= "ORDER BY timestamp DESC LIMIT 0,7";
+		$notificationFetchSQL .= "ORDER BY timestamp LIMIT 0,7";
 		//echo $notificationFetchSQL;
 		//var_dump($values);
 		$result=$conn->select($notificationFetchSQL,$values);
