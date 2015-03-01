@@ -268,7 +268,7 @@ function editEvent(id)
 	
 	$('#editEventModal').find('#editEventType').val(eventType);
 
-	$('#editEventModal').find('#editEventStatus').val("As Scheduled");
+	$('#editEventModal').find('#editEventStatus').val(eventStatus);
 
 	$('#editEventModal').find('#editEventCategory').val(eventCategory);
 	

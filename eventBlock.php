@@ -365,11 +365,11 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 						  			<option val="asScheduled">As Scheduled</option>
 
-						  			<!-- <option val="postponed">Pospone</option>
+						  			<option val="postponed">Pospone</option>
 
 						  			<option val="hold">On Hold</option>
 
-						  			<option val="cancel">Cancel</option> -->
+						  			<option val="cancel">Cancel</option>
 
 					  			</select>
 
