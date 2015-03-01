@@ -789,7 +789,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			$mail->FromName   = "Admin @ 4pi-IIIT D&M Kancheepuram";
 
-			$mail->AddEmbeddedImage('img/fourpi.png','logo_2u');
+			$mail->AddEmbeddedImage('img/reg.jpg','logo_2u');
 
 		}
 		catch(phpmailerException $e)
@@ -853,13 +853,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 //****************************************************************************************************************//
 
 
-	function mailContent($emailId,$content,$subject,$attachments="")
+	function mailContent($emailId,$post,$user,$attachments="")
 	{
+		
 		try
 		{
 			$mail = getMailerObject();
 
-			$mail->Subject    = $subject;
+			$mail->Subject    ="4Pi: Post[".$post['subject']."] Forwarded By '".$user['name']."'";
 
 			$mail->WordWrap   = 500; // set word wrap
 
@@ -867,11 +868,15 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			$mailBody="<center><strong>--This is an Automated Email. Don't Waste Your TIME Replying to this email address!!--</strong></center><br/>";
 
-			$mailBody=$mailBody."<strong>Subject:</strong>".$subject."<br/>";
+			$mailBody=$mailBody."----------------Start --------------<br/><br/>";
 
-			$mailBody=$mailBody."<strong>Content:</strong><br/>".$content."<br/><br/>";
+			$mailBody=$mailBody."<strong>Post Subject:</strong> ".$post['subject']."<br/>";
 
-			$mailBody=$mailBody."Have A Nice Time<br/>Regards,<br/><strong>4pi-Admin</strong><br/>";
+			$mailBody=$mailBody."<strong>Post Content:</strong><br/>".$post['content']."<br/><br/>";
+
+			$mailBody=$mailBody."----------------End --------------<br/><br/><br/>";
+
+			$mailBody=$mailBody."Have A Nice Time<br/>Regards,<br/><strong>4pi-MailerBot</strong><br/>";
 
 			$mail->Body       = $mailBody;
 

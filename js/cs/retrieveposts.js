@@ -13,7 +13,7 @@ function redirectPageToLogin()
 function checkData(data) {
     data = data.trim();
     if (data == 12) {
-        alert("Could not save your action into the database");
+        alert(" Some technical problem. Please try again later.");
         return -1;
     } else if (data == 13) {
         alert("You don't mess with 4pi");
@@ -47,6 +47,10 @@ function checkData(data) {
     else if(data==6)
     {
         alert("The details you have referred to are not present. ");
+    }
+    else if(data==10)
+    {
+        alert("Some oerror occurred");
     }
     else
     {
@@ -1128,10 +1132,11 @@ function mailPost(id, event) {
             alert("Unable to mail post with id " + id);
         })
         .success(function(data) {
-            // alert(data);
+            console.log(data);
             if(checkData(data)==1)
             {
                 alert("Mailed successfully");
+                data=JSON.parse(data);
                 $('#' + id).find('#mailCount').html(data);
                 $('#'+id).find('#mailPostButton').html('<i class="fa fa-envelope"></i>&nbsp;Mail').attr("onclick","mailPost("+id+")");
                 

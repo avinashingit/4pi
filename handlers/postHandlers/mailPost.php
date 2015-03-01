@@ -77,7 +77,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$subject="Mail Post Request for '".$post['subject']."' By '".$user['name']."'";
 				$content=$post['content'];
 				$attachments=$post['filesAttached'];
-				if(mailContent($emailId,$content,$subject,$attachments)==true)
+				if(mailContent($emailId,$post,$user,$attachments)==true)
 				{
 					$mailedBy=$post['mailedBy'];
 					$mailCount=$post['mailCount'];
