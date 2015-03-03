@@ -76,7 +76,7 @@ $mode=$_POST['_mode'];
 
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe insert")>0)
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe Edit")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -85,7 +85,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in aboutMe Insert",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in aboutMe Edit",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -94,7 +94,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 }
 if(($user=getUserFromHash($userIdHash))==false)
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe insert")>0)
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in aboutMe Edit")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -103,7 +103,7 @@ if(($user=getUserFromHash($userIdHash))==false)
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in aboutMe insert",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in aboutMe Edit",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;

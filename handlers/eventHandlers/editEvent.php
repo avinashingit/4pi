@@ -63,7 +63,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();
 	}
-	if(strlen($eventContent)>1000)
+	if(strlen($eventContent)>10000)
 	{
 		echo 16;
 		exit();
@@ -149,7 +149,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			$userId=$user['userId'];
 			if(($event=getEventFromHash($eventIdHash))==false)
 			{
-				/*if(blockUserByHash($userIdHash,"Tampering EventIdHash in editEvent",$userId.",sh:".$eventIdHash)>0)
+				if(blockUserByHash($userIdHash,"Tampering EventIdHash in editEvent",$userId.",sh:".$eventIdHash)>0)
 				{
 					$_SESSION=array();
 					session_destroy();
@@ -163,10 +163,10 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					session_destroy();
 					echo 13;
 					exit();
-				}*/
-				notifyAdmin("Suspicious eventIdHash in editPevent",$userId.",sh:".$eventIdHash);
+				}
+				/*notifyAdmin("Suspicious eventIdHash in editPevent",$userId.",sh:".$eventIdHash);
 				echo 6;
-				exit();
+				exit();*/
 			}
 			if(getEventStatus($event,1)=="Completed")
 			{
@@ -360,7 +360,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! While inserting in Create Event",$userId);
+				notifyAdmin("Conn.Error".$conn->error."! While inserting in Edit Event",$userId);
 				echo 12;
 				exit();
 			}

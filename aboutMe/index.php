@@ -18,6 +18,11 @@ if(userId=="")
 
 <style>
 
+	.highcharts-container
+	{
+		height:600px !important;
+	}
+
 	.skillValue
 	{
 		padding-top:5px;
@@ -918,7 +923,7 @@ if(userId=="")
 				count--;
 			}
 
-			console.log(toolArray);
+			//console.log(toolArray);
 
 			for(var i=0;i<toolArray.length;i++)
 			{
@@ -1081,7 +1086,7 @@ if(userId=="")
 		x.find('#editCertificationModalCourseName').val(y.find('#courseName').html());
 		x.find('#editCertificationModalInstitute').val(y.find('#institute').html());
 		var z=y.find('#duration').attr("title").split("-");
-		console.log(z);
+		//console.log(z);
 		x.find('#editCertificationModalCertificationDurationFrom').val(z[0]);
 		x.find('#editCertificationModalCertificationDurationTo').val(z[1]);
 		x.find('#editCertificationModalId').html(n);
@@ -1243,7 +1248,7 @@ if(userId=="")
 				count--;
 			}
 
-			console.log(interestsArray);
+			//console.log(interestsArray);
 
 			for(var i=0;i<interestsArray.length;i++)
 			{
@@ -1444,7 +1449,7 @@ if(userId=="")
 					
 				</nav>
 
-				<div class="navObject" id="skills">
+				<div class="navObject" id="skills" style="min-height:600px;">
 
 					<div class="row">
 
@@ -3046,7 +3051,8 @@ if(userId=="")
 		$( ".datepickers" ).datepicker({
 			changeMonth: true,
 			changeYear: true,
-			dateFormat:"dd/mm/yy"
+			dateFormat:"dd/mm/yy",
+			yearRange: "-100:+0"
 		});
 	});
 

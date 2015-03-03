@@ -20,7 +20,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	require_once("postHandlers/miniClasses/miniComment.php");
 	require_once("eventHandlers/miniEvent.php");
 	require_once("pollHandlers/miniPoll.php");
-
+	// include_once("../QOB/qob.php");
 
 //****************************************************************************************************************//
 //****************************************************************************************************************//
@@ -685,7 +685,9 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		$isActive=0;
 
-		$noteCrimeSQL="INSERT INTO suspicious (userId, suspicion) VALUES(?,?)";
+		$ip=$_SERVER['REMOTE_ADDR'];
+
+		
 
 		$UpdateUserSQL="UPDATE users SET isActive=? WHERE userIdHash= ?";
 
@@ -693,11 +695,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		$values[1]=array($userIdHash=>'s');
 
+
+
 		$result=$conn->update($UpdateUserSQL,$values);
 
 		if($conn->error==""&&$result==true)
 		{
-			$adminNotif="Blocked: ".$crime.",".$privateData;
+			$adminNotif="Blocked: ".$crime.",".$userIdHash.",".$privateData;
 
 			//$user=getUserFromHash($userIdHash);
 
@@ -706,6 +710,10 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 			$values1[0]=array($userIdHash =>'s');
 
 			$values1[1]=array($adminNotif => 's');
+
+			$values1[2]=array($ip=>'s');
+
+			$noteCrimeSQL="INSERT INTO suspicious (userId, suspicion,ip) VALUES(?,?,?)";
 
 			$result2=$conn->insert($noteCrimeSQL,$values1);
 
@@ -730,15 +738,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 	function notifyAdmin($notification,$userIdentity)
 	{
-		$conn=new QoB();
+		$conn= new QoB();
 
-		$notification="Notify: ".$notification;
+		$ip=$_SERVER['REMOTE_ADDR'];
 
-		$noteCrimeSQL="INSERT INTO suspicious (userId, suspicion) VALUES(?,?)";
+		$notification="Notify: ".$notification.",  IP: ".$ip;
+
+		$noteCrimeSQL="INSERT INTO suspicious (userId, suspicion, ip) VALUES(?,?,?)";
 
 		$values1[0]=array($userIdentity =>'s');
 
 		$values1[1]=array($notification => 's');
+
+		$values[2]=array($ip=>'s');
 
 		$result=$conn->insert($noteCrimeSQL,$values1);
 
@@ -1733,11 +1745,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		
 		$degree="B.Tech";
 
-		$rollNoArray=explode('',$userId);
+		$rollNoArray=str_split($userId);
 
 		if($rollNoArray[5]=='D')
 		{
-			$degree="Ph.D";
+			$degree="Ph.D Student";
 		}
 		else if($rollNoArray[5]=='M')
 		{
@@ -1745,10 +1757,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			if($startYear+2==$currentYearSliced)
 			{
-				if((int)currentMonth>6)
+				if(((int)currentMonth)>6)
 				{
 					$degree=$degree." Alumnus";
 				}
+			}
+			else if($startYear+2<$currentYearSliced)
+			{
+				$degree=$degree." Alumnus";
 			}
 		}
 		else if($rollNoArray[5]=='I')
@@ -1762,6 +1778,10 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 					$degree=$degree." Alumnus";
 				}
 			}
+			else if($startYear+5<$currentYearSliced)
+			{
+				$degree=$degree." Alumnus";
+			}
 		}
 		else if($rollNoArray[5]=='B')
 		{
@@ -1774,6 +1794,11 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 					$degree=$degree." Alumnus";
 				}
 			}
+			else if($startYear+4<$currentYearSliced)
+			{
+				$degree=$degree." Alumnus";
+			}
+			
 		}
 		
 		return $degree;
@@ -2288,7 +2313,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		foreach ($toUserIds as $userId) 
 		{
-			notifyAdmin("Just Testing notif.:".$fromUserId."!In create notification2!!",$userId);
+			// notifyAdmin("Just Testing notif.:".$fromUserId."!In create notification2!!",$userId);
 			if($fromUserId!=$userId)
 			{
 				

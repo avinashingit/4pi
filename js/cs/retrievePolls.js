@@ -8,6 +8,7 @@ function createPollAddInput()
 	var optionVal=numberOfOptionsCurrent+1;
 	current.attr('id',optionVal);
 	current.find('.inputOption').attr("id",optionVal);
+	current.addClass('extraInput');
 	placeHolder="Option ";
 	current.find('.inputOption').attr("placeholder",placeHolder);
 	current.find('.inputOption').val("");
@@ -128,6 +129,8 @@ function createPollSP()
 							$(this).val("1");
 						});
 
+						$('#pollCreateModal').find('.extraInput').remove();
+
 						$('#pollCreateModal').find('#createPollSharedWith').val("All");
 					}
 					else
@@ -162,8 +165,8 @@ $(function () {
 //--------------------------------------------------------------------------------------------//
 function displayChart(json,idC,id,hUh)
 {
-	// ////console.log("called "+json+" "+idC+" "+id);
-	////console.log(json);
+	// ////////console.log("called "+json+" "+idC+" "+id);
+	////////console.log(json);
 	// var pollQuestion =PollQuestion;
 	// var pollQuestion="Avinash";
 	if(hUh==1)
@@ -233,7 +236,7 @@ function approvePoll(id,val)
 		alert("Server overload. Please try again.:(");
 	})
 	.success(function(data){
-		console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			$("#"+id).find('.approve').remove();
@@ -1636,7 +1639,7 @@ function fetchLatestPolls(call,value)
 		});
 	}
 
-	// console.log(existingPolls);
+	// ////console.log(existingPolls);
 
 	$.post('./handlers/pollHandlers/latestPolls.php',{
 		_call:call,
@@ -1648,7 +1651,7 @@ function fetchLatestPolls(call,value)
 	})
 	.success(function(data){
 		$('#inViewElement').html("1004");
-		console.log(data);
+		////console.log(data);
 		data=data.trim();
 		if(data==404)
 		{
@@ -1666,7 +1669,7 @@ function fetchLatestPolls(call,value)
 					for(i=0;i<datas.length;i++)
 					{
 						insertPoll(datas[i],"last");
-						console.log(datas[i].isOwner);
+						////console.log(datas[i].isOwner);
 					}
 					$('time.timeago').timeago();
 
@@ -1741,7 +1744,7 @@ function submitVote(pollId,type,result,pollType)
 					checkedOption[0]=i;
 				}
 			}*/
-			////console.log("Option sent"+checkedOption[0]);
+			////////console.log("Option sent"+checkedOption[0]);
 			$.post('./handlers/pollHandlers/votePoll.php',{
 				_pollId:pollId,
 				_votes:checkedOption[0]
@@ -1750,9 +1753,9 @@ function submitVote(pollId,type,result,pollType)
 				alert("Server overload. Please try again. :(");
 			})
 			.success(function(data){
-				////console.log(data);
+				////////console.log(data);
 				
-				console.log(data);
+				////console.log(data);
 				if(checkData(data)==1)
 				{
 					if(data==3)
@@ -1762,7 +1765,7 @@ function submitVote(pollId,type,result,pollType)
 					else
 					{
 						datas=JSON.parse(data);
-						alert(datas.pollType);
+						// alert(datas.pollType);
 						displayChart(datas,pollId+'b',pollId,1);
 					}
 					
@@ -1827,7 +1830,7 @@ function submitVote(pollId,type,result,pollType)
 					count=count+1;
 				}
 			}*/
-			////console.log(checkedOptions);
+			////////console.log(checkedOptions);
 			$.post('/4pi/handlers/pollHandlers/votePoll.php',{
 				_pollId:pollId,
 				_votes:checkedOptions
@@ -1836,10 +1839,10 @@ function submitVote(pollId,type,result,pollType)
 				alert("Server overload. Please try again. :(");
 			})
 			.success(function(data){
-				////console.log(data);
+				////////console.log(data);
 				if(checkData(data)==1)
 				{
-					if(data!=3)
+					if(data==3)
 					{
 						$('#'+pollId).find('.pollIdContent').html("<p class='text-center'>Thanks for voting. Results soon. </p>");
 					}
@@ -1877,7 +1880,7 @@ function deletePoll(pollId)
 		.success(function(data){
 			if(checkData(data)==1)
 			{
-				////console.log(data);
+				////////console.log(data);
 				$('#'+pollId).remove();
 			}
 		});
@@ -1957,7 +1960,7 @@ function editedPollSend()
 					alert("Server overload. Please try again.:(");
 				})
 				.success(function(data){
-					console.log(data);
+					////console.log(data);
 					if(checkData(data)==1)
 					{
 						data=JSON.parse(data);

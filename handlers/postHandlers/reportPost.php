@@ -63,6 +63,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		{
 
 			$postIdHash=$_POST['_postId'];
+			$userId=$user['userId'];
 			if(($post=getPostFromHash($postIdHash))==false)
 			{
 				//Detected tampered postIdHash
@@ -74,7 +75,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 			{
 
 				$reportedBy=$post['reportedBy'];
-				$userId=$user['userId'];
+				
 				$spamCount=$post['spamCount'];
 				$hiddenTo=$post['hiddenTo'];
 				//echo "Hi".$hiddenTo;

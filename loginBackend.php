@@ -8,8 +8,8 @@ function login()
 		$password = $_POST['_password'];
 		$passwordHash=hash("sha512",$password.PASSSALT);
 		//$userIdHash = hash("sha512",$userId.SALT);
-		$values1 = array(0 => array($userId => 's'),1 => array($passwordHash => 's'));
-		$result1 = $conObj->fetchAll("SELECT userId,isActive,password FROM users WHERE userId = ? AND password = ?",$values1,false);
+		$values1 = array(0 => array($userId => 's'));
+		$result1 = $conObj->fetchAll("SELECT userId,isActive,password FROM users WHERE userId = ?",$values1,false);
 		if($conObj->error == "")
 			{
 				if($result1 != "")
@@ -20,39 +20,47 @@ function login()
 						}
 						else
 						{
-							if($result1['isActive']==1)
+							if($result1['password']==$passwordHash)
 							{
-								session_start();
-								$logId=loginLog($userId);
-								if($logId>0)
+								if($result1['isActive']==1)
 								{
-									$userIdHash=hash("sha512",$userId.SALT);
-									$_SESSION['vj'] = $userIdHash;
-									// echo '<script>console.log($userIdHash)</script>';
+									session_start();
+									$logId=loginLog($userId);
+									if($logId>0)
+									{
+										$userIdHash=hash("sha512",$userId.SALT);
+										$_SESSION['vj'] = $userIdHash;
+										// echo '<script>console.log($userIdHash)</script>';
 
 
-									$secondUserIdHash = hash("sha512",$userIdHash.SALT2);
-									$_SESSION['tn'] = $secondUserIdHash;
-									// echo '<script>console.log($secondUserIdHash)<script>';
-									//echo $secondUserIdHash;
+										$secondUserIdHash = hash("sha512",$userIdHash.SALT2);
+										$_SESSION['tn'] = $secondUserIdHash;
+										// echo '<script>console.log($secondUserIdHash)<script>';
+										//echo $secondUserIdHash;
 
-									$_SESSION['userId'] = $userId;
-									
-									$_SESSION['logId']=$logId;
-									$_SESSION['jq'] = 0;
-									$_SESSION['mq'] = 0;
-									$_SESSION['qq'] = 0;
-									echo 1;
+										$_SESSION['userId'] = $userId;
+										
+										$_SESSION['logId']=$logId;
+										$_SESSION['jq'] = 0;
+										$_SESSION['mq'] = 0;
+										$_SESSION['qq'] = 0;
+										echo 1;
+									}
+									else
+									{
+										echo 22;//Problem with noting the noting details
+									}
 								}
 								else
 								{
-									echo 22;//Problem with noting the noting details
+									echo 9;// User is blocked by administrator.
 								}
 							}
 							else
 							{
-								echo 9;// User is blocked by administrator.
+								echo -1;
 							}
+							
 						}
 						
 						

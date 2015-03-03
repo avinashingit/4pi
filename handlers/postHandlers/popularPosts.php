@@ -46,7 +46,7 @@ else
 $conn=new QoB();
 if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 {
-	if(blockUserByHash($userIdHash,"Suspicious Session Variable in latestpost")>0)
+	if(blockUserByHash($userIdHash,"Suspicious Session Variable in popular post")>0)
 	{
 		$_SESSION=array();
 		session_destroy();
@@ -55,7 +55,7 @@ if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	}
 	else
 	{
-		notifyAdmin("Suspicious Session Variable in latest post",$userIdHash.",sh:".$_SESSION['tn']);
+		notifyAdmin("Suspicious Session Variable in popular post",$userIdHash.",sh:".$_SESSION['tn']);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
@@ -66,7 +66,7 @@ else
 {
 	if(($user=getUserFromHash($userIdHash))==false)
 	{
-		notifyAdmin("Critical Error In latestpost",$userIdHash);
+		notifyAdmin("Critical Error In popular post",$userIdHash);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;

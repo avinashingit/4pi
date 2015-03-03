@@ -38,7 +38,7 @@ else
 {
 	if(($user=getUserFromHash($userIdHash))==false)
 	{
-		notifyAdmin("Critical Error In latestpoll",$userIdHash);
+		notifyAdmin("Critical Error In fetch little Posts",$userIdHash);
 		$_SESSION=array();
 		session_destroy();
 		echo 13;

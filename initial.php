@@ -14,15 +14,11 @@ include_once("handlers/fetch.php")
 	else
 	{
 		$userIdHash=$_GET['ref'];
-		/*$sql="SELECT * FROM users WHERE userIdHash=".$_GET['ref']."" ;
-		$result=mysql_query($sql);
-		$username="";
-		$userId="";*/
 		if(($row=getUserFromHash($userIdHash))!=false)
 		{
 			if($row['isActive']==1)
 			{
-				echo "<script>alert('You have already registered.');window.location.href='/4pi/index.php';</script>";
+				echo "<script>alert('You have already registered. Please login to continue!!!');window.location.href='/4pi/index.php';</script>";
 				exit();
 			}
 			else
@@ -41,26 +37,12 @@ include_once("handlers/fetch.php")
 <script>
 var userIdHash="<?php echo $_GET['ref'];?>";
 var userName='<?php
-	/*$con=mysql_connect("localhost","root","isquarer");
-	mysql_select_db("iiitdmstudentsportal"); echo "Im still being executed";
-	$sql="SELECT name FROM users WHERE userIdHash='".$_GET['ref']."'";
-	$res=mysql_query($sql);
-
-	if(($row=getUserFromHash($_GET["ref"])!=false)
-	{*/
+	
 		echo $row["name"];
-	//}
 	?>';
 
 var userRollNumber='<?php
-/*$con=mysql_connect("localhost","root","isquarer");
-mysql_select_db("iiitdmstudentsportal");
-$sql="SELECT userId FROM users WHERE userIdHash='".$_GET['ref']."'";
-$res=mysql_query($sql);
-while($row=mysql_fetch_array($res))
-{*/
 	echo $row["userId"];
-//}
 ?>';
 $(document).ready(function(){
 	$('.second').hide();

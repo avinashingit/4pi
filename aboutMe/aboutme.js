@@ -490,8 +490,6 @@ function insertTopPart(data,locateProPic)
 				topPart+='<div class="text-left" id="personDOB" title="'+data.dob+'">'+convertedDateOfBirth+'</div><br/>';
 			}
 
-				
-
 				topPart+='<div class="text-left break-word" id="personHighestDegree">'+data.highestDegree+'</div><br/>';
 
 				topPart+='<div class="text-left" id="personCurrentProfession">'+data.currentProfession+'</div><br/>';
@@ -500,7 +498,7 @@ function insertTopPart(data,locateProPic)
 				{
 					topPart+='<div class="text-left" id="personResumeLink">';
 
-						topPart+='<a href="/4pi/files/resumes/'+userIdFromURL+'.pdf"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
+						topPart+='<a href="/4pi/files/resumes/'+userIdFromURL+'.pdf?v='+num+'"><button class="btn btn-primary">Find my resume&nbsp;&nbsp;<i class="fa fa-external-link"></i></button></a>';
 
 					topPart+='</div><!-- end person resume link id -->';
 				}
@@ -595,35 +593,35 @@ function insertBottomPart(data)
 				if(data.facebookId!="")
 				{
 					bottomPart+='<div class="col-md-2" id="facebookURL">';
-						bottomPart+='<a href="'+data.facebookId+'" class="icon-button facebook" ><i class="fa fa-facebook" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+						bottomPart+='<a href="'+data.facebookId+'" target="_blank" class="icon-button facebook" ><i class="fa fa-facebook" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 					bottomPart+='</div>';
 				}
 					
 				if(data.twitterId!="")
 				{
 					bottomPart+='<div class="col-md-2" id="twitterURL">';
-						bottomPart+='<a href="'+data.twitterId+'"  class="icon-button twitter"><i class="fa fa-twitter" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+						bottomPart+='<a href="'+data.twitterId+'" target="_blank" class="icon-button twitter"><i class="fa fa-twitter" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 					bottomPart+='</div>';
 				}
 
 				if(data.googleId!="")
 				{
 					bottomPart+='<div class="col-md-2" id="googlePlusURL">';
-						bottomPart+='<a href="'+data.googleId+'" class="icon-button google-plus"><i class="fa fa-google-plus" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+						bottomPart+='<a href="'+data.googleId+'" target="_blank" class="icon-button google-plus"><i class="fa fa-google-plus" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 					bottomPart+='</div>';
 				}
 
 				if(data.linkedinId!="")
 				{
 					bottomPart+='<div class="col-md-2" id="linkedInURL">';
-						bottomPart+='<a href="'+data.linkedinId+'" class="icon-button linkedin"><i class="fa fa-linkedin" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+						bottomPart+='<a href="'+data.linkedinId+'" target="_blank" class="icon-button linkedin"><i class="fa fa-linkedin" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 					bottomPart+='</div>';
 				}
 
 				if(data.pinterestId!="")
 				{
 					bottomPart+='<div class="col-md-2" id="pinterestURL">';
-						bottomPart+='<a href="'+data.pinterestId+'" class="icon-button pinterest"><i class="fa fa-instagram" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
+						bottomPart+='<a href="'+data.pinterestId+'" target="_blank" class="icon-button pinterest"><i class="fa fa-instagram" style="font-size:25px;margin-top:15px;"></i><span></span></a>';
 					bottomPart+='</div>';
 				}
 
@@ -709,7 +707,7 @@ function fetchTopPart()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -741,8 +739,8 @@ function editContactInfoSendData()
 	var phone2=link.find("#contactNumber2").val().trim();
 	var showMailId=link.find("#showEmailIdValue").val();
 	var showContactsValue=link.find("#showContactsValue").val();
-	alert(showContactsValue);
-	alert(showMailId);
+	/*alert(showContactsValue);
+	alert(showMailId);*/
 	if(showMailId!=1 && showMailId!=2)
 	{
 		alert("There is a problem with your page. Please reload it.");
@@ -772,7 +770,7 @@ function editContactInfoSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			console.log("HI      "+data);
+			//console.log("HI      "+data);
 			if(checkData(data)==1)
 			{
 				insertBottomPart(JSON.parse(data));
@@ -834,7 +832,7 @@ function editTopPartSendData()
 
 		
 
-		//console.log(link.find("#editPersonInfoModalPersonName").val().trim());
+		////console.log(link.find("#editPersonInfoModalPersonName").val().trim());
 
 		new_data.append("_alias",link.find("#editPersonInfoModalPersonName").val());
 		new_data.append("_mode",1);
@@ -849,7 +847,7 @@ function editTopPartSendData()
 
 		new_data.append("_currentProfession",$("#topContent").find("#personCurrentProfession").html())
 
-		// //console.log(new_data);
+		// ////console.log(new_data);
 		// 
 		$.ajax({
 			url:'/4pi/handlers/aboutHandlers/aboutMeEdit.php',
@@ -880,7 +878,8 @@ function insertSkills(data)
 	data=JSON.parse(data);
 	$('#skills').find('#skillData').highcharts({
         chart: {
-            type: 'column'
+            type: 'column',
+            height:'500'
         },
         title: {
             text: 'Skillset'
@@ -895,6 +894,14 @@ function insertSkills(data)
                 }
             }
         },
+	    plotOptions: {
+	        pie: {
+	            size:'100%',
+	            dataLabels: {
+	                enabled: false
+	            }
+	        }
+	    },
         yAxis: {
             min: 0,
 			max:100,
@@ -936,7 +943,7 @@ function fetchSkills()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1007,7 +1014,7 @@ function addSkillSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1087,7 +1094,7 @@ function editSkillSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1116,7 +1123,7 @@ function editSkillSendData()
 
 function insertTool(data,isOwner)
 {
-	//console.log(data);
+	////console.log(data);
 	var tool="";
 
 	tool+='<div class="row tool">';
@@ -1165,7 +1172,7 @@ function fetchTools(data)
 		alert("Server overload. Please try again.:(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1225,7 +1232,7 @@ function addToolsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$("#tools").find('.tool').remove();
@@ -1269,7 +1276,7 @@ function editToolsSendData()
 		i++;
 	});
 
-	//console.log(toolArray);
+	////console.log(toolArray);
 
 	var empty=0;
 	for(var i=0;i<toolArray.length;i++)
@@ -1295,13 +1302,13 @@ function editToolsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$("#tools").find('.tool').remove();
 				data=JSON.parse(data);
 				var x=data.tools.split(",");
-				if(data.message.length==0)
+				if(data.message.length!=0)
 				{
 					alert(data.message);
 				}
@@ -1422,12 +1429,12 @@ function fetchProjects()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
 			{
-				// //console.log(checkData(data)+" this is checkData");
+				// ////console.log(checkData(data)+" this is checkData");
 				$(".project").remove();
 				x=JSON.parse(data);
 				for(var i=0;i<x.length;i++)
@@ -1475,7 +1482,7 @@ function addProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1510,7 +1517,7 @@ function editProjectSendData()
 	var projectId=ln.find('editProjectModalProjectId').val();
 	var id=ln.find("#editProjectModalProjectId").val();
 
-	alert(id);
+	// alert(id);
 
 	if(title.length==0)
 	{
@@ -1532,7 +1539,7 @@ function editProjectSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1555,7 +1562,7 @@ function deleteProject(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#projects').find('#'+id).remove();
@@ -1591,7 +1598,7 @@ function insertExperience(data)
 
 	experience+='<div class="row">';
 
-		experience+='<div class="text-left col-md-7">';
+		experience+='<div class="text-left col-md-9">';
 
 			experience+='<div style="font-size:18px;color:#9A69AA;" class="text-left textPadding" ><i class="fa fa-fighter-jet"></i>&nbsp;<span id="company">'+data.organisation+'</span></div>';
 
@@ -1599,7 +1606,7 @@ function insertExperience(data)
 
 		if(data.isOwner==1)
 		{
-			experience+='<div class="col-md-3 visibleForUser text-right col-md-offset-2">';
+			experience+='<div class="col-md-3 visibleForUser text-right">';
 
 				experience+='<div style="font-size:14px;" class="text-right textPadding"><i  onclick="editExperience(\''+data.experienceId+'\');" class="showOnHover fa fa-pencil"></i>&nbsp;<i  onclick="deleteExperience(\''+data.experienceId+'\');" class="showOnHover fa fa-trash"></i></div>';
 
@@ -1649,7 +1656,7 @@ function fetchExperience()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		console.log(data);
+		//console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1680,7 +1687,7 @@ function addExperienceSendData()
 	var role=ln.find('#addExperienceModalRole').val().trim();
 	var duration=ln.find('#addExperienceModalDurationFrom').val().trim()+"-"+ln.find('#addExperienceModalDurationTo').val().trim();
 	var featuring=ln.find("#addExperienceModalFeature").val();
-	alert(featuring);
+	// alert(featuring);
 	/*var featureElement=document.getElementsByName("featureInPersonalInfo");
 	for(var i=0;i<featureElement.length;i++)
 	{
@@ -1753,7 +1760,7 @@ function editExperienceSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -1776,7 +1783,7 @@ function deleteExperience(id)
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#experiences').find('#'+id).remove();
@@ -1820,13 +1827,13 @@ function insertAcademics(data)
 
 	academics+='<div class="row">';
 
-		academics+='<div class="col-md-4 text-left">';
+		academics+='<div class="col-md-8 text-left">';
 
 			academics+='<div style="font-size:18px; color:#DE7B1A;"><i class="fa fa-mortar-board"></i>&nbsp;&nbsp;<span id="degree">'+data.degree+'</span></div>';
 
 		academics+='</div>';
 
-		academics+='<div class="col-md-2 col-md-offset-6 text-center">';
+		academics+='<div class="col-md-2 col-md-offset-2 text-center">';
 
 			academics+='<div style="font-size:16px;" class="percentage" id="percentage">'+data.score+'</div>';
 
@@ -1838,13 +1845,13 @@ function insertAcademics(data)
 
 	academics+='<div class="row">';
 
-		academics+='<div class="col-md-4 text-left">';
+		academics+='<div class="col-md-7 text-left">';
 
 			academics+='<em><div style="font-size:14px;" id="school">'+data.schoolName+'</div></em>';
 
 		academics+='</div>';
 
-		academics+='<div class="col-md-4 col-md-offset-4 text-right">';
+		academics+='<div class="col-md-4 col-md-offset-1 text-right">';
 
 			academics+='<div style="font-size:14px;" title="'+data.duration+'"id="duration">'+data.minDuration+'</div>';
 
@@ -1895,7 +1902,7 @@ function fetchAcademics()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -1955,7 +1962,7 @@ function addAcademicsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2016,7 +2023,7 @@ function editAcademicsSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2039,7 +2046,7 @@ function deleteAcademics(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#academics').find('#'+id).remove();
@@ -2070,7 +2077,7 @@ function insertWorkshop(data)
 
 		workshop+='<div class="row">';
 
-			workshop+='<div class="col-md-6 text-left">';
+			workshop+='<div class="col-md-8 text-left">';
 
 				workshop+='<div style="font-size:18px;color:#007887;"><i class="fa fa-gear"></i>&nbsp;<span id="workshopName">'+data.workshopName+'</span></div>';
 
@@ -2078,7 +2085,7 @@ function insertWorkshop(data)
 
 			if(data.isOwner==1)
 			{
-				workshop+='<div class="col-md-3 visibleForUser text-right col-md-offset-3">';
+				workshop+='<div class="col-md-3 visibleForUser text-right col-md-offset-1">';
 
 					workshop+='<div style="font-size:14px;"><i  onclick="editWorkshop(\''+data.workshopId+'\');" class="showOnHover fa fa-pencil"></i>&nbsp;<i  onclick="deleteWorkshop(\''+data.workshopId+'\');" class="showOnHover fa fa-trash"></i></div>';
 
@@ -2093,13 +2100,13 @@ function insertWorkshop(data)
 
 		workshop+='<div class="row">';
 
-			workshop+='<div class="col-md-6 text-left">';
+			workshop+='<div class="col-md-7 text-left">';
 
 				workshop+='<div style="font-size:15px;"><i class="fa fa-map-marker"></i>&nbsp;<span id="workshopLocation">'+data.place+'</span></div>';
 
 			workshop+='</div><!-- end class col-md-6 -->';
 
-			workshop+='<div class="col-md-4 text-right col-md-offset-2">';
+			workshop+='<div class="col-md-4 text-right col-md-offset-1">';
 
 				workshop+='<div style="font-size:15px;" id="workshopDuration" title="'+data.duration+'">'+data.minDuration+'</div>';
 
@@ -2139,7 +2146,7 @@ function fetchWorkshops()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 
@@ -2188,7 +2195,7 @@ function addWorkshopSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2234,7 +2241,7 @@ function editWorkshopSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2257,7 +2264,7 @@ function deleteWorkshop(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#workshops').find('#'+id).remove();
@@ -2346,7 +2353,7 @@ function fetchCertifications()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -2433,7 +2440,7 @@ function editCertificationSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2456,7 +2463,7 @@ function deleteCertification(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#certifications').find('#'+id).remove();
@@ -2561,7 +2568,7 @@ function fetchAchievements()
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -2610,7 +2617,7 @@ function addAchievementSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2657,7 +2664,7 @@ function editAchievementSendData()
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2680,7 +2687,7 @@ function deleteAchievement(id)
 			alert("Server overload. Please try again.");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				$('#achievements').find('#'+id).remove();
@@ -2754,7 +2761,7 @@ function fetchInterests(data)
 		alert("Server overload. Please try again. :(");
 	})
 	.success(function(data){
-		//console.log(data);
+		////console.log(data);
 		if(checkData(data)==1)
 		{
 			if(data!=404)
@@ -2765,7 +2772,7 @@ function fetchInterests(data)
 
 				var interests=x.interests.split(",");
 
-				//console.log(interests);
+				////console.log(interests);
 
 				for(var i=0;i<interests.length;i++)
 				{
@@ -2821,7 +2828,7 @@ function addInterestsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2866,7 +2873,7 @@ function editInterestsSendData()
 		i++;
 	});
 
-	//console.log(interestArray);
+	////console.log(interestArray);
 
 	var empty=0;
 
@@ -2894,7 +2901,7 @@ function editInterestsSendData()
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			if(checkData(data)==1)
 			{
 				data=JSON.parse(data);
@@ -2956,7 +2963,7 @@ function leaveMessage(e)
 	   	 		alert("Server overload. Please try again.");
 	   	 	})
 	   	 	.success(function(data){
-	   	 		console.log(data);
+	   	 		//console.log(data);
 	   	 		if(checkData(data)==1)
 	   	 		{
 	   	 			alert("Thank you. The message is delivered.")

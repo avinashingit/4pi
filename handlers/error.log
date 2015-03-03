@@ -576,3 +576,117 @@
 
 [2015-02-26 23:10:10             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
 
+[2015-03-02 07:09:02    172.16.4.182                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-02 07:09:21    172.16.4.182                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-03 00:15:42     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:43     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:43     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:43     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:44     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:44     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:44     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:44     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:44     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:44     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:45     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:45     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:46     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:46     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:47     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:47     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:47     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:48     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:48     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:48     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:48     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:48     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:48     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:49     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:49     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:49     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:49     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:50     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:50     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:50     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:50     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:50     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:51     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:51     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:51     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:52     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:52     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:52     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:52     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:52     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:52     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:53     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:53     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:53     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:54     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:54     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:54     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:55     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:55     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:56     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:56     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:15:58     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:16:07     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:16:07     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-03-03 00:16:07     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+

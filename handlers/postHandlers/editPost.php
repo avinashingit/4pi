@@ -61,6 +61,7 @@ Code 11: Session Variables unset!!
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
+			exit();
 		}
 		else
 		{
@@ -157,7 +158,7 @@ Code 11: Session Variables unset!!
 						$requestPermanence=true;
 						$lifetime=180;
 					}
-					else if($lifetime==1||$lifetime==7||$lifetime==15||$lifetime==30||$lifetime==90||$lifetime==180||$lifetime==360)
+					else if($lifetime==1||$lifetime==7||$lifetime==15||$lifetime==30||$lifetime==90||$lifetime==180||$lifetime==365)
 					{
 						$requestPermanence=false;
 					}
@@ -168,6 +169,7 @@ Code 11: Session Variables unset!!
 							$_SESSION=array();
 							session_destroy();
 							echo 14;
+							exit();
 						}
 						else
 						{
@@ -175,10 +177,13 @@ Code 11: Session Variables unset!!
 							$_SESSION=array();
 							session_destroy();
 							echo 13;
+							exit();
 						}
 					}
-					$lifetime=($lifetime*86400)+time();
+					$postValidity=$lifetime;
 					$time=time();
+					$lifetime=($lifetime*86400)+$time;
+					
 					$filesAttached="";
 					$updatePostSQL="UPDATE post SET content = ?,
 						sharedWith = ?,
@@ -200,7 +205,7 @@ Code 11: Session Variables unset!!
 					if($conn->error==""&&$SQLResponse==true)
 					{
 							$postUserName=$user['alias'];
-							$postValidity=$lifetime;
+							
 							$postSubject=$subject;
 							$postContent=$content;
 							$noOfStars=$post['starCount'];
@@ -243,6 +248,7 @@ Code 11: Session Variables unset!!
 					else{
 						notifyAdmin("Conn.Error:".$conn->error."!! In EditPost",$userId);
 						echo 12;
+						exit();
 					}
 				}
 				else
@@ -251,6 +257,7 @@ Code 11: Session Variables unset!!
 					$_SESSION=array();
 					session_destroy();
 					echo 13;
+					exit();
 				}
 			}
 

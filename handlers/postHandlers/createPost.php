@@ -200,9 +200,13 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				}
 			}
 
-			$lifetime=($lifetime*86400)+time();
+			$cTime=time();
+
+			$lifetime=($lifetime*86400)+$cTime;
+
+			$timestamp="".$cTime;
 			
-			$mailToIndex=$commentIndex=$likeIndex=$lastUpdated=$timestamp="".time();//7+4=11
+			$mailToIndex=$commentIndex=$likeIndex=$lastUpdated=$timestamp="".$cTime;//7+4=11
 			
 			$popularityIndex=$impIndex=0;
 			

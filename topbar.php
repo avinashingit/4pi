@@ -2,9 +2,9 @@
 
 <script>
 
-	function displayNotification(data)
+	/*function displayNotification(data)
 	{
-		// console.log(data);
+		// //console.log(data);
 		var notification="";
 		if(data.objectType==500)
 		{
@@ -20,7 +20,7 @@
 			notification+='<div class=\"ns-thumb\"><img src=\"/4pi/img/poll.jpg\" width="64" height="64"/></div><div class=\"ns-content\"><p><a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><i class="fa fa-pie-chart" style="color:#580075"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></a></p></div>';
 		}
 		// alert(notification);
-		/*var finalMessage="<div class=\"ns-thumb\"><img src=\"img/user1.jpg\"/></div><div class=\"ns-content\"><p><a href=\"#\">Zoe Moulder</a> accepted your invitation.</p></div>"*/
+		/*var finalMessage="<div class=\"ns-thumb\"><img src=\"img/user1.jpg\"/></div><div class=\"ns-content\"><p><a href=\"#\">Zoe Moulder</a> accepted your invitation.</p></div>"
 		var notifications = new NotificationFx({
 				wrapper : document.getElementById('topBar'),
 				message : notification,
@@ -33,8 +33,8 @@
 			});
 
 			// show the notification
-			notifications.show();
-	}
+			// notifications.show();
+	}*/
 	/*(function() {
 		var bttn = document.getElementById( 'notification-trigger' );
 
@@ -100,7 +100,7 @@
 				alert("Server overload. Please try again. :(");
 			})
 			.success(function(data){
-				alert(data);
+				// alert(data);
 				if(checkData(data)==1)
 				{
 					if(data.trim()==17)
@@ -135,13 +135,14 @@
 			alert("Unable to contact server to send read notifications.")
 		})
 		.success(function(data){
-			//console.log(data);
+			////console.log(data);
 			// alert(data);
 		});
 	}
 
-	function showNotifications()
+	function showNotifications(el)
 	{
+
 		$('#notificationNumber').html("0");
 		if($('#notifications').hasClass('hidden'))
 		{
@@ -175,19 +176,19 @@
 
 			if(data.objectType==500)
 			{
-				notification+='<a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><p><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
+				notification+='<a href="/4pi/fetchSinglePost.php?ref='+data.objectId+'"><p style="word-break:normal !important;"><i class="fa fa-list-ul" style="color:#540733"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==600)
 			{
-				notification+='<a href="/4pi/fetchSingleEvent.php?ref='+data.objectId+'"><p><i class="fa fa-calendar" style="color:#98001D"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
+				notification+='<a href="/4pi/fetchSingleEvent.php?ref='+data.objectId+'"><p style="word-break:normal !important;"><i class="fa fa-calendar" style="color:#98001D"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
 			else if(data.objectType==700)
 			{
-				notification+='<a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><p><i class="fa fa-pie-chart" style="color:#580075"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
+				notification+='<a href="/4pi/fetchSinglePoll.php?ref='+data.objectId+'"><p style="word-break:normal !important;"><i class="fa fa-pie-chart" style="color:#580075"></i>&nbsp;&nbsp;'+data.notification+' <b>'+data.label+'</b></p>';
 
 				notification+='</a>';
 			}
@@ -196,7 +197,7 @@
 
 		notification+='</div><!-- end class notification -->';
 
-		//console.log(notification);
+		////console.log(notification);
 
 		$('#notifications').prepend(notification);
 	}
@@ -216,7 +217,7 @@
 			alert("Server overload. Please try again. :(");
 		})
 		.success(function(data){
-			// console.log(data);
+			// //console.log(data);
 			if(checkData(data)==1)
 			{
 				if(data==404)
@@ -234,10 +235,10 @@
 							unreadNotificationNumber++;
 						}
 						insertNotifications(datas[i],"first");
-						if(value=="yes")
+						/*if(value=="yes")
 						{
 							displayNotification(datas[i]);
-						}
+						}*/
 					}
 					/*if(value=="yes")
 					{
@@ -249,7 +250,7 @@
 							},500);
 						}
 					}*/
-					//console.log(unreadNotificationNumber);
+					////console.log(unreadNotificationNumber);
 					$('#notificationNumber').html(unreadNotificationNumber);
 
 					
@@ -263,7 +264,7 @@
 
 	setInterval(function(){
 		fetchNotifications('yes');
-	},15000);
+	},10000);
 
 	function insertPeopleSearch(data,val)
 	{
@@ -406,7 +407,7 @@
 			alert("Server overload. Please try again");
 		})
 		.success(function(data){
-			console.log(data);
+			//console.log(data);
 			data=JSON.parse(data);
 
 			
@@ -487,7 +488,7 @@
 
 			<div  class="text-center" style="padding-top:5px;font-size:20px;" >
 
-				<a style="color:white !important;" href="/4pi"><i id="notificationButton" class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications();" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
+				<a style="color:white !important;" href="/4pi"><i id="notificationButton" class="fa fa-home colorWhite"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="showNotifications(this);" class="fa fa-globe  colorWhite"></i>&nbsp;<span class="badge" id="notificationNumber"></span>
 
 				<div id="notifications" class="hidden">
 
@@ -668,7 +669,7 @@
 	    {
 	        var subject = $("#notifications"); 
 
-	        if((e.target.id != subject.attr('id') && !subject.has(e.target).length) || (e.target.id="notificationButton"))
+	        if((e.target.id != subject.attr('id') && !subject.has(e.target).length))
 	        {
 	            if(subject.hasClass('hidden'))
             	{
@@ -681,7 +682,7 @@
 	        }
 	    });
 
-	    /*$(document).mouseup(function(e)
+	    $(document).mouseup(function(e)
 	    {
 	        var subject = $("#searchResults1"); 
 
@@ -696,7 +697,7 @@
             		subject.addClass('hidden').fadeOut(500);
             	}
 	        }
-	    });*/
+	    });
 	});
 
 	$('#icons div i').css({'cursor':'pointer'});
@@ -731,13 +732,13 @@
 
 	//$('#topBarNew').hide();
 	//
-	$('#searchBefore').focusin(function(){
-		console.log('h');
+	/*$('#searchBefore').focusin(function(){
+		//console.log('h');
 		if($(this).val().length!=0)
 			{
 				$('#searchResults1').removeClass('hidden');
 			}
-		}); 
+		}); */
 
 	$('#searchBefore').focusin(function(){
 
@@ -747,7 +748,7 @@
 
 	});
 
-	$('#searchBefore').focusout(function(){
+	/*$('#searchBefore').focusout(function(){
 
 		$(this).css({'background-color':'#484848 !important','color':'white','border':'1px solid #484848'});
 
@@ -755,7 +756,7 @@
 
 		$("#searchResults1").addClass('hidden');
 
-	});
+	});*/
 
 
 </script>

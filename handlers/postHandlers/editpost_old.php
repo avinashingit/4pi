@@ -1,6 +1,6 @@
 <?php
 		$conn=new QoB();
-		$content=$_POST['_postContent'];//1		
+	/*	$content=$_POST['_postContent'];//1		
 		$rawsharedWith=$_POST['_share'];
 		$splitSharedWith=explode(",",$rawsharedWith);
 		$n=count($splitsharedWith);
@@ -124,11 +124,11 @@
 				//$values[]=array('active'=>'s');//status
 				$values[]=array($time=>'s');//lastUpdated
 				
-				/*$values[]=array($likeIndex=>'i');//likeIndex
-				$values[]=array($commentIndex=>'i');//commentIndex
-				$values[]=array($impIndex=>'i');//impIndex
-				$values[]=array($mailToIndex=>'i');//mailToIndex
-				$values[]=array($popularityIndex=>'i')//popularityIndex*/
+				//$values[]=array($likeIndex=>'i');//likeIndex
+				//$values[]=array($commentIndex=>'i');//commentIndex
+				//$values[]=array($impIndex=>'i');//impIndex
+				//$values[]=array($mailToIndex=>'i');//mailToIndex
+				//$values[]=array($popularityIndex=>'i')//popularityIndex
 				
 				$values[]=array($requestPermanence=>'i');//requestPermanence
 				$values[]=array($filesAttached =>'s');//filesAttached
@@ -162,5 +162,5 @@
 				}
 				
 			//------------------------------------------------------------------------!!!!!-----
-		}
+		}*/
 ?>

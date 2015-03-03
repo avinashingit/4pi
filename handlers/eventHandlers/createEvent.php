@@ -64,7 +64,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 		echo 16;
 		exit();
 	}
-	if(strlen($eventContent)>1000)
+	if(strlen($eventContent)>10000)
 	{
 		echo 16;
 		exit();

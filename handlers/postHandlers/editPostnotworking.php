@@ -26,7 +26,7 @@ Code 16: Erroneous Entry By USER!!
 Code 11: Session Variables unset!!
 */
 
-if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
+/*if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 {
 	echo 11;
 	exit();
@@ -218,5 +218,5 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 		}
 
-	}
+	}*/
 ?>

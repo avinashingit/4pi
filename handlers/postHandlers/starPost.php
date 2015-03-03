@@ -40,6 +40,7 @@ $userIdHash=$_SESSION['vj'];
 		$_SESSION=array();
 		session_destroy();
 		echo 13;
+		exit();
 	}
 	else
 	{
@@ -51,10 +52,12 @@ $userIdHash=$_SESSION['vj'];
 				$_SESSION=array();
 				session_destroy();
 				echo 13;
+				exit();
 			}
 			else
 			{
 				//fetch post
+				$userId=$user['userId'];
 				$post=getPostFromHash($postIdHash);
 				if($post==false)
 					{
@@ -68,8 +71,8 @@ $userIdHash=$_SESSION['vj'];
 						$postId=$post['postId'];
 						$starCount=$post['starCount'];
 						$starredBy=$post['starredBy'];
-						$userId=$user['userId'];
-						if(stripos($starredBy,$userId)===false)
+						
+						if(isThereInCSV($starredBy,$userId)===false)
 						{
 						
 							//update post

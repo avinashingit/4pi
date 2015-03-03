@@ -48,7 +48,7 @@ else
 $conn=new QoB();
 	if(hash("sha512",$userIdHash.SALT2)!=$_SESSION['tn'])
 	{
-		if(blockUserByHash($userIdHash,"Suspicious Session Variable in upcomingEvent")>0)
+		if(blockUserByHash($userIdHash,"Suspicious Session Variable in pastEvent")>0)
 		{
 			$_SESSION=array();
 			session_destroy();
@@ -57,7 +57,7 @@ $conn=new QoB();
 		}
 		else
 		{
-			notifyAdmin("Suspicious Session Variable in upcoming Event",$userIdHash.",sh:".$_SESSION['tn']);
+			notifyAdmin("Suspicious Session Variable in past Event",$userIdHash.",sh:".$_SESSION['tn']);
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
@@ -68,7 +68,7 @@ $conn=new QoB();
 	{
 		if(($user=getUserFromHash($userIdHash))==false)
 		{
-			notifyAdmin("Critical Error In upcomingEvent",$userIdHash);
+			notifyAdmin("Critical Error In pastEvent",$userIdHash);
 			$_SESSION=array();
 			session_destroy();
 			echo 13;
@@ -161,7 +161,7 @@ $conn=new QoB();
 			}
 			else
 			{
-				notifyAdmin("Conn.Error".$conn->error."! While inserting in upcomingEvent",$userId);
+				notifyAdmin("Conn.Error".$conn->error."! While inserting in pastEvent",$userId);
 				echo 12;
 				exit();
 			}

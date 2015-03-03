@@ -2794,3 +2794,15 @@
 
 [2015-02-18 22:22:50             ::1                   Asia/Kolkata] 1045   $$$Access denied for user 'root'@'localhost' (using password: YES)$$$
 
+[2015-03-02 02:34:49     172.16.6.61                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-02 02:54:50             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-02 16:52:05             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-03 12:59:34    192.168.5.72                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-03 13:01:28    192.168.5.72                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-03-03 13:08:45    192.168.5.72                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
