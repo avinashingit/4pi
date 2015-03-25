@@ -118,13 +118,13 @@ $conn=new QoB();
 					else
 					{
 						$isAttender=1;
-					}
+					}*/
 					$eventStatus=getEventStatus($event,$isAttender);
 					if($eventStatus!="Completed")
 					{
 						continue;
 					}
-					$eventUserId=$event['userId'];
+					/*$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
 					{
 						$eventOwner=1;

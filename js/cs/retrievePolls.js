@@ -246,6 +246,7 @@ function approvePoll(id,val)
 
 function insertPoll(data,position)
 {
+	//alert('hai');
 	var time=iso8601ToReadable(data.pollCreationTime);
 
 	if(data.pollOptionsType==1)
@@ -256,7 +257,7 @@ function insertPoll(data,position)
 			{
 				var poll="";
 
-				poll+='<div class="row poll" id="'+data.pollIdHash+'">';
+				poll+='<div class="row poll asdf" id="'+data.pollIdHash+'">';
 
 				if(data.isSAC==1 && data.approvalStatus==0)
 				{
@@ -279,16 +280,25 @@ function insertPoll(data,position)
 					poll+='</div>';
 				}
 
-					poll+='<div class="row">';
+					/** sai kumar edits**/
+					poll+='<div class="row " >';
+					//poll+='<div class="row pollTopPart" >';
 
-						poll+='<div class="col-md-9 text-left">';
+						/** sai kumar edits**/
+						// poll+='<div class="col-md-9 text-left">';
+						//poll+='<div class="col-md-12 text-left pollQuestionCont">';
+						poll+='<div class="col-md-10 text-left ">';
 
-							poll+='<p style="font-size:16px" class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion.replace(/'/g, "&#39;");+'</span></p>';
+							//poll+='<p class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30" class="pollSampImg" ><span>'+data.pollQuestion.replace(/'/g, "&#39;");+'</span></p>';
+							poll+='<p class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30" >&nbsp;&nbsp;<span>'+data.pollQuestion.replace(/'/g, "&#39;");+'</span></p>';
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3 text-right">';
+						/** sai kumar edits**/
+						// poll+='<div class="col-md-3 text-right">';
+						poll+='<div class="col-md-2 text-right">';
 
+							//poll+='<time class="pollTimestamp time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 							poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
 						poll+='</div>';
@@ -359,7 +369,13 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						//poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						if(data.isOwner==1 && data.approvalStatus!=1)
+							poll+='<div class="col-md-9" id="pollQuestion">';
+						else
+							poll+='<div class="col-md-10" id="pollQuestion">';
+
 
 							poll+='<p style="font-size:16px" class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion.replace(/'/g, "&#39;");+'</span></p>';
 
@@ -373,13 +389,17 @@ function insertPoll(data,position)
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							poll+='<div class="col-md-1" id="pollCreatorOptions">';
 
 								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							//poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -388,7 +408,9 @@ function insertPoll(data,position)
 
 						else
 						{
-							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							//poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -509,13 +531,17 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-9 text-left">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-9 text-left">';
+						poll+='<div class="col-md-10 text-left">';
 
 							poll+='<p style="font-size:16px" class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3 text-right">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-3 text-right">';
+						poll+='<div class="col-md-2 text-right">';
 
 							poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -591,7 +617,14 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						//poll+='<div class="col-md-7" id="pollQuestion">';
+
+						if(data.isOwner==1 && data.approvalStatus!=1)
+							poll+='<div class="col-md-9" id="pollQuestion">';
+						else
+							poll+='<div class="col-md-10" id="pollQuestion">';
+
 
 							poll+='<p style="font-size:16px"class="break-word" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
@@ -605,13 +638,17 @@ function insertPoll(data,position)
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							poll+='<div class="col-md-1" id="pollCreatorOptions">';
 
 								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							//poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -620,7 +657,9 @@ function insertPoll(data,position)
 
 						else
 						{
-							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							//poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -750,13 +789,17 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						//poll+='<div class="col-md-7" id="pollQuestion">';
+						poll+='<div class="col-md-10" id="pollQuestion">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+						/** sai kumar edits **/
+						//poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+						poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 							poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -820,7 +863,12 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						//poll+='<div class="col-md-7" id="pollQuestion">';
+						if(data.isOwner==1 && data.approvalStatus!=1)
+							poll+='<div class="col-md-9" id="pollQuestion">';
+						else
+							poll+='<div class="col-md-10" id="pollQuestion">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
@@ -828,13 +876,17 @@ function insertPoll(data,position)
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							poll+='<div class="col-md-1" id="pollCreatorOptions">';
 
 								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							//poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -843,7 +895,9 @@ function insertPoll(data,position)
 
 						else
 						{
-							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							//poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -966,13 +1020,17 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-9 text-left">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-9 text-left">';
+						poll+='<div class="col-md-10 text-left">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3 text-right">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-3 text-right">';
+						poll+='<div class="col-md-2 text-right">';
 
 							poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1044,7 +1102,15 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						
+						//poll+='<div class="col-md-7" id="pollQuestion">';
+
+						if(data.isOwner==1 && data.approvalStatus!=1)
+							poll+='<div class="col-md-9" id="pollQuestion">';
+						else
+							poll+='<div class="col-md-10" id="pollQuestion">';
+
+						
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
@@ -1058,13 +1124,17 @@ function insertPoll(data,position)
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							poll+='<div class="col-md-1" id="pollCreatorOptions">';
 
 								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1073,7 +1143,9 @@ function insertPoll(data,position)
 
 						else
 						{
-							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 col-md-offset-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1193,13 +1265,17 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-9 text-left">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-9 text-left">';
+						poll+='<div class="col-md-10 text-left">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3 text-right">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-3 text-right">';
+						poll+='<div class="col-md-2 text-right">';
 
 							poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1275,7 +1351,12 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-7" id="pollQuestion">';
+						if(data.isOwner==1 && data.approvalStatus!=1)
+							poll+='<div class="col-md-9" id="pollQuestion">';
+						else
+							poll+='<div class="col-md-10" id="pollQuestion">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
@@ -1283,13 +1364,17 @@ function insertPoll(data,position)
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							poll+='<div class="col-md-1" id="pollCreatorOptions">';
 
 								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1298,7 +1383,9 @@ function insertPoll(data,position)
 
 						else
 						{
-							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1425,7 +1512,9 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-7" id="pollQuestion">';
+						poll+='<div class="col-md-10" id="pollQuestion">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
@@ -1437,7 +1526,9 @@ function insertPoll(data,position)
 
 						poll+='</div>';
 
-						poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+						poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 							poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1495,7 +1586,12 @@ function insertPoll(data,position)
 
 					poll+='<div class="row">';
 
-						poll+='<div class="col-md-7" id="pollQuestion">';
+						/** sai kumar edits **/
+						// poll+='<div class="col-md-7" id="pollQuestion">';
+						if(data.isOwner==1 && data.approvalStatus!=1)
+							poll+='<div class="col-md-9" id="pollQuestion">';
+						else
+							poll+='<div class="col-md-10" id="pollQuestion">';
 
 							poll+='<p class="break-word" style="font-size:16px" id="pollQuestion"><img src="/4pi/img/poll.jpg" width="30" height="30">&nbsp;&nbsp;<span>'+data.pollQuestion+'</span></p>';
 
@@ -1509,13 +1605,17 @@ function insertPoll(data,position)
 
 						if(data.isOwner==1 && data.approvalStatus!=1)
 						{
-							poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-2" id="pollCreatorOptions">';
+							poll+='<div class="col-md-1" id="pollCreatorOptions">';
 
 								poll+='<i class="fa fa-pencil" onclick="editPoll(\''+data.pollIdHash+'\');"></i>&nbsp;&nbsp';poll+='<i class="fa fa-trash" onclick="deletePoll(\''+data.pollIdHash+'\');"></i>';
 
 							poll+='</div>';
 
-							poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-3 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+time+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 
@@ -1524,7 +1624,9 @@ function insertPoll(data,position)
 
 						else
 						{
-							poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							/** sai kumar edits **/
+							// poll+='<div class="col-md-3 col-md-offset-2 text-right" id="pollCreatedTime">';
+							poll+='<div class="col-md-2 text-right" id="pollCreatedTime">';
 
 								poll+='<time class="time timeago text-right" title="'+data.pollCreationTime+'" datetime="'+data.pollCreationTime+'">'+data.pollCreationTime+'</time>';
 

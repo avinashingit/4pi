@@ -1162,13 +1162,13 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	function changeToEventTimeFormat($time)
 	{
 		$timeArr=explode(':',$time);
-		$timeHr=(int)$timeArr[0];
+		$timeHr=$timeArr[0];
 		$timeMin=$timeArr[1];
 
-		if($timeHr<10)
+		/*if($timeHr<10)
 		{
 			$timeArr[0]='0'.$timeArr[0];
-		}
+		}*/
 		$eventTime=$timeArr[0].$timeArr[1];
 		return $eventTime;
 		/*$timeRegex="([:]+)";
@@ -1468,8 +1468,6 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 		$currentDate=(int)$currentDate;
  
- 
- 
 		$actualStatus="";
  
 		if($event['eventDate']==$currentDate)
@@ -1503,14 +1501,14 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			if($currentHr<$eventTimeHr)
 			{
-				$actualStatus="As Scheduled1";
+				$actualStatus="As Scheduled";
 			}
 			else if($currentHr==$eventTimeHr )
 			{
 				//Event starts in this hour
 				if($currentMin<$eventTimeMin)
 				{
-					$actualStatus="As Scheduled2";
+					$actualStatus="As Scheduled";
 				}
 				else
 				{
@@ -1559,7 +1557,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				}
 				else
 				{
-					$actualStatus="Completed4";
+					$actualStatus="Completed";
 				}
 			}
 		}

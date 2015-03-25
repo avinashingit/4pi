@@ -8,7 +8,7 @@
 		margin-bottom:10px;
 		padding-bottom:10px;
 		background-color:#fff;
-		padding-top:10px;
+		padding-top:17px;
 	}
 
 	.poll:hover

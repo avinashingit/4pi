@@ -93,15 +93,19 @@ $conn=new QoB();
 			
 			if($userId==COCAS || $userId == CULSEC)
 			{
-				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE eventDate >= ? ";
+				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId ";
 
 				//$values[0]=array($finalStudentRegex => 's');
 				//$values[0]=array($userId => 's');
-				$values[0]=array($currentDate => 'i');
+				//$values[0]=array($currentDate => 'i');
+				if($ProcessedHashesCount>0)
+				{
+					$getLatestEventsSQL.="WHERE";
+				}
 				for($i=0;$i<$ProcessedHashesCount;$i++)
 				{
 					$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash != ?";
-					$values[$i+1]=array($ProcessedHashes[$i] => 's');
+					$values[$i]=array($ProcessedHashes[$i] => 's');
 				}
 				$SQLEndPart=" ORDER BY timestamp DESC";
 				
@@ -111,14 +115,15 @@ $conn=new QoB();
 			
 			else
 			{
-				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ? AND displayStatus=1) OR event.userId=? ) AND eventDate>= ? ";
+				$getLatestEventsSQL="SELECT event.*,users.name,users.userIdHash,users.gender FROM event INNER JOIN users ON event.userId=users.userId WHERE ((sharedWith REGEXP ? AND displayStatus=1) OR event.userId=? ) ";
 				$values[0]=array($finalStudentRegex => 's');
 				$values[1]=array($userId => 's');
-				$values[2]=array($currentDate => 'i');
+				//$values[2]=array($currentDate => 'i');
+
 				for($i=0;$i<$ProcessedHashesCount;$i++)
 				{
 					$getLatestEventsSQL=$getLatestEventsSQL." AND event.eventIdHash!=?";
-					$values[$i+3]=array($ProcessedHashes[$i] => 's');
+					$values[$i+2]=array($ProcessedHashes[$i] => 's');
 				}
 				$SQLEndPart=" ORDER BY timestamp DESC";
 				
@@ -143,13 +148,13 @@ $conn=new QoB();
 					else
 					{
 						$isAttender=1;
-					}
+					}*/
 					$eventStatus=getEventStatus($event,$isAttender);
 					if($eventStatus=="Completed")
 					{
 						continue;
 					}
-					$eventUserId=$event['userId'];
+					/*$eventUserId=$event['userId'];
 					if($eventUserId==$userId)
 					{
 						$eventOwner=1;
