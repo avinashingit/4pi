@@ -1456,7 +1456,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 //****************************************************************************************************************//
 //****************************************************************************************************************//
 
-	function getEventStatus($event,$isAttending)
+	/*function getEventStatus($event,$isAttending)
 	{
 		date_default_timezone_set("Asia/Kolkata");
  
@@ -1596,10 +1596,10 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				return $event['eventStatus'];
 			}
 		}
-	}
+	}*/
 
 //****************************************************************************************************************//
-	/*function getEventStatus($event,$isAttending)
+	function getEventStatus($event,$isAttending)
 	{
 		date_default_timezone_set("Asia/Kolkata");
  
@@ -1617,109 +1617,27 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
  
 		$eventTimeMin=(int)(substr($event['eventTime'], 2,2));
 
+		$a = strptime($event['eventDate'], '%Y%m%d');
 		
+		$eventStartTimestamp = mktime($eventTimeHr, $eventTimeMin, 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
 
-		$eventStartTimestamp=mktime()
+		$currentTime=time();
 
-		if($event['eventDate']==$currentDate)
+		$eventEndTimestamp=$eventStartTimestamp+(60*60*$eventTimeHr+60*$eventTimeMin);
+
+		if($currentTime<$eventStartTimestamp)
 		{
-			$eventTimeHr=(int)(substr($event['eventTime'],0,2));
- 
-			$eventTimeMin=(int)(substr($event['eventTime'], 2,2));
- 			
-			//echo $eventTimeHr.":".$eventTimeMin." is the event time<br/> ";
-
-			$eventEndHr=$eventTimeHr+$event['eventDurationHrs'];
- 
-			$eventEndMin=$eventTimeMin+$event['eventDurationMin'];
-
-			//echo $event['eventDurationHrs'].":".$event['eventDurationMin']." is the event Duration<br/> ";
- 
-			if($eventEndMin>=60)
-			{
-				$eventEndMin=$eventEndMin%60;
- 
-				$eventEndHr++;
- 
-				$eventEndHr=$eventEndHr%24;
- 
-			}
-			//echo $eventEndHr.":".$eventEndMin." is the event end time<br/> ";
-			$currentHr=(int)(date("H",time()));
- 
-			$currentMin=(int)date("i",time());
-			//echo $currentHr.":".$currentMin." is the current time<br/>";
-
-			if($currentHr<$eventTimeHr)
-			{
-				$actualStatus="As Scheduled";
-			}
-			else if($currentHr==$eventTimeHr )
-			{
-				//Event starts in this hour
-				if($currentMin<$eventTimeMin)
-				{
-					$actualStatus="As Scheduled";
-				}
-				else
-				{
-					//event has started in this hour
-					if($currentHr<$eventEndHr)
-					{
-						$actualStatus="Ongoing";
-					}
-					else if($currentHr==$eventEndHr)
-					{
-						//event is going to end in this hour only
-						if($currentMin<=$eventEndMin)
-						{
-							//event hasnt yet ended
-							$actualStatus="Ongoing";
-						}
-						else
-						{
-							//event ended in this hour
-							$actualStatus="Completed";
-						}
-					}
-					else
-					{
-						//event ended but this part of the code is actually unreacheable
-						$actualStatus="Completed";
-					}
-				}
-			}
-			else
-			{
-				if($currentHr<$eventEndHr)
-				{
-					$actualStatus="Ongoing";
-				}
-				else if($currentHr==$eventEndHr)
-				{
-					if($currentMin<=$eventEndMin)
-					{
-						$actualStatus="Ongoing";
-					}
-					else
-					{
-						$actualStatus="Completed";
-					}
-				}
-				else
-				{
-					$actualStatus="Completed";
-				}
-			}
+			$actualStatus="As Scheduled";
 		}
-		else if($event['eventDate']<$currentDate)
+		else if($currentTime>=$eventStartTimestamp&&$currentTime<$eventEndTimestamp)
 		{
-			$actualStatus="Completed";
+			$actualStatus="Ongoing";
 		}
 		else
 		{
 			$actualStatus="As Scheduled";
 		}
+		
  
 		if($isAttending==1)
 		{
@@ -1747,7 +1665,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 				return $event['eventStatus'];
 			}
 		}
-	}*/
+	}
 
 //****************************************************************************************************************//
 //****************************************************************************************************************//
