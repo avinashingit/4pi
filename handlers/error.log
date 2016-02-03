@@ -690,3 +690,31 @@
 
 [2015-03-03 00:16:07     192.168.5.2                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
 
+[2015-04-01 14:00:26     172.16.4.68                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
+[2015-04-08 10:52:35    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:35    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:35    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:35    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:36    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:36    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:36    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-04-08 10:52:36    172.16.7.179                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-09-28 02:16:25   14.139.187.99                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-09-28 07:54:05   14.139.187.99                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-09-28 07:54:06   14.139.187.99                   Asia/Kolkata] 1064   $$$syntax error, unexpected $end, expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-09-28 07:54:07   14.139.187.99                   Asia/Kolkata] 1064   $$$syntax error, unexpected '>', expecting FTS_TERM or FTS_NUMB or '*'$$$
+
+[2015-12-31 17:12:55             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+

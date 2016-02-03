@@ -1599,6 +1599,156 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	}
 
 //****************************************************************************************************************//
+	/*function getEventStatus($event,$isAttending)
+	{
+		date_default_timezone_set("Asia/Kolkata");
+ 
+		//$currentDate=date("Ymd",time());
+ 
+ 		//echo $currentDate." is the Current Date<br/>";
+
+ 		//echo $event['eventDate']." is the Event Date<br/>";
+
+		$actualStatus="";
+
+		$currentDate=(int)$currentDate;
+ 
+		$eventTimeHr=(int)(substr($event['eventTime'],0,2));
+ 
+		$eventTimeMin=(int)(substr($event['eventTime'], 2,2));
+
+		
+
+		$eventStartTimestamp=mktime()
+
+		if($event['eventDate']==$currentDate)
+		{
+			$eventTimeHr=(int)(substr($event['eventTime'],0,2));
+ 
+			$eventTimeMin=(int)(substr($event['eventTime'], 2,2));
+ 			
+			//echo $eventTimeHr.":".$eventTimeMin." is the event time<br/> ";
+
+			$eventEndHr=$eventTimeHr+$event['eventDurationHrs'];
+ 
+			$eventEndMin=$eventTimeMin+$event['eventDurationMin'];
+
+			//echo $event['eventDurationHrs'].":".$event['eventDurationMin']." is the event Duration<br/> ";
+ 
+			if($eventEndMin>=60)
+			{
+				$eventEndMin=$eventEndMin%60;
+ 
+				$eventEndHr++;
+ 
+				$eventEndHr=$eventEndHr%24;
+ 
+			}
+			//echo $eventEndHr.":".$eventEndMin." is the event end time<br/> ";
+			$currentHr=(int)(date("H",time()));
+ 
+			$currentMin=(int)date("i",time());
+			//echo $currentHr.":".$currentMin." is the current time<br/>";
+
+			if($currentHr<$eventTimeHr)
+			{
+				$actualStatus="As Scheduled";
+			}
+			else if($currentHr==$eventTimeHr )
+			{
+				//Event starts in this hour
+				if($currentMin<$eventTimeMin)
+				{
+					$actualStatus="As Scheduled";
+				}
+				else
+				{
+					//event has started in this hour
+					if($currentHr<$eventEndHr)
+					{
+						$actualStatus="Ongoing";
+					}
+					else if($currentHr==$eventEndHr)
+					{
+						//event is going to end in this hour only
+						if($currentMin<=$eventEndMin)
+						{
+							//event hasnt yet ended
+							$actualStatus="Ongoing";
+						}
+						else
+						{
+							//event ended in this hour
+							$actualStatus="Completed";
+						}
+					}
+					else
+					{
+						//event ended but this part of the code is actually unreacheable
+						$actualStatus="Completed";
+					}
+				}
+			}
+			else
+			{
+				if($currentHr<$eventEndHr)
+				{
+					$actualStatus="Ongoing";
+				}
+				else if($currentHr==$eventEndHr)
+				{
+					if($currentMin<=$eventEndMin)
+					{
+						$actualStatus="Ongoing";
+					}
+					else
+					{
+						$actualStatus="Completed";
+					}
+				}
+				else
+				{
+					$actualStatus="Completed";
+				}
+			}
+		}
+		else if($event['eventDate']<$currentDate)
+		{
+			$actualStatus="Completed";
+		}
+		else
+		{
+			$actualStatus="As Scheduled";
+		}
+ 
+		if($isAttending==1)
+		{
+			if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled"&&$event['eventStatus']!="Preponed"&&$event['eventStatus']!="Postponed")
+			{
+				//echo 1;
+				return $actualStatus;
+			}
+			else
+			{
+				//echo 2;
+				return $event['eventStatus'];
+			}
+		}
+		else
+		{
+			if($event['eventStatus']!="On Hold"&&$event['eventStatus']!="Cancelled")
+			{
+				//echo 3;
+				return $actualStatus;
+			}
+			else
+			{
+				//echo 4;
+				return $event['eventStatus'];
+			}
+		}
+	}*/
+
 //****************************************************************************************************************//
 //****************************************************************************************************************//
 

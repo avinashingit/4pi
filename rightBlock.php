@@ -359,7 +359,7 @@
 
 	<div class="row" id="rightBlock4">
 
-		<a href="/4pi/ideaBank" target="_blank" class="ideaBankHeading" style="color:white;position:absolute;bottom:20px;width:96%;height:80px;padding-top:22px;"><div class="text-center cursorPointer" style="font-size:25px;"><i class="fa fa-exclamation"></i>dea Bank</div></a>
+		<a href="/4pi/ideaBank" target="_blank" class="ideaBankHeading" style="color:white;position:absolute;bottom:20px;width:96%;height:80px;padding-top:22px;"><div class="text-center cursorPointer" style="font-size:25px;"><!--<i class="fa fa-exclamation"></i>-->Ideabank</div></a>
 
 	</div>
 

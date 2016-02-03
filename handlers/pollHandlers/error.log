@@ -184,3 +184,5 @@
 
 [2015-02-22 19:41:29             ::1                   Asia/Kolkata] 1022   $$$Can't write; duplicate key in table 'poll'$$$
 
+[2015-12-31 17:12:55             ::1                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
+
