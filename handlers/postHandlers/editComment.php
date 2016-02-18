@@ -79,8 +79,8 @@ if($commentContent!=""&&$postIdHash!=""&&$commentIdHash!="")
 				//$postUserId=$post['userId'];
 				$postId=$post['postId'];
 				$commentCount=$post['commentCount'];
-				$commentTableName="p".$postId."c";
-				
+				//$commentTableName="p".$postId."c";
+				$commentTableName = "postcomments";
 				$personTags="";
 				if(($comment=getCommentByPostIdAndHash($postId,$commentIdHash))==true)
 				{
@@ -90,11 +90,12 @@ if($commentContent!=""&&$postIdHash!=""&&$commentIdHash!="")
 
 					if($commentUserId==$userId)
 					{
-						$UpdateCommentSQL="UPDATE ".$commentTableName." SET content=?, personTags=? WHERE commentIdHash=? ";
+						$UpdateCommentSQL = "UPDATE ".$commentTableName." SET content=?, personTags=? WHERE commentIdHash=? AND postId = ?";
 						//$values[]=array($commentTableName => 's');
 						$values[0]=array($commentContent => 's');
 						$values[1]=array($personTags => 's');
 						$values[2]=array($commentIdHash => 's');
+						$values[3]=array($postId => 's');
 						//$conn->startTransaction();
 						$res=$conn->update($UpdateCommentSQL,$values);
 						if($conn->error==""&&$res==true)

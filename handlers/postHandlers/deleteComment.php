@@ -65,16 +65,18 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$postId=$post['postId'];
 
 				$commentCount=$post['commentCount'];
-				$commentTableName="p".$postId."c";
+				//$commentTableName="p".$postId."c";
+				$commentTableName = "postcomments";
 				if(($comment=getCommentByPostIdAndHash($postId,$commentIdHash))==true)
 				{
 					$commentUserId=$comment['userId'];
 					$commentId=$comment['commentId'];
 					if($commentUserId==$userId||$postUserId==$userId)
 					{
-						$DeleteCommentSQL="DELETE FROM ".$commentTableName." WHERE commentIdHash=?";
+						$DeleteCommentSQL="DELETE FROM ".$commentTableName." WHERE commentIdHash=? AND postId = ?";
 						//$values[]=array($commentTableName => 's');
 						$values[0]=array($commentIdHash => 's');
+						$values[1]= array($postId => 's');
 						$conn->startTransaction();
 						$result=$conn->delete($DeleteCommentSQL,$values);
 						if($conn->error==""&&$result==true)

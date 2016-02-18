@@ -929,15 +929,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		$conn = new QoB();
 	
-		$commentTable="p".$postId."c";
+		//$commentTable="p".$postId."c";
+
+		$commentTable="postcomments";
 	
-		$GetCommentSQL="SELECT * FROM ".$commentTable." WHERE commentIdHash= ?";
+		$GetCommentSQL="SELECT * FROM ".$commentTable." WHERE commentIdHash= ? AND postId = ?";
 	
 		// $values[]=array("commentTable" => 's');
 	
 		// $values[]=array($commentTable => 's');
 	
 		$values[0]=array($commentIdHash => 's');
+
+		$values[1]=array($postId => 's');
 	
 		$result=$conn->fetchAll($GetCommentSQL,$values,false);
 	
@@ -962,17 +966,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		$conn = new QoB();
 	
-		$commentTable="p".$postId."c";
+		//$commentTable="p".$postId."c";
+
+		$commentTable="postcomments";
 	
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId WHERE postId = ? ORDER BY timestamp";
 	
 		// $values[]=array("commentTable" => 's');
 	
 		// $values[]=array($commentTable => 's');
 	
-		//$values[0]=array($commentIdHash => 's');
+		$values[0]=array($postId => 's');
 	
-		$result=$conn->select($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL, $values);
 	
 		if($conn->error==""&&$result!="")
 		{
@@ -995,17 +1001,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		$conn = new QoB();
 	
-		$commentTable="p".$postId."c";
+		//$commentTable="p".$postId."c";
+
+		$commentTable="postcomments";
 	
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp DESC LIMIT 0,".$commentCount;
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId WHERE postId = ? ORDER BY timestamp DESC LIMIT 0,".$commentCount;
 	
 		// $values[]=array("commentTable" => 's');
 	
 		// $values[]=array($commentTable => 's');
 	
-		//$values[0]=array($commentIdHash => 's');
+		$values[0]=array($postId => 's');
 	
-		$result=$conn->select($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL, $values);
 	
 		//var_dump($result);
 	
@@ -1029,17 +1037,19 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 	{
 		$conn = new QoB();
 	
-		$commentTable="p".$postId."c";
+		//$commentTable="p".$postId."c";
+
+		$commentTable="postcomments";
 	
-		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId ORDER BY timestamp";
+		$GetCommentSQL="SELECT ".$commentTable.".*,users.alias,users.name,users.userIdHash,users.gender FROM ".$commentTable." INNER JOIN users ON users.userId=".$commentTable.".userId WHERE postId = ? ORDER BY timestamp";
 	
 		// $values[]=array("commentTable" => 's');
 	
 		// $values[]=array($commentTable => 's');
 	
-		//$values[0]=array($commentIdHash => 's');
+		$values[0]=array($postId => 's');
 	
-		$result=$conn->select($GetCommentSQL);
+		$result=$conn->select($GetCommentSQL, $values);
 	
 		$out=array();
 	
@@ -1635,7 +1645,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 		}
 		else
 		{
-			$actualStatus="As Scheduled";
+			$actualStatus="Completed";
 		}
 		
  

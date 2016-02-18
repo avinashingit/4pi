@@ -293,7 +293,7 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 
 			$SQLResponse=$conn->insert($createPostSQL,$values);
 
-			if($conn->error=="")
+			/*if($conn->error=="")
 			{
 				 //echo "in comment";
 				 $CreateCommentTableSQL='CREATE TABLE `'.DB.'`.`'.'p'.$postId.'c'.'` (
@@ -391,6 +391,78 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					//var_dump($postObj);
 					//echo 'success';
 				}
+			}
+			else
+			{
+				$cr=$conn->error;
+				//echo $conn->error;
+				$conn->rollbackTransaction();
+		
+				notifyAdmin("Conn.Error".$cr."!! In CreatePost", $userId);
+		
+				echo 12;
+		
+				exit();
+			}*/
+
+			if($conn->error=="")
+			{
+				$postUserName=$user['alias'];
+
+				$postValidity=$_POST['_validity'];
+
+				$postSubject=$subject;
+
+				$postContent=$content;
+
+				$noOfStars=$starCount;
+
+				$noOfComments=$commentCount;
+
+				$noOfMailTos=$mailCount;
+
+				$postSeenNumber=$seenCount;
+
+				// $postCreationTime=$timestamp;
+
+				
+
+				$postCreationTime=toTimeAgoFormat($timestamp);
+
+				$followPost=1;
+				
+				$postUserIdHash=$userIdHash;
+				
+				$hasStarred = -1;
+				
+				$comments="";
+				
+				$isOwner=1;
+				
+				$proPicLocation='../../img/proPics/'.$userIdHash.'.jpg';
+				
+				if(file_exists($proPicLocation))
+				{
+					$proPicExists=1;
+				}
+				else
+				{
+					$proPicExists=-1;
+				}
+				$postObj=new miniPost($postIdHash,$rawsharedWith,$postValidity,$postUserName,$postSubject,$postContent, $noOfStars,$noOfComments, $noOfMailTos,$postSeenNumber,$postCreationTime,$followPost,$postUserIdHash,$userId,$hasStarred,$comments,$isOwner,$user['gender'],$proPicExists,$user['name']);	
+				
+				//$postObj = getPostFromHash($postIdHash);
+				
+				$conn->completeTransaction();
+				
+				//print_r $postObj;
+				//echo $postObj['userId'];
+				//print_r(json_encode($postObj));
+				print_r(json_encode($postObj));
+					
+				//var_dump($postObj);
+				//echo 'success';
+				
 			}
 			else
 			{

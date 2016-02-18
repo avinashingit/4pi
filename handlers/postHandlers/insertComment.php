@@ -83,7 +83,8 @@ if($content!=""&&$postIdHash!="")
 				else
 				{
 					$postId=$post['postId'];
-					$tablename="p".$postId."c";
+					//$tablename="p".$postId."c";
+					$tablename = "postcomments";
 					//$personTags=$_POST['_personTags'];
 					$personTags="";
 					//$userIdHash=$_POST['_hash'];
@@ -108,13 +109,14 @@ if($content!=""&&$postIdHash!="")
 						$commentUserName=$user['alias'];
 						//$commentUserName=$user['alias'];
 						$postCommentCount=$post['commentCount'];
-						$insertCommentSQL="INSERT INTO ".$tablename." (commentIdHash,content,userId,timestamp,personTags,commentId) VALUES(?,?,?,?,?,?)";
+						$insertCommentSQL="INSERT INTO ".$tablename." (commentIdHash,content,userId,timestamp,personTags,commentId,postId) VALUES(?,?,?,?,?,?,?)";
 						$values[0]=array($commentIdHash => 's');
 						$values[1]=array($content => 's');
 						$values[2]=array($userId => 's');
 						$values[3]=array($timestamp => 's');
 						$values[4]=array($personTags => 's');
 						$values[5]=array($commentId => 'i');
+						$values[6]=array($postId => 's');
 						$conn->startTransaction();
 						$result=$conn->insert($insertCommentSQL,$values);
 						if($conn->error==''&&$result==true)

@@ -33,7 +33,7 @@
 	    		<a href="#cocas" class="sec isec"  ><i class="fa fa-gears"></i> Co - Curricular Affairs Secretary</a>
 				<a href="#cas" class="sec isec"  ><i class="fa fa-gift"></i> Cultural Affairs Secretary</a>
 				<a href="#has" class="sec isec"  ><i class="fa fa-home"></i> Hostel Affairs Secretary</a>
-				<a href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Research Affairs Secretary</a>
+				<a href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Alumni Affairs Secretary</a>
 				<a href="#ss" class="sec isec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
 				
 				
@@ -46,7 +46,7 @@
 
 				
 				
-				<div>
+				<!-- <div>
 	    		<a href="#cs" class="sec hos"  ><i class="fa fa-crosshairs"></i> Councillors<i class="fa fa-plus-square" style="float:right;"></i></a>
 				<a href="#cbc" class="subsec"  ><i class="fa fa-crosshairs"></i> COE Branch Councillor</a>
 				<a href="#ebc" class="subsec"  ><i class="fa fa-crosshairs"></i> EDM Branch Councillor</a>
@@ -56,7 +56,7 @@
 				<a href="#pcc" class="subsec"  ><i class="fa fa-crosshairs"></i> PhD Class Councillor</a>
 				
 				<a href="#dsc" class="subsec"  ><i class="fa fa-crosshairs"></i> Day Scholars Councillor</a>
-				</div>
+				</div> -->
 				
 				
 				
@@ -73,10 +73,10 @@
 				<a href="#bms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
 				<a href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
 				<a href="#bss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<a href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
+				<!-- <a href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a> -->
 				<a href="#bls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
 				<a href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
+				<!-- <a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a> -->
 				
 				</div>
 				
@@ -134,7 +134,7 @@
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="Student General Secretary" class="secName" >S. Mahesh Varma</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="Student General Secretary" class="secName" >M. Tarakesh</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing<span></p>
 								<div>
 								<div>#332, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7418276308
@@ -190,17 +190,17 @@
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B005" title="Academic Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/aas.png" alt="Academic Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B007" title="Academic Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/aas.png" alt="Academic Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B005" title="Academic Affairs Secretary" class="secName"  >Battinoju Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B007" title="Academic Affairs Secretary" class="secName"  >Iniyai T.</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#415, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551913187
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b005@iiitdm.ac.in" title="Academic Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b005@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b005@iiitdm.ac.in" title="Academic Affairs Secretary" ><i class="fa fa-envelope"></i> coe12b007@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -254,17 +254,17 @@ also with the RAS in a manner that addresses the needs of the Student Body.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B011" title="Co-Curricular Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cocas.png" alt="Co-Curricular Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=mdm12b019" title="Co-Curricular Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cocas.png" alt="Co-Curricular Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B011" title="Co-Curricular Affairs Secretary" class="secName"  >M.Abhishravan</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=mdm12b019" title="Co-Curricular Affairs Secretary" class="secName"  >Rineetha Charles</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#324, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551913070
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b011@iiitdm.ac.in" title="Co-Curricular Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b011@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b011@iiitdm.ac.in" title="Co-Curricular Affairs Secretary" ><i class="fa fa-envelope"></i> mdm12b019@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -319,17 +319,17 @@ issues.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B20" title="Cultural Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cas.png" alt="Cultural Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B017" title="Cultural Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/cas.png" alt="Cultural Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B20" title="Cultural Affairs Secretary" class="secName"  >N. Vamsi Krishna</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B017" title="Cultural Affairs Secretary" class="secName"  >Nithin Shamsudhin</a><br /><span>B.Tech, Computer Engineering <span></p>
 								<div>
 								<div>#229, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9551381661
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b020@iiitdm.ac.in" title="Cultural Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b020@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12b017@iiitdm.ac.in" title="Cultural Affairs Secretary" ><i class="fa fa-envelope"></i> coe12b017@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -369,7 +369,7 @@ cultural events.</li>
 				
 				
 
-				<span id="has"></span>
+				<!--<span id="has"></span>
 				<section  class="sac"  >
 				<div class="secretary" tabindex="5" >
 					<div class="row" >
@@ -416,9 +416,9 @@ the employees of the hostel management and other persons employed by the hostels
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> 
 				</div>
-				</section>
+				</section>-->
 
 
 
@@ -436,7 +436,7 @@ the employees of the hostel management and other persons employed by the hostels
 				<div class="secretary" tabindex="6" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-ge"></i> Research Affairs Secretary</div>
+							<div class="secretaryType"><i class="fa fa-ge"></i> Alumni Affairs Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -449,12 +449,12 @@ the employees of the hostel management and other persons employed by the hostels
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12D001" title="Research Affairs Secretary" class="secName"  >Mohammed Asan Basiri</a><br /><span> Research Scholar , Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12D001" title="Research Affairs Secretary" class="secName"  >Kaviya Ramakrishnan</a><br /><span> B.Tech, Electronics Design &amp; Manufacturing<span></p>
 								<div>
 								<div>#1127, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9442753405
 								<br />								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12d001@iiitdm.ac.in" title="Research Affairs Secretary" ><i class="fa fa-envelope"></i> coe12d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12d001@iiitdm.ac.in" title="Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> coe12d001@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -512,12 +512,12 @@ also with the AAS in a manner that addresses the needs of the Student Body.</li>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B025" title="Sports Secretary"  class="secName" >Swaresh Sankpal</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B025" title="Sports Secretary"  class="secName" >Sai Hemanth G.</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#231, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7845491055
 								<br />								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b025@iiitdm.ac.in" title="Sports Secretary" ><i class="fa fa-envelope"></i> coe11b025@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b025@iiitdm.ac.in" title="Sports Secretary" ><i class="fa fa-envelope"></i> coe12b005@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
