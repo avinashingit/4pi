@@ -75,7 +75,8 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 				$postUserId=$post['userId'];
 				$postId=$post['postId'];
 				$userId=$user['userId'];
-				$commentTableName="p".$postId."c";
+				//$commentTableName="p".$postId."c";
+				$commentTableName = "postcomments";
 				if($postUserId==$userId)
 				{
 					$conn->startTransaction();
@@ -86,8 +87,9 @@ if(!(isset($_SESSION['vj'])&&isset($_SESSION['tn'])))
 					{
 						if($result>0)
 						{
-							$DropCommentTableSQL="DROP TABLE IF EXISTS ".$commentTableName;
-							$res=$conn->runSimpleQuery($DropCommentTableSQL);
+							$DropCommentsFromTableSQL="DELETE FROM postcomments WHERE postId= ?";
+							$values[0]=array($postId => 's');
+							$res=$conn->update($DropCommentsFromTableSQL,$values);
 							if($conn->error==""&&$res==true)
 							{
 								$postId=$post['postId'];

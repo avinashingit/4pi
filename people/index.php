@@ -32,8 +32,10 @@
 				<a href="#aas" class="sec isec"  ><i class="fa fa-mortar-board"></i> Academic Affairs Secretary</a>
 	    		<a href="#cocas" class="sec isec"  ><i class="fa fa-gears"></i> Co - Curricular Affairs Secretary</a>
 				<a href="#cas" class="sec isec"  ><i class="fa fa-gift"></i> Cultural Affairs Secretary</a>
-				<a href="#has" class="sec isec"  ><i class="fa fa-home"></i> Hostel Affairs Secretary</a>
-				<a href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Alumni Affairs Secretary</a>
+				<a href="#ras" class="sec isec"  ><i class="fa fa-ge"></i> Research Affairs Secretary</a>
+				<a href="#alas" class="sec isec"  ><i class="fa fa-ge"></i> Alumni Affairs Secretary</a>
+				<a href="#ugps" class="sec isec"  ><i class="fa fa-ge"></i> UG Placement Secretary</a>
+				<a href="#pgps" class="sec isec"  ><i class="fa fa-ge"></i> PG-Ph.D. Placement Secretary</a>
 				<a href="#ss" class="sec isec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
 				
 				
@@ -63,37 +65,41 @@
 				
 				
 				
-				<div>
-	    		<a href="#bh" class="sec hos"  ><i class="fa fa-male"></i> Boys Hostel<i class="fa fa-plus-square" style="float:right;"></i></a>
-				<a href="#bw" class="subsec"  ><i class="fa fa-won"></i> Wardens</a>
-				<!--<a target="_blank" href="#baw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a>  -->
+				<!--<div>
+	    		<a href="#bh" class="sec hos"  ><i class="fa fa-male"></i> Joint Secretaries<i class="fa fa-plus-square" style="float:right;"></i></a>
 				
 				
-	    		<a href="#bgs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
+				
+	    		<a href="#bgs" class="subsec"  ><i class="fa fa-building"></i> Joint General Secretary</a>
 				<a href="#bms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
-				<a href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
-				<a href="#bss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<!-- <a href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a> -->
-				<a href="#bls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
-				<a href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<!-- <a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a> -->
+				<a href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Joint Academic Affairs Secretary</a>
+
+				<a href="#bts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Joint Technical Affairs Secretary</a>
+				<a href="#bss" class="subsec"  ><i class="fa fa-users"></i> Joint Co-Curricular Affairs Secretary</a>
+				<a href="#bas" class="subsec"  ><i class="fa fa-credit-card"></i> Joint Mess Secretary</a>
+				<a href="#bls" class="subsec"  ><i class="fa fa-book"></i> Joint Hostel Affairs Secretary</a>
+				<a href="#bsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Joint Sports Secretary</a>
+				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Joint Hostel Affairs Secretary (BOYS)</a>
+				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Joint Hostel Affairs Secretary (GIRLS)</a>
+				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Joint Alumni Affairs Secretary</a>
+				<a href="#bgns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Joint Placement Secretary</a>
+
 				
-				</div>
+				</div>-->
 				
 				
 				<div>
-				<a href="#gh" class="sec hos"  ><i class="fa fa-female"></i> Girls Hostel<i class="fa fa-plus-square"  style="float:right;"></i></a>
-				<a href="#gw" class="subsec"  ><i class="fa fa-won"></i> Warden</a>
-				<!--<a target="_blank" href="#gaw" class="subsec"  ><i class="fa fa-won"></i> Asst. Warden</a> -->
+				<a href="#gh" class="sec hos"  ><i class="fa fa-female"></i> Hostel<i class="fa fa-plus-square"  style="float:right;"></i></a>
+				<a href="#bw" class="subsec"  ><i class="fa fa-won"></i> Boys Hostel Wardens</a>
+				<!-- <a target="_blank" href="#baw" class="subsec"  ><i class="fa fa-won"></i>Boys Hostel Asst. Warden</a>   -->
+				<a href="#gw" class="subsec"  ><i class="fa fa-won"></i> Girls Hostel Warden</a>
+				<!-- <a target="_blank" href="#gaw" class="subsec"  ><i class="fa fa-won"></i>Girls Hostel Asst. Warden</a>  -->
 				
-	    		<a href="#ggs" class="subsec"  ><i class="fa fa-building"></i> General Secretary</a>
-				<a href="#gms" class="subsec"  ><i class="fa fa-cutlery"></i> Mess Secretary</a>
-				<a href="#gts" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Technical Secretary</a>
-				<a href="#gss" class="subsec"  ><i class="fa fa-users"></i> Social Secretary</a>
-				<a href="#gas" class="subsec"  ><i class="fa fa-credit-card"></i> Alumni Secretary</a>
-				<a href="#gls" class="subsec"  ><i class="fa fa-book"></i> Literary Secretary</a>
-				<a href="#gsps" class="subsec"  ><i class="fa fa-futbol-o"></i> Sports Secretary</a>
-				<a href="#ggns" class="subsec"  ><i class="fa fa-pied-piper-alt"></i> Garden Secretary</a>
+	    		<a href="#bhgs" class="subsec"  ><i class="fa fa-building"></i>Boys Hostel Affairs Secretary</a>
+				<a href="#ghgs" class="subsec"  ><i class="fa fa-cutlery"></i> Girls Hostel Affairs Secretary</a>
+				<a href="#hms" class="subsec"  ><i class="fa fa-lightbulb-o"></i> Mess Secretary</a>
+				<a href="#bhss" class="subsec"  ><i class="fa fa-users"></i> Hostel Sports Secretary (BOYS)</a>
+				<a href="#ghss" class="subsec"  ><i class="fa fa-credit-card"></i> Hostel Sports Secretary (GIRLS)</a>
 	    		</div>
 				
 				
@@ -130,17 +136,17 @@
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="Student General Secretary" ><img class="img-responsive"  src="/4pi/img/people/sgs.png" alt="Student General Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM12B014" title="Student General Secretary" ><img class="img-responsive"  src="/4pi/img/people/sgs.png" alt="Student General Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="Student General Secretary" class="secName" >M. Tarakesh</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM12B014" title="Student General Secretary" class="secName" >M. Tarakesh</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing<span></p>
 								<div>
 								<div>#332, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7418276308
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b021@iiitdm.ac.in" title="Student General Secretary" ><i class="fa fa-envelope"></i> edm11b021@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm12b014@iiitdm.ac.in" title="Student General Secretary" ><i class="fa fa-envelope"></i> mdm12b014@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -200,7 +206,7 @@
 								<i class="fa fa-mobile"></i> +91 - 9551913187
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b005@iiitdm.ac.in" title="Academic Affairs Secretary" ><i class="fa fa-envelope"></i> coe12b007@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12b007@iiitdm.ac.in" title="Academic Affairs Secretary" ><i class="fa fa-envelope"></i> coe12b007@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -264,7 +270,7 @@ also with the RAS in a manner that addresses the needs of the Student Body.</li>
 								<i class="fa fa-mobile"></i> +91 - 9551913070
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b011@iiitdm.ac.in" title="Co-Curricular Affairs Secretary" ><i class="fa fa-envelope"></i> mdm12b019@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm12b019@iiitdm.ac.in" title="Co-Curricular Affairs Secretary" ><i class="fa fa-envelope"></i> mdm12b019@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -436,7 +442,7 @@ the employees of the hostel management and other persons employed by the hostels
 				<div class="secretary" tabindex="6" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-ge"></i> Alumni Affairs Secretary</div>
+							<div class="secretaryType"><i class="fa fa-ge"></i> Research Affairs Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -445,16 +451,16 @@ the employees of the hostel management and other persons employed by the hostels
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12D001" title="Research Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/ras.png" alt="Research Affairs Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE13D004" title="Research Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/ras.png" alt="Research Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12D001" title="Research Affairs Secretary" class="secName"  >Kaviya Ramakrishnan</a><br /><span> B.Tech, Electronics Design &amp; Manufacturing<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE13D004" title="Research Affairs Secretary" class="secName"  >Shanmuga Kumar</a><br /><span> Ph.D., Computer Engineering<span></p>
 								<div>
 								<div>#1127, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9442753405
 								<br />								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12d001@iiitdm.ac.in" title="Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> coe12d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe13d004@iiitdm.ac.in" title="Research Affairs Secretary" ><i class="fa fa-envelope"></i> coe13d004@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -494,6 +500,165 @@ also with the AAS in a manner that addresses the needs of the Student Body.</li>
 				
 			
 			
+				<span id="alas"></span>
+				<section  class="sac"  >
+				<div class="secretary" tabindex="7" >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-futbol-o"></i> Alumni Affairs Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B015" title="Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/alas.png" alt="Alumni Affairs Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B015" title="Alumni Affairs Secretary"  class="secName" >Kaviya R.</a><br /><span>B.Tech, Electronics Engineering D &amp; M<span></p>
+								<div>
+								<div>#231, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7845491055
+								<br />								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm12b015@iiitdm.ac.in" title="Alumni |Affairs Secretary" ><i class="fa fa-envelope"></i> edm12b015@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<!-- <li>The SS shall look after the issues regarding the sports activities of the students.</li>
+										<li>The SS shall help the Institute Sports Advisor in maintaining an inventory of sports equipment
+and shall consult him or her on sports activities.</li>
+										<li>The SS shall prepare and present the statement of expenditure of special tournaments (eg.
+GFKR) to the respective CSAs and the SAC.</li> -->
+										----NA----
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+				</div>
+				</section>
+				
+				
+				
+				<span id="ugps"></span>
+				<section  class="sac"  >
+				<div class="secretary" tabindex="7" >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-futbol-o"></i>UG Placement Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B027" title="UG Placement Secretary" ><img class="img-responsive"  src="/4pi/img/people/ugps.png" alt="UG Placement Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B015" title="Alumni Affairs Secretary"  class="secName" >Shubham Singh</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<div>
+								<div>#231, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7845491055
+								<br />								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12b027@iiitdm.ac.in" title="UG Placement Secretary" ><i class="fa fa-envelope"></i> coe12b027@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<!-- <li>The SS shall look after the issues regarding the sports activities of the students.</li>
+										<li>The SS shall help the Institute Sports Advisor in maintaining an inventory of sports equipment
+and shall consult him or her on sports activities.</li>
+										<li>The SS shall prepare and present the statement of expenditure of special tournaments (eg.
+GFKR) to the respective CSAs and the SAC.</li> -->
+										----NA----
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+				</div>
+				</section>
+				
+				
+				<span id="pgps"></span>
+				<section  class="sac"  >
+				<div class="secretary" tabindex="7" >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-futbol-o"></i> PG-Ph.D. Placement Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDS14M002" title="Pg-Ph.D. Placement Secretary" ><img class="img-responsive"  src="/4pi/img/people/pgps.jpg" alt="PG-Ph.D. Placement Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDS14M002" title="Alumni Affairs Secretary"  class="secName" >Deepak Ranjan</a><br /><span>M.Des. Electronic Design<span></p>
+								<div>
+								<div>#231, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 9941373406
+								<br />								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=eds14m002@iiitdm.ac.in" title="PG-Ph.D. Placement Secretary" ><i class="fa fa-envelope"></i> eds14m002@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<!-- <li>The SS shall look after the issues regarding the sports activities of the students.</li>
+										<li>The SS shall help the Institute Sports Advisor in maintaining an inventory of sports equipment
+and shall consult him or her on sports activities.</li>
+										<li>The SS shall prepare and present the statement of expenditure of special tournaments (eg.
+GFKR) to the respective CSAs and the SAC.</li> -->
+										----NA----
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+				</div>
+				</section>
+				
 				<span id="ss"></span>
 				<section  class="sac"  >
 				<div class="secretary" tabindex="7" >
@@ -508,16 +673,16 @@ also with the AAS in a manner that addresses the needs of the Student Body.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B025" title="Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/ss.png" alt="Sports Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B005" title="Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/ss.png" alt="Sports Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B025" title="Sports Secretary"  class="secName" >Sai Hemanth G.</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B005" title="Sports Secretary"  class="secName" >Sai Hemanth G.</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#231, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7845491055
 								<br />								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b025@iiitdm.ac.in" title="Sports Secretary" ><i class="fa fa-envelope"></i> coe12b005@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12b005@iiitdm.ac.in" title="Sports Secretary" ><i class="fa fa-envelope"></i> coe12b005@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -535,6 +700,7 @@ also with the AAS in a manner that addresses the needs of the Student Body.</li>
 and shall consult him or her on sports activities.</li>
 										<li>The SS shall prepare and present the statement of expenditure of special tournaments (eg.
 GFKR) to the respective CSAs and the SAC.</li>
+										<!-- ----NA---- -->
 									</ul>
 								</div>
 							</div>
@@ -544,15 +710,6 @@ GFKR) to the respective CSAs and the SAC.</li>
 					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 
 				
@@ -571,17 +728,17 @@ GFKR) to the respective CSAs and the SAC.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B014" title="SAC Speaker" ><img class="img-responsive"  src="/4pi/img/people/sacs.png" alt="SAC Speaker" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM12B006" title="SAC Speaker" ><img class="img-responsive"  src="/4pi/img/people/sacs.png" alt="SAC Speaker" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B014" title="SAC Speaker" class="secName"  >M. Rajasekhar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM12B006" title="SAC Speaker" class="secName"  >Sai Gopal</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
 								<div>#225, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9710300379
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b014@iiitdm.ac.in" title="SAC Speaker" ><i class="fa fa-envelope"></i> mdm11b014@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=MDM12B006@iiitdm.ac.in" title="SAC Speaker" ><i class="fa fa-envelope"></i> mdm12b006@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -640,7 +797,7 @@ shall be treated as approved.</li>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B022" title="SAC Speaker - Deputy" class="secName" >S. Lokesh Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B022" title="SAC Speaker - Deputy" class="secName" >S. Chandrasekhar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
 								<div>
 								<div>#333, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 9445419253
@@ -681,30 +838,30 @@ shall be treated as approved.</li>
 					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
-				
-				
-				
 
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<span id="cs"></span>
+				<!--
+				<span id="bh"></span>
 				<section  class="sac" >
-					<div class="btn btn-block btn-success" style="cursor:default" ><big style="font-size:30px;" ><i class="fa fa-crosshairs"></i> Councillors</big></div>
+					<div class="btn btn-block btn-success " style="cursor:default;"><big style="font-size:30px;" ><i class="fa fa-male"></i> Joint Secretaries</big></div>
 				</section>
-				<span id="cbc"></span>
+				
+				
+					
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<!--<span id="baw"></span>
 				<section  class="sac" >
 				<div class="secretary" tabindex="10" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-crosshairs"></i> COE Branch Councillor</div>
+							<div class="secretaryType"><i class="fa fa-won"></i> Boys Hostel Asst. Warden</div>
 							<hr />
 						</div>
 					</div>
@@ -713,17 +870,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B014" title="COE Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/cbc.png" alt="COE Branch Councillor"/></a>
+									<a target="_blank" href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/baw.png" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B014" title="COE Branch Councillor" class="secName"  >K.Krishna Mohan Reddy</a><br /><span>B.Tech, Computer Engineering <span></p>
+								<p ><a target="_blank" href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
-								<div>#420, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9094381911
+								<div>#234, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 9841191663
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b014@iiitdm.ac.in" title="COE Branch Councillor" ><i class="fa fa-envelope"></i> coe11b014@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="#" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -736,15 +893,81 @@ shall be treated as approved.</li>
 								
 								<div class="responsibilities" >
 									<ul>
-								        <li> The COE Branch Councillor shall keep a track of all the academic activities pertaining to  his/her respective streams. </li>
-										 <li> The COE Branch Councillor shall forward the student issues pertaining to  his/her respective streams, to the corresponding higher officials. </li>
+										<li>The HostelGenSec shall act as the Secretary of the HC and shall record and circulate within the
+hostel, the minutes of every HC meeting.</li>
+										<li>The GenSec shall ensure the proper maintenance of the hostel and its precincts.</li>
+										<li>The GenSec shall co-ordinate the activities of the other Hostel Secretaries.</li>
 									</ul>
 								</div>
 							</div>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+					<div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>
+				</div>
+				</section> 
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<span id="jgs"></span>
+				<section  class="sac" >
+				<div class="secretary" tabindex="10" >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-building"></i> Joint General Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B016" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/jgs.png" alt="Joint General Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B016" title="Boys Hostel General Secretary" class="secName"  >Janeshwaran</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<div>
+								<div>#234, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 9841191663
+								<br />
+								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b016@iiitdm.ac.in" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<li>The HostelGenSec shall act as the Secretary of the HC and shall record and circulate within the
+hostel, the minutes of every HC meeting.</li>
+										<li>The GenSec shall ensure the proper maintenance of the hostel and its precincts.</li>
+										<li>The GenSec shall co-ordinate the activities of the other Hostel Secretaries.</li>
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+					</div>
 				</div>
 				</section>
 				
@@ -760,12 +983,12 @@ shall be treated as approved.</li>
 				
 				
 			
-				<span id="ebc"></span>
+				<span id="bms"></span>
 				<section class="sac"  >
 				<div class="secretary" tabindex="11" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-crosshairs"></i> EDM Branch Councillor</div>
+							<div class="secretaryType"><i class="fa fa-cutlery"></i> Boys Hostel Mess Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -774,17 +997,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B026" title="EDM Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/ebc.png" alt="EDM Branch Councillor" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B023" title="Boys Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/bms.png" alt="Boys Hostel Mess Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B026" title="EDM Branch Councillor" class="secName"  >T.Nikhila  </a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B023" title="Boys Hostel Mess Secretary" class="secName"  >Siddhartha Agarwal</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
-								<div>#501, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9445419188
+								<div>#427, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 9710331521
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b026@iiitdm.ac.in" title="EDM Branch Councillor" ><i class="fa fa-envelope"></i> edm11b026@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b023@iiitdm.ac.in" title="Boys Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b023@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -797,15 +1020,18 @@ shall be treated as approved.</li>
 								
 								<div class="responsibilities" >
 									<ul>
-										<li> The EDM Branch Councillor shall keep a track of all the academic activities  pertaining to  his/her respective streams. </li>
-										 <li> The EDM Branch Councillor shall forward the student issues pertaining to  his/her respective streams, to the corresponding higher officials. </li>
+										<li>The Mess Sec shall be a member of the Mess Monitoring Committee (MMC).</li>
+										<li>The Mess Sec shall be allotted one of the messes, for monitoring, by the HAS. He/she shall look
+into issues regarding the maintenance of the mess and shall assist the HAS in discharging
+his/her duties on such issues.</li>
+										<li>The Mess Sec shall be responsible for arranging food requirements, if necessary, during the
+organization of social events in the hostel.</li>
 									</ul>
 								</div>
 							</div>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 				
@@ -819,12 +1045,12 @@ shall be treated as approved.</li>
 				
 				
 				
-				<span id="mbc"></span>
+				<span id="bts"></span>
 				<section  class="sac" >
 				<div class="secretary" tabindex="12" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-crosshairs"></i> MDM Branch Councillor</div>
+							<div class="secretaryType"><i class="fa fa-lightbulb-o"></i> Boys Hostel Technical Affairs Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -833,17 +1059,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B021" title="MDM Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/mbc.png" alt="MDM Branch Councillor" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B026" title="Boys Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bts.png" alt="Boys Hostel Technical Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B021" title="MDM Branch Councillor" class="secName"  >P. Sai Sankeerth Rao</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B026" title="Boys Hostel Technical Affairs Secretary" class="secName"  >Saurav Verma</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
 								<div>
-								<div>#429, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7667808942
+								<div>#221, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7845223392
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b021@iiitdm.ac.in" title="MDM Branch Councillor" ><i class="fa fa-envelope"></i> mdm11b021@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b026@iiitdm.ac.in" title="Boys Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b026@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -856,8 +1082,13 @@ shall be treated as approved.</li>
 								
 								<div class="responsibilities" >
 									<ul>
-										<li> The MDM Branch Councillor shall keep a track of all the academic activities  pertaining to  his/her respective streams. </li>
-										 <li> The MDM Branch Councillor shall forward the student issues pertaining to  his/her respective streams, to the corresponding higher officials. </li>
+										<li>The Technical Affairs Secretary shall be responsible for organizing Co-curricular activities in the
+hostel.</li>
+									 	<li> The Technical Affairs Secretary shall in consultation with the Co-curricular Affairs Secretary,
+will initiate activities of the Hobby Club and also organize intra-hostel technical competitions.</li>
+										<li>The Technical Affairs Secretary shall assist the Election Officer in conducting elections when
+his hostel is one of the polling venues.</li>
+
 									</ul>
 								</div>
 
@@ -865,7 +1096,6 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -879,12 +1109,12 @@ shall be treated as approved.</li>
 
 
 
-				<span id="mcc"></span>
+				<span id="bss"></span>
 				<section  class="sac" >
 				<div class="secretary" tabindex="13" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-crosshairs"></i> MDes Class Councillor</div>
+							<div class="secretaryType"><i class="fa fa-users"></i> Boys Hostel Social Affairs Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -893,18 +1123,18 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="MDes Branch Councillor" ><img class="img-responsive"  src="/4pi/img/people/mcc.png" alt="MDes Branch Councillor"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B024" title="Boys Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bss.png" alt="Boys Hostel Social Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B021" title="MDes Branch Councillor" class="secName"  >Gourav Pandey</a><br /><span>M.Des, Mechanical Systems<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B024" title="Boys Hostel Social Affairs Secretary" class="secName"  >R.Sri Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
-								<div>#736, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9941313415
+								<div>#431, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7845669426
 							</br>
 								
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mds13m006@iiitdm.ac.in" title="MDes Branch Councillor" ><i class="fa fa-envelope"></i> mds13m006@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b024@iiitdm.ac.in" title="Boys Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b024@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -917,8 +1147,11 @@ shall be treated as approved.</li>
 								
 								<div class="responsibilities" >
 									<ul>
-										<li> The M.Des Branch Councillor shall keep a track of all the academic activities  pertaining to  his/her respective streams. </li>
-										 <li> The M.Des Branch Councillor shall forward the student issues pertaining to  his/her respective streams, to the corresponding higher officials. </li>
+										<li>The Soc Sec shall be responsible for the conduct of the various arts activities of the hostel, in
+co-ordination with the Lit Sec of the hostel.</li>
+  									<li> The Soc shall strive towards the repair/replacement of faulty audio/video equipment.</li>
+  									<li> The Soc Sec shall be responsible for the procurement of magazines and newspapers for the
+hostel common room.</li>
 									</ul>
 								</div>
 
@@ -926,7 +1159,6 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>			
 				</section>
 
@@ -940,12 +1172,12 @@ shall be treated as approved.</li>
 				
 
 				
-				<span id="pcc"></span>
+				<span id="bas"></span>
 				<section  class="sac" >
 				<div class="secretary" tabindex="14" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-crosshairs"></i> PhD Class Councillor</div>
+							<div class="secretaryType"><i class="fa fa-credit-card"></i> Boys Hostel Alumni Affairs Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -954,17 +1186,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MAT11D001" title="PhD Class Councillor" ><img class="img-responsive"  src="/4pi/img/people/pcc.png" alt="PhD Class Councillor"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B016" title="Boys Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bas.png" alt="Boys Hostel Alumni Affairs Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MAT11D001" title="PhD Class Councillor" class="secName"  >T.Sandhya</a><br /><span> Research Scholar , Dept. Mathematics  <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B016" title="Boys Hostel Alumni Affairs Secretary" class="secName"  >P.L.Thanooj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
-								<div>#909, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9444950990
+								<div>#322, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7401698057
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mat11d001@iiitdm.ac.in" title="PhD Class Councillor" ><i class="fa fa-envelope"></i> mat11d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b016@iiitdm.ac.in" title="Boys Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b016@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -977,8 +1209,13 @@ shall be treated as approved.</li>
 								
 								<div class="responsibilities" >
 									<ul>
-								     <li> The PhD Class Councillor shall keep a track of all the academic activities  pertaining to  his/her respective streams. </li>
-										 <li> The PhD Class Councillor shall forward the student issues pertaining to  his/her respective streams, to the corresponding higher officials. </li>		
+										<li>The Alumni Affairs Secretary shall maintain and update a database containing the details of the
+Hostel alumni like Name, Contact, Current working position etc.</li>
+
+                                         <li>The Alumni Affairs Secretary, in coordination with the GenSec of the Hostel, shall maintain a
+Hostel Website and update news related to hostel events, activities and inter-hostel
+competitions on it.</li>
+										<li> The Alumni Affairs Secretary shall assist the alumni visiting the hostel.</li>
 									</ul>
 								</div>
 
@@ -986,7 +1223,6 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1000,12 +1236,12 @@ shall be treated as approved.</li>
 								
 		
 
-				<span id="dsc"></span>
+				<span id="bls"></span>
 				<section class="sac"  >
 				<div class="secretary" tabindex="15" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-crosshairs"></i> Day Scholars Councillor</div>
+							<div class="secretaryType"><i class="fa fa-book"></i> Boys Hostel Literary Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -1014,16 +1250,17 @@ shall be treated as approved.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE13D001" title="Day Scholars Councillor" ><img class="img-responsive"  src="/4pi/img/people/dsc.png" alt="Day Scholars Councillor" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B026" title="Boys Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/bls.png" alt="Boys Hostel Literary Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE13D001" title="Day Scholars Councillor" class="secName"  >Veeramani</a><br /><span>Research scholar, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B026" title="Boys Hostel Literary Secretary" class="secName"  >T. Naga Kuladeep</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
-								<i class="fa fa-mobile"></i> +91 - 7299655275
+								<div>#423, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 9445419216
 								<br />
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe13d001@iiitdm.ac.in" title="Day Scholars Councillor" ><i class="fa fa-envelope"></i> coe13d001@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b026@iiitdm.ac.in" title="Boys Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b026@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1036,7 +1273,12 @@ shall be treated as approved.</li>
 								
 								<div class="responsibilities" >
 									<ul>
-										 <li> The Day Scholars Councillor shall forward the student issues pertaining to the Day Scholars, to the corresponding higher officials. </li>										
+										<li>The Lit Sec shall be responsible for the conduct of the various literary activities of the hostel.
+He or she shall also conduct the arts activities of the hostel in co-ordination with the Social Sec of
+the hostel.</li>
+										<li>The Lit Sec shall be responsible for the procurement and proper upkeep of books meant for the
+hostel library.</li>
+										
 									</ul>
 								</div>
 
@@ -1044,7 +1286,6 @@ shall be treated as approved.</li>
 							
 						</div>
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
 
@@ -1055,21 +1296,58 @@ shall be treated as approved.</li>
 				
 
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				<span id="bsps"></span>
+				<section   class="sac" >
+				<div class="secretary" tabindex="16" >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-futbol-o"></i> Boys Hostel Sports Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B005" title="Boys Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/bsps.png" alt="Boys Hostel Sports Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B005" title="Boys Hostel Sports Secretary" class="secName"  >Ch. Sudhakar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<div>
+								<div>#217, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7299417901
+								<br />
+								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b005@iiitdm.ac.in" title="Boys Hostel Sports Secretary" ><i class="fa fa-envelope"></i> mdm11b005@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<li>The HSSec shall be responsible for the procurement of sports equipment for use by the hostel
+residents.</li>
+										<li>The HSSec shall appoint the various hostels team captains.</li>
+										<li>The HSSec shall be responsible for the conduct of various intra- and inter-hostel sports
+tournaments.</li>
+									</ul>
+								</div>
+
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				</section>
+
 				
 				
 				
@@ -1078,17 +1356,71 @@ shall be treated as approved.</li>
 				
 
 
-				
-				
 
+				<span id="bgns"></span>
+				<section class="sac"  >
+				<div class="secretary" tabindex="17" >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-pied-piper-alt"></i> Boys Hostel Garden Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B004" title="Boys Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgns.png" alt="Boys Hostel Garden Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B004" title="Boys Hostel Garden Secretary" class="secName"  >C.V.Dheeraj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<div>
+								<div>#319, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 84384148475
+								<br />
+								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b004@iiitdm.ac.in" title="Boys Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm11b004@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<li>The Garden Secretary shall be responsible for the proper upkeep the hostel garden(s).</li>	
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				</section>
+
+
+-->
+
+
+
+
+
+
+
+
+				<span id="gh"></span>
 				
-				<span id="bh"></span>
-				<section  class="sac" >
-					<div class="btn btn-block btn-success " style="cursor:default;"><big style="font-size:30px;" ><i class="fa fa-male"></i> Boys Hostel</big></div>
+				
+				<section class="sac"  >
+					<div class="btn btn-block btn-success "  style="cursor:default;" ><big style="font-size:30px;" ><i class="fa fa-bank"></i>Hostel</big></div>
 				</section>
 				
-				
-					
 				
 				<span id="bw"></span>
 				<section  class="sac" >
@@ -1181,588 +1513,6 @@ shall be treated as approved.</li>
 					</div> -->
 				</div>
 				</section>
-				
-				
-				
-				
-				
-				
-				
-				<!--<span id="baw"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="10" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-won"></i> Boys Hostel Asst. Warden</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="#" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/baw.png" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="#" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#234, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9841191663
-								<br />
-								
-								<div><a target="_blank" href="#" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The HostelGenSec shall act as the Secretary of the HC and shall record and circulate within the
-hostel, the minutes of every HC meeting.</li>
-										<li>The GenSec shall ensure the proper maintenance of the hostel and its precincts.</li>
-										<li>The GenSec shall co-ordinate the activities of the other Hostel Secretaries.</li>
-									</ul>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					<div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div>
-				</div>
-				</section> -->
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<span id="bgs"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="10" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-building"></i> Boys Hostel General Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B016" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgs.png" alt="Boys Hostel General Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B016" title="Boys Hostel General Secretary" class="secName"  >M. Karthik</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#234, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9841191663
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b016@iiitdm.ac.in" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm11b016@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The HostelGenSec shall act as the Secretary of the HC and shall record and circulate within the
-hostel, the minutes of every HC meeting.</li>
-										<li>The GenSec shall ensure the proper maintenance of the hostel and its precincts.</li>
-										<li>The GenSec shall co-ordinate the activities of the other Hostel Secretaries.</li>
-									</ul>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			
-				<span id="bms"></span>
-				<section class="sac"  >
-				<div class="secretary" tabindex="11" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-cutlery"></i> Boys Hostel Mess Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B023" title="Boys Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/bms.png" alt="Boys Hostel Mess Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B023" title="Boys Hostel Mess Secretary" class="secName"  >Siddhartha Agarwal</a><br /><span>B.Tech, Computer Engineering<span></p>
-								<div>
-								<div>#427, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9710331521
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b023@iiitdm.ac.in" title="Boys Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b023@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Mess Sec shall be a member of the Mess Monitoring Committee (MMC).</li>
-										<li>The Mess Sec shall be allotted one of the messes, for monitoring, by the HAS. He/she shall look
-into issues regarding the maintenance of the mess and shall assist the HAS in discharging
-his/her duties on such issues.</li>
-										<li>The Mess Sec shall be responsible for arranging food requirements, if necessary, during the
-organization of social events in the hostel.</li>
-									</ul>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-				
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<span id="bts"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="12" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-lightbulb-o"></i> Boys Hostel Technical Affairs Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B026" title="Boys Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bts.png" alt="Boys Hostel Technical Affairs Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B026" title="Boys Hostel Technical Affairs Secretary" class="secName"  >Saurav Verma</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#221, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7845223392
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b026@iiitdm.ac.in" title="Boys Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> mdm11b026@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Technical Affairs Secretary shall be responsible for organizing Co-curricular activities in the
-hostel.</li>
-									 	<li> The Technical Affairs Secretary shall in consultation with the Co-curricular Affairs Secretary,
-will initiate activities of the Hobby Club and also organize intra-hostel technical competitions.</li>
-										<li>The Technical Affairs Secretary shall assist the Election Officer in conducting elections when
-his hostel is one of the polling venues.</li>
-
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-				
-				
-				
-				
-				
-				
-
-
-
-
-				<span id="bss"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="13" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-users"></i> Boys Hostel Social Affairs Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B024" title="Boys Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bss.png" alt="Boys Hostel Social Affairs Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B024" title="Boys Hostel Social Affairs Secretary" class="secName"  >R.Sri Sai Kumar</a><br /><span>B.Tech, Computer Engineering<span></p>
-								<div>
-								<div>#431, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7845669426
-							</br>
-								
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b024@iiitdm.ac.in" title="Boys Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b024@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Soc Sec shall be responsible for the conduct of the various arts activities of the hostel, in
-co-ordination with the Lit Sec of the hostel.</li>
-  									<li> The Soc shall strive towards the repair/replacement of faulty audio/video equipment.</li>
-  									<li> The Soc Sec shall be responsible for the procurement of magazines and newspapers for the
-hostel common room.</li>
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>			
-				</section>
-
-
-				
-				
-				
-				
-				
-				
-				
-
-				
-				<span id="bas"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="14" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-credit-card"></i> Boys Hostel Alumni Affairs Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B016" title="Boys Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/bas.png" alt="Boys Hostel Alumni Affairs Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B016" title="Boys Hostel Alumni Affairs Secretary" class="secName"  >P.L.Thanooj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#322, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7401698057
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b016@iiitdm.ac.in" title="Boys Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b016@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Alumni Affairs Secretary shall maintain and update a database containing the details of the
-Hostel alumni like Name, Contact, Current working position etc.</li>
-
-                                         <li>The Alumni Affairs Secretary, in coordination with the GenSec of the Hostel, shall maintain a
-Hostel Website and update news related to hostel events, activities and inter-hostel
-competitions on it.</li>
-										<li> The Alumni Affairs Secretary shall assist the alumni visiting the hostel.</li>
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-
-				
-				
-				
-				
-
-				
-								
-		
-
-				<span id="bls"></span>
-				<section class="sac"  >
-				<div class="secretary" tabindex="15" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-book"></i> Boys Hostel Literary Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B026" title="Boys Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/bls.png" alt="Boys Hostel Literary Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B026" title="Boys Hostel Literary Secretary" class="secName"  >T. Naga Kuladeep</a><br /><span>B.Tech, Computer Engineering<span></p>
-								<div>
-								<div>#423, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9445419216
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b026@iiitdm.ac.in" title="Boys Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b026@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Lit Sec shall be responsible for the conduct of the various literary activities of the hostel.
-He or she shall also conduct the arts activities of the hostel in co-ordination with the Social Sec of
-the hostel.</li>
-										<li>The Lit Sec shall be responsible for the procurement and proper upkeep of books meant for the
-hostel library.</li>
-										
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-
-				
-				
-				
-				
-
-				
-				<span id="bsps"></span>
-				<section   class="sac" >
-				<div class="secretary" tabindex="16" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-futbol-o"></i> Boys Hostel Sports Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B005" title="Boys Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/bsps.png" alt="Boys Hostel Sports Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM11B005" title="Boys Hostel Sports Secretary" class="secName"  >Ch. Sudhakar</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#217, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7299417901
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm11b005@iiitdm.ac.in" title="Boys Hostel Sports Secretary" ><i class="fa fa-envelope"></i> mdm11b005@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The HSSec shall be responsible for the procurement of sports equipment for use by the hostel
-residents.</li>
-										<li>The HSSec shall appoint the various hostels team captains.</li>
-										<li>The HSSec shall be responsible for the conduct of various intra- and inter-hostel sports
-tournaments.</li>
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-				
-				
-				
-				
-				
-				
-
-
-
-				<span id="bgns"></span>
-				<section class="sac"  >
-				<div class="secretary" tabindex="17" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-pied-piper-alt"></i> Boys Hostel Garden Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B004" title="Boys Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/bgns.png" alt="Boys Hostel Garden Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B004" title="Boys Hostel Garden Secretary" class="secName"  >C.V.Dheeraj Kumar</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#319, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 84384148475
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b004@iiitdm.ac.in" title="Boys Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm11b004@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Garden Secretary shall be responsible for the proper upkeep the hostel garden(s).</li>	
-									</ul>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-
-
-
-
-
-
-
-
-
-
-				<span id="gh"></span>
-				
-				
-				<section class="sac"  >
-					<div class="btn btn-block btn-success "  style="cursor:default;" ><big style="font-size:30px;" ><i class="fa fa-female"></i> Girls Hostel</big></div>
-				</section>
-				
-				
-				
 				
 				
 				<span id="gw"></span>
@@ -1875,13 +1625,63 @@ hostel, the minutes of every HC meeting.</li>
 				
 				
 				
+				<span id="bhgs"></span>
+				<section  class="sac" >
+				<div class="secretary" tabindex="18"  >
+					<div class="row" >
+						<div class="col-md-12">
+							<div class="secretaryType"><i class="fa fa-building"></i> Boys Hostel General Secretary</div>
+							<hr />
+						</div>
+					</div>
+					
+				    <div class="row" >
+						<div class="col-md-6" style="border-right:1px solid #333;" >
+							<div>
+								<div class="secPic" >
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM12B004" title="Boys Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/bhgs.png" alt="Boys Hostel General Secretary" /></a>
+								</div>
+							
+							<div class="secInfo">
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=MDM12B004" title="Boys Hostel General Secretary" class="secName"  >Anuj Agrawal</a><br /><span>B.Tech, Mechanical Design &amp; Manufacturing <span></p>
+								<div>
+								<div>#505, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 9551913079
+								
+								
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=mdm12b004@iiitdm.ac.in" title="Boys Hostel General Secretary" ><i class="fa fa-envelope"></i> mdm12b04@iiitdm.ac.in</a></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="reponsibilitiesWrap">
+							
+								<h4><b>Functions and Responsibilities</b></h4>
+								
+								<div class="responsibilities" >
+									<ul>
+										<li>The HostelGenSec shall act as the Secretary of the HC and shall record and circulate within the
+hostel, the minutes of every HC meeting.</li>
+										<li>The GenSec shall ensure the proper maintenance of the hostel and its precincts.</li>
+										<li>The GenSec shall co-ordinate the activities of the other Hostel Secretaries.</li>
+									</ul>
+								</div>
+
+							</div>
+							
+						</div>
+					</div>
+					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
+				</div>
+				</section>
 				
 				
 				
 				
 				
-				
-				<span id="ggs"></span>
+				<span id="ghgs"></span>
 				<section  class="sac" >
 				<div class="secretary" tabindex="18"  >
 					<div class="row" >
@@ -1895,17 +1695,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B012" title="Girls Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/ggs.png" alt="Girls Hostel General Secretary" /></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B002" title="Girls Hostel General Secretary" ><img class="img-responsive"  src="/4pi/img/people/ghgs.jpg" alt="Girls Hostel General Secretary" /></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B012" title="Girls Hostel General Secretary" class="secName"  >M. Ashwini</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B002" title="Girls Hostel General Secretary" class="secName"  >Aarthi M. Sundaram</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 								<div>
-								<div>#505, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9551913079
+								<div>#305, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7401182582
 								
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b012@iiitdm.ac.in" title="Girls Hostel General Secretary" ><i class="fa fa-envelope"></i> edm11b012@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm12b002@iiitdm.ac.in" title="Girls Hostel General Secretary" ><i class="fa fa-envelope"></i> edm12b002@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1943,12 +1743,12 @@ hostel, the minutes of every HC meeting.</li>
 				
 				
 				
-				<span id="gms"></span>
+				<span id="hms"></span>
 				<section  class="sac" >
 				<div class="secretary" tabindex="19" >
 					<div class="row" >
 						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-cutlery"></i> Girls Hostel Mess Secretary</div>
+							<div class="secretaryType"><i class="fa fa-cutlery"></i>Mess Secretary</div>
 							<hr />
 						</div>
 					</div>
@@ -1957,17 +1757,17 @@ hostel, the minutes of every HC meeting.</li>
 						<div class="col-md-6" style="border-right:1px solid #333;" >
 							<div>
 								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B027" title="Girls Hostel Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/gms.png" alt="Girls Hostel Mess Secretary"/></a>
+									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B025" title="Mess Secretary" ><img class="img-responsive"  src="/4pi/img/people/hms.jpg" alt=" Mess Secretary"/></a>
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B027" title="Girls Hostel Mess Secretary" class="secName"  >V.Manogna</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B025" title="Mess Secretary" class="secName"  >Vikram R.</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
 								<div>
-								<div>#501, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7299417911
+								<div>#1033, Ashwatha Hostel</div>
+								<i class="fa fa-mobile"></i> +91 - 7299130300
 								
 								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b027@iiitdm.ac.in" title="Girls Hostel Mess Secretary" ><i class="fa fa-envelope"></i> coe11b027@iiitdm.ac.in</a></div>
+								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm12b025@iiitdm.ac.in" title="Mess Secretary" ><i class="fa fa-envelope"></i> edm12b025@iiitdm.ac.in</a></div>
 								</div>
 							</div>
 							</div>
@@ -1996,284 +1796,61 @@ organization of social events in the hostel.</li>
 					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
 				</div>
 				</section>
-
-
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
-				
-				<span id="gts"></span>
+				<span id="bhss"></span>
 				<section  class="sac" >
-				<div class="secretary" tabindex="20" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-lightbulb-o"></i> Girls Hostel Technical Affairs Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B014" title="Girls Hostel Technical Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gts.png" alt="Girls Hostel Technical Affairs Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B014" title="Girls Hostel Technical Affairs Secretary" class="secName"  >N.Sowmika</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#509, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9941319065
-								
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b014@iiitdm.ac.in" title="Girls Hostel Technical Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b014@iiitdm.ac.in</a></div>
-								</div>
-							</div>
+					<div class="secretary" tabindex="24" >
+						<div class="row" >
+							<div class="col-md-12">
+								<div class="secretaryType"><i class="fa fa-futbol-o"></i> Boys Hostel Sports Secretary</div>
+								<hr />
 							</div>
 						</div>
 						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Technical Affairs Secretary shall be responsible for organizing Co-curricular activities in the
-hostel.</li>
-									 	<li> The Technical Affairs Secretary shall in consultation with the Co-curricular Affairs Secretary,
-will initiate activities of the Hobby Club and also organize intra-hostel technical competitions.</li>
-										<li>The Technical Affairs Secretary shall assist the Election Officer in conducting elections when
-her hostel is one of the polling venues.</li>
-
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<span id="gss"></span>
-				<section  class="sac" >				
-				<div class="secretary" tabindex="21" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-users"></i> Girls Hostel Social Affairs Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B012" title="Girls Hostel Social Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gss.png" alt="Girls Hostel Social Affairs Secretary"/></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B012" title="Girls Hostel Social Affairs Secretary" class="secName"  >I. Madhu Lahari</a><br /><span>B.Tech, Computer Engineering<span></p>
+					    <div class="row" >
+							<div class="col-md-6" style="border-right:1px solid #333;" >
 								<div>
-								<div>#503, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7401336509
+									<div class="secPic" >
+										<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B016" title="Boys Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/bhss.png" alt="Boys Hostel Sports Secretary"/></a>
+									</div>
 								
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b012@iiitdm.ac.in" title="Girls Hostel Social Affairs Secretary" ><i class="fa fa-envelope"></i> coe11b012@iiitdm.ac.in</a></div>
+								<div class="secInfo">
+									<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B016" title="Girls Hostel Sports Secretary" class="secName"  >Krishna Kaushik</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing<span></p>
+									<div>
+									<div>#810, Ashwatha Hostel</div>
+									<i class="fa fa-mobile"></i> +91 - 9941723064
+									<br /> 
+									
+									<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm12b016@iiitdm.ac.in" title="Boys Hostel Sports Secretary" ><i class="fa fa-envelope"></i> edm12b016@iiitdm.ac.in</a></div>
+									</div>
+								</div>
 								</div>
 							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
 							
-								<h4><b>Functions and Responsibilities</b></h4>
+							<div class="col-md-6">
+								<div class="reponsibilitiesWrap">
 								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Soc Sec shall be responsible for the conduct of the various arts activities of the hostel, in
-co-ordination with the Lit Sec of the hostel.</li>
-  									<li> The Soc shall strive towards the repair/replacement of faulty audio/video equipment.</li>
-  									<li> The Soc Sec shall be responsible for the procurement of magazines and newspapers for the
-hostel common room.</li>
-									</ul>
+									<h4><b>Functions and Responsibilities</b></h4>
+									
+									<div class="responsibilities" >
+										<ul>
+											<li>The HSS shall look after the issues regarding the sports activities of the students.</li>
+											<li>The HSS shall help the Institute Sports Advisor in maintaining an inventory of sports equipment and shall consult him or her on sports activities.</li>
+											<li>The HSS shall prepare and present the statement of expenditure of special tournaments (eg. GFKR) to the respective CSAs and the SAC.</li>
+										</ul>
+									</div>
+	                
 								</div>
-
+								
 							</div>
-							
 						</div>
+						<!--<div class="row text-center" >
+							<div class="col-md-12">
+								<br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div>
+							</div>
+						</div>-->
 					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
 				</section>
-
-
-				
-				
-				
-				
-				
-				
-				
-				
-
-
-				
-				<span id="gas"></span>
-				<section class="sac"  >
-				<div class="secretary" tabindex="22" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-credit-card"></i> Girls Hostel Alumni Affairs Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B025" title="Girls Hostel Alumni Affairs Secretary" ><img class="img-responsive"  src="/4pi/img/people/gas.png" alt="Girls Hostel Alumni Affairs Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM11B025" title="Girls Hostel Alumni Affairs Secretary" class="secName"  >Swetha M Manur</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#508, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 7299205032
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm11b025@iiitdm.ac.in" title="Girls Hostel Alumni Affairs Secretary" ><i class="fa fa-envelope"></i> edm11b025@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Alumni Affairs Secretary shall maintain and update a database containing the details of the
-Hostel alumni like Name, Contact, Current working position etc.</li>
-
-                                         <li>The Alumni Affairs Secretary, in coordination with the GenSec of the Hostel, shall maintain a
-Hostel Website and update news related to hostel events, activities and inter-hostel
-competitions on it.</li>
-										<li> The Alumni Affairs Secretary shall assist the alumni visiting the hostel.</li>
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-
-
-
-
-
-
-				
-				
-				
-				
-				
-				
-
-				<span id="gls"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="23" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-book"></i> Girls Hostel Literary Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B001" title="Girls Hostel Literary Secretary" ><img class="img-responsive"  src="/4pi/img/people/gls.png" alt="Girls Hostel Literary Secretary" /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE11B001" title="Girls Hostel Literary Secretary" class="secName"  >A.Mounika</a><br /><span>B.Tech, Computer Engineering<span></p>
-								<div>
-								<div>#504, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9445419520
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe11b001@iiitdm.ac.in" title="Girls Hostel Literary Secretary" ><i class="fa fa-envelope"></i> coe11b001@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Lit Sec shall be responsible for the conduct of the various literary activities of the hostel.
-He or she shall also conduct the arts activities of the hostel in co-ordination with the Social Sec of
-the hostel.</li>
-										<li>The Lit Sec shall be responsible for the procurement and proper upkeep of books meant for the
-hostel library.</li>
-										
-									</ul>
-								</div>
-
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
-
-				
-				
-				
-				
-				
-				
-				
-				
 
 
 
@@ -2291,17 +1868,17 @@ hostel library.</li>
 							<div class="col-md-6" style="border-right:1px solid #333;" >
 								<div>
 									<div class="secPic" >
-										<a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B001" title="Girls Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/gsps.png" alt="Girls Hostel Sports Secretary"/></a>
+										<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM13B006" title="Girls Hostel Sports Secretary" ><img class="img-responsive"  src="/4pi/img/people/gsps.png" alt="Girls Hostel Sports Secretary"/></a>
 									</div>
 								
 								<div class="secInfo">
-									<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B001" title="Girls Hostel Sports Secretary" class="secName"  >Anita Seervi</a><br /><span>B.Tech, Computer Engineering <span></p>
+									<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=edm13b006" title="Girls Hostel Sports Secretary" class="secName"  >Ravali D.</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
 									<div>
 									<div>#810, Ashwatha Hostel</div>
 									<i class="fa fa-mobile"></i> +91 - 9941723064
 									<br /> 
 									
-									<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=coe12b001@iiitdm.ac.in" title="Girls Hostel Sports Secretary" ><i class="fa fa-envelope"></i> coe12b001@iiitdm.ac.in</a></div>
+									<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm13b006@iiitdm.ac.in" title="Girls Hostel Sports Secretary" ><i class="fa fa-envelope"></i> edm13b006@iiitdm.ac.in</a></div>
 									</div>
 								</div>
 								</div>
@@ -2340,53 +1917,7 @@ hostel library.</li>
 
 
 
-				<span id="ggns"></span>
-				<section  class="sac" >
-				<div class="secretary" tabindex="25" >
-					<div class="row" >
-						<div class="col-md-12">
-							<div class="secretaryType"><i class="fa fa-pied-piper-alt"></i> Girls Hostel Garden Secretary</div>
-							<hr />
-						</div>
-					</div>
-					
-				    <div class="row" >
-						<div class="col-md-6" style="border-right:1px solid #333;" >
-							<div>
-								<div class="secPic" >
-									<a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B003" title="Girls Hostel Garden Secretary" ><img class="img-responsive"  src="/4pi/img/people/ggns.png" alt="Girls Hostel Garden Secretary"  /></a>
-								</div>
-							
-							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B003" title="Girls Hostel Garden Secretary" class="secName"  >A. Asha Kumari</a><br /><span>B.Tech, Electronics Design &amp; Manufacturing <span></p>
-								<div>
-								<div>#811, Ashwatha Hostel</div>
-								<i class="fa fa-mobile"></i> +91 - 9941439496
-								<br />
-								
-								<div><a target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=edm12b003@iiitdm.ac.in" title="Girls Hostel Garden Secretary" ><i class="fa fa-envelope"></i> edm12b003@iiitdm.ac.in</a></div>
-								</div>
-							</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6">
-							<div class="reponsibilitiesWrap">
-							
-								<h4><b>Functions and Responsibilities</b></h4>
-								
-								<div class="responsibilities" >
-									<ul>
-										<li>The Garden Secretary shall be responsible for the proper upkeep the hostel garden(s).</li>	
-									</ul>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-					<!-- <div class="row text-center" ><div class="col-md-12"><br /><div class="btn btn-warning"  ><a target="_blank" href="#" title="View posts made by this person"  style="color:white;"  >View posts made by this person</i></a></div></div></div> -->
-				</div>
-				</section>
+				
 
 				
 				
