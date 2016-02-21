@@ -771,7 +771,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 //****************************************************************************************************************//
 
 
-	function getMailerObject()
+	function getMailerObject($senderEmail = 'root.4pi@gmail.com')
 	{
 		try
 		{
@@ -791,7 +791,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
 
 			$mail->Port       = 465;                  // set the SMTP port
 
-			$mail->Username   = "root.4pi@gmail.com";  // MAIL username
+			$mail->Username   = $senderEmail;  // MAIL username
 
 			$mail->Password   = "110720@iiitdmK";            // MAIL password
 
@@ -1627,13 +1627,26 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED^E_STRICT);
  
 		$eventTimeMin=(int)(substr($event['eventTime'], 2,2));
 
-		$a = strptime($event['eventDate'], '%Y%m%d');
+		//$a = strptime($event['eventDate'], '%Y%m%d');
 		
-		$eventStartTimestamp = mktime($eventTimeHr, $eventTimeMin, 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']+1900);
+		$a['tm_year']=(int)(substr($event['eventDate'],0,4));
+		
+		$a['tm_mon']=(int)(substr($event['eventDate'],4,2));
+		
+		$a['tm_mday']=(int)(substr($event['eventDate'],6,2));
+
+		$eventStartTimestamp = mktime($eventTimeHr, $eventTimeMin, 0, $a['tm_mon']+1, $a['tm_mday'], $a['tm_year']);
 
 		$currentTime=time();
 
 		$eventEndTimestamp=$eventStartTimestamp+(60*60*$eventTimeHr+60*$eventTimeMin);
+
+		/*echo $eventStartTimestamp." is the event start Timestamp\n";
+
+		echo $currentTime." is the current Timestamp\n";
+
+		echo $eventEndTimestamp." is the event end Timestamp\n";*/
+
 
 		if($currentTime<$eventStartTimestamp)
 		{

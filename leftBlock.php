@@ -106,7 +106,7 @@ echo '
 	<!--<a href="http://localhost/frontEnd/executiveWing/"><button style="background:linear-gradient(#5541BA, #503DB0) !important;color:white;" class="btn btn-lg">People</button></a>-->
 	';*/
 
-	echo '<p style="padding:10px;border-top:1px solid #fff;border-bottom:1px solid #fff;"><br/>This is a beta version. Please try to deploy and report bugs to the admin via <a style="cursor:pointer" onclick="$(\'#feedbackModal\').find(\'textarea\').val(\'\');$(\'#feedbackModal\').modal(\'show\');">feedback</a>.<br/>';
+	echo '<p style="padding:10px;border-top:1px solid #fff;border-bottom:1px solid #fff;"><br/>Welcome to 4pi. If you find any bugs then report bugs to the admin via <a style="cursor:pointer; color:yellow" onclick="$(\'#feedbackModal\').find(\'textarea\').val(\'\');$(\'#feedbackModal\').modal(\'show\');">feedback</a>.<br/>';
 	echo '<br/>
 	<table id="notificationDisplayDiv" class="text-center" style="text-align:center;position:absolute;bottom:15px;" >
 		<tr>

@@ -80,13 +80,13 @@ define("HASHNOTIF", "s'fitonsisiht");
 /*********************Secretaries and Admins*************************/
 
 //SAC Speaker
-define("SAC", "MDM11B014");
+define("SAC", "COE12B013");
 
 // Co-Curricular Affairs Secretary
-define("COCAS", "EDM11B011");
+define("COCAS", "COE12B013");
 
 //Cultural Secretary
-define("CULSEC", "MDM11B020");
+define("CULSEC", "COE12B017");
 
 //Student General Secretary
 /*define("GEN", "COE11B005");*/

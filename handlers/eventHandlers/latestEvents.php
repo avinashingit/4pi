@@ -135,12 +135,14 @@ $conn=new QoB();
 			//echo $getLatestEventsSQL;
 			$displayCount=0;
 			$result=$conn->select($getLatestEventsSQL,$values);
+
 			if($conn->error=="")
 			{
 				//Success
 				$eventObjArray=array();
 				while(($event=$conn->fetch($result))&&$displayCount<10)
 				{
+					//var_dump($event);
 					/*if(stripos($event['attenders'], $userId)===false)
 					{
 						$isAttender=-1;
@@ -149,9 +151,11 @@ $conn=new QoB();
 					{
 						$isAttender=1;
 					}*/
+					//$dummyCounter=0;
 					$eventStatus=getEventStatus($event,$isAttender);
 					if($eventStatus=="Completed")
 					{
+						//$dummyCounter++;
 						continue;
 					}
 					/*$eventUserId=$event['userId'];
@@ -175,7 +179,7 @@ $conn=new QoB();
 						$rawDate,$rawTime,$event['eventVenue'],$event['attendCount'],$rawSharedWith, $event['seenCount'],$eventOwner,$isAttender,
 						$event['eventDurationHrs'],$event['eventDurationMin'],$eventStatus,$eventCreationTime);*/
 					//print_r(json_encode($eventObj));
-					if($userId==COCAS)
+					/*if($userId==COCAS)
 					{
 						if(($event['eventCategory']=='technical' || $event['userId']==$userId ) && $event['approvalStatus']!=-1  )
 						{
@@ -194,15 +198,18 @@ $conn=new QoB();
 						}
 					}
 					else
-					{
+					{*/
+						
 						$eventObj=getEventObject($event,$userId);
 						$eventObjArray[]=$eventObj;
 						$displayCount++;
-					}
+						//echo 'HIiiiiiiiiiiiiiii';
+						//var_dump($eventObjArray);
+					/*}*/
 
 					
 				}
-
+				//echo $dummyCounter." is the count of completed events";
 				if($displayCount==0)
 				{
 					echo 404;

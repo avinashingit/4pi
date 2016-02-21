@@ -190,7 +190,7 @@ function setPassword(e)
 
 					<div class="form-group has-error">
 
-						<input class="form-control" type="text" id="aliasName" placeholder="It is your display name. Used every where on 4pi."><br/>
+						<input class="form-control" type="text" id="aliasName" placeholder="Enter a display name to be used everywhere on 4pi."><br/>
 
 					</div>
 

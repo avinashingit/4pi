@@ -572,7 +572,7 @@ GFKR) to the respective CSAs and the SAC.</li> -->
 								</div>
 							
 							<div class="secInfo">
-								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=EDM12B015" title="Alumni Affairs Secretary"  class="secName" >Shubham Singh</a><br /><span>B.Tech, Computer Engineering<span></p>
+								<p ><a target="_blank" href="/4pi/aboutMe/index.php?userId=COE12B027" title="Alumni Affairs Secretary"  class="secName" >Shubham Singh</a><br /><span>B.Tech, Computer Engineering<span></p>
 								<div>
 								<div>#231, Ashwatha Hostel</div>
 								<i class="fa fa-mobile"></i> +91 - 7845491055

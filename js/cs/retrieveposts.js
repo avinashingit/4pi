@@ -30,12 +30,12 @@ function callAfterAjax() {
     }), $("#postArea").on("click", ".back .fa-mail-reply", function() {
         $(this).parent().parent().parent().parent().hide(), $(this).parent().parent().parent().parent().parent().find(".front").show()
     }), $(".post").each(function() {
-        $(this).find("#postContent").shorten({
+        /*$(this).find("#postContent").shorten({
             showChars: 347,
             moreText: "<br/>See More",
             lessText: "",
             ellipsesText: ""
-        }), $("time.timeago").timeago(), $("textarea").autosize({
+        }),*/ $("time.timeago").timeago(), $("textarea").autosize({
             "line-height": "1.3"
         })
     }), $(".starHover").mouseover(function() {
@@ -99,13 +99,11 @@ function editPost(t) {
         o = e.parent().attr("id");
     $("#editPostId").html(o);
     var s = e.find("#postSubject").html();
-    e.find("#postContent").html().length > 300 ? (postContent = e.find("#postContent").find(".shortcontent").html(), postContent += e.find("#postContent").find(".allcontent").html()) : postContent = e.find("#postContent").html();
+    var postContent = e.find("#postContent").html();
     var n = e.find("#postSharedWith").html(),
         a = e.find("#postValidity").html(),
         i = e.parent().id;
-    $("#editPostModal").find("#editPostLivingTime").val(a), $("#editPostModal").find("#editPostSharedWith").val(n), $("#editPostModal").find("#editPostContent").css({
-        height: "50px"
-    }), $("#editPostModal").find("#editPostContent").val(postContent), $("#editPostModal").find("#editPostSubject").val(s), $("#editPostModal").find("#postId").val(i), $("#editPostModal").find("#editPostContent").autosize()
+    $("#editPostModal").find("#editPostLivingTime").val(a), $("#editPostModal").find("#editPostSharedWith").val(n), $("#editPostModal").find("#editPostContent").val(postContent), $("#editPostModal").find("#editPostSubject").val(s), $("#editPostModal").find("#postId").val(i), $("#editPostModal").find("#editPostContent").autosize()
 }
 
 function editedPostSend() {

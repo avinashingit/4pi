@@ -108,7 +108,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  			<label for="eventVenue">Event Date &nbsp;<span style="color:red;">*</span></label>
 
-					    		<input name="createEventDate" data-date-format="dd/mm/yyyy"  class="eventdatepicker form-control" placeholder="dd/mm/yyyy" type="text" id="createEventDate">
+					    		<input name="createEventDate" data-date-format="mm/dd/yyyy"  class="eventdatepicker form-control" placeholder="mm/dd/yyyy" type="text" id="createEventDate">
 
 					  		</div>
 
@@ -284,7 +284,7 @@ var inView="<?php echo $_SESSION['jx'];?>";
 
 					  			<label for="eventVenue">Event Date &nbsp;<span style="color:red;">*</span></label>
 
-					    		<input name="editEventDate" data-date-format="dd/mm/yyyy"  class="eventdatepicker form-control" placeholder="dd/mm/yyyy" type="text" id="editEventDate">
+					    		<input name="editEventDate" data-date-format="mm/dd/yyyy"  class="eventdatepicker form-control" placeholder="mm/dd/yyyy" type="text" id="editEventDate">
 
 					  		</div>
 
