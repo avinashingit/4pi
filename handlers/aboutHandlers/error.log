@@ -124,3 +124,5 @@
 
 [2015-08-02 13:15:26   14.139.187.99                   Asia/Kolkata] 0      $$$Could not bind values to the query$$$
 
+[2016-02-22 11:41:47    172.17.6.103                   Asia/Kolkata] 1054   $$$Unknown column 'isfeaturing' in 'field list'$$$
+
